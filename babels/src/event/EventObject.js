@@ -10,18 +10,15 @@
  *
  */
 
-import { ObjectUtil } from '../util/ObjectUtil';
-
 /**
  * custom Event のリスナー関数引数に送られる Event Object
  */
-export class EventObject extends ObjectUtil {
+export class EventObject {
   /**
    * custom Event Object
    * @param {String} type イベント種類
    */
   constructor(type:String) {
-    super();
-    Object.assign(this, { type });
+    Object.assign(this, { type, target: this, currentTarget: this });
   }
 }

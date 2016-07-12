@@ -12,53 +12,55 @@
  */
 
 import { EventDispatcher } from './event/EventDispatcher';
+import { EventObject } from './event/EventObject';
 // import { Ajax } from './net/Ajax';
 // import { Cycle } from './display/Cycle';
 // import { Fps } from './display/Fps';
 // import { Polling } from './display/Polling';
 
 /**
- * **BABEL_TASK_FILE**
+ * **MOKU**
  * <p>global Object</p>
  * <p>public な Class はここからアクセス可能です</p>
  * @type {Object}
  */
-const BABEL_TASK_FILE = {};
+const MOKU = {};
 
 /**
  * version number を取得します
  * @return {string} version number を返します
  */
-BABEL_TASK_FILE.version = ():String => '@@version';
+MOKU.version = ():String => '@@version';
 /**
  * build 日時を取得します
  * @return {string}  build 日時を返します
  */
-BABEL_TASK_FILE.build = ():String => '@@buildTime';
+MOKU.build = ():String => '@@buildTime';
 /**
- * BABEL_TASK_FILE.event
- * @type {Object} BABEL_TASK_FILE.event object を返します
+ * MOKU.event
+ * @type {Object} MOKU.event object を返します
  */
-BABEL_TASK_FILE.event = {
+MOKU.event = {
   EventDispatcher,
+  EventObject,
 };
 
 // /**
-//  * BABEL_TASK_FILE.net
-//  * @type {Object} BABEL_TASK_FILE.net object を返します
+//  * MOKU.net
+//  * @type {Object} MOKU.net object を返します
 //  */
-// BABEL_TASK_FILE.net = {
+// MOKU.net = {
 //   Ajax,
 // };
 // /**
-//  * BABEL_TASK_FILE.display
-//  * @type {Object} BABEL_TASK_FILE.display object を返します
+//  * MOKU.display
+//  * @type {Object} MOKU.display object を返します
 //  */
-// BABEL_TASK_FILE.display = {
+// MOKU.display = {
 //   Cycle,
 //   Fps,
 //   Polling,
 // };
 
 // export
-window.BABEL_TASK_FILE = BABEL_TASK_FILE;
+window.MOKU = MOKU;
