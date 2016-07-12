@@ -12,7 +12,7 @@ setting = require './setting'
 gulp = setting.gulp
 $ = setting.$
 
-$$ = setting.module
+$$ = setting.$$
 
 del = $$.del
 runSequence = $$.runSequence
@@ -96,7 +96,7 @@ gulp.task 'serve:app', ->
 app でファイルを作成しdistで確認します
 ###
 
-gulp.task 'serve:htdocs', ['vendor:dev', 'libs:copy']->
+gulp.task 'serve:htdocs', ['vendor:dev', 'libs:copy'], () ->
   option =
     notify: false
     # Customize the BrowserSync console logging prefix
@@ -152,7 +152,7 @@ gulp.task 'default', (cb) ->
   )
   return
 
-gulp.task 'serve', ['default']->
+gulp.task 'serve', ['default'], () ->
   option =
     notify: false
     # Customize the BrowserSync console logging prefix

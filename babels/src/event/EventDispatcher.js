@@ -10,9 +10,11 @@
  *
  */
 
-// ObjectUtil
-import { ObjectUtil } from '../util/ObjectUtil';
+// util
 import { Type } from '../util/Type';
+
+// Event
+import { EventObject } from './EventObject';
 
 /**
  * private property key, listeners Object
@@ -38,18 +40,17 @@ const listenersKey = Symbol();
  * console.log(event.has('abc', callback));// false
  * ```
  */
-export class EventDispatcher extends ObjectUtil {
+export class EventDispatcher {
   /**
    * listener property をイニシャライズします
    */
   constructor() {
-    super();
     /**
      * リスナーリスト
      * @type {Object}
      * @private
      */
-    this[listenersKey] = new ObjectUtil();
+    this[listenersKey] = {};
   }
   // ----------------------------------------
   // GETTER / SETTER
@@ -68,7 +69,7 @@ export class EventDispatcher extends ObjectUtil {
    * 全てのリスナーを破棄します
    */
   destroy():void {
-    this[listenersKey] = new ObjectUtil();
+    this[listenersKey] = {};
   }
   /**
    * event type に リスナー関数を bind します
@@ -142,18 +143,8 @@ export class EventDispatcher extends ObjectUtil {
    * @param {Array<Function>} types event type に登録されている配列（関数）
    */
   clean(type:String, types:Array):void {
-    // let hasFunction:Boolean = false;
-
-    // for (const listener:Function of types) {
-    //   if (listener !== null) {
-    //     hasFunction = true;
-    //     break;
-    //   }
-    // }
-
-    const hasFunction = types.some((listener) => {
-      return listener !== null;
-    });
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
+    const hasFunction = types.some((listener) => listener !== null);
 
     if (!hasFunction) {
       // null 以外が無いので空にする
@@ -185,39 +176,39 @@ export class EventDispatcher extends ObjectUtil {
   }
   /**
    * イベントを発生させリスナー関数を call します
-   * @param {Object} event typeキー が必須です
+   * @param {EventObject|*} event 送信される Event Object.<br>
+   *   type キーにイベント種類が設定されています、dispatch 時に target プロパティを追加し this を設定します
    */
-  dispatch(event:Object):void {
+  dispatch(event:EventObject):void {
     const listeners:Object = this.listeners;
     // event.target = this しようとすると
     // Assignment to property of function parameter 'event'  no-param-reassign
     // になるのでコピーし使用します
     const eventObject:Object = event;
+    // event.type
+    const type:String = event.type;
 
-    // typeof でなく hasOwnProperty で調べるように変更した
-    if (!listeners.hasOwnProperty(eventObject.type)) {
+    // typeof でなく hasOwnProperty で調べる
+    if (!listeners.hasOwnProperty(type)) {
       // listener.type が存在しない
       // 処理しない
       return;
     }
 
-    // const types:Array = listeners[eventObject.type];
+    // target プロパティに発生元を設定する
     eventObject.target = this;
 
     // callback を実行する
-    // for (const listener:Function of types) {
-    //   if (typeof listener === 'function') {
-    //     // callback apply
-    //     // 第二引数がObjectの時は call する
-    //     listener.call(this, eventObject);
-    //   }
-    // }
+    listeners[type]
+      .map(
+        (listener:Function) => {
+          if (Type.method(listener)) {
+            return listener.call(this, eventObject);
+          }
 
-    listeners[eventObject.type].map((listener:Function) => {
-      if (Type.method(listener)) {
-        listener.call(this, eventObject);
-      }
-    });
+          return null;
+        }
+      );
   }
   /**
    * **alias on**

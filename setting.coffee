@@ -75,14 +75,6 @@ dir.scripts =
   src: scripts + '/src'
   dependencies: scripts + '/dependencies'
 
-# babels
-babels = root + '/babels'
-
-dir.babels =
-  src: babels + '/src'
-  dependencies: babels + '/dependencies'
-  compile: babels + '/compile'
-
 # bower
 bower = root + '/bower'
 dir.bower =
@@ -90,9 +82,18 @@ dir.bower =
   exports: bower + '/bower_exports'
 
 # dist root
-dist = root + '/libs'
+dist = root
 dir.dist =
   root: dist
+  libs: root + '/libs'
+
+# babels
+babels = root + '/babels'
+
+dir.babels =
+  src: babels + '/src'
+  dependencies: babels + '/dependencies'
+  compile: babels + '/compile'
 
 # ------------------------------------------------------
 # webpack config
@@ -102,7 +103,7 @@ wpk =
   output:
     path: dir.app.bundle
     publicPath: 'assets/js/bundle'
-    filename: '[name].bundle.js'
+    filename: 'moku.js'
     chunkFilename: '[chunkhash].bundle.js'
 
 # ------------------------------------------------------
