@@ -23,4 +23,12 @@ export class Type {
   static method(target):Boolean {
     return typeof target === 'function';
   }
+  /**
+   * 引数(target)を `!!` で調べます
+   * @param {*} target 調査対象
+   * @return {boolean} 引数(target)を `!!` で調べ結果を返します
+   */
+  static exist(target):Boolean {
+    return !!target;
+  }
 }

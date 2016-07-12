@@ -11,9 +11,12 @@
  * @@buildTime
  */
 
+// event
 import { EventDispatcher } from './event/EventDispatcher';
 import { EventObject } from './event/EventObject';
-// import { Ajax } from './net/Ajax';
+
+// net
+import { Ajax } from './net/Ajax';
 // import { Cycle } from './display/Cycle';
 // import { Fps } from './display/Fps';
 // import { Polling } from './display/Polling';
@@ -44,14 +47,13 @@ MOKU.event = {
   EventDispatcher,
   EventObject,
 };
-
-// /**
-//  * MOKU.net
-//  * @type {Object} MOKU.net object を返します
-//  */
-// MOKU.net = {
-//   Ajax,
-// };
+/**
+ * MOKU.net
+ * @type {Object} MOKU.net object を返します
+ */
+MOKU.net = {
+  Ajax,
+};
 // /**
 //  * MOKU.display
 //  * @type {Object} MOKU.display object を返します
