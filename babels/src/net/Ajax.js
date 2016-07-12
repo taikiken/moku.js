@@ -10,7 +10,12 @@
  *
  */
 
+// event
 import { EventDispatcher } from '../event/EventDispatcher';
+import { EventObject } from '../event/EventObject';
+
+// util
+import { Type } from '../util/Type';
 
 const canKey = Symbol();
 
@@ -18,6 +23,7 @@ const canKey = Symbol();
 // Safari, IE はサポートしていないのでライブラリを使用すること
 const fetch = self.fetch;
 const Request = self.Request;
+const Headers = self.Headers;
 /**
  * <p>fetch API を使用し Ajax request を行います</p>
  * <p>Safari, IE はサポートしていないので polyfill ライブラリを使用します<br>
@@ -123,17 +129,26 @@ export class Ajax extends EventDispatcher {
       .then((response:Object) => {
         // may be success
         if (response.status !== 200) {
-          throw new Error('Ajax error');
+          throw new Error(`Ajax status error: (${response.status})`);
         }
 
         return response.json();
       })
       .then((json:Object) => {
-        this.dispatch({ type: Ajax.COMPLETE, data: json });
+        const event:EventObject = new EventObject(Ajax.COMPLETE);
+        event.data = json;
+        // complete event fire
+        this.dispatch(event);
+        // flag true
         this.enable();
       })
       .catch((error) => {
-        this.dispatch({ type: Ajax.ERROR, data: null, error });
+        const event:EventObject = new EventObject(Ajax.ERROR);
+        event.data = null;
+        event.error = error;
+        // error event fire
+        this.dispatch(event);
+        // flag true
         this.enable();
       });
   }
@@ -171,17 +186,16 @@ export class Ajax extends EventDispatcher {
     });
 
     // headers option
-    if (headers !== null && typeof headers !== 'undefined') {
+    if (Type.exist(headers)) {
       option.headers = headers;
     }
 
     // body へ FormData をセット
-    if (formData !== null && typeof formData !== 'undefined') {
+    if (Type.exist(formData)) {
       option.body = formData;
     }
 
     // https://developer.mozilla.org/ja/docs/Web/API/Request
-    //
     return new Request(path, option);
   }
 }
