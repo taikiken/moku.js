@@ -1,0 +1,8 @@
+# bundle
+*.bundle.js
+
+# compile
+./babels/compile/**/*
+
+# app/**/libs
+./app/assets/js/libs/**/*
