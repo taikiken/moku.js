@@ -10,7 +10,11 @@
  *
  */
 
+// event
 import { EventDispatcher } from '../event/EventDispatcher';
+import { EventObject } from '../event/EventObject';
+
+// display
 import { Cycle } from './Cycle';
 
 /**

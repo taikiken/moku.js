@@ -17,7 +17,12 @@ import { EventObject } from '../event/EventObject';
 // util
 import { Type } from '../util/Type';
 
-const canKey = Symbol();
+/**
+ * can（Ajax 実行可能かの真偽値）フラッグを保存するための Symbol
+ * @type {Symbol}
+ * @private
+ */
+const canSymbol:Symbol = Symbol();
 
 // native function
 // Safari, IE はサポートしていないのでライブラリを使用すること
@@ -57,7 +62,7 @@ export class Ajax extends EventDispatcher {
      * @private
      * @default true
      */
-    this[canKey] = true;
+    this[canSymbol] = true;
   }
   // ----------------------------------------
   // EVENT
@@ -91,14 +96,14 @@ export class Ajax extends EventDispatcher {
    * @return {Boolean} request 可能 / 不可能 flag を返します
    */
   get can():Boolean {
-    return this[canKey];
+    return this[canSymbol];
   }
   /**
    * request 可能 / 不可能 flag を設定します
    * @param {Boolean} flag request 可能 / 不可能 flag
    */
   set can(flag:Boolean):void {
-    this[canKey] = flag;
+    this[canSymbol] = flag;
   }
   // ----------------------------------------
   // METHOD

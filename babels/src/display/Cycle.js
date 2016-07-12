@@ -11,7 +11,9 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  */
 
+// event
 import { EventDispatcher } from '../event/EventDispatcher';
+import { EventObject } from '../event/EventObject';
 
 /**
  * new を許可しないための Symbol
@@ -44,6 +46,12 @@ const updateSymbol:Symbol = Symbol();
  * @private
  */
 const startSymbol:Symbol = Symbol();
+/**
+ * Cycle.UPDATE event を発火する時の EventObject instance を保存するための Symbol
+ * @type {Symbol}
+ * @private
+ */
+const eventSymbol:Symbol = Symbol();
 
 /**
  * <p>requestAnimationFrame でループイベントを発生させます</p>
@@ -73,9 +81,14 @@ export class Cycle extends EventDispatcher {
     }
     // onetime setting
     instance = this;
+    // requestAnimationFrame return id
     this[requestSymbol] = 0;
+    // update bind function
     this[updateSymbol] = this.update.bind(this);
+    // started flag
     this[startSymbol] = false;
+    // eventObject
+    this[eventSymbol] = new EventObject(Cycle.UPDATE);
     // 設定済み instance を返します
     return instance;
   }
@@ -105,21 +118,28 @@ export class Cycle extends EventDispatcher {
     this.update();
   }
   /**
-   * loop(cancelAnimationFrame) します
+   * loop(cancelAnimationFrame) を止めます
+   * @param {Number} [id] requestAnimationFrame id を使い cancelAnimationFrame をします
    */
-  stop():void {
-    cancelAnimationFrame(this[requestSymbol]);
+  stop(id:Number = this[requestSymbol]):void {
+    cancelAnimationFrame(id);
     this[startSymbol] = false;
   }
   // ----------------------------------------
   // PRIVATE METHOD
   // ----------------------------------------
   /**
-   * loop(requestAnimationFrame) します
+   * loop(requestAnimationFrame)コールバック関数<br>Cycle.UPDATE event を発火します
    */
   update():void {
-    this[requestSymbol] = requestAnimationFrame(this[updateSymbol]);
-    this.dispatch({ type: Cycle.UPDATE });
+    // requestAnimationFrame id
+    const id:Number = requestAnimationFrame(this[updateSymbol]);
+    this[requestSymbol] = id;
+    // event
+    const event:EventObject = this[eventSymbol];
+    event.id = id;
+    // event fire
+    this.dispatch(event);
   }
   // ----------------------------------------
   // STATIC METHOD

@@ -9,7 +9,12 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
+
+// event
 import { EventDispatcher } from '../event/EventDispatcher';
+import { EventObject } from '../event/EventObject';
+
+// display
 import { Cycle } from './Cycle';
 
 /**
