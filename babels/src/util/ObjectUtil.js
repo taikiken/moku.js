@@ -14,18 +14,17 @@
  * Object 操作ヘルパークラス、本プロジェクトの基底クラスとして使用します
  */
 export class ObjectUtil {
-  /**
-   *  Object 操作ヘルパークラス
-   */
-  constructor() {}
-
+  // /**
+  //  *  Object 操作ヘルパークラス
+  //  */
+  // constructor() {}
   /**
    * public プロパティを追加します
    * @param {String} propertyName プロパティ名称
    * @param {*} value プロパティ値
    */
   add(propertyName:String, value):void {
-    Object.assign(this, { propertyName: value, });
+    Object.assign(this, { propertyName: value });
   }
   /**
    * 複製を作成します

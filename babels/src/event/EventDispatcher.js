@@ -14,6 +14,9 @@
 import { ObjectUtil } from '../util/ObjectUtil';
 import { Type } from '../util/Type';
 
+// Event
+import { EventObject } from './EventObject';
+
 /**
  * private property key, listeners Object
  * @type {Symbol}
@@ -151,9 +154,8 @@ export class EventDispatcher extends ObjectUtil {
     //   }
     // }
 
-    const hasFunction = types.some((listener) => {
-      return listener !== null;
-    });
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
+    const hasFunction = types.some((listener) => listener !== null);
 
     if (!hasFunction) {
       // null 以外が無いので空にする
@@ -185,25 +187,25 @@ export class EventDispatcher extends ObjectUtil {
   }
   /**
    * イベントを発生させリスナー関数を call します
-   * @param {Object} event typeキー が必須です
+   * @param {EventObject|*} event 送信される Event Object.<br>
+   *   type キーにイベント種類が設定されています、dispatch 時に target プロパティを追加し this を設定します
    */
-  dispatch(event:Object):void {
+  dispatch(event:EventObject):void {
     const listeners:Object = this.listeners;
     // event.target = this しようとすると
     // Assignment to property of function parameter 'event'  no-param-reassign
     // になるのでコピーし使用します
-    const eventObject:Object = event;
-
-    // typeof でなく hasOwnProperty で調べるように変更した
-    if (!listeners.hasOwnProperty(eventObject.type)) {
+    // const eventObject:Object = event;
+    const type:String = event.type;
+    // typeof でなく hasOwnProperty で調べる
+    if (!listeners.hasOwnProperty(type)) {
       // listener.type が存在しない
       // 処理しない
       return;
     }
-
     // const types:Array = listeners[eventObject.type];
-    eventObject.target = this;
-
+    // eventObject.target = this;
+    event.add('target', this);
     // callback を実行する
     // for (const listener:Function of types) {
     //   if (typeof listener === 'function') {
@@ -212,12 +214,16 @@ export class EventDispatcher extends ObjectUtil {
     //     listener.call(this, eventObject);
     //   }
     // }
+    listeners[type]
+      .map(
+        (listener:Function) => {
+          if (Type.method(listener)) {
+            return listener.call(this, event);
+          }
 
-    listeners[eventObject.type].map((listener:Function) => {
-      if (Type.method(listener)) {
-        listener.call(this, eventObject);
-      }
-    });
+          return null;
+        }
+      );
   }
   /**
    * **alias on**

@@ -12,10 +12,10 @@
  */
 
 import { EventDispatcher } from './event/EventDispatcher';
-import { Ajax } from './net/Ajax';
-import { Cycle } from './display/Cycle';
-import { Fps } from './display/Fps';
-import { Polling } from './display/Polling';
+// import { Ajax } from './net/Ajax';
+// import { Cycle } from './display/Cycle';
+// import { Fps } from './display/Fps';
+// import { Polling } from './display/Polling';
 
 /**
  * **BABEL_TASK_FILE**
@@ -36,28 +36,29 @@ BABEL_TASK_FILE.version = ():String => '@@version';
  */
 BABEL_TASK_FILE.build = ():String => '@@buildTime';
 /**
- * BABEL_TASK_FILE.net
- * @type {Object} BABEL_TASK_FILE.net object を返します
- */
-BABEL_TASK_FILE.net = {
-  Ajax,
-};
-/**
  * BABEL_TASK_FILE.event
  * @type {Object} BABEL_TASK_FILE.event object を返します
  */
 BABEL_TASK_FILE.event = {
   EventDispatcher,
 };
-/**
- * BABEL_TASK_FILE.display
- * @type {Object} BABEL_TASK_FILE.display object を返します
- */
-BABEL_TASK_FILE.display = {
-  Cycle,
-  Fps,
-  Polling,
-};
+
+// /**
+//  * BABEL_TASK_FILE.net
+//  * @type {Object} BABEL_TASK_FILE.net object を返します
+//  */
+// BABEL_TASK_FILE.net = {
+//   Ajax,
+// };
+// /**
+//  * BABEL_TASK_FILE.display
+//  * @type {Object} BABEL_TASK_FILE.display object を返します
+//  */
+// BABEL_TASK_FILE.display = {
+//   Cycle,
+//   Fps,
+//   Polling,
+// };
 
 // export
 window.BABEL_TASK_FILE = BABEL_TASK_FILE;

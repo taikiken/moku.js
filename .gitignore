@@ -258,15 +258,17 @@ port.coffee
 # test php
 # -----------
 # php server を立てる時に使用します
+# それぞれで環境が違うので個別に作ること
 php_ini.coffee
 
 # 開発 directory
 # ------------
 
-# scripts
-scripts/compile/*
+# babels
+babels/compile/*
 
 # app
+app
 app/json/*
 app/assets/js/**/*.bundle.js
 app/assets/js/libs/*
@@ -277,6 +279,3 @@ app/**/_sprite.scss
 ### MicrosoftOffice template section で ignore 済み
 ## css 出力
 #.tmp
-
-# 出力ファイル
-htdocs/assets

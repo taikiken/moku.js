@@ -56,13 +56,21 @@ gulp.task 'babels:eslint', ->
   .pipe $.eslint.format()
   .pipe $.eslint.failAfterError()
 
-# babel
+# babel 2015
 gulp.task 'babels:babel', ->
   return gulp.src files
   .pipe $.babel presets: [ 'es2015', 'react', 'stage-0' ], plugins: ['transform-runtime']
   .pipe $.replaceTask patterns: patterns
   .pipe gulp.dest babels.compile
   .pipe $.size title: '*** babels:babel ***'
+
+# babel 2016
+gulp.task 'babels:babel:2016', ->
+  return gulp.src files
+  .pipe $.babel presets: [ 'es2016', 'react', 'stage-0' ], plugins: ['transform-runtime']
+  .pipe $.replaceTask patterns: patterns
+  .pipe gulp.dest babels.compile
+  .pipe $.size title: '*** babels:babel:2016 ***'
 
 # BUILD
 
@@ -77,7 +85,10 @@ gulp.task 'babels:webpack:dev', ( cb ) ->
   conf.plugins = [
     new webpack.optimize.DedupePlugin()
   ]
-  conf.entry = conf.entry + '/babels/compile/main.js'
+  conf.entry = conf.entry + '/babels/compile/moku.js'
+  
+#  # output
+#  conf.output.path = dir.dist.libs
 
   webpack conf, ( err, stats ) ->
     if ( err )
@@ -110,7 +121,10 @@ gulp.task 'babels:webpack:build', ( cb ) ->
     new webpack.optimize.DedupePlugin()
     new webpack.optimize.UglifyJsPlugin compress: warnings: true
   ]
-  conf.entry = conf.entry + '/babels/compile/main.js'
+  conf.entry = conf.entry + '/babels/compile/moku.js'
+
+#  # output
+#  conf.output.path = dir.dist.libs
 
   webpack conf, ( err, stats ) ->
     if ( err )
