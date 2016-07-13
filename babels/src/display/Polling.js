@@ -12,7 +12,7 @@
 
 // event
 import { EventDispatcher } from '../event/EventDispatcher';
-import { EventObject } from '../event/EventObject';
+import { Events } from '../event/Events';
 
 // display
 import { Cycle } from './Cycle';
@@ -41,6 +41,12 @@ const beginSymbol:Symbol = Symbol();
  * @private
  */
 const pollingSymbol:Symbol = Symbol();
+/**
+ * Polling.UPDATE event を発火する時の Events instance を保存するための Symbol
+ * @type {Symbol}
+ * @private
+ */
+const eventSymbol:Symbol = Symbol();
 
 /**
  * 一定間隔毎に UPDATE イベントを発生させます
@@ -65,6 +71,8 @@ export class Polling extends EventDispatcher {
     this[startSymbol] = false;
     // 開始時間
     this[beginSymbol] = 0;
+    // Events
+    this[eventSymbol] = new Events(Polling.UPDATE);
   }
   // ----------------------------------------
   // EVENT
@@ -146,13 +154,12 @@ export class Polling extends EventDispatcher {
     const strong = event.hasOwnProperty('strong') && !!event.strong;
     // 現在時間 が interval より大きくなったか
     if (strong || (present - this.begin) >= this.polling) {
+      const events = this[eventSymbol];
+      events.time = present;
+      events.begin = this.begin;
+      events.interval = this.interval;
       // event 発生
-      this.dispatch({
-        type: Polling.UPDATE,
-        time: present,
-        begin: this.begin,
-        interval: this.polling,
-      });
+      this.dispatch(events);
       // 開始時間を update
       this.begin = present;
     }

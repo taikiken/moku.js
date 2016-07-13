@@ -13,7 +13,7 @@
 
 // event
 import { EventDispatcher } from '../event/EventDispatcher';
-import { EventObject } from '../event/EventObject';
+import { Events } from '../event/Events';
 
 /**
  * new を許可しないための Symbol
@@ -47,7 +47,7 @@ const updateSymbol:Symbol = Symbol();
  */
 const startSymbol:Symbol = Symbol();
 /**
- * Cycle.UPDATE event を発火する時の EventObject instance を保存するための Symbol
+ * Cycle.UPDATE event を発火する時の Events instance を保存するための Symbol
  * @type {Symbol}
  * @private
  */
@@ -87,8 +87,8 @@ export class Cycle extends EventDispatcher {
     this[updateSymbol] = this.update.bind(this);
     // started flag
     this[startSymbol] = false;
-    // eventObject
-    this[eventSymbol] = new EventObject(Cycle.UPDATE);
+    // Events
+    this[eventSymbol] = new Events(Cycle.UPDATE);
     // 設定済み instance を返します
     return instance;
   }
@@ -136,10 +136,10 @@ export class Cycle extends EventDispatcher {
     const id:Number = requestAnimationFrame(this[updateSymbol]);
     this[requestSymbol] = id;
     // event
-    const event:EventObject = this[eventSymbol];
-    event.id = id;
+    const events:Events = this[eventSymbol];
+    events.id = id;
     // event fire
-    this.dispatch(event);
+    this.dispatch(events);
   }
   // ----------------------------------------
   // STATIC METHOD
