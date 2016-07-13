@@ -12,18 +12,24 @@
 
 // event
 import { EventDispatcher } from '../event/EventDispatcher';
-import { EventObject } from '../event/EventObject';
+import { Events } from '../event/Events';
 
 // util
 import { Type } from '../util/Type';
 
-const canKey = Symbol();
-
-// native function
+// built-in function
 // Safari, IE はサポートしていないのでライブラリを使用すること
 const fetch = self.fetch;
 const Request = self.Request;
 const Headers = self.Headers;
+
+/**
+ * can（Ajax 実行可能かの真偽値）フラッグを保存するための Symbol
+ * @type {Symbol}
+ * @private
+ */
+const canSymbol:Symbol = Symbol();
+
 /**
  * <p>fetch API を使用し Ajax request を行います</p>
  * <p>Safari, IE はサポートしていないので polyfill ライブラリを使用します<br>
@@ -57,7 +63,7 @@ export class Ajax extends EventDispatcher {
      * @private
      * @default true
      */
-    this[canKey] = true;
+    this[canSymbol] = true;
   }
   // ----------------------------------------
   // EVENT
@@ -91,14 +97,14 @@ export class Ajax extends EventDispatcher {
    * @return {Boolean} request 可能 / 不可能 flag を返します
    */
   get can():Boolean {
-    return this[canKey];
+    return this[canSymbol];
   }
   /**
    * request 可能 / 不可能 flag を設定します
    * @param {Boolean} flag request 可能 / 不可能 flag
    */
   set can(flag:Boolean):void {
-    this[canKey] = flag;
+    this[canSymbol] = flag;
   }
   // ----------------------------------------
   // METHOD
@@ -135,7 +141,7 @@ export class Ajax extends EventDispatcher {
         return response.json();
       })
       .then((json:Object) => {
-        const event:EventObject = new EventObject(Ajax.COMPLETE);
+        const event:Events = new Events(Ajax.COMPLETE);
         event.data = json;
         // complete event fire
         this.dispatch(event);
@@ -143,7 +149,7 @@ export class Ajax extends EventDispatcher {
         this.enable();
       })
       .catch((error) => {
-        const event:EventObject = new EventObject(Ajax.ERROR);
+        const event:Events = new Events(Ajax.ERROR);
         event.data = null;
         event.error = error;
         // error event fire

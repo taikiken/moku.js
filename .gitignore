@@ -279,3 +279,7 @@ app/**/_sprite.scss
 ### MicrosoftOffice template section で ignore 済み
 ## css 出力
 #.tmp
+
+# 一時的に ignore
+docs
+api_docs

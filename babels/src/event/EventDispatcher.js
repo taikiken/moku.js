@@ -14,14 +14,14 @@
 import { Type } from '../util/Type';
 
 // Event
-import { EventObject } from './EventObject';
+import { Events } from './Events';
 
 /**
  * private property key, listeners Object
  * @type {Symbol}
  * @private
  */
-const listenersKey = Symbol();
+const listenersKey:Symbol = Symbol();
 
 /**
  * <p>Custom Event を作成し Event 通知を行います</p>
@@ -143,8 +143,10 @@ export class EventDispatcher {
    * @param {Array<Function>} types event type に登録されている配列（関数）
    */
   clean(type:String, types:Array):void {
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
-    const hasFunction = types.some((listener) => listener !== null);
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some\
+    // Array.some は 戻り値が true の時に走査を止めます
+    // types 配列に null 以外があるかを調べます
+    const hasFunction = types.some((listener) => typeof listener === 'function');
 
     if (!hasFunction) {
       // null 以外が無いので空にする
@@ -176,15 +178,11 @@ export class EventDispatcher {
   }
   /**
    * イベントを発生させリスナー関数を call します
-   * @param {EventObject|*} event 送信される Event Object.<br>
+   * @param {Events|*} event 送信される Event Object.<br>
    *   type キーにイベント種類が設定されています、dispatch 時に target プロパティを追加し this を設定します
    */
-  dispatch(event:EventObject):void {
+  dispatch(event:Events):void {
     const listeners:Object = this.listeners;
-    // event.target = this しようとすると
-    // Assignment to property of function parameter 'event'  no-param-reassign
-    // になるのでコピーし使用します
-    const eventObject:Object = event;
     // event.type
     const type:String = event.type;
 
@@ -195,6 +193,10 @@ export class EventDispatcher {
       return;
     }
 
+    // event.target = this しようとすると
+    // Assignment to property of function parameter 'event'  no-param-reassign
+    // になるのでコピーし使用します
+    const eventObject:Object = event;
     // target プロパティに発生元を設定する
     eventObject.target = this;
 
@@ -241,9 +243,9 @@ export class EventDispatcher {
   /**
    * **alias dispatch**
    * <p>イベントを発生させリスナー関数を call します</p>
-   * @param {Object} event typeキー が必須です
+   * @param {Events} event typeキー が必須です
    */
-  dispatchEvent(event:Object):void {
+  dispatchEvent(event:Events):void {
     this.dispatch(event);
   }
 }

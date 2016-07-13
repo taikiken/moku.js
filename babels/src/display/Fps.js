@@ -10,7 +10,11 @@
  *
  */
 
+// event
 import { EventDispatcher } from '../event/EventDispatcher';
+import { Events } from '../event/Events';
+
+// display
 import { Cycle } from './Cycle';
 
 /**
@@ -43,6 +47,12 @@ const intervalSymbol:Symbol = Symbol();
  * @private
  */
 const fpsSymbol:Symbol = Symbol();
+/**
+ * Fps.UPDATE event を発火する時の Events instance を保存するための Symbol
+ * @type {Symbol}
+ * @private
+ */
+const eventsSymbol:Symbol = Symbol();
 
 /**
  * フレームレート毎に UPDATE イベントを発生させます
@@ -69,6 +79,8 @@ export class Fps extends EventDispatcher {
     this[beginSymbol] = 0;
     // interval
     this[intervalSymbol] = 1;
+    // Events
+    this[eventsSymbol] = new Events(Fps.UPDATE);
   }
   // ----------------------------------------
   // EVENT
@@ -158,13 +170,12 @@ export class Fps extends EventDispatcher {
     const strong = event.hasOwnProperty('strong') && !!event.strong;
     // 現在時間 が interval より大きくなったか
     if (strong || (present - this.begin) >= this.interval) {
+      const events = this[eventsSymbol];
+      events.time = present;
+      events.begin = this.begin;
+      events.interval = this.interval;
       // event 発生
-      this.dispatch({
-        type: Fps.UPDATE,
-        time: present,
-        begin: this.begin,
-        interval: this.interval,
-      });
+      this.dispatch(events);
       // 開始時間を update
       this.begin = present;
     }

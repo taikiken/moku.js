@@ -13,12 +13,14 @@
 /**
  * custom Event のリスナー関数引数に送られる Event Object
  */
-export class EventObject {
+export class Events {
   /**
-   * custom Event Object
+   * custom Event Object, Defines a generic model.
    * @param {String} type イベント種類
-   */
-  constructor(type:String) {
-    Object.assign(this, { type, target: this, currentTarget: this });
+   * @param {*} target イベント発生インスタンス
+   * @param {*} currentTarget イベント発生インスタンス
+   * */
+  constructor(type:String, target = this, currentTarget = this) {
+    Object.assign(this, { type, target, currentTarget });
   }
 }

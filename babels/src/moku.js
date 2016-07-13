@@ -13,7 +13,7 @@
 
 // event
 import { EventDispatcher } from './event/EventDispatcher';
-import { EventObject } from './event/EventObject';
+import { Events } from './event/Events';
 
 // net
 import { Ajax } from './net/Ajax';
@@ -45,7 +45,7 @@ MOKU.build = ():String => '@@buildTime';
  */
 MOKU.event = {
   EventDispatcher,
-  EventObject,
+  Events,
 };
 /**
  * MOKU.net
