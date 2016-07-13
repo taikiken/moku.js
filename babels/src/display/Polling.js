@@ -46,7 +46,7 @@ const pollingSymbol:Symbol = Symbol();
  * @type {Symbol}
  * @private
  */
-const eventSymbol:Symbol = Symbol();
+const eventsSymbol:Symbol = Symbol();
 
 /**
  * 一定間隔毎に UPDATE イベントを発生させます
@@ -72,7 +72,7 @@ export class Polling extends EventDispatcher {
     // 開始時間
     this[beginSymbol] = 0;
     // Events
-    this[eventSymbol] = new Events(Polling.UPDATE);
+    this[eventsSymbol] = new Events(Polling.UPDATE);
   }
   // ----------------------------------------
   // EVENT
@@ -154,7 +154,7 @@ export class Polling extends EventDispatcher {
     const strong = event.hasOwnProperty('strong') && !!event.strong;
     // 現在時間 が interval より大きくなったか
     if (strong || (present - this.begin) >= this.polling) {
-      const events = this[eventSymbol];
+      const events = this[eventsSymbol];
       events.time = present;
       events.begin = this.begin;
       events.interval = this.interval;

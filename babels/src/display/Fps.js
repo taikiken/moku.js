@@ -52,7 +52,7 @@ const fpsSymbol:Symbol = Symbol();
  * @type {Symbol}
  * @private
  */
-const eventSymbol:Symbol = Symbol();
+const eventsSymbol:Symbol = Symbol();
 
 /**
  * フレームレート毎に UPDATE イベントを発生させます
@@ -80,7 +80,7 @@ export class Fps extends EventDispatcher {
     // interval
     this[intervalSymbol] = 1;
     // Events
-    this[eventSymbol] = new Events(Fps.UPDATE);
+    this[eventsSymbol] = new Events(Fps.UPDATE);
   }
   // ----------------------------------------
   // EVENT
@@ -170,7 +170,7 @@ export class Fps extends EventDispatcher {
     const strong = event.hasOwnProperty('strong') && !!event.strong;
     // 現在時間 が interval より大きくなったか
     if (strong || (present - this.begin) >= this.interval) {
-      const events = this[eventSymbol];
+      const events = this[eventsSymbol];
       events.time = present;
       events.begin = this.begin;
       events.interval = this.interval;

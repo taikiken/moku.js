@@ -51,7 +51,7 @@ const startSymbol:Symbol = Symbol();
  * @type {Symbol}
  * @private
  */
-const eventSymbol:Symbol = Symbol();
+const eventsSymbol:Symbol = Symbol();
 
 /**
  * <p>requestAnimationFrame でループイベントを発生させます</p>
@@ -88,7 +88,7 @@ export class Cycle extends EventDispatcher {
     // started flag
     this[startSymbol] = false;
     // Events
-    this[eventSymbol] = new Events(Cycle.UPDATE);
+    this[eventsSymbol] = new Events(Cycle.UPDATE);
     // 設定済み instance を返します
     return instance;
   }
@@ -136,7 +136,7 @@ export class Cycle extends EventDispatcher {
     const id:Number = requestAnimationFrame(this[updateSymbol]);
     this[requestSymbol] = id;
     // event
-    const events:Events = this[eventSymbol];
+    const events:Events = this[eventsSymbol];
     events.id = id;
     // event fire
     this.dispatch(events);
