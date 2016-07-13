@@ -17,9 +17,11 @@ import { Events } from './event/Events';
 
 // net
 import { Ajax } from './net/Ajax';
-// import { Cycle } from './display/Cycle';
-// import { Fps } from './display/Fps';
-// import { Polling } from './display/Polling';
+
+// display
+import { Cycle } from './display/Cycle';
+import { Fps } from './display/Fps';
+import { Polling } from './display/Polling';
 
 /**
  * **MOKU**
@@ -54,15 +56,15 @@ MOKU.event = {
 MOKU.net = {
   Ajax,
 };
-// /**
-//  * MOKU.display
-//  * @type {Object} MOKU.display object を返します
-//  */
-// MOKU.display = {
-//   Cycle,
-//   Fps,
-//   Polling,
-// };
+/**
+ * MOKU.display
+ * @type {Object} MOKU.display object を返します
+ */
+MOKU.display = {
+  Cycle,
+  Fps,
+  Polling,
+};
 
 // export
 window.MOKU = MOKU;
