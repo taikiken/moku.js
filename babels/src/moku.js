@@ -3,7 +3,6 @@
  * @author (at)taikiken / http://inazumatv.com
  * @date 2016/06/30 - 17:54
  *
- * @license MIT
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
  *
@@ -11,6 +10,8 @@
  * @@version
  * @@buildTime
  */
+/* eslint strict: [0, "global"] */
+'use strict';
 
 // event
 import { EventDispatcher } from './event/EventDispatcher';
@@ -23,7 +24,6 @@ import { Ajax } from './net/Ajax';
 import { Cycle } from './display/Cycle';
 import { Fps } from './display/Fps';
 import { Polling } from './display/Polling';
-
 /**
  * **MOKU**
  * <p>global Object</p>
@@ -31,7 +31,6 @@ import { Polling } from './display/Polling';
  * @type {Object}
  */
 const MOKU = {};
-
 /**
  * version number を取得します
  * @return {string} version number を返します

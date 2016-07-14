@@ -120,12 +120,8 @@ gulp.task 'babels:webpack:build', (cb) ->
   ugly =
     compress:
       warnings: true
-    output:
-      comments: (node, comment) ->
-        if comment.type == 'comment2'
-          $.util.log 'comment.value', /@license/i.test(comment.value), comment.value
-#          return comment.value.charAt(0) == '!'
-          return /@license/i.test(comment.value);
+#    output:
+#      comments: false
 
   conf.plugins = [
     new webpack.optimize.DedupePlugin()
