@@ -99,7 +99,7 @@ gulp.task 'babels:webpack:dev', ( cb ) ->
   return
 
 # --------------------------------------------
-  
+
 ###
   DEVELOP SEQUENCE
 ###
@@ -114,23 +114,35 @@ gulp.task 'babels:dev', (cb) ->
 
 
 # BUILD
-gulp.task 'babels:webpack:build', ( cb ) ->
+gulp.task 'babels:webpack:build', (cb) ->
   conf = Object.create wpk
+
+  ugly =
+    compress:
+      warnings: true
+    output:
+      comments: (node, comment) ->
+        if comment.type == 'comment2'
+          $.util.log 'comment.value', /@license/i.test(comment.value), comment.value
+#          return comment.value.charAt(0) == '!'
+          return /@license/i.test(comment.value);
 
   conf.plugins = [
     new webpack.optimize.DedupePlugin()
-    new webpack.optimize.UglifyJsPlugin compress: warnings: true
+    new webpack.optimize.UglifyJsPlugin ugly
   ]
   conf.entry = conf.entry + '/babels/compile/moku.js'
 
 #  # output
 #  conf.output.path = dir.dist.libs
-
+  conf.output.filename = 'moku.min.js';
+  $.util.log 'ugly', ugly
   webpack conf, ( err, stats ) ->
     if ( err )
       throw new $.util.PluginError( 'webpack', err )
 
     $.util.log '[webpack]', stats.toString colors: true, progress: true
+    cb()
   return
 
 ###
@@ -138,7 +150,6 @@ BUILD SEQUENCE
 ###
 gulp.task 'babels:build', (cb) ->
   runSequence(
-#    'scripts:eslint'
     'babels:babel'
     'babels:webpack:build'
     cb

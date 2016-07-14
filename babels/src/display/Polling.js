@@ -22,31 +22,31 @@ import { Cycle } from './Cycle';
  * @type {Symbol}
  * @private
  */
-const updateSymbol:Symbol = Symbol();
+const updateSymbol = Symbol();
 /**
  * private property key, Cycle.UPDATE 監視を開始したかを表す真偽値を保存するための Symbol
  * @type {Symbol}
  * @private
  */
-const startSymbol:Symbol = Symbol();
+const startSymbol = Symbol();
 /**
  * private property key, Fps.start 時間を保存するための Symbol
  * @type {Symbol}
  * @private
  */
-const beginSymbol:Symbol = Symbol();
+const beginSymbol = Symbol();
 /**
  * private property key, polling を保存するための Symbol
  * @type {Symbol}
  * @private
  */
-const pollingSymbol:Symbol = Symbol();
+const pollingSymbol = Symbol();
 /**
  * Polling.UPDATE event を発火する時の Events instance を保存するための Symbol
  * @type {Symbol}
  * @private
  */
-const eventsSymbol:Symbol = Symbol();
+const eventsSymbol = Symbol();
 
 /**
  * 一定間隔毎に UPDATE イベントを発生させます
@@ -56,10 +56,10 @@ export class Polling extends EventDispatcher {
    * 引数の polling に合わせ UPDATE イベントを発生させます
    * @param {Number} [polling=1000] polling milliseconds
    */
-  constructor(polling:Number = 1000) {
+  constructor(polling = 1000) {
     super();
     // Cycle instance
-    const cycle:Cycle = Cycle.factory();
+    const cycle = Cycle.factory();
     // public property
     Object.assign(this, { cycle });
     // private property
@@ -72,7 +72,7 @@ export class Polling extends EventDispatcher {
     // 開始時間
     this[beginSymbol] = 0;
     // Events
-    this[eventsSymbol] = new Events(Polling.UPDATE);
+    this[eventsSymbol] = new Events(Polling.UPDATE, this, this);
   }
   // ----------------------------------------
   // EVENT
@@ -81,7 +81,7 @@ export class Polling extends EventDispatcher {
    * requestAnimationFrame 毎に発生するイベントを取得します
    * @return {String} event, pollingUpdate を返します
    */
-  static get UPDATE():String {
+  static get UPDATE() {
     return 'pollingUpdate';
   }
   // ----------------------------------------
@@ -92,14 +92,14 @@ export class Polling extends EventDispatcher {
    * polling(milliseconds) を取得します
    * @return {Number} polling(milliseconds) を返します
    */
-  get polling():Number {
+  get polling() {
     return this[pollingSymbol];
   }
   /**
    * polling(milliseconds) を設定します
    * @param {Number} rate polling(milliseconds)
    */
-  set polling(rate:Number):void {
+  set polling(rate) {
     this[pollingSymbol] = rate;
   }
   // begin
@@ -107,14 +107,14 @@ export class Polling extends EventDispatcher {
    * 開始時間を取得します
    * @return {Number} 開始時間を返します
    */
-  get begin():Number {
+  get begin() {
     return this[beginSymbol];
   }
   /**
    * 開始時間を設定します
    * @param {Number} time 開始時間
    */
-  set begin(time:Number):void {
+  set begin(time) {
     this[beginSymbol] = time;
   }
   // ----------------------------------------
@@ -122,46 +122,79 @@ export class Polling extends EventDispatcher {
   // ----------------------------------------
   /**
    * loop(requestAnimationFrame) を開始します
+   * @return {Boolean} start に成功すると true を返します
    */
-  start():void {
+  start() {
     if (this[startSymbol]) {
       // already start
       console.warn('Polling.start already start', this[startSymbol]);
-      return;
+      return false;
     }
-
-    this.begin = Date.now();
+    // flag -> true
     this[startSymbol] = true;
-    this.cycle.on(Cycle.UPDATE, this[updateSymbol]);
-    this.cycle.start();
-    this.update({ strong: true });
+    // 開始時間
+    // @type {Number}
+    this.begin = Date.now();
+    // cycle
+    const cycle = this.cycle;
+    // bind Cycle.UPDATE
+    cycle.on(Cycle.UPDATE, this[updateSymbol]);
+    // cycle 開始
+    cycle.start();
+    // 強制的に1回目を実行
+    const events = this[eventsSymbol];
+    events.time = this.begin;
+    events.begin = this.begin;
+    events.polling = this.polling;
+    this.fire(events);
+
+    return true;
   }
   /**
    * loop(cancelAnimationFrame) します
+   * @returns {Boolean} stop に成功すると true を返します
    */
-  stop():void {
+  stop() {
+    if (!this[startSymbol]) {
+      // not start
+      return false;
+    }
     this.cycle.off(Cycle.UPDATE, this[updateSymbol]);
     this[startSymbol] = false;
+    return true;
   }
   /**
    * loop(requestAnimationFrame) します
-   * @param {Object} event Cycle.UPDATE event Object
+   * @returns {Boolean} Polling.UPDATE event が発生すると true を返します
    */
-  update(event:Object):void {
+  update() {
     // 現在時間
-    const present:Number = Date.now();
-    // strong flag
-    const strong = event.hasOwnProperty('strong') && !!event.strong;
+    // @type {Number}
+    const present = Date.now();
+    // @type {Number} - polling 間隔
+    const polling = this.polling;
+    // @type {Number} - 開始時間
+    const begin = this.begin;
     // 現在時間 が interval より大きくなったか
-    if (strong || (present - this.begin) >= this.polling) {
+    if ((present - begin) >= polling) {
       const events = this[eventsSymbol];
       events.time = present;
-      events.begin = this.begin;
-      events.interval = this.interval;
+      events.begin = begin;
+      events.polling = polling;
       // event 発生
-      this.dispatch(events);
+      this.fire(events);
       // 開始時間を update
       this.begin = present;
+      // event 発生
+      return true;
     }
+    return false;
+  }
+  /**
+   * Polling.UPDATE event を発生します
+   * @param {Events} events Polling.UPDATE event object
+   */
+  fire(events) {
+    this.dispatch(events);
   }
 }

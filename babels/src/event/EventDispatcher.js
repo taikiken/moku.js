@@ -13,15 +13,12 @@
 // util
 import { Type } from '../util/Type';
 
-// Event
-import { Events } from './Events';
-
 /**
  * private property key, listeners Object
  * @type {Symbol}
  * @private
  */
-const listenersKey:Symbol = Symbol();
+const listenersKey = Symbol();
 
 /**
  * <p>Custom Event を作成し Event 通知を行います</p>
@@ -59,7 +56,7 @@ export class EventDispatcher {
    * リスナーリストを取得します
    * @return {Object} リスナーリストを返します
    */
-  get listeners():Object {
+  get listeners() {
     return this[listenersKey];
   }
   // ----------------------------------------
@@ -68,7 +65,7 @@ export class EventDispatcher {
   /**
    * 全てのリスナーを破棄します
    */
-  destroy():void {
+  destroy() {
     this[listenersKey] = {};
   }
   /**
@@ -76,7 +73,7 @@ export class EventDispatcher {
    * @param {String} type event type（種類）
    * @param {Function} listener callback関数
    */
-  on(type:String, listener:Function):void {
+  on(type, listener) {
     if (!Type.method(listener)) {
       // listener が 関数でないので処理しない
       return;
@@ -105,13 +102,14 @@ export class EventDispatcher {
    * @param {String} type event type（種類）
    * @param {Function} listener リスナー関数
    */
-  off(type:String, listener:Function):void {
+  off(type, listener) {
     if (!Type.method(listener)) {
       // listener が 関数でないので処理しない
       return;
     }
 
-    const listeners:Object = this[listenersKey];
+    // @type {Object} - events.type:String: [listener:Function...]
+    const listeners = this.listeners;
 
     if (!listeners.hasOwnProperty(type)) {
       // listener.type が存在しない
@@ -119,9 +117,11 @@ export class EventDispatcher {
       return;
     }
 
-    const types:Array = listeners[type];
+    // @type {Array} - listener list
+    const types = listeners[type];
 
     // listener の配列位置を調べる
+    // @type {Number}
     const index = types.indexOf(listener);
 
     if (index === -1) {
@@ -142,10 +142,11 @@ export class EventDispatcher {
    * @param {String} type event type（種類）
    * @param {Array<Function>} types event type に登録されている配列（関数）
    */
-  clean(type:String, types:Array):void {
+  clean(type, types) {
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some\
     // Array.some は 戻り値が true の時に走査を止めます
     // types 配列に null 以外があるかを調べます
+    // @type {Boolean} - listener list に 関数(typeof 'function')が存在すると true になります
     const hasFunction = types.some((listener) => typeof listener === 'function');
 
     if (!hasFunction) {
@@ -159,13 +160,14 @@ export class EventDispatcher {
    * @param {Function} listener リスナー関数
    * @return {Boolean} event type にリスナー関数が登録されているかの真偽値を返します
    */
-  has(type:String, listener:Function):Boolean {
+  has(type, listener) {
     if (!Type.method(listener)) {
       // listener が 関数でないので処理しない
       return false;
     }
 
-    const listeners:Object = this.listeners;
+    // @type {Object} - events.type:String: [listener:Function...]
+    const listeners = this.listeners;
 
     if (!listeners.hasOwnProperty(type)) {
       // listener.type が存在しない
@@ -173,18 +175,19 @@ export class EventDispatcher {
       return false;
     }
 
-    // 存在チェック
+    // @type {Boolean} - 存在チェック
     return listeners[type].indexOf(listener) !== -1;
   }
   /**
    * イベントを発生させリスナー関数を call します
-   * @param {Events|*} event 送信される Event Object.<br>
+   * @param {Events|*} events 送信される Event Object.<br>
    *   type キーにイベント種類が設定されています、dispatch 時に target プロパティを追加し this を設定します
    */
-  dispatch(event:Events):void {
-    const listeners:Object = this.listeners;
-    // event.type
-    const type:String = event.type;
+  dispatch(events) {
+    // @type {Object} - events.type:String: [listener:Function...]
+    const listeners = this.listeners;
+    // @type {String} - event.type
+    const type = events.type;
 
     // typeof でなく hasOwnProperty で調べる
     if (!listeners.hasOwnProperty(type)) {
@@ -196,14 +199,16 @@ export class EventDispatcher {
     // event.target = this しようとすると
     // Assignment to property of function parameter 'event'  no-param-reassign
     // になるのでコピーし使用します
-    const eventObject:Object = event;
+    const eventObject = events;
     // target プロパティに発生元を設定する
     eventObject.target = this;
 
     // callback を実行する
     listeners[type]
       .map(
-        (listener:Function) => {
+        // @param listener {Function}
+        (listener) => {
+          // null が混じっているのでタイプチェックを行い listener 関数を実行します
           if (Type.method(listener)) {
             return listener.call(this, eventObject);
           }
@@ -218,7 +223,7 @@ export class EventDispatcher {
    * @param {String} type event type（種類）
    * @param {Function} listener callback関数
    */
-  addEventListener(type:String, listener:Function):void {
+  addEventListener(type, listener) {
     this.on(type, listener);
   }
   /**
@@ -227,7 +232,7 @@ export class EventDispatcher {
    * @param {String} type event type（種類）
    * @param {Function} listener リスナー関数
    */
-  removeEventListener(type:String, listener:Function):void {
+  removeEventListener(type, listener) {
     this.off(type, listener);
   }
   /**
@@ -237,15 +242,15 @@ export class EventDispatcher {
    * @param {Function} listener リスナー関数
    * @return {Boolean} event type にリスナー関数が登録されているかの真偽値を返します
    */
-  hasEventListener(type:String, listener:Function):Boolean {
+  hasEventListener(type, listener) {
     return this.has(type, listener);
   }
   /**
    * **alias dispatch**
    * <p>イベントを発生させリスナー関数を call します</p>
-   * @param {Events} event typeキー が必須です
+   * @param {Events} events typeキー が必須です
    */
-  dispatchEvent(event:Events):void {
-    this.dispatch(event);
+  dispatchEvent(events) {
+    this.dispatch(events);
   }
 }

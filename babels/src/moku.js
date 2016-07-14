@@ -1,8 +1,9 @@
 /*!
- * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * Copyright (c) inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
  * @date 2016/06/30 - 17:54
  *
+ * @license MIT
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
  *
@@ -35,12 +36,12 @@ const MOKU = {};
  * version number を取得します
  * @return {string} version number を返します
  */
-MOKU.version = ():String => '@@version';
+MOKU.version = () => '@@version';
 /**
  * build 日時を取得します
  * @return {string}  build 日時を返します
  */
-MOKU.build = ():String => '@@buildTime';
+MOKU.build = () => '@@buildTime';
 /**
  * MOKU.event
  * @type {Object} MOKU.event object を返します
