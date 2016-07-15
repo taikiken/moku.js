@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/07/04 - 14:19
+ * @date 2016/07/04 - 16:46
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -14,7 +14,7 @@
 import { EventDispatcher } from '../event/EventDispatcher';
 import { Events } from '../event/Events';
 
-// display
+// tick
 import { Cycle } from './Cycle';
 
 /**
@@ -36,82 +36,71 @@ const startSymbol = Symbol();
  */
 const beginSymbol = Symbol();
 /**
- * private property key, fps を milli seconds に変換した polling（interval） 時間を保存するための Symbol
+ * private property key, polling を保存するための Symbol
  * @type {Symbol}
  * @private
  */
-const intervalSymbol = Symbol();
+const pollingSymbol = Symbol();
 /**
- * private property key, fps を保存するための Symbol
- * @type {Symbol}
- * @private
- */
-const fpsSymbol = Symbol();
-/**
- * Fps.UPDATE event を発火する時の Events instance を保存するための Symbol
+ * Polling.UPDATE event を発火する時の Events instance を保存するための Symbol
  * @type {Symbol}
  * @private
  */
 const eventsSymbol = Symbol();
 
 /**
- * フレームレート毎に UPDATE イベントを発生させます
+ * 一定間隔毎に UPDATE イベントを発生させます
  */
-export class Fps extends EventDispatcher {
+export class Polling extends EventDispatcher {
   /**
-   * 引数の frame rate に合わせ UPDATE イベントを発生させます
-   * @param {Number} [fps=30] frame rate
+   * 引数の polling に合わせ UPDATE イベントを発生させます
+   * @param {Number} [polling=1000] polling milliseconds
    */
-  constructor(fps = 30) {
+  constructor(polling = 1000) {
     super();
-    // @type {Cycle} - Cycle instance
+    // Cycle instance
     const cycle = Cycle.factory();
     // public property
     Object.assign(this, { cycle });
     // private property
-    // frame rate
-    this[fpsSymbol] = fps;
+    // polling rate(milliseconds)
+    this[pollingSymbol] = polling;
     // Cycle.UPDATE event handler
     this[updateSymbol] = this.update.bind(this);
     // started flag
     this[startSymbol] = false;
     // 開始時間
     this[beginSymbol] = 0;
-    // interval
-    this[intervalSymbol] = 1;
     // Events
-    this[eventsSymbol] = new Events(Fps.UPDATE, this, this);
+    this[eventsSymbol] = new Events(Polling.UPDATE, this, this);
   }
   // ----------------------------------------
   // EVENT
   // ----------------------------------------
   /**
    * requestAnimationFrame 毎に発生するイベントを取得します
-   * @event UPDATE
-   * @return {String} event, fpsUpdate を返します
-   * @default fpsUpdate
+   * @return {String} event, pollingUpdate を返します
    */
   static get UPDATE() {
-    return 'fpsUpdate';
+    return 'pollingUpdate';
   }
   // ----------------------------------------
   // GETTER / SETTER
   // ----------------------------------------
   // fps
   /**
-   * frame rate を取得します
-   * @return {Number} frame rate を返します
+   * polling(milliseconds) を取得します
+   * @return {Number} polling(milliseconds) を返します
    */
-  get fps() {
-    return this[fpsSymbol];
+  get polling() {
+    return this[pollingSymbol];
   }
   /**
-   * frame rate を設定します, 1 ~ 60 の間で設定します
-   * @param {Number} rate frame rate
+   * polling(milliseconds) を設定します
+   * @param {Number} rate polling(milliseconds)
    */
-  set fps(rate) {
-    this[fpsSymbol] = rate;
-    this[intervalSymbol] = 1000 / rate;
+  set polling(rate) {
+    this[pollingSymbol] = rate;
   }
   // begin
   /**
@@ -128,40 +117,69 @@ export class Fps extends EventDispatcher {
   set begin(time) {
     this[beginSymbol] = time;
   }
-  // polling
+  // events
   /**
-   * interval time(milli seconds) を取得します
-   * @return {Number} interval time(milli seconds) を返します
+   * Events instance を取得します
+   * @return {Events} Events instance を返します
    */
-  get interval() {
-    return this[intervalSymbol];
+  get events() {
+    return this[eventsSymbol];
+  }
+  /**
+   * Events instance を設定します
+   * @param {Events} events Events instance
+   */
+  set events(events) {
+    this[eventsSymbol] = events;
   }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
   /**
+   * events object を発火前に作成します
+   * @param {Number} begin 開始時間: 前回の発火時間
+   * @param {Number} present 現在時間
+   * @return {Events} アップデートした Events を返します
+   */
+  updateEvents(begin, present) {
+    this.begin = begin;
+    // @type {Events} - start event
+    const events = this.events;
+    events.begin = begin;
+    events.present = present;
+    events.polling = this.polling;
+    return events;
+  }
+  /**
    * loop(requestAnimationFrame) を開始します
-   * @returns {Boolean} start に成功すると true を返します
+   * @return {Boolean} start に成功すると true を返します
    */
   start() {
     if (this[startSymbol]) {
       // already start
-      console.warn('Fps.start already start', this[startSymbol]);
+      // console.warn('Polling.start already start', this[startSymbol]);
       return false;
     }
-    this.init(fpsSymbol);
     // flag -> true
     this[startSymbol] = true;
+    // // 開始時間
+    // // @type {Number}
+    // this.begin = Date.now();
     // cycle
     const cycle = this.cycle;
+    // bind Cycle.UPDATE
     cycle.on(Cycle.UPDATE, this[updateSymbol]);
+    // cycle 開始
     cycle.start();
-    // 最初の 1 回目のイベントを強制発行します
-    const fpsEvents = this[eventsSymbol];
-    fpsEvents.time = this.begin;
-    fpsEvents.begin = this.begin;
-    fpsEvents.interval = this.interval;
-    this.fire(fpsEvents);
+    // const events = this.events;
+    // events.time = this.begin;
+    // events.begin = this.begin;
+    // events.polling = this.polling;
+    // @type {Number}
+    const present = Date.now();
+    // 強制的に1回目を実行
+    this.fire(this.updateEvents(present, present));
+
     return true;
   }
   /**
@@ -174,29 +192,29 @@ export class Fps extends EventDispatcher {
       return false;
     }
     this.cycle.off(Cycle.UPDATE, this[updateSymbol]);
-    // flag -> false
     this[startSymbol] = false;
     return true;
   }
   /**
    * loop(requestAnimationFrame) します
-   * @returns {Boolean} Fps.UPDATE event が発生すると true を返します
+   * @returns {Boolean} Polling.UPDATE event が発生すると true を返します
    */
   update() {
-    // @type {Number} - 現在時間
+    // 現在時間
+    // @type {Number}
     const present = Date.now();
     // @type {Number} - polling 間隔
-    const interval = this.interval;
+    const polling = this.polling;
     // @type {Number} - 開始時間
     const begin = this.begin;
-    // 現在時間と開始時間の差が interval より大きくなったらイベントを発生させます
-    if ((present - begin) >= interval) {
-      const events = this[eventsSymbol];
-      events.time = present;
-      events.begin = begin;
-      events.interval = interval;
+    // 現在時間 が interval より大きくなったか
+    if ((present - begin) >= polling) {
+      // const events = this.events;
+      // events.present = present;
+      // events.begin = begin;
+      // events.polling = polling;
       // event 発生
-      this.fire(events);
+      this.fire(this.updateEvents(begin, present));
       // 開始時間を update
       this.begin = present;
       // event 発生
@@ -205,23 +223,10 @@ export class Fps extends EventDispatcher {
     return false;
   }
   /**
-   * Fps.UPDATE event を発生します
-   * @param {Events} events Fps.UPDATE event object
+   * Polling.UPDATE event を発生します
+   * @param {Events} events Polling.UPDATE event object
    */
   fire(events) {
     this.dispatch(events);
-  }
-  /**
-   * Fps 開始初期処理を行います
-   *
-   * - fps(interval time) 設定
-   * - 開始時間設定
-   *
-   * @param {Symbol} symbol private property fps を取得するための Symbol
-   * @private
-   */
-  init(symbol) {
-    this.fps = this[symbol];
-    this.begin = Date.now();
   }
 }

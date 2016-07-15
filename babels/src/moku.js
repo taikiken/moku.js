@@ -10,6 +10,8 @@
  * @@version
  * @@buildTime
  */
+// use strict は本来不要でエラーになる
+// 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
 /* eslint strict: [0, "global"] */
 'use strict';
 
@@ -20,10 +22,10 @@ import { Events } from './event/Events';
 // net
 import { Ajax } from './net/Ajax';
 
-// display
-import { Cycle } from './display/Cycle';
-import { Fps } from './display/Fps';
-import { Polling } from './display/Polling';
+// tick
+import { Cycle } from './tick/Cycle';
+import { Fps } from './tick/Fps';
+import { Polling } from './tick/Polling';
 /**
  * **MOKU**
  * <p>global Object</p>
@@ -60,7 +62,7 @@ MOKU.net = {
  * MOKU.display
  * @type {Object} MOKU.display object を返します
  */
-MOKU.display = {
+MOKU.tick = {
   Cycle,
   Fps,
   Polling,

@@ -137,7 +137,11 @@ export class Ajax extends EventDispatcher {
 
     // @type {Request} Request instance
     const request = Ajax.option(path, method, headers, formData);
-
+    // start event fire
+    const startEvents = new Events(Ajax.START, this, this);
+    startEvents.request = request;
+    this.dispatch(startEvents);
+    // fetch start
     fetch(request)
       // @param {Object} response - Ajax response
       .then((response) => {
@@ -158,6 +162,7 @@ export class Ajax extends EventDispatcher {
         // flag true
         this.enable();
       })
+      // @param {Error} - Ajax something error
       .catch((error) => {
         // @type {Evens} - Ajax.COMPLETE events Object
         const events = new Events(Ajax.ERROR, this, this);

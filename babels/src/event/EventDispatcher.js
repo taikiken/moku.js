@@ -143,7 +143,7 @@ export class EventDispatcher {
    * @param {Array<Function>} types event type に登録されている配列（関数）
    */
   clean(type, types) {
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some\
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
     // Array.some は 戻り値が true の時に走査を止めます
     // types 配列に null 以外があるかを調べます
     // @type {Boolean} - listener list に 関数(typeof 'function')が存在すると true になります
