@@ -86,9 +86,9 @@ gulp.task 'babels:webpack:dev', ( cb ) ->
     new webpack.optimize.DedupePlugin()
   ]
   conf.entry = conf.entry + '/babels/compile/moku.js'
-  
-#  # output
-#  conf.output.path = dir.dist.libs
+
+  # output
+  conf.output.path = dir.dist.libs
 
   webpack conf, ( err, stats ) ->
     if ( err )
@@ -129,10 +129,10 @@ gulp.task 'babels:webpack:build', (cb) ->
   ]
   conf.entry = conf.entry + '/babels/compile/moku.js'
 
-#  # output
-#  conf.output.path = dir.dist.libs
+  # output
+  conf.output.path = dir.dist.libs
   conf.output.filename = 'moku.min.js';
-  $.util.log 'ugly', ugly
+#  $.util.log 'ugly', ugly
   webpack conf, ( err, stats ) ->
     if ( err )
       throw new $.util.PluginError( 'webpack', err )
@@ -144,7 +144,7 @@ gulp.task 'babels:webpack:build', (cb) ->
 ###
 BUILD SEQUENCE
 ###
-gulp.task 'babels:build', (cb) ->
+gulp.task 'babels:build', ['babels:dev'], (cb) ->
   runSequence(
     'babels:babel'
     'babels:webpack:build'

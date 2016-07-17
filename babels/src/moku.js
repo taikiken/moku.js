@@ -26,6 +26,9 @@ import { Ajax } from './net/Ajax';
 import { Cycle } from './tick/Cycle';
 import { Fps } from './tick/Fps';
 import { Polling } from './tick/Polling';
+
+// util
+import { Type } from './util/Type';
 /**
  * **MOKU**
  * <p>global Object</p>
@@ -59,13 +62,20 @@ MOKU.net = {
   Ajax,
 };
 /**
- * MOKU.display
- * @type {Object} MOKU.display object を返します
+ * MOKU.tick
+ * @type {Object} MOKU.tick object を返します
  */
 MOKU.tick = {
   Cycle,
   Fps,
   Polling,
+};
+/**
+ * MOKU.util
+ * @type {Object} MOKU.util object を返します
+ */
+MOKU.util = {
+  Type,
 };
 
 // export
