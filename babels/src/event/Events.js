@@ -16,7 +16,7 @@
 export class Events {
   /**
    * custom Event Object, Defines a generic model.
-   * @param {String} type イベント種類
+   * @param {string} type イベント種類
    * @param {*} [target=this] イベント発生インスタンス
    * @param {*} [currentTarget=this] current イベント発生インスタンス
    * */

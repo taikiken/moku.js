@@ -98,7 +98,7 @@ export class Cycle extends EventDispatcher {
   /**
    * requestAnimationFrame 毎に発生するイベントを取得します
    * @event UPDATE
-   * @return {String} event, cycleUpdate を返します
+   * @return {string} event, cycleUpdate を返します
    * @default cycleUpdate
    */
   static get UPDATE() {
@@ -109,7 +109,7 @@ export class Cycle extends EventDispatcher {
   // ----------------------------------------
   /**
    * loop(requestAnimationFrame) を開始します
-   * @returns {Boolean} start に成功すると true を返します
+   * @returns {boolean} start に成功すると true を返します
    */
   start() {
     if (this[startSymbol]) {
@@ -123,8 +123,8 @@ export class Cycle extends EventDispatcher {
   }
   /**
    * loop(cancelAnimationFrame) を止めます
-   * @param {Number} [id] requestAnimationFrame id を使い cancelAnimationFrame をします
-   * @returns {Boolean} stop に成功すると true を返します
+   * @param {number} [id] requestAnimationFrame id を使い cancelAnimationFrame をします
+   * @returns {boolean} stop に成功すると true を返します
    */
   stop(id = this[requestSymbol]) {
     if (!this[startSymbol]) {
@@ -143,7 +143,7 @@ export class Cycle extends EventDispatcher {
    * @returns {Cycle} Cycle instance を返します
    */
   update() {
-    // @type {Number} - requestAnimationFrame id
+    // @type {number} - requestAnimationFrame id
     const id = requestAnimationFrame(this[updateSymbol]);
     this[requestSymbol] = id;
     // @type {Events} - event

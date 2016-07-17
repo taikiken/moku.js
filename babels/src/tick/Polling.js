@@ -54,7 +54,7 @@ const eventsSymbol = Symbol();
 export class Polling extends EventDispatcher {
   /**
    * 引数の polling に合わせ UPDATE イベントを発生させます
-   * @param {Number} [polling=1000] polling milliseconds
+   * @param {number} [polling=1000] polling milliseconds
    */
   constructor(polling = 1000) {
     super();
@@ -79,7 +79,7 @@ export class Polling extends EventDispatcher {
   // ----------------------------------------
   /**
    * 一定間隔(milliseconds)毎に発生するイベント type を取得します
-   * @return {String} event, pollingUpdate を返します
+   * @return {string} event, pollingUpdate を返します
    */
   static get UPDATE() {
     return 'pollingUpdate';
@@ -90,14 +90,14 @@ export class Polling extends EventDispatcher {
   // fps
   /**
    * polling(milliseconds) を取得します
-   * @return {Number} polling(milliseconds) を返します
+   * @return {number} polling(milliseconds) を返します
    */
   get polling() {
     return this[pollingSymbol];
   }
   /**
    * polling(milliseconds) を設定します
-   * @param {Number} rate polling(milliseconds)
+   * @param {number} rate polling(milliseconds)
    */
   set polling(rate) {
     this[pollingSymbol] = rate;
@@ -105,14 +105,14 @@ export class Polling extends EventDispatcher {
   // begin
   /**
    * 開始時間を取得します
-   * @return {Number} 開始時間を返します
+   * @return {number} 開始時間を返します
    */
   get begin() {
     return this[beginSymbol];
   }
   /**
    * 開始時間を設定します
-   * @param {Number} time 開始時間
+   * @param {number} time 開始時間
    */
   set begin(time) {
     this[beginSymbol] = time;
@@ -135,7 +135,8 @@ export class Polling extends EventDispatcher {
   // flag
   /**
    * started flag 状態を取得します
-   * @returns {Boolean} 現在の started flag 状態を返します
+   * @readonly
+   * @returns {boolean} 現在の started flag 状態を返します
    */
   get started() {
     return this[startSymbol];
@@ -145,7 +146,7 @@ export class Polling extends EventDispatcher {
   // ----------------------------------------
   /**
    * started flag を反転させ現在の started flag 状態を取得します
-   * @returns {Boolean} 現在の started flag 状態を返します
+   * @returns {boolean} 現在の started flag 状態を返します
    */
   turnOver() {
     this[startSymbol] = !this[startSymbol];
@@ -153,8 +154,8 @@ export class Polling extends EventDispatcher {
   }
   /**
    * events object を発火前に作成します
-   * @param {Number} begin 開始時間: 前回の発火時間
-   * @param {Number} present 現在時間
+   * @param {number} begin 開始時間: 前回の発火時間
+   * @param {number} present 現在時間
    * @return {Events} アップデートした Events を返します
    */
   updateEvents(begin, present) {
@@ -181,20 +182,19 @@ export class Polling extends EventDispatcher {
   }
   /**
    * loop(requestAnimationFrame) を開始します
-   * @return {Boolean} start に成功すると true を返します
+   * @return {boolean} start に成功すると true を返します
    */
   start() {
     if (this.started) {
       // already start
-      // console.warn('Polling.start already start', this[startSymbol]);
-      return false;
+        return false;
     }
     // flag -> true
     // this[startSymbol] = true;
     this.turnOver();
     // cycle
     this.initCycle();
-    // @type {Number} - 開始時間
+    // @type {number} - 開始時間
     const present = Date.now();
     // 強制的に1回目を実行
     this.fire(this.updateEvents(present, present));
@@ -203,7 +203,7 @@ export class Polling extends EventDispatcher {
   }
   /**
    * loop(cancelAnimationFrame) します
-   * @returns {Boolean} stop に成功すると true を返します
+   * @returns {boolean} stop に成功すると true を返します
    */
   stop() {
     if (!this.started) {
@@ -217,15 +217,15 @@ export class Polling extends EventDispatcher {
   }
   /**
    * loop(requestAnimationFrame) します
-   * @returns {Boolean} Polling.UPDATE event が発生すると true を返します
+   * @returns {boolean} Polling.UPDATE event が発生すると true を返します
    */
   update() {
     // 現在時間
-    // @type {Number}
+    // @type {number}
     const present = Date.now();
-    // @type {Number} - polling 間隔
+    // @type {number} - polling 間隔
     const polling = this.polling;
-    // @type {Number} - 開始時間
+    // @type {number} - 開始時間
     const begin = this.begin;
     // 現在時間 が interval より大きくなったか
     if ((present - begin) >= polling) {

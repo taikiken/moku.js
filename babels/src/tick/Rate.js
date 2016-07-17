@@ -51,7 +51,7 @@ const ratesSymbol = Symbol();
 export class Rate extends Polling {
   /**
    * 固定値フレームレート毎に UPDATE イベントを発生させます
-   * @param {Number} rate fps, 固定値以外設定できません
+   * @param {number} rate fps, 固定値以外設定できません
    */
   constructor(rate) {
     super(1);
@@ -82,7 +82,7 @@ export class Rate extends Polling {
   /**
    * fps 30 基準値を取得します
    * @const RATE_30
-   * @returns {Number} fps 30 基準値を返します
+   * @returns {number} fps 30 基準値を返します
    * @default 2
    */
   static get RATE_30() {
@@ -91,7 +91,7 @@ export class Rate extends Polling {
   /**
    * fps 20 基準値を取得します
    * @const RATE_20
-   * @returns {Number} fps 20 基準値を返します
+   * @returns {number} fps 20 基準値を返します
    * @default 3
    */
   static get RATE_20() {
@@ -100,7 +100,7 @@ export class Rate extends Polling {
   /**
    * fps 15 基準値を取得します
    * @const RATE_15
-   * @returns {Number} fps 15 基準値を返します
+   * @returns {number} fps 15 基準値を返します
    * @default 4
    */
   static get RATE_15() {
@@ -109,7 +109,7 @@ export class Rate extends Polling {
   /**
    * fps 12 基準値を取得します
    * @const RATE_12
-   * @returns {Number} fps 12 基準値を返します
+   * @returns {number} fps 12 基準値を返します
    * @default 5
    */
   static get RATE_12() {
@@ -118,7 +118,7 @@ export class Rate extends Polling {
   /**
    * fps 10 基準値を取得します
    * @const RATE_10
-   * @returns {Number} fps 10 基準値を返します
+   * @returns {number} fps 10 基準値を返します
    * @default 6
    */
   static get RATE_10() {
@@ -130,7 +130,7 @@ export class Rate extends Polling {
   /**
    * フレームレート毎に発生するイベント type を取得します
    * @event UPDATE
-   * @return {String} event, rateUpdate を返します
+   * @return {string} event, rateUpdate を返します
    * @default rateUpdate
    */
   static get UPDATE() {
@@ -141,7 +141,7 @@ export class Rate extends Polling {
   // ----------------------------------------
   /**
    * fps 基準値を取得します
-   * @returns {Number} fps 基準値を返します
+   * @returns {number} fps 基準値を返します
    */
   get rate() {
     return this[rateSymbol];
@@ -151,7 +151,7 @@ export class Rate extends Polling {
   // ----------------------------------------
   /**
    * fps 基準値を設定します
-   * @param {Number} rate fps 基準値, <br>
+   * @param {number} rate fps 基準値, <br>
    * this.RATE_30, this.RATE_20, this.RATE_15, this.RATE_12, this.RATE_10 の何れかが必須です
    */
   change(rate) {
@@ -163,12 +163,11 @@ export class Rate extends Polling {
   }
   /**
    * loop(requestAnimationFrame) を開始します
-   * @return {Boolean} start に成功すると true を返します
+   * @return {boolean} start に成功すると true を返します
    */
   start() {
     if (this.started) {
       // already start
-      // console.warn('Polling.start already start', this[startSymbol]);
       return false;
     }
     // flag -> true
@@ -182,7 +181,7 @@ export class Rate extends Polling {
   }
   /**
    * loop(requestAnimationFrame) します
-   * @returns {Boolean} Rate.UPDATE event が発生すると true を返します
+   * @returns {boolean} Rate.UPDATE event が発生すると true を返します
    */
   update() {
     // 余りが 0 の時にイベントを発火します

@@ -59,7 +59,7 @@ export class Ajax extends EventDispatcher {
     super();
     /**
      * request 可能 / 不可能 flag
-     * @type {Boolean}
+     * @type {boolean}
      * @private
      * @default true
      */
@@ -71,7 +71,7 @@ export class Ajax extends EventDispatcher {
   /**
    * START event を取得します
    * @event START
-   * @returns {String} リクエスト開始イベント, ajaxStart を返します
+   * @returns {string} リクエスト開始イベント, ajaxStart を返します
    * @default ajaxStart
    */
   static get START() {
@@ -80,7 +80,7 @@ export class Ajax extends EventDispatcher {
   /**
    * COMPLETE event を取得します
    * @event COMPLETE
-   * @returns {String} リクエスト完了イベント, ajaxComplete を返します
+   * @returns {string} リクエスト完了イベント, ajaxComplete を返します
    * @default ajaxComplete
    */
   static get COMPLETE() {
@@ -100,14 +100,14 @@ export class Ajax extends EventDispatcher {
   // ----------------------------------------
   /**
    * request 可能 / 不可能 flag を取得します
-   * @return {Boolean} request 可能 / 不可能 flag を返します
+   * @return {boolean} request 可能 / 不可能 flag を返します
    */
   get can() {
     return this[canSymbol];
   }
   /**
    * request 可能 / 不可能 flag を設定します
-   * @param {Boolean} flag request 可能 / 不可能 flag
+   * @param {boolean} flag request 可能 / 不可能 flag
    */
   set can(flag) {
     this[canSymbol] = flag;
@@ -121,8 +121,8 @@ export class Ajax extends EventDispatcher {
    * true の時は false にしリクエストを開始します</p>
    * <p>START, COMPLETE, ERROR イベントを発生させます</p>
    *
-   * @param {String} path Ajax request path
-   * @param {String} method GET, POST, PUT, DELETE...etc request method
+   * @param {string} path Ajax request path
+   * @param {string} method GET, POST, PUT, DELETE...etc request method
    * @param {Headers|Object|null} [headers=null] Headers option
    * @param {FormData|null} [formData=null] 送信フォームデータオプション
    */
@@ -176,7 +176,7 @@ export class Ajax extends EventDispatcher {
   }
   /**
    * 実行可否 flag を true にします
-   * @returns {Boolean} 現在の this.can property を返します
+   * @returns {boolean} 現在の this.can property を返します
    */
   enable() {
     this.can = true;
@@ -184,7 +184,7 @@ export class Ajax extends EventDispatcher {
   }
   /**
    * 実行可否 flag を false にします
-   * @returns {Boolean} 現在の this.can property を返します
+   * @returns {boolean} 現在の this.can property を返します
    */
   disable() {
     this.can = false;
@@ -196,8 +196,8 @@ export class Ajax extends EventDispatcher {
   /**
    * <p>fetch API へ送るオプションを作成します</p>
    *
-   * @param {String} path Ajax request path
-   * @param {String} method GET, POST, PUT, DELETE...etc request method
+   * @param {string} path Ajax request path
+   * @param {string} method GET, POST, PUT, DELETE...etc request method
    * @param {Headers|Object|null} headers Headers option
    * @param {FormData|null} formData 送信フォームデータオプション
    * @return {Request} fetch API へ送る Request instance を返します
