@@ -187,7 +187,7 @@ export class Polling extends EventDispatcher {
   start() {
     if (this.started) {
       // already start
-        return false;
+      return false;
     }
     // flag -> true
     // this[startSymbol] = true;
