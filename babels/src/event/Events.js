@@ -12,10 +12,18 @@
 
 /**
  * custom Event のリスナー関数引数に送られる Event Object
+ *
+ * EventDispatcher.dispatch する時の引数として使用します
+ *
+ * 3つのプロパティは必須項目です、イベントにあわせプロパティを追加します
+ *
+ * - type: string, イベント種類
+ * - target: *, イベント発生インスタンス
+ * - currentTarget: *, current イベント発生インスタンス
  */
 export class Events {
   /**
-   * custom Event Object, Defines a generic model.
+   * custom Event Object
    * @param {string} type イベント種類
    * @param {*} [target=this] イベント発生インスタンス
    * @param {*} [currentTarget=this] current イベント発生インスタンス
