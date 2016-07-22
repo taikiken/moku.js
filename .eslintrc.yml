@@ -22,7 +22,7 @@ extends: './eslint.extends.yml'
 #    - 4
 #  linebreak-style:
 #    - error
-#    - unix
+#    - unix 
 #  quotes:
 #    - error
 #    - single
