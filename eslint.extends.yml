@@ -35,6 +35,9 @@ rules:
   # enforce valid JSDoc comments (valid-jsdoc)
   valid-jsdoc:
     - 1
+    - {
+      requireReturn: false
+    }
   # http://eslint.org/docs/rules/no-console
   # console.warn, console.error は許可
   no-console:

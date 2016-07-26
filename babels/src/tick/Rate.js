@@ -188,6 +188,10 @@ export class Rate extends Polling {
     if (++this[countSymbol] % this.rate === 0) {
       this[countSymbol] = 0;
       this.fire(this.updateEvents(0, 0));
+
+      return true;
     }
+
+    return false;
   }
 }
