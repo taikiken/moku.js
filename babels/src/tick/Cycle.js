@@ -22,8 +22,8 @@ import { Events } from '../event/Events';
  */
 const singletonSymbol = Symbol();
 /**
- * singleton instance
- * @type {null|Cycle}
+ * singleton instance, nullable
+ * @type {?Cycle}
  * @private
  */
 let instance = null;
@@ -67,7 +67,7 @@ export class Cycle extends EventDispatcher {
   /**
    * singleton です
    * @param {Symbol} checkSymbol singleton を保証するための private instance
-   * @return {Cycle}
+   * @return {Cycle} singleton instance を返します
    */
   constructor(checkSymbol) {
     // checkSymbol と singleton が等価かをチェックします
