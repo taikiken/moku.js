@@ -64,19 +64,22 @@ export class EventDispatcher {
   // ----------------------------------------
   /**
    * 全てのリスナーを破棄します
+   * @return {boolean} 成功・不成功の真偽値を返します
    */
   destroy() {
     this[listenersKey] = {};
+    return true;
   }
   /**
    * event type に リスナー関数を bind します
    * @param {string} type event type（種類）
    * @param {Function} listener callback関数
+   * @return {boolean} 成功・不成功の真偽値を返します
    */
   on(type, listener) {
     if (!Type.method(listener)) {
       // listener が 関数でないので処理しない
-      return;
+      return false;
     }
 
     const listeners = this.listeners;
@@ -95,17 +98,20 @@ export class EventDispatcher {
         listeners[type].push(listener);
       }
     }
+
+    return true;
   }
   /**
    * <p>event type からリスナー関数を remove します<br>
    * 内部処理は一時的に null 設定にします</p>
    * @param {string} type event type（種類）
    * @param {Function} listener リスナー関数
+   * @return {boolean} 成功・不成功の真偽値を返します
    */
   off(type, listener) {
     if (!Type.method(listener)) {
       // listener が 関数でないので処理しない
-      return;
+      return false;
     }
 
     // @type {Object} - events.type:String: [listener:Function...]
@@ -114,7 +120,7 @@ export class EventDispatcher {
     if (!listeners.hasOwnProperty(type)) {
       // listener.type が存在しない
       // 処理しない
-      return;
+      return false;
     }
 
     // @type {Array} - listener list
@@ -127,7 +133,7 @@ export class EventDispatcher {
     if (index === -1) {
       // 配列位置が -1, 見つからなかった
       // 処理しない
-      return;
+      return false;
     }
 
     // すぐに削除するのでは無く null 代入
@@ -135,12 +141,15 @@ export class EventDispatcher {
     types[index] = null;
 
     this.clean(type, types);
+
+    return true;
   }
   /**
    * <p>リスナー配列を調べ可能なら空にします<br>
    * リスナーリストが全て null の時に 空配列にします</p>
    * @param {string} type event type（種類）
    * @param {Array<Function>} types event type に登録されている配列（関数）
+   * @return {boolean} 成功・不成功の真偽値を返します, true: 空にした
    */
   clean(type, types) {
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
@@ -153,6 +162,9 @@ export class EventDispatcher {
       // null 以外が無いので空にする
       this.listeners[type] = [];
     }
+
+    // 空配列にしたかを hasFunction flag を反転させることで知らせます
+    return !hasFunction;
   }
   /**
    * event type にリスナー関数が登録されているかを調べます
@@ -182,18 +194,19 @@ export class EventDispatcher {
    * イベントを発生させリスナー関数を call します
    * @param {Events|*} events 送信される Event Object.<br>
    *   type キーにイベント種類が設定されています、dispatch 時に target プロパティを追加し this を設定します
+   * @return {boolean} 成功・不成功の真偽値を返します
    */
   dispatch(events) {
-    // @type {Object} - events.type:String: [listener:Function...]
+    // @type {Object} - events.type:string: [listener:Function...]
     const listeners = this.listeners;
-    // @type {string} - event.type
+    // @type {string} - event type
     const type = events.type;
 
     // typeof でなく hasOwnProperty で調べる
     if (!listeners.hasOwnProperty(type)) {
       // listener.type が存在しない
       // 処理しない
-      return;
+      return false;
     }
 
     // event.target = this しようとすると
@@ -216,24 +229,28 @@ export class EventDispatcher {
           return null;
         }
       );
+
+    return true;
   }
   /**
    * **alias on**
    * <p>event type に リスナー関数を bind します</p>
    * @param {string} type event type（種類）
    * @param {Function} listener callback関数
+   * @return {boolean} 成功・不成功の真偽値を返します
    */
   addEventListener(type, listener) {
-    this.on(type, listener);
+    return this.on(type, listener);
   }
   /**
    * **alias off**
    * <p>event type からリスナー関数を remove します</p>
    * @param {string} type event type（種類）
    * @param {Function} listener リスナー関数
+   * @return {boolean} 成功・不成功の真偽値を返します
    */
   removeEventListener(type, listener) {
-    this.off(type, listener);
+    return this.off(type, listener);
   }
   /**
    * **alias has**
@@ -249,8 +266,9 @@ export class EventDispatcher {
    * **alias dispatch**
    * <p>イベントを発生させリスナー関数を call します</p>
    * @param {Events} events typeキー が必須です
+   * @return {boolean} 成功・不成功の真偽値を返します
    */
   dispatchEvent(events) {
-    this.dispatch(events);
+    return this.dispatch(events);
   }
 }

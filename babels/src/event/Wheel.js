@@ -81,8 +81,7 @@ export class Wheel extends EventDispatcher {
      */
     const threshold = 200;
     /**
-     * wheelDelta 移動量が閾値を超えるかをイベントハンドラ内でチェックします<br>
-     * Firefox: detail はコンバートし利用します
+     * wheelDelta 移動量が閾値を超えるかをチェックするための計算変数
      * @type {number}
      * @default 0
      */
@@ -93,7 +92,11 @@ export class Wheel extends EventDispatcher {
     //  * @default -7.5
     //  */
     // const coefficient = -7.5;
-
+    /**
+     * @type {Wheel}
+     * @property {number} this.threshold 閾値, wheel 移動量が閾値を超えたときにイベントを発生させます
+     * @property {number} this.moved wheelDelta 移動量が閾値を超えるかをチェックするための計算変数
+     */
     Object.assign(this, { threshold, moved });
 
     // 設定済み instance を返します
@@ -171,6 +174,8 @@ export class Wheel extends EventDispatcher {
   /**
    * window mousewheel event handler
    * <p>delta 値を取得し `this.moving` を実行します</p>
+   *
+   * @listens {WheelEvent} WheelEvent.wheel
    * @param {WheelEvent} event window wheel event
    * @returns {number} 前回移動量に delta 値 を加算した値を返します
    */
@@ -199,8 +204,14 @@ export class Wheel extends EventDispatcher {
    * @returns {number} 前回移動量に delta 値 を加算した値を返します
    */
   moving(delta) {
+    /**
+     * 移動量が閾値を超えるかをチェックするための計算変数
+     * @type {number}
+     */
     this.moved += delta;
+    // @type {number}
     const moved = this.moved;
+
     // 0 check
     if (moved === 0) {
       // 移動量が 0 なので処理をしない
@@ -230,6 +241,7 @@ export class Wheel extends EventDispatcher {
    * @returns {number} 加算移動量を返します
    */
   up(moved) {
+    // @type {Events}
     const events = new Events(Wheel.UP, this, this);
     events.moved = moved;
     this.dispatch(events);
@@ -242,6 +254,7 @@ export class Wheel extends EventDispatcher {
    * @returns {number} 加算移動量を返します
    */
   down(moved) {
+    // @type {Events}
     const events = new Events(Wheel.DOWN, this, this);
     events.moved = moved;
     this.dispatch(events);

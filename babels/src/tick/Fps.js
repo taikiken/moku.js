@@ -29,14 +29,14 @@ const fpsSymbol = Symbol();
 export class Fps extends Polling {
   /**
    * 引数の frame rate に合わせ UPDATE イベントを発生させます
-   * @param {number} [fps=30] frame rate
+   * @param {number} [fps=30] frame rate, default: 30
    */
   constructor(fps = 30) {
     super(1000 / fps);
     // private property
-    // frame rate
+    // @type {number} - frame rate, default: 30
     this[fpsSymbol] = fps;
-    // Events
+    // @type {Events} - Events
     const events = new Events(Fps.UPDATE, this, this);
     events.fps = fps;
     /**

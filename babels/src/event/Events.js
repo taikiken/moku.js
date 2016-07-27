@@ -30,6 +30,11 @@ export class Events {
    * */
   constructor(type, target = this, currentTarget = this) {
     // https://github.com/esdoc/esdoc/issues/305
+    /**
+     * @property {string} this.type - イベント種類
+     * @property {*} this.target - イベント発生インスタンス
+     * @property {*} this.currentTarget - current イベント発生インスタンス
+     */
     Object.assign(this, { type, target, currentTarget });
   }
 }

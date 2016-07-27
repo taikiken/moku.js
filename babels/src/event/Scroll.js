@@ -52,7 +52,7 @@ export class Scroll extends EventDispatcher {
   /**
    * singleton です
    * @param {Symbol} checkSymbol singleton を保証するための private instance
-   * @returns {Scroll} singleton instance を返します
+   * @return {Scroll} singleton instance を返します
    */
   constructor(checkSymbol) {
     // checkSymbol と singleton が等価かをチェックします
@@ -85,7 +85,7 @@ export class Scroll extends EventDispatcher {
   /**
    * scroll で発生するイベントを取得します
    * @event SCROLL
-   * @returns {string} event, scrollScroll を返します
+   * @return {string} event, scrollScroll を返します
    * @default scrollScroll
    */
   static get SCROLL() {
@@ -96,14 +96,14 @@ export class Scroll extends EventDispatcher {
   // ----------------------------------------
   /**
    * bind 済み mouseWheel
-   * @returns {function} bind 済み mouseWheel を返します
+   * @return {function} bind 済み mouseWheel を返します
    */
   get bindScroll() {
     return this[bindSymbol];
   }
   /**
    * scroll top 位置
-   * @returns {number} scroll top 位置を返します
+   * @return {number} scroll top 位置を返します
    */
   static get y() {
     // https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY
@@ -121,7 +121,7 @@ export class Scroll extends EventDispatcher {
   }
   /**
    * Events instance を取得します
-   * @returns {Events} Events instance
+   * @return {Events} Events instance
    */
   static get events() {
     return this[eventsSymbol];
@@ -132,7 +132,7 @@ export class Scroll extends EventDispatcher {
   /**
    * scroll event を監視します<br>
    * 監視前に二重に addEventListener しないように unwatch を実行します
-   * @returns {Scroll} method chain 可能なように instance を返します
+   * @return {Scroll} method chain 可能なように instance を返します
    */
   watch() {
     this.unwatch();
@@ -143,7 +143,7 @@ export class Scroll extends EventDispatcher {
   }
   /**
    * scroll event を監視を止めます
-   * @returns {Scroll} method chain 可能なように instance を返します
+   * @return {Scroll} method chain 可能なように instance を返します
    */
   unwatch() {
     window.removeEventListener('scroll', this.bindScroll);
@@ -154,7 +154,7 @@ export class Scroll extends EventDispatcher {
    * window scroll event handler<br>
    * window scroll event 発生後に scroll top 位置をもたせた Scroll.SCROLL custom event を発火します
    * @param {?Event} event window scroll event, nullable
-   * @returns {undefined} no-return
+   * @return {undefined} no-return
    */
   scroll(event) {
     // @type {Events} - events
@@ -170,7 +170,7 @@ export class Scroll extends EventDispatcher {
   // ----------------------------------------
   /**
    * Wheel instance を singleton を保証し作成します
-   * @returns {Scroll} Scroll instance を返します
+   * @return {Scroll} Scroll instance を返します
    */
   static factory() {
     return new Scroll(singletonSymbol);
