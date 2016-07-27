@@ -46,6 +46,8 @@ const ratesSymbol = Symbol();
  * - 15: RATE_15
  * - 12: RATE_12
  * - 10: RATE_10
+ * - 6: RATE_6
+ * - 5: RATE_5
  *
  */
 export class Rate extends Polling {
@@ -55,7 +57,7 @@ export class Rate extends Polling {
    */
   constructor(rate) {
     super(1);
-    // Events
+    // @type {Events - Events
     const events = new Events(Rate.UPDATE, this, this);
     events.rate = rate;
     /**
@@ -63,17 +65,23 @@ export class Rate extends Polling {
      * @type {Events}
      */
     this.events = events;
+
     // frame rate
     this.change(rate);
-    // count
+
+    // @type {number} - count, rate に達したかを計測するための counter 変数
     this[countSymbol] = 0;
+
     // correct rate list
+    // サポートするレートリスト
     this[ratesSymbol] = [
       this.RATE_30,
       this.RATE_20,
       this.RATE_15,
       this.RATE_12,
       this.RATE_10,
+      this.RATE_6,
+      this.RATE_5,
     ];
   }
   // ----------------------------------------
@@ -124,6 +132,24 @@ export class Rate extends Polling {
   static get RATE_10() {
     return 6;
   }
+  /**
+   * fps 6 基準値を取得します
+   * @const RATE_6
+   * @returns {number} fps 6 基準値を返します
+   * @default 10
+   */
+  static get RATE_6() {
+    return 10;
+  }
+  /**
+   * fps 5 基準値を取得します
+   * @const RATE_5
+   * @returns {number} fps 6 基準値を返します
+   * @default 12
+   */
+  static get RATE_5() {
+    return 12;
+  }
   // ----------------------------------------
   // EVENT
   // ----------------------------------------
@@ -151,8 +177,11 @@ export class Rate extends Polling {
   // ----------------------------------------
   /**
    * fps 基準値を設定します
+   * @throws {Error} 引数 rate が設定可能値以外の時に例外エラーが発生します
    * @param {number} rate fps 基準値, <br>
-   * this.RATE_30, this.RATE_20, this.RATE_15, this.RATE_12, this.RATE_10 の何れかが必須です
+   * this.RATE_30, this.RATE_20, this.RATE_15, this.RATE_12, this.RATE_10, <br>
+   * this.RATE_6, this.RATE_5 の何れかが必須です
+   * @return {undefined} no-return
    */
   change(rate) {
     if (this[ratesSymbol].indexof(rate) !== -1) {

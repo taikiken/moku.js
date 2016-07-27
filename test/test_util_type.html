@@ -11,7 +11,6 @@
 <script src="//cdn.rawgit.com/Automattic/expect.js/0.3.1/index.js"></script>
 <script src="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
 <script src="//chaijs.com/chai.js"></script>
-<script>mocha.setup('bdd')</script>
 <script src="../libs/moku.js" charset="utf-8"></script>
 <script>
   // mochaの機能を呼び出します。ここでは、BDDとTDDを使用します。
@@ -28,6 +27,7 @@
   var util = MOKU.util;
   var Type = util.Type;
 
+  //  Type.method
   describe('#Type.method, type check', function() {
     it("null is not function", function() {
       expect(Type.method(null)).to.eql(false);
@@ -49,6 +49,7 @@
     });
   });
 
+  // Type.exist
   describe('#Type.exist, type check', function() {
     it("null is not exist", function() {
       expect(Type.exist(null)).to.eql(false);
@@ -73,6 +74,42 @@
     });
     it("1 is exist", function() {
       expect(Type.exist(1)).to.be.true;
+    });
+  });
+
+  // Type.number
+  describe('#Type.number, type check', function() {
+    it("1 is number", function() {
+      expect(Type.number(1)).to.be.true;
+    });
+    it("'1' is not number", function() {
+      expect(Type.number('1')).to.be.false;
+    });
+  });
+
+  // Type.string
+  describe('#Type.string, type check', function() {
+    it("1 is not string", function() {
+      expect(Type.string(1)).to.be.false;
+    });
+    it("'1' is string", function() {
+      expect(Type.string('1')).to.be.true;
+    });
+  });
+
+  // Type.array
+  describe('#Type.array, type check', function() {
+    it("1 is not array", function() {
+      expect(Type.array(1)).to.be.false;
+    });
+    it("'1' is not array", function() {
+      expect(Type.array('1')).to.be.false;
+    });
+    it("{} is not array", function() {
+      expect(Type.array({})).to.be.false;
+    });
+    it("[] is array", function() {
+      expect(Type.array([])).to.be.true;
     });
   });
 </script>

@@ -10,3 +10,6 @@ app/assets/js/bundle
 
 # test
 test
+
+# libs
+libs/*

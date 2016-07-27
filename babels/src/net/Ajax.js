@@ -93,7 +93,7 @@ export class Ajax extends EventDispatcher {
    * @default ajaxError
    */
   static get ERROR() {
-    return 'AjaxError';
+    return 'ajaxError';
   }
   // ----------------------------------------
   // GETTER / SETTER
@@ -123,24 +123,28 @@ export class Ajax extends EventDispatcher {
    *
    * @param {string} path Ajax request path
    * @param {string} method GET, POST, PUT, DELETE...etc request method
-   * @param {Headers|Object|null} [headers=null] Headers option
-   * @param {FormData|null} [formData=null] 送信フォームデータオプション
+   * @param {?Headers|?Object|null} [headers=null] Headers option, nullable
+   * @param {?FormData|null} [formData=null] 送信フォームデータオプション, nullable
+   * @return {boolean} ajax request を開始したかどうかの真偽値を返します
    */
   start(path, method, headers = null, formData = null) {
     // ajax request 開始
     if (!this.can) {
       // flag が off なので処理しない
-      return;
+      return false;
     }
+
     // flag off
     this.disable();
 
     // @type {Request} Request instance
     const request = Ajax.option(path, method, headers, formData);
+
     // start event fire
     const startEvents = new Events(Ajax.START, this, this);
     startEvents.request = request;
     this.dispatch(startEvents);
+
     // fetch start
     fetch(request)
       // @param {Object} response - Ajax response
@@ -173,6 +177,8 @@ export class Ajax extends EventDispatcher {
         // flag true
         this.enable();
       });
+
+    return true;
   }
   /**
    * 実行可否 flag を true にします

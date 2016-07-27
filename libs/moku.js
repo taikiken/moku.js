@@ -54,7 +54,7 @@
 	 *
 	 * This notice shall be included in all copies or substantial portions of the Software.
 	 * 0.0.1
-	 * 2016-07-17 19:44:32
+	 * 2016-07-27 16:35:24
 	 */
 	// use strict は本来不要でエラーになる
 	// 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -105,7 +105,7 @@
 	 * @return {string}  build 日時を返します
 	 */
 	MOKU.build = function () {
-	  return '2016-07-17 19:44:32';
+	  return '2016-07-27 16:35:24';
 	};
 	/**
 	 * MOKU.event
@@ -239,14 +239,17 @@
 	    // ----------------------------------------
 	    /**
 	     * 全てのリスナーを破棄します
+	     * @return {boolean} 成功・不成功の真偽値を返します
 	     */
 	    value: function destroy() {
 	      this[listenersKey] = {};
+	      return true;
 	    }
 	    /**
 	     * event type に リスナー関数を bind します
 	     * @param {string} type event type（種類）
 	     * @param {Function} listener callback関数
+	     * @return {boolean} 成功・不成功の真偽値を返します
 	     */
 
 	  }, {
@@ -254,7 +257,7 @@
 	    value: function on(type, listener) {
 	      if (!_Type.Type.method(listener)) {
 	        // listener が 関数でないので処理しない
-	        return;
+	        return false;
 	      }
 
 	      var listeners = this.listeners;
@@ -273,12 +276,15 @@
 	          listeners[type].push(listener);
 	        }
 	      }
+
+	      return true;
 	    }
 	    /**
 	     * <p>event type からリスナー関数を remove します<br>
 	     * 内部処理は一時的に null 設定にします</p>
 	     * @param {string} type event type（種類）
 	     * @param {Function} listener リスナー関数
+	     * @return {boolean} 成功・不成功の真偽値を返します
 	     */
 
 	  }, {
@@ -286,7 +292,7 @@
 	    value: function off(type, listener) {
 	      if (!_Type.Type.method(listener)) {
 	        // listener が 関数でないので処理しない
-	        return;
+	        return false;
 	      }
 
 	      // @type {Object} - events.type:String: [listener:Function...]
@@ -295,7 +301,7 @@
 	      if (!listeners.hasOwnProperty(type)) {
 	        // listener.type が存在しない
 	        // 処理しない
-	        return;
+	        return false;
 	      }
 
 	      // @type {Array} - listener list
@@ -308,7 +314,7 @@
 	      if (index === -1) {
 	        // 配列位置が -1, 見つからなかった
 	        // 処理しない
-	        return;
+	        return false;
 	      }
 
 	      // すぐに削除するのでは無く null 代入
@@ -316,12 +322,15 @@
 	      types[index] = null;
 
 	      this.clean(type, types);
+
+	      return true;
 	    }
 	    /**
 	     * <p>リスナー配列を調べ可能なら空にします<br>
 	     * リスナーリストが全て null の時に 空配列にします</p>
 	     * @param {string} type event type（種類）
 	     * @param {Array<Function>} types event type に登録されている配列（関数）
+	     * @return {boolean} 成功・不成功の真偽値を返します, true: 空にした
 	     */
 
 	  }, {
@@ -339,6 +348,9 @@
 	        // null 以外が無いので空にする
 	        this.listeners[type] = [];
 	      }
+
+	      // 空配列にしたかを hasFunction flag を反転させることで知らせます
+	      return !hasFunction;
 	    }
 	    /**
 	     * event type にリスナー関数が登録されているかを調べます
@@ -371,6 +383,7 @@
 	     * イベントを発生させリスナー関数を call します
 	     * @param {Events|*} events 送信される Event Object.<br>
 	     *   type キーにイベント種類が設定されています、dispatch 時に target プロパティを追加し this を設定します
+	     * @return {boolean} 成功・不成功の真偽値を返します
 	     */
 
 	  }, {
@@ -378,16 +391,16 @@
 	    value: function dispatch(events) {
 	      var _this = this;
 
-	      // @type {Object} - events.type:String: [listener:Function...]
+	      // @type {Object} - events.type:string: [listener:Function...]
 	      var listeners = this.listeners;
-	      // @type {string} - event.type
+	      // @type {string} - event type
 	      var type = events.type;
 
 	      // typeof でなく hasOwnProperty で調べる
 	      if (!listeners.hasOwnProperty(type)) {
 	        // listener.type が存在しない
 	        // 処理しない
-	        return;
+	        return false;
 	      }
 
 	      // event.target = this しようとすると
@@ -408,30 +421,34 @@
 
 	        return null;
 	      });
+
+	      return true;
 	    }
 	    /**
 	     * **alias on**
 	     * <p>event type に リスナー関数を bind します</p>
 	     * @param {string} type event type（種類）
 	     * @param {Function} listener callback関数
+	     * @return {boolean} 成功・不成功の真偽値を返します
 	     */
 
 	  }, {
 	    key: 'addEventListener',
 	    value: function addEventListener(type, listener) {
-	      this.on(type, listener);
+	      return this.on(type, listener);
 	    }
 	    /**
 	     * **alias off**
 	     * <p>event type からリスナー関数を remove します</p>
 	     * @param {string} type event type（種類）
 	     * @param {Function} listener リスナー関数
+	     * @return {boolean} 成功・不成功の真偽値を返します
 	     */
 
 	  }, {
 	    key: 'removeEventListener',
 	    value: function removeEventListener(type, listener) {
-	      this.off(type, listener);
+	      return this.off(type, listener);
 	    }
 	    /**
 	     * **alias has**
@@ -450,12 +467,13 @@
 	     * **alias dispatch**
 	     * <p>イベントを発生させリスナー関数を call します</p>
 	     * @param {Events} events typeキー が必須です
+	     * @return {boolean} 成功・不成功の真偽値を返します
 	     */
 
 	  }, {
 	    key: 'dispatchEvent',
 	    value: function dispatchEvent(events) {
-	      this.dispatch(events);
+	      return this.dispatch(events);
 	    }
 	  }, {
 	    key: 'listeners',
@@ -1600,6 +1618,39 @@
 	    value: function exist(target) {
 	      return !!target;
 	    }
+	    /**
+	     * 引数(target)が number かを調べます
+	     * @param {*} target 調査対象
+	     * @returns {boolean} 引数(target)が number かを調べ結果を返します、true: number
+	     */
+
+	  }, {
+	    key: 'number',
+	    value: function number(target) {
+	      return typeof target === 'number';
+	    }
+	    /**
+	     * 引数(target)が string かを調べます
+	     * @param {*} target 調査対象
+	     * @returns {boolean} 引数(target)が string かを調べ結果を返します、true: string
+	     */
+
+	  }, {
+	    key: 'string',
+	    value: function string(target) {
+	      return typeof target === 'string';
+	    }
+	    /**
+	     * 引数(target)を `Array.isArray` で配列かを調べます
+	     * @param {*} target 調査対象
+	     * @returns {boolean} 引数(target)が 配列 かを調べ結果を返します、true: 配列
+	     */
+
+	  }, {
+	    key: 'array',
+	    value: function array(target) {
+	      return Array.isArray(target);
+	    }
 	  }]);
 	  return Type;
 	}();
@@ -1639,11 +1690,19 @@
 
 	/**
 	 * custom Event のリスナー関数引数に送られる Event Object
+	 *
+	 * EventDispatcher.dispatch する時の引数として使用します
+	 *
+	 * 3つのプロパティは必須項目です、イベントにあわせプロパティを追加します
+	 *
+	 * - type: string, イベント種類
+	 * - target: *, イベント発生インスタンス
+	 * - currentTarget: *, current イベント発生インスタンス
 	 */
 
 	var Events =
 	/**
-	 * custom Event Object, Defines a generic model.
+	 * custom Event Object
 	 * @param {string} type イベント種類
 	 * @param {*} [target=this] イベント発生インスタンス
 	 * @param {*} [currentTarget=this] current イベント発生インスタンス
@@ -1654,6 +1713,11 @@
 	  (0, _classCallCheck3.default)(this, Events);
 
 	  // https://github.com/esdoc/esdoc/issues/305
+	  /**
+	   * @property {string} this.type - イベント種類
+	   * @property {*} this.target - イベント発生インスタンス
+	   * @property {*} this.currentTarget - current イベント発生インスタンス
+	   */
 	  (0, _assign2.default)(this, { type: type, target: target, currentTarget: currentTarget });
 	};
 
@@ -1872,8 +1936,9 @@
 	     *
 	     * @param {string} path Ajax request path
 	     * @param {string} method GET, POST, PUT, DELETE...etc request method
-	     * @param {Headers|Object|null} [headers=null] Headers option
-	     * @param {FormData|null} [formData=null] 送信フォームデータオプション
+	     * @param {?Headers|?Object|null} [headers=null] Headers option, nullable
+	     * @param {?FormData|null} [formData=null] 送信フォームデータオプション, nullable
+	     * @return {boolean} ajax request を開始したかどうかの真偽値を返します
 	     */
 	    value: function start(path, method) {
 	      var _this2 = this;
@@ -1884,17 +1949,20 @@
 	      // ajax request 開始
 	      if (!this.can) {
 	        // flag が off なので処理しない
-	        return;
+	        return false;
 	      }
+
 	      // flag off
 	      this.disable();
 
 	      // @type {Request} Request instance
 	      var request = Ajax.option(path, method, headers, formData);
+
 	      // start event fire
 	      var startEvents = new _Events.Events(Ajax.START, this, this);
 	      startEvents.request = request;
 	      this.dispatch(startEvents);
+
 	      // fetch start
 	      fetch(request)
 	      // @param {Object} response - Ajax response
@@ -1927,6 +1995,8 @@
 	        // flag true
 	        _this2.enable();
 	      });
+
+	      return true;
 	    }
 	    /**
 	     * 実行可否 flag を true にします
@@ -2035,7 +2105,7 @@
 	  }, {
 	    key: 'ERROR',
 	    get: function get() {
-	      return 'AjaxError';
+	      return 'ajaxError';
 	    }
 	  }]);
 	  return Ajax;
@@ -2552,8 +2622,8 @@
 	// event
 	var singletonSymbol = (0, _symbol2.default)();
 	/**
-	 * singleton instance
-	 * @type {null|Cycle}
+	 * singleton instance, nullable
+	 * @type {?Cycle}
 	 * @private
 	 */
 	var instance = null;
@@ -2600,7 +2670,7 @@
 	  /**
 	   * singleton です
 	   * @param {Symbol} checkSymbol singleton を保証するための private instance
-	   * @return {Cycle}
+	   * @return {Cycle} singleton instance を返します
 	   */
 
 	  function Cycle(checkSymbol) {
@@ -2624,13 +2694,13 @@
 	    }
 	    // onetime setting
 	    instance = _this;
-	    // requestAnimationFrame return id
+	    // @type {number} - requestAnimationFrame return id
 	    _this[requestSymbol] = 0;
-	    // update bind function
+	    // @type {function} - update bind function
 	    _this[updateSymbol] = _this.update.bind(_this);
-	    // started flag
+	    // @type {boolean} - started flag
 	    _this[startSymbol] = false;
-	    // Events
+	    // @type {Events} - Events
 	    _this[eventsSymbol] = new _Events.Events(Cycle.UPDATE, _this, _this);
 	    // 設定済み instance を返します
 	    return _ret2 = instance, (0, _possibleConstructorReturn3.default)(_this, _ret2);
@@ -2654,7 +2724,7 @@
 	    // ----------------------------------------
 	    /**
 	     * loop(requestAnimationFrame) を開始します
-	     * @returns {boolean} start に成功すると true を返します
+	     * @return {boolean} start に成功すると true を返します
 	     */
 	    value: function start() {
 	      if (this[startSymbol]) {
@@ -2664,12 +2734,14 @@
 	      }
 	      this[startSymbol] = true;
 	      this.update();
+
+	      // @return
 	      return true;
 	    }
 	    /**
 	     * loop(cancelAnimationFrame) を止めます
 	     * @param {number} [id] requestAnimationFrame id を使い cancelAnimationFrame をします
-	     * @returns {boolean} stop に成功すると true を返します
+	     * @return {boolean} stop に成功すると true を返します
 	     */
 
 	  }, {
@@ -2681,8 +2753,11 @@
 	        // not start
 	        return false;
 	      }
+
 	      cancelAnimationFrame(id);
 	      this[startSymbol] = false;
+
+	      // @return
 	      return true;
 	    }
 	    // ----------------------------------------
@@ -2690,7 +2765,7 @@
 	    // ----------------------------------------
 	    /**
 	     * loop(requestAnimationFrame)コールバック関数<br>Cycle.UPDATE event を発火します
-	     * @returns {Cycle} Cycle instance を返します
+	     * @return {undefined} no-return
 	     */
 
 	  }, {
@@ -2699,12 +2774,11 @@
 	      // @type {number} - requestAnimationFrame id
 	      var id = requestAnimationFrame(this[updateSymbol]);
 	      this[requestSymbol] = id;
-	      // @type {Events} - event
-	      var events = this[eventsSymbol];
+	      // @type {Events} - events
+	      var events = this.events;
 	      events.id = id;
 	      // event fire
 	      this.dispatch(events);
-	      return this;
 	    }
 	    // ----------------------------------------
 	    // STATIC METHOD
@@ -2723,6 +2797,19 @@
 	    key: 'UPDATE',
 	    get: function get() {
 	      return 'cycleUpdate';
+	    }
+	    // ----------------------------------------
+	    // GETTER / SETTER
+	    // ----------------------------------------
+	    /**
+	     * Events instance を取得します
+	     * @return {Events} Events instance
+	     */
+
+	  }, {
+	    key: 'events',
+	    get: function get() {
+	      return this[eventsSymbol];
 	    }
 	  }]);
 	  return Cycle;
@@ -2801,7 +2888,7 @@
 
 	  /**
 	   * 引数の frame rate に合わせ UPDATE イベントを発生させます
-	   * @param {number} [fps=30] frame rate
+	   * @param {number} [fps=30] frame rate, default: 30
 	   */
 
 	  function Fps() {
@@ -2809,12 +2896,12 @@
 	    (0, _classCallCheck3.default)(this, Fps);
 
 	    // private property
-	    // frame rate
+	    // @type {number} - frame rate, default: 30
 
 	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Fps).call(this, 1000 / fps));
 
 	    _this[fpsSymbol] = fps;
-	    // Events
+	    // @type {Events} - Events
 	    var events = new _Events.Events(Fps.UPDATE, _this, _this);
 	    events.fps = fps;
 	    /**
@@ -2983,23 +3070,27 @@
 	    var polling = arguments.length <= 0 || arguments[0] === undefined ? 1000 : arguments[0];
 	    (0, _classCallCheck3.default)(this, Polling);
 
-	    // Cycle instance
+	    // @type {Cycle} - Cycle instance
 
 	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Polling).call(this));
 
 	    var cycle = _Cycle.Cycle.factory();
 	    // public property
+	    /**
+	     * @property {Cycle} this.cycle - Cycle instance
+	     */
 	    (0, _assign2.default)(_this, { cycle: cycle });
+
 	    // private property
-	    // polling rate(milliseconds)
+	    // @type {number} - polling rate(milliseconds), default: 1000(1 sec.)
 	    _this[pollingSymbol] = polling;
-	    // Cycle.UPDATE event handler
+	    // @type {function} - Cycle.UPDATE event handler
 	    _this[updateSymbol] = _this.update.bind(_this);
-	    // started flag
+	    // @type {boolean} - started flag
 	    _this[startSymbol] = false;
-	    // 開始時間
+	    // @type {number} - 開始時間
 	    _this[beginSymbol] = 0;
-	    // Events
+	    // @type {Events} - Events
 	    _this[eventsSymbol] = new _Events.Events(Polling.UPDATE, _this, _this);
 	    return _this;
 	  }
@@ -3020,7 +3111,7 @@
 	    // ----------------------------------------
 	    /**
 	     * started flag を反転させ現在の started flag 状態を取得します
-	     * @returns {boolean} 現在の started flag 状態を返します
+	     * @return {boolean} 現在の started flag 状態を返します
 	     */
 	    value: function turnOver() {
 	      this[startSymbol] = !this[startSymbol];
@@ -3045,8 +3136,9 @@
 	      return events;
 	    }
 	    /**
+	     * cycle ループを開始します<br>
 	     * watch Cycle.UPDATE event
-	     * @returns {Cycle} cycle ループを開始しインスタンスを返します
+	     * @return {Cycle} cycle ループを開始しインスタンスを返します
 	     */
 
 	  }, {
@@ -3061,7 +3153,7 @@
 	      return cycle;
 	    }
 	    /**
-	     * loop(requestAnimationFrame) を開始します
+	     * polling を開始します
 	     * @return {boolean} start に成功すると true を返します
 	     */
 
@@ -3085,8 +3177,8 @@
 	      return true;
 	    }
 	    /**
-	     * loop(cancelAnimationFrame) します
-	     * @returns {boolean} stop に成功すると true を返します
+	     * polling を止めます
+	     * @return {boolean} stop に成功すると true を返します
 	     */
 
 	  }, {
@@ -3102,8 +3194,10 @@
 	      return true;
 	    }
 	    /**
-	     * loop(requestAnimationFrame) します
-	     * @returns {boolean} Polling.UPDATE event が発生すると true を返します
+	     * Cycle.UPDATE event handler, polling を計測しイベントを発火するかを判断します
+	     *
+	     * @listens {Cycle.UPDATE} Cycle.UPDATE が発生すると実行されます
+	     * @return {boolean} Polling.UPDATE event が発生すると true を返します
 	     */
 
 	  }, {
@@ -3130,6 +3224,7 @@
 	    /**
 	     * Polling.UPDATE event を発生します
 	     * @param {Events} events Polling.UPDATE event object
+	     * @return {undefined} no-return
 	     */
 
 	  }, {
@@ -3201,7 +3296,7 @@
 	    /**
 	     * started flag 状態を取得します
 	     * @readonly
-	     * @returns {boolean} 現在の started flag 状態を返します
+	     * @return {boolean} 現在の started flag 状態を返します
 	     */
 
 	  }, {

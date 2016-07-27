@@ -81,13 +81,13 @@ export class Cycle extends EventDispatcher {
     }
     // onetime setting
     instance = this;
-    // requestAnimationFrame return id
+    // @type {number} - requestAnimationFrame return id
     this[requestSymbol] = 0;
-    // update bind function
+    // @type {function} - update bind function
     this[updateSymbol] = this.update.bind(this);
-    // started flag
+    // @type {boolean} - started flag
     this[startSymbol] = false;
-    // Events
+    // @type {Events} - Events
     this[eventsSymbol] = new Events(Cycle.UPDATE, this, this);
     // 設定済み instance を返します
     return instance;
@@ -105,11 +105,21 @@ export class Cycle extends EventDispatcher {
     return 'cycleUpdate';
   }
   // ----------------------------------------
+  // GETTER / SETTER
+  // ----------------------------------------
+  /**
+   * Events instance を取得します
+   * @return {Events} Events instance
+   */
+  static get events() {
+    return this[eventsSymbol];
+  }
+  // ----------------------------------------
   // METHOD
   // ----------------------------------------
   /**
    * loop(requestAnimationFrame) を開始します
-   * @returns {boolean} start に成功すると true を返します
+   * @return {boolean} start に成功すると true を返します
    */
   start() {
     if (this[startSymbol]) {
@@ -119,20 +129,25 @@ export class Cycle extends EventDispatcher {
     }
     this[startSymbol] = true;
     this.update();
+
+    // @return
     return true;
   }
   /**
    * loop(cancelAnimationFrame) を止めます
    * @param {number} [id] requestAnimationFrame id を使い cancelAnimationFrame をします
-   * @returns {boolean} stop に成功すると true を返します
+   * @return {boolean} stop に成功すると true を返します
    */
   stop(id = this[requestSymbol]) {
     if (!this[startSymbol]) {
       // not start
       return false;
     }
+
     cancelAnimationFrame(id);
     this[startSymbol] = false;
+
+    // @return
     return true;
   }
   // ----------------------------------------
@@ -140,18 +155,17 @@ export class Cycle extends EventDispatcher {
   // ----------------------------------------
   /**
    * loop(requestAnimationFrame)コールバック関数<br>Cycle.UPDATE event を発火します
-   * @returns {Cycle} Cycle instance を返します
+   * @return {undefined} no-return
    */
   update() {
     // @type {number} - requestAnimationFrame id
     const id = requestAnimationFrame(this[updateSymbol]);
     this[requestSymbol] = id;
-    // @type {Events} - event
-    const events = this[eventsSymbol];
+    // @type {Events} - events
+    const events = this.events;
     events.id = id;
     // event fire
     this.dispatch(events);
-    return this;
   }
   // ----------------------------------------
   // STATIC METHOD
