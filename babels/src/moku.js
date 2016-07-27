@@ -26,6 +26,7 @@ import { Ajax } from './net/Ajax';
 import { Cycle } from './tick/Cycle';
 import { Fps } from './tick/Fps';
 import { Polling } from './tick/Polling';
+import { Rate } from './tick/Rate';
 
 // util
 import { Type } from './util/Type';
@@ -69,6 +70,7 @@ MOKU.tick = {
   Cycle,
   Fps,
   Polling,
+  Rate,
 };
 /**
  * MOKU.util
