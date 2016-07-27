@@ -67,7 +67,7 @@ export class Cycle extends EventDispatcher {
   /**
    * singleton です
    * @param {Symbol} checkSymbol singleton を保証するための private instance
-   * @return {Cycle} singleton instance を返します
+   * @returns {Cycle} singleton instance を返します
    */
   constructor(checkSymbol) {
     // checkSymbol と singleton が等価かをチェックします
@@ -81,13 +81,13 @@ export class Cycle extends EventDispatcher {
     }
     // onetime setting
     instance = this;
-    // requestAnimationFrame return id
+    // @type {number} - requestAnimationFrame return id
     this[requestSymbol] = 0;
-    // update bind function
+    // @type {function} - update bind function
     this[updateSymbol] = this.update.bind(this);
-    // started flag
+    // @type {boolean} - started flag
     this[startSymbol] = false;
-    // Events
+    // @type {Events} - Events
     this[eventsSymbol] = new Events(Cycle.UPDATE, this, this);
     // 設定済み instance を返します
     return instance;
@@ -103,6 +103,16 @@ export class Cycle extends EventDispatcher {
    */
   static get UPDATE() {
     return 'cycleUpdate';
+  }
+  // ----------------------------------------
+  // GETTER / SETTER
+  // ----------------------------------------
+  /**
+   * Events instance を取得します
+   * @returns {Events} Events instance
+   */
+  static get events() {
+    return this[eventsSymbol];
   }
   // ----------------------------------------
   // METHOD
@@ -140,25 +150,24 @@ export class Cycle extends EventDispatcher {
   // ----------------------------------------
   /**
    * loop(requestAnimationFrame)コールバック関数<br>Cycle.UPDATE event を発火します
-   * @returns {Cycle} Cycle instance を返します
+   * @returns {undefined} no-return
    */
   update() {
     // @type {number} - requestAnimationFrame id
     const id = requestAnimationFrame(this[updateSymbol]);
     this[requestSymbol] = id;
-    // @type {Events} - event
-    const events = this[eventsSymbol];
+    // @type {Events} - events
+    const events = this.events;
     events.id = id;
     // event fire
     this.dispatch(events);
-    return this;
   }
   // ----------------------------------------
   // STATIC METHOD
   // ----------------------------------------
   /**
    * Cycle instance を singleton を保証し作成します
-   * @return {Cycle} Cycle instance を返します
+   * @returns {Cycle} Cycle instance を返します
    */
   static factory() {
     return new Cycle(singletonSymbol);
