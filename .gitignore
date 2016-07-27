@@ -269,12 +269,12 @@ babels/compile/*
 
 # app
 app
-app/json/*
-app/assets/js/**/*.bundle.js
-app/assets/js/libs/*
+#app/json/*
+#app/assets/js/**/*.bundle.js
+#app/assets/js/libs/*
 
 # app/sprite.scss
-app/**/_sprite.scss
+#app/**/_sprite.scss
 
 ### MicrosoftOffice template section で ignore 済み
 ## css 出力
