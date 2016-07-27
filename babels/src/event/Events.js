@@ -12,15 +12,24 @@
 
 /**
  * custom Event のリスナー関数引数に送られる Event Object
+ *
+ * EventDispatcher.dispatch する時の引数として使用します
+ *
+ * 3つのプロパティは必須項目です、イベントにあわせプロパティを追加します
+ *
+ * - type: string, イベント種類
+ * - target: *, イベント発生インスタンス
+ * - currentTarget: *, current イベント発生インスタンス
  */
 export class Events {
   /**
-   * custom Event Object, Defines a generic model.
-   * @param {String} type イベント種類
-   * @param {*} target イベント発生インスタンス
-   * @param {*} currentTarget イベント発生インスタンス
+   * custom Event Object
+   * @param {string} type イベント種類
+   * @param {*} [target=this] イベント発生インスタンス
+   * @param {*} [currentTarget=this] current イベント発生インスタンス
    * */
-  constructor(type:String, target = this, currentTarget = this) {
+  constructor(type, target = this, currentTarget = this) {
+    // https://github.com/esdoc/esdoc/issues/305
     Object.assign(this, { type, target, currentTarget });
   }
 }

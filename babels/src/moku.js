@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * Copyright (c) inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
  * @date 2016/06/30 - 17:54
  *
@@ -10,6 +10,10 @@
  * @@version
  * @@buildTime
  */
+// use strict は本来不要でエラーになる
+// 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
+/* eslint strict: [0, "global"] */
+'use strict';
 
 // event
 import { EventDispatcher } from './event/EventDispatcher';
@@ -17,10 +21,14 @@ import { Events } from './event/Events';
 
 // net
 import { Ajax } from './net/Ajax';
-// import { Cycle } from './display/Cycle';
-// import { Fps } from './display/Fps';
-// import { Polling } from './display/Polling';
 
+// tick
+import { Cycle } from './tick/Cycle';
+import { Fps } from './tick/Fps';
+import { Polling } from './tick/Polling';
+
+// util
+import { Type } from './util/Type';
 /**
  * **MOKU**
  * <p>global Object</p>
@@ -28,17 +36,16 @@ import { Ajax } from './net/Ajax';
  * @type {Object}
  */
 const MOKU = {};
-
 /**
  * version number を取得します
  * @return {string} version number を返します
  */
-MOKU.version = ():String => '@@version';
+MOKU.version = () => '@@version';
 /**
  * build 日時を取得します
  * @return {string}  build 日時を返します
  */
-MOKU.build = ():String => '@@buildTime';
+MOKU.build = () => '@@buildTime';
 /**
  * MOKU.event
  * @type {Object} MOKU.event object を返します
@@ -54,15 +61,22 @@ MOKU.event = {
 MOKU.net = {
   Ajax,
 };
-// /**
-//  * MOKU.display
-//  * @type {Object} MOKU.display object を返します
-//  */
-// MOKU.display = {
-//   Cycle,
-//   Fps,
-//   Polling,
-// };
+/**
+ * MOKU.tick
+ * @type {Object} MOKU.tick object を返します
+ */
+MOKU.tick = {
+  Cycle,
+  Fps,
+  Polling,
+};
+/**
+ * MOKU.util
+ * @type {Object} MOKU.util object を返します
+ */
+MOKU.util = {
+  Type,
+};
 
 // export
 window.MOKU = MOKU;

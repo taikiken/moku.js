@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Mocha</title>
+<link href="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+</head>
+<body>
+<div id="mocha"></div>
+<script src="//cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
+<script src="//cdn.rawgit.com/Automattic/expect.js/0.3.1/index.js"></script>
+<script src="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+<script src="//chaijs.com/chai.js"></script>
+<script>mocha.setup('bdd')</script>
+<script src="../libs/moku.js" charset="utf-8"></script>
+<script>
+  // mochaの機能を呼び出します。ここでは、BDDとTDDを使用します。
+  mocha.setup('bdd');
+  mocha.setup('tdd');
+  var assert = chai.assert;
+  // expectの機能を読み込み
+  var expect = chai.expect;
+  // shouldの機能を読み込み
+  chai.Should();
+</script>
+<script>
+  var MOKU = window.MOKU;
+  var util = MOKU.util;
+  var Type = util.Type;
+
+  describe('#Type.method, type check', function() {
+    it("null is not function", function() {
+      expect(Type.method(null)).to.eql(false);
+    });
+    it("undefined is not function", function() {
+      expect(Type.method(undefined)).to.eql(false);
+    });
+    it("1 is not function", function() {
+      expect(Type.method(1)).to.eql(false);
+    });
+    it("'a' is not function", function() {
+      expect(Type.method('a')).to.eql(false);
+    });
+    it("true is not function", function() {
+      expect(Type.method(true)).to.eql(false);
+    });
+    it("Type.method is function", function() {
+      expect(Type.method(Type.method)).to.eql(true);
+    });
+  });
+
+  describe('#Type.exist, type check', function() {
+    it("null is not exist", function() {
+      expect(Type.exist(null)).to.eql(false);
+    });
+    it("undefined is not exist", function() {
+      expect(Type.exist(undefined)).to.eql(false);
+    });
+    it("'' is not exist", function() {
+      expect(Type.exist('')).to.eql(false);
+    });
+    it("0 is not exist", function() {
+      expect(Type.exist(0)).to.eql(false);
+    });
+    it("false is not exist", function() {
+      expect(Type.exist(false)).to.eql(false);
+    });
+    it("true is exist", function() {
+      expect(Type.exist(true)).to.be.true;
+    });
+    it("'a' is exist", function() {
+      expect(Type.exist('a')).to.be.true;
+    });
+    it("1 is exist", function() {
+      expect(Type.exist(1)).to.be.true;
+    });
+  });
+</script>
+<script>
+  mocha.checkLeaks();
+  mocha.globals(['jQuery']);
+  mocha.run();
+</script>
+</body>
+</html>

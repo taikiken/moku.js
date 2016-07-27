@@ -21,14 +21,14 @@ import { Type } from '../util/Type';
 // Safari, IE はサポートしていないのでライブラリを使用すること
 const fetch = self.fetch;
 const Request = self.Request;
-const Headers = self.Headers;
+// const Headers = self.Headers;
 
 /**
  * can（Ajax 実行可能かの真偽値）フラッグを保存するための Symbol
  * @type {Symbol}
  * @private
  */
-const canSymbol:Symbol = Symbol();
+const canSymbol = Symbol();
 
 /**
  * <p>fetch API を使用し Ajax request を行います</p>
@@ -59,7 +59,7 @@ export class Ajax extends EventDispatcher {
     super();
     /**
      * request 可能 / 不可能 flag
-     * @type {Boolean}
+     * @type {boolean}
      * @private
      * @default true
      */
@@ -70,23 +70,29 @@ export class Ajax extends EventDispatcher {
   // ----------------------------------------
   /**
    * START event を取得します
-   * @returns {String} リクエスト開始イベント, AjaxStart を返します
+   * @event START
+   * @returns {string} リクエスト開始イベント, ajaxStart を返します
+   * @default ajaxStart
    */
-  static get START():String {
-    return 'AjaxStart';
+  static get START() {
+    return 'ajaxStart';
   }
   /**
    * COMPLETE event を取得します
-   * @returns {String} リクエスト完了イベント, AjaxComplete を返します
+   * @event COMPLETE
+   * @returns {string} リクエスト完了イベント, ajaxComplete を返します
+   * @default ajaxComplete
    */
-  static get COMPLETE():String {
-    return 'AjaxComplete';
+  static get COMPLETE() {
+    return 'ajaxComplete';
   }
   /**
    * ERROR event を取得します
-   * @returns {string} リクエストエラー イベント, AjaxError を返します
+   * @event ERROR
+   * @returns {string} リクエストエラー イベント, ajaxError を返します
+   * @default ajaxError
    */
-  static get ERROR():String {
+  static get ERROR() {
     return 'AjaxError';
   }
   // ----------------------------------------
@@ -94,16 +100,16 @@ export class Ajax extends EventDispatcher {
   // ----------------------------------------
   /**
    * request 可能 / 不可能 flag を取得します
-   * @return {Boolean} request 可能 / 不可能 flag を返します
+   * @return {boolean} request 可能 / 不可能 flag を返します
    */
-  get can():Boolean {
+  get can() {
     return this[canSymbol];
   }
   /**
    * request 可能 / 不可能 flag を設定します
-   * @param {Boolean} flag request 可能 / 不可能 flag
+   * @param {boolean} flag request 可能 / 不可能 flag
    */
-  set can(flag:Boolean):void {
+  set can(flag) {
     this[canSymbol] = flag;
   }
   // ----------------------------------------
@@ -115,12 +121,12 @@ export class Ajax extends EventDispatcher {
    * true の時は false にしリクエストを開始します</p>
    * <p>START, COMPLETE, ERROR イベントを発生させます</p>
    *
-   * @param {String} path Ajax request path
-   * @param {String} method GET, POST, PUT, DELETE...etc request method
-   * @param {Headers} [headers=null] Headers option
-   * @param {FormData} [formData=null] 送信フォームデータオプション
+   * @param {string} path Ajax request path
+   * @param {string} method GET, POST, PUT, DELETE...etc request method
+   * @param {Headers|Object|null} [headers=null] Headers option
+   * @param {FormData|null} [formData=null] 送信フォームデータオプション
    */
-  start(path:String, method:String, headers:Headers = null, formData:FormData = null):void {
+  start(path, method, headers = null, formData = null) {
     // ajax request 開始
     if (!this.can) {
       // flag が off なので処理しない
@@ -129,10 +135,16 @@ export class Ajax extends EventDispatcher {
     // flag off
     this.disable();
 
-    const request:Object = Ajax.option(path, method, headers, formData);
-
+    // @type {Request} Request instance
+    const request = Ajax.option(path, method, headers, formData);
+    // start event fire
+    const startEvents = new Events(Ajax.START, this, this);
+    startEvents.request = request;
+    this.dispatch(startEvents);
+    // fetch start
     fetch(request)
-      .then((response:Object) => {
+      // @param {Object} response - Ajax response
+      .then((response) => {
         // may be success
         if (response.status !== 200) {
           throw new Error(`Ajax status error: (${response.status})`);
@@ -140,35 +152,43 @@ export class Ajax extends EventDispatcher {
 
         return response.json();
       })
-      .then((json:Object) => {
-        const event:Events = new Events(Ajax.COMPLETE);
-        event.data = json;
+      // @param {Object} - JSON パース済み Object
+      .then((json) => {
+        // @type {Evens} - Ajax.COMPLETE events Object
+        const events = new Events(Ajax.COMPLETE, this, this);
+        events.data = json;
         // complete event fire
-        this.dispatch(event);
+        this.dispatch(events);
         // flag true
         this.enable();
       })
+      // @param {Error} - Ajax something error
       .catch((error) => {
-        const event:Events = new Events(Ajax.ERROR);
-        event.data = null;
-        event.error = error;
+        // @type {Evens} - Ajax.COMPLETE events Object
+        const events = new Events(Ajax.ERROR, this, this);
+        events.data = null;
+        events.error = error;
         // error event fire
-        this.dispatch(event);
+        this.dispatch(events);
         // flag true
         this.enable();
       });
   }
   /**
    * 実行可否 flag を true にします
+   * @returns {boolean} 現在の this.can property を返します
    */
-  enable():void {
+  enable() {
     this.can = true;
+    return this.can;
   }
   /**
    * 実行可否 flag を false にします
+   * @returns {boolean} 現在の this.can property を返します
    */
-  disable():void {
+  disable() {
     this.can = false;
+    return this.can;
   }
   // ----------------------------------------
   // STATIC METHOD
@@ -176,15 +196,15 @@ export class Ajax extends EventDispatcher {
   /**
    * <p>fetch API へ送るオプションを作成します</p>
    *
-   * @param {String} path Ajax request path
-   * @param {String} method GET, POST, PUT, DELETE...etc request method
-   * @param {Headers} headers Headers option
-   * @param {FormData} formData 送信フォームデータオプション
+   * @param {string} path Ajax request path
+   * @param {string} method GET, POST, PUT, DELETE...etc request method
+   * @param {Headers|Object|null} headers Headers option
+   * @param {FormData|null} formData 送信フォームデータオプション
    * @return {Request} fetch API へ送る Request instance を返します
    */
-  static option(path:String, method:String, headers:Headers, formData:FormData):Request {
+  static option(path, method, headers, formData) {
     // request option
-    const option:Object = Object.create({
+    const option = Object.create({
       method,
       cache: 'no-cache',
       // https://developers.google.com/web/updates/2015/03/introduction-to-fetch

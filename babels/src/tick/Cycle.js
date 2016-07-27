@@ -20,10 +20,10 @@ import { Events } from '../event/Events';
  * @type {Symbol}
  * @private
  */
-const singletonSymbol:Symbol = Symbol();
+const singletonSymbol = Symbol();
 /**
- * singleton instance
- * @type {null|Cycle}
+ * singleton instance, nullable
+ * @type {?Cycle}
  * @private
  */
 let instance = null;
@@ -33,25 +33,25 @@ let instance = null;
  * @type {Symbol}
  * @private
  */
-const requestSymbol:Symbol = Symbol();
+const requestSymbol = Symbol();
 /**
  * private property key, this.update.bind(this) を保存するための Symbol
  * @type {Symbol}
  * @private
  */
-const updateSymbol:Symbol = Symbol();
+const updateSymbol = Symbol();
 /**
  * private property key, requestAnimationFrame を開始したかを表す真偽値を保存するための Symbol
  * @type {Symbol}
  * @private
  */
-const startSymbol:Symbol = Symbol();
+const startSymbol = Symbol();
 /**
  * Cycle.UPDATE event を発火する時の Events instance を保存するための Symbol
  * @type {Symbol}
  * @private
  */
-const eventsSymbol:Symbol = Symbol();
+const eventsSymbol = Symbol();
 
 /**
  * <p>requestAnimationFrame でループイベントを発生させます</p>
@@ -67,9 +67,9 @@ export class Cycle extends EventDispatcher {
   /**
    * singleton です
    * @param {Symbol} checkSymbol singleton を保証するための private instance
-   * @return {Cycle}
+   * @return {Cycle} singleton instance を返します
    */
-  constructor(checkSymbol:Symbol) {
+  constructor(checkSymbol) {
     // checkSymbol と singleton が等価かをチェックします
     if (checkSymbol !== singletonSymbol) {
       throw new Error('don\'t use new, instead use static factory method.');
@@ -88,7 +88,7 @@ export class Cycle extends EventDispatcher {
     // started flag
     this[startSymbol] = false;
     // Events
-    this[eventsSymbol] = new Events(Cycle.UPDATE);
+    this[eventsSymbol] = new Events(Cycle.UPDATE, this, this);
     // 設定済み instance を返します
     return instance;
   }
@@ -97,9 +97,11 @@ export class Cycle extends EventDispatcher {
   // ----------------------------------------
   /**
    * requestAnimationFrame 毎に発生するイベントを取得します
-   * @return {String} event, cycleUpdate を返します
+   * @event UPDATE
+   * @return {string} event, cycleUpdate を返します
+   * @default cycleUpdate
    */
-  static get UPDATE():String {
+  static get UPDATE() {
     return 'cycleUpdate';
   }
   // ----------------------------------------
@@ -107,48 +109,58 @@ export class Cycle extends EventDispatcher {
   // ----------------------------------------
   /**
    * loop(requestAnimationFrame) を開始します
+   * @returns {boolean} start に成功すると true を返します
    */
-  start():void {
+  start() {
     if (this[startSymbol]) {
       // already start
       console.warn('Cycle.start already start', this[startSymbol]);
-      return;
+      return false;
     }
     this[startSymbol] = true;
     this.update();
+    return true;
   }
   /**
    * loop(cancelAnimationFrame) を止めます
-   * @param {Number} [id] requestAnimationFrame id を使い cancelAnimationFrame をします
+   * @param {number} [id] requestAnimationFrame id を使い cancelAnimationFrame をします
+   * @returns {boolean} stop に成功すると true を返します
    */
-  stop(id:Number = this[requestSymbol]):void {
+  stop(id = this[requestSymbol]) {
+    if (!this[startSymbol]) {
+      // not start
+      return false;
+    }
     cancelAnimationFrame(id);
     this[startSymbol] = false;
+    return true;
   }
   // ----------------------------------------
   // PRIVATE METHOD
   // ----------------------------------------
   /**
    * loop(requestAnimationFrame)コールバック関数<br>Cycle.UPDATE event を発火します
+   * @returns {Cycle} Cycle instance を返します
    */
-  update():void {
-    // requestAnimationFrame id
-    const id:Number = requestAnimationFrame(this[updateSymbol]);
+  update() {
+    // @type {number} - requestAnimationFrame id
+    const id = requestAnimationFrame(this[updateSymbol]);
     this[requestSymbol] = id;
-    // event
-    const events:Events = this[eventsSymbol];
+    // @type {Events} - event
+    const events = this[eventsSymbol];
     events.id = id;
     // event fire
     this.dispatch(events);
+    return this;
   }
   // ----------------------------------------
   // STATIC METHOD
   // ----------------------------------------
   /**
    * Cycle instance を singleton を保証し作成します
-   * @return {Cycle}
+   * @return {Cycle} Cycle instance を返します
    */
-  static factory():Cycle {
+  static factory() {
     return new Cycle(singletonSymbol);
   }
 }
