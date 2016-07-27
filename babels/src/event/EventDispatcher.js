@@ -24,14 +24,16 @@ const listenersKey = Symbol();
  * <p>Custom Event を作成し Event 通知を行います</p>
  *
  * ```
- * const callback = () => {};
+ * const callback = (event) => {
+ *  console.log(event);
+ * };
  *
  * const event:EventDispatcher = new EventDispatcher();
  * event.on('abc', callback);
  *
  * console.log(event.has('abc', callback));// true
  *
- * event.dispatch({type: 'abc'});
+ * event.dispatch(new Events('abc'));
  *
  * event.off('abc', callback);
  * console.log(event.has('abc', callback));// false
