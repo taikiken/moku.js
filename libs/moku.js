@@ -54,7 +54,7 @@
 	 *
 	 * This notice shall be included in all copies or substantial portions of the Software.
 	 * 0.0.1
-	 * 2016-07-27 16:35:24
+	 * 2016-07-27 18:14:50
 	 */
 	// use strict は本来不要でエラーになる
 	// 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -75,6 +75,8 @@
 
 	var _Polling = __webpack_require__(97);
 
+	var _Rate = __webpack_require__(98);
+
 	var _Type = __webpack_require__(61);
 
 	/**
@@ -85,7 +87,7 @@
 	 */
 
 
-	// tick
+	// net
 	var MOKU = {};
 	/**
 	 * version number を取得します
@@ -96,7 +98,7 @@
 	// util
 
 
-	// net
+	// tick
 	MOKU.version = function () {
 	  return '0.0.1';
 	};
@@ -105,7 +107,7 @@
 	 * @return {string}  build 日時を返します
 	 */
 	MOKU.build = function () {
-	  return '2016-07-27 16:35:24';
+	  return '2016-07-27 18:14:50';
 	};
 	/**
 	 * MOKU.event
@@ -129,7 +131,8 @@
 	MOKU.tick = {
 	  Cycle: _Cycle.Cycle,
 	  Fps: _Fps.Fps,
-	  Polling: _Polling.Polling
+	  Polling: _Polling.Polling,
+	  Rate: _Rate.Rate
 	};
 	/**
 	 * MOKU.util
@@ -3312,6 +3315,312 @@
 	  }]);
 	  return Polling;
 	}(_EventDispatcher2.EventDispatcher);
+
+/***/ },
+/* 98 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Rate = undefined;
+
+	var _getPrototypeOf = __webpack_require__(72);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(2);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(3);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(77);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(90);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _symbol = __webpack_require__(22);
+
+	var _symbol2 = _interopRequireDefault(_symbol);
+
+	var _Events = __webpack_require__(62);
+
+	var _Polling2 = __webpack_require__(97);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * private property key, fps を保存するための Symbol
+	 * @type {Symbol}
+	 * @private
+	 */
+	/**
+	 * @license inazumatv.com
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/07/16
+	 *
+	 * Copyright (c) 2011-2015 inazumatv.com, inc.
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 */
+
+	// event
+	var rateSymbol = (0, _symbol2.default)();
+
+	/**
+	 * private property key, count を保存するための Symbol
+	 * @type {Symbol}
+	 * @private
+	 */
+
+
+	// tick
+	var countSymbol = (0, _symbol2.default)();
+	/**
+	 * private property key, rates を保存するための Symbol
+	 * @type {Symbol}
+	 * @private
+	 */
+	var ratesSymbol = (0, _symbol2.default)();
+	/**
+	 * 固定値を使用し fps を決定します
+	 *
+	 * 以下のフレームレートが設定可能です
+	 *
+	 * - 30: RATE_30
+	 * - 20: RATE_20
+	 * - 15: RATE_15
+	 * - 12: RATE_12
+	 * - 10: RATE_10
+	 * - 6: RATE_6
+	 * - 5: RATE_5
+	 *
+	 */
+
+	var Rate = exports.Rate = function (_Polling) {
+	  (0, _inherits3.default)(Rate, _Polling);
+
+	  /**
+	   * 固定値フレームレート毎に UPDATE イベントを発生させます
+	   * @param {number} rate fps, 固定値以外設定できません
+	   */
+
+	  function Rate(rate) {
+	    (0, _classCallCheck3.default)(this, Rate);
+
+	    // @type {Events - Events
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Rate).call(this, 1));
+
+	    var events = new _Events.Events(Rate.UPDATE, _this, _this);
+	    events.rate = rate;
+	    /**
+	     * Rate.UPDATE Events instance
+	     * @type {Events}
+	     */
+	    _this.events = events;
+
+	    // frame rate
+	    _this.change(rate);
+
+	    // @type {number} - count, rate に達したかを計測するための counter 変数
+	    _this[countSymbol] = 0;
+
+	    // correct rate list
+	    // サポートするレートリスト
+	    _this[ratesSymbol] = [_this.RATE_30, _this.RATE_20, _this.RATE_15, _this.RATE_12, _this.RATE_10, _this.RATE_6, _this.RATE_5];
+	    return _this;
+	  }
+	  // ----------------------------------------
+	  // CONST
+	  // ----------------------------------------
+	  /**
+	   * fps 30 基準値を取得します
+	   * @const RATE_30
+	   * @returns {number} fps 30 基準値を返します
+	   * @default 2
+	   */
+
+
+	  (0, _createClass3.default)(Rate, [{
+	    key: 'change',
+
+	    // ----------------------------------------
+	    // METHOD
+	    // ----------------------------------------
+	    /**
+	     * fps 基準値を設定します
+	     * @throws {Error} 引数 rate が設定可能値以外の時に例外エラーが発生します
+	     * @param {number} rate fps 基準値, <br>
+	     * this.RATE_30, this.RATE_20, this.RATE_15, this.RATE_12, this.RATE_10, <br>
+	     * this.RATE_6, this.RATE_5 の何れかが必須です
+	     * @return {undefined} no-return
+	     */
+	    value: function change(rate) {
+	      if (this[ratesSymbol].indexof(rate) !== -1) {
+	        this[rateSymbol] = rate;
+	      } else {
+	        throw new Error('illegal rate: ' + rate + '. use const RATE_NN');
+	      }
+	    }
+	    /**
+	     * loop(requestAnimationFrame) を開始します
+	     * @return {boolean} start に成功すると true を返します
+	     */
+
+	  }, {
+	    key: 'start',
+	    value: function start() {
+	      if (this.started) {
+	        // already start
+	        return false;
+	      }
+	      // flag -> true
+	      this.turnOver();
+	      // cycle
+	      this.initCycle();
+	      // 強制的に1回目を実行
+	      this.fire(this.updateEvents(0, 0));
+
+	      return true;
+	    }
+	    /**
+	     * loop(requestAnimationFrame) します
+	     * @returns {boolean} Rate.UPDATE event が発生すると true を返します
+	     */
+
+	  }, {
+	    key: 'update',
+	    value: function update() {
+	      // 余りが 0 の時にイベントを発火します
+	      if (++this[countSymbol] % this.rate === 0) {
+	        this[countSymbol] = 0;
+	        this.fire(this.updateEvents(0, 0));
+
+	        return true;
+	      }
+
+	      return false;
+	    }
+	  }, {
+	    key: 'rate',
+
+	    // ----------------------------------------
+	    // GETTER / SETTER
+	    // ----------------------------------------
+	    /**
+	     * fps 基準値を取得します
+	     * @returns {number} fps 基準値を返します
+	     */
+	    get: function get() {
+	      return this[rateSymbol];
+	    }
+	  }], [{
+	    key: 'RATE_30',
+	    get: function get() {
+	      return 2;
+	    }
+	    /**
+	     * fps 20 基準値を取得します
+	     * @const RATE_20
+	     * @returns {number} fps 20 基準値を返します
+	     * @default 3
+	     */
+
+	  }, {
+	    key: 'RATE_20',
+	    get: function get() {
+	      return 3;
+	    }
+	    /**
+	     * fps 15 基準値を取得します
+	     * @const RATE_15
+	     * @returns {number} fps 15 基準値を返します
+	     * @default 4
+	     */
+
+	  }, {
+	    key: 'RATE_15',
+	    get: function get() {
+	      return 4;
+	    }
+	    /**
+	     * fps 12 基準値を取得します
+	     * @const RATE_12
+	     * @returns {number} fps 12 基準値を返します
+	     * @default 5
+	     */
+
+	  }, {
+	    key: 'RATE_12',
+	    get: function get() {
+	      return 5;
+	    }
+	    /**
+	     * fps 10 基準値を取得します
+	     * @const RATE_10
+	     * @returns {number} fps 10 基準値を返します
+	     * @default 6
+	     */
+
+	  }, {
+	    key: 'RATE_10',
+	    get: function get() {
+	      return 6;
+	    }
+	    /**
+	     * fps 6 基準値を取得します
+	     * @const RATE_6
+	     * @returns {number} fps 6 基準値を返します
+	     * @default 10
+	     */
+
+	  }, {
+	    key: 'RATE_6',
+	    get: function get() {
+	      return 10;
+	    }
+	    /**
+	     * fps 5 基準値を取得します
+	     * @const RATE_5
+	     * @returns {number} fps 6 基準値を返します
+	     * @default 12
+	     */
+
+	  }, {
+	    key: 'RATE_5',
+	    get: function get() {
+	      return 12;
+	    }
+	    // ----------------------------------------
+	    // EVENT
+	    // ----------------------------------------
+	    /**
+	     * フレームレート毎に発生するイベント type を取得します
+	     * @event UPDATE
+	     * @return {string} event, rateUpdate を返します
+	     * @default rateUpdate
+	     */
+
+	  }, {
+	    key: 'UPDATE',
+	    get: function get() {
+	      return 'rateUpdate';
+	    }
+	  }]);
+	  return Rate;
+	}(_Polling2.Polling);
 
 /***/ }
 /******/ ]);

@@ -235,6 +235,7 @@ export class EventDispatcher {
   /**
    * **alias on**
    * <p>event type に リスナー関数を bind します</p>
+   * @deprecated instead use on
    * @param {string} type event type（種類）
    * @param {Function} listener callback関数
    * @return {boolean} 成功・不成功の真偽値を返します
@@ -245,6 +246,7 @@ export class EventDispatcher {
   /**
    * **alias off**
    * <p>event type からリスナー関数を remove します</p>
+   * @deprecated instead use off
    * @param {string} type event type（種類）
    * @param {Function} listener リスナー関数
    * @return {boolean} 成功・不成功の真偽値を返します
@@ -255,6 +257,7 @@ export class EventDispatcher {
   /**
    * **alias has**
    * <p>event type にリスナー関数が登録されているかを調べます</p>
+   * @deprecated instead use has
    * @param {string} type event type（種類）
    * @param {Function} listener リスナー関数
    * @return {boolean} event type にリスナー関数が登録されているかの真偽値を返します
@@ -265,6 +268,7 @@ export class EventDispatcher {
   /**
    * **alias dispatch**
    * <p>イベントを発生させリスナー関数を call します</p>
+   * @deprecated instead use dispatch
    * @param {Events} events typeキー が必須です
    * @return {boolean} 成功・不成功の真偽値を返します
    */
