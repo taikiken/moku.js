@@ -92,15 +92,8 @@ export class Scroll extends EventDispatcher {
     return 'scrollScroll';
   }
   // ----------------------------------------
-  // GETTER / SETTER
+  // STATIC GETTER / SETTER
   // ----------------------------------------
-  /**
-   * bind 済み mouseWheel
-   * @return {function} bind 済み mouseWheel を返します
-   */
-  get bindScroll() {
-    return this[bindSymbol];
-  }
   /**
    * scroll top 位置
    * @return {number} scroll top 位置を返します
@@ -119,11 +112,35 @@ export class Scroll extends EventDispatcher {
   static set y(top) {
     window.scrollTo(0, top);
   }
+  // ----------------------------------------
+  // GETTER / SETTER
+  // ----------------------------------------
+  /**
+   * scroll top 位置
+   * @return {number} scroll top 位置を返します
+   */
+  get y() {
+    return Scroll.y;
+  }
+  /**
+   * scroll top 位置 を設定します
+   * @param {number} top スクロール位置(px)
+   */
+  set y(top) {
+    Scroll.y = top;
+  }
+  /**
+   * bind 済み mouseWheel
+   * @return {function} bind 済み mouseWheel を返します
+   */
+  get bindScroll() {
+    return this[bindSymbol];
+  }
   /**
    * Events instance を取得します
    * @return {Events} Events instance
    */
-  static get events() {
+  get events() {
     return this[eventsSymbol];
   }
   // ----------------------------------------
@@ -159,7 +176,7 @@ export class Scroll extends EventDispatcher {
   scroll(event) {
     // @type {Events} - events
     const events = this.events;
-    // @ttype {Event}
+    // @type {Event}
     events.original = event;
     events.y = Scroll.y;
     // event fire

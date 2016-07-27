@@ -18,6 +18,8 @@
 // event
 import { EventDispatcher } from './event/EventDispatcher';
 import { Events } from './event/Events';
+import { Scroll } from './event/Scroll';
+import { Wheel } from './event/Wheel';
 
 // net
 import { Ajax } from './net/Ajax';
@@ -54,6 +56,8 @@ MOKU.build = () => '@@buildTime';
 MOKU.event = {
   EventDispatcher,
   Events,
+  Scroll,
+  Wheel,
 };
 /**
  * MOKU.net
