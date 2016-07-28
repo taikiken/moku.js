@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "esdoc": "cd ./babels && esdoc -c esdoc.json",
+    "check": "jscheckstyle --html ./libs/moku.js > ./babels/check/jscheckstyle.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

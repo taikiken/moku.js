@@ -18,6 +18,8 @@
 // event
 import { EventDispatcher } from './event/EventDispatcher';
 import { Events } from './event/Events';
+import { Scroll } from './event/Scroll';
+import { Wheel } from './event/Wheel';
 
 // net
 import { Ajax } from './net/Ajax';
@@ -26,6 +28,7 @@ import { Ajax } from './net/Ajax';
 import { Cycle } from './tick/Cycle';
 import { Fps } from './tick/Fps';
 import { Polling } from './tick/Polling';
+import { Rate } from './tick/Rate';
 
 // util
 import { Type } from './util/Type';
@@ -53,6 +56,8 @@ MOKU.build = () => '@@buildTime';
 MOKU.event = {
   EventDispatcher,
   Events,
+  Scroll,
+  Wheel,
 };
 /**
  * MOKU.net
@@ -69,6 +74,7 @@ MOKU.tick = {
   Cycle,
   Fps,
   Polling,
+  Rate,
 };
 /**
  * MOKU.util

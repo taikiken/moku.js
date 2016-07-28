@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Mocha</title>
+<link href="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+</head>
+<body>
+<div id="mocha"></div>
+<script src="//cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
+<script src="//cdn.rawgit.com/Automattic/expect.js/0.3.1/index.js"></script>
+<script src="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+<script src="//chaijs.com/chai.js"></script>
+<script src="../libs/moku.js" charset="utf-8"></script>
+<script>
+  // mochaの機能を呼び出します。ここでは、BDDとTDDを使用します。
+  mocha.setup('bdd');
+  mocha.setup('tdd');
+  var assert = chai.assert;
+  // expectの機能を読み込み
+  var expect = chai.expect;
+  // shouldの機能を読み込み
+  chai.Should();
+</script>
+<script>
+  var event = window.MOKU.event;
+  var Events = event.Events;
+  var Scroll = event.Scroll;
+
+  function callback(event) {
+    console.log('callback', event)
+  }
+  function callback2(event) {
+    console.log('callback2', event)
+  }
+
+  var dispatcher = Scroll.factory();
+
+  //  Scroll.factory
+  describe('#Scroll.factory', function() {
+    it("Scroll.factory is exist", function() {
+      expect(Scroll.factory()).to.exist;
+    });
+  });
+
+  // Scroll.SCROLL
+  describe('#Scroll.SCROLL', function() {
+    it("Scroll.SCROLL is scrollScroll", function() {
+      expect(Scroll.SCROLL).to.eql('scrollScroll');
+    });
+  });
+
+  // Scroll.bindScroll
+  describe('#Scroll.bindScroll', function() {
+    it("dispatcher.bindScroll is exist", function() {
+      expect(dispatcher.bindScroll).to.exist;
+    });
+  });
+
+  // Scroll.y
+  describe('#Scroll.y', function() {
+    it("Scroll.y is 0", function() {
+      expect(Scroll.y).to.eql(0);
+    });
+  });
+
+//  window.addEventListener('load', function() {
+//    console.log('load');
+//    setTimeout(function() {
+//      console.log('timeout');
+//      Scroll.y = 100;
+//
+//      // Scroll.y
+//      describe('#Scroll.y set', function() {
+//        it("Scroll.y = 100 is 100", function() {
+//          expect(Scroll.y).to.eql(100);
+//        });
+//      });
+//    }, 100);
+//  });
+
+  dispatcher.on(Scroll.SCROLL, callback2);
+
+  // Scroll.events
+  describe('#Scroll.events', function() {
+    it("dispatcher.events is exist", function() {
+      expect(dispatcher.events).to.exist;
+    });
+  });
+
+  // Scroll.watch
+  describe('#Scroll.watch', function() {
+    it("dispatcher.watch() is exist", function() {
+      expect(dispatcher.watch()).to.exist;
+    });
+  });
+
+  // Scroll.unwatch
+  describe('#Scroll.unwatch', function() {
+    it("dispatcher.unwatch() is exist", function() {
+      expect(dispatcher.unwatch()).to.exist;
+    });
+  });
+
+
+  // ------ parent method
+  //  Scroll.on
+
+  describe('#Scroll.on', function() {
+    it("dispatcher.on('abc', callback) is true", function() {
+      expect(dispatcher.on('abc', callback)).to.eql(true);
+    });
+
+    it("dispatcher.on('abc', null) is false", function() {
+      expect(dispatcher.on('abc', null)).to.eql(false);
+    });
+  });
+
+  //  Scroll.has
+  describe('#Scroll.has', function() {
+    it("dispatcher.has('abc', callback) is true", function() {
+      expect(dispatcher.has('abc', callback)).to.eql(true);
+    });
+
+    it("dispatcher.has('abc', callback2) is false", function() {
+      expect(dispatcher.has('abc', callback2)).to.eql(false);
+    });
+  });
+
+  //  Scroll.dispatch
+  describe('#Scroll.dispatch', function() {
+    it("dispatcher.dispatch(new Events('abc')) is true", function() {
+      expect(dispatcher.dispatch(new Events('abc'))).to.eql(true);
+    });
+
+    it("dispatcher.dispatch(new Events('xyz')) is false", function() {
+      expect(dispatcher.dispatch(new Events('xyz'))).to.eql(false);
+    });
+  });
+
+  //  Scroll.listeners
+  describe('#Scroll.listeners', function() {
+    it("dispatcher.listeners have abc property", function() {
+      expect(dispatcher.listeners).to.have.property('abc');
+    });
+
+    it("dispatcher.listeners have abc property length 1", function() {
+      expect(dispatcher.listeners.abc.length).to.eql(1);
+    });
+
+  });
+
+  //  Scroll.clean
+  describe('#Scroll.clean', function() {
+    it("dispatcher.clean('abc', dispatcher.listeners.abc) is false", function() {
+      expect(dispatcher.clean('abc', dispatcher.listeners.abc)).to.eql(false);
+    });
+  });
+
+
+  //  Scroll.off
+  describe('#Scroll.off', function() {
+    it("dispatcher.off('abc', callback) is true", function() {
+      expect(dispatcher.off('abc', callback)).to.eql(true);
+    });
+
+    it("dispatcher.off('abc', null) is false", function() {
+      expect(dispatcher.off('abc', null)).to.eql(false);
+    });
+  });
+
+
+  //  Scroll.clean
+  describe('#Scroll.clean', function() {
+    it("dispatcher.clean('abc', dispatcher.listeners.abc) is true", function() {
+      expect(dispatcher.clean('abc', dispatcher.listeners.abc)).to.eql(true);
+    });
+  });
+
+  // ---------------------------------------------------
+
+</script>
+<script>
+  mocha.checkLeaks();
+  mocha.globals(['jQuery']);
+  mocha.run();
+</script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Mocha</title>
+<link href="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+</head>
+<body>
+<div id="mocha"></div>
+<script src="//cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
+<script src="//cdn.rawgit.com/Automattic/expect.js/0.3.1/index.js"></script>
+<script src="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+<script src="//chaijs.com/chai.js"></script>
+<script src="../libs/moku.js" charset="utf-8"></script>
+<script>
+  // mochaの機能を呼び出します。ここでは、BDDとTDDを使用します。
+  mocha.setup('bdd');
+  mocha.setup('tdd');
+  var assert = chai.assert;
+  // expectの機能を読み込み
+  var expect = chai.expect;
+  // shouldの機能を読み込み
+  chai.Should();
+</script>
+<script>
+  var event = window.MOKU.event;
+  var dispatcher = new event.EventDispatcher();
+  var Events = event.Events;
+
+  function callback(event) {
+    console.log('callback', event)
+  }
+  function callback2(event) {
+    console.log('callback2', event)
+  }
+
+  //  EventDispatcher.on
+  describe('#EventDispatcher.on', function() {
+    it("EventDispatcher.on dispatcher.on('abc', callback) is true", function() {
+      expect(dispatcher.on('abc', callback)).to.eql(true);
+    });
+
+    it("EventDispatcher.on dispatcher.on('abc', null) is false", function() {
+      expect(dispatcher.on('abc', null)).to.eql(false);
+    });
+  });
+
+  //  EventDispatcher.has
+  describe('#EventDispatcher.has', function() {
+    it("EventDispatcher.has dispatcher.has('abc', callback) is true", function() {
+      expect(dispatcher.has('abc', callback)).to.eql(true);
+    });
+
+    it("EventDispatcher.has dispatcher.has('abc', callback2) is false", function() {
+      expect(dispatcher.has('abc', callback2)).to.eql(false);
+    });
+  });
+
+  //  EventDispatcher.dispatch
+  describe('#EventDispatcher.dispatch', function() {
+    it("dispatcher.dispatch(new Events('abc')) is true", function() {
+      expect(dispatcher.dispatch(new Events('abc'))).to.eql(true);
+    });
+
+    it("dispatcher.dispatch(new Events('xyz')) is false", function() {
+      expect(dispatcher.dispatch(new Events('xyz'))).to.eql(false);
+    });
+  });
+
+  //  EventDispatcher.listeners
+  describe('#EventDispatcher.listeners', function() {
+    it("dispatcher.listeners have abc property", function() {
+      expect(dispatcher.listeners).to.have.property('abc');
+    });
+
+    it("dispatcher.listeners have abc property length 1", function() {
+      expect(dispatcher.listeners.abc.length).to.eql(1);
+    });
+
+  });
+
+  //  EventDispatcher.clean
+  describe('#EventDispatcher.clean', function() {
+    it("dispatcher.clean('abc', dispatcher.listeners.abc) is false", function() {
+      expect(dispatcher.clean('abc', dispatcher.listeners.abc)).to.eql(false);
+    });
+  });
+
+
+  //  EventDispatcher.off
+  describe('#EventDispatcher.off', function() {
+    it("dispatcher.off('abc', callback) is true", function() {
+      expect(dispatcher.off('abc', callback)).to.eql(true);
+    });
+
+    it("dispatcher.off('abc', null) is false", function() {
+      expect(dispatcher.off('abc', null)).to.eql(false);
+    });
+  });
+
+
+  //  EventDispatcher.clean
+  describe('#EventDispatcher.clean', function() {
+    it("dispatcher.clean('abc', dispatcher.listeners.abc) is true", function() {
+      expect(dispatcher.clean('abc', dispatcher.listeners.abc)).to.eql(true);
+    });
+  });
+
+</script>
+<script>
+  mocha.checkLeaks();
+  mocha.globals(['jQuery']);
+  mocha.run();
+</script>
+</body>
+</html>

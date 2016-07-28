@@ -281,5 +281,5 @@ app
 #.tmp
 
 # 一時的に ignore
-docs
+#docs
 api_docs

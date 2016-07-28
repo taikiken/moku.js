@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/event/Wheel.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+<link data-ice="userStyle" rel="stylesheet" href="user/css/0-esdoc_extension.css">
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">event</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html">EventDispatcher</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Events.js~Events.html">Events</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scroll.js~Scroll.html">Scroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">net</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">tick</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html">Cycle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Fps.js~Fps.html">Fps</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Polling.js~Polling.html">Polling</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Rate.js~Rate.html">Rate</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/event/Wheel.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/07/26 - 19:12
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
+
+// event
+import { EventDispatcher } from &apos;./EventDispatcher&apos;;
+import { Events } from &apos;./Events&apos;;
+
+/**
+ * new &#x3092;&#x8A31;&#x53EF;&#x3057;&#x306A;&#x3044;&#x305F;&#x3081;&#x306E; Symbol
+ * @type {Symbol}
+ * @private
+ */
+const singletonSymbol = Symbol();
+/**
+ * singleton instance, nullable
+ * @type {?Wheel}
+ * @private
+ */
+let instance = null;
+/**
+ * private property key, bind &#x6E08;&#x307F; mouseWheel &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+ * @type {Symbol}
+ * @private
+ */
+const wheelSymbol = Symbol();
+// /**
+//  * private property key, bind &#x6E08;&#x307F; mouseScroll &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+//  * @type {Symbol}
+//  * @private
+//  */
+// const scrollSymbol = Symbol();
+
+/**
+ * mousewheel event &#x3092;&#x76E3;&#x8996;&#x3057;&#x901A;&#x77E5;&#x3092;&#x884C;&#x3044;&#x307E;&#x3059;
+ * &lt;p&gt;singleton &#x306A;&#x306E;&#x3067; new &#x3067;&#x306F;&#x306A;&#x304F; factory &#x3092;&#x4F7F;&#x7528;&#x3057; instance &#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&lt;/p&gt;
+ *
+ * ```
+ * const instance:Wheel = Wheel.factory();
+ * ```
+ */
+export class Wheel extends EventDispatcher {
+  /**
+   * singleton &#x3067;&#x3059;
+   * @param {Symbol} checkSymbol singleton &#x3092;&#x4FDD;&#x8A3C;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; private instance
+   * @returns {Wheel} singleton instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  constructor(checkSymbol) {
+    // checkSymbol &#x3068; singleton &#x304C;&#x7B49;&#x4FA1;&#x304B;&#x3092;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3057;&#x307E;&#x3059;
+    if (checkSymbol !== singletonSymbol) {
+      throw new Error(&apos;don\&apos;t use new, instead use static factory method.&apos;);
+    }
+
+    super();
+
+    // instance &#x4F5C;&#x6210;&#x6E08;&#x307F;&#x304B;&#x3092;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3057; instance &#x304C; null &#x306E;&#x6642; this &#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
+    if (instance !== null) {
+      return instance;
+    }
+
+    // onetime setting
+    instance = this;
+
+    // event handler
+    this[wheelSymbol] = this.mouseWheel.bind(this);
+    // this[scrollSymbol] = this.mouseScroll.bind(this);
+
+    // public property
+    /**
+     * &#x95BE;&#x5024;, wheel &#x79FB;&#x52D5;&#x91CF;&#x304C;&#x95BE;&#x5024;&#x3092;&#x8D85;&#x3048;&#x305F;&#x3068;&#x304D;&#x306B;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x307E;&#x3059;
+     * @type {number}
+     * @default 200
+     */
+    const threshold = 200;
+    /**
+     * wheelDelta &#x79FB;&#x52D5;&#x91CF;&#x304C;&#x95BE;&#x5024;&#x3092;&#x8D85;&#x3048;&#x308B;&#x304B;&#x3092;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x8A08;&#x7B97;&#x5909;&#x6570;
+     * @type {number}
+     * @default 0
+     */
+    const moved = 0;
+    // /**
+    //  * firefox wheel event.detail &#x6570;&#x5024;&#x3092;&#x4ED6;&#x3068;&#x63C3;&#x3048;&#x308B;&#x305F;&#x3081;&#x306E;&#x4FC2;&#x6570;
+    //  * @type {number}
+    //  * @default -7.5
+    //  */
+    // const coefficient = -7.5;
+    /**
+     * @type {Wheel}
+     * @property {number} this.threshold &#x95BE;&#x5024;, wheel &#x79FB;&#x52D5;&#x91CF;&#x304C;&#x95BE;&#x5024;&#x3092;&#x8D85;&#x3048;&#x305F;&#x3068;&#x304D;&#x306B;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x307E;&#x3059;
+     * @property {number} this.moved wheelDelta &#x79FB;&#x52D5;&#x91CF;&#x304C;&#x95BE;&#x5024;&#x3092;&#x8D85;&#x3048;&#x308B;&#x304B;&#x3092;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x8A08;&#x7B97;&#x5909;&#x6570;
+     */
+    Object.assign(this, { threshold, moved });
+
+    // &#x8A2D;&#x5B9A;&#x6E08;&#x307F; instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+    return instance;
+  }
+  // ----------------------------------------
+  // EVENT
+  // ----------------------------------------
+  /**
+   * wheel up &#x3067;&#x767A;&#x751F;&#x3059;&#x308B;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @event UP
+   * @return {string} event, wheelUp &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @default wheelUp
+   */
+  static get UP() {
+    return &apos;wheelUp&apos;;
+  }
+  /**
+   * wheel  &#x3067;&#x767A;&#x751F;&#x3059;&#x308B;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @event DOWN
+   * @return {string} event, wheelUp &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @default wheelUp
+   */
+  static get DOWN() {
+    return &apos;wheelDown&apos;;
+  }
+  // ----------------------------------------
+  // GETTER / SETTER
+  // ----------------------------------------
+  /**
+   * bind &#x6E08;&#x307F; mouseWheel
+   * @returns {function} bind &#x6E08;&#x307F; mouseWheel &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  get boundWheel() {
+    return this[wheelSymbol];
+  }
+  // /**
+  //  * bind &#x6E08;&#x307F; mouseScroll
+  //  * @returns {function} bind &#x6E08;&#x307F; mouseScroll &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+  //  */
+  // get boundScroll() {
+  //   return this[scrollSymbol];
+  // }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
+  /**
+   * mousewheel event &#x3092;&#x76E3;&#x8996;&#x3057;&#x307E;&#x3059;&lt;br&gt;
+   * &#x76E3;&#x8996;&#x524D;&#x306B;&#x4E8C;&#x91CD;&#x306B; addEventListener &#x3057;&#x306A;&#x3044;&#x3088;&#x3046;&#x306B; unwatch &#x3092;&#x5B9F;&#x884C;&#x3057;&#x307E;&#x3059;
+   * @returns {Wheel} method chain &#x53EF;&#x80FD;&#x306A;&#x3088;&#x3046;&#x306B; instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  watch() {
+    this.unwatch();
+    // // firefox
+    // window.addEventListener(&apos;DOMMouseScroll&apos;, this.boundScroll, false);
+    // // other modern browser
+    // window.addEventListener(&apos;mousewheel&apos;, this.boundWheel, false);
+
+    window.addEventListener(&apos;wheel&apos;, this.boundWheel, false);
+
+    return this;
+  }
+  /**
+   * mousewheel event &#x3092;&#x76E3;&#x8996;&#x3092;&#x6B62;&#x3081;&#x307E;&#x3059;
+   * @returns {Wheel} method chain &#x53EF;&#x80FD;&#x306A;&#x3088;&#x3046;&#x306B; instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  unwatch() {
+    // window.removeEventListener(&apos;DOMMouseScroll&apos;, this.boundScroll);
+    // window.removeEventListener(&apos;mousewheel&apos;, this.boundWheel);
+
+    window.removeEventListener(&apos;wheel&apos;, this.boundWheel);
+
+    return this;
+  }
+  /**
+   * window mousewheel event handler
+   * &lt;p&gt;delta &#x5024;&#x3092;&#x53D6;&#x5F97;&#x3057; `this.moving` &#x3092;&#x5B9F;&#x884C;&#x3057;&#x307E;&#x3059;&lt;/p&gt;
+   *
+   * @listens {WheelEvent} WheelEvent.wheel
+   * @param {WheelEvent} event window wheel event
+   * @returns {number} &#x524D;&#x56DE;&#x79FB;&#x52D5;&#x91CF;&#x306B; delta &#x5024; &#x3092;&#x52A0;&#x7B97;&#x3057;&#x305F;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  mouseWheel(event) {
+    // const wheelDelta = event.wheelDelta;
+    const wheelDelta = event.deltaY;
+    return this.moving(wheelDelta);
+  }
+  // /**
+  //  * window DOMMouseScroll event handler
+  //  * &lt;p&gt;detail &#x5024;&#x3092;&#x53D6;&#x5F97;&#x3057; `this.moving` &#x3092;&#x5B9F;&#x884C;&#x3057;&#x307E;&#x3059;&lt;/p&gt;
+  //  * @param {Event} event window DOMMouseScroll event
+  //  * @returns {number} &#x524D;&#x56DE;&#x79FB;&#x52D5;&#x91CF;&#x306B; delta &#x5024; &#x3092;&#x52A0;&#x7B97;&#x3057;&#x305F;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+  //  */
+  // mouseScroll(event) {
+  //   let wheelDetail = event.detail;
+  //   // firefox &#x6570;&#x5024;&#x304C;&#x5C0F;&#x3055;&#x3044;&#x305F;&#x3081;&#x306B;&#x88DC;&#x6B63;&#x3059;&#x308B;
+  //   // up / down &#x304C; wheelDelta &#x3068;&#x9006;&#x306A;&#x306E;&#x3067;&#x88DC;&#x6B63;&#x3059;&#x308B;
+  //   // -7.5(default) &#x3092;&#x304B;&#x3051;&#x308B;
+  //   wheelDetail *= this.coefficient;
+  //   return this.moving(wheelDetail);
+  // }
+  /**
+   * mouse delta &#x304B;&#x3089;&#x79FB;&#x52D5;&#x91CF;&#x3092;&#x8A08;&#x7B97;&#x3057;&#x307E;&#x3059;
+   * @param {number} delta mouse delta &#x5024;
+   * @returns {number} &#x524D;&#x56DE;&#x79FB;&#x52D5;&#x91CF;&#x306B; delta &#x5024; &#x3092;&#x52A0;&#x7B97;&#x3057;&#x305F;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  moving(delta) {
+    /**
+     * &#x79FB;&#x52D5;&#x91CF;&#x304C;&#x95BE;&#x5024;&#x3092;&#x8D85;&#x3048;&#x308B;&#x304B;&#x3092;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x8A08;&#x7B97;&#x5909;&#x6570;
+     * @type {number}
+     */
+    this.moved += delta;
+    // @type {number}
+    const moved = this.moved;
+
+    // 0 check
+    if (moved === 0) {
+      // &#x79FB;&#x52D5;&#x91CF;&#x304C; 0 &#x306A;&#x306E;&#x3067;&#x51E6;&#x7406;&#x3092;&#x3057;&#x306A;&#x3044;
+      return moved;
+    }
+
+    // &#x95BE;&#x5024;&#x30C1;&#x30A7;&#x30C3;&#x30AF;
+    if (Math.abs(moved) &gt;= this.threshold) {
+      if (moved &gt; 0) {
+        // scroll up
+        this.up(moved);
+      } else {
+        this.down(moved);
+      }
+    } else {
+      // &#x95BE;&#x5024;&#x3092;&#x8D85;&#x3048;&#x3066;&#x3044;&#x306A;&#x3044;&#x306E;&#x3067;&#x51E6;&#x7406;&#x3092;&#x3057;&#x306A;&#x3044;
+      return moved;
+    }
+
+    // initialize moved
+    this.moved = 0;
+    return moved;
+  }
+  /**
+   * scroll up &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x706B;&#x3057;&#x307E;&#x3059;
+   * @param {number} moved &#x79FB;&#x52D5;&#x91CF;
+   * @returns {number} &#x52A0;&#x7B97;&#x79FB;&#x52D5;&#x91CF;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  up(moved) {
+    // @type {Events}
+    const events = new Events(Wheel.UP, this, this);
+    events.moved = moved;
+    this.dispatch(events);
+
+    return moved;
+  }
+  /**
+   * scroll down &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x706B;&#x3057;&#x307E;&#x3059;
+   * @param {number} moved &#x79FB;&#x52D5;&#x91CF;
+   * @returns {number} &#x52A0;&#x7B97;&#x79FB;&#x52D5;&#x91CF;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  down(moved) {
+    // @type {Events}
+    const events = new Events(Wheel.DOWN, this, this);
+    events.moved = moved;
+    this.dispatch(events);
+
+    return moved;
+  }
+  // ----------------------------------------
+  // STATIC METHOD
+  // ----------------------------------------
+  /**
+   * Wheel instance &#x3092; singleton &#x3092;&#x4FDD;&#x8A3C;&#x3057;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;
+   * @return {Wheel} Wheel instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  static factory() {
+    return new Wheel(singletonSymbol);
+  }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.4)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

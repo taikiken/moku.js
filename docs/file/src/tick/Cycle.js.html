@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/tick/Cycle.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+<link data-ice="userStyle" rel="stylesheet" href="user/css/0-esdoc_extension.css">
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">event</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html">EventDispatcher</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Events.js~Events.html">Events</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scroll.js~Scroll.html">Scroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">net</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">tick</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html">Cycle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Fps.js~Fps.html">Fps</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Polling.js~Polling.html">Polling</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Rate.js~Rate.html">Rate</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/tick/Cycle.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * @license inazumatv.com
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/07/03
+ *
+ * Copyright (c) 2011-2015 inazumatv.com, inc.
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ */
+
+// event
+import { EventDispatcher } from &apos;../event/EventDispatcher&apos;;
+import { Events } from &apos;../event/Events&apos;;
+
+/**
+ * new &#x3092;&#x8A31;&#x53EF;&#x3057;&#x306A;&#x3044;&#x305F;&#x3081;&#x306E; Symbol
+ * @type {Symbol}
+ * @private
+ */
+const singletonSymbol = Symbol();
+/**
+ * singleton instance, nullable
+ * @type {?Cycle}
+ * @private
+ */
+let instance = null;
+
+/**
+ * private property key, requestAnimationFrame ID &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+ * @type {Symbol}
+ * @private
+ */
+const requestSymbol = Symbol();
+/**
+ * private property key, this.update.bind(this) &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+ * @type {Symbol}
+ * @private
+ */
+const updateSymbol = Symbol();
+/**
+ * private property key, requestAnimationFrame &#x3092;&#x958B;&#x59CB;&#x3057;&#x305F;&#x304B;&#x3092;&#x8868;&#x3059;&#x771F;&#x507D;&#x5024;&#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+ * @type {Symbol}
+ * @private
+ */
+const startSymbol = Symbol();
+/**
+ * Cycle.UPDATE event &#x3092;&#x767A;&#x706B;&#x3059;&#x308B;&#x6642;&#x306E; Events instance &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+ * @type {Symbol}
+ * @private
+ */
+const eventsSymbol = Symbol();
+
+/**
+ * &lt;p&gt;requestAnimationFrame &#x3067;&#x30EB;&#x30FC;&#x30D7;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x307E;&#x3059;&lt;/p&gt;
+ * &lt;p&gt;singleton &#x306A;&#x306E;&#x3067; new &#x3067;&#x306F;&#x306A;&#x304F; factory &#x3092;&#x4F7F;&#x7528;&#x3057; instance &#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&lt;/p&gt;
+ *
+ * ```
+ * const loop:Cycle = Cycle.factory();
+ * ```
+ *
+ * &lt;p&gt;requestAnimationFrame &#x306F; tab &#x304C; active(focus) &#x306A;&#x6642;&#x306E;&#x307F;&#x767A;&#x751F;&#x3057;&#x307E;&#x3059;&lt;/p&gt;
+ */
+export class Cycle extends EventDispatcher {
+  /**
+   * singleton &#x3067;&#x3059;
+   * @param {Symbol} checkSymbol singleton &#x3092;&#x4FDD;&#x8A3C;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; private instance
+   * @return {Cycle} singleton instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  constructor(checkSymbol) {
+    // checkSymbol &#x3068; singleton &#x304C;&#x7B49;&#x4FA1;&#x304B;&#x3092;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3057;&#x307E;&#x3059;
+    if (checkSymbol !== singletonSymbol) {
+      throw new Error(&apos;don\&apos;t use new, instead use static factory method.&apos;);
+    }
+    super();
+    // instance &#x4F5C;&#x6210;&#x6E08;&#x307F;&#x304B;&#x3092;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3057; instance &#x304C; null &#x306E;&#x6642; this &#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
+    if (instance !== null) {
+      return instance;
+    }
+    // onetime setting
+    instance = this;
+    // @type {number} - requestAnimationFrame return id
+    this[requestSymbol] = 0;
+    // @type {function} - update bind function
+    this[updateSymbol] = this.update.bind(this);
+    // @type {boolean} - started flag
+    this[startSymbol] = false;
+    // @type {Events} - Events
+    this[eventsSymbol] = new Events(Cycle.UPDATE, this, this);
+    // &#x8A2D;&#x5B9A;&#x6E08;&#x307F; instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+    return instance;
+  }
+  // ----------------------------------------
+  // EVENT
+  // ----------------------------------------
+  /**
+   * requestAnimationFrame &#x6BCE;&#x306B;&#x767A;&#x751F;&#x3059;&#x308B;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @event UPDATE
+   * @return {string} event, cycleUpdate &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @default cycleUpdate
+   */
+  static get UPDATE() {
+    return &apos;cycleUpdate&apos;;
+  }
+  // ----------------------------------------
+  // GETTER / SETTER
+  // ----------------------------------------
+  /**
+   * Events instance &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @return {Events} Events instance
+   */
+  static get events() {
+    return this[eventsSymbol];
+  }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
+  /**
+   * loop(requestAnimationFrame) &#x3092;&#x958B;&#x59CB;&#x3057;&#x307E;&#x3059;
+   * @return {boolean} start &#x306B;&#x6210;&#x529F;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  start() {
+    if (this[startSymbol]) {
+      // already start
+      console.warn(&apos;Cycle.start already start&apos;, this[startSymbol]);
+      return false;
+    }
+    this[startSymbol] = true;
+    this.update();
+
+    // @return
+    return true;
+  }
+  /**
+   * loop(cancelAnimationFrame) &#x3092;&#x6B62;&#x3081;&#x307E;&#x3059;
+   * @param {number} [id] requestAnimationFrame id &#x3092;&#x4F7F;&#x3044; cancelAnimationFrame &#x3092;&#x3057;&#x307E;&#x3059;
+   * @return {boolean} stop &#x306B;&#x6210;&#x529F;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  stop(id = this[requestSymbol]) {
+    if (!this[startSymbol]) {
+      // not start
+      return false;
+    }
+
+    cancelAnimationFrame(id);
+    this[startSymbol] = false;
+
+    // @return
+    return true;
+  }
+  // ----------------------------------------
+  // PRIVATE METHOD
+  // ----------------------------------------
+  /**
+   * loop(requestAnimationFrame)&#x30B3;&#x30FC;&#x30EB;&#x30D0;&#x30C3;&#x30AF;&#x95A2;&#x6570;&lt;br&gt;Cycle.UPDATE event &#x3092;&#x767A;&#x706B;&#x3057;&#x307E;&#x3059;
+   * @return {undefined} no-return
+   */
+  update() {
+    // @type {number} - requestAnimationFrame id
+    const id = requestAnimationFrame(this[updateSymbol]);
+    this[requestSymbol] = id;
+    // @type {Events} - events
+    const events = this.events;
+    events.id = id;
+    // event fire
+    this.dispatch(events);
+  }
+  // ----------------------------------------
+  // STATIC METHOD
+  // ----------------------------------------
+  /**
+   * Cycle instance &#x3092; singleton &#x3092;&#x4FDD;&#x8A3C;&#x3057;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;
+   * @return {Cycle} Cycle instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  static factory() {
+    return new Cycle(singletonSymbol);
+  }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.4)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

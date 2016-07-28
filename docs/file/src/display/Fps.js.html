@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/display/Fps.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+<link data-ice="userStyle" rel="stylesheet" href="user/css/0-esdoc_extension.css">
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">display</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/display/Cycle.js~Cycle.html">Cycle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/display/Fps.js~Fps.html">Fps</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/display/Polling.js~Polling.html">Polling</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">event</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html">EventDispatcher</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Events.js~Events.html">Events</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">net</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/display/Fps.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/07/04 - 14:19
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
+
+// event
+import { EventDispatcher } from &apos;../event/EventDispatcher&apos;;
+import { Events } from &apos;../event/Events&apos;;
+
+// display
+import { Cycle } from &apos;./Cycle&apos;;
+
+/**
+ * private property key, this.update.bind(this) &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+ * @type {Symbol}
+ * @private
+ */
+const updateSymbol:Symbol = Symbol();
+/**
+ * private property key, Cycle.UPDATE &#x76E3;&#x8996;&#x3092;&#x958B;&#x59CB;&#x3057;&#x305F;&#x304B;&#x3092;&#x8868;&#x3059;&#x771F;&#x507D;&#x5024;&#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+ * @type {Symbol}
+ * @private
+ */
+const startSymbol:Symbol = Symbol();
+/**
+ * private property key, Fps.start &#x6642;&#x9593;&#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+ * @type {Symbol}
+ * @private
+ */
+const beginSymbol:Symbol = Symbol();
+/**
+ * private property key, fps &#x3092; milli seconds &#x306B;&#x5909;&#x63DB;&#x3057;&#x305F; polling&#xFF08;interval&#xFF09; &#x6642;&#x9593;&#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+ * @type {Symbol}
+ * @private
+ */
+const intervalSymbol:Symbol = Symbol();
+/**
+ * private property key, fps &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+ * @type {Symbol}
+ * @private
+ */
+const fpsSymbol:Symbol = Symbol();
+/**
+ * Fps.UPDATE event &#x3092;&#x767A;&#x706B;&#x3059;&#x308B;&#x6642;&#x306E; Events instance &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+ * @type {Symbol}
+ * @private
+ */
+const eventSymbol:Symbol = Symbol();
+
+/**
+ * &#x30D5;&#x30EC;&#x30FC;&#x30E0;&#x30EC;&#x30FC;&#x30C8;&#x6BCE;&#x306B; UPDATE &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x307E;&#x3059;
+ */
+export class Fps extends EventDispatcher {
+  /**
+   * &#x5F15;&#x6570;&#x306E; frame rate &#x306B;&#x5408;&#x308F;&#x305B; UPDATE &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x307E;&#x3059;
+   * @param {Number} [fps=30] frame rate
+   */
+  constructor(fps:Number = 30) {
+    super();
+    // Cycle instance
+    const cycle:Cycle = Cycle.factory();
+    // public property
+    Object.assign(this, { cycle });
+    // private property
+    // frame rate
+    this[fpsSymbol] = fps;
+    // Cycle.UPDATE event handler
+    this[updateSymbol] = this.update.bind(this);
+    // started flag
+    this[startSymbol] = false;
+    // &#x958B;&#x59CB;&#x6642;&#x9593;
+    this[beginSymbol] = 0;
+    // interval
+    this[intervalSymbol] = 1;
+    // Events
+    this[eventSymbol] = new Events(Fps.UPDATE);
+  }
+  // ----------------------------------------
+  // EVENT
+  // ----------------------------------------
+  /**
+   * requestAnimationFrame &#x6BCE;&#x306B;&#x767A;&#x751F;&#x3059;&#x308B;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @return {String} event, fpsUpdate &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  static get UPDATE():String {
+    return &apos;fpsUpdate&apos;;
+  }
+  // ----------------------------------------
+  // GETTER / SETTER
+  // ----------------------------------------
+  // fps
+  /**
+   * frame rate &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @return {Number} frame rate &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  get fps():Number {
+    return this[fpsSymbol];
+  }
+  /**
+   * frame rate &#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
+   * @param {Number} rate frame rate
+   */
+  set fps(rate:Number):void {
+    this[fpsSymbol] = rate;
+    this[intervalSymbol] = 1000 / rate;
+  }
+  // begin
+  /**
+   * &#x958B;&#x59CB;&#x6642;&#x9593;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @return {Number} &#x958B;&#x59CB;&#x6642;&#x9593;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  get begin():Number {
+    return this[beginSymbol];
+  }
+  /**
+   * &#x958B;&#x59CB;&#x6642;&#x9593;&#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
+   * @param {Number} time &#x958B;&#x59CB;&#x6642;&#x9593;
+   */
+  set begin(time:Number):void {
+    this[beginSymbol] = time;
+  }
+  // polling
+  /**
+   * interval time(milli seconds) &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @return {Number} interval time(milli seconds) &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  get interval():Number {
+    return this[intervalSymbol];
+  }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
+  /**
+   * loop(requestAnimationFrame) &#x3092;&#x958B;&#x59CB;&#x3057;&#x307E;&#x3059;
+   */
+  start():void {
+    if (this[startSymbol]) {
+      // already start
+      console.warn(&apos;Fps.start already start&apos;, this[startSymbol]);
+      return;
+    }
+    this.init(fpsSymbol);
+    this[startSymbol] = true;
+    this.cycle.on(Cycle.UPDATE, this[updateSymbol]);
+    this.cycle.start();
+    this.update({ strong: true });
+  }
+  /**
+   * loop(cancelAnimationFrame) &#x3057;&#x307E;&#x3059;
+   */
+  stop():void {
+    this.cycle.off(Cycle.UPDATE, this[updateSymbol]);
+    this[startSymbol] = false;
+  }
+  /**
+   * loop(requestAnimationFrame) &#x3057;&#x307E;&#x3059;
+   * @param {Object} event Cycle.UPDATE event Object
+   */
+  update(event:Object):void {
+    // &#x73FE;&#x5728;&#x6642;&#x9593;
+    const present:Number = Date.now();
+    // strong flag
+    const strong = event.hasOwnProperty(&apos;strong&apos;) &amp;&amp; !!event.strong;
+    // &#x73FE;&#x5728;&#x6642;&#x9593; &#x304C; interval &#x3088;&#x308A;&#x5927;&#x304D;&#x304F;&#x306A;&#x3063;&#x305F;&#x304B;
+    if (strong || (present - this.begin) &gt;= this.interval) {
+      const events = this[eventSymbol];
+      events.time = present;
+      events.begin = this.begin;
+      events.interval = this.interval;
+      // event &#x767A;&#x751F;
+      this.dispatch(events);
+      // &#x958B;&#x59CB;&#x6642;&#x9593;&#x3092; update
+      this.begin = present;
+    }
+  }
+  /**
+   * Fps &#x958B;&#x59CB;&#x521D;&#x671F;&#x51E6;&#x7406;&#x3092;&#x884C;&#x3044;&#x307E;&#x3059;
+   *
+   * - fps(interval time) &#x8A2D;&#x5B9A;
+   * - &#x958B;&#x59CB;&#x6642;&#x9593;&#x8A2D;&#x5B9A;
+   *
+   * @param {Symbol} symbol private property fps &#x3092;&#x53D6;&#x5F97;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+   * @private
+   */
+  init(symbol:Symbol):void {
+    this.fps = this[symbol];
+    this.begin = Date.now();
+  }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.4)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

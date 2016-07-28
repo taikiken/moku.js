@@ -54,7 +54,7 @@
 	 *
 	 * This notice shall be included in all copies or substantial portions of the Software.
 	 * 0.0.1
-	 * 2016-07-27 16:35:24
+	 * 2016-07-27 19:41:33
 	 */
 	// use strict は本来不要でエラーになる
 	// 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -67,13 +67,19 @@
 
 	var _Events = __webpack_require__(62);
 
-	var _Ajax = __webpack_require__(68);
+	var _Scroll = __webpack_require__(68);
 
-	var _Cycle = __webpack_require__(95);
+	var _Wheel = __webpack_require__(95);
 
-	var _Fps = __webpack_require__(96);
+	var _Ajax = __webpack_require__(96);
 
-	var _Polling = __webpack_require__(97);
+	var _Cycle = __webpack_require__(97);
+
+	var _Fps = __webpack_require__(98);
+
+	var _Polling = __webpack_require__(99);
+
+	var _Rate = __webpack_require__(100);
 
 	var _Type = __webpack_require__(61);
 
@@ -85,7 +91,7 @@
 	 */
 
 
-	// tick
+	// net
 	var MOKU = {};
 	/**
 	 * version number を取得します
@@ -96,7 +102,7 @@
 	// util
 
 
-	// net
+	// tick
 	MOKU.version = function () {
 	  return '0.0.1';
 	};
@@ -105,7 +111,7 @@
 	 * @return {string}  build 日時を返します
 	 */
 	MOKU.build = function () {
-	  return '2016-07-27 16:35:24';
+	  return '2016-07-27 19:41:33';
 	};
 	/**
 	 * MOKU.event
@@ -113,7 +119,9 @@
 	 */
 	MOKU.event = {
 	  EventDispatcher: _EventDispatcher.EventDispatcher,
-	  Events: _Events.Events
+	  Events: _Events.Events,
+	  Scroll: _Scroll.Scroll,
+	  Wheel: _Wheel.Wheel
 	};
 	/**
 	 * MOKU.net
@@ -129,7 +137,8 @@
 	MOKU.tick = {
 	  Cycle: _Cycle.Cycle,
 	  Fps: _Fps.Fps,
-	  Polling: _Polling.Polling
+	  Polling: _Polling.Polling,
+	  Rate: _Rate.Rate
 	};
 	/**
 	 * MOKU.util
@@ -180,14 +189,16 @@
 	 * <p>Custom Event を作成し Event 通知を行います</p>
 	 *
 	 * ```
-	 * const callback = () => {};
+	 * const callback = (event) => {
+	 *  console.log(event);
+	 * };
 	 *
 	 * const event:EventDispatcher = new EventDispatcher();
 	 * event.on('abc', callback);
 	 *
 	 * console.log(event.has('abc', callback));// true
 	 *
-	 * event.dispatch({type: 'abc'});
+	 * event.dispatch(new Events('abc'));
 	 *
 	 * event.off('abc', callback);
 	 * console.log(event.has('abc', callback));// false
@@ -427,6 +438,7 @@
 	    /**
 	     * **alias on**
 	     * <p>event type に リスナー関数を bind します</p>
+	     * @deprecated instead use on
 	     * @param {string} type event type（種類）
 	     * @param {Function} listener callback関数
 	     * @return {boolean} 成功・不成功の真偽値を返します
@@ -440,6 +452,7 @@
 	    /**
 	     * **alias off**
 	     * <p>event type からリスナー関数を remove します</p>
+	     * @deprecated instead use off
 	     * @param {string} type event type（種類）
 	     * @param {Function} listener リスナー関数
 	     * @return {boolean} 成功・不成功の真偽値を返します
@@ -453,6 +466,7 @@
 	    /**
 	     * **alias has**
 	     * <p>event type にリスナー関数が登録されているかを調べます</p>
+	     * @deprecated instead use has
 	     * @param {string} type event type（種類）
 	     * @param {Function} listener リスナー関数
 	     * @return {boolean} event type にリスナー関数が登録されているかの真偽値を返します
@@ -466,6 +480,7 @@
 	    /**
 	     * **alias dispatch**
 	     * <p>イベントを発生させリスナー関数を call します</p>
+	     * @deprecated instead use dispatch
 	     * @param {Events} events typeキー が必須です
 	     * @return {boolean} 成功・不成功の真偽値を返します
 	     */
@@ -1800,13 +1815,9 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.Ajax = undefined;
+	exports.Scroll = undefined;
 
-	var _create = __webpack_require__(69);
-
-	var _create2 = _interopRequireDefault(_create);
-
-	var _getPrototypeOf = __webpack_require__(72);
+	var _getPrototypeOf = __webpack_require__(69);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -1818,11 +1829,1100 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(77);
+	var _possibleConstructorReturn2 = __webpack_require__(74);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(90);
+	var _inherits2 = __webpack_require__(87);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _symbol = __webpack_require__(22);
+
+	var _symbol2 = _interopRequireDefault(_symbol);
+
+	var _EventDispatcher2 = __webpack_require__(1);
+
+	var _Events = __webpack_require__(62);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * new を許可しないための Symbol
+	 * @type {Symbol}
+	 * @private
+	 */
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/07/26 - 21:05
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+
+	// event
+	var singletonSymbol = (0, _symbol2.default)();
+	/**
+	 * singleton instance, nullable
+	 * @type {?Scroll}
+	 * @private
+	 */
+	var instance = null;
+
+	/**
+	 * private property key, bind 済み mouseWheel を保存するための Symbol
+	 * @type {Symbol}
+	 * @private
+	 */
+	var bindSymbol = (0, _symbol2.default)();
+	/**
+	 * Cycle.UPDATE event を発火する時の Events instance を保存するための Symbol
+	 * @type {Symbol}
+	 * @private
+	 */
+	var eventsSymbol = (0, _symbol2.default)();
+
+	/**
+	 * window scroll event を監視し通知を行います
+	 * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
+	 *
+	 * ```
+	 * const instance:Scroll = Scroll.factory();
+	 * ```
+	 */
+
+	var Scroll = exports.Scroll = function (_EventDispatcher) {
+	  (0, _inherits3.default)(Scroll, _EventDispatcher);
+
+	  /**
+	   * singleton です
+	   * @param {Symbol} checkSymbol singleton を保証するための private instance
+	   * @return {Scroll} singleton instance を返します
+	   */
+
+	  function Scroll(checkSymbol) {
+	    var _ret2;
+
+	    (0, _classCallCheck3.default)(this, Scroll);
+
+	    // checkSymbol と singleton が等価かをチェックします
+	    if (checkSymbol !== singletonSymbol) {
+	      throw new Error('don\'t use new, instead use static factory method.');
+	    }
+
+	    // instance 作成済みかをチェックし instance が null の時 this を設定します
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Scroll).call(this));
+
+	    if (instance !== null) {
+	      var _ret;
+
+	      return _ret = instance, (0, _possibleConstructorReturn3.default)(_this, _ret);
+	    }
+
+	    // onetime setting
+	    instance = _this;
+
+	    // event handler
+	    // @type {function} - bound scroll function
+	    _this[bindSymbol] = _this.scroll.bind(_this);
+	    // @type {Events} - events instance
+	    _this[eventsSymbol] = new _Events.Events(Scroll.SCROLL, _this, _this);
+
+	    // 設定済み instance を返します
+	    return _ret2 = instance, (0, _possibleConstructorReturn3.default)(_this, _ret2);
+	  }
+	  // ----------------------------------------
+	  // EVENT
+	  // ----------------------------------------
+	  /**
+	   * scroll で発生するイベントを取得します
+	   * @event SCROLL
+	   * @return {string} event, scrollScroll を返します
+	   * @default scrollScroll
+	   */
+
+
+	  (0, _createClass3.default)(Scroll, [{
+	    key: 'watch',
+
+	    // ----------------------------------------
+	    // METHOD
+	    // ----------------------------------------
+	    /**
+	     * scroll event を監視します<br>
+	     * 監視前に二重に addEventListener しないように unwatch を実行します
+	     * @return {Scroll} method chain 可能なように instance を返します
+	     */
+	    value: function watch() {
+	      this.unwatch();
+
+	      window.addEventListener('scroll', this.bindScroll, false);
+
+	      return this;
+	    }
+	    /**
+	     * scroll event を監視を止めます
+	     * @return {Scroll} method chain 可能なように instance を返します
+	     */
+
+	  }, {
+	    key: 'unwatch',
+	    value: function unwatch() {
+	      window.removeEventListener('scroll', this.bindScroll);
+
+	      return this;
+	    }
+	    /**
+	     * window scroll event handler<br>
+	     * window scroll event 発生後に scroll top 位置をもたせた Scroll.SCROLL custom event を発火します
+	     * @param {?Event} event window scroll event, nullable
+	     * @return {undefined} no-return
+	     */
+
+	  }, {
+	    key: 'scroll',
+	    value: function scroll(event) {
+	      // @type {Events} - events
+	      var events = this.events;
+	      // @type {Event}
+	      events.original = event;
+	      events.y = Scroll.y;
+	      // event fire
+	      this.dispatch(events);
+	    }
+	    // ----------------------------------------
+	    // STATIC METHOD
+	    // ----------------------------------------
+	    /**
+	     * Wheel instance を singleton を保証し作成します
+	     * @return {Scroll} Scroll instance を返します
+	     */
+
+	  }, {
+	    key: 'y',
+
+	    // ----------------------------------------
+	    // GETTER / SETTER
+	    // ----------------------------------------
+	    /**
+	     * scroll top 位置
+	     * @return {number} scroll top 位置を返します
+	     */
+	    get: function get() {
+	      return Scroll.y;
+	    }
+	    /**
+	     * scroll top 位置 を設定します
+	     * @param {number} top スクロール位置(px)
+	     */
+	    ,
+	    set: function set(top) {
+	      Scroll.y = top;
+	    }
+	    /**
+	     * bind 済み mouseWheel
+	     * @return {function} bind 済み mouseWheel を返します
+	     */
+
+	  }, {
+	    key: 'bindScroll',
+	    get: function get() {
+	      return this[bindSymbol];
+	    }
+	    /**
+	     * Events instance を取得します
+	     * @return {Events} Events instance
+	     */
+
+	  }, {
+	    key: 'events',
+	    get: function get() {
+	      return this[eventsSymbol];
+	    }
+	  }], [{
+	    key: 'factory',
+	    value: function factory() {
+	      return new Scroll(singletonSymbol);
+	    }
+	  }, {
+	    key: 'SCROLL',
+	    get: function get() {
+	      return 'scrollScroll';
+	    }
+	    // ----------------------------------------
+	    // STATIC GETTER / SETTER
+	    // ----------------------------------------
+	    /**
+	     * scroll top 位置
+	     * @return {number} scroll top 位置を返します
+	     */
+
+	  }, {
+	    key: 'y',
+	    get: function get() {
+	      // https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY
+	      // https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
+	      return typeof window.pageYOffset !== 'undefined' ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+	    }
+	    /**
+	     * scroll top 位置 を設定します
+	     * @param {number} top スクロール位置(px)
+	     */
+	    ,
+	    set: function set(top) {
+	      window.scrollTo(0, top);
+	    }
+	  }]);
+	  return Scroll;
+	}(_EventDispatcher2.EventDispatcher);
+
+/***/ },
+/* 69 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(70), __esModule: true };
+
+/***/ },
+/* 70 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(71);
+	module.exports = __webpack_require__(9).Object.getPrototypeOf;
+
+/***/ },
+/* 71 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.2.9 Object.getPrototypeOf(O)
+	var toObject        = __webpack_require__(67)
+	  , $getPrototypeOf = __webpack_require__(72);
+
+	__webpack_require__(73)('getPrototypeOf', function(){
+	  return function getPrototypeOf(it){
+	    return $getPrototypeOf(toObject(it));
+	  };
+	});
+
+/***/ },
+/* 72 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
+	var has         = __webpack_require__(25)
+	  , toObject    = __webpack_require__(67)
+	  , IE_PROTO    = __webpack_require__(46)('IE_PROTO')
+	  , ObjectProto = Object.prototype;
+
+	module.exports = Object.getPrototypeOf || function(O){
+	  O = toObject(O);
+	  if(has(O, IE_PROTO))return O[IE_PROTO];
+	  if(typeof O.constructor == 'function' && O instanceof O.constructor){
+	    return O.constructor.prototype;
+	  } return O instanceof Object ? ObjectProto : null;
+	};
+
+/***/ },
+/* 73 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// most Object methods by ES6 should accept primitives
+	var $export = __webpack_require__(7)
+	  , core    = __webpack_require__(9)
+	  , fails   = __webpack_require__(18);
+	module.exports = function(KEY, exec){
+	  var fn  = (core.Object || {})[KEY] || Object[KEY]
+	    , exp = {};
+	  exp[KEY] = exec(fn);
+	  $export($export.S + $export.F * fails(function(){ fn(1); }), 'Object', exp);
+	};
+
+/***/ },
+/* 74 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	exports.__esModule = true;
+
+	var _typeof2 = __webpack_require__(75);
+
+	var _typeof3 = _interopRequireDefault(_typeof2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function (self, call) {
+	  if (!self) {
+	    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+	  }
+
+	  return call && ((typeof call === "undefined" ? "undefined" : (0, _typeof3.default)(call)) === "object" || typeof call === "function") ? call : self;
+	};
+
+/***/ },
+/* 75 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	exports.__esModule = true;
+
+	var _iterator = __webpack_require__(76);
+
+	var _iterator2 = _interopRequireDefault(_iterator);
+
+	var _symbol = __webpack_require__(22);
+
+	var _symbol2 = _interopRequireDefault(_symbol);
+
+	var _typeof = typeof _symbol2.default === "function" && typeof _iterator2.default === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default ? "symbol" : typeof obj; };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = typeof _symbol2.default === "function" && _typeof(_iterator2.default) === "symbol" ? function (obj) {
+	  return typeof obj === "undefined" ? "undefined" : _typeof(obj);
+	} : function (obj) {
+	  return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
+	};
+
+/***/ },
+/* 76 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(77), __esModule: true };
+
+/***/ },
+/* 77 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(78);
+	__webpack_require__(83);
+	module.exports = __webpack_require__(32).f('iterator');
+
+/***/ },
+/* 78 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $at  = __webpack_require__(79)(true);
+
+	// 21.1.3.27 String.prototype[@@iterator]()
+	__webpack_require__(80)(String, 'String', function(iterated){
+	  this._t = String(iterated); // target
+	  this._i = 0;                // next index
+	// 21.1.5.2.1 %StringIteratorPrototype%.next()
+	}, function(){
+	  var O     = this._t
+	    , index = this._i
+	    , point;
+	  if(index >= O.length)return {value: undefined, done: true};
+	  point = $at(O, index);
+	  this._i += point.length;
+	  return {value: point, done: false};
+	});
+
+/***/ },
+/* 79 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var toInteger = __webpack_require__(44)
+	  , defined   = __webpack_require__(41);
+	// true  -> String#at
+	// false -> String#codePointAt
+	module.exports = function(TO_STRING){
+	  return function(that, pos){
+	    var s = String(defined(that))
+	      , i = toInteger(pos)
+	      , l = s.length
+	      , a, b;
+	    if(i < 0 || i >= l)return TO_STRING ? '' : undefined;
+	    a = s.charCodeAt(i);
+	    return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff
+	      ? TO_STRING ? s.charAt(i) : a
+	      : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
+	  };
+	};
+
+/***/ },
+/* 80 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var LIBRARY        = __webpack_require__(34)
+	  , $export        = __webpack_require__(7)
+	  , redefine       = __webpack_require__(26)
+	  , hide           = __webpack_require__(12)
+	  , has            = __webpack_require__(25)
+	  , Iterators      = __webpack_require__(81)
+	  , $iterCreate    = __webpack_require__(82)
+	  , setToStringTag = __webpack_require__(30)
+	  , getPrototypeOf = __webpack_require__(72)
+	  , ITERATOR       = __webpack_require__(31)('iterator')
+	  , BUGGY          = !([].keys && 'next' in [].keys()) // Safari has buggy iterators w/o `next`
+	  , FF_ITERATOR    = '@@iterator'
+	  , KEYS           = 'keys'
+	  , VALUES         = 'values';
+
+	var returnThis = function(){ return this; };
+
+	module.exports = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCED){
+	  $iterCreate(Constructor, NAME, next);
+	  var getMethod = function(kind){
+	    if(!BUGGY && kind in proto)return proto[kind];
+	    switch(kind){
+	      case KEYS: return function keys(){ return new Constructor(this, kind); };
+	      case VALUES: return function values(){ return new Constructor(this, kind); };
+	    } return function entries(){ return new Constructor(this, kind); };
+	  };
+	  var TAG        = NAME + ' Iterator'
+	    , DEF_VALUES = DEFAULT == VALUES
+	    , VALUES_BUG = false
+	    , proto      = Base.prototype
+	    , $native    = proto[ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT]
+	    , $default   = $native || getMethod(DEFAULT)
+	    , $entries   = DEFAULT ? !DEF_VALUES ? $default : getMethod('entries') : undefined
+	    , $anyNative = NAME == 'Array' ? proto.entries || $native : $native
+	    , methods, key, IteratorPrototype;
+	  // Fix native
+	  if($anyNative){
+	    IteratorPrototype = getPrototypeOf($anyNative.call(new Base));
+	    if(IteratorPrototype !== Object.prototype){
+	      // Set @@toStringTag to native iterators
+	      setToStringTag(IteratorPrototype, TAG, true);
+	      // fix for some old engines
+	      if(!LIBRARY && !has(IteratorPrototype, ITERATOR))hide(IteratorPrototype, ITERATOR, returnThis);
+	    }
+	  }
+	  // fix Array#{values, @@iterator}.name in V8 / FF
+	  if(DEF_VALUES && $native && $native.name !== VALUES){
+	    VALUES_BUG = true;
+	    $default = function values(){ return $native.call(this); };
+	  }
+	  // Define iterator
+	  if((!LIBRARY || FORCED) && (BUGGY || VALUES_BUG || !proto[ITERATOR])){
+	    hide(proto, ITERATOR, $default);
+	  }
+	  // Plug for library
+	  Iterators[NAME] = $default;
+	  Iterators[TAG]  = returnThis;
+	  if(DEFAULT){
+	    methods = {
+	      values:  DEF_VALUES ? $default : getMethod(VALUES),
+	      keys:    IS_SET     ? $default : getMethod(KEYS),
+	      entries: $entries
+	    };
+	    if(FORCED)for(key in methods){
+	      if(!(key in proto))redefine(proto, key, methods[key]);
+	    } else $export($export.P + $export.F * (BUGGY || VALUES_BUG), NAME, methods);
+	  }
+	  return methods;
+	};
+
+/***/ },
+/* 81 */
+/***/ function(module, exports) {
+
+	module.exports = {};
+
+/***/ },
+/* 82 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var create         = __webpack_require__(52)
+	  , descriptor     = __webpack_require__(21)
+	  , setToStringTag = __webpack_require__(30)
+	  , IteratorPrototype = {};
+
+	// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
+	__webpack_require__(12)(IteratorPrototype, __webpack_require__(31)('iterator'), function(){ return this; });
+
+	module.exports = function(Constructor, NAME, next){
+	  Constructor.prototype = create(IteratorPrototype, {next: descriptor(1, next)});
+	  setToStringTag(Constructor, NAME + ' Iterator');
+	};
+
+/***/ },
+/* 83 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(84);
+	var global        = __webpack_require__(8)
+	  , hide          = __webpack_require__(12)
+	  , Iterators     = __webpack_require__(81)
+	  , TO_STRING_TAG = __webpack_require__(31)('toStringTag');
+
+	for(var collections = ['NodeList', 'DOMTokenList', 'MediaList', 'StyleSheetList', 'CSSRuleList'], i = 0; i < 5; i++){
+	  var NAME       = collections[i]
+	    , Collection = global[NAME]
+	    , proto      = Collection && Collection.prototype;
+	  if(proto && !proto[TO_STRING_TAG])hide(proto, TO_STRING_TAG, NAME);
+	  Iterators[NAME] = Iterators.Array;
+	}
+
+/***/ },
+/* 84 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var addToUnscopables = __webpack_require__(85)
+	  , step             = __webpack_require__(86)
+	  , Iterators        = __webpack_require__(81)
+	  , toIObject        = __webpack_require__(38);
+
+	// 22.1.3.4 Array.prototype.entries()
+	// 22.1.3.13 Array.prototype.keys()
+	// 22.1.3.29 Array.prototype.values()
+	// 22.1.3.30 Array.prototype[@@iterator]()
+	module.exports = __webpack_require__(80)(Array, 'Array', function(iterated, kind){
+	  this._t = toIObject(iterated); // target
+	  this._i = 0;                   // next index
+	  this._k = kind;                // kind
+	// 22.1.5.2.1 %ArrayIteratorPrototype%.next()
+	}, function(){
+	  var O     = this._t
+	    , kind  = this._k
+	    , index = this._i++;
+	  if(!O || index >= O.length){
+	    this._t = undefined;
+	    return step(1);
+	  }
+	  if(kind == 'keys'  )return step(0, index);
+	  if(kind == 'values')return step(0, O[index]);
+	  return step(0, [index, O[index]]);
+	}, 'values');
+
+	// argumentsList[@@iterator] is %ArrayProto_values% (9.4.4.6, 9.4.4.7)
+	Iterators.Arguments = Iterators.Array;
+
+	addToUnscopables('keys');
+	addToUnscopables('values');
+	addToUnscopables('entries');
+
+/***/ },
+/* 85 */
+/***/ function(module, exports) {
+
+	module.exports = function(){ /* empty */ };
+
+/***/ },
+/* 86 */
+/***/ function(module, exports) {
+
+	module.exports = function(done, value){
+	  return {value: value, done: !!done};
+	};
+
+/***/ },
+/* 87 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	exports.__esModule = true;
+
+	var _setPrototypeOf = __webpack_require__(88);
+
+	var _setPrototypeOf2 = _interopRequireDefault(_setPrototypeOf);
+
+	var _create = __webpack_require__(92);
+
+	var _create2 = _interopRequireDefault(_create);
+
+	var _typeof2 = __webpack_require__(75);
+
+	var _typeof3 = _interopRequireDefault(_typeof2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function (subClass, superClass) {
+	  if (typeof superClass !== "function" && superClass !== null) {
+	    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : (0, _typeof3.default)(superClass)));
+	  }
+
+	  subClass.prototype = (0, _create2.default)(superClass && superClass.prototype, {
+	    constructor: {
+	      value: subClass,
+	      enumerable: false,
+	      writable: true,
+	      configurable: true
+	    }
+	  });
+	  if (superClass) _setPrototypeOf2.default ? (0, _setPrototypeOf2.default)(subClass, superClass) : subClass.__proto__ = superClass;
+	};
+
+/***/ },
+/* 88 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(89), __esModule: true };
+
+/***/ },
+/* 89 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(90);
+	module.exports = __webpack_require__(9).Object.setPrototypeOf;
+
+/***/ },
+/* 90 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.3.19 Object.setPrototypeOf(O, proto)
+	var $export = __webpack_require__(7);
+	$export($export.S, 'Object', {setPrototypeOf: __webpack_require__(91).set});
+
+/***/ },
+/* 91 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Works with __proto__ only. Old v8 can't work with null proto objects.
+	/* eslint-disable no-proto */
+	var isObject = __webpack_require__(15)
+	  , anObject = __webpack_require__(14);
+	var check = function(O, proto){
+	  anObject(O);
+	  if(!isObject(proto) && proto !== null)throw TypeError(proto + ": can't set as prototype!");
+	};
+	module.exports = {
+	  set: Object.setPrototypeOf || ('__proto__' in {} ? // eslint-disable-line
+	    function(test, buggy, set){
+	      try {
+	        set = __webpack_require__(10)(Function.call, __webpack_require__(57).f(Object.prototype, '__proto__').set, 2);
+	        set(test, []);
+	        buggy = !(test instanceof Array);
+	      } catch(e){ buggy = true; }
+	      return function setPrototypeOf(O, proto){
+	        check(O, proto);
+	        if(buggy)O.__proto__ = proto;
+	        else set(O, proto);
+	        return O;
+	      };
+	    }({}, false) : undefined),
+	  check: check
+	};
+
+/***/ },
+/* 92 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(93), __esModule: true };
+
+/***/ },
+/* 93 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(94);
+	var $Object = __webpack_require__(9).Object;
+	module.exports = function create(P, D){
+	  return $Object.create(P, D);
+	};
+
+/***/ },
+/* 94 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $export = __webpack_require__(7)
+	// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
+	$export($export.S, 'Object', {create: __webpack_require__(52)});
+
+/***/ },
+/* 95 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Wheel = undefined;
+
+	var _assign = __webpack_require__(63);
+
+	var _assign2 = _interopRequireDefault(_assign);
+
+	var _getPrototypeOf = __webpack_require__(69);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(2);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(3);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(74);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(87);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _symbol = __webpack_require__(22);
+
+	var _symbol2 = _interopRequireDefault(_symbol);
+
+	var _EventDispatcher2 = __webpack_require__(1);
+
+	var _Events = __webpack_require__(62);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * new を許可しないための Symbol
+	 * @type {Symbol}
+	 * @private
+	 */
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/07/26 - 19:12
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+
+	// event
+	var singletonSymbol = (0, _symbol2.default)();
+	/**
+	 * singleton instance, nullable
+	 * @type {?Wheel}
+	 * @private
+	 */
+	var instance = null;
+	/**
+	 * private property key, bind 済み mouseWheel を保存するための Symbol
+	 * @type {Symbol}
+	 * @private
+	 */
+	var wheelSymbol = (0, _symbol2.default)();
+	// /**
+	//  * private property key, bind 済み mouseScroll を保存するための Symbol
+	//  * @type {Symbol}
+	//  * @private
+	//  */
+	// const scrollSymbol = Symbol();
+
+	/**
+	 * mousewheel event を監視し通知を行います
+	 * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
+	 *
+	 * ```
+	 * const instance:Wheel = Wheel.factory();
+	 * ```
+	 */
+
+	var Wheel = exports.Wheel = function (_EventDispatcher) {
+	  (0, _inherits3.default)(Wheel, _EventDispatcher);
+
+	  /**
+	   * singleton です
+	   * @param {Symbol} checkSymbol singleton を保証するための private instance
+	   * @returns {Wheel} singleton instance を返します
+	   */
+
+	  function Wheel(checkSymbol) {
+	    var _ret2;
+
+	    (0, _classCallCheck3.default)(this, Wheel);
+
+	    // checkSymbol と singleton が等価かをチェックします
+	    if (checkSymbol !== singletonSymbol) {
+	      throw new Error('don\'t use new, instead use static factory method.');
+	    }
+
+	    // instance 作成済みかをチェックし instance が null の時 this を設定します
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Wheel).call(this));
+
+	    if (instance !== null) {
+	      var _ret;
+
+	      return _ret = instance, (0, _possibleConstructorReturn3.default)(_this, _ret);
+	    }
+
+	    // onetime setting
+	    instance = _this;
+
+	    // event handler
+	    _this[wheelSymbol] = _this.mouseWheel.bind(_this);
+	    // this[scrollSymbol] = this.mouseScroll.bind(this);
+
+	    // public property
+	    /**
+	     * 閾値, wheel 移動量が閾値を超えたときにイベントを発生させます
+	     * @type {number}
+	     * @default 200
+	     */
+	    var threshold = 200;
+	    /**
+	     * wheelDelta 移動量が閾値を超えるかをチェックするための計算変数
+	     * @type {number}
+	     * @default 0
+	     */
+	    var moved = 0;
+	    // /**
+	    //  * firefox wheel event.detail 数値を他と揃えるための係数
+	    //  * @type {number}
+	    //  * @default -7.5
+	    //  */
+	    // const coefficient = -7.5;
+	    /**
+	     * @type {Wheel}
+	     * @property {number} this.threshold 閾値, wheel 移動量が閾値を超えたときにイベントを発生させます
+	     * @property {number} this.moved wheelDelta 移動量が閾値を超えるかをチェックするための計算変数
+	     */
+	    (0, _assign2.default)(_this, { threshold: threshold, moved: moved });
+
+	    // 設定済み instance を返します
+	    return _ret2 = instance, (0, _possibleConstructorReturn3.default)(_this, _ret2);
+	  }
+	  // ----------------------------------------
+	  // EVENT
+	  // ----------------------------------------
+	  /**
+	   * wheel up で発生するイベントを取得します
+	   * @event UP
+	   * @return {string} event, wheelUp を返します
+	   * @default wheelUp
+	   */
+
+
+	  (0, _createClass3.default)(Wheel, [{
+	    key: 'watch',
+
+	    // /**
+	    //  * bind 済み mouseScroll
+	    //  * @returns {function} bind 済み mouseScroll を返します
+	    //  */
+	    // get boundScroll() {
+	    //   return this[scrollSymbol];
+	    // }
+	    // ----------------------------------------
+	    // METHOD
+	    // ----------------------------------------
+	    /**
+	     * mousewheel event を監視します<br>
+	     * 監視前に二重に addEventListener しないように unwatch を実行します
+	     * @returns {Wheel} method chain 可能なように instance を返します
+	     */
+	    value: function watch() {
+	      this.unwatch();
+	      // // firefox
+	      // window.addEventListener('DOMMouseScroll', this.boundScroll, false);
+	      // // other modern browser
+	      // window.addEventListener('mousewheel', this.boundWheel, false);
+
+	      window.addEventListener('wheel', this.boundWheel, false);
+
+	      return this;
+	    }
+	    /**
+	     * mousewheel event を監視を止めます
+	     * @returns {Wheel} method chain 可能なように instance を返します
+	     */
+
+	  }, {
+	    key: 'unwatch',
+	    value: function unwatch() {
+	      // window.removeEventListener('DOMMouseScroll', this.boundScroll);
+	      // window.removeEventListener('mousewheel', this.boundWheel);
+
+	      window.removeEventListener('wheel', this.boundWheel);
+
+	      return this;
+	    }
+	    /**
+	     * window mousewheel event handler
+	     * <p>delta 値を取得し `this.moving` を実行します</p>
+	     *
+	     * @listens {WheelEvent} WheelEvent.wheel
+	     * @param {WheelEvent} event window wheel event
+	     * @returns {number} 前回移動量に delta 値 を加算した値を返します
+	     */
+
+	  }, {
+	    key: 'mouseWheel',
+	    value: function mouseWheel(event) {
+	      // const wheelDelta = event.wheelDelta;
+	      var wheelDelta = event.deltaY;
+	      return this.moving(wheelDelta);
+	    }
+	    // /**
+	    //  * window DOMMouseScroll event handler
+	    //  * <p>detail 値を取得し `this.moving` を実行します</p>
+	    //  * @param {Event} event window DOMMouseScroll event
+	    //  * @returns {number} 前回移動量に delta 値 を加算した値を返します
+	    //  */
+	    // mouseScroll(event) {
+	    //   let wheelDetail = event.detail;
+	    //   // firefox 数値が小さいために補正する
+	    //   // up / down が wheelDelta と逆なので補正する
+	    //   // -7.5(default) をかける
+	    //   wheelDetail *= this.coefficient;
+	    //   return this.moving(wheelDetail);
+	    // }
+	    /**
+	     * mouse delta から移動量を計算します
+	     * @param {number} delta mouse delta 値
+	     * @returns {number} 前回移動量に delta 値 を加算した値を返します
+	     */
+
+	  }, {
+	    key: 'moving',
+	    value: function moving(delta) {
+	      /**
+	       * 移動量が閾値を超えるかをチェックするための計算変数
+	       * @type {number}
+	       */
+	      this.moved += delta;
+	      // @type {number}
+	      var moved = this.moved;
+
+	      // 0 check
+	      if (moved === 0) {
+	        // 移動量が 0 なので処理をしない
+	        return moved;
+	      }
+
+	      // 閾値チェック
+	      if (Math.abs(moved) >= this.threshold) {
+	        if (moved > 0) {
+	          // scroll up
+	          this.up(moved);
+	        } else {
+	          this.down(moved);
+	        }
+	      } else {
+	        // 閾値を超えていないので処理をしない
+	        return moved;
+	      }
+
+	      // initialize moved
+	      this.moved = 0;
+	      return moved;
+	    }
+	    /**
+	     * scroll up イベントを発火します
+	     * @param {number} moved 移動量
+	     * @returns {number} 加算移動量を返します
+	     */
+
+	  }, {
+	    key: 'up',
+	    value: function up(moved) {
+	      // @type {Events}
+	      var events = new _Events.Events(Wheel.UP, this, this);
+	      events.moved = moved;
+	      this.dispatch(events);
+
+	      return moved;
+	    }
+	    /**
+	     * scroll down イベントを発火します
+	     * @param {number} moved 移動量
+	     * @returns {number} 加算移動量を返します
+	     */
+
+	  }, {
+	    key: 'down',
+	    value: function down(moved) {
+	      // @type {Events}
+	      var events = new _Events.Events(Wheel.DOWN, this, this);
+	      events.moved = moved;
+	      this.dispatch(events);
+
+	      return moved;
+	    }
+	    // ----------------------------------------
+	    // STATIC METHOD
+	    // ----------------------------------------
+	    /**
+	     * Wheel instance を singleton を保証し作成します
+	     * @return {Wheel} Wheel instance を返します
+	     */
+
+	  }, {
+	    key: 'boundWheel',
+
+	    // ----------------------------------------
+	    // GETTER / SETTER
+	    // ----------------------------------------
+	    /**
+	     * bind 済み mouseWheel
+	     * @returns {function} bind 済み mouseWheel を返します
+	     */
+	    get: function get() {
+	      return this[wheelSymbol];
+	    }
+	  }], [{
+	    key: 'factory',
+	    value: function factory() {
+	      return new Wheel(singletonSymbol);
+	    }
+	  }, {
+	    key: 'UP',
+	    get: function get() {
+	      return 'wheelUp';
+	    }
+	    /**
+	     * wheel  で発生するイベントを取得します
+	     * @event DOWN
+	     * @return {string} event, wheelUp を返します
+	     * @default wheelUp
+	     */
+
+	  }, {
+	    key: 'DOWN',
+	    get: function get() {
+	      return 'wheelDown';
+	    }
+	  }]);
+	  return Wheel;
+	}(_EventDispatcher2.EventDispatcher);
+
+/***/ },
+/* 96 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Ajax = undefined;
+
+	var _create = __webpack_require__(92);
+
+	var _create2 = _interopRequireDefault(_create);
+
+	var _getPrototypeOf = __webpack_require__(69);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(2);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(3);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(74);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(87);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -2112,456 +3212,7 @@
 	}(_EventDispatcher2.EventDispatcher);
 
 /***/ },
-/* 69 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(70), __esModule: true };
-
-/***/ },
-/* 70 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(71);
-	var $Object = __webpack_require__(9).Object;
-	module.exports = function create(P, D){
-	  return $Object.create(P, D);
-	};
-
-/***/ },
-/* 71 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var $export = __webpack_require__(7)
-	// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-	$export($export.S, 'Object', {create: __webpack_require__(52)});
-
-/***/ },
-/* 72 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(73), __esModule: true };
-
-/***/ },
-/* 73 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(74);
-	module.exports = __webpack_require__(9).Object.getPrototypeOf;
-
-/***/ },
-/* 74 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// 19.1.2.9 Object.getPrototypeOf(O)
-	var toObject        = __webpack_require__(67)
-	  , $getPrototypeOf = __webpack_require__(75);
-
-	__webpack_require__(76)('getPrototypeOf', function(){
-	  return function getPrototypeOf(it){
-	    return $getPrototypeOf(toObject(it));
-	  };
-	});
-
-/***/ },
-/* 75 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
-	var has         = __webpack_require__(25)
-	  , toObject    = __webpack_require__(67)
-	  , IE_PROTO    = __webpack_require__(46)('IE_PROTO')
-	  , ObjectProto = Object.prototype;
-
-	module.exports = Object.getPrototypeOf || function(O){
-	  O = toObject(O);
-	  if(has(O, IE_PROTO))return O[IE_PROTO];
-	  if(typeof O.constructor == 'function' && O instanceof O.constructor){
-	    return O.constructor.prototype;
-	  } return O instanceof Object ? ObjectProto : null;
-	};
-
-/***/ },
-/* 76 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// most Object methods by ES6 should accept primitives
-	var $export = __webpack_require__(7)
-	  , core    = __webpack_require__(9)
-	  , fails   = __webpack_require__(18);
-	module.exports = function(KEY, exec){
-	  var fn  = (core.Object || {})[KEY] || Object[KEY]
-	    , exp = {};
-	  exp[KEY] = exec(fn);
-	  $export($export.S + $export.F * fails(function(){ fn(1); }), 'Object', exp);
-	};
-
-/***/ },
-/* 77 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	exports.__esModule = true;
-
-	var _typeof2 = __webpack_require__(78);
-
-	var _typeof3 = _interopRequireDefault(_typeof2);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = function (self, call) {
-	  if (!self) {
-	    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-	  }
-
-	  return call && ((typeof call === "undefined" ? "undefined" : (0, _typeof3.default)(call)) === "object" || typeof call === "function") ? call : self;
-	};
-
-/***/ },
-/* 78 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	exports.__esModule = true;
-
-	var _iterator = __webpack_require__(79);
-
-	var _iterator2 = _interopRequireDefault(_iterator);
-
-	var _symbol = __webpack_require__(22);
-
-	var _symbol2 = _interopRequireDefault(_symbol);
-
-	var _typeof = typeof _symbol2.default === "function" && typeof _iterator2.default === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default ? "symbol" : typeof obj; };
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = typeof _symbol2.default === "function" && _typeof(_iterator2.default) === "symbol" ? function (obj) {
-	  return typeof obj === "undefined" ? "undefined" : _typeof(obj);
-	} : function (obj) {
-	  return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
-	};
-
-/***/ },
-/* 79 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(80), __esModule: true };
-
-/***/ },
-/* 80 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(81);
-	__webpack_require__(86);
-	module.exports = __webpack_require__(32).f('iterator');
-
-/***/ },
-/* 81 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	var $at  = __webpack_require__(82)(true);
-
-	// 21.1.3.27 String.prototype[@@iterator]()
-	__webpack_require__(83)(String, 'String', function(iterated){
-	  this._t = String(iterated); // target
-	  this._i = 0;                // next index
-	// 21.1.5.2.1 %StringIteratorPrototype%.next()
-	}, function(){
-	  var O     = this._t
-	    , index = this._i
-	    , point;
-	  if(index >= O.length)return {value: undefined, done: true};
-	  point = $at(O, index);
-	  this._i += point.length;
-	  return {value: point, done: false};
-	});
-
-/***/ },
-/* 82 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var toInteger = __webpack_require__(44)
-	  , defined   = __webpack_require__(41);
-	// true  -> String#at
-	// false -> String#codePointAt
-	module.exports = function(TO_STRING){
-	  return function(that, pos){
-	    var s = String(defined(that))
-	      , i = toInteger(pos)
-	      , l = s.length
-	      , a, b;
-	    if(i < 0 || i >= l)return TO_STRING ? '' : undefined;
-	    a = s.charCodeAt(i);
-	    return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff
-	      ? TO_STRING ? s.charAt(i) : a
-	      : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
-	  };
-	};
-
-/***/ },
-/* 83 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	var LIBRARY        = __webpack_require__(34)
-	  , $export        = __webpack_require__(7)
-	  , redefine       = __webpack_require__(26)
-	  , hide           = __webpack_require__(12)
-	  , has            = __webpack_require__(25)
-	  , Iterators      = __webpack_require__(84)
-	  , $iterCreate    = __webpack_require__(85)
-	  , setToStringTag = __webpack_require__(30)
-	  , getPrototypeOf = __webpack_require__(75)
-	  , ITERATOR       = __webpack_require__(31)('iterator')
-	  , BUGGY          = !([].keys && 'next' in [].keys()) // Safari has buggy iterators w/o `next`
-	  , FF_ITERATOR    = '@@iterator'
-	  , KEYS           = 'keys'
-	  , VALUES         = 'values';
-
-	var returnThis = function(){ return this; };
-
-	module.exports = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCED){
-	  $iterCreate(Constructor, NAME, next);
-	  var getMethod = function(kind){
-	    if(!BUGGY && kind in proto)return proto[kind];
-	    switch(kind){
-	      case KEYS: return function keys(){ return new Constructor(this, kind); };
-	      case VALUES: return function values(){ return new Constructor(this, kind); };
-	    } return function entries(){ return new Constructor(this, kind); };
-	  };
-	  var TAG        = NAME + ' Iterator'
-	    , DEF_VALUES = DEFAULT == VALUES
-	    , VALUES_BUG = false
-	    , proto      = Base.prototype
-	    , $native    = proto[ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT]
-	    , $default   = $native || getMethod(DEFAULT)
-	    , $entries   = DEFAULT ? !DEF_VALUES ? $default : getMethod('entries') : undefined
-	    , $anyNative = NAME == 'Array' ? proto.entries || $native : $native
-	    , methods, key, IteratorPrototype;
-	  // Fix native
-	  if($anyNative){
-	    IteratorPrototype = getPrototypeOf($anyNative.call(new Base));
-	    if(IteratorPrototype !== Object.prototype){
-	      // Set @@toStringTag to native iterators
-	      setToStringTag(IteratorPrototype, TAG, true);
-	      // fix for some old engines
-	      if(!LIBRARY && !has(IteratorPrototype, ITERATOR))hide(IteratorPrototype, ITERATOR, returnThis);
-	    }
-	  }
-	  // fix Array#{values, @@iterator}.name in V8 / FF
-	  if(DEF_VALUES && $native && $native.name !== VALUES){
-	    VALUES_BUG = true;
-	    $default = function values(){ return $native.call(this); };
-	  }
-	  // Define iterator
-	  if((!LIBRARY || FORCED) && (BUGGY || VALUES_BUG || !proto[ITERATOR])){
-	    hide(proto, ITERATOR, $default);
-	  }
-	  // Plug for library
-	  Iterators[NAME] = $default;
-	  Iterators[TAG]  = returnThis;
-	  if(DEFAULT){
-	    methods = {
-	      values:  DEF_VALUES ? $default : getMethod(VALUES),
-	      keys:    IS_SET     ? $default : getMethod(KEYS),
-	      entries: $entries
-	    };
-	    if(FORCED)for(key in methods){
-	      if(!(key in proto))redefine(proto, key, methods[key]);
-	    } else $export($export.P + $export.F * (BUGGY || VALUES_BUG), NAME, methods);
-	  }
-	  return methods;
-	};
-
-/***/ },
-/* 84 */
-/***/ function(module, exports) {
-
-	module.exports = {};
-
-/***/ },
-/* 85 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	var create         = __webpack_require__(52)
-	  , descriptor     = __webpack_require__(21)
-	  , setToStringTag = __webpack_require__(30)
-	  , IteratorPrototype = {};
-
-	// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-	__webpack_require__(12)(IteratorPrototype, __webpack_require__(31)('iterator'), function(){ return this; });
-
-	module.exports = function(Constructor, NAME, next){
-	  Constructor.prototype = create(IteratorPrototype, {next: descriptor(1, next)});
-	  setToStringTag(Constructor, NAME + ' Iterator');
-	};
-
-/***/ },
-/* 86 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(87);
-	var global        = __webpack_require__(8)
-	  , hide          = __webpack_require__(12)
-	  , Iterators     = __webpack_require__(84)
-	  , TO_STRING_TAG = __webpack_require__(31)('toStringTag');
-
-	for(var collections = ['NodeList', 'DOMTokenList', 'MediaList', 'StyleSheetList', 'CSSRuleList'], i = 0; i < 5; i++){
-	  var NAME       = collections[i]
-	    , Collection = global[NAME]
-	    , proto      = Collection && Collection.prototype;
-	  if(proto && !proto[TO_STRING_TAG])hide(proto, TO_STRING_TAG, NAME);
-	  Iterators[NAME] = Iterators.Array;
-	}
-
-/***/ },
-/* 87 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	var addToUnscopables = __webpack_require__(88)
-	  , step             = __webpack_require__(89)
-	  , Iterators        = __webpack_require__(84)
-	  , toIObject        = __webpack_require__(38);
-
-	// 22.1.3.4 Array.prototype.entries()
-	// 22.1.3.13 Array.prototype.keys()
-	// 22.1.3.29 Array.prototype.values()
-	// 22.1.3.30 Array.prototype[@@iterator]()
-	module.exports = __webpack_require__(83)(Array, 'Array', function(iterated, kind){
-	  this._t = toIObject(iterated); // target
-	  this._i = 0;                   // next index
-	  this._k = kind;                // kind
-	// 22.1.5.2.1 %ArrayIteratorPrototype%.next()
-	}, function(){
-	  var O     = this._t
-	    , kind  = this._k
-	    , index = this._i++;
-	  if(!O || index >= O.length){
-	    this._t = undefined;
-	    return step(1);
-	  }
-	  if(kind == 'keys'  )return step(0, index);
-	  if(kind == 'values')return step(0, O[index]);
-	  return step(0, [index, O[index]]);
-	}, 'values');
-
-	// argumentsList[@@iterator] is %ArrayProto_values% (9.4.4.6, 9.4.4.7)
-	Iterators.Arguments = Iterators.Array;
-
-	addToUnscopables('keys');
-	addToUnscopables('values');
-	addToUnscopables('entries');
-
-/***/ },
-/* 88 */
-/***/ function(module, exports) {
-
-	module.exports = function(){ /* empty */ };
-
-/***/ },
-/* 89 */
-/***/ function(module, exports) {
-
-	module.exports = function(done, value){
-	  return {value: value, done: !!done};
-	};
-
-/***/ },
-/* 90 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	exports.__esModule = true;
-
-	var _setPrototypeOf = __webpack_require__(91);
-
-	var _setPrototypeOf2 = _interopRequireDefault(_setPrototypeOf);
-
-	var _create = __webpack_require__(69);
-
-	var _create2 = _interopRequireDefault(_create);
-
-	var _typeof2 = __webpack_require__(78);
-
-	var _typeof3 = _interopRequireDefault(_typeof2);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = function (subClass, superClass) {
-	  if (typeof superClass !== "function" && superClass !== null) {
-	    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : (0, _typeof3.default)(superClass)));
-	  }
-
-	  subClass.prototype = (0, _create2.default)(superClass && superClass.prototype, {
-	    constructor: {
-	      value: subClass,
-	      enumerable: false,
-	      writable: true,
-	      configurable: true
-	    }
-	  });
-	  if (superClass) _setPrototypeOf2.default ? (0, _setPrototypeOf2.default)(subClass, superClass) : subClass.__proto__ = superClass;
-	};
-
-/***/ },
-/* 91 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(92), __esModule: true };
-
-/***/ },
-/* 92 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(93);
-	module.exports = __webpack_require__(9).Object.setPrototypeOf;
-
-/***/ },
-/* 93 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// 19.1.3.19 Object.setPrototypeOf(O, proto)
-	var $export = __webpack_require__(7);
-	$export($export.S, 'Object', {setPrototypeOf: __webpack_require__(94).set});
-
-/***/ },
-/* 94 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// Works with __proto__ only. Old v8 can't work with null proto objects.
-	/* eslint-disable no-proto */
-	var isObject = __webpack_require__(15)
-	  , anObject = __webpack_require__(14);
-	var check = function(O, proto){
-	  anObject(O);
-	  if(!isObject(proto) && proto !== null)throw TypeError(proto + ": can't set as prototype!");
-	};
-	module.exports = {
-	  set: Object.setPrototypeOf || ('__proto__' in {} ? // eslint-disable-line
-	    function(test, buggy, set){
-	      try {
-	        set = __webpack_require__(10)(Function.call, __webpack_require__(57).f(Object.prototype, '__proto__').set, 2);
-	        set(test, []);
-	        buggy = !(test instanceof Array);
-	      } catch(e){ buggy = true; }
-	      return function setPrototypeOf(O, proto){
-	        check(O, proto);
-	        if(buggy)O.__proto__ = proto;
-	        else set(O, proto);
-	        return O;
-	      };
-	    }({}, false) : undefined),
-	  check: check
-	};
-
-/***/ },
-/* 95 */
+/* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2571,7 +3222,7 @@
 	});
 	exports.Cycle = undefined;
 
-	var _getPrototypeOf = __webpack_require__(72);
+	var _getPrototypeOf = __webpack_require__(69);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -2583,11 +3234,11 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(77);
+	var _possibleConstructorReturn2 = __webpack_require__(74);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(90);
+	var _inherits2 = __webpack_require__(87);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -2816,7 +3467,7 @@
 	}(_EventDispatcher2.EventDispatcher);
 
 /***/ },
-/* 96 */
+/* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2826,7 +3477,7 @@
 	});
 	exports.Fps = undefined;
 
-	var _getPrototypeOf = __webpack_require__(72);
+	var _getPrototypeOf = __webpack_require__(69);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -2838,11 +3489,11 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(77);
+	var _possibleConstructorReturn2 = __webpack_require__(74);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(90);
+	var _inherits2 = __webpack_require__(87);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -2852,7 +3503,7 @@
 
 	var _Events = __webpack_require__(62);
 
-	var _Polling2 = __webpack_require__(97);
+	var _Polling2 = __webpack_require__(99);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2961,7 +3612,7 @@
 	}(_Polling2.Polling);
 
 /***/ },
-/* 97 */
+/* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2975,7 +3626,7 @@
 
 	var _assign2 = _interopRequireDefault(_assign);
 
-	var _getPrototypeOf = __webpack_require__(72);
+	var _getPrototypeOf = __webpack_require__(69);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -2987,11 +3638,11 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(77);
+	var _possibleConstructorReturn2 = __webpack_require__(74);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(90);
+	var _inherits2 = __webpack_require__(87);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -3003,7 +3654,7 @@
 
 	var _Events = __webpack_require__(62);
 
-	var _Cycle = __webpack_require__(95);
+	var _Cycle = __webpack_require__(97);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3312,6 +3963,312 @@
 	  }]);
 	  return Polling;
 	}(_EventDispatcher2.EventDispatcher);
+
+/***/ },
+/* 100 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Rate = undefined;
+
+	var _getPrototypeOf = __webpack_require__(69);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(2);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(3);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(74);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(87);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _symbol = __webpack_require__(22);
+
+	var _symbol2 = _interopRequireDefault(_symbol);
+
+	var _Events = __webpack_require__(62);
+
+	var _Polling2 = __webpack_require__(99);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * private property key, fps を保存するための Symbol
+	 * @type {Symbol}
+	 * @private
+	 */
+	/**
+	 * @license inazumatv.com
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/07/16
+	 *
+	 * Copyright (c) 2011-2015 inazumatv.com, inc.
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 */
+
+	// event
+	var rateSymbol = (0, _symbol2.default)();
+
+	/**
+	 * private property key, count を保存するための Symbol
+	 * @type {Symbol}
+	 * @private
+	 */
+
+
+	// tick
+	var countSymbol = (0, _symbol2.default)();
+	/**
+	 * private property key, rates を保存するための Symbol
+	 * @type {Symbol}
+	 * @private
+	 */
+	var ratesSymbol = (0, _symbol2.default)();
+	/**
+	 * 固定値を使用し fps を決定します
+	 *
+	 * 以下のフレームレートが設定可能です
+	 *
+	 * - 30: RATE_30
+	 * - 20: RATE_20
+	 * - 15: RATE_15
+	 * - 12: RATE_12
+	 * - 10: RATE_10
+	 * - 6: RATE_6
+	 * - 5: RATE_5
+	 *
+	 */
+
+	var Rate = exports.Rate = function (_Polling) {
+	  (0, _inherits3.default)(Rate, _Polling);
+
+	  /**
+	   * 固定値フレームレート毎に UPDATE イベントを発生させます
+	   * @param {number} rate fps, 固定値以外設定できません
+	   */
+
+	  function Rate(rate) {
+	    (0, _classCallCheck3.default)(this, Rate);
+
+	    // @type {Events - Events
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Rate).call(this, 1));
+
+	    var events = new _Events.Events(Rate.UPDATE, _this, _this);
+	    events.rate = rate;
+	    /**
+	     * Rate.UPDATE Events instance
+	     * @type {Events}
+	     */
+	    _this.events = events;
+
+	    // frame rate
+	    _this.change(rate);
+
+	    // @type {number} - count, rate に達したかを計測するための counter 変数
+	    _this[countSymbol] = 0;
+
+	    // correct rate list
+	    // サポートするレートリスト
+	    _this[ratesSymbol] = [_this.RATE_30, _this.RATE_20, _this.RATE_15, _this.RATE_12, _this.RATE_10, _this.RATE_6, _this.RATE_5];
+	    return _this;
+	  }
+	  // ----------------------------------------
+	  // CONST
+	  // ----------------------------------------
+	  /**
+	   * fps 30 基準値を取得します
+	   * @const RATE_30
+	   * @returns {number} fps 30 基準値を返します
+	   * @default 2
+	   */
+
+
+	  (0, _createClass3.default)(Rate, [{
+	    key: 'change',
+
+	    // ----------------------------------------
+	    // METHOD
+	    // ----------------------------------------
+	    /**
+	     * fps 基準値を設定します
+	     * @throws {Error} 引数 rate が設定可能値以外の時に例外エラーが発生します
+	     * @param {number} rate fps 基準値, <br>
+	     * this.RATE_30, this.RATE_20, this.RATE_15, this.RATE_12, this.RATE_10, <br>
+	     * this.RATE_6, this.RATE_5 の何れかが必須です
+	     * @return {undefined} no-return
+	     */
+	    value: function change(rate) {
+	      if (this[ratesSymbol].indexof(rate) !== -1) {
+	        this[rateSymbol] = rate;
+	      } else {
+	        throw new Error('illegal rate: ' + rate + '. use const RATE_NN');
+	      }
+	    }
+	    /**
+	     * loop(requestAnimationFrame) を開始します
+	     * @return {boolean} start に成功すると true を返します
+	     */
+
+	  }, {
+	    key: 'start',
+	    value: function start() {
+	      if (this.started) {
+	        // already start
+	        return false;
+	      }
+	      // flag -> true
+	      this.turnOver();
+	      // cycle
+	      this.initCycle();
+	      // 強制的に1回目を実行
+	      this.fire(this.updateEvents(0, 0));
+
+	      return true;
+	    }
+	    /**
+	     * loop(requestAnimationFrame) します
+	     * @returns {boolean} Rate.UPDATE event が発生すると true を返します
+	     */
+
+	  }, {
+	    key: 'update',
+	    value: function update() {
+	      // 余りが 0 の時にイベントを発火します
+	      if (++this[countSymbol] % this.rate === 0) {
+	        this[countSymbol] = 0;
+	        this.fire(this.updateEvents(0, 0));
+
+	        return true;
+	      }
+
+	      return false;
+	    }
+	  }, {
+	    key: 'rate',
+
+	    // ----------------------------------------
+	    // GETTER / SETTER
+	    // ----------------------------------------
+	    /**
+	     * fps 基準値を取得します
+	     * @returns {number} fps 基準値を返します
+	     */
+	    get: function get() {
+	      return this[rateSymbol];
+	    }
+	  }], [{
+	    key: 'RATE_30',
+	    get: function get() {
+	      return 2;
+	    }
+	    /**
+	     * fps 20 基準値を取得します
+	     * @const RATE_20
+	     * @returns {number} fps 20 基準値を返します
+	     * @default 3
+	     */
+
+	  }, {
+	    key: 'RATE_20',
+	    get: function get() {
+	      return 3;
+	    }
+	    /**
+	     * fps 15 基準値を取得します
+	     * @const RATE_15
+	     * @returns {number} fps 15 基準値を返します
+	     * @default 4
+	     */
+
+	  }, {
+	    key: 'RATE_15',
+	    get: function get() {
+	      return 4;
+	    }
+	    /**
+	     * fps 12 基準値を取得します
+	     * @const RATE_12
+	     * @returns {number} fps 12 基準値を返します
+	     * @default 5
+	     */
+
+	  }, {
+	    key: 'RATE_12',
+	    get: function get() {
+	      return 5;
+	    }
+	    /**
+	     * fps 10 基準値を取得します
+	     * @const RATE_10
+	     * @returns {number} fps 10 基準値を返します
+	     * @default 6
+	     */
+
+	  }, {
+	    key: 'RATE_10',
+	    get: function get() {
+	      return 6;
+	    }
+	    /**
+	     * fps 6 基準値を取得します
+	     * @const RATE_6
+	     * @returns {number} fps 6 基準値を返します
+	     * @default 10
+	     */
+
+	  }, {
+	    key: 'RATE_6',
+	    get: function get() {
+	      return 10;
+	    }
+	    /**
+	     * fps 5 基準値を取得します
+	     * @const RATE_5
+	     * @returns {number} fps 6 基準値を返します
+	     * @default 12
+	     */
+
+	  }, {
+	    key: 'RATE_5',
+	    get: function get() {
+	      return 12;
+	    }
+	    // ----------------------------------------
+	    // EVENT
+	    // ----------------------------------------
+	    /**
+	     * フレームレート毎に発生するイベント type を取得します
+	     * @event UPDATE
+	     * @return {string} event, rateUpdate を返します
+	     * @default rateUpdate
+	     */
+
+	  }, {
+	    key: 'UPDATE',
+	    get: function get() {
+	      return 'rateUpdate';
+	    }
+	  }]);
+	  return Rate;
+	}(_Polling2.Polling);
 
 /***/ }
 /******/ ]);
