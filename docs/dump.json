@@ -1,0 +1,4775 @@
+[
+  {
+    "__docId__": 0,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/event/EventDispatcher.js",
+    "memberof": null,
+    "longname": "src/event/EventDispatcher.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/06/30 - 20:09\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n// util\nimport { Type } from '../util/Type';\n\n/**\n * private property key, listeners Object\n * @type {Symbol}\n * @private\n */\nconst listenersKey = Symbol();\n\n/**\n * <p>Custom Event を作成し Event 通知を行います</p>\n *\n * ```\n * const callback = () => {};\n *\n * const event:EventDispatcher = new EventDispatcher();\n * event.on('abc', callback);\n *\n * console.log(event.has('abc', callback));// true\n *\n * event.dispatch({type: 'abc'});\n *\n * event.off('abc', callback);\n * console.log(event.has('abc', callback));// false\n * ```\n */\nexport class EventDispatcher {\n  /**\n   * listener property をイニシャライズします\n   */\n  constructor() {\n    /**\n     * リスナーリスト\n     * @type {Object}\n     * @private\n     */\n    this[listenersKey] = {};\n  }\n  // ----------------------------------------\n  // GETTER / SETTER\n  // ----------------------------------------\n  /**\n   * リスナーリストを取得します\n   * @return {Object} リスナーリストを返します\n   */\n  get listeners() {\n    return this[listenersKey];\n  }\n  // ----------------------------------------\n  // METHOD\n  // ----------------------------------------\n  /**\n   * 全てのリスナーを破棄します\n   * @return {boolean} 成功・不成功の真偽値を返します\n   */\n  destroy() {\n    this[listenersKey] = {};\n    return true;\n  }\n  /**\n   * event type に リスナー関数を bind します\n   * @param {string} type event type（種類）\n   * @param {Function} listener callback関数\n   * @return {boolean} 成功・不成功の真偽値を返します\n   */\n  on(type, listener) {\n    if (!Type.method(listener)) {\n      // listener が 関数でないので処理しない\n      return false;\n    }\n\n    const listeners = this.listeners;\n\n    // listeners.type が存在するかを調べます\n    if (!listeners.hasOwnProperty(type)) {\n      // listeners.type が存在しない\n      // listeners.type 新規配列を作成し\n      // listener を配列へ登録します\n      listeners[type] = [];\n      listeners[type].push(listener);\n    } else {\n      // すでに listeners.type が存在する\n      // listeners.type 配列に listener が存在しないならば登録します\n      if (listeners[type].indexOf(listener) === -1) {\n        listeners[type].push(listener);\n      }\n    }\n\n    return true;\n  }\n  /**\n   * <p>event type からリスナー関数を remove します<br>\n   * 内部処理は一時的に null 設定にします</p>\n   * @param {string} type event type（種類）\n   * @param {Function} listener リスナー関数\n   * @return {boolean} 成功・不成功の真偽値を返します\n   */\n  off(type, listener) {\n    if (!Type.method(listener)) {\n      // listener が 関数でないので処理しない\n      return false;\n    }\n\n    // @type {Object} - events.type:String: [listener:Function...]\n    const listeners = this.listeners;\n\n    if (!listeners.hasOwnProperty(type)) {\n      // listener.type が存在しない\n      // 処理しない\n      return false;\n    }\n\n    // @type {Array} - listener list\n    const types = listeners[type];\n\n    // listener の配列位置を調べる\n    // @type {number}\n    const index = types.indexOf(listener);\n\n    if (index === -1) {\n      // 配列位置が -1, 見つからなかった\n      // 処理しない\n      return false;\n    }\n\n    // すぐに削除するのでは無く null 代入\n    // loop(iterator) の中で off すると index 位置が変わりまずい\n    types[index] = null;\n\n    this.clean(type, types);\n\n    return true;\n  }\n  /**\n   * <p>リスナー配列を調べ可能なら空にします<br>\n   * リスナーリストが全て null の時に 空配列にします</p>\n   * @param {string} type event type（種類）\n   * @param {Array<Function>} types event type に登録されている配列（関数）\n   * @return {boolean} 成功・不成功の真偽値を返します, true: 空にした\n   */\n  clean(type, types) {\n    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some\n    // Array.some は 戻り値が true の時に走査を止めます\n    // types 配列に null 以外があるかを調べます\n    // @type {boolean} - listener list に 関数(typeof 'function')が存在すると true になります\n    const hasFunction = types.some((listener) => typeof listener === 'function');\n\n    if (!hasFunction) {\n      // null 以外が無いので空にする\n      this.listeners[type] = [];\n    }\n\n    // 空配列にしたかを hasFunction flag を反転させることで知らせます\n    return !hasFunction;\n  }\n  /**\n   * event type にリスナー関数が登録されているかを調べます\n   * @param {string} type event type（種類）\n   * @param {Function} listener リスナー関数\n   * @return {boolean} event type にリスナー関数が登録されているかの真偽値を返します\n   */\n  has(type, listener) {\n    if (!Type.method(listener)) {\n      // listener が 関数でないので処理しない\n      return false;\n    }\n\n    // @type {Object} - events.type:String: [listener:Function...]\n    const listeners = this.listeners;\n\n    if (!listeners.hasOwnProperty(type)) {\n      // listener.type が存在しない\n      // 処理しない\n      return false;\n    }\n\n    // @type {boolean} - 存在チェック\n    return listeners[type].indexOf(listener) !== -1;\n  }\n  /**\n   * イベントを発生させリスナー関数を call します\n   * @param {Events|*} events 送信される Event Object.<br>\n   *   type キーにイベント種類が設定されています、dispatch 時に target プロパティを追加し this を設定します\n   * @return {boolean} 成功・不成功の真偽値を返します\n   */\n  dispatch(events) {\n    // @type {Object} - events.type:string: [listener:Function...]\n    const listeners = this.listeners;\n    // @type {string} - event type\n    const type = events.type;\n\n    // typeof でなく hasOwnProperty で調べる\n    if (!listeners.hasOwnProperty(type)) {\n      // listener.type が存在しない\n      // 処理しない\n      return false;\n    }\n\n    // event.target = this しようとすると\n    // Assignment to property of function parameter 'event'  no-param-reassign\n    // になるのでコピーし使用します\n    const eventObject = events;\n    // target プロパティに発生元を設定する\n    eventObject.target = this;\n\n    // callback を実行する\n    listeners[type]\n      .map(\n        // @param listener {Function}\n        (listener) => {\n          // null が混じっているのでタイプチェックを行い listener 関数を実行します\n          if (Type.method(listener)) {\n            return listener.call(this, eventObject);\n          }\n\n          return null;\n        }\n      );\n\n    return true;\n  }\n  /**\n   * **alias on**\n   * <p>event type に リスナー関数を bind します</p>\n   * @param {string} type event type（種類）\n   * @param {Function} listener callback関数\n   * @return {boolean} 成功・不成功の真偽値を返します\n   */\n  addEventListener(type, listener) {\n    return this.on(type, listener);\n  }\n  /**\n   * **alias off**\n   * <p>event type からリスナー関数を remove します</p>\n   * @param {string} type event type（種類）\n   * @param {Function} listener リスナー関数\n   * @return {boolean} 成功・不成功の真偽値を返します\n   */\n  removeEventListener(type, listener) {\n    return this.off(type, listener);\n  }\n  /**\n   * **alias has**\n   * <p>event type にリスナー関数が登録されているかを調べます</p>\n   * @param {string} type event type（種類）\n   * @param {Function} listener リスナー関数\n   * @return {boolean} event type にリスナー関数が登録されているかの真偽値を返します\n   */\n  hasEventListener(type, listener) {\n    return this.has(type, listener);\n  }\n  /**\n   * **alias dispatch**\n   * <p>イベントを発生させリスナー関数を call します</p>\n   * @param {Events} events typeキー が必須です\n   * @return {boolean} 成功・不成功の真偽値を返します\n   */\n  dispatchEvent(events) {\n    return this.dispatch(events);\n  }\n}\n"
+  },
+  {
+    "__docId__": 1,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "listenersKey",
+    "memberof": "src/event/EventDispatcher.js",
+    "longname": "src/event/EventDispatcher.js~listenersKey",
+    "access": "private",
+    "export": false,
+    "importPath": "./src/event/EventDispatcher.js",
+    "importStyle": null,
+    "description": "private property key, listeners Object",
+    "lineNumber": 21,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Symbol"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 2,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "EventDispatcher",
+    "memberof": "src/event/EventDispatcher.js",
+    "longname": "src/event/EventDispatcher.js~EventDispatcher",
+    "access": null,
+    "export": true,
+    "importPath": "./src/event/EventDispatcher.js",
+    "importStyle": "{EventDispatcher}",
+    "description": "<p>Custom Event を作成し Event 通知を行います</p>\n```\nconst callback = () => {};\nconst event:EventDispatcher = new EventDispatcher();\nevent.on('abc', callback);\nconsole.log(event.has('abc', callback));// true\nevent.dispatch({type: 'abc'});\nevent.off('abc', callback);\nconsole.log(event.has('abc', callback));// false\n```",
+    "lineNumber": 40,
+    "interface": false
+  },
+  {
+    "__docId__": 3,
+    "kind": "constructor",
+    "static": false,
+    "variation": null,
+    "name": "constructor",
+    "memberof": "src/event/EventDispatcher.js~EventDispatcher",
+    "longname": "src/event/EventDispatcher.js~EventDispatcher#constructor",
+    "access": null,
+    "description": "listener property をイニシャライズします",
+    "lineNumber": 44,
+    "params": [],
+    "generator": false
+  },
+  {
+    "__docId__": 4,
+    "kind": "get",
+    "static": false,
+    "variation": null,
+    "name": "listeners",
+    "memberof": "src/event/EventDispatcher.js~EventDispatcher",
+    "longname": "src/event/EventDispatcher.js~EventDispatcher#listeners",
+    "access": null,
+    "description": "リスナーリストを取得します",
+    "lineNumber": 59,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": "リスナーリストを返します"
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 5,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "destroy",
+    "memberof": "src/event/EventDispatcher.js~EventDispatcher",
+    "longname": "src/event/EventDispatcher.js~EventDispatcher#destroy",
+    "access": null,
+    "description": "全てのリスナーを破棄します",
+    "lineNumber": 69,
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "成功・不成功の真偽値を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 6,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "on",
+    "memberof": "src/event/EventDispatcher.js~EventDispatcher",
+    "longname": "src/event/EventDispatcher.js~EventDispatcher#on",
+    "access": null,
+    "description": "event type に リスナー関数を bind します",
+    "lineNumber": 79,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "type",
+        "description": "event type（種類）"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "listener",
+        "description": "callback関数"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "成功・不成功の真偽値を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 7,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "off",
+    "memberof": "src/event/EventDispatcher.js~EventDispatcher",
+    "longname": "src/event/EventDispatcher.js~EventDispatcher#off",
+    "access": null,
+    "description": "<p>event type からリスナー関数を remove します<br>\n内部処理は一時的に null 設定にします</p>",
+    "lineNumber": 111,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "type",
+        "description": "event type（種類）"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "listener",
+        "description": "リスナー関数"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "成功・不成功の真偽値を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 8,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "clean",
+    "memberof": "src/event/EventDispatcher.js~EventDispatcher",
+    "longname": "src/event/EventDispatcher.js~EventDispatcher#clean",
+    "access": null,
+    "description": "<p>リスナー配列を調べ可能なら空にします<br>\nリスナーリストが全て null の時に 空配列にします</p>",
+    "lineNumber": 154,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "type",
+        "description": "event type（種類）"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Array<Function>"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "types",
+        "description": "event type に登録されている配列（関数）"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "成功・不成功の真偽値を返します, true: 空にした"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 9,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "has",
+    "memberof": "src/event/EventDispatcher.js~EventDispatcher",
+    "longname": "src/event/EventDispatcher.js~EventDispatcher#has",
+    "access": null,
+    "description": "event type にリスナー関数が登録されているかを調べます",
+    "lineNumber": 175,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "type",
+        "description": "event type（種類）"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "listener",
+        "description": "リスナー関数"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "event type にリスナー関数が登録されているかの真偽値を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 10,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "dispatch",
+    "memberof": "src/event/EventDispatcher.js~EventDispatcher",
+    "longname": "src/event/EventDispatcher.js~EventDispatcher#dispatch",
+    "access": null,
+    "description": "イベントを発生させリスナー関数を call します",
+    "lineNumber": 199,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Events",
+          "*"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "events",
+        "description": "送信される Event Object.<br>\n  type キーにイベント種類が設定されています、dispatch 時に target プロパティを追加し this を設定します"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "成功・不成功の真偽値を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 11,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "addEventListener",
+    "memberof": "src/event/EventDispatcher.js~EventDispatcher",
+    "longname": "src/event/EventDispatcher.js~EventDispatcher#addEventListener",
+    "access": null,
+    "description": "**alias on**\n<p>event type に リスナー関数を bind します</p>",
+    "lineNumber": 242,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "type",
+        "description": "event type（種類）"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "listener",
+        "description": "callback関数"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "成功・不成功の真偽値を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 12,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "removeEventListener",
+    "memberof": "src/event/EventDispatcher.js~EventDispatcher",
+    "longname": "src/event/EventDispatcher.js~EventDispatcher#removeEventListener",
+    "access": null,
+    "description": "**alias off**\n<p>event type からリスナー関数を remove します</p>",
+    "lineNumber": 252,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "type",
+        "description": "event type（種類）"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "listener",
+        "description": "リスナー関数"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "成功・不成功の真偽値を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 13,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "hasEventListener",
+    "memberof": "src/event/EventDispatcher.js~EventDispatcher",
+    "longname": "src/event/EventDispatcher.js~EventDispatcher#hasEventListener",
+    "access": null,
+    "description": "**alias has**\n<p>event type にリスナー関数が登録されているかを調べます</p>",
+    "lineNumber": 262,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "type",
+        "description": "event type（種類）"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "listener",
+        "description": "リスナー関数"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "event type にリスナー関数が登録されているかの真偽値を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 14,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "dispatchEvent",
+    "memberof": "src/event/EventDispatcher.js~EventDispatcher",
+    "longname": "src/event/EventDispatcher.js~EventDispatcher#dispatchEvent",
+    "access": null,
+    "description": "**alias dispatch**\n<p>イベントを発生させリスナー関数を call します</p>",
+    "lineNumber": 271,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Events"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "events",
+        "description": "typeキー が必須です"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "成功・不成功の真偽値を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 15,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/event/Events.js",
+    "memberof": null,
+    "longname": "src/event/Events.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/12 - 19:07\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n/**\n * custom Event のリスナー関数引数に送られる Event Object\n *\n * EventDispatcher.dispatch する時の引数として使用します\n *\n * 3つのプロパティは必須項目です、イベントにあわせプロパティを追加します\n *\n * - type: string, イベント種類\n * - target: *, イベント発生インスタンス\n * - currentTarget: *, current イベント発生インスタンス\n */\nexport class Events {\n  /**\n   * custom Event Object\n   * @param {string} type イベント種類\n   * @param {*} [target=this] イベント発生インスタンス\n   * @param {*} [currentTarget=this] current イベント発生インスタンス\n   * */\n  constructor(type, target = this, currentTarget = this) {\n    // https://github.com/esdoc/esdoc/issues/305\n    /**\n     * @property {string} this.type - イベント種類\n     * @property {*} this.target - イベント発生インスタンス\n     * @property {*} this.currentTarget - current イベント発生インスタンス\n     */\n    Object.assign(this, { type, target, currentTarget });\n  }\n}\n"
+  },
+  {
+    "__docId__": 16,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "Events",
+    "memberof": "src/event/Events.js",
+    "longname": "src/event/Events.js~Events",
+    "access": null,
+    "export": true,
+    "importPath": "./src/event/Events.js",
+    "importStyle": "{Events}",
+    "description": "custom Event のリスナー関数引数に送られる Event Object\nEventDispatcher.dispatch する時の引数として使用します\n3つのプロパティは必須項目です、イベントにあわせプロパティを追加します\n- type: string, イベント種類\n- target: *, イベント発生インスタンス\n- currentTarget: *, current イベント発生インスタンス",
+    "lineNumber": 24,
+    "interface": false
+  },
+  {
+    "__docId__": 17,
+    "kind": "constructor",
+    "static": false,
+    "variation": null,
+    "name": "constructor",
+    "memberof": "src/event/Events.js~Events",
+    "longname": "src/event/Events.js~Events#constructor",
+    "access": null,
+    "description": "custom Event Object",
+    "lineNumber": 31,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "type",
+        "description": "イベント種類"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "*"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "this",
+        "defaultRaw": "this",
+        "name": "target",
+        "description": "イベント発生インスタンス"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "*"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "this",
+        "defaultRaw": "this",
+        "name": "currentTarget",
+        "description": "current イベント発生インスタンス"
+      }
+    ],
+    "generator": false
+  },
+  {
+    "__docId__": 18,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/event/Scroll.js",
+    "memberof": null,
+    "longname": "src/event/Scroll.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/26 - 21:05\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n// event\nimport { EventDispatcher } from '../event/EventDispatcher';\nimport { Events } from '../event/Events';\n\n/**\n * new を許可しないための Symbol\n * @type {Symbol}\n * @private\n */\nconst singletonSymbol = Symbol();\n/**\n * singleton instance, nullable\n * @type {?Scroll}\n * @private\n */\nlet instance = null;\n\n/**\n * private property key, bind 済み mouseWheel を保存するための Symbol\n * @type {Symbol}\n * @private\n */\nconst bindSymbol = Symbol();\n/**\n * Cycle.UPDATE event を発火する時の Events instance を保存するための Symbol\n * @type {Symbol}\n * @private\n */\nconst eventsSymbol = Symbol();\n\n/**\n * window scroll event を監視し通知を行います\n * <p>singleton なので new ではなく factory を使用し instance を作成します</p>\n *\n * ```\n * const instance:Scroll = Scroll.factory();\n * ```\n */\nexport class Scroll extends EventDispatcher {\n  /**\n   * singleton です\n   * @param {Symbol} checkSymbol singleton を保証するための private instance\n   * @return {Scroll} singleton instance を返します\n   */\n  constructor(checkSymbol) {\n    // checkSymbol と singleton が等価かをチェックします\n    if (checkSymbol !== singletonSymbol) {\n      throw new Error('don\\'t use new, instead use static factory method.');\n    }\n\n    super();\n\n    // instance 作成済みかをチェックし instance が null の時 this を設定します\n    if (instance !== null) {\n      return instance;\n    }\n\n    // onetime setting\n    instance = this;\n\n    // event handler\n    // @type {function} - bound scroll function\n    this[bindSymbol] = this.scroll.bind(this);\n    // @type {Events} - events instance\n    this[eventsSymbol] = new Events(Scroll.SCROLL, this, this);\n\n    // 設定済み instance を返します\n    return instance;\n  }\n  // ----------------------------------------\n  // EVENT\n  // ----------------------------------------\n  /**\n   * scroll で発生するイベントを取得します\n   * @event SCROLL\n   * @return {string} event, scrollScroll を返します\n   * @default scrollScroll\n   */\n  static get SCROLL() {\n    return 'scrollScroll';\n  }\n  // ----------------------------------------\n  // GETTER / SETTER\n  // ----------------------------------------\n  /**\n   * bind 済み mouseWheel\n   * @return {function} bind 済み mouseWheel を返します\n   */\n  get bindScroll() {\n    return this[bindSymbol];\n  }\n  /**\n   * scroll top 位置\n   * @return {number} scroll top 位置を返します\n   */\n  static get y() {\n    // https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY\n    // https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset\n    return (typeof window.pageYOffset !== 'undefined') ?\n      window.pageYOffset :\n      (document.documentElement || document.body.parentNode || document.body).scrollTop;\n  }\n  /**\n   * scroll top 位置 を設定します\n   * @param {number} top スクロール位置(px)\n   */\n  static set y(top) {\n    window.scrollTo(0, top);\n  }\n  /**\n   * Events instance を取得します\n   * @return {Events} Events instance\n   */\n  static get events() {\n    return this[eventsSymbol];\n  }\n  // ----------------------------------------\n  // METHOD\n  // ----------------------------------------\n  /**\n   * scroll event を監視します<br>\n   * 監視前に二重に addEventListener しないように unwatch を実行します\n   * @return {Scroll} method chain 可能なように instance を返します\n   */\n  watch() {\n    this.unwatch();\n\n    window.addEventListener('scroll', this.bindScroll, false);\n\n    return this;\n  }\n  /**\n   * scroll event を監視を止めます\n   * @return {Scroll} method chain 可能なように instance を返します\n   */\n  unwatch() {\n    window.removeEventListener('scroll', this.bindScroll);\n\n    return this;\n  }\n  /**\n   * window scroll event handler<br>\n   * window scroll event 発生後に scroll top 位置をもたせた Scroll.SCROLL custom event を発火します\n   * @param {?Event} event window scroll event, nullable\n   * @return {undefined} no-return\n   */\n  scroll(event) {\n    // @type {Events} - events\n    const events = this.events;\n    // @ttype {Event}\n    events.original = event;\n    events.y = Scroll.y;\n    // event fire\n    this.dispatch(events);\n  }\n  // ----------------------------------------\n  // STATIC METHOD\n  // ----------------------------------------\n  /**\n   * Wheel instance を singleton を保証し作成します\n   * @return {Scroll} Scroll instance を返します\n   */\n  static factory() {\n    return new Scroll(singletonSymbol);\n  }\n}\n"
+  },
+  {
+    "__docId__": 19,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "singletonSymbol",
+    "memberof": "src/event/Scroll.js",
+    "longname": "src/event/Scroll.js~singletonSymbol",
+    "access": "private",
+    "export": false,
+    "importPath": "./src/event/Scroll.js",
+    "importStyle": null,
+    "description": "new を許可しないための Symbol",
+    "lineNumber": 22,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Symbol"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 20,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "instance",
+    "memberof": "src/event/Scroll.js",
+    "longname": "src/event/Scroll.js~instance",
+    "access": "private",
+    "export": false,
+    "importPath": "./src/event/Scroll.js",
+    "importStyle": null,
+    "description": "singleton instance, nullable",
+    "lineNumber": 28,
+    "type": {
+      "nullable": true,
+      "types": [
+        "Scroll"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 21,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "bindSymbol",
+    "memberof": "src/event/Scroll.js",
+    "longname": "src/event/Scroll.js~bindSymbol",
+    "access": "private",
+    "export": false,
+    "importPath": "./src/event/Scroll.js",
+    "importStyle": null,
+    "description": "private property key, bind 済み mouseWheel を保存するための Symbol",
+    "lineNumber": 35,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Symbol"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 22,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "eventsSymbol",
+    "memberof": "src/event/Scroll.js",
+    "longname": "src/event/Scroll.js~eventsSymbol",
+    "access": "private",
+    "export": false,
+    "importPath": "./src/event/Scroll.js",
+    "importStyle": null,
+    "description": "Cycle.UPDATE event を発火する時の Events instance を保存するための Symbol",
+    "lineNumber": 41,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Symbol"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 23,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "Scroll",
+    "memberof": "src/event/Scroll.js",
+    "longname": "src/event/Scroll.js~Scroll",
+    "access": null,
+    "export": true,
+    "importPath": "./src/event/Scroll.js",
+    "importStyle": "{Scroll}",
+    "description": "window scroll event を監視し通知を行います\n<p>singleton なので new ではなく factory を使用し instance を作成します</p>\n```\nconst instance:Scroll = Scroll.factory();\n```",
+    "lineNumber": 51,
+    "interface": false,
+    "extends": [
+      "src/event/EventDispatcher.js~EventDispatcher"
+    ]
+  },
+  {
+    "__docId__": 24,
+    "kind": "constructor",
+    "static": false,
+    "variation": null,
+    "name": "constructor",
+    "memberof": "src/event/Scroll.js~Scroll",
+    "longname": "src/event/Scroll.js~Scroll#constructor",
+    "access": null,
+    "description": "singleton です",
+    "lineNumber": 57,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Symbol"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "checkSymbol",
+        "description": "singleton を保証するための private instance"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Scroll"
+      ],
+      "spread": false,
+      "description": "singleton instance を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 25,
+    "kind": "get",
+    "static": true,
+    "variation": null,
+    "name": "SCROLL",
+    "memberof": "src/event/Scroll.js~Scroll",
+    "longname": "src/event/Scroll.js~Scroll.SCROLL",
+    "access": null,
+    "description": "scroll で発生するイベントを取得します",
+    "lineNumber": 91,
+    "unknown": [
+      {
+        "tagName": "@event",
+        "tagValue": "SCROLL"
+      },
+      {
+        "tagName": "@default",
+        "tagValue": "scrollScroll"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": "event, scrollScroll を返します"
+    },
+    "type": {
+      "types": [
+        "string"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 26,
+    "kind": "get",
+    "static": false,
+    "variation": null,
+    "name": "bindScroll",
+    "memberof": "src/event/Scroll.js~Scroll",
+    "longname": "src/event/Scroll.js~Scroll#bindScroll",
+    "access": null,
+    "description": "bind 済み mouseWheel",
+    "lineNumber": 101,
+    "return": {
+      "nullable": null,
+      "types": [
+        "function"
+      ],
+      "spread": false,
+      "description": "bind 済み mouseWheel を返します"
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 27,
+    "kind": "get",
+    "static": true,
+    "variation": null,
+    "name": "y",
+    "memberof": "src/event/Scroll.js~Scroll",
+    "longname": "src/event/Scroll.js~Scroll.y",
+    "access": null,
+    "description": "scroll top 位置",
+    "lineNumber": 108,
+    "return": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": "scroll top 位置を返します"
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 28,
+    "kind": "set",
+    "static": true,
+    "variation": null,
+    "name": "y",
+    "memberof": "src/event/Scroll.js~Scroll",
+    "longname": "src/event/Scroll.js~Scroll.y",
+    "access": null,
+    "description": "scroll top 位置 を設定します",
+    "lineNumber": 119,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "top",
+        "description": "スクロール位置(px)"
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 29,
+    "kind": "get",
+    "static": true,
+    "variation": null,
+    "name": "events",
+    "memberof": "src/event/Scroll.js~Scroll",
+    "longname": "src/event/Scroll.js~Scroll.events",
+    "access": null,
+    "description": "Events instance を取得します",
+    "lineNumber": 126,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Events"
+      ],
+      "spread": false,
+      "description": "Events instance"
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 30,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "watch",
+    "memberof": "src/event/Scroll.js~Scroll",
+    "longname": "src/event/Scroll.js~Scroll#watch",
+    "access": null,
+    "description": "scroll event を監視します<br>\n監視前に二重に addEventListener しないように unwatch を実行します",
+    "lineNumber": 137,
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Scroll"
+      ],
+      "spread": false,
+      "description": "method chain 可能なように instance を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 31,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "unwatch",
+    "memberof": "src/event/Scroll.js~Scroll",
+    "longname": "src/event/Scroll.js~Scroll#unwatch",
+    "access": null,
+    "description": "scroll event を監視を止めます",
+    "lineNumber": 148,
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Scroll"
+      ],
+      "spread": false,
+      "description": "method chain 可能なように instance を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 32,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "scroll",
+    "memberof": "src/event/Scroll.js~Scroll",
+    "longname": "src/event/Scroll.js~Scroll#scroll",
+    "access": null,
+    "description": "window scroll event handler<br>\nwindow scroll event 発生後に scroll top 位置をもたせた Scroll.SCROLL custom event を発火します",
+    "lineNumber": 159,
+    "params": [
+      {
+        "nullable": true,
+        "types": [
+          "Event"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "event",
+        "description": "window scroll event, nullable"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "undefined"
+      ],
+      "spread": false,
+      "description": "no-return"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 33,
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "factory",
+    "memberof": "src/event/Scroll.js~Scroll",
+    "longname": "src/event/Scroll.js~Scroll.factory",
+    "access": null,
+    "description": "Wheel instance を singleton を保証し作成します",
+    "lineNumber": 175,
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Scroll"
+      ],
+      "spread": false,
+      "description": "Scroll instance を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 34,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/event/Wheel.js",
+    "memberof": null,
+    "longname": "src/event/Wheel.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/26 - 19:12\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n// event\nimport { EventDispatcher } from './EventDispatcher';\nimport { Events } from './Events';\n\n/**\n * new を許可しないための Symbol\n * @type {Symbol}\n * @private\n */\nconst singletonSymbol = Symbol();\n/**\n * singleton instance, nullable\n * @type {?Wheel}\n * @private\n */\nlet instance = null;\n/**\n * private property key, bind 済み mouseWheel を保存するための Symbol\n * @type {Symbol}\n * @private\n */\nconst wheelSymbol = Symbol();\n// /**\n//  * private property key, bind 済み mouseScroll を保存するための Symbol\n//  * @type {Symbol}\n//  * @private\n//  */\n// const scrollSymbol = Symbol();\n\n/**\n * mousewheel event を監視し通知を行います\n * <p>singleton なので new ではなく factory を使用し instance を作成します</p>\n *\n * ```\n * const instance:Wheel = Wheel.factory();\n * ```\n */\nexport class Wheel extends EventDispatcher {\n  /**\n   * singleton です\n   * @param {Symbol} checkSymbol singleton を保証するための private instance\n   * @returns {Wheel} singleton instance を返します\n   */\n  constructor(checkSymbol) {\n    // checkSymbol と singleton が等価かをチェックします\n    if (checkSymbol !== singletonSymbol) {\n      throw new Error('don\\'t use new, instead use static factory method.');\n    }\n\n    super();\n\n    // instance 作成済みかをチェックし instance が null の時 this を設定します\n    if (instance !== null) {\n      return instance;\n    }\n\n    // onetime setting\n    instance = this;\n\n    // event handler\n    this[wheelSymbol] = this.mouseWheel.bind(this);\n    // this[scrollSymbol] = this.mouseScroll.bind(this);\n\n    // public property\n    /**\n     * 閾値, wheel 移動量が閾値を超えたときにイベントを発生させます\n     * @type {number}\n     * @default 200\n     */\n    const threshold = 200;\n    /**\n     * wheelDelta 移動量が閾値を超えるかをチェックするための計算変数\n     * @type {number}\n     * @default 0\n     */\n    const moved = 0;\n    // /**\n    //  * firefox wheel event.detail 数値を他と揃えるための係数\n    //  * @type {number}\n    //  * @default -7.5\n    //  */\n    // const coefficient = -7.5;\n    /**\n     * @type {Wheel}\n     * @property {number} this.threshold 閾値, wheel 移動量が閾値を超えたときにイベントを発生させます\n     * @property {number} this.moved wheelDelta 移動量が閾値を超えるかをチェックするための計算変数\n     */\n    Object.assign(this, { threshold, moved });\n\n    // 設定済み instance を返します\n    return instance;\n  }\n  // ----------------------------------------\n  // EVENT\n  // ----------------------------------------\n  /**\n   * wheel up で発生するイベントを取得します\n   * @event UP\n   * @return {string} event, wheelUp を返します\n   * @default wheelUp\n   */\n  static get UP() {\n    return 'wheelUp';\n  }\n  /**\n   * wheel  で発生するイベントを取得します\n   * @event DOWN\n   * @return {string} event, wheelUp を返します\n   * @default wheelUp\n   */\n  static get DOWN() {\n    return 'wheelDown';\n  }\n  // ----------------------------------------\n  // GETTER / SETTER\n  // ----------------------------------------\n  /**\n   * bind 済み mouseWheel\n   * @returns {function} bind 済み mouseWheel を返します\n   */\n  get boundWheel() {\n    return this[wheelSymbol];\n  }\n  // /**\n  //  * bind 済み mouseScroll\n  //  * @returns {function} bind 済み mouseScroll を返します\n  //  */\n  // get boundScroll() {\n  //   return this[scrollSymbol];\n  // }\n  // ----------------------------------------\n  // METHOD\n  // ----------------------------------------\n  /**\n   * mousewheel event を監視します<br>\n   * 監視前に二重に addEventListener しないように unwatch を実行します\n   * @returns {Wheel} method chain 可能なように instance を返します\n   */\n  watch() {\n    this.unwatch();\n    // // firefox\n    // window.addEventListener('DOMMouseScroll', this.boundScroll, false);\n    // // other modern browser\n    // window.addEventListener('mousewheel', this.boundWheel, false);\n\n    window.addEventListener('wheel', this.boundWheel, false);\n\n    return this;\n  }\n  /**\n   * mousewheel event を監視を止めます\n   * @returns {Wheel} method chain 可能なように instance を返します\n   */\n  unwatch() {\n    // window.removeEventListener('DOMMouseScroll', this.boundScroll);\n    // window.removeEventListener('mousewheel', this.boundWheel);\n\n    window.removeEventListener('wheel', this.boundWheel);\n\n    return this;\n  }\n  /**\n   * window mousewheel event handler\n   * <p>delta 値を取得し `this.moving` を実行します</p>\n   *\n   * @listens {WheelEvent} WheelEvent.wheel\n   * @param {WheelEvent} event window wheel event\n   * @returns {number} 前回移動量に delta 値 を加算した値を返します\n   */\n  mouseWheel(event) {\n    // const wheelDelta = event.wheelDelta;\n    const wheelDelta = event.deltaY;\n    return this.moving(wheelDelta);\n  }\n  // /**\n  //  * window DOMMouseScroll event handler\n  //  * <p>detail 値を取得し `this.moving` を実行します</p>\n  //  * @param {Event} event window DOMMouseScroll event\n  //  * @returns {number} 前回移動量に delta 値 を加算した値を返します\n  //  */\n  // mouseScroll(event) {\n  //   let wheelDetail = event.detail;\n  //   // firefox 数値が小さいために補正する\n  //   // up / down が wheelDelta と逆なので補正する\n  //   // -7.5(default) をかける\n  //   wheelDetail *= this.coefficient;\n  //   return this.moving(wheelDetail);\n  // }\n  /**\n   * mouse delta から移動量を計算します\n   * @param {number} delta mouse delta 値\n   * @returns {number} 前回移動量に delta 値 を加算した値を返します\n   */\n  moving(delta) {\n    /**\n     * 移動量が閾値を超えるかをチェックするための計算変数\n     * @type {number}\n     */\n    this.moved += delta;\n    // @type {number}\n    const moved = this.moved;\n\n    // 0 check\n    if (moved === 0) {\n      // 移動量が 0 なので処理をしない\n      return moved;\n    }\n\n    // 閾値チェック\n    if (Math.abs(moved) >= this.threshold) {\n      if (moved > 0) {\n        // scroll up\n        this.up(moved);\n      } else {\n        this.down(moved);\n      }\n    } else {\n      // 閾値を超えていないので処理をしない\n      return moved;\n    }\n\n    // initialize moved\n    this.moved = 0;\n    return moved;\n  }\n  /**\n   * scroll up イベントを発火します\n   * @param {number} moved 移動量\n   * @returns {number} 加算移動量を返します\n   */\n  up(moved) {\n    // @type {Events}\n    const events = new Events(Wheel.UP, this, this);\n    events.moved = moved;\n    this.dispatch(events);\n\n    return moved;\n  }\n  /**\n   * scroll down イベントを発火します\n   * @param {number} moved 移動量\n   * @returns {number} 加算移動量を返します\n   */\n  down(moved) {\n    // @type {Events}\n    const events = new Events(Wheel.DOWN, this, this);\n    events.moved = moved;\n    this.dispatch(events);\n\n    return moved;\n  }\n  // ----------------------------------------\n  // STATIC METHOD\n  // ----------------------------------------\n  /**\n   * Wheel instance を singleton を保証し作成します\n   * @return {Wheel} Wheel instance を返します\n   */\n  static factory() {\n    return new Wheel(singletonSymbol);\n  }\n}\n"
+  },
+  {
+    "__docId__": 35,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "singletonSymbol",
+    "memberof": "src/event/Wheel.js",
+    "longname": "src/event/Wheel.js~singletonSymbol",
+    "access": "private",
+    "export": false,
+    "importPath": "./src/event/Wheel.js",
+    "importStyle": null,
+    "description": "new を許可しないための Symbol",
+    "lineNumber": 22,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Symbol"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 36,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "instance",
+    "memberof": "src/event/Wheel.js",
+    "longname": "src/event/Wheel.js~instance",
+    "access": "private",
+    "export": false,
+    "importPath": "./src/event/Wheel.js",
+    "importStyle": null,
+    "description": "singleton instance, nullable",
+    "lineNumber": 28,
+    "type": {
+      "nullable": true,
+      "types": [
+        "Wheel"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 37,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "wheelSymbol",
+    "memberof": "src/event/Wheel.js",
+    "longname": "src/event/Wheel.js~wheelSymbol",
+    "access": "private",
+    "export": false,
+    "importPath": "./src/event/Wheel.js",
+    "importStyle": null,
+    "description": "private property key, bind 済み mouseWheel を保存するための Symbol",
+    "lineNumber": 34,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Symbol"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 38,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "Wheel",
+    "memberof": "src/event/Wheel.js",
+    "longname": "src/event/Wheel.js~Wheel",
+    "access": null,
+    "export": true,
+    "importPath": "./src/event/Wheel.js",
+    "importStyle": "{Wheel}",
+    "description": "mousewheel event を監視し通知を行います\n<p>singleton なので new ではなく factory を使用し instance を作成します</p>\n```\nconst instance:Wheel = Wheel.factory();\n```",
+    "lineNumber": 50,
+    "interface": false,
+    "extends": [
+      "src/event/EventDispatcher.js~EventDispatcher"
+    ]
+  },
+  {
+    "__docId__": 39,
+    "kind": "constructor",
+    "static": false,
+    "variation": null,
+    "name": "constructor",
+    "memberof": "src/event/Wheel.js~Wheel",
+    "longname": "src/event/Wheel.js~Wheel#constructor",
+    "access": null,
+    "description": "singleton です",
+    "lineNumber": 56,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Wheel} singleton instance を返します"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Symbol"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "checkSymbol",
+        "description": "singleton を保証するための private instance"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Wheel"
+      ],
+      "spread": false,
+      "description": "singleton instance を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 40,
+    "kind": "get",
+    "static": true,
+    "variation": null,
+    "name": "UP",
+    "memberof": "src/event/Wheel.js~Wheel",
+    "longname": "src/event/Wheel.js~Wheel.UP",
+    "access": null,
+    "description": "wheel up で発生するイベントを取得します",
+    "lineNumber": 114,
+    "unknown": [
+      {
+        "tagName": "@event",
+        "tagValue": "UP"
+      },
+      {
+        "tagName": "@default",
+        "tagValue": "wheelUp"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": "event, wheelUp を返します"
+    },
+    "type": {
+      "types": [
+        "string"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 41,
+    "kind": "get",
+    "static": true,
+    "variation": null,
+    "name": "DOWN",
+    "memberof": "src/event/Wheel.js~Wheel",
+    "longname": "src/event/Wheel.js~Wheel.DOWN",
+    "access": null,
+    "description": "wheel  で発生するイベントを取得します",
+    "lineNumber": 123,
+    "unknown": [
+      {
+        "tagName": "@event",
+        "tagValue": "DOWN"
+      },
+      {
+        "tagName": "@default",
+        "tagValue": "wheelUp"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": "event, wheelUp を返します"
+    },
+    "type": {
+      "types": [
+        "string"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 42,
+    "kind": "get",
+    "static": false,
+    "variation": null,
+    "name": "boundWheel",
+    "memberof": "src/event/Wheel.js~Wheel",
+    "longname": "src/event/Wheel.js~Wheel#boundWheel",
+    "access": null,
+    "description": "bind 済み mouseWheel",
+    "lineNumber": 133,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{function} bind 済み mouseWheel を返します"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "function"
+      ],
+      "spread": false,
+      "description": "bind 済み mouseWheel を返します"
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 43,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "watch",
+    "memberof": "src/event/Wheel.js~Wheel",
+    "longname": "src/event/Wheel.js~Wheel#watch",
+    "access": null,
+    "description": "mousewheel event を監視します<br>\n監視前に二重に addEventListener しないように unwatch を実行します",
+    "lineNumber": 151,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Wheel} method chain 可能なように instance を返します"
+      }
+    ],
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Wheel"
+      ],
+      "spread": false,
+      "description": "method chain 可能なように instance を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 44,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "unwatch",
+    "memberof": "src/event/Wheel.js~Wheel",
+    "longname": "src/event/Wheel.js~Wheel#unwatch",
+    "access": null,
+    "description": "mousewheel event を監視を止めます",
+    "lineNumber": 166,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Wheel} method chain 可能なように instance を返します"
+      }
+    ],
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Wheel"
+      ],
+      "spread": false,
+      "description": "method chain 可能なように instance を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 45,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "mouseWheel",
+    "memberof": "src/event/Wheel.js~Wheel",
+    "longname": "src/event/Wheel.js~Wheel#mouseWheel",
+    "access": null,
+    "description": "window mousewheel event handler\n<p>delta 値を取得し `this.moving` を実行します</p>",
+    "lineNumber": 182,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{number} 前回移動量に delta 値 を加算した値を返します"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "WheelEvent"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "event",
+        "description": "window wheel event"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": "前回移動量に delta 値 を加算した値を返します"
+    },
+    "listens": [
+      {
+        "types": [
+          "WheelEvent"
+        ],
+        "description": "WheelEvent.wheel"
+      }
+    ],
+    "generator": false
+  },
+  {
+    "__docId__": 46,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "moving",
+    "memberof": "src/event/Wheel.js~Wheel",
+    "longname": "src/event/Wheel.js~Wheel#moving",
+    "access": null,
+    "description": "mouse delta から移動量を計算します",
+    "lineNumber": 206,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{number} 前回移動量に delta 値 を加算した値を返します"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "delta",
+        "description": "mouse delta 値"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": "前回移動量に delta 値 を加算した値を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 47,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "moved",
+    "memberof": "src/event/Wheel.js~Wheel",
+    "longname": "src/event/Wheel.js~Wheel#moved",
+    "access": null,
+    "description": "移動量が閾値を超えるかをチェックするための計算変数",
+    "lineNumber": 211,
+    "type": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 48,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "moved",
+    "memberof": "src/event/Wheel.js~Wheel",
+    "longname": "src/event/Wheel.js~Wheel#moved",
+    "access": null,
+    "description": null,
+    "lineNumber": 235,
+    "undocument": true,
+    "type": {
+      "types": [
+        "number"
+      ]
+    }
+  },
+  {
+    "__docId__": 49,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "up",
+    "memberof": "src/event/Wheel.js~Wheel",
+    "longname": "src/event/Wheel.js~Wheel#up",
+    "access": null,
+    "description": "scroll up イベントを発火します",
+    "lineNumber": 243,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{number} 加算移動量を返します"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "moved",
+        "description": "移動量"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": "加算移動量を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 50,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "down",
+    "memberof": "src/event/Wheel.js~Wheel",
+    "longname": "src/event/Wheel.js~Wheel#down",
+    "access": null,
+    "description": "scroll down イベントを発火します",
+    "lineNumber": 256,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{number} 加算移動量を返します"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "moved",
+        "description": "移動量"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": "加算移動量を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 51,
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "factory",
+    "memberof": "src/event/Wheel.js~Wheel",
+    "longname": "src/event/Wheel.js~Wheel.factory",
+    "access": null,
+    "description": "Wheel instance を singleton を保証し作成します",
+    "lineNumber": 271,
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Wheel"
+      ],
+      "spread": false,
+      "description": "Wheel instance を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 52,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/moku.js",
+    "memberof": null,
+    "longname": "src/moku.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "/*!\n * Copyright (c) inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/06/30 - 17:54\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n * @@version\n * @@buildTime\n */\n// use strict は本来不要でエラーになる\n// 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する\n/* eslint strict: [0, \"global\"] */\n'use strict';\n\n// event\nimport { EventDispatcher } from './event/EventDispatcher';\nimport { Events } from './event/Events';\n\n// net\nimport { Ajax } from './net/Ajax';\n\n// tick\nimport { Cycle } from './tick/Cycle';\nimport { Fps } from './tick/Fps';\nimport { Polling } from './tick/Polling';\n\n// util\nimport { Type } from './util/Type';\n/**\n * **MOKU**\n * <p>global Object</p>\n * <p>public な Class はここからアクセス可能です</p>\n * @type {Object}\n */\nconst MOKU = {};\n/**\n * version number を取得します\n * @return {string} version number を返します\n */\nMOKU.version = () => '@@version';\n/**\n * build 日時を取得します\n * @return {string}  build 日時を返します\n */\nMOKU.build = () => '@@buildTime';\n/**\n * MOKU.event\n * @type {Object} MOKU.event object を返します\n */\nMOKU.event = {\n  EventDispatcher,\n  Events,\n};\n/**\n * MOKU.net\n * @type {Object} MOKU.net object を返します\n */\nMOKU.net = {\n  Ajax,\n};\n/**\n * MOKU.tick\n * @type {Object} MOKU.tick object を返します\n */\nMOKU.tick = {\n  Cycle,\n  Fps,\n  Polling,\n};\n/**\n * MOKU.util\n * @type {Object} MOKU.util object を返します\n */\nMOKU.util = {\n  Type,\n};\n\n// export\nwindow.MOKU = MOKU;\n"
+  },
+  {
+    "__docId__": 53,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "MOKU",
+    "memberof": "src/moku.js",
+    "longname": "src/moku.js~MOKU",
+    "access": null,
+    "export": false,
+    "importPath": "./src/moku.js",
+    "importStyle": null,
+    "description": "**MOKU**\n<p>global Object</p>\n<p>public な Class はここからアクセス可能です</p>",
+    "lineNumber": 38,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 54,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/net/Ajax.js",
+    "memberof": null,
+    "longname": "src/net/Ajax.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/01 - 19:41\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n// event\nimport { EventDispatcher } from '../event/EventDispatcher';\nimport { Events } from '../event/Events';\n\n// util\nimport { Type } from '../util/Type';\n\n// built-in function\n// Safari, IE はサポートしていないのでライブラリを使用すること\nconst fetch = self.fetch;\nconst Request = self.Request;\n// const Headers = self.Headers;\n\n/**\n * can（Ajax 実行可能かの真偽値）フラッグを保存するための Symbol\n * @type {Symbol}\n * @private\n */\nconst canSymbol = Symbol();\n\n/**\n * <p>fetch API を使用し Ajax request を行います</p>\n * <p>Safari, IE はサポートしていないので polyfill ライブラリを使用します<br>\n * また、 fetch は Promise も必要としています。</p>\n *\n * ```\n * $ bower install fetch\n *\n * $ bower install es6-promise\n * ```\n *\n * @see http://caniuse.com/#feat=fetch\n * @see https://github.com/github/fetch\n * @see https://github.com/github/fetch\n * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch\n * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API\n * @see https://developer.mozilla.org/ja/docs/Web/API/Request\n * @see https://developer.mozilla.org/ja/docs/Web/API/Request/Request\n * @see https://developer.mozilla.org/ja/docs/Web/API/Headers\n * @see https://developer.mozilla.org/ja/docs/Web/API/Body\n */\nexport class Ajax extends EventDispatcher {\n  /**\n   * request 可能 / 不可能 flag を true に設定します\n   */\n  constructor() {\n    super();\n    /**\n     * request 可能 / 不可能 flag\n     * @type {boolean}\n     * @private\n     * @default true\n     */\n    this[canSymbol] = true;\n  }\n  // ----------------------------------------\n  // EVENT\n  // ----------------------------------------\n  /**\n   * START event を取得します\n   * @event START\n   * @returns {string} リクエスト開始イベント, ajaxStart を返します\n   * @default ajaxStart\n   */\n  static get START() {\n    return 'ajaxStart';\n  }\n  /**\n   * COMPLETE event を取得します\n   * @event COMPLETE\n   * @returns {string} リクエスト完了イベント, ajaxComplete を返します\n   * @default ajaxComplete\n   */\n  static get COMPLETE() {\n    return 'ajaxComplete';\n  }\n  /**\n   * ERROR event を取得します\n   * @event ERROR\n   * @returns {string} リクエストエラー イベント, ajaxError を返します\n   * @default ajaxError\n   */\n  static get ERROR() {\n    return 'ajaxError';\n  }\n  // ----------------------------------------\n  // GETTER / SETTER\n  // ----------------------------------------\n  /**\n   * request 可能 / 不可能 flag を取得します\n   * @return {boolean} request 可能 / 不可能 flag を返します\n   */\n  get can() {\n    return this[canSymbol];\n  }\n  /**\n   * request 可能 / 不可能 flag を設定します\n   * @param {boolean} flag request 可能 / 不可能 flag\n   */\n  set can(flag) {\n    this[canSymbol] = flag;\n  }\n  // ----------------------------------------\n  // METHOD\n  // ----------------------------------------\n  /**\n   * <p>Ajax request 開始します</p>\n   * <p>request 可能 / 不可能 flag が false の時は実行しません<br>\n   * true の時は false にしリクエストを開始します</p>\n   * <p>START, COMPLETE, ERROR イベントを発生させます</p>\n   *\n   * @param {string} path Ajax request path\n   * @param {string} method GET, POST, PUT, DELETE...etc request method\n   * @param {?Headers|?Object|null} [headers=null] Headers option, nullable\n   * @param {?FormData|null} [formData=null] 送信フォームデータオプション, nullable\n   * @return {boolean} ajax request を開始したかどうかの真偽値を返します\n   */\n  start(path, method, headers = null, formData = null) {\n    // ajax request 開始\n    if (!this.can) {\n      // flag が off なので処理しない\n      return false;\n    }\n\n    // flag off\n    this.disable();\n\n    // @type {Request} Request instance\n    const request = Ajax.option(path, method, headers, formData);\n\n    // start event fire\n    const startEvents = new Events(Ajax.START, this, this);\n    startEvents.request = request;\n    this.dispatch(startEvents);\n\n    // fetch start\n    fetch(request)\n      // @param {Object} response - Ajax response\n      .then((response) => {\n        // may be success\n        if (response.status !== 200) {\n          throw new Error(`Ajax status error: (${response.status})`);\n        }\n\n        return response.json();\n      })\n      // @param {Object} - JSON パース済み Object\n      .then((json) => {\n        // @type {Evens} - Ajax.COMPLETE events Object\n        const events = new Events(Ajax.COMPLETE, this, this);\n        events.data = json;\n        // complete event fire\n        this.dispatch(events);\n        // flag true\n        this.enable();\n      })\n      // @param {Error} - Ajax something error\n      .catch((error) => {\n        // @type {Evens} - Ajax.COMPLETE events Object\n        const events = new Events(Ajax.ERROR, this, this);\n        events.data = null;\n        events.error = error;\n        // error event fire\n        this.dispatch(events);\n        // flag true\n        this.enable();\n      });\n\n    return true;\n  }\n  /**\n   * 実行可否 flag を true にします\n   * @returns {boolean} 現在の this.can property を返します\n   */\n  enable() {\n    this.can = true;\n    return this.can;\n  }\n  /**\n   * 実行可否 flag を false にします\n   * @returns {boolean} 現在の this.can property を返します\n   */\n  disable() {\n    this.can = false;\n    return this.can;\n  }\n  // ----------------------------------------\n  // STATIC METHOD\n  // ----------------------------------------\n  /**\n   * <p>fetch API へ送るオプションを作成します</p>\n   *\n   * @param {string} path Ajax request path\n   * @param {string} method GET, POST, PUT, DELETE...etc request method\n   * @param {Headers|Object|null} headers Headers option\n   * @param {FormData|null} formData 送信フォームデータオプション\n   * @return {Request} fetch API へ送る Request instance を返します\n   */\n  static option(path, method, headers, formData) {\n    // request option\n    const option = Object.create({\n      method,\n      cache: 'no-cache',\n      // https://developers.google.com/web/updates/2015/03/introduction-to-fetch\n      credentials: 'same-origin',\n    });\n\n    // headers option\n    if (Type.exist(headers)) {\n      option.headers = headers;\n    }\n\n    // body へ FormData をセット\n    if (Type.exist(formData)) {\n      option.body = formData;\n    }\n\n    // https://developer.mozilla.org/ja/docs/Web/API/Request\n    return new Request(path, option);\n  }\n}\n"
+  },
+  {
+    "__docId__": 55,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "fetch",
+    "memberof": "src/net/Ajax.js",
+    "longname": "src/net/Ajax.js~fetch",
+    "access": null,
+    "export": false,
+    "importPath": "./src/net/Ajax.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 22,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 56,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "Request",
+    "memberof": "src/net/Ajax.js",
+    "longname": "src/net/Ajax.js~Request",
+    "access": null,
+    "export": false,
+    "importPath": "./src/net/Ajax.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 23,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 57,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "canSymbol",
+    "memberof": "src/net/Ajax.js",
+    "longname": "src/net/Ajax.js~canSymbol",
+    "access": "private",
+    "export": false,
+    "importPath": "./src/net/Ajax.js",
+    "importStyle": null,
+    "description": "can（Ajax 実行可能かの真偽値）フラッグを保存するための Symbol",
+    "lineNumber": 31,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Symbol"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 58,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "Ajax",
+    "memberof": "src/net/Ajax.js",
+    "longname": "src/net/Ajax.js~Ajax",
+    "access": null,
+    "export": true,
+    "importPath": "./src/net/Ajax.js",
+    "importStyle": "{Ajax}",
+    "description": "<p>fetch API を使用し Ajax request を行います</p>\n<p>Safari, IE はサポートしていないので polyfill ライブラリを使用します<br>\nまた、 fetch は Promise も必要としています。</p>\n```\n$ bower install fetch\n$ bower install es6-promise\n```",
+    "see": [
+      "http://caniuse.com/#feat=fetch",
+      "https://github.com/github/fetch",
+      "https://github.com/github/fetch",
+      "https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch",
+      "https://developer.mozilla.org/ja/docs/Web/API/Fetch_API",
+      "https://developer.mozilla.org/ja/docs/Web/API/Request",
+      "https://developer.mozilla.org/ja/docs/Web/API/Request/Request",
+      "https://developer.mozilla.org/ja/docs/Web/API/Headers",
+      "https://developer.mozilla.org/ja/docs/Web/API/Body"
+    ],
+    "lineNumber": 54,
+    "interface": false,
+    "extends": [
+      "src/event/EventDispatcher.js~EventDispatcher"
+    ]
+  },
+  {
+    "__docId__": 59,
+    "kind": "constructor",
+    "static": false,
+    "variation": null,
+    "name": "constructor",
+    "memberof": "src/net/Ajax.js~Ajax",
+    "longname": "src/net/Ajax.js~Ajax#constructor",
+    "access": null,
+    "description": "request 可能 / 不可能 flag を true に設定します",
+    "lineNumber": 58,
+    "params": [],
+    "generator": false
+  },
+  {
+    "__docId__": 60,
+    "kind": "get",
+    "static": true,
+    "variation": null,
+    "name": "START",
+    "memberof": "src/net/Ajax.js~Ajax",
+    "longname": "src/net/Ajax.js~Ajax.START",
+    "access": null,
+    "description": "START event を取得します",
+    "lineNumber": 77,
+    "unknown": [
+      {
+        "tagName": "@event",
+        "tagValue": "START"
+      },
+      {
+        "tagName": "@returns",
+        "tagValue": "{string} リクエスト開始イベント, ajaxStart を返します"
+      },
+      {
+        "tagName": "@default",
+        "tagValue": "ajaxStart"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": "リクエスト開始イベント, ajaxStart を返します"
+    },
+    "type": {
+      "types": [
+        "string"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 61,
+    "kind": "get",
+    "static": true,
+    "variation": null,
+    "name": "COMPLETE",
+    "memberof": "src/net/Ajax.js~Ajax",
+    "longname": "src/net/Ajax.js~Ajax.COMPLETE",
+    "access": null,
+    "description": "COMPLETE event を取得します",
+    "lineNumber": 86,
+    "unknown": [
+      {
+        "tagName": "@event",
+        "tagValue": "COMPLETE"
+      },
+      {
+        "tagName": "@returns",
+        "tagValue": "{string} リクエスト完了イベント, ajaxComplete を返します"
+      },
+      {
+        "tagName": "@default",
+        "tagValue": "ajaxComplete"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": "リクエスト完了イベント, ajaxComplete を返します"
+    },
+    "type": {
+      "types": [
+        "string"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 62,
+    "kind": "get",
+    "static": true,
+    "variation": null,
+    "name": "ERROR",
+    "memberof": "src/net/Ajax.js~Ajax",
+    "longname": "src/net/Ajax.js~Ajax.ERROR",
+    "access": null,
+    "description": "ERROR event を取得します",
+    "lineNumber": 95,
+    "unknown": [
+      {
+        "tagName": "@event",
+        "tagValue": "ERROR"
+      },
+      {
+        "tagName": "@returns",
+        "tagValue": "{string} リクエストエラー イベント, ajaxError を返します"
+      },
+      {
+        "tagName": "@default",
+        "tagValue": "ajaxError"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": "リクエストエラー イベント, ajaxError を返します"
+    },
+    "type": {
+      "types": [
+        "string"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 63,
+    "kind": "get",
+    "static": false,
+    "variation": null,
+    "name": "can",
+    "memberof": "src/net/Ajax.js~Ajax",
+    "longname": "src/net/Ajax.js~Ajax#can",
+    "access": null,
+    "description": "request 可能 / 不可能 flag を取得します",
+    "lineNumber": 105,
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "request 可能 / 不可能 flag を返します"
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 64,
+    "kind": "set",
+    "static": false,
+    "variation": null,
+    "name": "can",
+    "memberof": "src/net/Ajax.js~Ajax",
+    "longname": "src/net/Ajax.js~Ajax#can",
+    "access": null,
+    "description": "request 可能 / 不可能 flag を設定します",
+    "lineNumber": 112,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "boolean"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "flag",
+        "description": "request 可能 / 不可能 flag"
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 65,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "start",
+    "memberof": "src/net/Ajax.js~Ajax",
+    "longname": "src/net/Ajax.js~Ajax#start",
+    "access": null,
+    "description": "<p>Ajax request 開始します</p>\n<p>request 可能 / 不可能 flag が false の時は実行しません<br>\ntrue の時は false にしリクエストを開始します</p>\n<p>START, COMPLETE, ERROR イベントを発生させます</p>",
+    "lineNumber": 130,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "path",
+        "description": "Ajax request path"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "method",
+        "description": "GET, POST, PUT, DELETE...etc request method"
+      },
+      {
+        "nullable": true,
+        "types": [
+          "Headers",
+          "?Object",
+          "null"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "null",
+        "defaultRaw": null,
+        "name": "headers",
+        "description": "Headers option, nullable"
+      },
+      {
+        "nullable": true,
+        "types": [
+          "FormData",
+          "null"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "null",
+        "defaultRaw": null,
+        "name": "formData",
+        "description": "送信フォームデータオプション, nullable"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "ajax request を開始したかどうかの真偽値を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 66,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "enable",
+    "memberof": "src/net/Ajax.js~Ajax",
+    "longname": "src/net/Ajax.js~Ajax#enable",
+    "access": null,
+    "description": "実行可否 flag を true にします",
+    "lineNumber": 187,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{boolean} 現在の this.can property を返します"
+      }
+    ],
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "現在の this.can property を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 67,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "can",
+    "memberof": "src/net/Ajax.js~Ajax",
+    "longname": "src/net/Ajax.js~Ajax#can",
+    "access": null,
+    "description": null,
+    "lineNumber": 188,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 68,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "disable",
+    "memberof": "src/net/Ajax.js~Ajax",
+    "longname": "src/net/Ajax.js~Ajax#disable",
+    "access": null,
+    "description": "実行可否 flag を false にします",
+    "lineNumber": 195,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{boolean} 現在の this.can property を返します"
+      }
+    ],
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "現在の this.can property を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 69,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "can",
+    "memberof": "src/net/Ajax.js~Ajax",
+    "longname": "src/net/Ajax.js~Ajax#can",
+    "access": null,
+    "description": null,
+    "lineNumber": 196,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 70,
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "option",
+    "memberof": "src/net/Ajax.js~Ajax",
+    "longname": "src/net/Ajax.js~Ajax.option",
+    "access": null,
+    "description": "<p>fetch API へ送るオプションを作成します</p>",
+    "lineNumber": 211,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "path",
+        "description": "Ajax request path"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "method",
+        "description": "GET, POST, PUT, DELETE...etc request method"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Headers",
+          "Object",
+          "null"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "headers",
+        "description": "Headers option"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "FormData",
+          "null"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "formData",
+        "description": "送信フォームデータオプション"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Request"
+      ],
+      "spread": false,
+      "description": "fetch API へ送る Request instance を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 71,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/tick/Cycle.js",
+    "memberof": null,
+    "longname": "src/tick/Cycle.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "/**\n * @license inazumatv.com\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/03\n *\n * Copyright (c) 2011-2015 inazumatv.com, inc.\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n */\n\n// event\nimport { EventDispatcher } from '../event/EventDispatcher';\nimport { Events } from '../event/Events';\n\n/**\n * new を許可しないための Symbol\n * @type {Symbol}\n * @private\n */\nconst singletonSymbol = Symbol();\n/**\n * singleton instance, nullable\n * @type {?Cycle}\n * @private\n */\nlet instance = null;\n\n/**\n * private property key, requestAnimationFrame ID を保存するための Symbol\n * @type {Symbol}\n * @private\n */\nconst requestSymbol = Symbol();\n/**\n * private property key, this.update.bind(this) を保存するための Symbol\n * @type {Symbol}\n * @private\n */\nconst updateSymbol = Symbol();\n/**\n * private property key, requestAnimationFrame を開始したかを表す真偽値を保存するための Symbol\n * @type {Symbol}\n * @private\n */\nconst startSymbol = Symbol();\n/**\n * Cycle.UPDATE event を発火する時の Events instance を保存するための Symbol\n * @type {Symbol}\n * @private\n */\nconst eventsSymbol = Symbol();\n\n/**\n * <p>requestAnimationFrame でループイベントを発生させます</p>\n * <p>singleton なので new ではなく factory を使用し instance を作成します</p>\n *\n * ```\n * const loop:Cycle = Cycle.factory();\n * ```\n *\n * <p>requestAnimationFrame は tab が active(focus) な時のみ発生します</p>\n */\nexport class Cycle extends EventDispatcher {\n  /**\n   * singleton です\n   * @param {Symbol} checkSymbol singleton を保証するための private instance\n   * @return {Cycle} singleton instance を返します\n   */\n  constructor(checkSymbol) {\n    // checkSymbol と singleton が等価かをチェックします\n    if (checkSymbol !== singletonSymbol) {\n      throw new Error('don\\'t use new, instead use static factory method.');\n    }\n    super();\n    // instance 作成済みかをチェックし instance が null の時 this を設定します\n    if (instance !== null) {\n      return instance;\n    }\n    // onetime setting\n    instance = this;\n    // @type {number} - requestAnimationFrame return id\n    this[requestSymbol] = 0;\n    // @type {function} - update bind function\n    this[updateSymbol] = this.update.bind(this);\n    // @type {boolean} - started flag\n    this[startSymbol] = false;\n    // @type {Events} - Events\n    this[eventsSymbol] = new Events(Cycle.UPDATE, this, this);\n    // 設定済み instance を返します\n    return instance;\n  }\n  // ----------------------------------------\n  // EVENT\n  // ----------------------------------------\n  /**\n   * requestAnimationFrame 毎に発生するイベントを取得します\n   * @event UPDATE\n   * @return {string} event, cycleUpdate を返します\n   * @default cycleUpdate\n   */\n  static get UPDATE() {\n    return 'cycleUpdate';\n  }\n  // ----------------------------------------\n  // GETTER / SETTER\n  // ----------------------------------------\n  /**\n   * Events instance を取得します\n   * @return {Events} Events instance\n   */\n  static get events() {\n    return this[eventsSymbol];\n  }\n  // ----------------------------------------\n  // METHOD\n  // ----------------------------------------\n  /**\n   * loop(requestAnimationFrame) を開始します\n   * @return {boolean} start に成功すると true を返します\n   */\n  start() {\n    if (this[startSymbol]) {\n      // already start\n      console.warn('Cycle.start already start', this[startSymbol]);\n      return false;\n    }\n    this[startSymbol] = true;\n    this.update();\n\n    // @return\n    return true;\n  }\n  /**\n   * loop(cancelAnimationFrame) を止めます\n   * @param {number} [id] requestAnimationFrame id を使い cancelAnimationFrame をします\n   * @return {boolean} stop に成功すると true を返します\n   */\n  stop(id = this[requestSymbol]) {\n    if (!this[startSymbol]) {\n      // not start\n      return false;\n    }\n\n    cancelAnimationFrame(id);\n    this[startSymbol] = false;\n\n    // @return\n    return true;\n  }\n  // ----------------------------------------\n  // PRIVATE METHOD\n  // ----------------------------------------\n  /**\n   * loop(requestAnimationFrame)コールバック関数<br>Cycle.UPDATE event を発火します\n   * @return {undefined} no-return\n   */\n  update() {\n    // @type {number} - requestAnimationFrame id\n    const id = requestAnimationFrame(this[updateSymbol]);\n    this[requestSymbol] = id;\n    // @type {Events} - events\n    const events = this.events;\n    events.id = id;\n    // event fire\n    this.dispatch(events);\n  }\n  // ----------------------------------------\n  // STATIC METHOD\n  // ----------------------------------------\n  /**\n   * Cycle instance を singleton を保証し作成します\n   * @return {Cycle} Cycle instance を返します\n   */\n  static factory() {\n    return new Cycle(singletonSymbol);\n  }\n}\n"
+  },
+  {
+    "__docId__": 72,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "singletonSymbol",
+    "memberof": "src/tick/Cycle.js",
+    "longname": "src/tick/Cycle.js~singletonSymbol",
+    "access": "private",
+    "export": false,
+    "importPath": "./src/tick/Cycle.js",
+    "importStyle": null,
+    "description": "new を許可しないための Symbol",
+    "lineNumber": 23,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Symbol"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 73,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "instance",
+    "memberof": "src/tick/Cycle.js",
+    "longname": "src/tick/Cycle.js~instance",
+    "access": "private",
+    "export": false,
+    "importPath": "./src/tick/Cycle.js",
+    "importStyle": null,
+    "description": "singleton instance, nullable",
+    "lineNumber": 29,
+    "type": {
+      "nullable": true,
+      "types": [
+        "Cycle"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 74,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "requestSymbol",
+    "memberof": "src/tick/Cycle.js",
+    "longname": "src/tick/Cycle.js~requestSymbol",
+    "access": "private",
+    "export": false,
+    "importPath": "./src/tick/Cycle.js",
+    "importStyle": null,
+    "description": "private property key, requestAnimationFrame ID を保存するための Symbol",
+    "lineNumber": 36,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Symbol"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 75,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "updateSymbol",
+    "memberof": "src/tick/Cycle.js",
+    "longname": "src/tick/Cycle.js~updateSymbol",
+    "access": "private",
+    "export": false,
+    "importPath": "./src/tick/Cycle.js",
+    "importStyle": null,
+    "description": "private property key, this.update.bind(this) を保存するための Symbol",
+    "lineNumber": 42,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Symbol"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 76,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "startSymbol",
+    "memberof": "src/tick/Cycle.js",
+    "longname": "src/tick/Cycle.js~startSymbol",
+    "access": "private",
+    "export": false,
+    "importPath": "./src/tick/Cycle.js",
+    "importStyle": null,
+    "description": "private property key, requestAnimationFrame を開始したかを表す真偽値を保存するための Symbol",
+    "lineNumber": 48,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Symbol"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 77,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "eventsSymbol",
+    "memberof": "src/tick/Cycle.js",
+    "longname": "src/tick/Cycle.js~eventsSymbol",
+    "access": "private",
+    "export": false,
+    "importPath": "./src/tick/Cycle.js",
+    "importStyle": null,
+    "description": "Cycle.UPDATE event を発火する時の Events instance を保存するための Symbol",
+    "lineNumber": 54,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Symbol"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 78,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "Cycle",
+    "memberof": "src/tick/Cycle.js",
+    "longname": "src/tick/Cycle.js~Cycle",
+    "access": null,
+    "export": true,
+    "importPath": "./src/tick/Cycle.js",
+    "importStyle": "{Cycle}",
+    "description": "<p>requestAnimationFrame でループイベントを発生させます</p>\n<p>singleton なので new ではなく factory を使用し instance を作成します</p>\n```\nconst loop:Cycle = Cycle.factory();\n```\n<p>requestAnimationFrame は tab が active(focus) な時のみ発生します</p>",
+    "lineNumber": 66,
+    "interface": false,
+    "extends": [
+      "src/event/EventDispatcher.js~EventDispatcher"
+    ]
+  },
+  {
+    "__docId__": 79,
+    "kind": "constructor",
+    "static": false,
+    "variation": null,
+    "name": "constructor",
+    "memberof": "src/tick/Cycle.js~Cycle",
+    "longname": "src/tick/Cycle.js~Cycle#constructor",
+    "access": null,
+    "description": "singleton です",
+    "lineNumber": 72,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Symbol"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "checkSymbol",
+        "description": "singleton を保証するための private instance"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Cycle"
+      ],
+      "spread": false,
+      "description": "singleton instance を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 80,
+    "kind": "get",
+    "static": true,
+    "variation": null,
+    "name": "UPDATE",
+    "memberof": "src/tick/Cycle.js~Cycle",
+    "longname": "src/tick/Cycle.js~Cycle.UPDATE",
+    "access": null,
+    "description": "requestAnimationFrame 毎に発生するイベントを取得します",
+    "lineNumber": 104,
+    "unknown": [
+      {
+        "tagName": "@event",
+        "tagValue": "UPDATE"
+      },
+      {
+        "tagName": "@default",
+        "tagValue": "cycleUpdate"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": "event, cycleUpdate を返します"
+    },
+    "type": {
+      "types": [
+        "string"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 81,
+    "kind": "get",
+    "static": true,
+    "variation": null,
+    "name": "events",
+    "memberof": "src/tick/Cycle.js~Cycle",
+    "longname": "src/tick/Cycle.js~Cycle.events",
+    "access": null,
+    "description": "Events instance を取得します",
+    "lineNumber": 114,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Events"
+      ],
+      "spread": false,
+      "description": "Events instance"
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 82,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "start",
+    "memberof": "src/tick/Cycle.js~Cycle",
+    "longname": "src/tick/Cycle.js~Cycle#start",
+    "access": null,
+    "description": "loop(requestAnimationFrame) を開始します",
+    "lineNumber": 124,
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "start に成功すると true を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 83,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "stop",
+    "memberof": "src/tick/Cycle.js~Cycle",
+    "longname": "src/tick/Cycle.js~Cycle#stop",
+    "access": null,
+    "description": "loop(cancelAnimationFrame) を止めます",
+    "lineNumber": 141,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "id",
+        "description": "requestAnimationFrame id を使い cancelAnimationFrame をします"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "stop に成功すると true を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 84,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "update",
+    "memberof": "src/tick/Cycle.js~Cycle",
+    "longname": "src/tick/Cycle.js~Cycle#update",
+    "access": null,
+    "description": "loop(requestAnimationFrame)コールバック関数<br>Cycle.UPDATE event を発火します",
+    "lineNumber": 160,
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "undefined"
+      ],
+      "spread": false,
+      "description": "no-return"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 85,
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "factory",
+    "memberof": "src/tick/Cycle.js~Cycle",
+    "longname": "src/tick/Cycle.js~Cycle.factory",
+    "access": null,
+    "description": "Cycle instance を singleton を保証し作成します",
+    "lineNumber": 177,
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Cycle"
+      ],
+      "spread": false,
+      "description": "Cycle instance を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 86,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/tick/Fps.js",
+    "memberof": null,
+    "longname": "src/tick/Fps.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/04 - 14:19\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n// event\nimport { Events } from '../event/Events';\n\n// tick\nimport { Polling } from './Polling';\n\n/**\n * private property key, fps を保存するための Symbol\n * @type {Symbol}\n * @private\n */\nconst fpsSymbol = Symbol();\n\n/**\n * フレームレート毎に UPDATE イベントを発生させます\n */\nexport class Fps extends Polling {\n  /**\n   * 引数の frame rate に合わせ UPDATE イベントを発生させます\n   * @param {number} [fps=30] frame rate, default: 30\n   */\n  constructor(fps = 30) {\n    super(1000 / fps);\n    // private property\n    // @type {number} - frame rate, default: 30\n    this[fpsSymbol] = fps;\n    // @type {Events} - Events\n    const events = new Events(Fps.UPDATE, this, this);\n    events.fps = fps;\n    /**\n     * Fps.UPDATE Events instance\n     * @type {Events}\n     */\n    this.events = events;\n  }\n  // ----------------------------------------\n  // EVENT\n  // ----------------------------------------\n  /**\n   * フレームレート毎に発生するイベントを取得します\n   * @event UPDATE\n   * @return {string} event, fpsUpdate を返します\n   * @default fpsUpdate\n   */\n  static get UPDATE() {\n    return 'fpsUpdate';\n  }\n  // ----------------------------------------\n  // GETTER / SETTER\n  // ----------------------------------------\n  // fps\n  /**\n   * frame rate を取得します\n   * @return {number} frame rate を返します\n   */\n  get fps() {\n    return this[fpsSymbol];\n  }\n  /**\n   * frame rate を設定します, 1 ~ 60 の間で設定します\n   * @param {number} rate frame rate\n   */\n  set fps(rate) {\n    const events = this.events;\n    events.fps = rate;\n    this[fpsSymbol] = rate;\n    /**\n     * interval milliseconds\n     * @type {number}\n     */\n    this.polling = 1000 / rate;\n  }\n}\n"
+  },
+  {
+    "__docId__": 87,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "fpsSymbol",
+    "memberof": "src/tick/Fps.js",
+    "longname": "src/tick/Fps.js~fpsSymbol",
+    "access": "private",
+    "export": false,
+    "importPath": "./src/tick/Fps.js",
+    "importStyle": null,
+    "description": "private property key, fps を保存するための Symbol",
+    "lineNumber": 24,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Symbol"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 88,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "Fps",
+    "memberof": "src/tick/Fps.js",
+    "longname": "src/tick/Fps.js~Fps",
+    "access": null,
+    "export": true,
+    "importPath": "./src/tick/Fps.js",
+    "importStyle": "{Fps}",
+    "description": "フレームレート毎に UPDATE イベントを発生させます",
+    "lineNumber": 29,
+    "interface": false,
+    "extends": [
+      "src/tick/Polling.js~Polling"
+    ]
+  },
+  {
+    "__docId__": 89,
+    "kind": "constructor",
+    "static": false,
+    "variation": null,
+    "name": "constructor",
+    "memberof": "src/tick/Fps.js~Fps",
+    "longname": "src/tick/Fps.js~Fps#constructor",
+    "access": null,
+    "description": "引数の frame rate に合わせ UPDATE イベントを発生させます",
+    "lineNumber": 34,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "30",
+        "defaultRaw": 30,
+        "name": "fps",
+        "description": "frame rate, default: 30"
+      }
+    ],
+    "generator": false
+  },
+  {
+    "__docId__": 90,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "events",
+    "memberof": "src/tick/Fps.js~Fps",
+    "longname": "src/tick/Fps.js~Fps#events",
+    "access": null,
+    "description": "Fps.UPDATE Events instance",
+    "lineNumber": 46,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Events"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 91,
+    "kind": "get",
+    "static": true,
+    "variation": null,
+    "name": "UPDATE",
+    "memberof": "src/tick/Fps.js~Fps",
+    "longname": "src/tick/Fps.js~Fps.UPDATE",
+    "access": null,
+    "description": "フレームレート毎に発生するイベントを取得します",
+    "lineNumber": 57,
+    "unknown": [
+      {
+        "tagName": "@event",
+        "tagValue": "UPDATE"
+      },
+      {
+        "tagName": "@default",
+        "tagValue": "fpsUpdate"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": "event, fpsUpdate を返します"
+    },
+    "type": {
+      "types": [
+        "string"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 92,
+    "kind": "get",
+    "static": false,
+    "variation": null,
+    "name": "fps",
+    "memberof": "src/tick/Fps.js~Fps",
+    "longname": "src/tick/Fps.js~Fps#fps",
+    "access": null,
+    "description": "frame rate を取得します",
+    "lineNumber": 68,
+    "return": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": "frame rate を返します"
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 93,
+    "kind": "set",
+    "static": false,
+    "variation": null,
+    "name": "fps",
+    "memberof": "src/tick/Fps.js~Fps",
+    "longname": "src/tick/Fps.js~Fps#fps",
+    "access": null,
+    "description": "frame rate を設定します, 1 ~ 60 の間で設定します",
+    "lineNumber": 75,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "rate",
+        "description": "frame rate"
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 94,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "polling",
+    "memberof": "src/tick/Fps.js~Fps",
+    "longname": "src/tick/Fps.js~Fps#polling",
+    "access": null,
+    "description": "interval milliseconds",
+    "lineNumber": 83,
+    "type": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 95,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/tick/Polling.js",
+    "memberof": null,
+    "longname": "src/tick/Polling.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/04 - 16:46\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n// event\nimport { EventDispatcher } from '../event/EventDispatcher';\nimport { Events } from '../event/Events';\n\n// tick\nimport { Cycle } from './Cycle';\n\n/**\n * private property key, this.update.bind(this) を保存するための Symbol\n * @type {Symbol}\n * @private\n */\nconst updateSymbol = Symbol();\n/**\n * private property key, Cycle.UPDATE 監視を開始したかを表す真偽値を保存するための Symbol\n * @type {Symbol}\n * @private\n */\nconst startSymbol = Symbol();\n/**\n * private property key, Fps.start 時間を保存するための Symbol\n * @type {Symbol}\n * @private\n */\nconst beginSymbol = Symbol();\n/**\n * private property key, polling を保存するための Symbol\n * @type {Symbol}\n * @private\n */\nconst pollingSymbol = Symbol();\n/**\n * Polling.UPDATE event を発火する時の Events instance を保存するための Symbol\n * @type {Symbol}\n * @private\n */\nconst eventsSymbol = Symbol();\n\n/**\n * 一定間隔毎に UPDATE イベントを発生させます\n */\nexport class Polling extends EventDispatcher {\n  /**\n   * 引数の polling に合わせ UPDATE イベントを発生させます\n   * @param {number} [polling=1000] polling milliseconds\n   */\n  constructor(polling = 1000) {\n    super();\n    // @type {Cycle} - Cycle instance\n    const cycle = Cycle.factory();\n    // public property\n    /**\n     * @property {Cycle} this.cycle - Cycle instance\n     */\n    Object.assign(this, { cycle });\n\n    // private property\n    // @type {number} - polling rate(milliseconds), default: 1000(1 sec.)\n    this[pollingSymbol] = polling;\n    // @type {function} - Cycle.UPDATE event handler\n    this[updateSymbol] = this.update.bind(this);\n    // @type {boolean} - started flag\n    this[startSymbol] = false;\n    // @type {number} - 開始時間\n    this[beginSymbol] = 0;\n    // @type {Events} - Events\n    this[eventsSymbol] = new Events(Polling.UPDATE, this, this);\n  }\n  // ----------------------------------------\n  // EVENT\n  // ----------------------------------------\n  /**\n   * 一定間隔(milliseconds)毎に発生するイベント type を取得します\n   * @return {string} event, pollingUpdate を返します\n   */\n  static get UPDATE() {\n    return 'pollingUpdate';\n  }\n  // ----------------------------------------\n  // GETTER / SETTER\n  // ----------------------------------------\n  // fps\n  /**\n   * polling(milliseconds) を取得します\n   * @return {number} polling(milliseconds) を返します\n   */\n  get polling() {\n    return this[pollingSymbol];\n  }\n  /**\n   * polling(milliseconds) を設定します\n   * @param {number} rate polling(milliseconds)\n   */\n  set polling(rate) {\n    this[pollingSymbol] = rate;\n  }\n  // begin\n  /**\n   * 開始時間を取得します\n   * @return {number} 開始時間を返します\n   */\n  get begin() {\n    return this[beginSymbol];\n  }\n  /**\n   * 開始時間を設定します\n   * @param {number} time 開始時間\n   */\n  set begin(time) {\n    this[beginSymbol] = time;\n  }\n  // events\n  /**\n   * Events instance を取得します\n   * @return {Events} Events instance を返します\n   */\n  get events() {\n    return this[eventsSymbol];\n  }\n  /**\n   * Events instance を設定します\n   * @param {Events} events Events instance\n   */\n  set events(events) {\n    this[eventsSymbol] = events;\n  }\n  // flag\n  /**\n   * started flag 状態を取得します\n   * @readonly\n   * @return {boolean} 現在の started flag 状態を返します\n   */\n  get started() {\n    return this[startSymbol];\n  }\n  // ----------------------------------------\n  // METHOD\n  // ----------------------------------------\n  /**\n   * started flag を反転させ現在の started flag 状態を取得します\n   * @return {boolean} 現在の started flag 状態を返します\n   */\n  turnOver() {\n    this[startSymbol] = !this[startSymbol];\n    return this.started;\n  }\n  /**\n   * events object を発火前に作成します\n   * @param {number} begin 開始時間: 前回の発火時間\n   * @param {number} present 現在時間\n   * @return {Events} アップデートした Events を返します\n   */\n  updateEvents(begin, present) {\n    this.begin = begin;\n    // @type {Events} - start event\n    const events = this.events;\n    events.begin = begin;\n    events.present = present;\n    events.polling = this.polling;\n    return events;\n  }\n  /**\n   * cycle ループを開始します<br>\n   * watch Cycle.UPDATE event\n   * @return {Cycle} cycle ループを開始しインスタンスを返します\n   */\n  initCycle() {\n    // cycle\n    const cycle = this.cycle;\n    // bind Cycle.UPDATE\n    cycle.on(Cycle.UPDATE, this[updateSymbol]);\n    // cycle 開始\n    cycle.start();\n    return cycle;\n  }\n  /**\n   * polling を開始します\n   * @return {boolean} start に成功すると true を返します\n   */\n  start() {\n    if (this.started) {\n      // already start\n      return false;\n    }\n    // flag -> true\n    // this[startSymbol] = true;\n    this.turnOver();\n    // cycle\n    this.initCycle();\n    // @type {number} - 開始時間\n    const present = Date.now();\n    // 強制的に1回目を実行\n    this.fire(this.updateEvents(present, present));\n\n    return true;\n  }\n  /**\n   * polling を止めます\n   * @return {boolean} stop に成功すると true を返します\n   */\n  stop() {\n    if (!this.started) {\n      // not start\n      return false;\n    }\n    this.cycle.off(Cycle.UPDATE, this[updateSymbol]);\n    // this[startSymbol] = false;\n    this.turnOver();\n    return true;\n  }\n  /**\n   * Cycle.UPDATE event handler, polling を計測しイベントを発火するかを判断します\n   *\n   * @listens {Cycle.UPDATE} Cycle.UPDATE が発生すると実行されます\n   * @return {boolean} Polling.UPDATE event が発生すると true を返します\n   */\n  update() {\n    // 現在時間\n    // @type {number}\n    const present = Date.now();\n    // @type {number} - polling 間隔\n    const polling = this.polling;\n    // @type {number} - 開始時間\n    const begin = this.begin;\n    // 現在時間 が interval より大きくなったか\n    if ((present - begin) >= polling) {\n      // event 発火\n      this.fire(this.updateEvents(begin, present));\n      // 開始時間を update\n      this.begin = present;\n      // event 発生\n      return true;\n    }\n    return false;\n  }\n  /**\n   * Polling.UPDATE event を発生します\n   * @param {Events} events Polling.UPDATE event object\n   * @return {undefined} no-return\n   */\n  fire(events) {\n    this.dispatch(events);\n  }\n}\n"
+  },
+  {
+    "__docId__": 96,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "updateSymbol",
+    "memberof": "src/tick/Polling.js",
+    "longname": "src/tick/Polling.js~updateSymbol",
+    "access": "private",
+    "export": false,
+    "importPath": "./src/tick/Polling.js",
+    "importStyle": null,
+    "description": "private property key, this.update.bind(this) を保存するための Symbol",
+    "lineNumber": 25,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Symbol"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 97,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "startSymbol",
+    "memberof": "src/tick/Polling.js",
+    "longname": "src/tick/Polling.js~startSymbol",
+    "access": "private",
+    "export": false,
+    "importPath": "./src/tick/Polling.js",
+    "importStyle": null,
+    "description": "private property key, Cycle.UPDATE 監視を開始したかを表す真偽値を保存するための Symbol",
+    "lineNumber": 31,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Symbol"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 98,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "beginSymbol",
+    "memberof": "src/tick/Polling.js",
+    "longname": "src/tick/Polling.js~beginSymbol",
+    "access": "private",
+    "export": false,
+    "importPath": "./src/tick/Polling.js",
+    "importStyle": null,
+    "description": "private property key, Fps.start 時間を保存するための Symbol",
+    "lineNumber": 37,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Symbol"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 99,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "pollingSymbol",
+    "memberof": "src/tick/Polling.js",
+    "longname": "src/tick/Polling.js~pollingSymbol",
+    "access": "private",
+    "export": false,
+    "importPath": "./src/tick/Polling.js",
+    "importStyle": null,
+    "description": "private property key, polling を保存するための Symbol",
+    "lineNumber": 43,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Symbol"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 100,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "eventsSymbol",
+    "memberof": "src/tick/Polling.js",
+    "longname": "src/tick/Polling.js~eventsSymbol",
+    "access": "private",
+    "export": false,
+    "importPath": "./src/tick/Polling.js",
+    "importStyle": null,
+    "description": "Polling.UPDATE event を発火する時の Events instance を保存するための Symbol",
+    "lineNumber": 49,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Symbol"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 101,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "Polling",
+    "memberof": "src/tick/Polling.js",
+    "longname": "src/tick/Polling.js~Polling",
+    "access": null,
+    "export": true,
+    "importPath": "./src/tick/Polling.js",
+    "importStyle": "{Polling}",
+    "description": "一定間隔毎に UPDATE イベントを発生させます",
+    "lineNumber": 54,
+    "interface": false,
+    "extends": [
+      "src/event/EventDispatcher.js~EventDispatcher"
+    ]
+  },
+  {
+    "__docId__": 102,
+    "kind": "constructor",
+    "static": false,
+    "variation": null,
+    "name": "constructor",
+    "memberof": "src/tick/Polling.js~Polling",
+    "longname": "src/tick/Polling.js~Polling#constructor",
+    "access": null,
+    "description": "引数の polling に合わせ UPDATE イベントを発生させます",
+    "lineNumber": 59,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "1000",
+        "defaultRaw": 1000,
+        "name": "polling",
+        "description": "polling milliseconds"
+      }
+    ],
+    "generator": false
+  },
+  {
+    "__docId__": 103,
+    "kind": "get",
+    "static": true,
+    "variation": null,
+    "name": "UPDATE",
+    "memberof": "src/tick/Polling.js~Polling",
+    "longname": "src/tick/Polling.js~Polling.UPDATE",
+    "access": null,
+    "description": "一定間隔(milliseconds)毎に発生するイベント type を取得します",
+    "lineNumber": 88,
+    "return": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": "event, pollingUpdate を返します"
+    },
+    "type": {
+      "types": [
+        "string"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 104,
+    "kind": "get",
+    "static": false,
+    "variation": null,
+    "name": "polling",
+    "memberof": "src/tick/Polling.js~Polling",
+    "longname": "src/tick/Polling.js~Polling#polling",
+    "access": null,
+    "description": "polling(milliseconds) を取得します",
+    "lineNumber": 99,
+    "return": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": "polling(milliseconds) を返します"
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 105,
+    "kind": "set",
+    "static": false,
+    "variation": null,
+    "name": "polling",
+    "memberof": "src/tick/Polling.js~Polling",
+    "longname": "src/tick/Polling.js~Polling#polling",
+    "access": null,
+    "description": "polling(milliseconds) を設定します",
+    "lineNumber": 106,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "rate",
+        "description": "polling(milliseconds)"
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 106,
+    "kind": "get",
+    "static": false,
+    "variation": null,
+    "name": "begin",
+    "memberof": "src/tick/Polling.js~Polling",
+    "longname": "src/tick/Polling.js~Polling#begin",
+    "access": null,
+    "description": "開始時間を取得します",
+    "lineNumber": 114,
+    "return": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": "開始時間を返します"
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 107,
+    "kind": "set",
+    "static": false,
+    "variation": null,
+    "name": "begin",
+    "memberof": "src/tick/Polling.js~Polling",
+    "longname": "src/tick/Polling.js~Polling#begin",
+    "access": null,
+    "description": "開始時間を設定します",
+    "lineNumber": 121,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "time",
+        "description": "開始時間"
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 108,
+    "kind": "get",
+    "static": false,
+    "variation": null,
+    "name": "events",
+    "memberof": "src/tick/Polling.js~Polling",
+    "longname": "src/tick/Polling.js~Polling#events",
+    "access": null,
+    "description": "Events instance を取得します",
+    "lineNumber": 129,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Events"
+      ],
+      "spread": false,
+      "description": "Events instance を返します"
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 109,
+    "kind": "set",
+    "static": false,
+    "variation": null,
+    "name": "events",
+    "memberof": "src/tick/Polling.js~Polling",
+    "longname": "src/tick/Polling.js~Polling#events",
+    "access": null,
+    "description": "Events instance を設定します",
+    "lineNumber": 136,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Events"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "events",
+        "description": "Events instance"
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 110,
+    "kind": "get",
+    "static": false,
+    "variation": null,
+    "name": "started",
+    "memberof": "src/tick/Polling.js~Polling",
+    "longname": "src/tick/Polling.js~Polling#started",
+    "access": null,
+    "description": "started flag 状態を取得します",
+    "lineNumber": 145,
+    "unknown": [
+      {
+        "tagName": "@readonly",
+        "tagValue": ""
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "現在の started flag 状態を返します"
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 111,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "turnOver",
+    "memberof": "src/tick/Polling.js~Polling",
+    "longname": "src/tick/Polling.js~Polling#turnOver",
+    "access": null,
+    "description": "started flag を反転させ現在の started flag 状態を取得します",
+    "lineNumber": 155,
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "現在の started flag 状態を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 112,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "updateEvents",
+    "memberof": "src/tick/Polling.js~Polling",
+    "longname": "src/tick/Polling.js~Polling#updateEvents",
+    "access": null,
+    "description": "events object を発火前に作成します",
+    "lineNumber": 165,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "begin",
+        "description": "開始時間: 前回の発火時間"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "present",
+        "description": "現在時間"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Events"
+      ],
+      "spread": false,
+      "description": "アップデートした Events を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 113,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "begin",
+    "memberof": "src/tick/Polling.js~Polling",
+    "longname": "src/tick/Polling.js~Polling#begin",
+    "access": null,
+    "description": null,
+    "lineNumber": 166,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 114,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "initCycle",
+    "memberof": "src/tick/Polling.js~Polling",
+    "longname": "src/tick/Polling.js~Polling#initCycle",
+    "access": null,
+    "description": "cycle ループを開始します<br>\nwatch Cycle.UPDATE event",
+    "lineNumber": 179,
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Cycle"
+      ],
+      "spread": false,
+      "description": "cycle ループを開始しインスタンスを返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 115,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "start",
+    "memberof": "src/tick/Polling.js~Polling",
+    "longname": "src/tick/Polling.js~Polling#start",
+    "access": null,
+    "description": "polling を開始します",
+    "lineNumber": 192,
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "start に成功すると true を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 116,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "stop",
+    "memberof": "src/tick/Polling.js~Polling",
+    "longname": "src/tick/Polling.js~Polling#stop",
+    "access": null,
+    "description": "polling を止めます",
+    "lineNumber": 213,
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "stop に成功すると true を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 117,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "update",
+    "memberof": "src/tick/Polling.js~Polling",
+    "longname": "src/tick/Polling.js~Polling#update",
+    "access": null,
+    "description": "Cycle.UPDATE event handler, polling を計測しイベントを発火するかを判断します",
+    "lineNumber": 229,
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "Polling.UPDATE event が発生すると true を返します"
+    },
+    "listens": [
+      {
+        "types": [
+          "Cycle.UPDATE"
+        ],
+        "description": "Cycle.UPDATE が発生すると実行されます"
+      }
+    ],
+    "generator": false
+  },
+  {
+    "__docId__": 118,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "begin",
+    "memberof": "src/tick/Polling.js~Polling",
+    "longname": "src/tick/Polling.js~Polling#begin",
+    "access": null,
+    "description": null,
+    "lineNumber": 242,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 119,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "fire",
+    "memberof": "src/tick/Polling.js~Polling",
+    "longname": "src/tick/Polling.js~Polling#fire",
+    "access": null,
+    "description": "Polling.UPDATE event を発生します",
+    "lineNumber": 253,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Events"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "events",
+        "description": "Polling.UPDATE event object"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "undefined"
+      ],
+      "spread": false,
+      "description": "no-return"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 120,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/tick/Rate.js",
+    "memberof": null,
+    "longname": "src/tick/Rate.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "/**\n * @license inazumatv.com\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/16\n *\n * Copyright (c) 2011-2015 inazumatv.com, inc.\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n */\n\n// event\nimport { Events } from '../event/Events';\n\n// tick\nimport { Polling } from './Polling';\n\n/**\n * private property key, fps を保存するための Symbol\n * @type {Symbol}\n * @private\n */\nconst rateSymbol = Symbol();\n\n/**\n * private property key, count を保存するための Symbol\n * @type {Symbol}\n * @private\n */\nconst countSymbol = Symbol();\n/**\n * private property key, rates を保存するための Symbol\n * @type {Symbol}\n * @private\n */\nconst ratesSymbol = Symbol();\n/**\n * 固定値を使用し fps を決定します\n *\n * 以下のフレームレートが設定可能です\n *\n * - 30: RATE_30\n * - 20: RATE_20\n * - 15: RATE_15\n * - 12: RATE_12\n * - 10: RATE_10\n * - 6: RATE_6\n * - 5: RATE_5\n *\n */\nexport class Rate extends Polling {\n  /**\n   * 固定値フレームレート毎に UPDATE イベントを発生させます\n   * @param {number} rate fps, 固定値以外設定できません\n   */\n  constructor(rate) {\n    super(1);\n    // @type {Events - Events\n    const events = new Events(Rate.UPDATE, this, this);\n    events.rate = rate;\n    /**\n     * Rate.UPDATE Events instance\n     * @type {Events}\n     */\n    this.events = events;\n\n    // frame rate\n    this.change(rate);\n\n    // @type {number} - count, rate に達したかを計測するための counter 変数\n    this[countSymbol] = 0;\n\n    // correct rate list\n    // サポートするレートリスト\n    this[ratesSymbol] = [\n      this.RATE_30,\n      this.RATE_20,\n      this.RATE_15,\n      this.RATE_12,\n      this.RATE_10,\n      this.RATE_6,\n      this.RATE_5,\n    ];\n  }\n  // ----------------------------------------\n  // CONST\n  // ----------------------------------------\n  /**\n   * fps 30 基準値を取得します\n   * @const RATE_30\n   * @returns {number} fps 30 基準値を返します\n   * @default 2\n   */\n  static get RATE_30() {\n    return 2;\n  }\n  /**\n   * fps 20 基準値を取得します\n   * @const RATE_20\n   * @returns {number} fps 20 基準値を返します\n   * @default 3\n   */\n  static get RATE_20() {\n    return 3;\n  }\n  /**\n   * fps 15 基準値を取得します\n   * @const RATE_15\n   * @returns {number} fps 15 基準値を返します\n   * @default 4\n   */\n  static get RATE_15() {\n    return 4;\n  }\n  /**\n   * fps 12 基準値を取得します\n   * @const RATE_12\n   * @returns {number} fps 12 基準値を返します\n   * @default 5\n   */\n  static get RATE_12() {\n    return 5;\n  }\n  /**\n   * fps 10 基準値を取得します\n   * @const RATE_10\n   * @returns {number} fps 10 基準値を返します\n   * @default 6\n   */\n  static get RATE_10() {\n    return 6;\n  }\n  /**\n   * fps 6 基準値を取得します\n   * @const RATE_6\n   * @returns {number} fps 6 基準値を返します\n   * @default 10\n   */\n  static get RATE_6() {\n    return 10;\n  }\n  /**\n   * fps 5 基準値を取得します\n   * @const RATE_5\n   * @returns {number} fps 6 基準値を返します\n   * @default 12\n   */\n  static get RATE_5() {\n    return 12;\n  }\n  // ----------------------------------------\n  // EVENT\n  // ----------------------------------------\n  /**\n   * フレームレート毎に発生するイベント type を取得します\n   * @event UPDATE\n   * @return {string} event, rateUpdate を返します\n   * @default rateUpdate\n   */\n  static get UPDATE() {\n    return 'rateUpdate';\n  }\n  // ----------------------------------------\n  // GETTER / SETTER\n  // ----------------------------------------\n  /**\n   * fps 基準値を取得します\n   * @returns {number} fps 基準値を返します\n   */\n  get rate() {\n    return this[rateSymbol];\n  }\n  // ----------------------------------------\n  // METHOD\n  // ----------------------------------------\n  /**\n   * fps 基準値を設定します\n   * @throws {Error} 引数 rate が設定可能値以外の時に例外エラーが発生します\n   * @param {number} rate fps 基準値, <br>\n   * this.RATE_30, this.RATE_20, this.RATE_15, this.RATE_12, this.RATE_10, <br>\n   * this.RATE_6, this.RATE_5 の何れかが必須です\n   * @return {undefined} no-return\n   */\n  change(rate) {\n    if (this[ratesSymbol].indexof(rate) !== -1) {\n      this[rateSymbol] = rate;\n    } else {\n      throw new Error(`illegal rate: ${rate}. use const RATE_NN`);\n    }\n  }\n  /**\n   * loop(requestAnimationFrame) を開始します\n   * @return {boolean} start に成功すると true を返します\n   */\n  start() {\n    if (this.started) {\n      // already start\n      return false;\n    }\n    // flag -> true\n    this.turnOver();\n    // cycle\n    this.initCycle();\n    // 強制的に1回目を実行\n    this.fire(this.updateEvents(0, 0));\n\n    return true;\n  }\n  /**\n   * loop(requestAnimationFrame) します\n   * @returns {boolean} Rate.UPDATE event が発生すると true を返します\n   */\n  update() {\n    // 余りが 0 の時にイベントを発火します\n    if (++this[countSymbol] % this.rate === 0) {\n      this[countSymbol] = 0;\n      this.fire(this.updateEvents(0, 0));\n\n      return true;\n    }\n\n    return false;\n  }\n}\n"
+  },
+  {
+    "__docId__": 121,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "rateSymbol",
+    "memberof": "src/tick/Rate.js",
+    "longname": "src/tick/Rate.js~rateSymbol",
+    "access": "private",
+    "export": false,
+    "importPath": "./src/tick/Rate.js",
+    "importStyle": null,
+    "description": "private property key, fps を保存するための Symbol",
+    "lineNumber": 25,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Symbol"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 122,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "countSymbol",
+    "memberof": "src/tick/Rate.js",
+    "longname": "src/tick/Rate.js~countSymbol",
+    "access": "private",
+    "export": false,
+    "importPath": "./src/tick/Rate.js",
+    "importStyle": null,
+    "description": "private property key, count を保存するための Symbol",
+    "lineNumber": 32,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Symbol"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 123,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "ratesSymbol",
+    "memberof": "src/tick/Rate.js",
+    "longname": "src/tick/Rate.js~ratesSymbol",
+    "access": "private",
+    "export": false,
+    "importPath": "./src/tick/Rate.js",
+    "importStyle": null,
+    "description": "private property key, rates を保存するための Symbol",
+    "lineNumber": 38,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Symbol"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 124,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "Rate",
+    "memberof": "src/tick/Rate.js",
+    "longname": "src/tick/Rate.js~Rate",
+    "access": null,
+    "export": true,
+    "importPath": "./src/tick/Rate.js",
+    "importStyle": "{Rate}",
+    "description": "固定値を使用し fps を決定します\n以下のフレームレートが設定可能です\n- 30: RATE_30\n- 20: RATE_20\n- 15: RATE_15\n- 12: RATE_12\n- 10: RATE_10\n- 6: RATE_6\n- 5: RATE_5",
+    "lineNumber": 53,
+    "interface": false,
+    "extends": [
+      "src/tick/Polling.js~Polling"
+    ]
+  },
+  {
+    "__docId__": 125,
+    "kind": "constructor",
+    "static": false,
+    "variation": null,
+    "name": "constructor",
+    "memberof": "src/tick/Rate.js~Rate",
+    "longname": "src/tick/Rate.js~Rate#constructor",
+    "access": null,
+    "description": "固定値フレームレート毎に UPDATE イベントを発生させます",
+    "lineNumber": 58,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "rate",
+        "description": "fps, 固定値以外設定できません"
+      }
+    ],
+    "generator": false
+  },
+  {
+    "__docId__": 126,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "events",
+    "memberof": "src/tick/Rate.js~Rate",
+    "longname": "src/tick/Rate.js~Rate#events",
+    "access": null,
+    "description": "Rate.UPDATE Events instance",
+    "lineNumber": 67,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Events"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 127,
+    "kind": "get",
+    "static": true,
+    "variation": null,
+    "name": "RATE_30",
+    "memberof": "src/tick/Rate.js~Rate",
+    "longname": "src/tick/Rate.js~Rate.RATE_30",
+    "access": null,
+    "description": "fps 30 基準値を取得します",
+    "lineNumber": 96,
+    "unknown": [
+      {
+        "tagName": "@const",
+        "tagValue": "RATE_30"
+      },
+      {
+        "tagName": "@returns",
+        "tagValue": "{number} fps 30 基準値を返します"
+      },
+      {
+        "tagName": "@default",
+        "tagValue": "2"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": "fps 30 基準値を返します"
+    },
+    "type": {
+      "types": [
+        "number"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 128,
+    "kind": "get",
+    "static": true,
+    "variation": null,
+    "name": "RATE_20",
+    "memberof": "src/tick/Rate.js~Rate",
+    "longname": "src/tick/Rate.js~Rate.RATE_20",
+    "access": null,
+    "description": "fps 20 基準値を取得します",
+    "lineNumber": 105,
+    "unknown": [
+      {
+        "tagName": "@const",
+        "tagValue": "RATE_20"
+      },
+      {
+        "tagName": "@returns",
+        "tagValue": "{number} fps 20 基準値を返します"
+      },
+      {
+        "tagName": "@default",
+        "tagValue": "3"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": "fps 20 基準値を返します"
+    },
+    "type": {
+      "types": [
+        "number"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 129,
+    "kind": "get",
+    "static": true,
+    "variation": null,
+    "name": "RATE_15",
+    "memberof": "src/tick/Rate.js~Rate",
+    "longname": "src/tick/Rate.js~Rate.RATE_15",
+    "access": null,
+    "description": "fps 15 基準値を取得します",
+    "lineNumber": 114,
+    "unknown": [
+      {
+        "tagName": "@const",
+        "tagValue": "RATE_15"
+      },
+      {
+        "tagName": "@returns",
+        "tagValue": "{number} fps 15 基準値を返します"
+      },
+      {
+        "tagName": "@default",
+        "tagValue": "4"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": "fps 15 基準値を返します"
+    },
+    "type": {
+      "types": [
+        "number"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 130,
+    "kind": "get",
+    "static": true,
+    "variation": null,
+    "name": "RATE_12",
+    "memberof": "src/tick/Rate.js~Rate",
+    "longname": "src/tick/Rate.js~Rate.RATE_12",
+    "access": null,
+    "description": "fps 12 基準値を取得します",
+    "lineNumber": 123,
+    "unknown": [
+      {
+        "tagName": "@const",
+        "tagValue": "RATE_12"
+      },
+      {
+        "tagName": "@returns",
+        "tagValue": "{number} fps 12 基準値を返します"
+      },
+      {
+        "tagName": "@default",
+        "tagValue": "5"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": "fps 12 基準値を返します"
+    },
+    "type": {
+      "types": [
+        "number"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 131,
+    "kind": "get",
+    "static": true,
+    "variation": null,
+    "name": "RATE_10",
+    "memberof": "src/tick/Rate.js~Rate",
+    "longname": "src/tick/Rate.js~Rate.RATE_10",
+    "access": null,
+    "description": "fps 10 基準値を取得します",
+    "lineNumber": 132,
+    "unknown": [
+      {
+        "tagName": "@const",
+        "tagValue": "RATE_10"
+      },
+      {
+        "tagName": "@returns",
+        "tagValue": "{number} fps 10 基準値を返します"
+      },
+      {
+        "tagName": "@default",
+        "tagValue": "6"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": "fps 10 基準値を返します"
+    },
+    "type": {
+      "types": [
+        "number"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 132,
+    "kind": "get",
+    "static": true,
+    "variation": null,
+    "name": "RATE_6",
+    "memberof": "src/tick/Rate.js~Rate",
+    "longname": "src/tick/Rate.js~Rate.RATE_6",
+    "access": null,
+    "description": "fps 6 基準値を取得します",
+    "lineNumber": 141,
+    "unknown": [
+      {
+        "tagName": "@const",
+        "tagValue": "RATE_6"
+      },
+      {
+        "tagName": "@returns",
+        "tagValue": "{number} fps 6 基準値を返します"
+      },
+      {
+        "tagName": "@default",
+        "tagValue": "10"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": "fps 6 基準値を返します"
+    },
+    "type": {
+      "types": [
+        "number"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 133,
+    "kind": "get",
+    "static": true,
+    "variation": null,
+    "name": "RATE_5",
+    "memberof": "src/tick/Rate.js~Rate",
+    "longname": "src/tick/Rate.js~Rate.RATE_5",
+    "access": null,
+    "description": "fps 5 基準値を取得します",
+    "lineNumber": 150,
+    "unknown": [
+      {
+        "tagName": "@const",
+        "tagValue": "RATE_5"
+      },
+      {
+        "tagName": "@returns",
+        "tagValue": "{number} fps 6 基準値を返します"
+      },
+      {
+        "tagName": "@default",
+        "tagValue": "12"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": "fps 6 基準値を返します"
+    },
+    "type": {
+      "types": [
+        "number"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 134,
+    "kind": "get",
+    "static": true,
+    "variation": null,
+    "name": "UPDATE",
+    "memberof": "src/tick/Rate.js~Rate",
+    "longname": "src/tick/Rate.js~Rate.UPDATE",
+    "access": null,
+    "description": "フレームレート毎に発生するイベント type を取得します",
+    "lineNumber": 162,
+    "unknown": [
+      {
+        "tagName": "@event",
+        "tagValue": "UPDATE"
+      },
+      {
+        "tagName": "@default",
+        "tagValue": "rateUpdate"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": "event, rateUpdate を返します"
+    },
+    "type": {
+      "types": [
+        "string"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 135,
+    "kind": "get",
+    "static": false,
+    "variation": null,
+    "name": "rate",
+    "memberof": "src/tick/Rate.js~Rate",
+    "longname": "src/tick/Rate.js~Rate#rate",
+    "access": null,
+    "description": "fps 基準値を取得します",
+    "lineNumber": 172,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{number} fps 基準値を返します"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": "fps 基準値を返します"
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 136,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "change",
+    "memberof": "src/tick/Rate.js~Rate",
+    "longname": "src/tick/Rate.js~Rate#change",
+    "access": null,
+    "description": "fps 基準値を設定します",
+    "lineNumber": 186,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "rate",
+        "description": "fps 基準値, <br>\nthis.RATE_30, this.RATE_20, this.RATE_15, this.RATE_12, this.RATE_10, <br>\nthis.RATE_6, this.RATE_5 の何れかが必須です"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "undefined"
+      ],
+      "spread": false,
+      "description": "no-return"
+    },
+    "throws": [
+      {
+        "types": [
+          "Error"
+        ],
+        "description": "引数 rate が設定可能値以外の時に例外エラーが発生します"
+      }
+    ],
+    "generator": false
+  },
+  {
+    "__docId__": 137,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "start",
+    "memberof": "src/tick/Rate.js~Rate",
+    "longname": "src/tick/Rate.js~Rate#start",
+    "access": null,
+    "description": "loop(requestAnimationFrame) を開始します",
+    "lineNumber": 197,
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "start に成功すると true を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 138,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "update",
+    "memberof": "src/tick/Rate.js~Rate",
+    "longname": "src/tick/Rate.js~Rate#update",
+    "access": null,
+    "description": "loop(requestAnimationFrame) します",
+    "lineNumber": 215,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{boolean} Rate.UPDATE event が発生すると true を返します"
+      }
+    ],
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "Rate.UPDATE event が発生すると true を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 139,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/util/Type.js",
+    "memberof": null,
+    "longname": "src/util/Type.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/12 - 18:24\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n/**\n * 型チェックを行います\n * @static\n */\nexport class Type {\n  /**\n   * 引数(target)が関数かを調べます\n   * @param {Function|*} target 調査対象\n   * @return {boolean} 引数(target)が関数かを調べ結果を返します、true: 関数\n   */\n  static method(target) {\n    return typeof target === 'function';\n  }\n  /**\n   * 引数(target)を `!!` で調べます\n   * @param {*} target 調査対象\n   * @return {boolean} 引数(target)を `!!` で調べ結果を返します\n   */\n  static exist(target) {\n    return !!target;\n  }\n  /**\n   * 引数(target)が number かを調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)が number かを調べ結果を返します、true: number\n   */\n  static number(target) {\n    return typeof target === 'number';\n  }\n  /**\n   * 引数(target)が string かを調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)が string かを調べ結果を返します、true: string\n   */\n  static string(target) {\n    return typeof target === 'string';\n  }\n  /**\n   * 引数(target)を `Array.isArray` で配列かを調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)が 配列 かを調べ結果を返します、true: 配列\n   */\n  static array(target) {\n    return Array.isArray(target);\n  }\n}\n"
+  },
+  {
+    "__docId__": 140,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "Type",
+    "memberof": "src/util/Type.js",
+    "longname": "src/util/Type.js~Type",
+    "access": null,
+    "export": true,
+    "importPath": "./src/util/Type.js",
+    "importStyle": "{Type}",
+    "description": "型チェックを行います",
+    "lineNumber": 17,
+    "unknown": [
+      {
+        "tagName": "@static",
+        "tagValue": ""
+      }
+    ],
+    "interface": false
+  },
+  {
+    "__docId__": 141,
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "method",
+    "memberof": "src/util/Type.js~Type",
+    "longname": "src/util/Type.js~Type.method",
+    "access": null,
+    "description": "引数(target)が関数かを調べます",
+    "lineNumber": 23,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Function",
+          "*"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "target",
+        "description": "調査対象"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "引数(target)が関数かを調べ結果を返します、true: 関数"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 142,
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "exist",
+    "memberof": "src/util/Type.js~Type",
+    "longname": "src/util/Type.js~Type.exist",
+    "access": null,
+    "description": "引数(target)を `!!` で調べます",
+    "lineNumber": 31,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "*"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "target",
+        "description": "調査対象"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "引数(target)を `!!` で調べ結果を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 143,
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "number",
+    "memberof": "src/util/Type.js~Type",
+    "longname": "src/util/Type.js~Type.number",
+    "access": null,
+    "description": "引数(target)が number かを調べます",
+    "lineNumber": 39,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{boolean} 引数(target)が number かを調べ結果を返します、true: number"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "*"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "target",
+        "description": "調査対象"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "引数(target)が number かを調べ結果を返します、true: number"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 144,
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "string",
+    "memberof": "src/util/Type.js~Type",
+    "longname": "src/util/Type.js~Type.string",
+    "access": null,
+    "description": "引数(target)が string かを調べます",
+    "lineNumber": 47,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{boolean} 引数(target)が string かを調べ結果を返します、true: string"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "*"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "target",
+        "description": "調査対象"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "引数(target)が string かを調べ結果を返します、true: string"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 145,
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "array",
+    "memberof": "src/util/Type.js~Type",
+    "longname": "src/util/Type.js~Type.array",
+    "access": null,
+    "description": "引数(target)を `Array.isArray` で配列かを調べます",
+    "lineNumber": 55,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{boolean} 引数(target)が 配列 かを調べ結果を返します、true: 配列"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "*"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "target",
+        "description": "調査対象"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "引数(target)が 配列 かを調べ結果を返します、true: 配列"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 147,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Infinity",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Infinity",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 148,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "NaN",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~NaN",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 149,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "undefined",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~undefined",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 150,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "null",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~null",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 151,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Object",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 152,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~object",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 153,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Function",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 154,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~function",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 155,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Boolean",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 156,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~boolean",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 157,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Symbol",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Symbol",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 158,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Error",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Error",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 159,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "EvalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~EvalError",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 160,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "InternalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~InternalError",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 161,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "RangeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~RangeError",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 162,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "ReferenceError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~ReferenceError",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 163,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "SyntaxError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~SyntaxError",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 164,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "TypeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~TypeError",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 165,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "URIError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~URIError",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 166,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Number",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 167,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~number",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 168,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Date",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Date",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 169,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "String",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~String",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 170,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "string",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~string",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 171,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "RegExp",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~RegExp",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 172,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 173,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Int8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int8Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 174,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint8Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 175,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint8ClampedArray",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint8ClampedArray",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 176,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Int16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int16Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 177,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint16Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 178,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Int32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int32Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 179,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint32Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 180,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Float32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Float32Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 181,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Float64Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Float64Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 182,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Map",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Map",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 183,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Set",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Set",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 184,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "WeakMap",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~WeakMap",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 185,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "WeakSet",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~WeakSet",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 186,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "ArrayBuffer",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~ArrayBuffer",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 187,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "DataView",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~DataView",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 188,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "JSON",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~JSON",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 189,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Promise",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Promise",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 190,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Generator",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Generator",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 191,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "GeneratorFunction",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~GeneratorFunction",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 192,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Reflect",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Reflect",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 193,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Proxy",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Proxy",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 195,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "CanvasRenderingContext2D",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~CanvasRenderingContext2D",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 196,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "DocumentFragment",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~DocumentFragment",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 197,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Element",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Element",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~Element",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 198,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Event",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Event",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~Event",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 199,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Node",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Node",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~Node",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 200,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "NodeList",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/NodeList",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~NodeList",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 201,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "XMLHttpRequest",
+    "externalLink": "https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~XMLHttpRequest",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 202,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "AudioContext",
+    "externalLink": "https://developer.mozilla.org/en/docs/Web/API/AudioContext",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~AudioContext",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  }
+]

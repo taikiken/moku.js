@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/event/Events.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+<link data-ice="userStyle" rel="stylesheet" href="user/css/0-esdoc_extension.css">
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">event</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html">EventDispatcher</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Events.js~Events.html">Events</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scroll.js~Scroll.html">Scroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">net</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">tick</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html">Cycle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Fps.js~Fps.html">Fps</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Polling.js~Polling.html">Polling</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Rate.js~Rate.html">Rate</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/event/Events.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/07/12 - 19:07
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
+
+/**
+ * custom Event &#x306E;&#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x95A2;&#x6570;&#x5F15;&#x6570;&#x306B;&#x9001;&#x3089;&#x308C;&#x308B; Event Object
+ *
+ * EventDispatcher.dispatch &#x3059;&#x308B;&#x6642;&#x306E;&#x5F15;&#x6570;&#x3068;&#x3057;&#x3066;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;
+ *
+ * 3&#x3064;&#x306E;&#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3;&#x306F;&#x5FC5;&#x9808;&#x9805;&#x76EE;&#x3067;&#x3059;&#x3001;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x306B;&#x3042;&#x308F;&#x305B;&#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3;&#x3092;&#x8FFD;&#x52A0;&#x3057;&#x307E;&#x3059;
+ *
+ * - type: string, &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x7A2E;&#x985E;
+ * - target: *, &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x767A;&#x751F;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;
+ * - currentTarget: *, current &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x767A;&#x751F;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;
+ */
+export class Events {
+  /**
+   * custom Event Object
+   * @param {string} type &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x7A2E;&#x985E;
+   * @param {*} [target=this] &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x767A;&#x751F;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;
+   * @param {*} [currentTarget=this] current &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x767A;&#x751F;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;
+   * */
+  constructor(type, target = this, currentTarget = this) {
+    // https://github.com/esdoc/esdoc/issues/305
+    /**
+     * @property {string} this.type - &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x7A2E;&#x985E;
+     * @property {*} this.target - &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x767A;&#x751F;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;
+     * @property {*} this.currentTarget - current &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x767A;&#x751F;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;
+     */
+    Object.assign(this, { type, target, currentTarget });
+  }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.4)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

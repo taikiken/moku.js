@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/tick/Fps.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+<link data-ice="userStyle" rel="stylesheet" href="user/css/0-esdoc_extension.css">
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">event</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html">EventDispatcher</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Events.js~Events.html">Events</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scroll.js~Scroll.html">Scroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">net</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">tick</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html">Cycle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Fps.js~Fps.html">Fps</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Polling.js~Polling.html">Polling</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Rate.js~Rate.html">Rate</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/tick/Fps.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/07/04 - 14:19
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
+
+// event
+import { Events } from &apos;../event/Events&apos;;
+
+// tick
+import { Polling } from &apos;./Polling&apos;;
+
+/**
+ * private property key, fps &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+ * @type {Symbol}
+ * @private
+ */
+const fpsSymbol = Symbol();
+
+/**
+ * &#x30D5;&#x30EC;&#x30FC;&#x30E0;&#x30EC;&#x30FC;&#x30C8;&#x6BCE;&#x306B; UPDATE &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x307E;&#x3059;
+ */
+export class Fps extends Polling {
+  /**
+   * &#x5F15;&#x6570;&#x306E; frame rate &#x306B;&#x5408;&#x308F;&#x305B; UPDATE &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x307E;&#x3059;
+   * @param {number} [fps=30] frame rate, default: 30
+   */
+  constructor(fps = 30) {
+    super(1000 / fps);
+    // private property
+    // @type {number} - frame rate, default: 30
+    this[fpsSymbol] = fps;
+    // @type {Events} - Events
+    const events = new Events(Fps.UPDATE, this, this);
+    events.fps = fps;
+    /**
+     * Fps.UPDATE Events instance
+     * @type {Events}
+     */
+    this.events = events;
+  }
+  // ----------------------------------------
+  // EVENT
+  // ----------------------------------------
+  /**
+   * &#x30D5;&#x30EC;&#x30FC;&#x30E0;&#x30EC;&#x30FC;&#x30C8;&#x6BCE;&#x306B;&#x767A;&#x751F;&#x3059;&#x308B;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @event UPDATE
+   * @return {string} event, fpsUpdate &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @default fpsUpdate
+   */
+  static get UPDATE() {
+    return &apos;fpsUpdate&apos;;
+  }
+  // ----------------------------------------
+  // GETTER / SETTER
+  // ----------------------------------------
+  // fps
+  /**
+   * frame rate &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @return {number} frame rate &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  get fps() {
+    return this[fpsSymbol];
+  }
+  /**
+   * frame rate &#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;, 1 ~ 60 &#x306E;&#x9593;&#x3067;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
+   * @param {number} rate frame rate
+   */
+  set fps(rate) {
+    const events = this.events;
+    events.fps = rate;
+    this[fpsSymbol] = rate;
+    /**
+     * interval milliseconds
+     * @type {number}
+     */
+    this.polling = 1000 / rate;
+  }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.4)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

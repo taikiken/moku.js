@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/tick/Polling.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+<link data-ice="userStyle" rel="stylesheet" href="user/css/0-esdoc_extension.css">
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">event</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html">EventDispatcher</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Events.js~Events.html">Events</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scroll.js~Scroll.html">Scroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">net</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">tick</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html">Cycle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Fps.js~Fps.html">Fps</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Polling.js~Polling.html">Polling</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Rate.js~Rate.html">Rate</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/tick/Polling.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/07/04 - 16:46
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
+
+// event
+import { EventDispatcher } from &apos;../event/EventDispatcher&apos;;
+import { Events } from &apos;../event/Events&apos;;
+
+// tick
+import { Cycle } from &apos;./Cycle&apos;;
+
+/**
+ * private property key, this.update.bind(this) &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+ * @type {Symbol}
+ * @private
+ */
+const updateSymbol = Symbol();
+/**
+ * private property key, Cycle.UPDATE &#x76E3;&#x8996;&#x3092;&#x958B;&#x59CB;&#x3057;&#x305F;&#x304B;&#x3092;&#x8868;&#x3059;&#x771F;&#x507D;&#x5024;&#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+ * @type {Symbol}
+ * @private
+ */
+const startSymbol = Symbol();
+/**
+ * private property key, Fps.start &#x6642;&#x9593;&#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+ * @type {Symbol}
+ * @private
+ */
+const beginSymbol = Symbol();
+/**
+ * private property key, polling &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+ * @type {Symbol}
+ * @private
+ */
+const pollingSymbol = Symbol();
+/**
+ * Polling.UPDATE event &#x3092;&#x767A;&#x706B;&#x3059;&#x308B;&#x6642;&#x306E; Events instance &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+ * @type {Symbol}
+ * @private
+ */
+const eventsSymbol = Symbol();
+
+/**
+ * &#x4E00;&#x5B9A;&#x9593;&#x9694;&#x6BCE;&#x306B; UPDATE &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x307E;&#x3059;
+ */
+export class Polling extends EventDispatcher {
+  /**
+   * &#x5F15;&#x6570;&#x306E; polling &#x306B;&#x5408;&#x308F;&#x305B; UPDATE &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x307E;&#x3059;
+   * @param {number} [polling=1000] polling milliseconds
+   */
+  constructor(polling = 1000) {
+    super();
+    // @type {Cycle} - Cycle instance
+    const cycle = Cycle.factory();
+    // public property
+    /**
+     * @property {Cycle} this.cycle - Cycle instance
+     */
+    Object.assign(this, { cycle });
+
+    // private property
+    // @type {number} - polling rate(milliseconds), default: 1000(1 sec.)
+    this[pollingSymbol] = polling;
+    // @type {function} - Cycle.UPDATE event handler
+    this[updateSymbol] = this.update.bind(this);
+    // @type {boolean} - started flag
+    this[startSymbol] = false;
+    // @type {number} - &#x958B;&#x59CB;&#x6642;&#x9593;
+    this[beginSymbol] = 0;
+    // @type {Events} - Events
+    this[eventsSymbol] = new Events(Polling.UPDATE, this, this);
+  }
+  // ----------------------------------------
+  // EVENT
+  // ----------------------------------------
+  /**
+   * &#x4E00;&#x5B9A;&#x9593;&#x9694;(milliseconds)&#x6BCE;&#x306B;&#x767A;&#x751F;&#x3059;&#x308B;&#x30A4;&#x30D9;&#x30F3;&#x30C8; type &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @return {string} event, pollingUpdate &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  static get UPDATE() {
+    return &apos;pollingUpdate&apos;;
+  }
+  // ----------------------------------------
+  // GETTER / SETTER
+  // ----------------------------------------
+  // fps
+  /**
+   * polling(milliseconds) &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @return {number} polling(milliseconds) &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  get polling() {
+    return this[pollingSymbol];
+  }
+  /**
+   * polling(milliseconds) &#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
+   * @param {number} rate polling(milliseconds)
+   */
+  set polling(rate) {
+    this[pollingSymbol] = rate;
+  }
+  // begin
+  /**
+   * &#x958B;&#x59CB;&#x6642;&#x9593;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @return {number} &#x958B;&#x59CB;&#x6642;&#x9593;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  get begin() {
+    return this[beginSymbol];
+  }
+  /**
+   * &#x958B;&#x59CB;&#x6642;&#x9593;&#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
+   * @param {number} time &#x958B;&#x59CB;&#x6642;&#x9593;
+   */
+  set begin(time) {
+    this[beginSymbol] = time;
+  }
+  // events
+  /**
+   * Events instance &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @return {Events} Events instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  get events() {
+    return this[eventsSymbol];
+  }
+  /**
+   * Events instance &#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
+   * @param {Events} events Events instance
+   */
+  set events(events) {
+    this[eventsSymbol] = events;
+  }
+  // flag
+  /**
+   * started flag &#x72B6;&#x614B;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @readonly
+   * @return {boolean} &#x73FE;&#x5728;&#x306E; started flag &#x72B6;&#x614B;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  get started() {
+    return this[startSymbol];
+  }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
+  /**
+   * started flag &#x3092;&#x53CD;&#x8EE2;&#x3055;&#x305B;&#x73FE;&#x5728;&#x306E; started flag &#x72B6;&#x614B;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @return {boolean} &#x73FE;&#x5728;&#x306E; started flag &#x72B6;&#x614B;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  turnOver() {
+    this[startSymbol] = !this[startSymbol];
+    return this.started;
+  }
+  /**
+   * events object &#x3092;&#x767A;&#x706B;&#x524D;&#x306B;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;
+   * @param {number} begin &#x958B;&#x59CB;&#x6642;&#x9593;: &#x524D;&#x56DE;&#x306E;&#x767A;&#x706B;&#x6642;&#x9593;
+   * @param {number} present &#x73FE;&#x5728;&#x6642;&#x9593;
+   * @return {Events} &#x30A2;&#x30C3;&#x30D7;&#x30C7;&#x30FC;&#x30C8;&#x3057;&#x305F; Events &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  updateEvents(begin, present) {
+    this.begin = begin;
+    // @type {Events} - start event
+    const events = this.events;
+    events.begin = begin;
+    events.present = present;
+    events.polling = this.polling;
+    return events;
+  }
+  /**
+   * cycle &#x30EB;&#x30FC;&#x30D7;&#x3092;&#x958B;&#x59CB;&#x3057;&#x307E;&#x3059;&lt;br&gt;
+   * watch Cycle.UPDATE event
+   * @return {Cycle} cycle &#x30EB;&#x30FC;&#x30D7;&#x3092;&#x958B;&#x59CB;&#x3057;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  initCycle() {
+    // cycle
+    const cycle = this.cycle;
+    // bind Cycle.UPDATE
+    cycle.on(Cycle.UPDATE, this[updateSymbol]);
+    // cycle &#x958B;&#x59CB;
+    cycle.start();
+    return cycle;
+  }
+  /**
+   * polling &#x3092;&#x958B;&#x59CB;&#x3057;&#x307E;&#x3059;
+   * @return {boolean} start &#x306B;&#x6210;&#x529F;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  start() {
+    if (this.started) {
+      // already start
+      return false;
+    }
+    // flag -&gt; true
+    // this[startSymbol] = true;
+    this.turnOver();
+    // cycle
+    this.initCycle();
+    // @type {number} - &#x958B;&#x59CB;&#x6642;&#x9593;
+    const present = Date.now();
+    // &#x5F37;&#x5236;&#x7684;&#x306B;1&#x56DE;&#x76EE;&#x3092;&#x5B9F;&#x884C;
+    this.fire(this.updateEvents(present, present));
+
+    return true;
+  }
+  /**
+   * polling &#x3092;&#x6B62;&#x3081;&#x307E;&#x3059;
+   * @return {boolean} stop &#x306B;&#x6210;&#x529F;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  stop() {
+    if (!this.started) {
+      // not start
+      return false;
+    }
+    this.cycle.off(Cycle.UPDATE, this[updateSymbol]);
+    // this[startSymbol] = false;
+    this.turnOver();
+    return true;
+  }
+  /**
+   * Cycle.UPDATE event handler, polling &#x3092;&#x8A08;&#x6E2C;&#x3057;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x706B;&#x3059;&#x308B;&#x304B;&#x3092;&#x5224;&#x65AD;&#x3057;&#x307E;&#x3059;
+   *
+   * @listens {Cycle.UPDATE} Cycle.UPDATE &#x304C;&#x767A;&#x751F;&#x3059;&#x308B;&#x3068;&#x5B9F;&#x884C;&#x3055;&#x308C;&#x307E;&#x3059;
+   * @return {boolean} Polling.UPDATE event &#x304C;&#x767A;&#x751F;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  update() {
+    // &#x73FE;&#x5728;&#x6642;&#x9593;
+    // @type {number}
+    const present = Date.now();
+    // @type {number} - polling &#x9593;&#x9694;
+    const polling = this.polling;
+    // @type {number} - &#x958B;&#x59CB;&#x6642;&#x9593;
+    const begin = this.begin;
+    // &#x73FE;&#x5728;&#x6642;&#x9593; &#x304C; interval &#x3088;&#x308A;&#x5927;&#x304D;&#x304F;&#x306A;&#x3063;&#x305F;&#x304B;
+    if ((present - begin) &gt;= polling) {
+      // event &#x767A;&#x706B;
+      this.fire(this.updateEvents(begin, present));
+      // &#x958B;&#x59CB;&#x6642;&#x9593;&#x3092; update
+      this.begin = present;
+      // event &#x767A;&#x751F;
+      return true;
+    }
+    return false;
+  }
+  /**
+   * Polling.UPDATE event &#x3092;&#x767A;&#x751F;&#x3057;&#x307E;&#x3059;
+   * @param {Events} events Polling.UPDATE event object
+   * @return {undefined} no-return
+   */
+  fire(events) {
+    this.dispatch(events);
+  }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.4)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/tick/Rate.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+<link data-ice="userStyle" rel="stylesheet" href="user/css/0-esdoc_extension.css">
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">event</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html">EventDispatcher</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Events.js~Events.html">Events</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scroll.js~Scroll.html">Scroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">net</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">tick</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html">Cycle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Fps.js~Fps.html">Fps</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Polling.js~Polling.html">Polling</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Rate.js~Rate.html">Rate</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/tick/Rate.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * @license inazumatv.com
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/07/16
+ *
+ * Copyright (c) 2011-2015 inazumatv.com, inc.
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ */
+
+// event
+import { Events } from &apos;../event/Events&apos;;
+
+// tick
+import { Polling } from &apos;./Polling&apos;;
+
+/**
+ * private property key, fps &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+ * @type {Symbol}
+ * @private
+ */
+const rateSymbol = Symbol();
+
+/**
+ * private property key, count &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+ * @type {Symbol}
+ * @private
+ */
+const countSymbol = Symbol();
+/**
+ * private property key, rates &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+ * @type {Symbol}
+ * @private
+ */
+const ratesSymbol = Symbol();
+/**
+ * &#x56FA;&#x5B9A;&#x5024;&#x3092;&#x4F7F;&#x7528;&#x3057; fps &#x3092;&#x6C7A;&#x5B9A;&#x3057;&#x307E;&#x3059;
+ *
+ * &#x4EE5;&#x4E0B;&#x306E;&#x30D5;&#x30EC;&#x30FC;&#x30E0;&#x30EC;&#x30FC;&#x30C8;&#x304C;&#x8A2D;&#x5B9A;&#x53EF;&#x80FD;&#x3067;&#x3059;
+ *
+ * - 30: RATE_30
+ * - 20: RATE_20
+ * - 15: RATE_15
+ * - 12: RATE_12
+ * - 10: RATE_10
+ * - 6: RATE_6
+ * - 5: RATE_5
+ *
+ */
+export class Rate extends Polling {
+  /**
+   * &#x56FA;&#x5B9A;&#x5024;&#x30D5;&#x30EC;&#x30FC;&#x30E0;&#x30EC;&#x30FC;&#x30C8;&#x6BCE;&#x306B; UPDATE &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x307E;&#x3059;
+   * @param {number} rate fps, &#x56FA;&#x5B9A;&#x5024;&#x4EE5;&#x5916;&#x8A2D;&#x5B9A;&#x3067;&#x304D;&#x307E;&#x305B;&#x3093;
+   */
+  constructor(rate) {
+    super(1);
+    // @type {Events - Events
+    const events = new Events(Rate.UPDATE, this, this);
+    events.rate = rate;
+    /**
+     * Rate.UPDATE Events instance
+     * @type {Events}
+     */
+    this.events = events;
+
+    // frame rate
+    this.change(rate);
+
+    // @type {number} - count, rate &#x306B;&#x9054;&#x3057;&#x305F;&#x304B;&#x3092;&#x8A08;&#x6E2C;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; counter &#x5909;&#x6570;
+    this[countSymbol] = 0;
+
+    // correct rate list
+    // &#x30B5;&#x30DD;&#x30FC;&#x30C8;&#x3059;&#x308B;&#x30EC;&#x30FC;&#x30C8;&#x30EA;&#x30B9;&#x30C8;
+    this[ratesSymbol] = [
+      this.RATE_30,
+      this.RATE_20,
+      this.RATE_15,
+      this.RATE_12,
+      this.RATE_10,
+      this.RATE_6,
+      this.RATE_5,
+    ];
+  }
+  // ----------------------------------------
+  // CONST
+  // ----------------------------------------
+  /**
+   * fps 30 &#x57FA;&#x6E96;&#x5024;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @const RATE_30
+   * @returns {number} fps 30 &#x57FA;&#x6E96;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @default 2
+   */
+  static get RATE_30() {
+    return 2;
+  }
+  /**
+   * fps 20 &#x57FA;&#x6E96;&#x5024;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @const RATE_20
+   * @returns {number} fps 20 &#x57FA;&#x6E96;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @default 3
+   */
+  static get RATE_20() {
+    return 3;
+  }
+  /**
+   * fps 15 &#x57FA;&#x6E96;&#x5024;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @const RATE_15
+   * @returns {number} fps 15 &#x57FA;&#x6E96;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @default 4
+   */
+  static get RATE_15() {
+    return 4;
+  }
+  /**
+   * fps 12 &#x57FA;&#x6E96;&#x5024;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @const RATE_12
+   * @returns {number} fps 12 &#x57FA;&#x6E96;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @default 5
+   */
+  static get RATE_12() {
+    return 5;
+  }
+  /**
+   * fps 10 &#x57FA;&#x6E96;&#x5024;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @const RATE_10
+   * @returns {number} fps 10 &#x57FA;&#x6E96;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @default 6
+   */
+  static get RATE_10() {
+    return 6;
+  }
+  /**
+   * fps 6 &#x57FA;&#x6E96;&#x5024;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @const RATE_6
+   * @returns {number} fps 6 &#x57FA;&#x6E96;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @default 10
+   */
+  static get RATE_6() {
+    return 10;
+  }
+  /**
+   * fps 5 &#x57FA;&#x6E96;&#x5024;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @const RATE_5
+   * @returns {number} fps 6 &#x57FA;&#x6E96;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @default 12
+   */
+  static get RATE_5() {
+    return 12;
+  }
+  // ----------------------------------------
+  // EVENT
+  // ----------------------------------------
+  /**
+   * &#x30D5;&#x30EC;&#x30FC;&#x30E0;&#x30EC;&#x30FC;&#x30C8;&#x6BCE;&#x306B;&#x767A;&#x751F;&#x3059;&#x308B;&#x30A4;&#x30D9;&#x30F3;&#x30C8; type &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @event UPDATE
+   * @return {string} event, rateUpdate &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @default rateUpdate
+   */
+  static get UPDATE() {
+    return &apos;rateUpdate&apos;;
+  }
+  // ----------------------------------------
+  // GETTER / SETTER
+  // ----------------------------------------
+  /**
+   * fps &#x57FA;&#x6E96;&#x5024;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @returns {number} fps &#x57FA;&#x6E96;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  get rate() {
+    return this[rateSymbol];
+  }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
+  /**
+   * fps &#x57FA;&#x6E96;&#x5024;&#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
+   * @throws {Error} &#x5F15;&#x6570; rate &#x304C;&#x8A2D;&#x5B9A;&#x53EF;&#x80FD;&#x5024;&#x4EE5;&#x5916;&#x306E;&#x6642;&#x306B;&#x4F8B;&#x5916;&#x30A8;&#x30E9;&#x30FC;&#x304C;&#x767A;&#x751F;&#x3057;&#x307E;&#x3059;
+   * @param {number} rate fps &#x57FA;&#x6E96;&#x5024;, &lt;br&gt;
+   * this.RATE_30, this.RATE_20, this.RATE_15, this.RATE_12, this.RATE_10, &lt;br&gt;
+   * this.RATE_6, this.RATE_5 &#x306E;&#x4F55;&#x308C;&#x304B;&#x304C;&#x5FC5;&#x9808;&#x3067;&#x3059;
+   * @return {undefined} no-return
+   */
+  change(rate) {
+    if (this[ratesSymbol].indexof(rate) !== -1) {
+      this[rateSymbol] = rate;
+    } else {
+      throw new Error(`illegal rate: ${rate}. use const RATE_NN`);
+    }
+  }
+  /**
+   * loop(requestAnimationFrame) &#x3092;&#x958B;&#x59CB;&#x3057;&#x307E;&#x3059;
+   * @return {boolean} start &#x306B;&#x6210;&#x529F;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  start() {
+    if (this.started) {
+      // already start
+      return false;
+    }
+    // flag -&gt; true
+    this.turnOver();
+    // cycle
+    this.initCycle();
+    // &#x5F37;&#x5236;&#x7684;&#x306B;1&#x56DE;&#x76EE;&#x3092;&#x5B9F;&#x884C;
+    this.fire(this.updateEvents(0, 0));
+
+    return true;
+  }
+  /**
+   * loop(requestAnimationFrame) &#x3057;&#x307E;&#x3059;
+   * @returns {boolean} Rate.UPDATE event &#x304C;&#x767A;&#x751F;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  update() {
+    // &#x4F59;&#x308A;&#x304C; 0 &#x306E;&#x6642;&#x306B;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x706B;&#x3057;&#x307E;&#x3059;
+    if (++this[countSymbol] % this.rate === 0) {
+      this[countSymbol] = 0;
+      this.fire(this.updateEvents(0, 0));
+
+      return true;
+    }
+
+    return false;
+  }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.4)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
