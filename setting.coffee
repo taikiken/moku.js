@@ -139,7 +139,7 @@ patterns = [
   }
   {
     match: 'copyright'
-    replacement: 'Parachute'
+    replacement: 'inazumatv.com'
   }
 ]
 
