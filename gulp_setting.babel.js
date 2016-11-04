@@ -26,6 +26,7 @@ import gulpLoadPlugins from 'gulp-load-plugins';
 import runSequence from 'run-sequence';
 import browserSync from 'browser-sync';
 import webpack from 'webpack';
+import del from 'del';
 
 // --------------------------------------
 //  CONSTANT
@@ -35,8 +36,10 @@ const $ = gulpLoadPlugins();
 // plugins
 const $$ = {};
 $$.reload = browserSync.reload;
+$$.browserSync = browserSync;
 $$.runSequence = runSequence;
 $$.webpack = webpack;
+$$.del = del;
 
 // --------------------------------------
 //  DIRECTORY
