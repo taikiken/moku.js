@@ -54,30 +54,31 @@
 	 *
 	 * This notice shall be included in all copies or substantial portions of the Software.
 	 * 0.0.1
-	 * 2016-11-04 09:29:44
+	 * 2016-11-04 10:58:59
 	 */
 	// use strict は本来不要でエラーになる
 	// 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
 	/* eslint strict: [0, "global"] */
+
 	'use strict';
 
 	// event
-	import { EventDispatcher } from './event/EventDispatcher';
-	import { Events } from './event/Events';
-	import { Scroll } from './event/Scroll';
-	import { Wheel } from './event/Wheel';
+	import { default as EventDispatcher } from './event/EventDispatcher';
+	import { default as Events } from './event/Events';
+	import { default as Scroll } from './event/Scroll';
+	import { default as Wheel } from './event/Wheel';
 
 	// net
-	import { Ajax } from './net/Ajax';
+	import { default as Ajax } from './net/Ajax';
 
 	// tick
-	import { Cycle } from './tick/Cycle';
-	import { Fps } from './tick/Fps';
-	import { Polling } from './tick/Polling';
-	import { Rate } from './tick/Rate';
+	import { default as Cycle } from './tick/Cycle';
+	import { default as Fps } from './tick/Fps';
+	import { default as Polling } from './tick/Polling';
+	import { default as Rate } from './tick/Rate';
 
 	// util
-	import { Type } from './util/Type';
+	import { default as Type } from './util/Type';
 	/**
 	 * **MOKU**
 	 * <p>global Object</p>
@@ -94,7 +95,7 @@
 	 * build 日時を取得します
 	 * @return {string}  build 日時を返します
 	 */
-	MOKU.build = () => '2016-11-04 09:29:44';
+	MOKU.build = () => '2016-11-04 10:58:59';
 	/**
 	 * MOKU.event
 	 * @type {Object} MOKU.event object を返します

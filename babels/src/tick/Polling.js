@@ -11,47 +11,47 @@
  */
 
 // event
-import { EventDispatcher } from '../event/EventDispatcher';
-import { Events } from '../event/Events';
+import { default as EventDispatcher } from '../event/EventDispatcher';
+import { default as Events } from '../event/Events';
 
 // tick
-import { Cycle } from './Cycle';
+import { default as Cycle } from './Cycle';
 
 /**
  * private property key, this.update.bind(this) を保存するための Symbol
  * @type {Symbol}
  * @private
  */
-const updateSymbol = Symbol();
+const updateSymbol = Symbol('bound update');
 /**
  * private property key, Cycle.UPDATE 監視を開始したかを表す真偽値を保存するための Symbol
  * @type {Symbol}
  * @private
  */
-const startSymbol = Symbol();
+const startSymbol = Symbol('is started watch Cycle.UPDATE flag');
 /**
  * private property key, Fps.start 時間を保存するための Symbol
  * @type {Symbol}
  * @private
  */
-const beginSymbol = Symbol();
+const beginSymbol = Symbol('start time');
 /**
  * private property key, polling を保存するための Symbol
  * @type {Symbol}
  * @private
  */
-const pollingSymbol = Symbol();
+const pollingSymbol = Symbol('polling duration');
 /**
  * Polling.UPDATE event を発火する時の Events instance を保存するための Symbol
  * @type {Symbol}
  * @private
  */
-const eventsSymbol = Symbol();
+const eventsSymbol = Symbol('Polling.UPDATE Events instance');
 
 /**
  * 一定間隔毎に UPDATE イベントを発生させます
  */
-export class Polling extends EventDispatcher {
+export default class Polling extends EventDispatcher {
   /**
    * 引数の polling に合わせ UPDATE イベントを発生させます
    * @param {number} [polling=1000] polling milliseconds
@@ -148,6 +148,16 @@ export class Polling extends EventDispatcher {
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
+  /**
+   * polling 時間を変更します<br>
+   * 1. プロパティ polling 変更
+   * 1. update 実行
+   * @param {number} polling polling 時間
+   */
+  change(polling) {
+    this.polling = polling;
+    this.update();
+  }
   /**
    * started flag を反転させ現在の started flag 状態を取得します
    * @return {boolean} 現在の started flag 状態を返します

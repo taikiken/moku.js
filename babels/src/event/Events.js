@@ -21,7 +21,7 @@
  * - target: *, イベント発生インスタンス
  * - currentTarget: *, current イベント発生インスタンス
  */
-export class Events {
+export default class Events {
   /**
    * custom Event Object
    * @param {string} type イベント種類

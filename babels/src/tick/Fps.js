@@ -11,22 +11,22 @@
  */
 
 // event
-import { Events } from '../event/Events';
+import { default as Events } from '../event/Events';
 
 // tick
-import { Polling } from './Polling';
+import { default as Polling } from './Polling';
 
 /**
  * private property key, fps を保存するための Symbol
  * @type {Symbol}
  * @private
  */
-const fpsSymbol = Symbol();
+const fpsSymbol = Symbol('Singleton Fps Symbol');
 
 /**
  * フレームレート毎に UPDATE イベントを発生させます
  */
-export class Fps extends Polling {
+export default class Fps extends Polling {
   /**
    * 引数の frame rate に合わせ UPDATE イベントを発生させます
    * @param {number} [fps=30] frame rate, default: 30

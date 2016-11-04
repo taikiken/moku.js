@@ -12,19 +12,20 @@
  */
 
 // event
-import { EventDispatcher } from '../event/EventDispatcher';
-import { Events } from '../event/Events';
+import { default as EventDispatcher } from '../event/EventDispatcher';
+import { default as Events } from '../event/Events';
 
 /**
  * new を許可しないための Symbol
  * @type {Symbol}
  * @private
  */
-const singletonSymbol = Symbol();
+const singletonSymbol = Symbol('singleton instance');
 /**
  * singleton instance, nullable
  * @type {?Cycle}
  * @private
+ * @static
  */
 let instance = null;
 
@@ -33,37 +34,37 @@ let instance = null;
  * @type {Symbol}
  * @private
  */
-const requestSymbol = Symbol();
+const requestSymbol = Symbol('requestAnimationFrame id');
 /**
  * private property key, this.update.bind(this) を保存するための Symbol
  * @type {Symbol}
  * @private
  */
-const updateSymbol = Symbol();
+const updateSymbol = Symbol('bind update');
 /**
  * private property key, requestAnimationFrame を開始したかを表す真偽値を保存するための Symbol
  * @type {Symbol}
  * @private
  */
-const startSymbol = Symbol();
+const startSymbol = Symbol('is requestAnimationFrame started flag');
 /**
  * Cycle.UPDATE event を発火する時の Events instance を保存するための Symbol
  * @type {Symbol}
  * @private
  */
-const eventsSymbol = Symbol();
+const eventsSymbol = Symbol('Cycle.UPDATE Events instance');
 
 /**
- * <p>requestAnimationFrame でループイベントを発生させます</p>
+ * <p>requestAnimationFrame を使用しループイベントを発生させます</p>
  * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
  *
  * ```
- * const loop:Cycle = Cycle.factory();
+ * const loop = Cycle.factory();
  * ```
  *
  * <p>requestAnimationFrame は tab が active(focus) な時のみ発生します</p>
  */
-export class Cycle extends EventDispatcher {
+export default class Cycle extends EventDispatcher {
   /**
    * singleton です
    * @param {Symbol} checkSymbol singleton を保証するための private instance
@@ -74,21 +75,25 @@ export class Cycle extends EventDispatcher {
     if (checkSymbol !== singletonSymbol) {
       throw new Error('don\'t use new, instead use static factory method.');
     }
-    super();
     // instance 作成済みかをチェックし instance が null の時 this を設定します
     if (instance !== null) {
       return instance;
     }
+
+    super();
+    // -------------------------------
     // onetime setting
     instance = this;
+    // @type {Events} - Events
+    this[eventsSymbol] = new Events(Cycle.UPDATE, this, this);
+
     // @type {number} - requestAnimationFrame return id
     this[requestSymbol] = 0;
     // @type {function} - update bind function
     this[updateSymbol] = this.update.bind(this);
     // @type {boolean} - started flag
     this[startSymbol] = false;
-    // @type {Events} - Events
-    this[eventsSymbol] = new Events(Cycle.UPDATE, this, this);
+
     // 設定済み instance を返します
     return instance;
   }
@@ -111,7 +116,7 @@ export class Cycle extends EventDispatcher {
    * Events instance を取得します
    * @return {Events} Events instance
    */
-  static get events() {
+  get events() {
     return this[eventsSymbol];
   }
   // ----------------------------------------
@@ -124,7 +129,7 @@ export class Cycle extends EventDispatcher {
   start() {
     if (this[startSymbol]) {
       // already start
-      console.warn('Cycle.start already start', this[startSymbol]);
+      // console.warn('Cycle.start already start', this[startSymbol]);
       return false;
     }
     this[startSymbol] = true;
@@ -161,6 +166,7 @@ export class Cycle extends EventDispatcher {
     // @type {number} - requestAnimationFrame id
     const id = requestAnimationFrame(this[updateSymbol]);
     this[requestSymbol] = id;
+
     // @type {Events} - events
     const events = this.events;
     events.id = id;
@@ -175,6 +181,9 @@ export class Cycle extends EventDispatcher {
    * @return {Cycle} Cycle instance を返します
    */
   static factory() {
-    return new Cycle(singletonSymbol);
+    if (instance === null) {
+      return new Cycle(singletonSymbol);
+    }
+    return instance;
   }
 }

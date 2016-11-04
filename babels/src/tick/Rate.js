@@ -12,35 +12,35 @@
  */
 
 // event
-import { Events } from '../event/Events';
+import { default as Events } from '../event/Events';
 
 // tick
-import { Polling } from './Polling';
+import { default as Polling } from './Polling';
 
 /**
  * private property key, fps を保存するための Symbol
  * @type {Symbol}
  * @private
  */
-const rateSymbol = Symbol();
-
+const rateSymbol = Symbol('save fps');
 /**
  * private property key, count を保存するための Symbol
  * @type {Symbol}
  * @private
  */
-const countSymbol = Symbol();
+const countSymbol = Symbol('for update count');
 /**
  * private property key, rates を保存するための Symbol
  * @type {Symbol}
  * @private
  */
-const ratesSymbol = Symbol();
+const ratesSymbol = Symbol('save rate');
 /**
  * 固定値を使用し fps を決定します
  *
  * 以下のフレームレートが設定可能です
  *
+ * - 60: Rate.RATE_60
  * - 30: RATE_30
  * - 20: RATE_20
  * - 15: RATE_15
@@ -50,7 +50,7 @@ const ratesSymbol = Symbol();
  * - 5: RATE_5
  *
  */
-export class Rate extends Polling {
+export default class Rate extends Polling {
   /**
    * 固定値フレームレート毎に UPDATE イベントを発生させます
    * @param {number} rate fps, 固定値以外設定できません
@@ -66,28 +66,38 @@ export class Rate extends Polling {
      */
     this.events = events;
 
-    // frame rate
-    this.change(rate);
-
     // @type {number} - count, rate に達したかを計測するための counter 変数
     this[countSymbol] = 0;
 
     // correct rate list
     // サポートするレートリスト
     this[ratesSymbol] = [
-      this.RATE_30,
-      this.RATE_20,
-      this.RATE_15,
-      this.RATE_12,
-      this.RATE_10,
-      this.RATE_6,
-      this.RATE_5,
+      Rate.RATE_60,
+      Rate.RATE_30,
+      Rate.RATE_20,
+      Rate.RATE_15,
+      Rate.RATE_12,
+      Rate.RATE_10,
+      Rate.RATE_6,
+      Rate.RATE_5,
     ];
+
+    // frame rate
+    this[rateSymbol] = 0;
+    this.change(rate);
   }
   // ----------------------------------------
   // CONST
   // ----------------------------------------
   /**
+   * fps 60 基準値を取得します
+   * @const RATE_60
+   * @returns {number} fps 60 基準値を返します
+   * @default 1
+   */
+  static get RATE_60() {
+    return 1;
+  }  /**
    * fps 30 基準値を取得します
    * @const RATE_30
    * @returns {number} fps 30 基準値を返します
@@ -166,11 +176,33 @@ export class Rate extends Polling {
   // GETTER / SETTER
   // ----------------------------------------
   /**
+   * fps 基準値リストを取得します
+   * @returns {number} fps 基準値リストを返します
+   */
+  get rates() {
+    return this[ratesSymbol];
+  }
+  /**
    * fps 基準値を取得します
    * @returns {number} fps 基準値を返します
    */
   get rate() {
     return this[rateSymbol];
+  }
+
+  /**
+   * rate に達したかを計測するための counter 変数を取得します
+   * @return {number} rate に達したかを計測するための counter 変数を返します
+   */
+  get count() {
+    return this[countSymbol];
+  }
+  /**
+   * rate に達したかを計測するための counter 変数を設定します
+   * @param {number} step rate に達したかを計測するための counter 数
+   */
+  set count(step) {
+    this[countSymbol] = step;
   }
   // ----------------------------------------
   // METHOD
@@ -184,7 +216,7 @@ export class Rate extends Polling {
    * @return {undefined} no-return
    */
   change(rate) {
-    if (this[ratesSymbol].indexof(rate) !== -1) {
+    if (this.rates.indexOf(rate) !== -1) {
       this[rateSymbol] = rate;
     } else {
       throw new Error(`illegal rate: ${rate}. use const RATE_NN`);
@@ -214,8 +246,10 @@ export class Rate extends Polling {
    */
   update() {
     // 余りが 0 の時にイベントを発火します
-    if (++this[countSymbol] % this.rate === 0) {
-      this[countSymbol] = 0;
+    this.count += 1;
+    const reminder = this.count % this.rate;
+    if (reminder === 0) {
+      this.count = 0;
       this.fire(this.updateEvents(0, 0));
 
       return true;

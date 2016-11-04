@@ -11,14 +11,14 @@
  */
 
 // util
-import { Type } from '../util/Type';
+import { default as Type } from '../util/Type';
 
 /**
  * private property key, listeners Object
  * @type {Symbol}
  * @private
  */
-const listenersKey = Symbol();
+const listenersKey = Symbol('event listeners object');
 
 /**
  * <p>Custom Event を作成し Event 通知を行います</p>
@@ -28,7 +28,7 @@ const listenersKey = Symbol();
  *  console.log(event);
  * };
  *
- * const event:EventDispatcher = new EventDispatcher();
+ * const event = new EventDispatcher();
  * event.on('abc', callback);
  *
  * console.log(event.has('abc', callback));// true
@@ -38,8 +38,10 @@ const listenersKey = Symbol();
  * event.off('abc', callback);
  * console.log(event.has('abc', callback));// false
  * ```
+ *
+ * {@link Events}
  */
-export class EventDispatcher {
+export default class EventDispatcher {
   /**
    * listener property をイニシャライズします
    */
@@ -79,26 +81,27 @@ export class EventDispatcher {
    * @return {boolean} 成功・不成功の真偽値を返します
    */
   on(type, listener) {
+    if (!Type.exist(type)) {
+      // type が有効値ではないので処理しない
+      return false;
+    }
     if (!Type.method(listener)) {
       // listener が 関数でないので処理しない
       return false;
     }
 
+    // type {Object} - {{eventType: array [listener: Function...]...}}
     const listeners = this.listeners;
 
-    // listeners.type が存在するかを調べます
-    if (!listeners.hasOwnProperty(type)) {
-      // listeners.type が存在しない
-      // listeners.type 新規配列を作成し
-      // listener を配列へ登録します
+    if (!Type.hasKey(listeners, type)) {
+      // listeners.type が存在しない場合は
+      // listeners.type をキーに新規配列を作成し
+      // listener {function} を配列へ追加（登録）します
       listeners[type] = [];
       listeners[type].push(listener);
     } else {
       // すでに listeners.type が存在する
-      // listeners.type 配列に listener が存在しないならば登録します
-      if (listeners[type].indexOf(listener) === -1) {
-        listeners[type].push(listener);
-      }
+      listeners[type].push(listener);
     }
 
     return true;
@@ -118,8 +121,7 @@ export class EventDispatcher {
 
     // @type {Object} - events.type:String: [listener:Function...]
     const listeners = this.listeners;
-
-    if (!listeners.hasOwnProperty(type)) {
+    if (!Type.hasKey(listeners, type)) {
       // listener.type が存在しない
       // 処理しない
       return false;
@@ -158,7 +160,7 @@ export class EventDispatcher {
     // Array.some は 戻り値が true の時に走査を止めます
     // types 配列に null 以外があるかを調べます
     // @type {boolean} - listener list に 関数(typeof 'function')が存在すると true になります
-    const hasFunction = types.some((listener) => typeof listener === 'function');
+    const hasFunction = types.some(listener => Type.method(listener));
 
     if (!hasFunction) {
       // null 以外が無いので空にする
@@ -183,7 +185,7 @@ export class EventDispatcher {
     // @type {Object} - events.type:String: [listener:Function...]
     const listeners = this.listeners;
 
-    if (!listeners.hasOwnProperty(type)) {
+    if (!Type.hasKey(listeners, type)) {
       // listener.type が存在しない
       // 処理しない
       return false;
@@ -204,8 +206,7 @@ export class EventDispatcher {
     // @type {string} - event type
     const type = events.type;
 
-    // typeof でなく hasOwnProperty で調べる
-    if (!listeners.hasOwnProperty(type)) {
+    if (!Type.hasKey(listeners, type)) {
       // listener.type が存在しない
       // 処理しない
       return false;
@@ -227,7 +228,6 @@ export class EventDispatcher {
           if (Type.method(listener)) {
             return listener.call(this, eventObject);
           }
-
           return null;
         }
       );

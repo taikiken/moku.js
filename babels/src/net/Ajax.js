@@ -11,11 +11,11 @@
  */
 
 // event
-import { EventDispatcher } from '../event/EventDispatcher';
-import { Events } from '../event/Events';
+import { default as EventDispatcher } from '../event/EventDispatcher';
+import { default as Events } from '../event/Events';
 
 // util
-import { Type } from '../util/Type';
+import { default as Type } from '../util/Type';
 
 // built-in function
 // Safari, IE はサポートしていないのでライブラリを使用すること
@@ -28,7 +28,7 @@ const Request = self.Request;
  * @type {Symbol}
  * @private
  */
-const canSymbol = Symbol();
+const canSymbol = Symbol('flag can ajax SYmbol');
 
 /**
  * <p>fetch API を使用し Ajax request を行います</p>
@@ -51,7 +51,7 @@ const canSymbol = Symbol();
  * @see https://developer.mozilla.org/ja/docs/Web/API/Headers
  * @see https://developer.mozilla.org/ja/docs/Web/API/Body
  */
-export class Ajax extends EventDispatcher {
+export default class Ajax extends EventDispatcher {
   /**
    * request 可能 / 不可能 flag を true に設定します
    */
