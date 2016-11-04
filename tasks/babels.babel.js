@@ -39,6 +39,8 @@ const dir = module.dir;
 
 const wpk = module.wpk;
 
+const patterns = module.patterns;
+
 // --------------------------------------
 //  TASK
 // --------------------------------------
@@ -54,5 +56,25 @@ gulp.task('babels:eslint', () => {
     .pipe($.eslint({ useEslintrc: true }))
     .pipe($.eslint.format())
     .pipe($.eslint.failAfterError())
-    .pipe($.size({ title: '*** babels:eslint ***' }))
+    .pipe($.size({ title: '*** babels:eslint ***' }));
 });
+
+// babel
+// --------------------------------------
+gulp.task('babels:babel', () => {
+  return gulp.src(files)
+    .pipe($.babel({
+      presets: [
+        'es2015',
+        'react',
+        'stage-0',
+      ],
+      plugins: ['transform-runtime']
+    }))
+    .pipe($.replaceTask({ patterns }))
+    .pipe(gulp.dest(dir.babels.compile))
+    .pipe($.size({ title: '*** babels:babel ***' }));
+});
+
+// babel
+// --------------------------------------
