@@ -11,7 +11,7 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  */
 
-import { module } from '../gulp_setting.babel.js';
+import { module } from '../gulp_setting.babel';
 
 const gulp = module.gulp;
 /**
@@ -95,4 +95,48 @@ gulp.task('babels:pack:dev', (callback) => {
     }));
     callback();
   });
+});
+
+// webpack [BUILD]
+// --------------------------------------
+gulp.task('babels:pack:build', (callback) => {
+  const config = Object.create(wpk);
+  config.plugins = [
+    new $$.webpack.optimize.DedupePlugin(),
+    new $$.webpack.optimize.UglifyJsPlugin({ compress: { warnings: true } }),
+  ];
+  config.entry = `${config.entry}/babels/compile/moku.js`;
+  config.output.path = dir.dist.libs;
+  // webpack
+  return $$.webpack(config, (error, stats) => {
+    if (error) {
+      throw new $.util.PluginError('webpack', error);
+    }
+    $.util.log('[webpack:build]', stats.toString({
+      colors: true,
+      progress: true,
+    }));
+    callback();
+  });
+});
+
+// --------------------------------------
+//  TASK > SEQUENCE
+// --------------------------------------
+gulp.task('babels:dev', (callback) => {
+  return $$.runSequence(
+    'babels:lint',
+    'babels:babel',
+    'babels:pack:dev',
+    callback,
+  );
+});
+
+gulp.task('babels:build', (callback) => {
+  return $$.runSequence(
+    'babels:lint',
+    'babels:babel',
+    'babels:pack:build',
+    callback,
+  );
 });
