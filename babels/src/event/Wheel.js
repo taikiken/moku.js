@@ -11,8 +11,8 @@
  */
 
 // event
-import { default as EventDispatcher } from './EventDispatcher';
-import { default as Events } from './Events';
+import { EventDispatcher } from './EventDispatcher';
+import { Events } from './Events';
 
 /**
  * new を許可しないための Symbol
@@ -91,7 +91,7 @@ export default class Wheel extends EventDispatcher {
   /**
    * wheel up で発生するイベントを取得します
    * @event UP
-   * @return {string} event, wheelUp を返します
+   * @returns {string} event, wheelUp を返します
    * @default wheelUp
    */
   static get UP() {
@@ -100,7 +100,7 @@ export default class Wheel extends EventDispatcher {
   /**
    * wheel  で発生するイベントを取得します
    * @event DOWN
-   * @return {string} event, wheelUp を返します
+   * @returns {string} event, wheelUp を返します
    * @default wheelUp
    */
   static get DOWN() {
@@ -217,7 +217,7 @@ export default class Wheel extends EventDispatcher {
   // ----------------------------------------
   /**
    * Wheel instance を singleton を保証し作成します
-   * @return {Wheel} Wheel instance を返します
+   * @returns {Wheel} Wheel instance を返します
    */
   static factory() {
     return new Wheel(singletonSymbol);

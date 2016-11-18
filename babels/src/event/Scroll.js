@@ -11,8 +11,8 @@
  */
 
 // event
-import { default as EventDispatcher } from './EventDispatcher';
-import { default as Events } from './Events';
+import { EventDispatcher } from './EventDispatcher';
+import { Events } from './Events';
 
 /**
  * new を許可しないための Symbol
@@ -54,12 +54,13 @@ const topSymbol = Symbol('previous scroll top');
 let timerId = 0;
 
 /**
- * scroll を止める時間, touch device: 720, pc: 100
+ * scroll を止める時間
  * @private
  * @static
  * @type {number}
+ * @default 200
  */
-const freezeTime = window.Sagen.Browser.Mobile.is() ? 200 : 100;
+let freezeTime = 200;
 
 /**
  * window scroll event を監視し通知を行います
@@ -73,7 +74,7 @@ export default class Scroll extends EventDispatcher {
   /**
    * singleton です
    * @param {Symbol} checkSymbol singleton を保証するための private instance
-   * @return {Scroll} singleton instance を返します
+   * @returns {Scroll} singleton instance を返します
    */
   constructor(checkSymbol) {
     // checkSymbol と singleton が等価かをチェックします
@@ -109,7 +110,7 @@ export default class Scroll extends EventDispatcher {
   /**
    * scroll で発生するイベントを取得します
    * @event SCROLL
-   * @return {string} event, scrollScroll を返します
+   * @returns {string} event, scrollScroll を返します
    * @default scrollScroll
    */
   static get SCROLL() {
@@ -118,7 +119,7 @@ export default class Scroll extends EventDispatcher {
   /**
    * scroll motion start event
    * @event START
-   * @return {string} event, scrollStart を返します
+   * @returns {string} event, scrollStart を返します
    * @default scrollStart
    */
   static get START() {
@@ -127,7 +128,7 @@ export default class Scroll extends EventDispatcher {
   /**
    * scroll motion complete event
    * @event COMPLETE
-   * @return {string} event, scrollComplete を返します
+   * @returns {string} event, scrollComplete を返します
    * @default scrollComplete
    */
   static get COMPLETE() {
@@ -136,7 +137,7 @@ export default class Scroll extends EventDispatcher {
   /**
    * [LINE UP] button 由来の Scroll Event, start
    * @event LINEUP_START
-   * @return {string} event, scrollLineupStart を返します
+   * @returns {string} event, scrollLineupStart を返します
    */
   static get LINEUP_START() {
     return 'scrollLineupStart';
@@ -144,7 +145,7 @@ export default class Scroll extends EventDispatcher {
   /**
    * [LINE UP] button 由来の Scroll Event, complete
    * @event LINEUP_COMPLETE
-   * @return {string} event, scrollLineupComplete を返します
+   * @returns {string} event, scrollLineupComplete を返します
    */
   static get LINEUP_COMPLETE() {
     return 'scrollLineupComplete';
@@ -154,7 +155,7 @@ export default class Scroll extends EventDispatcher {
   // ----------------------------------------
   /**
    * scroll top 位置
-   * @return {number} scroll top 位置を返します
+   * @returns {number} scroll top 位置を返します
    * @see https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY
    * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
    */
@@ -176,7 +177,7 @@ export default class Scroll extends EventDispatcher {
   // scroll
   /**
    * bind 済み mouseWheel
-   * @return {function} bind 済み mouseWheel を返します
+   * @returns {function} bind 済み mouseWheel を返します
    */
   get bindScroll() {
     return this[bindSymbol];
@@ -184,7 +185,7 @@ export default class Scroll extends EventDispatcher {
   // events
   /**
    * Events instance を取得します
-   * @return {Events} Events instance
+   * @returns {Events} Events instance
    */
   get events() {
     return this[eventsSymbol];
@@ -202,7 +203,7 @@ export default class Scroll extends EventDispatcher {
   /**
    * scroll event を監視します<br>
    * 監視前に二重に addEventListener しないように unwatch を実行します
-   * @return {Scroll} method chain 可能なように instance を返します
+   * @returns {Scroll} method chain 可能なように instance を返します
    */
   watch() {
     this.unwatch();
@@ -213,7 +214,7 @@ export default class Scroll extends EventDispatcher {
   }
   /**
    * scroll event を監視を止めます
-   * @return {Scroll} method chain 可能なように instance を返します
+   * @returns {Scroll} method chain 可能なように instance を返します
    */
   unwatch() {
     window.removeEventListener('scroll', this.bindScroll);
@@ -224,7 +225,7 @@ export default class Scroll extends EventDispatcher {
    * window scroll event handler<br>
    * window scroll event 発生後に scroll top 位置をもたせた Scroll.SCROLL custom event を発火します
    * @param {?Event} event window scroll event, nullable
-   * @return {undefined} no-return
+   * @returns {void}
    */
   scroll(event) {
     // @type {number} - scroll top
@@ -260,7 +261,7 @@ export default class Scroll extends EventDispatcher {
    * y 位置に scroll top を即座に移動させます
    * @param {number} [y=0] scroll top 目標値
    * @param {number} [delay=0] time out 遅延 ms
-   * @return {number} time out id
+   * @returns {number} time out id
    */
   static jump(y = 0, delay = 0) {
     return setTimeout(() => { window.scrollTo(0, y); }, delay);
@@ -268,9 +269,9 @@ export default class Scroll extends EventDispatcher {
   // ----------------------------------------
   /**
    * scroll 動作を受付不能にします
+   * @returns {void}
    */
   static abort() {
-    // console.log('---------------------- start');
     window.addEventListener('touchstart', Scroll.onScroll, false);
     window.addEventListener('touchmove', Scroll.onScroll, false);
     window.addEventListener('touchend', Scroll.onScroll, false);
@@ -281,9 +282,9 @@ export default class Scroll extends EventDispatcher {
   }
   /**
    * scroll 動作を回復します
+   * @returns {void}
    */
   static activate() {
-    // console.log('---------------------- end');
     window.removeEventListener('touchstart', Scroll.onScroll);
     window.removeEventListener('touchmove', Scroll.onScroll);
     window.removeEventListener('touchend', Scroll.onScroll);
@@ -295,27 +296,44 @@ export default class Scroll extends EventDispatcher {
   /**
    * window scroll event handler, バブリング・伝播全てキャンセルします
    * @param {Event} event window scroll event
+   * @returns {boolean} event をキャンセルするために false を返します
    */
   static onScroll(event) {
     event.preventDefault();
     event.stopPropagation();
+    return false;
   }
   /**
    * scroll 操作を引数(delay)の間キャンセルします
    * @param {number} [delay=100] 遅延時間(ms), pc: 100, mobile: 500
-   * @return {number} time out id
+   * @returns {number} time out id
    */
-  static freeze(delay = freezeTime) {
+  static freeze(delay = Scroll.freezeTime()) {
     clearTimeout(timerId);
 
     Scroll.abort();
     timerId = setTimeout(Scroll.activate, delay);
     return timerId;
   }
+  /**
+   * scroll 操作を不能にする時間間隔(ms)を取得します
+   * @returns {number} scroll 操作を不能にする時間間隔(ms)
+   */
+  static freezeTime() {
+    return freezeTime;
+  }
+  /**
+   * scroll 操作を不能にする時間間隔(ms)を設定します
+   * @param {number} time scroll 操作を不能にする時間(ms)
+   * @returns {void}
+   */
+  static setFreezeTime(time) {
+    freezeTime = time;
+  }
   // ----------------------------------------
   /**
    * Scroll instance を singleton を保証し作成します
-   * @return {Scroll} Scroll instance を返します
+   * @returns {Scroll} Scroll instance を返します
    */
   static factory() {
     return new Scroll(singletonSymbol);

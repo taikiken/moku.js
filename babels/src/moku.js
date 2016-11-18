@@ -17,22 +17,22 @@
 'use strict';
 
 // event
-import { default as EventDispatcher } from './event/EventDispatcher';
-import { default as Events } from './event/Events';
-import { default as Scroll } from './event/Scroll';
-import { default as Wheel } from './event/Wheel';
+import { EventDispatcher } from './event/EventDispatcher';
+import { Events } from './event/Events';
+import { Scroll } from './event/Scroll';
+import { Wheel } from './event/Wheel';
 
 // net
-import { default as Ajax } from './net/Ajax';
+import { Ajax } from './net/Ajax';
 
 // tick
-import { default as Cycle } from './tick/Cycle';
-import { default as Fps } from './tick/Fps';
-import { default as Polling } from './tick/Polling';
-import { default as Rate } from './tick/Rate';
+import { Cycle } from './tick/Cycle';
+import { Fps } from './tick/Fps';
+import { Polling } from './tick/Polling';
+import { Rate } from './tick/Rate';
 
 // util
-import { default as Type } from './util/Type';
+import { Type } from './util/Type';
 /**
  * **MOKU**
  * <p>global Object</p>
@@ -42,12 +42,12 @@ import { default as Type } from './util/Type';
 const MOKU = {};
 /**
  * version number を取得します
- * @return {string} version number を返します
+ * @returns {string} version number を返します
  */
 MOKU.version = () => '@@version';
 /**
  * build 日時を取得します
- * @return {string}  build 日時を返します
+ * @returns {string}  build 日時を返します
  */
 MOKU.build = () => '@@buildTime';
 /**

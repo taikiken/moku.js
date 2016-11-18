@@ -11,11 +11,11 @@
  */
 
 // event
-import { default as EventDispatcher } from '../event/EventDispatcher';
-import { default as Events } from '../event/Events';
+import { EventDispatcher } from '../event/EventDispatcher';
+import { Events } from '../event/Events';
 
 // util
-import { default as Type } from '../util/Type';
+import { Type } from '../util/Type';
 
 // built-in function
 // Safari, IE はサポートしていないのでライブラリを使用すること
@@ -100,7 +100,7 @@ export default class Ajax extends EventDispatcher {
   // ----------------------------------------
   /**
    * request 可能 / 不可能 flag を取得します
-   * @return {boolean} request 可能 / 不可能 flag を返します
+   * @returns {boolean} request 可能 / 不可能 flag を返します
    */
   get can() {
     return this[canSymbol];
@@ -125,7 +125,7 @@ export default class Ajax extends EventDispatcher {
    * @param {string} method GET, POST, PUT, DELETE...etc request method
    * @param {?Headers|?Object|null} [headers=null] Headers option, nullable
    * @param {?FormData|null} [formData=null] 送信フォームデータオプション, nullable
-   * @return {boolean} ajax request を開始したかどうかの真偽値を返します
+   * @returns {boolean} ajax request を開始したかどうかの真偽値を返します
    */
   start(path, method, headers = null, formData = null) {
     // ajax request 開始
@@ -206,7 +206,7 @@ export default class Ajax extends EventDispatcher {
    * @param {string} method GET, POST, PUT, DELETE...etc request method
    * @param {Headers|Object|null} headers Headers option
    * @param {FormData|null} formData 送信フォームデータオプション
-   * @return {Request} fetch API へ送る Request instance を返します
+   * @returns {Request} fetch API へ送る Request instance を返します
    */
   static option(path, method, headers, formData) {
     // request option

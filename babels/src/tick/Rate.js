@@ -12,10 +12,10 @@
  */
 
 // event
-import { default as Events } from '../event/Events';
+import { Events } from '../event/Events';
 
 // tick
-import { default as Polling } from './Polling';
+import { Polling } from './Polling';
 
 /**
  * private property key, fps を保存するための Symbol
@@ -166,7 +166,7 @@ export default class Rate extends Polling {
   /**
    * フレームレート毎に発生するイベント type を取得します
    * @event UPDATE
-   * @return {string} event, rateUpdate を返します
+   * @returns {string} event, rateUpdate を返します
    * @default rateUpdate
    */
   static get UPDATE() {
@@ -192,7 +192,7 @@ export default class Rate extends Polling {
 
   /**
    * rate に達したかを計測するための counter 変数を取得します
-   * @return {number} rate に達したかを計測するための counter 変数を返します
+   * @returns {number} rate に達したかを計測するための counter 変数を返します
    */
   get count() {
     return this[countSymbol];
@@ -213,7 +213,7 @@ export default class Rate extends Polling {
    * @param {number} rate fps 基準値, <br>
    * this.RATE_30, this.RATE_20, this.RATE_15, this.RATE_12, this.RATE_10, <br>
    * this.RATE_6, this.RATE_5 の何れかが必須です
-   * @return {undefined} no-return
+   * @returns {undefined} no-return
    */
   change(rate) {
     if (this.rates.indexOf(rate) !== -1) {
@@ -224,7 +224,7 @@ export default class Rate extends Polling {
   }
   /**
    * loop(requestAnimationFrame) を開始します
-   * @return {boolean} start に成功すると true を返します
+   * @returns {boolean} start に成功すると true を返します
    */
   start() {
     if (this.started) {

@@ -18,7 +18,7 @@ export default class Type {
   /**
    * 引数(target)が関数かを調べます
    * @param {Function|*} target 調査対象
-   * @return {boolean} 引数(target)が関数かを調べ結果を返します、true: 関数
+   * @returns {boolean} 引数(target)が関数かを調べ結果を返します、true: 関数
    */
   static method(target) {
     return typeof target === 'function';
@@ -26,7 +26,7 @@ export default class Type {
   /**
    * 引数(target)を `!!` で調べます
    * @param {*} target 調査対象
-   * @return {boolean} 引数(target)を `!!` で調べ結果を返します
+   * @returns {boolean} 引数(target)を `!!` で調べ結果を返します
    */
   static exist(target) {
     return !!target;
@@ -44,7 +44,7 @@ export default class Type {
   /**
    * 引数(target)が int かを調べます
    * @param {*} target 調査対象
-   * @return {boolean} 引数(target)が int かを調べ結果を返します、true: int
+   * @returns {boolean} 引数(target)が int かを調べ結果を返します、true: int
    */
   static int(target) {
     return Number.isInteger(target);
@@ -68,7 +68,7 @@ export default class Type {
   /**
    * 引数(target)が null かを調べます
    * @param {*} target 調査対象
-   * @return {boolean} 引数(target)が null かを調べ結果を返します、true: null
+   * @returns {boolean} 引数(target)が null かを調べ結果を返します、true: null
    */
   static nil(target) {
     return target === null;
@@ -77,7 +77,7 @@ export default class Type {
    * Object型 引数 `object` は String型 引数 `key` を [key] として存在するかを調べます
    * @param {Object} target 調査対象
    * @param {string} key Object.key 名称
-   * @return {boolean} 存在する時は true を返します
+   * @returns {boolean} 存在する時は true を返します
    */
   static hasKey(target, key) {
     return Object.keys(target).indexOf(key) !== -1;
@@ -85,7 +85,7 @@ export default class Type {
   /**
    * target が undefined かを調べます
    * @param {*} target 調査対象
-   * @return {boolean} true: undefined
+   * @returns {boolean} true: undefined
    * @since 2016-10-25
    */
   static undef(target) {
@@ -112,7 +112,7 @@ export default class Type {
   /**
    * 使用可能なbase64 file かを調べます
    * @param {string} fileName 調査対象ファイル名
-   * @return {boolean} jpeg / png の時に true を返します
+   * @returns {boolean} jpeg / png の時に true を返します
    */
   static base64(fileName) {
     if (!Type.exist(fileName)) {

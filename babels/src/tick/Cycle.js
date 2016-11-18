@@ -12,8 +12,8 @@
  */
 
 // event
-import { default as EventDispatcher } from '../event/EventDispatcher';
-import { default as Events } from '../event/Events';
+import { EventDispatcher } from '../event/EventDispatcher';
+import { Events } from '../event/Events';
 
 /**
  * new を許可しないための Symbol
@@ -68,7 +68,7 @@ export default class Cycle extends EventDispatcher {
   /**
    * singleton です
    * @param {Symbol} checkSymbol singleton を保証するための private instance
-   * @return {Cycle} singleton instance を返します
+   * @returns {Cycle} singleton instance を返します
    */
   constructor(checkSymbol) {
     // checkSymbol と singleton が等価かをチェックします
@@ -103,7 +103,7 @@ export default class Cycle extends EventDispatcher {
   /**
    * requestAnimationFrame 毎に発生するイベントを取得します
    * @event UPDATE
-   * @return {string} event, cycleUpdate を返します
+   * @returns {string} event, cycleUpdate を返します
    * @default cycleUpdate
    */
   static get UPDATE() {
@@ -114,7 +114,7 @@ export default class Cycle extends EventDispatcher {
   // ----------------------------------------
   /**
    * Events instance を取得します
-   * @return {Events} Events instance
+   * @returns {Events} Events instance
    */
   get events() {
     return this[eventsSymbol];
@@ -124,7 +124,7 @@ export default class Cycle extends EventDispatcher {
   // ----------------------------------------
   /**
    * loop(requestAnimationFrame) を開始します
-   * @return {boolean} start に成功すると true を返します
+   * @returns {boolean} start に成功すると true を返します
    */
   start() {
     if (this[startSymbol]) {
@@ -141,7 +141,7 @@ export default class Cycle extends EventDispatcher {
   /**
    * loop(cancelAnimationFrame) を止めます
    * @param {number} [id] requestAnimationFrame id を使い cancelAnimationFrame をします
-   * @return {boolean} stop に成功すると true を返します
+   * @returns {boolean} stop に成功すると true を返します
    */
   stop(id = this[requestSymbol]) {
     if (!this[startSymbol]) {
@@ -160,7 +160,7 @@ export default class Cycle extends EventDispatcher {
   // ----------------------------------------
   /**
    * loop(requestAnimationFrame)コールバック関数<br>Cycle.UPDATE event を発火します
-   * @return {undefined} no-return
+   * @returns {undefined} no-return
    */
   update() {
     // @type {number} - requestAnimationFrame id
@@ -178,7 +178,7 @@ export default class Cycle extends EventDispatcher {
   // ----------------------------------------
   /**
    * Cycle instance を singleton を保証し作成します
-   * @return {Cycle} Cycle instance を返します
+   * @returns {Cycle} Cycle instance を返します
    */
   static factory() {
     if (instance === null) {

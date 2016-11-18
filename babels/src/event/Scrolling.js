@@ -12,12 +12,12 @@
  */
 
 // event
-import { default as Scroll } from './Scroll';
-import { default as EventDispatcher } from './EventDispatcher';
-import { default as Events } from './Events';
+import { Scroll } from './Scroll';
+import { EventDispatcher } from './EventDispatcher';
+import { Events } from './Events';
 
 // tick
-import { default as Rate } from '../tick/Rate';
+import { Rate } from '../tick/Rate';
 
 /**
  * new を許可しないための Symbol
@@ -64,7 +64,7 @@ export default class Scrolling extends EventDispatcher {
    * singleton です
    * @param {Symbol} checkSymbol singleton を保証するための private instance
    * @param {Rate} rate 使用する Rate instance
-   * @return {Scrolling} singleton instance を返します
+   * @returns {Scrolling} singleton instance を返します
    */
   constructor(checkSymbol, rate) {
     // checkSymbol と singleton が等価かをチェックします
@@ -111,7 +111,7 @@ export default class Scrolling extends EventDispatcher {
   /**
    * fps で発生するイベントを取得します
    * @event SCROLL
-   * @return {string} event, scrollingScroll を返します
+   * @returns {string} event, scrollingScroll を返します
    * @default scrollingScroll
    */
   static get SCROLL() {
@@ -122,7 +122,7 @@ export default class Scrolling extends EventDispatcher {
   // ----------------------------------------
   /**
    * bind 済み mouseWheel
-   * @return {function} bind 済み mouseWheel を返します
+   * @returns {function} bind 済み mouseWheel を返します
    */
   get bindScroll() {
     return this[bindSymbol];
@@ -130,7 +130,7 @@ export default class Scrolling extends EventDispatcher {
   // events
   /**
    * Events instance を取得します
-   * @return {Events} Events instance
+   * @returns {Events} Events instance
    */
   get events() {
     return this[eventsSymbol];
@@ -148,7 +148,7 @@ export default class Scrolling extends EventDispatcher {
   /**
    * fps を監視しスクロール位置を知らせます<br>
    * 二重に watch しない様に `this.unwatch()` 実行し開始します
-   * @return {Scrolling} method chain 可能なように instance を返します
+   * @returns {Scrolling} method chain 可能なように instance を返します
    */
   watch() {
     this.unwatch();
@@ -161,7 +161,7 @@ export default class Scrolling extends EventDispatcher {
   }
   /**
    * fps 監視を止めます
-   * @return {Scrolling} method chain 可能なように instance を返します
+   * @returns {Scrolling} method chain 可能なように instance を返します
    */
   unwatch() {
     this.rate.off(Rate.UPDATE, this.bindScroll);
@@ -185,7 +185,7 @@ export default class Scrolling extends EventDispatcher {
    * - changed {boolean} - scroll top が前回と変わっていたら true
    *
    * @param {?Event|?Events} event window scroll event, nullable
-   * @return {undefined} no-return
+   * @returns {void}
    */
   scroll(event) {
     // @type {number} - scroll top
@@ -228,6 +228,7 @@ export default class Scrolling extends EventDispatcher {
   }
   /**
    * 強制的に Scrolling.SCROLL event を発火させます
+   * @returns {void}
    */
   fire() {
     this.scroll(null);
@@ -238,7 +239,7 @@ export default class Scrolling extends EventDispatcher {
   /**
    * Scrolling instance を singleton を保証し作成します
    * @param {Rate} [rate=new Rate(Rate.RATE_12)] Rate instance
-   * @return {Scrolling} Scrolling instance を返します
+   * @returns {Scrolling} Scrolling instance を返します
    */
   static factory(rate = new Rate(Rate.RATE_12)) {
     return new Scrolling(singletonSymbol, rate);

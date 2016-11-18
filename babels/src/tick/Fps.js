@@ -11,10 +11,10 @@
  */
 
 // event
-import { default as Events } from '../event/Events';
+import { Events } from '../event/Events';
 
 // tick
-import { default as Polling } from './Polling';
+import { Polling } from './Polling';
 
 /**
  * private property key, fps を保存するための Symbol
@@ -51,7 +51,7 @@ export default class Fps extends Polling {
   /**
    * フレームレート毎に発生するイベントを取得します
    * @event UPDATE
-   * @return {string} event, fpsUpdate を返します
+   * @returns {string} event, fpsUpdate を返します
    * @default fpsUpdate
    */
   static get UPDATE() {
@@ -63,7 +63,7 @@ export default class Fps extends Polling {
   // fps
   /**
    * frame rate を取得します
-   * @return {number} frame rate を返します
+   * @returns {number} frame rate を返します
    */
   get fps() {
     return this[fpsSymbol];
