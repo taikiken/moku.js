@@ -12,12 +12,12 @@
  */
 
 // event
-import { Scroll } from './Scroll';
-import { EventDispatcher } from './EventDispatcher';
-import { Events } from './Events';
+import { default as Scroll } from './Scroll';
+import { default as EventDispatcher } from './EventDispatcher';
+import { default as Events } from './Events';
 
 // tick
-import { Rate } from '../tick/Rate';
+import { default as Rate } from '../tick/Rate';
 
 /**
  * new を許可しないための Symbol

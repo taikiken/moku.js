@@ -11,11 +11,11 @@
  */
 
 // event
-import { EventDispatcher } from '../event/EventDispatcher';
-import { Events } from '../event/Events';
+import { default as EventDispatcher } from '../event/EventDispatcher';
+import { default as Events } from '../event/Events';
 
 // tick
-import { Cycle } from './Cycle';
+import { default as Cycle } from './Cycle';
 
 /**
  * private property key, this.update.bind(this) を保存するための Symbol

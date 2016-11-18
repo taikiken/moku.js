@@ -11,11 +11,11 @@
  */
 
 // event
-import { EventDispatcher } from '../event/EventDispatcher';
-import { Events } from '../event/Events';
+import { default as EventDispatcher } from '../event/EventDispatcher';
+import { default as Events } from '../event/Events';
 
 // util
-import { Type } from '../util/Type';
+import { default as Type } from '../util/Type';
 
 // built-in function
 // Safari, IE はサポートしていないのでライブラリを使用すること

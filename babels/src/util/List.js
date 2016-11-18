@@ -10,7 +10,7 @@
  *
  */
 
-import { Type } from './Type';
+import { default as Type } from './Type';
 
 /**
  * Array.prototype.fill, polyfill

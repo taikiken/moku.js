@@ -13,12 +13,12 @@
  */
 
 // event
-import { EventDispatcher } from './EventDispatcher';
-import { TouchingEvents } from './TouchingEvents';
+import { default as EventDispatcher } from './EventDispatcher';
+import { default as TouchingEvents } from './TouchingEvents';
 
 // util
-import { Vectors } from '../util/Vectors';
-import { Type } from '../util/Type';
+import { default as Vectors } from '../util/Vectors';
+import { default as Type } from '../util/Type';
 
 // private
 /**
