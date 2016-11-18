@@ -11,8 +11,6 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  */
 
-'use strict';
-
 import { module } from '../gulp_setting.babel.js';
 
 const gulp = module.gulp;
@@ -47,7 +45,7 @@ const patterns = module.patterns;
 // --------------------------------------
 
 const files = [
-  dir.babels.src + '/**/*.{js,jsx}',
+  `${dir.babels.src}/**/*.{js,jsx}`,
 ];
 
 // ESLint
@@ -70,7 +68,7 @@ gulp.task('babels:babel', () => {
         'react',
         'stage-0',
       ],
-      plugins: ['transform-runtime']
+      plugins: ['transform-runtime'],
     }))
     .pipe($.replaceTask({ patterns }))
     .pipe(gulp.dest(dir.babels.compile))
