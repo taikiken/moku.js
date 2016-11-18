@@ -18,7 +18,7 @@ import { Type } from '../util/Type';
  * @type {Symbol}
  * @private
  */
-const listenersKey = Symbol();
+const listenersKey = Symbol('event listeners object');
 
 /**
  * <p>Custom Event を作成し Event 通知を行います</p>
@@ -28,7 +28,7 @@ const listenersKey = Symbol();
  *  console.log(event);
  * };
  *
- * const event:EventDispatcher = new EventDispatcher();
+ * const event = new EventDispatcher();
  * event.on('abc', callback);
  *
  * console.log(event.has('abc', callback));// true
@@ -38,8 +38,10 @@ const listenersKey = Symbol();
  * event.off('abc', callback);
  * console.log(event.has('abc', callback));// false
  * ```
+ *
+ * {@link Events}
  */
-export class EventDispatcher {
+export default class EventDispatcher {
   /**
    * listener property をイニシャライズします
    */
@@ -56,7 +58,7 @@ export class EventDispatcher {
   // ----------------------------------------
   /**
    * リスナーリストを取得します
-   * @return {Object} リスナーリストを返します
+   * @returns {Object} リスナーリストを返します
    */
   get listeners() {
     return this[listenersKey];
@@ -66,7 +68,7 @@ export class EventDispatcher {
   // ----------------------------------------
   /**
    * 全てのリスナーを破棄します
-   * @return {boolean} 成功・不成功の真偽値を返します
+   * @returns {boolean} 成功・不成功の真偽値を返します
    */
   destroy() {
     this[listenersKey] = {};
@@ -76,30 +78,33 @@ export class EventDispatcher {
    * event type に リスナー関数を bind します
    * @param {string} type event type（種類）
    * @param {Function} listener callback関数
-   * @return {boolean} 成功・不成功の真偽値を返します
+   * @returns {boolean} 成功・不成功の真偽値を返します
    */
   on(type, listener) {
+    if (!Type.exist(type)) {
+      // type が有効値ではないので処理しない
+      return false;
+    }
     if (!Type.method(listener)) {
       // listener が 関数でないので処理しない
       return false;
     }
 
+    // type {Object} - {{eventType: array [listener: Function...]...}}
     const listeners = this.listeners;
 
-    // listeners.type が存在するかを調べます
-    if (!listeners.hasOwnProperty(type)) {
-      // listeners.type が存在しない
-      // listeners.type 新規配列を作成し
-      // listener を配列へ登録します
+    if (!Type.hasKey(listeners, type)) {
+      // listeners.type が存在しない場合は
+      // listeners.type をキーに新規配列を作成し
+      // listener {function} を配列へ追加（登録）します
       listeners[type] = [];
-      listeners[type].push(listener);
-    } else {
-      // すでに listeners.type が存在する
-      // listeners.type 配列に listener が存在しないならば登録します
-      if (listeners[type].indexOf(listener) === -1) {
-        listeners[type].push(listener);
-      }
+      // listeners[type].push(listener);
     }
+    // else {
+    //   // すでに listeners.type が存在する
+    //   listeners[type].push(listener);
+    // }
+    listeners[type].push(listener);
 
     return true;
   }
@@ -108,7 +113,7 @@ export class EventDispatcher {
    * 内部処理は一時的に null 設定にします</p>
    * @param {string} type event type（種類）
    * @param {Function} listener リスナー関数
-   * @return {boolean} 成功・不成功の真偽値を返します
+   * @returns {boolean} 成功・不成功の真偽値を返します
    */
   off(type, listener) {
     if (!Type.method(listener)) {
@@ -118,8 +123,7 @@ export class EventDispatcher {
 
     // @type {Object} - events.type:String: [listener:Function...]
     const listeners = this.listeners;
-
-    if (!listeners.hasOwnProperty(type)) {
+    if (!Type.hasKey(listeners, type)) {
       // listener.type が存在しない
       // 処理しない
       return false;
@@ -151,14 +155,14 @@ export class EventDispatcher {
    * リスナーリストが全て null の時に 空配列にします</p>
    * @param {string} type event type（種類）
    * @param {Array<Function>} types event type に登録されている配列（関数）
-   * @return {boolean} 成功・不成功の真偽値を返します, true: 空にした
+   * @returns {boolean} 成功・不成功の真偽値を返します, true: 空にした
    */
   clean(type, types) {
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
     // Array.some は 戻り値が true の時に走査を止めます
     // types 配列に null 以外があるかを調べます
     // @type {boolean} - listener list に 関数(typeof 'function')が存在すると true になります
-    const hasFunction = types.some((listener) => typeof listener === 'function');
+    const hasFunction = types.some(listener => Type.method(listener));
 
     if (!hasFunction) {
       // null 以外が無いので空にする
@@ -172,7 +176,7 @@ export class EventDispatcher {
    * event type にリスナー関数が登録されているかを調べます
    * @param {string} type event type（種類）
    * @param {Function} listener リスナー関数
-   * @return {boolean} event type にリスナー関数が登録されているかの真偽値を返します
+   * @returns {boolean} event type にリスナー関数が登録されているかの真偽値を返します
    */
   has(type, listener) {
     if (!Type.method(listener)) {
@@ -183,7 +187,7 @@ export class EventDispatcher {
     // @type {Object} - events.type:String: [listener:Function...]
     const listeners = this.listeners;
 
-    if (!listeners.hasOwnProperty(type)) {
+    if (!Type.hasKey(listeners, type)) {
       // listener.type が存在しない
       // 処理しない
       return false;
@@ -196,7 +200,7 @@ export class EventDispatcher {
    * イベントを発生させリスナー関数を call します
    * @param {Events|*} events 送信される Event Object.<br>
    *   type キーにイベント種類が設定されています、dispatch 時に target プロパティを追加し this を設定します
-   * @return {boolean} 成功・不成功の真偽値を返します
+   * @returns {boolean} 成功・不成功の真偽値を返します
    */
   dispatch(events) {
     // @type {Object} - events.type:string: [listener:Function...]
@@ -204,8 +208,7 @@ export class EventDispatcher {
     // @type {string} - event type
     const type = events.type;
 
-    // typeof でなく hasOwnProperty で調べる
-    if (!listeners.hasOwnProperty(type)) {
+    if (!Type.hasKey(listeners, type)) {
       // listener.type が存在しない
       // 処理しない
       return false;
@@ -227,7 +230,6 @@ export class EventDispatcher {
           if (Type.method(listener)) {
             return listener.call(this, eventObject);
           }
-
           return null;
         }
       );
@@ -240,7 +242,7 @@ export class EventDispatcher {
    * @deprecated instead use on
    * @param {string} type event type（種類）
    * @param {Function} listener callback関数
-   * @return {boolean} 成功・不成功の真偽値を返します
+   * @returns {boolean} 成功・不成功の真偽値を返します
    */
   addEventListener(type, listener) {
     return this.on(type, listener);
@@ -251,7 +253,7 @@ export class EventDispatcher {
    * @deprecated instead use off
    * @param {string} type event type（種類）
    * @param {Function} listener リスナー関数
-   * @return {boolean} 成功・不成功の真偽値を返します
+   * @returns {boolean} 成功・不成功の真偽値を返します
    */
   removeEventListener(type, listener) {
     return this.off(type, listener);
@@ -262,7 +264,7 @@ export class EventDispatcher {
    * @deprecated instead use has
    * @param {string} type event type（種類）
    * @param {Function} listener リスナー関数
-   * @return {boolean} event type にリスナー関数が登録されているかの真偽値を返します
+   * @returns {boolean} event type にリスナー関数が登録されているかの真偽値を返します
    */
   hasEventListener(type, listener) {
     return this.has(type, listener);
@@ -272,7 +274,7 @@ export class EventDispatcher {
    * <p>イベントを発生させリスナー関数を call します</p>
    * @deprecated instead use dispatch
    * @param {Events} events typeキー が必須です
-   * @return {boolean} 成功・不成功の真偽値を返します
+   * @returns {boolean} 成功・不成功の真偽値を返します
    */
   dispatchEvent(events) {
     return this.dispatch(events);

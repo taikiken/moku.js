@@ -28,7 +28,7 @@ const Request = self.Request;
  * @type {Symbol}
  * @private
  */
-const canSymbol = Symbol();
+const canSymbol = Symbol('flag can ajax SYmbol');
 
 /**
  * <p>fetch API を使用し Ajax request を行います</p>
@@ -51,7 +51,7 @@ const canSymbol = Symbol();
  * @see https://developer.mozilla.org/ja/docs/Web/API/Headers
  * @see https://developer.mozilla.org/ja/docs/Web/API/Body
  */
-export class Ajax extends EventDispatcher {
+export default class Ajax extends EventDispatcher {
   /**
    * request 可能 / 不可能 flag を true に設定します
    */
@@ -100,7 +100,7 @@ export class Ajax extends EventDispatcher {
   // ----------------------------------------
   /**
    * request 可能 / 不可能 flag を取得します
-   * @return {boolean} request 可能 / 不可能 flag を返します
+   * @returns {boolean} request 可能 / 不可能 flag を返します
    */
   get can() {
     return this[canSymbol];
@@ -125,7 +125,7 @@ export class Ajax extends EventDispatcher {
    * @param {string} method GET, POST, PUT, DELETE...etc request method
    * @param {?Headers|?Object|null} [headers=null] Headers option, nullable
    * @param {?FormData|null} [formData=null] 送信フォームデータオプション, nullable
-   * @return {boolean} ajax request を開始したかどうかの真偽値を返します
+   * @returns {boolean} ajax request を開始したかどうかの真偽値を返します
    */
   start(path, method, headers = null, formData = null) {
     // ajax request 開始
@@ -206,7 +206,7 @@ export class Ajax extends EventDispatcher {
    * @param {string} method GET, POST, PUT, DELETE...etc request method
    * @param {Headers|Object|null} headers Headers option
    * @param {FormData|null} formData 送信フォームデータオプション
-   * @return {Request} fetch API へ送る Request instance を返します
+   * @returns {Request} fetch API へ送る Request instance を返します
    */
   static option(path, method, headers, formData) {
     // request option

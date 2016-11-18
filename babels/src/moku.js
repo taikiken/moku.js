@@ -13,6 +13,7 @@
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
 /* eslint strict: [0, "global"] */
+
 'use strict';
 
 // event
@@ -41,12 +42,12 @@ import { Type } from './util/Type';
 const MOKU = {};
 /**
  * version number を取得します
- * @return {string} version number を返します
+ * @returns {string} version number を返します
  */
 MOKU.version = () => '@@version';
 /**
  * build 日時を取得します
- * @return {string}  build 日時を返します
+ * @returns {string}  build 日時を返します
  */
 MOKU.build = () => '@@buildTime';
 /**

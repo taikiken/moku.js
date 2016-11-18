@@ -19,7 +19,7 @@ import { Events } from './Events';
  * @type {Symbol}
  * @private
  */
-const singletonSymbol = Symbol();
+const singletonSymbol = Symbol('Scroll singleton symbol');
 /**
  * singleton instance, nullable
  * @type {?Wheel}
@@ -31,13 +31,7 @@ let instance = null;
  * @type {Symbol}
  * @private
  */
-const wheelSymbol = Symbol();
-// /**
-//  * private property key, bind 済み mouseScroll を保存するための Symbol
-//  * @type {Symbol}
-//  * @private
-//  */
-// const scrollSymbol = Symbol();
+const wheelSymbol = Symbol('bound mouseWheel Symbol');
 
 /**
  * mousewheel event を監視し通知を行います
@@ -47,7 +41,7 @@ const wheelSymbol = Symbol();
  * const instance:Wheel = Wheel.factory();
  * ```
  */
-export class Wheel extends EventDispatcher {
+export default class Wheel extends EventDispatcher {
   /**
    * singleton です
    * @param {Symbol} checkSymbol singleton を保証するための private instance
@@ -71,33 +65,22 @@ export class Wheel extends EventDispatcher {
 
     // event handler
     this[wheelSymbol] = this.mouseWheel.bind(this);
-    // this[scrollSymbol] = this.mouseScroll.bind(this);
-
-    // public property
     /**
      * 閾値, wheel 移動量が閾値を超えたときにイベントを発生させます
      * @type {number}
      * @default 200
      */
-    const threshold = 200;
+    this.threshold = 200;
     /**
-     * wheelDelta 移動量が閾値を超えるかをチェックするための計算変数
+     * wheelDelta 移動量が閾値を超えるかをチェックするための積算計算変数
      * @type {number}
-     * @default 0
      */
-    const moved = 0;
-    // /**
-    //  * firefox wheel event.detail 数値を他と揃えるための係数
-    //  * @type {number}
-    //  * @default -7.5
-    //  */
-    // const coefficient = -7.5;
+    this.moved = 0;
     /**
-     * @type {Wheel}
-     * @property {number} this.threshold 閾値, wheel 移動量が閾値を超えたときにイベントを発生させます
-     * @property {number} this.moved wheelDelta 移動量が閾値を超えるかをチェックするための計算変数
+     * firefox wheel event.detail 数値を他 Browser wheel 値と揃えるための係数
+     * @type {number}
      */
-    Object.assign(this, { threshold, moved });
+    this.coefficient = -7.5;
 
     // 設定済み instance を返します
     return instance;
@@ -108,7 +91,7 @@ export class Wheel extends EventDispatcher {
   /**
    * wheel up で発生するイベントを取得します
    * @event UP
-   * @return {string} event, wheelUp を返します
+   * @returns {string} event, wheelUp を返します
    * @default wheelUp
    */
   static get UP() {
@@ -117,7 +100,7 @@ export class Wheel extends EventDispatcher {
   /**
    * wheel  で発生するイベントを取得します
    * @event DOWN
-   * @return {string} event, wheelUp を返します
+   * @returns {string} event, wheelUp を返します
    * @default wheelUp
    */
   static get DOWN() {
@@ -133,13 +116,6 @@ export class Wheel extends EventDispatcher {
   get boundWheel() {
     return this[wheelSymbol];
   }
-  // /**
-  //  * bind 済み mouseScroll
-  //  * @returns {function} bind 済み mouseScroll を返します
-  //  */
-  // get boundScroll() {
-  //   return this[scrollSymbol];
-  // }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
@@ -150,13 +126,7 @@ export class Wheel extends EventDispatcher {
    */
   watch() {
     this.unwatch();
-    // // firefox
-    // window.addEventListener('DOMMouseScroll', this.boundScroll, false);
-    // // other modern browser
-    // window.addEventListener('mousewheel', this.boundWheel, false);
-
     window.addEventListener('wheel', this.boundWheel, false);
-
     return this;
   }
   /**
@@ -164,11 +134,7 @@ export class Wheel extends EventDispatcher {
    * @returns {Wheel} method chain 可能なように instance を返します
    */
   unwatch() {
-    // window.removeEventListener('DOMMouseScroll', this.boundScroll);
-    // window.removeEventListener('mousewheel', this.boundWheel);
-
     window.removeEventListener('wheel', this.boundWheel);
-
     return this;
   }
   /**
@@ -180,24 +146,9 @@ export class Wheel extends EventDispatcher {
    * @returns {number} 前回移動量に delta 値 を加算した値を返します
    */
   mouseWheel(event) {
-    // const wheelDelta = event.wheelDelta;
     const wheelDelta = event.deltaY;
     return this.moving(wheelDelta);
   }
-  // /**
-  //  * window DOMMouseScroll event handler
-  //  * <p>detail 値を取得し `this.moving` を実行します</p>
-  //  * @param {Event} event window DOMMouseScroll event
-  //  * @returns {number} 前回移動量に delta 値 を加算した値を返します
-  //  */
-  // mouseScroll(event) {
-  //   let wheelDetail = event.detail;
-  //   // firefox 数値が小さいために補正する
-  //   // up / down が wheelDelta と逆なので補正する
-  //   // -7.5(default) をかける
-  //   wheelDetail *= this.coefficient;
-  //   return this.moving(wheelDetail);
-  // }
   /**
    * mouse delta から移動量を計算します
    * @param {number} delta mouse delta 値
@@ -266,7 +217,7 @@ export class Wheel extends EventDispatcher {
   // ----------------------------------------
   /**
    * Wheel instance を singleton を保証し作成します
-   * @return {Wheel} Wheel instance を返します
+   * @returns {Wheel} Wheel instance を返します
    */
   static factory() {
     return new Wheel(singletonSymbol);

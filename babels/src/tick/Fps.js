@@ -21,12 +21,12 @@ import { Polling } from './Polling';
  * @type {Symbol}
  * @private
  */
-const fpsSymbol = Symbol();
+const fpsSymbol = Symbol('Singleton Fps Symbol');
 
 /**
  * フレームレート毎に UPDATE イベントを発生させます
  */
-export class Fps extends Polling {
+export default class Fps extends Polling {
   /**
    * 引数の frame rate に合わせ UPDATE イベントを発生させます
    * @param {number} [fps=30] frame rate, default: 30
@@ -51,7 +51,7 @@ export class Fps extends Polling {
   /**
    * フレームレート毎に発生するイベントを取得します
    * @event UPDATE
-   * @return {string} event, fpsUpdate を返します
+   * @returns {string} event, fpsUpdate を返します
    * @default fpsUpdate
    */
   static get UPDATE() {
@@ -63,7 +63,7 @@ export class Fps extends Polling {
   // fps
   /**
    * frame rate を取得します
-   * @return {number} frame rate を返します
+   * @returns {number} frame rate を返します
    */
   get fps() {
     return this[fpsSymbol];

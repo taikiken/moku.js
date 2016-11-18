@@ -22,36 +22,36 @@ import { Cycle } from './Cycle';
  * @type {Symbol}
  * @private
  */
-const updateSymbol = Symbol();
+const updateSymbol = Symbol('bound update');
 /**
  * private property key, Cycle.UPDATE 監視を開始したかを表す真偽値を保存するための Symbol
  * @type {Symbol}
  * @private
  */
-const startSymbol = Symbol();
+const startSymbol = Symbol('is started watch Cycle.UPDATE flag');
 /**
  * private property key, Fps.start 時間を保存するための Symbol
  * @type {Symbol}
  * @private
  */
-const beginSymbol = Symbol();
+const beginSymbol = Symbol('start time');
 /**
  * private property key, polling を保存するための Symbol
  * @type {Symbol}
  * @private
  */
-const pollingSymbol = Symbol();
+const pollingSymbol = Symbol('polling duration');
 /**
  * Polling.UPDATE event を発火する時の Events instance を保存するための Symbol
  * @type {Symbol}
  * @private
  */
-const eventsSymbol = Symbol();
+const eventsSymbol = Symbol('Polling.UPDATE Events instance');
 
 /**
  * 一定間隔毎に UPDATE イベントを発生させます
  */
-export class Polling extends EventDispatcher {
+export default class Polling extends EventDispatcher {
   /**
    * 引数の polling に合わせ UPDATE イベントを発生させます
    * @param {number} [polling=1000] polling milliseconds
@@ -83,7 +83,7 @@ export class Polling extends EventDispatcher {
   // ----------------------------------------
   /**
    * 一定間隔(milliseconds)毎に発生するイベント type を取得します
-   * @return {string} event, pollingUpdate を返します
+   * @returns {string} event, pollingUpdate を返します
    */
   static get UPDATE() {
     return 'pollingUpdate';
@@ -94,7 +94,7 @@ export class Polling extends EventDispatcher {
   // fps
   /**
    * polling(milliseconds) を取得します
-   * @return {number} polling(milliseconds) を返します
+   * @returns {number} polling(milliseconds) を返します
    */
   get polling() {
     return this[pollingSymbol];
@@ -109,7 +109,7 @@ export class Polling extends EventDispatcher {
   // begin
   /**
    * 開始時間を取得します
-   * @return {number} 開始時間を返します
+   * @returns {number} 開始時間を返します
    */
   get begin() {
     return this[beginSymbol];
@@ -124,7 +124,7 @@ export class Polling extends EventDispatcher {
   // events
   /**
    * Events instance を取得します
-   * @return {Events} Events instance を返します
+   * @returns {Events} Events instance を返します
    */
   get events() {
     return this[eventsSymbol];
@@ -140,7 +140,7 @@ export class Polling extends EventDispatcher {
   /**
    * started flag 状態を取得します
    * @readonly
-   * @return {boolean} 現在の started flag 状態を返します
+   * @returns {boolean} 現在の started flag 状態を返します
    */
   get started() {
     return this[startSymbol];
@@ -149,8 +149,19 @@ export class Polling extends EventDispatcher {
   // METHOD
   // ----------------------------------------
   /**
+   * polling 時間を変更します<br>
+   * 1. プロパティ polling 変更
+   * 1. update 実行
+   * @param {number} polling polling 時間
+   * @returns {boolean} `update` をコールし Polling.UPDATE event が発生すると true を返します
+   */
+  change(polling) {
+    this.polling = polling;
+    return this.update();
+  }
+  /**
    * started flag を反転させ現在の started flag 状態を取得します
-   * @return {boolean} 現在の started flag 状態を返します
+   * @returns {boolean} 現在の started flag 状態を返します
    */
   turnOver() {
     this[startSymbol] = !this[startSymbol];
@@ -160,7 +171,7 @@ export class Polling extends EventDispatcher {
    * events object を発火前に作成します
    * @param {number} begin 開始時間: 前回の発火時間
    * @param {number} present 現在時間
-   * @return {Events} アップデートした Events を返します
+   * @returns {Events} アップデートした Events を返します
    */
   updateEvents(begin, present) {
     this.begin = begin;
@@ -174,7 +185,7 @@ export class Polling extends EventDispatcher {
   /**
    * cycle ループを開始します<br>
    * watch Cycle.UPDATE event
-   * @return {Cycle} cycle ループを開始しインスタンスを返します
+   * @returns {Cycle} cycle ループを開始しインスタンスを返します
    */
   initCycle() {
     // cycle
@@ -187,7 +198,7 @@ export class Polling extends EventDispatcher {
   }
   /**
    * polling を開始します
-   * @return {boolean} start に成功すると true を返します
+   * @returns {boolean} start に成功すると true を返します
    */
   start() {
     if (this.started) {
@@ -208,7 +219,7 @@ export class Polling extends EventDispatcher {
   }
   /**
    * polling を止めます
-   * @return {boolean} stop に成功すると true を返します
+   * @returns {boolean} stop に成功すると true を返します
    */
   stop() {
     if (!this.started) {
@@ -224,7 +235,7 @@ export class Polling extends EventDispatcher {
    * Cycle.UPDATE event handler, polling を計測しイベントを発火するかを判断します
    *
    * @listens {Cycle.UPDATE} Cycle.UPDATE が発生すると実行されます
-   * @return {boolean} Polling.UPDATE event が発生すると true を返します
+   * @returns {boolean} Polling.UPDATE event が発生すると true を返します
    */
   update() {
     // 現在時間
@@ -248,7 +259,7 @@ export class Polling extends EventDispatcher {
   /**
    * Polling.UPDATE event を発生します
    * @param {Events} events Polling.UPDATE event object
-   * @return {undefined} no-return
+   * @returns {void}
    */
   fire(events) {
     this.dispatch(events);

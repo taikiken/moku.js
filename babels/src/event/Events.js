@@ -21,7 +21,7 @@
  * - target: *, イベント発生インスタンス
  * - currentTarget: *, current イベント発生インスタンス
  */
-export class Events {
+export default class Events {
   /**
    * custom Event Object
    * @param {string} type イベント種類
@@ -29,12 +29,20 @@ export class Events {
    * @param {*} [currentTarget=this] current イベント発生インスタンス
    * */
   constructor(type, target = this, currentTarget = this) {
-    // https://github.com/esdoc/esdoc/issues/305
     /**
-     * @property {string} this.type - イベント種類
-     * @property {*} this.target - イベント発生インスタンス
-     * @property {*} this.currentTarget - current イベント発生インスタンス
+     * イベント種類
+     * @type {string}
      */
-    Object.assign(this, { type, target, currentTarget });
+    this.type = type;
+    /**
+     * target instance
+     * @type {*}
+     */
+    this.target = target;
+    /**
+     * currentTarget instance
+     * @type {*}
+     */
+    this.currentTarget = currentTarget;
   }
 }
