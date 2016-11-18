@@ -101,7 +101,7 @@ const wpk = {
   output: {
     path: dir.app.bundle,
     publicPath: 'assets/js/bundle',
-    filename: 'moke.js',
+    filename: 'moku.js',
     chunkFilename: '[chunkhash].bundle.js',
   },
 };
