@@ -11,14 +11,14 @@
  */
 
 // util
-import { Type } from '../util/Type';
+import { default as Type } from '../util/Type';
 
-/**
- * private property key, listeners Object
- * @type {Symbol}
- * @private
- */
-const listenersKey = Symbol('event listeners object');
+// /**
+//  * private property key, listeners Object
+//  * @type {Symbol}
+//  * @private
+//  */
+// const listenersKey = Symbol('event listeners object');
 
 /**
  * <p>Custom Event を作成し Event 通知を行います</p>
@@ -46,34 +46,50 @@ export default class EventDispatcher {
    * listener property をイニシャライズします
    */
   constructor() {
+    // /**
+    //  * リスナーリスト
+    //  * @type {Object}
+    //  * @private
+    //  */
+    // this[listenersKey] = {};
+    let listeners = {};
     /**
-     * リスナーリスト
-     * @type {Object}
-     * @private
+     * リスナーリストを取得します
+     * @returns {Object} リスナーリストを返します
      */
-    this[listenersKey] = {};
+    this.listeners = () => listeners;
+    /**
+     * 全てのリスナーを破棄します
+     * @returns {boolean} 成功・不成功の真偽値を返します
+     */
+    this.destroy = () => {
+      listeners = {};
+      return true;
+    };
   }
-  // ----------------------------------------
-  // GETTER / SETTER
-  // ----------------------------------------
-  /**
-   * リスナーリストを取得します
-   * @returns {Object} リスナーリストを返します
-   */
-  get listeners() {
-    return this[listenersKey];
-  }
+  // // ----------------------------------------
+  // // GETTER / SETTER
+  // // ----------------------------------------
+  // /**
+  //  * リスナーリストを取得します
+  //  * @returns {Object} リスナーリストを返します
+  //  */
+  // get listeners() {
+  //   return this[listenersKey];
+  // }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
-  /**
-   * 全てのリスナーを破棄します
-   * @returns {boolean} 成功・不成功の真偽値を返します
-   */
-  destroy() {
-    this[listenersKey] = {};
-    return true;
-  }
+  // /**
+  //  * 全てのリスナーを破棄します
+  //  * @returns {boolean} 成功・不成功の真偽値を返します
+  //  */
+  // destroy() {
+  //   // this[listenersKey] = {};
+  //   let listeners = this.listeners();
+  //   listeners = {};
+  //   return true;
+  // }
   /**
    * event type に リスナー関数を bind します
    * @param {string} type event type（種類）
@@ -91,7 +107,7 @@ export default class EventDispatcher {
     }
 
     // type {Object} - {{eventType: array [listener: Function...]...}}
-    const listeners = this.listeners;
+    const listeners = this.listeners();
 
     if (!Type.hasKey(listeners, type)) {
       // listeners.type が存在しない場合は
@@ -122,7 +138,7 @@ export default class EventDispatcher {
     }
 
     // @type {Object} - events.type:String: [listener:Function...]
-    const listeners = this.listeners;
+    const listeners = this.listeners();
     if (!Type.hasKey(listeners, type)) {
       // listener.type が存在しない
       // 処理しない
@@ -185,7 +201,7 @@ export default class EventDispatcher {
     }
 
     // @type {Object} - events.type:String: [listener:Function...]
-    const listeners = this.listeners;
+    const listeners = this.listeners();
 
     if (!Type.hasKey(listeners, type)) {
       // listener.type が存在しない
@@ -204,7 +220,7 @@ export default class EventDispatcher {
    */
   dispatch(events) {
     // @type {Object} - events.type:string: [listener:Function...]
-    const listeners = this.listeners;
+    const listeners = this.listeners();
     // @type {string} - event type
     const type = events.type;
 
