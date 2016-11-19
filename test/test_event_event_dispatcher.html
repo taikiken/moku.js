@@ -27,12 +27,16 @@
   var dispatcher = new event.EventDispatcher();
   var Events = event.Events;
 
+  console.log('dispatcher', dispatcher);
+
   function callback(event) {
     console.log('callback', event)
   }
   function callback2(event) {
     console.log('callback2', event)
   }
+
+  console.log('dispatcher.on', dispatcher.on('abc', callback));
 
   //  EventDispatcher.on
   describe('#EventDispatcher.on', function() {
@@ -70,11 +74,11 @@
   //  EventDispatcher.listeners
   describe('#EventDispatcher.listeners', function() {
     it("dispatcher.listeners have abc property", function() {
-      expect(dispatcher.listeners).to.have.property('abc');
+      expect(dispatcher.listeners()).to.have.property('abc');
     });
 
     it("dispatcher.listeners have abc property length 1", function() {
-      expect(dispatcher.listeners.abc.length).to.eql(1);
+      expect(dispatcher.listeners().abc.length).to.eql(2);
     });
 
   });
@@ -82,7 +86,7 @@
   //  EventDispatcher.clean
   describe('#EventDispatcher.clean', function() {
     it("dispatcher.clean('abc', dispatcher.listeners.abc) is false", function() {
-      expect(dispatcher.clean('abc', dispatcher.listeners.abc)).to.eql(false);
+      expect(dispatcher.clean('abc', dispatcher.listeners().abc)).to.eql(false);
     });
   });
 
@@ -102,7 +106,7 @@
   //  EventDispatcher.clean
   describe('#EventDispatcher.clean', function() {
     it("dispatcher.clean('abc', dispatcher.listeners.abc) is true", function() {
-      expect(dispatcher.clean('abc', dispatcher.listeners.abc)).to.eql(true);
+      expect(dispatcher.clean('abc', dispatcher.listeners().abc)).to.eql(true);
     });
   });
 
