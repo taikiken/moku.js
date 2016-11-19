@@ -77,7 +77,7 @@
       expect(dispatcher.listeners()).to.have.property('abc');
     });
 
-    it("dispatcher.listeners have abc property length 1", function() {
+    it("dispatcher.listeners have abc property length 2", function() {
       expect(dispatcher.listeners().abc.length).to.eql(2);
     });
 
@@ -97,12 +97,16 @@
       expect(dispatcher.off('abc', callback)).to.eql(true);
     });
 
+    it("dispatcher.off('abc', callback) is true", function() {
+      expect(dispatcher.off('abc', callback)).to.eql(true);
+    });
+
     it("dispatcher.off('abc', null) is false", function() {
       expect(dispatcher.off('abc', null)).to.eql(false);
     });
   });
 
-
+  console.log('dispatcher.listeners().abc', dispatcher.listeners().abc);
   //  EventDispatcher.clean
   describe('#EventDispatcher.clean', function() {
     it("dispatcher.clean('abc', dispatcher.listeners.abc) is true", function() {

@@ -64,22 +64,7 @@
     });
   });
 
-//  window.addEventListener('load', function() {
-//    console.log('load');
-//    setTimeout(function() {
-//      console.log('timeout');
-//      Scroll.y = 100;
-//
-//      // Scroll.y
-//      describe('#Scroll.y set', function() {
-//        it("Scroll.y = 100 is 100", function() {
-//          expect(Scroll.y).to.eql(100);
-//        });
-//      });
-//    }, 100);
-//  });
-
-  dispatcher.on(Scroll.SCROLL, callback2);
+//  dispatcher.on(Scroll.SCROLL, callback2);
 
   // Scroll.events
   describe('#Scroll.events', function() {
@@ -141,11 +126,11 @@
   //  Scroll.listeners
   describe('#Scroll.listeners', function() {
     it("dispatcher.listeners have abc property", function() {
-      expect(dispatcher.listeners).to.have.property('abc');
+      expect(dispatcher.listeners()).to.have.property('abc');
     });
 
     it("dispatcher.listeners have abc property length 1", function() {
-      expect(dispatcher.listeners.abc.length).to.eql(1);
+      expect(dispatcher.listeners().abc.length).to.eql(1);
     });
 
   });
@@ -153,7 +138,7 @@
   //  Scroll.clean
   describe('#Scroll.clean', function() {
     it("dispatcher.clean('abc', dispatcher.listeners.abc) is false", function() {
-      expect(dispatcher.clean('abc', dispatcher.listeners.abc)).to.eql(false);
+      expect(dispatcher.clean('abc', dispatcher.listeners().abc)).to.eql(false);
     });
   });
 
@@ -173,7 +158,7 @@
   //  Scroll.clean
   describe('#Scroll.clean', function() {
     it("dispatcher.clean('abc', dispatcher.listeners.abc) is true", function() {
-      expect(dispatcher.clean('abc', dispatcher.listeners.abc)).to.eql(true);
+      expect(dispatcher.clean('abc', dispatcher.listeners().abc)).to.eql(true);
     });
   });
 
