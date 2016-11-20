@@ -10,10 +10,6 @@
  *
  */
 
-// event
-import { default as EventDispatcher } from '../event/EventDispatcher';
-import { default as Events } from '../event/Events';
-
 // util
 import { default as Type } from '../util/Type';
 
@@ -23,12 +19,12 @@ const fetch = self.fetch;
 const Request = self.Request;
 // const Headers = self.Headers;
 
-/**
- * can（Ajax 実行可能かの真偽値）フラッグを保存するための Symbol
- * @type {Symbol}
- * @private
- */
-const canSymbol = Symbol('flag can ajax SYmbol');
+// /**
+//  * can（Ajax 実行可能かの真偽値）フラッグを保存するための Symbol
+//  * @type {Symbol}
+//  * @private
+//  */
+// const canSymbol = Symbol('can start Ajax flag');
 
 /**
  * <p>fetch API を使用し Ajax request を行います</p>
@@ -51,67 +47,53 @@ const canSymbol = Symbol('flag can ajax SYmbol');
  * @see https://developer.mozilla.org/ja/docs/Web/API/Headers
  * @see https://developer.mozilla.org/ja/docs/Web/API/Body
  */
-export default class Ajax extends EventDispatcher {
+export default class Ajax {
   /**
    * request 可能 / 不可能 flag を true に設定します
+   * @param {Function} resolve Promise success callback
+   * @param {Function} reject Promise fail callback
    */
-  constructor() {
-    super();
+  constructor(resolve, reject) {
+    // /**
+    //  * request 可能 / 不可能 flag
+    //  * @type {boolean}
+    //  * @private
+    //  * @default true
+    //  */
+    // this[canSymbol] = true;
     /**
-     * request 可能 / 不可能 flag
+     * request 可能 / 不可能 flag, true: 実行可能
      * @type {boolean}
-     * @private
-     * @default true
      */
-    this[canSymbol] = true;
+    this.can = true;
+    /**
+     * Promise success callback
+     * @type {Function}
+     */
+    this.resolve = resolve;
+    /**
+     * Promise fail callback
+     * @type {Function}
+     */
+    this.reject = reject;
   }
-  // ----------------------------------------
-  // EVENT
-  // ----------------------------------------
-  /**
-   * START event を取得します
-   * @event START
-   * @returns {string} リクエスト開始イベント, ajaxStart を返します
-   * @default ajaxStart
-   */
-  static get START() {
-    return 'ajaxStart';
-  }
-  /**
-   * COMPLETE event を取得します
-   * @event COMPLETE
-   * @returns {string} リクエスト完了イベント, ajaxComplete を返します
-   * @default ajaxComplete
-   */
-  static get COMPLETE() {
-    return 'ajaxComplete';
-  }
-  /**
-   * ERROR event を取得します
-   * @event ERROR
-   * @returns {string} リクエストエラー イベント, ajaxError を返します
-   * @default ajaxError
-   */
-  static get ERROR() {
-    return 'ajaxError';
-  }
-  // ----------------------------------------
-  // GETTER / SETTER
-  // ----------------------------------------
-  /**
-   * request 可能 / 不可能 flag を取得します
-   * @returns {boolean} request 可能 / 不可能 flag を返します
-   */
-  get can() {
-    return this[canSymbol];
-  }
-  /**
-   * request 可能 / 不可能 flag を設定します
-   * @param {boolean} flag request 可能 / 不可能 flag
-   */
-  set can(flag) {
-    this[canSymbol] = flag;
-  }
+  // // ----------------------------------------
+  // // GETTER / SETTER
+  // // ----------------------------------------
+  // /**
+  //  * request 可能 / 不可能 flag を取得します
+  //  * @return {boolean} request 可能 / 不可能 flag を返します
+  //  */
+  // get can() {
+  //   return this[canSymbol];
+  // }
+  // /**
+  //  * request 可能 / 不可能 flag を設定します
+  //  * @param {boolean} flag request 可能 / 不可能 flag
+  //  */
+  // set can(flag) {
+  //   this[canSymbol] = !!flag;
+  // }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
@@ -123,9 +105,9 @@ export default class Ajax extends EventDispatcher {
    *
    * @param {string} path Ajax request path
    * @param {string} method GET, POST, PUT, DELETE...etc request method
-   * @param {?Headers|?Object|null} [headers=null] Headers option, nullable
-   * @param {?FormData|null} [formData=null] 送信フォームデータオプション, nullable
-   * @returns {boolean} ajax request を開始したかどうかの真偽値を返します
+   * @param {?Headers} [headers=null] Headers option, token などを埋め込むのに使用します
+   * @param {?FormData} [formData=null] フォームデータを送信するのに使用します
+   * @return {boolean} ajax request を開始したかどうかの真偽値を返します
    */
   start(path, method, headers = null, formData = null) {
     // ajax request 開始
@@ -140,40 +122,27 @@ export default class Ajax extends EventDispatcher {
     // @type {Request} Request instance
     const request = Ajax.option(path, method, headers, formData);
 
-    // start event fire
-    const startEvents = new Events(Ajax.START, this, this);
-    startEvents.request = request;
-    this.dispatch(startEvents);
-
     // fetch start
     fetch(request)
-      // @param {Object} response - Ajax response
+    // @param {Object} response - Ajax response
       .then((response) => {
         // may be success
         if (response.status !== 200) {
           throw new Error(`Ajax status error: (${response.status})`);
         }
-
         return response.json();
       })
       // @param {Object} - JSON パース済み Object
       .then((json) => {
-        // @type {Evens} - Ajax.COMPLETE events Object
-        const events = new Events(Ajax.COMPLETE, this, this);
-        events.data = json;
         // complete event fire
-        this.dispatch(events);
+        this.resolve(json);
         // flag true
         this.enable();
       })
       // @param {Error} - Ajax something error
       .catch((error) => {
-        // @type {Evens} - Ajax.COMPLETE events Object
-        const events = new Events(Ajax.ERROR, this, this);
-        events.data = null;
-        events.error = error;
         // error event fire
-        this.dispatch(events);
+        this.reject(error);
         // flag true
         this.enable();
       });
@@ -202,11 +171,21 @@ export default class Ajax extends EventDispatcher {
   /**
    * <p>fetch API へ送るオプションを作成します</p>
    *
+   * 必ず設定します
+   * - method: GET, POST, PUT, DELETE...etc
+   * - cache: 'no-cache'
+   * - credentials: 'same-origin'
+   *
+   * headers, formData は存在すれば option に追加されます
+   *
    * @param {string} path Ajax request path
    * @param {string} method GET, POST, PUT, DELETE...etc request method
    * @param {Headers|Object|null} headers Headers option
    * @param {FormData|null} formData 送信フォームデータオプション
    * @returns {Request} fetch API へ送る Request instance を返します
+   *
+   * @see https://developers.google.com/web/updates/2015/03/introduction-to-fetch
+   * @see https://developer.mozilla.org/ja/docs/Web/API/Request
    */
   static option(path, method, headers, formData) {
     // request option
