@@ -254,12 +254,12 @@ export default class Polling extends EventDispatcher {
     // 現在時間
     // @type {number}
     const present = Date.now();
-    // @type {number} - polling 間隔
-    const polling = this.polling;
+    // @type {number} - interval 間隔
+    const interval = this.interval;
     // @type {number} - 開始時間
     const begin = this.begin;
     // 現在時間 が interval より大きくなったか
-    if ((present - begin) >= polling) {
+    if ((present - begin) >= interval) {
       // event 発火
       this.fire(this.updateEvents(begin, present));
       // 開始時間を update
