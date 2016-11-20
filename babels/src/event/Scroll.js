@@ -28,41 +28,6 @@ const singletonSymbol = Symbol('Scroll singleton symbol');
  */
 let instance = null;
 
-// /**
-//  * private property key, bind 済み mouseWheel を保存するための Symbol
-//  * @type {Symbol}
-//  * @private
-//  */
-// const bindSymbol = Symbol('bound mouseWheel symbol');
-// /**
-//  * Cycle.UPDATE event を発火する時の Events instance を保存するための Symbol
-//  * @type {Symbol}
-//  * @private
-//  */
-// const eventsSymbol = Symbol('Cycle.UPDATE symbol');
-// /**
-//  * scroll top 位置が変更になったかを確認するために前回値を保存するための Symbol
-//  * @type {Symbol}
-//  */
-// const topSymbol = Symbol('previous scroll top');
-//
-// /**
-//  * scroll freeze timeout id
-//  * @private
-//  * @static
-//  * @type {number}
-//  */
-// let timerId = 0;
-//
-// /**
-//  * scroll を止める時間
-//  * @private
-//  * @static
-//  * @type {number}
-//  * @default 200
-//  */
-// let freezeTime = 200;
-
 /**
  * window scroll event を監視し通知を行います
  * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
@@ -94,8 +59,6 @@ export default class Scroll extends EventDispatcher {
     instance = this;
 
     // event handler
-    // @type {function} - bound scroll function
-    // this[bindSymbol] = this.scroll.bind(this);
     const boundScroll = this.scroll.bind(this);
     /**
      * bound scroll, window.onscroll event handler
@@ -103,16 +66,12 @@ export default class Scroll extends EventDispatcher {
      */
     this.boundScroll = () => boundScroll;
     // @type {Events} - events instance
-    // this[eventsSymbol] = new Events(Scroll.SCROLL, this, this);
     const events = new ScrollEvents(Scroll.SCROLL, this, this);
     /**
      * ScrollEvents instance, 発火時に使用します
      * @returns {ScrollEvents} ScrollEvents instance
      */
     this.events = () => events;
-    // @type {number} - scroll top 前回値を保存します
-    // @default -1
-    // this[topSymbol] = -1;
     /**
      * 前回 scroll top 位置
      * @type {number}
@@ -141,72 +100,6 @@ export default class Scroll extends EventDispatcher {
   static get SCROLL() {
     return 'scrollScroll';
   }
-  // /**
-  //  * scroll motion start event
-  //  * @event START
-  //  * @returns {string} event, scrollStart を返します
-  //  * @default scrollStart
-  //  */
-  // static get START() {
-  //   return 'scrollStart';
-  // }
-  // /**
-  //  * scroll motion complete event
-  //  * @event COMPLETE
-  //  * @returns {string} event, scrollComplete を返します
-  //  * @default scrollComplete
-  //  */
-  // static get COMPLETE() {
-  //   return 'scrollComplete';
-  // }
-  // // ----------------------------------------
-  // // STATIC GETTER / SETTER
-  // // ----------------------------------------
-  // /**
-  //  * scroll top 位置
-  //  * @returns {number} scroll top 位置を返します
-  //  * @see https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY
-  //  * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
-  //  */
-  // static get y() {
-  //   return (typeof window.pageYOffset !== 'undefined') ?
-  //     window.pageYOffset :
-  //     (document.documentElement || document.body.parentNode || document.body).scrollTop;
-  // }
-  // /**
-  //  * scroll top 位置 を設定します
-  //  * @param {number} top スクロール位置(px)
-  //  */
-  // static set y(top) {
-  //   // window.scrollTo(0, top);
-  //   Scroll.jump(top);
-  // }
-  // ----------------------------------------
-  // GETTER / SETTER
-  // ----------------------------------------}
-  // scroll
-  // /**
-  //  * bind 済み mouseWheel
-  //  * @returns {function} bind 済み mouseWheel を返します
-  //  */
-  // get bindScroll() {
-  //   return this[bindSymbol];
-  // }
-  // // events
-  // /**
-  //  * Events instance を取得します
-  //  * @returns {Events} Events instance
-  //  */
-  // get events() {
-  //   return this[eventsSymbol];
-  // }
-  // /**
-  //  * Events instance を設定します
-  //  * @param {Events} events Events instance
-  //  */
-  // set events(events) {
-  //   this[eventsSymbol] = events;
-  // }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
@@ -279,70 +172,6 @@ export default class Scroll extends EventDispatcher {
   static jump(y = 0, delay = 0) {
     return setTimeout(() => { window.scrollTo(0, y); }, delay);
   }
-  // // ----------------------------------------
-  // /**
-  //  * scroll 動作を受付不能にします
-  //  * @returns {void}
-  //  */
-  // static abort() {
-  //   window.addEventListener('touchstart', Scroll.onScroll, false);
-  //   window.addEventListener('touchmove', Scroll.onScroll, false);
-  //   window.addEventListener('touchend', Scroll.onScroll, false);
-  //   window.addEventListener('scroll', Scroll.onScroll, false);
-  //   document.addEventListener('wheel', Scroll.onScroll, false);
-  //   document.addEventListener('mousewheel', Scroll.onScroll, false);
-  //   window.addEventListener('DOMMouseScroll', Scroll.onScroll, false);
-  // }
-  // /**
-  //  * scroll 動作を回復します
-  //  * @returns {void}
-  //  */
-  // static activate() {
-  //   window.removeEventListener('touchstart', Scroll.onScroll);
-  //   window.removeEventListener('touchmove', Scroll.onScroll);
-  //   window.removeEventListener('touchend', Scroll.onScroll);
-  //   window.removeEventListener('scroll', Scroll.onScroll);
-  //   document.removeEventListener('wheel', Scroll.onScroll);
-  //   document.removeEventListener('mousewheel', Scroll.onScroll);
-  //   window.removeEventListener('DOMMouseScroll', Scroll.onScroll);
-  // }
-  // /**
-  //  * window scroll event handler, バブリング・伝播全てキャンセルします
-  //  * @param {Event} event window scroll event
-  //  * @returns {boolean} event をキャンセルするために false を返します
-  //  */
-  // static onScroll(event) {
-  //   event.preventDefault();
-  //   event.stopPropagation();
-  //   return false;
-  // }
-  // /**
-  //  * scroll 操作を引数(delay)の間キャンセルします
-  //  * @param {number} [delay=100] 遅延時間(ms), pc: 100, mobile: 500
-  //  * @returns {number} time out id
-  //  */
-  // static freeze(delay = Scroll.freezeTime()) {
-  //   clearTimeout(timerId);
-  //
-  //   Scroll.abort();
-  //   timerId = setTimeout(Scroll.activate, delay);
-  //   return timerId;
-  // }
-  // /**
-  //  * scroll 操作を不能にする時間間隔(ms)を取得します
-  //  * @returns {number} scroll 操作を不能にする時間間隔(ms)
-  //  */
-  // static freezeTime() {
-  //   return freezeTime;
-  // }
-  // /**
-  //  * scroll 操作を不能にする時間間隔(ms)を設定します
-  //  * @param {number} time scroll 操作を不能にする時間(ms)
-  //  * @returns {void}
-  //  */
-  // static setFreezeTime(time) {
-  //   freezeTime = time;
-  // }
   /**
    * {@link Freeze}.freeze を実行し scroll 操作を一定期間不能にします
    * @returns {number} time out ID

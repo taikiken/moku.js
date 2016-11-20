@@ -33,17 +33,8 @@ export default class Fps extends Polling {
    */
   constructor(fps = 30) {
     super(1000 / fps);
-    // private property
-    // @type {number} - frame rate, default: 30
-    // this[fpsSymbol] = fps;
     // @type {Events} - Events
     const events = new Events(Fps.UPDATE, this, this);
-    // events.fps = fps;
-    // /**
-    //  * Fps.UPDATE Events instance
-    //  * @type {Events}
-    //  */
-    // this.events = events;
     /**
      * Fps.UPDATE Events instance
      * @returns {Events} Fps.UPDATE Events instance
@@ -86,29 +77,4 @@ export default class Fps extends Polling {
     this.fps = interval;
     return this.update();
   }
-  // // ----------------------------------------
-  // // GETTER / SETTER
-  // // ----------------------------------------
-  // // fps
-  // /**
-  //  * frame rate を取得します
-  //  * @returns {number} frame rate を返します
-  //  */
-  // get fps() {
-  //   return this[fpsSymbol];
-  // }
-  // /**
-  //  * frame rate を設定します, 1 ~ 60 の間で設定します
-  //  * @param {number} rate frame rate
-  //  */
-  // set fps(rate) {
-  //   const events = this.events;
-  //   events.fps = rate;
-  //   this[fpsSymbol] = rate;
-  //   /**
-  //    * interval milliseconds
-  //    * @type {number}
-  //    */
-  //   this.polling = 1000 / rate;
-  // }
 }

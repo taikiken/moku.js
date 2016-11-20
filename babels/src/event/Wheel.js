@@ -26,12 +26,6 @@ const singletonSymbol = Symbol('Scroll singleton symbol');
  * @private
  */
 let instance = null;
-// /**
-//  * private property key, bind 済み mouseWheel を保存するための Symbol
-//  * @type {Symbol}
-//  * @private
-//  */
-// const wheelSymbol = Symbol('bound mouseWheel Symbol');
 
 /**
  * mousewheel event を監視し通知を行います
@@ -126,16 +120,6 @@ export default class Wheel extends EventDispatcher {
   static get DOWN() {
     return 'wheelDown';
   }
-  // // ----------------------------------------
-  // // GETTER / SETTER
-  // // ----------------------------------------
-  // /**
-  //  * bind 済み mouseWheel
-  //  * @returns {function} bind 済み mouseWheel を返します
-  //  */
-  // get boundWheel() {
-  //   return this[wheelSymbol];
-  // }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------

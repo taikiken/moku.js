@@ -20,38 +20,6 @@ import { default as TouchingEvents } from './TouchingEvents';
 import { default as Vectors } from '../util/Vectors';
 import { default as Type } from '../util/Type';
 
-// // private
-// /**
-//  * bound start event handler
-//  * @private
-//  * @type {Symbol}
-//  */
-// const boundStart = Symbol('bound start event handler');
-// /**
-//  * bound move event handler
-//  * @private
-//  * @type {Symbol}
-//  */
-// const boundMove = Symbol('bound move event handler');
-// /**
-//  * bound end event handler
-//  * @private
-//  * @type {Symbol}
-//  */
-// const boundEnd = Symbol('bound end event handler');
-// /**
-//  * bound cancel event handler
-//  * @private
-//  * @type {Symbol}
-//  */
-// const boundCancel = Symbol('bound cancel event handler');
-// /**
-//  * bound blur event handler
-//  * @private
-//  * @type {Symbol}
-//  */
-// const boundBlur = Symbol('bound blur event handler');
-
 /**
  * Touch event を監視し y方向移動が `threshold` 以内の時に `TOUCH` event を発火します
  */
@@ -82,77 +50,43 @@ export default class Touching extends EventDispatcher {
      * @default 10
      */
     this.threshold = threshold;
-    // /**
-    //  * bind 済み `onStart`
-    //  * @type {Function}
-    //  */
-    // this[boundStart] = this.onStart.bind(this);
     const boundStart = this.onStart.bind(this);
     /**
      * bound onStart
      * @returns {function} bound onStart
      */
     this.boundStart = () => boundStart;
-    // /**
-    //  * bind 済み `onMove`
-    //  * @type {Function}
-    //  */
-    // this[boundMove] = this.onMove.bind(this);
     const boundMove = this.onMove.bind(this);
     /**
      * bound onMove
      * @returns {function} bound onMove
      */
     this.boundMove = () => boundMove;
-    // /**
-    //  * bind 済み `onEnd`
-    //  * @type {Function}
-    //  */
-    // this[boundEnd] = this.onEnd.bind(this);
     const boundEnd = this.onEnd.bind(this);
     /**
      * bound onEnd
      * @returns {function} bound onEnd
      */
     this.boundEnd = () => boundEnd;
-    // /**
-    //  * bind 済み `onCancel`
-    //  * @type {Function}
-    //  */
-    // this[boundCancel] = this.onCancel.bind(this);
     const boundCancel = this.onCancel.bind(this);
     /**
      * bound onCancel
      * @returns {function} onCancel onStart
      */
     this.boundCancel = () => boundCancel;
-    // /**
-    //  * bind 済み `onBlur`
-    //  * @type {Function}
-    //  */
-    // this[boundBlur] = this.onBlur.bind(this);
     const boundBlur = this.onBlur.bind(this);
     /**
      * bound onBlur
      * @returns {function} bound onBlur
      */
     this.boundBlur = () => boundBlur;
-    // /**
-    //  * 位置管理を行う Vectors instance を管理します
-    //  * @type {{start: Vectors, end: Vectors, moving: Array.<Vectors>}}
-    //  */
-    // this.vectors = {
-    //   start: new Vectors(),
-    //   end: new Vectors(),
-    //   moving: [].slice(0),
-    // };
     const vectors = {
       start: new Vectors(),
       end: new Vectors(),
       moving: [].slice(0),
     };
     /**
-     * vectors object
+     * 位置管理を行う Vectors instance
      * @returns {{start: Vectors, end: Vectors, moving: Array.<Vectors>}} vectors object
      */
     this.vectors = () => vectors;
@@ -200,44 +134,6 @@ export default class Touching extends EventDispatcher {
   static get TOUCH() {
     return 'touchingTouch';
   }
-  // // ---------------------------------------------------
-  // //  GETTER / SETTER
-  // // ---------------------------------------------------
-  // /**
-  //  * bind 済み `onStart` 関数を取得します
-  //  * @returns {function} bind 済み `onStart` 関数返します
-  //  */
-  // get boundStart() {
-  //   return this[boundStart];
-  // }
-  // /**
-  //  * bind 済み `onMove` 関数を取得します
-  //  * @returns {function} bind 済み `onMove` 関数返します
-  //  */
-  // get boundMove() {
-  //   return this[boundMove];
-  // }
-  // /**
-  //  * bind 済み `onEnd` 関数を取得します
-  //  * @returns {function} bind 済み `onEnd` 関数返します
-  //  */
-  // get boundEnd() {
-  //   return this[boundEnd];
-  // }
-  // /**
-  //  * bind 済み `onCancel` 関数を取得します
-  //  * @returns {function} bind 済み `onCancel` 関数返します
-  //  */
-  // get boundCancel() {
-  //   return this[boundCancel];
-  // }
-  // /**
-  //  * bind 済み `onBlur` 関数を取得します
-  //  * @returns {function} bind 済み `onBlur` 関数返します
-  //  */
-  // get boundBlur() {
-  //   return this[boundBlur];
-  // }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
@@ -376,17 +272,6 @@ export default class Touching extends EventDispatcher {
    * @returns {boolean} 正常終了時に true を返します
    */
   onCancel(event) {
-  //   this.dispose();
-  //   this.reset();
-  //   // this.dispatch({
-  //   //   type: Touching.CANCEL,
-  //   //   originalEVent: event,
-  //   // });
-  //   this.dispatch(new TouchingEvents(
-  //     Touching.CANCEL,
-  //     this,
-  //     event,
-  // ));
     return this.abort(event);
   }
   /**

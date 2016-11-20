@@ -29,31 +29,6 @@ const singletonSymbol = Symbol('singleton instance');
  */
 let instance = null;
 
-// /**
-//  * private property key, requestAnimationFrame ID を保存するための Symbol
-//  * @type {Symbol}
-//  * @private
-//  */
-// const requestSymbol = Symbol('requestAnimationFrame id');
-// /**
-//  * private property key, this.update.bind(this) を保存するための Symbol
-//  * @type {Symbol}
-//  * @private
-//  */
-// const updateSymbol = Symbol('bind update');
-// /**
-//  * private property key, requestAnimationFrame を開始したかを表す真偽値を保存するための Symbol
-//  * @type {Symbol}
-//  * @private
-//  */
-// const startSymbol = Symbol('is requestAnimationFrame started flag');
-// /**
-//  * Cycle.UPDATE event を発火する時の Events instance を保存するための Symbol
-//  * @type {Symbol}
-//  * @private
-//  */
-// const eventsSymbol = Symbol('Cycle.UPDATE Events instance');
-
 /**
  * <p>requestAnimationFrame を使用しループイベントを発生させます</p>
  * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
@@ -83,16 +58,6 @@ export default class Cycle extends EventDispatcher {
     // -------------------------------
     // onetime setting
     instance = this;
-    // // @type {Events} - Events
-    // this[eventsSymbol] = new Events(Cycle.UPDATE, this, this);
-    //
-    // // @type {number} - requestAnimationFrame return id
-    // this[requestSymbol] = 0;
-    // // @type {function} - update bind function
-    // this[updateSymbol] = this.update.bind(this);
-    // // @type {boolean} - started flag
-    // this[startSymbol] = false;
-
     const events = new Events(Cycle.UPDATE, this, this);
     const boundUpdate = this.update.bind(this);
     /**
@@ -130,16 +95,6 @@ export default class Cycle extends EventDispatcher {
   static get UPDATE() {
     return 'cycleUpdate';
   }
-  // // ----------------------------------------
-  // // GETTER / SETTER
-  // // ----------------------------------------
-  // /**
-  //  * Events instance を取得します
-  //  * @returns {Events} Events instance
-  //  */
-  // get events() {
-  //   return this[eventsSymbol];
-  // }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------

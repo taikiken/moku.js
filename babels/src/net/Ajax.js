@@ -17,14 +17,6 @@ import { default as Type } from '../util/Type';
 // Safari, IE はサポートしていないのでライブラリを使用すること
 const fetch = self.fetch;
 const Request = self.Request;
-// const Headers = self.Headers;
-
-// /**
-//  * can（Ajax 実行可能かの真偽値）フラッグを保存するための Symbol
-//  * @type {Symbol}
-//  * @private
-//  */
-// const canSymbol = Symbol('can start Ajax flag');
 
 /**
  * <p>fetch API を使用し Ajax request を行います</p>
@@ -54,13 +46,6 @@ export default class Ajax {
    * @param {Function} reject Promise fail callback
    */
   constructor(resolve, reject) {
-    // /**
-    //  * request 可能 / 不可能 flag
-    //  * @type {boolean}
-    //  * @private
-    //  * @default true
-    //  */
-    // this[canSymbol] = true;
     /**
      * request 可能 / 不可能 flag, true: 実行可能
      * @type {boolean}
@@ -77,23 +62,6 @@ export default class Ajax {
      */
     this.reject = reject;
   }
-  // // ----------------------------------------
-  // // GETTER / SETTER
-  // // ----------------------------------------
-  // /**
-  //  * request 可能 / 不可能 flag を取得します
-  //  * @return {boolean} request 可能 / 不可能 flag を返します
-  //  */
-  // get can() {
-  //   return this[canSymbol];
-  // }
-  // /**
-  //  * request 可能 / 不可能 flag を設定します
-  //  * @param {boolean} flag request 可能 / 不可能 flag
-  //  */
-  // set can(flag) {
-  //   this[canSymbol] = !!flag;
-  // }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------

@@ -57,33 +57,7 @@ export default class Rate extends Polling {
    */
   constructor(rateValue) {
     super(1000 / 60);
-    // @type {Events - Events
     const events = new Events(Rate.UPDATE, this, this);
-    // events.rate = rate;
-    // /**
-    //  * Rate.UPDATE Events instance
-    //  * @type {Events}
-    //  */
-    // this.events = events;
-
-    // @type {number} - count, rate に達したかを計測するための counter 変数
-    // this[countSymbol] = 0;
-
-    // correct rate list
-    // サポートするレートリスト
-    // this[ratesSymbol] = [
-    //   Rate.RATE_60,
-    //   Rate.RATE_30,
-    //   Rate.RATE_20,
-    //   Rate.RATE_15,
-    //   Rate.RATE_12,
-    //   Rate.RATE_10,
-    //   Rate.RATE_6,
-    //   Rate.RATE_5,
-    // ];
-    //
-    // // frame rate
-    // this[rateSymbol] = 0;
     const rates = [
       Rate.RATE_60,
       Rate.RATE_30,
@@ -215,38 +189,6 @@ export default class Rate extends Polling {
   static get UPDATE() {
     return 'rateUpdate';
   }
-  // // ----------------------------------------
-  // // GETTER / SETTER
-  // // ----------------------------------------
-  // /**
-  //  * fps 基準値リストを取得します
-  //  * @returns {number} fps 基準値リストを返します
-  //  */
-  // get rates() {
-  //   return this[ratesSymbol];
-  // }
-  // /**
-  //  * fps 基準値を取得します
-  //  * @returns {number} fps 基準値を返します
-  //  */
-  // get rate() {
-  //   return this[rateSymbol];
-  // }
-  //
-  // /**
-  //  * rate に達したかを計測するための counter 変数を取得します
-  //  * @returns {number} rate に達したかを計測するための counter 変数を返します
-  //  */
-  // get count() {
-  //   return this[countSymbol];
-  // }
-  // /**
-  //  * rate に達したかを計測するための counter 変数を設定します
-  //  * @param {number} step rate に達したかを計測するための counter 数
-  //  */
-  // set count(step) {
-  //   this[countSymbol] = step;
-  // }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
@@ -267,14 +209,6 @@ export default class Rate extends Polling {
    * @returns {boolean} rate 設定に成功すると true を返します
    */
   change(rate) {
-    // if (this.validate(rate)) {
-    //   this.rate = rate;
-    //   return true;
-    // }
-    // // else {
-    // //   throw new Error(`illegal rate: ${rate}. use const RATE_NN`);
-    // // }
-    // return false;
     const result = this.setRate(rate);
     this.update();
     return result;

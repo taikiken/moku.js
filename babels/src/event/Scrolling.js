@@ -31,23 +31,6 @@ const singletonSymbol = Symbol('Scrolling singleton symbol');
  * @private
  */
 let instance = null;
-// /**
-//  * private property key, bind 済み mouseWheel を保存するための Symbol
-//  * @type {Symbol}
-//  * @private
-//  */
-// const bindSymbol = Symbol('bound mouseWheel');
-// /**
-//  * Cycle.UPDATE event を発火する時の Events instance を保存するための Symbol
-//  * @type {Symbol}
-//  * @private
-//  */
-// const eventsSymbol = Symbol('Cycle.UPDATE event');
-// /**
-//  * scroll top 位置が変更になったかを確認するために前回値を保存するための Symbol
-//  * @type {Symbol}
-//  */
-// const topSymbol = Symbol('previous scroll top');
 
 /**
  * 引数 rate instance に設定した fps でスクロール位置を通知します
@@ -77,15 +60,8 @@ export default class Scrolling extends EventDispatcher {
     if (instance !== null) {
       return instance;
     }
-
     // onetime setting
     instance = this;
-
-    // @type {function} - bound scroll function
-    // this[bindSymbol] = this.scroll.bind(this);
-    //
-    // // @type {Events} - events instance
-    // this[eventsSymbol] = new ScrollEvents(Scrolling.SCROLL, this, this);
     const boundScroll = this.scroll.bind(this);
     /**
      * bound scroll, Rate.UPDATE event handler
@@ -98,10 +74,6 @@ export default class Scrolling extends EventDispatcher {
      * @returns {ScrollEvents} ScrollEvents instance
      */
     this.events = () => events;
-
-    // @type {number} - scroll top 前回値を保存します
-    // @default -1
-    // this[topSymbol] = -1;
     /**
      * 前回 scroll top 位置
      * @type {number}
@@ -114,11 +86,6 @@ export default class Scrolling extends EventDispatcher {
      * @default false
      */
     this.started = false;
-
-    // /**
-    //  * @property {Rate} this.rate - Rate instance
-    //  */
-    // Object.assign(this, { rate });
     /**
      * Rate instance
      * @type {?Rate}
@@ -140,31 +107,6 @@ export default class Scrolling extends EventDispatcher {
   static get UPDATE() {
     return 'scrollingUpdate';
   }
-  // // ----------------------------------------
-  // // GETTER / SETTER
-  // // ----------------------------------------
-  // /**
-  //  * bind 済み mouseWheel
-  //  * @returns {function} bind 済み mouseWheel を返します
-  //  */
-  // get bindScroll() {
-  //   return this[bindSymbol];
-  // }
-  // // events
-  // /**
-  //  * Events instance を取得します
-  //  * @returns {Events} Events instance
-  //  */
-  // get events() {
-  //   return this[eventsSymbol];
-  // }
-  // /**
-  //  * Events instance を設定します
-  //  * @param {Events} events Events instance
-  //  */
-  // set events(events) {
-  //   this[eventsSymbol] = events;
-  // }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
