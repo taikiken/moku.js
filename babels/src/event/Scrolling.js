@@ -14,7 +14,7 @@
 // event
 import { default as Scroll } from './Scroll';
 import { default as EventDispatcher } from './EventDispatcher';
-import { default as Events } from './Events';
+import { default as ScrollEvents } from './ScrollEvents';
 
 // tick
 import { default as Rate } from '../tick/Rate';
@@ -31,23 +31,23 @@ const singletonSymbol = Symbol('Scrolling singleton symbol');
  * @private
  */
 let instance = null;
-/**
- * private property key, bind 済み mouseWheel を保存するための Symbol
- * @type {Symbol}
- * @private
- */
-const bindSymbol = Symbol('bound mouseWheel');
-/**
- * Cycle.UPDATE event を発火する時の Events instance を保存するための Symbol
- * @type {Symbol}
- * @private
- */
-const eventsSymbol = Symbol('Cycle.UPDATE event');
-/**
- * scroll top 位置が変更になったかを確認するために前回値を保存するための Symbol
- * @type {Symbol}
- */
-const topSymbol = Symbol('previous scroll top');
+// /**
+//  * private property key, bind 済み mouseWheel を保存するための Symbol
+//  * @type {Symbol}
+//  * @private
+//  */
+// const bindSymbol = Symbol('bound mouseWheel');
+// /**
+//  * Cycle.UPDATE event を発火する時の Events instance を保存するための Symbol
+//  * @type {Symbol}
+//  * @private
+//  */
+// const eventsSymbol = Symbol('Cycle.UPDATE event');
+// /**
+//  * scroll top 位置が変更になったかを確認するために前回値を保存するための Symbol
+//  * @type {Symbol}
+//  */
+// const topSymbol = Symbol('previous scroll top');
 
 /**
  * 引数 rate instance に設定した fps でスクロール位置を通知します
@@ -63,10 +63,9 @@ export default class Scrolling extends EventDispatcher {
   /**
    * singleton です
    * @param {Symbol} checkSymbol singleton を保証するための private instance
-   * @param {Rate} rate 使用する Rate instance
    * @returns {Scrolling} singleton instance を返します
    */
-  constructor(checkSymbol, rate) {
+  constructor(checkSymbol) {
     // checkSymbol と singleton が等価かをチェックします
     if (checkSymbol !== singletonSymbol) {
       throw new Error('don\'t use new, instead use static factory method.');
@@ -83,14 +82,38 @@ export default class Scrolling extends EventDispatcher {
     instance = this;
 
     // @type {function} - bound scroll function
-    this[bindSymbol] = this.scroll.bind(this);
-
-    // @type {Events} - events instance
-    this[eventsSymbol] = new Events(Scrolling.SCROLL, this, this);
+    // this[bindSymbol] = this.scroll.bind(this);
+    //
+    // // @type {Events} - events instance
+    // this[eventsSymbol] = new ScrollEvents(Scrolling.SCROLL, this, this);
+    const boundScroll = this.scroll.bind(this);
+    /**
+     * bound scroll, Rate.UPDATE event handler
+     * @returns {function} bound scroll
+     */
+    this.boundScroll = () => boundScroll;
+    const events = new ScrollEvents(Scrolling.UPDATE, this, this);
+    /**
+     * ScrollEvents instance, 発火時に使用します
+     * @returns {ScrollEvents} ScrollEvents instance
+     */
+    this.events = () => events;
 
     // @type {number} - scroll top 前回値を保存します
     // @default -1
-    this[topSymbol] = -1;
+    // this[topSymbol] = -1;
+    /**
+     * 前回 scroll top 位置
+     * @type {number}
+     * @default -1
+     */
+    this.previous = -1;
+    /**
+     * start 済みフラッグ
+     * @type {boolean}
+     * @default false
+     */
+    this.started = false;
 
     // /**
     //  * @property {Rate} this.rate - Rate instance
@@ -98,9 +121,9 @@ export default class Scrolling extends EventDispatcher {
     // Object.assign(this, { rate });
     /**
      * Rate instance
-     * @type {Rate}
+     * @type {?Rate}
      */
-    this.rate = rate;
+    this.rate = null;
 
     // 設定済み instance を返します
     return instance;
@@ -114,58 +137,73 @@ export default class Scrolling extends EventDispatcher {
    * @returns {string} event, scrollingScroll を返します
    * @default scrollingScroll
    */
-  static get SCROLL() {
-    return 'scrollingScroll';
+  static get UPDATE() {
+    return 'scrollingUpdate';
   }
-  // ----------------------------------------
-  // GETTER / SETTER
-  // ----------------------------------------
-  /**
-   * bind 済み mouseWheel
-   * @returns {function} bind 済み mouseWheel を返します
-   */
-  get bindScroll() {
-    return this[bindSymbol];
-  }
-  // events
-  /**
-   * Events instance を取得します
-   * @returns {Events} Events instance
-   */
-  get events() {
-    return this[eventsSymbol];
-  }
-  /**
-   * Events instance を設定します
-   * @param {Events} events Events instance
-   */
-  set events(events) {
-    this[eventsSymbol] = events;
-  }
+  // // ----------------------------------------
+  // // GETTER / SETTER
+  // // ----------------------------------------
+  // /**
+  //  * bind 済み mouseWheel
+  //  * @returns {function} bind 済み mouseWheel を返します
+  //  */
+  // get bindScroll() {
+  //   return this[bindSymbol];
+  // }
+  // // events
+  // /**
+  //  * Events instance を取得します
+  //  * @returns {Events} Events instance
+  //  */
+  // get events() {
+  //   return this[eventsSymbol];
+  // }
+  // /**
+  //  * Events instance を設定します
+  //  * @param {Events} events Events instance
+  //  */
+  // set events(events) {
+  //   this[eventsSymbol] = events;
+  // }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
   /**
-   * fps を監視しスクロール位置を知らせます<br>
-   * 二重に watch しない様に `this.unwatch()` 実行し開始します
+   * Rate instance を設定します
+   * @param {Rate} [rate=new Rate(Rate.Rate_5)] Rate instance, scroll 監視 fps を設定します
    * @returns {Scrolling} method chain 可能なように instance を返します
    */
-  watch() {
-    this.unwatch();
-
+  init(rate = new Rate(Rate.RATE_5)) {
+    this.rate = rate;
+    return this;
+  }
+  /**
+   * fps を監視しスクロール位置を知らせます
+   * @returns {Scrolling} method chain 可能なように instance を返します
+   */
+  start() {
     const rate = this.rate;
-    rate.on(Rate.UPDATE, this.bindScroll);
+    if (rate === null) {
+      throw new Error(`rate: ${rate} error. have to set rate, before start.`);
+    }
+    if (this.started) {
+      return this;
+    }
+    this.started = true;
+    rate.on(Rate.UPDATE, this.boundScroll());
     rate.start();
-
     return this;
   }
   /**
    * fps 監視を止めます
    * @returns {Scrolling} method chain 可能なように instance を返します
    */
-  unwatch() {
-    this.rate.off(Rate.UPDATE, this.bindScroll);
-
+  stop() {
+    if (!this.started) {
+      return this;
+    }
+    this.started = false;
+    this.rate.off(Rate.UPDATE, this.boundScroll());
     return this;
   }
   /**
@@ -189,16 +227,16 @@ export default class Scrolling extends EventDispatcher {
    */
   scroll(event) {
     // @type {number} - scroll top
-    const y = Scroll.y;
+    const y = Scroll.y();
     // @type {number} - window height
     const height = window.innerHeight;
     // @type {number} - window width
     const width = window.innerWidth;
     // @type {number} - previous scroll top
-    const previous = this[topSymbol];
+    const previous = this.previous;
 
-    // @type {Events} - events
-    const events = this.events;
+    // @type {ScrollEvents} - events
+    const events = this.events();
 
     // @type {Event} - Rate Events instance
     events.original = event;
@@ -208,8 +246,6 @@ export default class Scrolling extends EventDispatcher {
     events.height = height;
     // @type {number} - window width
     events.width = width;
-    // @type {boolean} - window width が 768px 以上かを表す真偽値
-    events.wide = width >= 768;
     // @type {number} - window bottom(y + height)
     events.bottom = y + height;
     // @type {boolean} - 移動したかを表します,
@@ -224,7 +260,7 @@ export default class Scrolling extends EventDispatcher {
     this.dispatch(events);
 
     // save scroll top -> previous
-    this[topSymbol] = y;
+    this.previous = y;
   }
   /**
    * 強制的に Scrolling.SCROLL event を発火させます
@@ -238,10 +274,12 @@ export default class Scrolling extends EventDispatcher {
   // ----------------------------------------
   /**
    * Scrolling instance を singleton を保証し作成します
-   * @param {Rate} [rate=new Rate(Rate.RATE_12)] Rate instance
    * @returns {Scrolling} Scrolling instance を返します
    */
-  static factory(rate = new Rate(Rate.RATE_12)) {
-    return new Scrolling(singletonSymbol, rate);
+  static factory() {
+    if (instance !== null) {
+      return instance;
+    }
+    return new Scrolling(singletonSymbol);
   }
 }

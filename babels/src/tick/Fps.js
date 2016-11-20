@@ -16,12 +16,12 @@ import { default as Events } from '../event/Events';
 // tick
 import { default as Polling } from './Polling';
 
-/**
- * private property key, fps を保存するための Symbol
- * @type {Symbol}
- * @private
- */
-const fpsSymbol = Symbol('Singleton Fps Symbol');
+// /**
+//  * private property key, fps を保存するための Symbol
+//  * @type {Symbol}
+//  * @private
+//  */
+// const fpsSymbol = Symbol('Singleton Fps Symbol');
 
 /**
  * フレームレート毎に UPDATE イベントを発生させます
@@ -35,15 +35,25 @@ export default class Fps extends Polling {
     super(1000 / fps);
     // private property
     // @type {number} - frame rate, default: 30
-    this[fpsSymbol] = fps;
+    // this[fpsSymbol] = fps;
     // @type {Events} - Events
     const events = new Events(Fps.UPDATE, this, this);
-    events.fps = fps;
+    // events.fps = fps;
+    // /**
+    //  * Fps.UPDATE Events instance
+    //  * @type {Events}
+    //  */
+    // this.events = events;
     /**
      * Fps.UPDATE Events instance
-     * @type {Events}
+     * @returns {Events} Fps.UPDATE Events instance
      */
-    this.events = events;
+    this.events = () => events;
+    /**
+     * frame rate
+     * @type {number}
+     */
+    this.fps = fps;
   }
   // ----------------------------------------
   // EVENT
@@ -58,28 +68,43 @@ export default class Fps extends Polling {
     return 'fpsUpdate';
   }
   // ----------------------------------------
-  // GETTER / SETTER
+  // METHOD
   // ----------------------------------------
-  // fps
   /**
-   * frame rate を取得します
-   * @returns {number} frame rate を返します
+   * polling 時間を変更します<br>
+   * 1. プロパティ polling 変更
+   * 1. update 実行
+   * @param {number} interval fps
+   * @returns {boolean} `update` をコールし Polling.UPDATE event が発生すると true を返します
    */
-  get fps() {
-    return this[fpsSymbol];
+  change(interval) {
+    this.interval = 1000 / interval;
+    this.fps = interval;
+    return this.update();
   }
-  /**
-   * frame rate を設定します, 1 ~ 60 の間で設定します
-   * @param {number} rate frame rate
-   */
-  set fps(rate) {
-    const events = this.events;
-    events.fps = rate;
-    this[fpsSymbol] = rate;
-    /**
-     * interval milliseconds
-     * @type {number}
-     */
-    this.polling = 1000 / rate;
-  }
+  // // ----------------------------------------
+  // // GETTER / SETTER
+  // // ----------------------------------------
+  // // fps
+  // /**
+  //  * frame rate を取得します
+  //  * @returns {number} frame rate を返します
+  //  */
+  // get fps() {
+  //   return this[fpsSymbol];
+  // }
+  // /**
+  //  * frame rate を設定します, 1 ~ 60 の間で設定します
+  //  * @param {number} rate frame rate
+  //  */
+  // set fps(rate) {
+  //   const events = this.events;
+  //   events.fps = rate;
+  //   this[fpsSymbol] = rate;
+  //   /**
+  //    * interval milliseconds
+  //    * @type {number}
+  //    */
+  //   this.polling = 1000 / rate;
+  // }
 }

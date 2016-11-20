@@ -17,24 +17,24 @@ import { default as Events } from '../event/Events';
 // tick
 import { default as Polling } from './Polling';
 
-/**
- * private property key, fps を保存するための Symbol
- * @type {Symbol}
- * @private
- */
-const rateSymbol = Symbol('save fps');
-/**
- * private property key, count を保存するための Symbol
- * @type {Symbol}
- * @private
- */
-const countSymbol = Symbol('for update count');
-/**
- * private property key, rates を保存するための Symbol
- * @type {Symbol}
- * @private
- */
-const ratesSymbol = Symbol('save rate');
+// /**
+//  * private property key, fps を保存するための Symbol
+//  * @type {Symbol}
+//  * @private
+//  */
+// const rateSymbol = Symbol('save fps');
+// /**
+//  * private property key, count を保存するための Symbol
+//  * @type {Symbol}
+//  * @private
+//  */
+// const countSymbol = Symbol('for update count');
+// /**
+//  * private property key, rates を保存するための Symbol
+//  * @type {Symbol}
+//  * @private
+//  */
+// const ratesSymbol = Symbol('save rate');
 /**
  * 固定値を使用し fps を決定します
  *
@@ -53,25 +53,38 @@ const ratesSymbol = Symbol('save rate');
 export default class Rate extends Polling {
   /**
    * 固定値フレームレート毎に UPDATE イベントを発生させます
-   * @param {number} rate fps, 固定値以外設定できません
+   * @param {number} rateValue fps, 固定値以外設定できません
    */
-  constructor(rate) {
-    super(1);
+  constructor(rateValue) {
+    super(1000 / 60);
     // @type {Events - Events
     const events = new Events(Rate.UPDATE, this, this);
-    events.rate = rate;
-    /**
-     * Rate.UPDATE Events instance
-     * @type {Events}
-     */
-    this.events = events;
+    // events.rate = rate;
+    // /**
+    //  * Rate.UPDATE Events instance
+    //  * @type {Events}
+    //  */
+    // this.events = events;
 
     // @type {number} - count, rate に達したかを計測するための counter 変数
-    this[countSymbol] = 0;
+    // this[countSymbol] = 0;
 
     // correct rate list
     // サポートするレートリスト
-    this[ratesSymbol] = [
+    // this[ratesSymbol] = [
+    //   Rate.RATE_60,
+    //   Rate.RATE_30,
+    //   Rate.RATE_20,
+    //   Rate.RATE_15,
+    //   Rate.RATE_12,
+    //   Rate.RATE_10,
+    //   Rate.RATE_6,
+    //   Rate.RATE_5,
+    // ];
+    //
+    // // frame rate
+    // this[rateSymbol] = 0;
+    const rates = [
       Rate.RATE_60,
       Rate.RATE_30,
       Rate.RATE_20,
@@ -81,10 +94,40 @@ export default class Rate extends Polling {
       Rate.RATE_6,
       Rate.RATE_5,
     ];
-
-    // frame rate
-    this[rateSymbol] = 0;
-    this.change(rate);
+    /**
+     * @returns {Events} Events instance
+     */
+    this.events = () => events;
+    /**
+     * 許容可能な rate
+     * @return {Array<number>} 許容可能な rate
+     */
+    this.rates = () => rates;
+    /**
+     * rate count, update 毎にカウントアップします
+     * @type {number}
+     */
+    this.count = 0;
+    let rate = null;
+    /**
+     * rate 値
+     * @returns {?number} rate 値
+     */
+    this.rate = () => rate;
+    /**
+     * rate 値を設定します
+     * @param {number} value rate 値
+     * @returns {boolean} rate 設定に成功すると true を返します
+     */
+    this.setRate = (value) => {
+      if (this.validate(rateValue)) {
+        rate = value;
+        return true;
+      }
+      return false;
+    };
+    // init
+    this.setRate(rate);
   }
   // ----------------------------------------
   // CONST
@@ -172,61 +215,79 @@ export default class Rate extends Polling {
   static get UPDATE() {
     return 'rateUpdate';
   }
-  // ----------------------------------------
-  // GETTER / SETTER
-  // ----------------------------------------
-  /**
-   * fps 基準値リストを取得します
-   * @returns {number} fps 基準値リストを返します
-   */
-  get rates() {
-    return this[ratesSymbol];
-  }
-  /**
-   * fps 基準値を取得します
-   * @returns {number} fps 基準値を返します
-   */
-  get rate() {
-    return this[rateSymbol];
-  }
-
-  /**
-   * rate に達したかを計測するための counter 変数を取得します
-   * @returns {number} rate に達したかを計測するための counter 変数を返します
-   */
-  get count() {
-    return this[countSymbol];
-  }
-  /**
-   * rate に達したかを計測するための counter 変数を設定します
-   * @param {number} step rate に達したかを計測するための counter 数
-   */
-  set count(step) {
-    this[countSymbol] = step;
-  }
+  // // ----------------------------------------
+  // // GETTER / SETTER
+  // // ----------------------------------------
+  // /**
+  //  * fps 基準値リストを取得します
+  //  * @returns {number} fps 基準値リストを返します
+  //  */
+  // get rates() {
+  //   return this[ratesSymbol];
+  // }
+  // /**
+  //  * fps 基準値を取得します
+  //  * @returns {number} fps 基準値を返します
+  //  */
+  // get rate() {
+  //   return this[rateSymbol];
+  // }
+  //
+  // /**
+  //  * rate に達したかを計測するための counter 変数を取得します
+  //  * @returns {number} rate に達したかを計測するための counter 変数を返します
+  //  */
+  // get count() {
+  //   return this[countSymbol];
+  // }
+  // /**
+  //  * rate に達したかを計測するための counter 変数を設定します
+  //  * @param {number} step rate に達したかを計測するための counter 数
+  //  */
+  // set count(step) {
+  //   this[countSymbol] = step;
+  // }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
+  /**
+   * 正規な rate 値かをチェックします
+   * @param {number} rate 対象 rate
+   * @returns {boolean} 正しいと true を返します
+   */
+  validate(rate) {
+    return this.rates().indexOf(rate) !== -1;
+  }
   /**
    * fps 基準値を設定します
    * @throws {Error} 引数 rate が設定可能値以外の時に例外エラーが発生します
    * @param {number} rate fps 基準値, <br>
    * this.RATE_30, this.RATE_20, this.RATE_15, this.RATE_12, this.RATE_10, <br>
    * this.RATE_6, this.RATE_5 の何れかが必須です
-   * @returns {undefined} no-return
+   * @returns {boolean} rate 設定に成功すると true を返します
    */
   change(rate) {
-    if (this.rates.indexOf(rate) !== -1) {
-      this[rateSymbol] = rate;
-    } else {
-      throw new Error(`illegal rate: ${rate}. use const RATE_NN`);
-    }
+    // if (this.validate(rate)) {
+    //   this.rate = rate;
+    //   return true;
+    // }
+    // // else {
+    // //   throw new Error(`illegal rate: ${rate}. use const RATE_NN`);
+    // // }
+    // return false;
+    const result = this.setRate(rate);
+    this.update();
+    return result;
   }
   /**
    * loop(requestAnimationFrame) を開始します
    * @returns {boolean} start に成功すると true を返します
    */
   start() {
+    const rate = this.rate();
+    if (rate === null) {
+      throw new Error(`rate are not correct. ${rate}`);
+    }
     if (this.started) {
       // already start
       return false;
@@ -247,7 +308,7 @@ export default class Rate extends Polling {
   update() {
     // 余りが 0 の時にイベントを発火します
     this.count += 1;
-    const reminder = this.count % this.rate;
+    const reminder = this.count % this.rate();
     if (reminder === 0) {
       this.count = 0;
       this.fire(this.updateEvents(0, 0));

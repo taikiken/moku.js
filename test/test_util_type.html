@@ -78,12 +78,31 @@
   });
 
   // Type.number
-  describe('#Type.number, type check', function() {
+  describe('#Type.int, type check', function() {
     it("1 is number", function() {
       expect(Type.number(1)).to.be.true;
     });
+    it("1.0 is number", function() {
+      expect(Type.number(1.0)).to.be.true;
+    });
+    it("2 is number", function() {
+      expect(Type.number(2)).to.be.true;
+    });
+    it("-3.1 is number", function() {
+      expect(Type.number(-3.1)).to.be.true;
+    });
     it("'1' is not number", function() {
       expect(Type.number('1')).to.be.false;
+    });
+  });
+
+  // Type.int
+  describe('#Type.number, type check', function() {
+    it("1 is int", function() {
+      expect(Type.int(1)).to.be.true;
+    });
+    it("'1' is not int", function() {
+      expect(Type.int('1')).to.be.false;
     });
   });
 
