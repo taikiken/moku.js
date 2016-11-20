@@ -39,7 +39,7 @@ export default class Type {
   static number(target) {
     // return typeof target === 'number';
     // jQuery 2.x
-    return !Type.array(target) && ((target - parseFloat(target)) + 1) >= 0;
+    return typeof target === 'number' && !Type.array(target) && ((target - parseFloat(target)) + 1) >= 0;
   }
   /**
    * 引数(target)が int かを調べます

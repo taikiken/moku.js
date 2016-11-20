@@ -52,15 +52,15 @@
 
   // Scroll.bindScroll
   describe('#Scroll.bindScroll', function() {
-    it("dispatcher.bindScroll is exist", function() {
-      expect(dispatcher.bindScroll).to.exist;
+    it("dispatcher.boundScroll() is exist", function() {
+      expect(dispatcher.boundScroll()).to.exist;
     });
   });
 
   // Scroll.y
   describe('#Scroll.y', function() {
-    it("Scroll.y is 0", function() {
-      expect(Scroll.y).to.eql(0);
+    it("Scroll.y() is 0", function() {
+      expect(Scroll.y()).to.eql(0);
     });
   });
 
@@ -74,16 +74,16 @@
   });
 
   // Scroll.watch
-  describe('#Scroll.watch', function() {
-    it("dispatcher.watch() is exist", function() {
-      expect(dispatcher.watch()).to.exist;
+  describe('#Scroll.start', function() {
+    it("dispatcher.start() is exist", function() {
+      expect(dispatcher.start()).to.exist;
     });
   });
 
   // Scroll.unwatch
-  describe('#Scroll.unwatch', function() {
-    it("dispatcher.unwatch() is exist", function() {
-      expect(dispatcher.unwatch()).to.exist;
+  describe('#Scroll.stop', function() {
+    it("dispatcher.stop() is exist", function() {
+      expect(dispatcher.stop()).to.exist;
     });
   });
 

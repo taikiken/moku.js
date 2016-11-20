@@ -54,7 +54,7 @@
 	 *
 	 * This notice shall be included in all copies or substantial portions of the Software.
 	 * 0.0.1
-	 * 2016-11-19 16:44:08
+	 * 2016-11-20 16:54:05
 	 */
 	// use strict は本来不要でエラーになる
 	// 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -66,16 +66,16 @@
 	var _EventDispatcher = __webpack_require__(1);var _EventDispatcher2 = _interopRequireDefault(_EventDispatcher);
 	var _Events = __webpack_require__(47);var _Events2 = _interopRequireDefault(_Events);
 	var _Scroll = __webpack_require__(48);var _Scroll2 = _interopRequireDefault(_Scroll);
-	var _Wheel = __webpack_require__(98);var _Wheel2 = _interopRequireDefault(_Wheel);
+	var _Wheel = __webpack_require__(100);var _Wheel2 = _interopRequireDefault(_Wheel);
 
 
-	var _Ajax = __webpack_require__(99);var _Ajax2 = _interopRequireDefault(_Ajax);
+	var _Ajax = __webpack_require__(102);var _Ajax2 = _interopRequireDefault(_Ajax);
 
 
-	var _Cycle = __webpack_require__(100);var _Cycle2 = _interopRequireDefault(_Cycle);
-	var _Fps = __webpack_require__(101);var _Fps2 = _interopRequireDefault(_Fps);
-	var _Polling = __webpack_require__(102);var _Polling2 = _interopRequireDefault(_Polling);
-	var _Rate = __webpack_require__(107);var _Rate2 = _interopRequireDefault(_Rate);
+	var _Cycle = __webpack_require__(103);var _Cycle2 = _interopRequireDefault(_Cycle);
+	var _Fps = __webpack_require__(104);var _Fps2 = _interopRequireDefault(_Fps);
+	var _Polling = __webpack_require__(105);var _Polling2 = _interopRequireDefault(_Polling);
+	var _Rate = __webpack_require__(106);var _Rate2 = _interopRequireDefault(_Rate);
 
 
 	var _Type = __webpack_require__(22);var _Type2 = _interopRequireDefault(_Type);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
@@ -95,7 +95,7 @@
 	                                                   * build 日時を取得します
 	                                                   * @returns {string}  build 日時を返します
 	                                                   */
-	MOKU.build = function () {return '2016-11-19 16:44:08';};
+	MOKU.build = function () {return '2016-11-20 16:54:05';};
 	/**
 	                                                   * MOKU.event
 	                                                   * @type {Object} MOKU.event object を返します
@@ -801,7 +801,7 @@
 	    target) {
 	      // return typeof target === 'number';
 	      // jQuery 2.x
-	      return !Type.array(target) && target - parseFloat(target) + 1 >= 0;
+	      return typeof target === 'number' && !Type.array(target) && target - parseFloat(target) + 1 >= 0;
 	    }
 	    /**
 	       * 引数(target)が int かを調べます
@@ -1202,10 +1202,10 @@
 	/**
 	          * custom Event Object
 	          * @param {string} type イベント種類
-	          * @param {*} [target=this] イベント発生インスタンス
 	          * @param {*} [currentTarget=this] current イベント発生インスタンス
+	          * @param {*} [target=this] イベント発生インスタンス
 	          * */
-	function Events(type) {var target = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this;var currentTarget = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this;(0, _classCallCheck3.default)(this, Events);
+	function Events(type) {var currentTarget = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this;var target = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this;(0, _classCallCheck3.default)(this, Events);
 	  /**
 	                                                                                                                                                                                                                                                        * イベント種類
 	                                                                                                                                                                                                                                                        * @type {string}
@@ -1241,76 +1241,77 @@
 
 
 	var _EventDispatcher2 = __webpack_require__(1);var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
-	var _Events = __webpack_require__(47);var _Events2 = _interopRequireDefault(_Events);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	var _ScrollEvents = __webpack_require__(98);var _ScrollEvents2 = _interopRequireDefault(_ScrollEvents);
+	var _Freeze = __webpack_require__(99);var _Freeze2 = _interopRequireDefault(_Freeze);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 	/**
 	                                                                                                                                                                                * new を許可しないための Symbol
 	                                                                                                                                                                                * @type {Symbol}
 	                                                                                                                                                                                * @private
-	                                                                                                                                                                                */ /**
-	                                                                                                                                                                                    * Copyright (c) 2011-2016 inazumatv.com, inc.
-	                                                                                                                                                                                    * @author (at)taikiken / http://inazumatv.com
-	                                                                                                                                                                                    * @date 2016/07/26 - 21:05
-	                                                                                                                                                                                    *
-	                                                                                                                                                                                    * Distributed under the terms of the MIT license.
-	                                                                                                                                                                                    * http://www.opensource.org/licenses/mit-license.html
-	                                                                                                                                                                                    *
-	                                                                                                                                                                                    * This notice shall be included in all copies or substantial portions of the Software.
-	                                                                                                                                                                                    *
-	                                                                                                                                                                                    */ // event
-	var singletonSymbol = (0, _symbol2.default)('Scroll singleton symbol'); /**
+	                                                                                                                                                                                */
+	var singletonSymbol = (0, _symbol2.default)('Scroll singleton symbol');
+	/**
 	                                                                         * singleton instance, nullable
 	                                                                         * @type {?Scroll}
 	                                                                         * @private
-	                                                                         */var instance = null; /**
-	                                                                                                 * private property key, bind 済み mouseWheel を保存するための Symbol
-	                                                                                                 * @type {Symbol}
-	                                                                                                 * @private
-	                                                                                                 */var bindSymbol = (0, _symbol2.default)('bound mouseWheel symbol'); /**
-	                                                                                                                                                                       * Cycle.UPDATE event を発火する時の Events instance を保存するための Symbol
-	                                                                                                                                                                       * @type {Symbol}
-	                                                                                                                                                                       * @private
-	                                                                                                                                                                       */var eventsSymbol = (0, _symbol2.default)('Cycle.UPDATE symbol'); /**
-	                                                                                                                                                                                                                                           * scroll top 位置が変更になったかを確認するために前回値を保存するための Symbol
-	                                                                                                                                                                                                                                           * @type {Symbol}
-	                                                                                                                                                                                                                                           */var topSymbol = (0, _symbol2.default)('previous scroll top');
+	                                                                         */ /**
+	                                                                             * Copyright (c) 2011-2016 inazumatv.com, inc.
+	                                                                             * @author (at)taikiken / http://inazumatv.com
+	                                                                             * @date 2016/07/26 - 21:05
+	                                                                             *
+	                                                                             * Distributed under the terms of the MIT license.
+	                                                                             * http://www.opensource.org/licenses/mit-license.html
+	                                                                             *
+	                                                                             * This notice shall be included in all copies or substantial portions of the Software.
+	                                                                             *
+	                                                                             */ // event
+	var instance = null; // /**
+	//  * private property key, bind 済み mouseWheel を保存するための Symbol
+	//  * @type {Symbol}
+	//  * @private
+	//  */
+	// const bindSymbol = Symbol('bound mouseWheel symbol');
+	// /**
+	//  * Cycle.UPDATE event を発火する時の Events instance を保存するための Symbol
+	//  * @type {Symbol}
+	//  * @private
+	//  */
+	// const eventsSymbol = Symbol('Cycle.UPDATE symbol');
+	// /**
+	//  * scroll top 位置が変更になったかを確認するために前回値を保存するための Symbol
+	//  * @type {Symbol}
+	//  */
+	// const topSymbol = Symbol('previous scroll top');
+	//
+	// /**
+	//  * scroll freeze timeout id
+	//  * @private
+	//  * @static
+	//  * @type {number}
+	//  */
+	// let timerId = 0;
+	//
+	// /**
+	//  * scroll を止める時間
+	//  * @private
+	//  * @static
+	//  * @type {number}
+	//  * @default 200
+	//  */
+	// let freezeTime = 200;
 	/**
-	                                                                                                                                                                                                                                                                                                            * scroll freeze timeout id
-	                                                                                                                                                                                                                                                                                                            * @private
-	                                                                                                                                                                                                                                                                                                            * @static
-	                                                                                                                                                                                                                                                                                                            * @type {number}
-	                                                                                                                                                                                                                                                                                                            */
-	var timerId = 0;
-
-	/**
-	                  * scroll を止める時間
-	                  * @private
-	                  * @static
-	                  * @type {number}
-	                  * @default 200
-	                  */
-	var _freezeTime = 200;
-
-	/**
-	                        * window scroll event を監視し通知を行います
-	                        * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
-	                        *
-	                        * ```
-	                        * const instance = Scroll.factory();
-	                        * ```
-	                        */var
-	Scroll = function (_EventDispatcher) {(0, _inherits3.default)(Scroll, _EventDispatcher);
-	  /**
-	                                                                                          * singleton です
-	                                                                                          * @param {Symbol} checkSymbol singleton を保証するための private instance
-	                                                                                          * @returns {Scroll} singleton instance を返します
-	                                                                                          */
-	  function Scroll(checkSymbol) {var _ret2;(0, _classCallCheck3.default)(this, Scroll);
-	    // checkSymbol と singleton が等価かをチェックします
-	    if (checkSymbol !== singletonSymbol) {
-	      throw new Error('don\'t use new, instead use static factory method.');
-	    }
-
+	 * window scroll event を監視し通知を行います
+	 * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
+	 *
+	 * ```
+	 * const instance = Scroll.factory();
+	 * ```
+	 */var Scroll = function (_EventDispatcher) {(0, _inherits3.default)(Scroll, _EventDispatcher); /**
+	                                                                                                 * singleton です
+	                                                                                                 * @param {Symbol} checkSymbol singleton を保証するための private instance
+	                                                                                                 * @returns {Scroll} singleton instance を返します
+	                                                                                                 */function Scroll(checkSymbol) {var _ret2;(0, _classCallCheck3.default)(this, Scroll); // checkSymbol と singleton が等価かをチェックします
+	    if (checkSymbol !== singletonSymbol) {throw new Error('don\'t use new, instead use static factory method.');}
 
 
 	    // instance 作成済みかをチェックし instance が null の時 this を設定します
@@ -1323,12 +1324,36 @@
 
 	    // event handler
 	    // @type {function} - bound scroll function
-	    _this[bindSymbol] = _this.scroll.bind(_this);
+	    // this[bindSymbol] = this.scroll.bind(this);
+	    var boundScroll = _this.scroll.bind(_this);
+	    /**
+	                                                 * bound scroll, window.onscroll event handler
+	                                                 * @returns {function} bound scroll
+	                                                 */
+	    _this.boundScroll = function () {return boundScroll;};
 	    // @type {Events} - events instance
-	    _this[eventsSymbol] = new _Events2.default(Scroll.SCROLL, _this, _this);
+	    // this[eventsSymbol] = new Events(Scroll.SCROLL, this, this);
+	    var events = new _ScrollEvents2.default(Scroll.SCROLL, _this, _this);
+	    /**
+	                                                                           * ScrollEvents instance, 発火時に使用します
+	                                                                           * @returns {ScrollEvents} ScrollEvents instance
+	                                                                           */
+	    _this.events = function () {return events;};
 	    // @type {number} - scroll top 前回値を保存します
 	    // @default -1
-	    _this[topSymbol] = -1;
+	    // this[topSymbol] = -1;
+	    /**
+	     * 前回 scroll top 位置
+	     * @type {number}
+	     * @default -1
+	     */
+	    _this.previous = -1;
+	    /**
+	                          * start 済みフラッグ
+	                          * @type {boolean}
+	                          * @default false
+	                          */
+	    _this.started = false;
 
 	    // 設定済み instance を返します
 	    return _ret2 = instance, (0, _possibleConstructorReturn3.default)(_this, _ret2);
@@ -1341,113 +1366,101 @@
 	   * @event SCROLL
 	   * @returns {string} event, scrollScroll を返します
 	   * @default scrollScroll
-	   */(0, _createClass3.default)(Scroll, [{ key: 'watch',
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	   */(0, _createClass3.default)(Scroll, [{ key: 'start',
+
+
+
+	    // /**
+	    //  * scroll motion start event
+	    //  * @event START
+	    //  * @returns {string} event, scrollStart を返します
+	    //  * @default scrollStart
+	    //  */
+	    // static get START() {
+	    //   return 'scrollStart';
+	    // }
+	    // /**
+	    //  * scroll motion complete event
+	    //  * @event COMPLETE
+	    //  * @returns {string} event, scrollComplete を返します
+	    //  * @default scrollComplete
+	    //  */
+	    // static get COMPLETE() {
+	    //   return 'scrollComplete';
+	    // }
+	    // // ----------------------------------------
+	    // // STATIC GETTER / SETTER
+	    // // ----------------------------------------
+	    // /**
+	    //  * scroll top 位置
+	    //  * @returns {number} scroll top 位置を返します
+	    //  * @see https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY
+	    //  * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
+	    //  */
+	    // static get y() {
+	    //   return (typeof window.pageYOffset !== 'undefined') ?
+	    //     window.pageYOffset :
+	    //     (document.documentElement || document.body.parentNode || document.body).scrollTop;
+	    // }
+	    // /**
+	    //  * scroll top 位置 を設定します
+	    //  * @param {number} top スクロール位置(px)
+	    //  */
+	    // static set y(top) {
+	    //   // window.scrollTo(0, top);
+	    //   Scroll.jump(top);
+	    // }
+	    // ----------------------------------------
+	    // GETTER / SETTER
+	    // ----------------------------------------}
+	    // scroll
+	    // /**
+	    //  * bind 済み mouseWheel
+	    //  * @returns {function} bind 済み mouseWheel を返します
+	    //  */
+	    // get bindScroll() {
+	    //   return this[bindSymbol];
+	    // }
+	    // // events
+	    // /**
+	    //  * Events instance を取得します
+	    //  * @returns {Events} Events instance
+	    //  */
+	    // get events() {
+	    //   return this[eventsSymbol];
+	    // }
+	    // /**
+	    //  * Events instance を設定します
+	    //  * @param {Events} events Events instance
+	    //  */
+	    // set events(events) {
+	    //   this[eventsSymbol] = events;
+	    // }
 	    // ----------------------------------------
 	    // METHOD
 	    // ----------------------------------------
 	    /**
-	     * scroll event を監視します<br>
-	     * 監視前に二重に addEventListener しないように unwatch を実行します
+	     * scroll event を監視します
 	     * @returns {Scroll} method chain 可能なように instance を返します
-	     */value: function watch()
+	     */value: function start()
 	    {
-	      this.unwatch();
-
-	      window.addEventListener('scroll', this.bindScroll, false);
-
+	      if (this.started) {
+	        return this;
+	      }
+	      this.started = true;
+	      window.addEventListener('scroll', this.boundScroll(), false);
 	      return this;
 	    }
 	    /**
 	       * scroll event を監視を止めます
 	       * @returns {Scroll} method chain 可能なように instance を返します
-	       */ }, { key: 'unwatch', value: function unwatch()
+	       */ }, { key: 'stop', value: function stop()
 	    {
-	      window.removeEventListener('scroll', this.bindScroll);
-
+	      if (!this.started) {
+	        return this;
+	      }
+	      this.started = false;
+	      window.removeEventListener('scroll', this.boundScroll());
 	      return this;
 	    }
 	    /**
@@ -1458,14 +1471,14 @@
 	       */ }, { key: 'scroll', value: function scroll(
 	    event) {
 	      // @type {number} - scroll top
-	      var y = Scroll.y;
+	      var y = Scroll.y();
 	      // @type {number} - window height
 	      var height = window.innerHeight;
 	      // @type {number} - 前回の scroll top
-	      var previous = this[topSymbol];
+	      var previous = this.previous;
 
 	      // @type {Events} - events
-	      var events = this.events;
+	      var events = this.events();
 	      // @type {Event} - scroll event
 	      events.original = event;
 	      // @type {number} - scroll top
@@ -1481,7 +1494,7 @@
 	      events.moving = y - previous;
 	      // event fire
 	      this.dispatch(events);
-	      this[topSymbol] = y;
+	      this.previous = y;
 	    }
 	    // ----------------------------------------
 	    // STATIC METHOD
@@ -1491,73 +1504,91 @@
 	     * @param {number} [y=0] scroll top 目標値
 	     * @param {number} [delay=0] time out 遅延 ms
 	     * @returns {number} time out id
-	     */ }, { key: 'bindScroll', // ----------------------------------------
-	    // GETTER / SETTER
-	    // ----------------------------------------}
-	    // scroll
+	     */ }], [{ key: 'jump', value: function jump()
+	    {var y = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+	      return setTimeout(function () {window.scrollTo(0, y);}, delay);
+	    }
+	    // // ----------------------------------------
+	    // /**
+	    //  * scroll 動作を受付不能にします
+	    //  * @returns {void}
+	    //  */
+	    // static abort() {
+	    //   window.addEventListener('touchstart', Scroll.onScroll, false);
+	    //   window.addEventListener('touchmove', Scroll.onScroll, false);
+	    //   window.addEventListener('touchend', Scroll.onScroll, false);
+	    //   window.addEventListener('scroll', Scroll.onScroll, false);
+	    //   document.addEventListener('wheel', Scroll.onScroll, false);
+	    //   document.addEventListener('mousewheel', Scroll.onScroll, false);
+	    //   window.addEventListener('DOMMouseScroll', Scroll.onScroll, false);
+	    // }
+	    // /**
+	    //  * scroll 動作を回復します
+	    //  * @returns {void}
+	    //  */
+	    // static activate() {
+	    //   window.removeEventListener('touchstart', Scroll.onScroll);
+	    //   window.removeEventListener('touchmove', Scroll.onScroll);
+	    //   window.removeEventListener('touchend', Scroll.onScroll);
+	    //   window.removeEventListener('scroll', Scroll.onScroll);
+	    //   document.removeEventListener('wheel', Scroll.onScroll);
+	    //   document.removeEventListener('mousewheel', Scroll.onScroll);
+	    //   window.removeEventListener('DOMMouseScroll', Scroll.onScroll);
+	    // }
+	    // /**
+	    //  * window scroll event handler, バブリング・伝播全てキャンセルします
+	    //  * @param {Event} event window scroll event
+	    //  * @returns {boolean} event をキャンセルするために false を返します
+	    //  */
+	    // static onScroll(event) {
+	    //   event.preventDefault();
+	    //   event.stopPropagation();
+	    //   return false;
+	    // }
+	    // /**
+	    //  * scroll 操作を引数(delay)の間キャンセルします
+	    //  * @param {number} [delay=100] 遅延時間(ms), pc: 100, mobile: 500
+	    //  * @returns {number} time out id
+	    //  */
+	    // static freeze(delay = Scroll.freezeTime()) {
+	    //   clearTimeout(timerId);
+	    //
+	    //   Scroll.abort();
+	    //   timerId = setTimeout(Scroll.activate, delay);
+	    //   return timerId;
+	    // }
+	    // /**
+	    //  * scroll 操作を不能にする時間間隔(ms)を取得します
+	    //  * @returns {number} scroll 操作を不能にする時間間隔(ms)
+	    //  */
+	    // static freezeTime() {
+	    //   return freezeTime;
+	    // }
+	    // /**
+	    //  * scroll 操作を不能にする時間間隔(ms)を設定します
+	    //  * @param {number} time scroll 操作を不能にする時間(ms)
+	    //  * @returns {void}
+	    //  */
+	    // static setFreezeTime(time) {
+	    //   freezeTime = time;
+	    // }
 	    /**
-	     * bind 済み mouseWheel
-	     * @returns {function} bind 済み mouseWheel を返します
-	     */get: function get() {return this[bindSymbol];} // events
-	    /**
-	     * Events instance を取得します
-	     * @returns {Events} Events instance
-	     */ }, { key: 'events', get: function get() {return this[eventsSymbol];} /**
-	                                                                              * Events instance を設定します
-	                                                                              * @param {Events} events Events instance
-	                                                                              */, set: function set(events) {this[eventsSymbol] = events;} }], [{ key: 'jump', value: function jump() {var y = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;return setTimeout(function () {window.scrollTo(0, y);}, delay);} // ----------------------------------------
-	    /**
-	     * scroll 動作を受付不能にします
-	     * @returns {void}
-	     */ }, { key: 'abort', value: function abort() {window.addEventListener('touchstart', Scroll.onScroll, false);window.addEventListener('touchmove', Scroll.onScroll, false);window.addEventListener('touchend', Scroll.onScroll, false);window.addEventListener('scroll', Scroll.onScroll, false);document.addEventListener('wheel', Scroll.onScroll, false);document.addEventListener('mousewheel', Scroll.onScroll, false);window.addEventListener('DOMMouseScroll', Scroll.onScroll, false);} /**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     * scroll 動作を回復します
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     * @returns {void}
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     */ }, { key: 'activate', value: function activate()
+	     * {@link Freeze}.freeze を実行し scroll 操作を一定期間不能にします
+	     * @returns {number} time out ID
+	     */ }, { key: 'freeze', value: function freeze()
 	    {
-	      window.removeEventListener('touchstart', Scroll.onScroll);
-	      window.removeEventListener('touchmove', Scroll.onScroll);
-	      window.removeEventListener('touchend', Scroll.onScroll);
-	      window.removeEventListener('scroll', Scroll.onScroll);
-	      document.removeEventListener('wheel', Scroll.onScroll);
-	      document.removeEventListener('mousewheel', Scroll.onScroll);
-	      window.removeEventListener('DOMMouseScroll', Scroll.onScroll);
+	      return _Freeze2.default.freeze();
 	    }
 	    /**
-	       * window scroll event handler, バブリング・伝播全てキャンセルします
-	       * @param {Event} event window scroll event
-	       * @returns {boolean} event をキャンセルするために false を返します
-	       */ }, { key: 'onScroll', value: function onScroll(
-	    event) {
-	      event.preventDefault();
-	      event.stopPropagation();
-	      return false;
-	    }
-	    /**
-	       * scroll 操作を引数(delay)の間キャンセルします
-	       * @param {number} [delay=100] 遅延時間(ms), pc: 100, mobile: 500
-	       * @returns {number} time out id
-	       */ }, { key: 'freeze', value: function freeze()
-	    {var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Scroll.freezeTime();
-	      clearTimeout(timerId);
-
-	      Scroll.abort();
-	      timerId = setTimeout(Scroll.activate, delay);
-	      return timerId;
-	    }
-	    /**
-	       * scroll 操作を不能にする時間間隔(ms)を取得します
-	       * @returns {number} scroll 操作を不能にする時間間隔(ms)
-	       */ }, { key: 'freezeTime', value: function freezeTime()
+	       * scroll top 位置
+	       * @returns {number} scroll top 位置を返します
+	       * @see https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY
+	       * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
+	       */ }, { key: 'y', value: function y()
 	    {
-	      return _freezeTime;
-	    }
-	    /**
-	       * scroll 操作を不能にする時間間隔(ms)を設定します
-	       * @param {number} time scroll 操作を不能にする時間(ms)
-	       * @returns {void}
-	       */ }, { key: 'setFreezeTime', value: function setFreezeTime(
-	    time) {
-	      _freezeTime = time;
+	      return typeof window.pageYOffset !== 'undefined' ?
+	      window.pageYOffset :
+	      (document.documentElement || document.body.parentNode || document.body).scrollTop;
 	    }
 	    // ----------------------------------------
 	    /**
@@ -1565,37 +1596,11 @@
 	     * @returns {Scroll} Scroll instance を返します
 	     */ }, { key: 'factory', value: function factory()
 	    {
+	      if (instance !== null) {
+	        return instance;
+	      }
 	      return new Scroll(singletonSymbol);
-	    } }, { key: 'SCROLL', get: function get() {return 'scrollScroll';} /**
-	                                                                        * scroll motion start event
-	                                                                        * @event START
-	                                                                        * @returns {string} event, scrollStart を返します
-	                                                                        * @default scrollStart
-	                                                                        */ }, { key: 'START', get: function get() {return 'scrollStart';} /**
-	                                                                                                                                           * scroll motion complete event
-	                                                                                                                                           * @event COMPLETE
-	                                                                                                                                           * @returns {string} event, scrollComplete を返します
-	                                                                                                                                           * @default scrollComplete
-	                                                                                                                                           */ }, { key: 'COMPLETE', get: function get() {return 'scrollComplete';} /**
-	                                                                                                                                                                                                                    * [LINE UP] button 由来の Scroll Event, start
-	                                                                                                                                                                                                                    * @event LINEUP_START
-	                                                                                                                                                                                                                    * @returns {string} event, scrollLineupStart を返します
-	                                                                                                                                                                                                                    */ }, { key: 'LINEUP_START', get: function get() {return 'scrollLineupStart';} /**
-	                                                                                                                                                                                                                                                                                                    * [LINE UP] button 由来の Scroll Event, complete
-	                                                                                                                                                                                                                                                                                                    * @event LINEUP_COMPLETE
-	                                                                                                                                                                                                                                                                                                    * @returns {string} event, scrollLineupComplete を返します
-	                                                                                                                                                                                                                                                                                                    */ }, { key: 'LINEUP_COMPLETE', get: function get() {return 'scrollLineupComplete';} // ----------------------------------------
-	    // STATIC GETTER / SETTER
-	    // ----------------------------------------
-	    /**
-	     * scroll top 位置
-	     * @returns {number} scroll top 位置を返します
-	     * @see https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY
-	     * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
-	     */ }, { key: 'y', get: function get() {return typeof window.pageYOffset !== 'undefined' ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;} /**
-	                                                                                                                                                                                                         * scroll top 位置 を設定します
-	                                                                                                                                                                                                         * @param {number} top スクロール位置(px)
-	                                                                                                                                                                                                         */, set: function set(top) {window.scrollTo(0, top);} }]);return Scroll;}(_EventDispatcher3.default);exports.default = Scroll;
+	    } }, { key: 'SCROLL', get: function get() {return 'scrollScroll';} }]);return Scroll;}(_EventDispatcher3.default);exports.default = Scroll;
 
 /***/ },
 /* 49 */
@@ -2613,6 +2618,190 @@
 /* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _getPrototypeOf = __webpack_require__(49);var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _possibleConstructorReturn2 = __webpack_require__(53);var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);var _inherits2 = __webpack_require__(90);var _inherits3 = _interopRequireDefault(_inherits2);
+
+
+
+
+
+
+
+
+
+
+
+	var _Events2 = __webpack_require__(47);var _Events3 = _interopRequireDefault(_Events2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+	/**
+	                                                                                                                                                                                  * Scroll events 管理クラス
+	                                                                                                                                                                                  */var
+	ScrollEvents = function (_Events) {(0, _inherits3.default)(ScrollEvents, _Events);
+	  /**
+	                                                                                    * custom Event Object
+	                                                                                    * @param {string} type イベント種類
+	                                                                                    * @param {*} currentTarget current イベント発生インスタンス
+	                                                                                    * @param {*} [target=undefined] イベント発生インスタンス
+	                                                                                    * */
+	  function ScrollEvents(type, currentTarget) {var target = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;(0, _classCallCheck3.default)(this, ScrollEvents);
+
+	    /**
+	                                                                                                                                                                                             * scroll top 前回位置(px)
+	                                                                                                                                                                                             * @type {number}
+	                                                                                                                                                                                             */var _this = (0, _possibleConstructorReturn3.default)(this, (ScrollEvents.__proto__ || (0, _getPrototypeOf2.default)(ScrollEvents)).call(this, type, currentTarget, target));
+	    _this.previous = -1;
+	    /**
+	                          * オリジナルイベント(.onscroll)
+	                          * @type {?Event}
+	                          */
+	    _this.original = null;
+	    /**
+	                            * scroll top 現在位置(px)
+	                            * @type {number}
+	                            */
+	    _this.y = 0;
+	    /**
+	                  * window innerHeight
+	                  * @type {number}
+	                  */
+	    _this.height = 0;
+	    /**
+	                       * window innerWidth
+	                       * @type {number}
+	                       */
+	    _this.width = 0;
+	    /**
+	                      * window 下端位置(scroll top + window height)
+	                      * @type {number}
+	                      */
+	    _this.bottom = 0;
+	    /**
+	                       * scroll top 位置が前回と違うかを表すフラッグ, true: 違う
+	                       * @type {boolean}
+	                       */
+	    _this.changed = false;
+	    /**
+	                            * UP / DOWN と前回からの移動距離(px), 正(+): scroll down
+	                            * @type {number}
+	                            */
+	    _this.moving = 0;return _this;
+	  }return ScrollEvents;}(_Events3.default); /**
+	                                             * Copyright (c) 2011-2016 inazumatv.com, inc.
+	                                             * @author (at)taikiken / http://inazumatv.com
+	                                             * @date 2016/11/20 - 10:54
+	                                             *
+	                                             * Distributed under the terms of the MIT license.
+	                                             * http://www.opensource.org/licenses/mit-license.html
+	                                             *
+	                                             * This notice shall be included in all copies or substantial portions of the Software.
+	                                             *
+	                                             */exports.default = ScrollEvents;
+
+/***/ },
+/* 99 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * Copyright (c) 2011-2016 inazumatv.com, inc.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * @author (at)taikiken / http://inazumatv.com
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * @date 2016/11/19 - 22:10
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * Distributed under the terms of the MIT license.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * http://www.opensource.org/licenses/mit-license.html
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * This notice shall be included in all copies or substantial portions of the Software.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            */
+
+
+	/**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                * scroll freeze timeout id
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                * @private
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                * @static
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                * @type {number}
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+	var timerId = 0;
+
+	/**
+	                  * scroll を止める時間
+	                  * @private
+	                  * @static
+	                  * @type {number}
+	                  * @default 200
+	                  */
+	var _duration = 200;
+
+	/**
+	                      * scroll 操作を強制的に不可能にします
+	                      */var
+	Freeze = function () {function Freeze() {(0, _classCallCheck3.default)(this, Freeze);}(0, _createClass3.default)(Freeze, null, [{ key: 'start',
+	    /**
+	                                                                                                                                                 * scroll 動作を受付不能にします
+	                                                                                                                                                 * @returns {void}
+	                                                                                                                                                 */value: function start()
+	    {
+	      window.addEventListener('touchstart', Freeze.onScroll, false);
+	      window.addEventListener('touchmove', Freeze.onScroll, false);
+	      window.addEventListener('touchend', Freeze.onScroll, false);
+	      window.addEventListener('scroll', Freeze.onScroll, false);
+	      document.addEventListener('wheel', Freeze.onScroll, false);
+	      document.addEventListener('mousewheel', Freeze.onScroll, false);
+	      window.addEventListener('DOMMouseScroll', Freeze.onScroll, false);
+	    }
+	    /**
+	       * scroll 動作を回復します
+	       * @returns {void}
+	       */ }, { key: 'stop', value: function stop()
+	    {
+	      window.removeEventListener('touchstart', Freeze.onScroll);
+	      window.removeEventListener('touchmove', Freeze.onScroll);
+	      window.removeEventListener('touchend', Freeze.onScroll);
+	      window.removeEventListener('scroll', Freeze.onScroll);
+	      document.removeEventListener('wheel', Freeze.onScroll);
+	      document.removeEventListener('mousewheel', Freeze.onScroll);
+	      window.removeEventListener('DOMMouseScroll', Freeze.onScroll);
+	    }
+	    /**
+	       * window scroll event handler, バブリング・伝播全てキャンセルします
+	       * @param {Event} event window scroll event
+	       * @returns {boolean} event をキャンセルするために false を返します
+	       */ }, { key: 'onScroll', value: function onScroll(
+	    event) {
+	      event.preventDefault();
+	      event.stopPropagation();
+	      return false;
+	    }
+	    /**
+	       * scroll 操作を引数(delay)の間キャンセルします
+	       * @param {number} [delay=200] 遅延時間(ms), 200
+	       * @returns {number} time out id
+	       */ }, { key: 'freeze', value: function freeze()
+	    {var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Freeze.duration();
+	      clearTimeout(timerId);
+
+	      Freeze.stop();
+	      timerId = setTimeout(Freeze.start, delay);
+	      return timerId;
+	    }
+	    /**
+	       * scroll 操作を不能にする時間間隔(ms)を取得します
+	       * @returns {number} scroll 操作を不能にする時間間隔(ms)
+	       */ }, { key: 'duration', value: function duration()
+	    {
+	      return _duration;
+	    }
+	    /**
+	       * scroll 操作を不能にする時間間隔(ms)を設定します
+	       * @param {number} time scroll 操作を不能にする時間(ms)
+	       * @returns {void}
+	       */ }, { key: 'setDuration', value: function setDuration(
+	    time) {
+	      _duration = time;
+	    } }]);return Freeze;}();exports.default = Freeze;
+
+/***/ },
+/* 100 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _getPrototypeOf = __webpack_require__(49);var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);var _possibleConstructorReturn2 = __webpack_require__(53);var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);var _inherits2 = __webpack_require__(90);var _inherits3 = _interopRequireDefault(_inherits2);var _symbol = __webpack_require__(74);var _symbol2 = _interopRequireDefault(_symbol);
 
 
@@ -2627,46 +2816,46 @@
 
 
 	var _EventDispatcher2 = __webpack_require__(1);var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
-	var _Events = __webpack_require__(47);var _Events2 = _interopRequireDefault(_Events);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	var _WheelEvents = __webpack_require__(101);var _WheelEvents2 = _interopRequireDefault(_WheelEvents);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 	/**
-	                                                                                                                                                                                * new を許可しないための Symbol
-	                                                                                                                                                                                * @type {Symbol}
-	                                                                                                                                                                                * @private
-	                                                                                                                                                                                */ /**
-	                                                                                                                                                                                    * Copyright (c) 2011-2016 inazumatv.com, inc.
-	                                                                                                                                                                                    * @author (at)taikiken / http://inazumatv.com
-	                                                                                                                                                                                    * @date 2016/07/26 - 19:12
-	                                                                                                                                                                                    *
-	                                                                                                                                                                                    * Distributed under the terms of the MIT license.
-	                                                                                                                                                                                    * http://www.opensource.org/licenses/mit-license.html
-	                                                                                                                                                                                    *
-	                                                                                                                                                                                    * This notice shall be included in all copies or substantial portions of the Software.
-	                                                                                                                                                                                    *
-	                                                                                                                                                                                    */ // event
+	                                                                                                                                                                                                    * new を許可しないための Symbol
+	                                                                                                                                                                                                    * @type {Symbol}
+	                                                                                                                                                                                                    * @private
+	                                                                                                                                                                                                    */ /**
+	                                                                                                                                                                                                        * Copyright (c) 2011-2016 inazumatv.com, inc.
+	                                                                                                                                                                                                        * @author (at)taikiken / http://inazumatv.com
+	                                                                                                                                                                                                        * @date 2016/07/26 - 19:12
+	                                                                                                                                                                                                        *
+	                                                                                                                                                                                                        * Distributed under the terms of the MIT license.
+	                                                                                                                                                                                                        * http://www.opensource.org/licenses/mit-license.html
+	                                                                                                                                                                                                        *
+	                                                                                                                                                                                                        * This notice shall be included in all copies or substantial portions of the Software.
+	                                                                                                                                                                                                        *
+	                                                                                                                                                                                                        */ // event
 	var singletonSymbol = (0, _symbol2.default)('Scroll singleton symbol'); /**
 	                                                                         * singleton instance, nullable
 	                                                                         * @type {?Wheel}
 	                                                                         * @private
-	                                                                         */var instance = null; /**
-	                                                                                                 * private property key, bind 済み mouseWheel を保存するための Symbol
-	                                                                                                 * @type {Symbol}
-	                                                                                                 * @private
-	                                                                                                 */var wheelSymbol = (0, _symbol2.default)('bound mouseWheel Symbol'); /**
-	                                                                                                                                                                        * mousewheel event を監視し通知を行います
-	                                                                                                                                                                        * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
-	                                                                                                                                                                        *
-	                                                                                                                                                                        * ```
-	                                                                                                                                                                        * const instance:Wheel = Wheel.factory();
-	                                                                                                                                                                        * ```
-	                                                                                                                                                                        */var Wheel = function (_EventDispatcher) {(0, _inherits3.default)(Wheel, _EventDispatcher); /**
-	                                                                                                                                                                                                                                                                      * singleton です
-	                                                                                                                                                                                                                                                                      * @param {Symbol} checkSymbol singleton を保証するための private instance
-	                                                                                                                                                                                                                                                                      * @returns {Wheel} singleton instance を返します
-	                                                                                                                                                                                                                                                                      */function Wheel(checkSymbol) {var _ret2;(0, _classCallCheck3.default)(this, Wheel); // checkSymbol と singleton が等価かをチェックします
-	    if (checkSymbol !== singletonSymbol) {
-	      throw new Error('don\'t use new, instead use static factory method.');
-	    }
+	                                                                         */var instance = null; // /**
+	//  * private property key, bind 済み mouseWheel を保存するための Symbol
+	//  * @type {Symbol}
+	//  * @private
+	//  */
+	// const wheelSymbol = Symbol('bound mouseWheel Symbol');
+	/**
+	 * mousewheel event を監視し通知を行います
+	 * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
+	 *
+	 * ```
+	 * const instance:Wheel = Wheel.factory();
+	 * ```
+	 */var Wheel = function (_EventDispatcher) {(0, _inherits3.default)(Wheel, _EventDispatcher); /**
+	                                                                                               * singleton です
+	                                                                                               * @param {Symbol} checkSymbol singleton を保証するための private instance
+	                                                                                               * @returns {Wheel} singleton instance を返します
+	                                                                                               */function Wheel(checkSymbol) {var _ret2;(0, _classCallCheck3.default)(this, Wheel); // checkSymbol と singleton が等価かをチェックします
+	    if (checkSymbol !== singletonSymbol) {throw new Error('don\'t use new, instead use static factory method.');}
 
 
 
@@ -2679,23 +2868,39 @@
 	    instance = _this;
 
 	    // event handler
-	    _this[wheelSymbol] = _this.mouseWheel.bind(_this);
+	    // this[wheelSymbol] = this.mouseWheel.bind(this);
+	    var boundWheel = _this.mouseWheel.bind(_this);
 	    /**
-	                                                        * 閾値, wheel 移動量が閾値を超えたときにイベントを発生させます
-	                                                        * @type {number}
-	                                                        * @default 200
-	                                                        */
+	                                                    * bound mouseWheel
+	                                                    * @returns {function} window.wheel event handler
+	                                                    */
+	    _this.boundWheel = function () {return boundWheel;};
+	    /**
+	                                                          * 閾値, wheel 移動量が閾値を超えたときにイベントを発生させます
+	                                                          * @type {number}
+	                                                          * @default 200
+	                                                          */
 	    _this.threshold = 200;
 	    /**
 	                            * wheelDelta 移動量が閾値を超えるかをチェックするための積算計算変数
 	                            * @type {number}
 	                            */
 	    _this.moved = 0;
+	    // /**
+	    //  * firefox wheel event.detail 数値を他 Browser wheel 値と揃えるための係数
+	    //  * @type {number}
+	    //  */
+	    // this.coefficient = -7.5;
+	    _this.started = false;
+	    var events = {
+	      up: new _WheelEvents2.default(Wheel.UP, _this),
+	      down: new _WheelEvents2.default(Wheel.DOWN, _this) };
+
 	    /**
-	                      * firefox wheel event.detail 数値を他 Browser wheel 値と揃えるための係数
-	                      * @type {number}
-	                      */
-	    _this.coefficient = -7.5;
+	                                                             * UP / DOWN Events instance
+	                                                             * @returns {{up: WheelEvents, down: WheelEvents}} UP / DOWN Events instance
+	                                                             */
+	    _this.events = function () {return events;};
 
 	    // 設定済み instance を返します
 	    return _ret2 = instance, (0, _possibleConstructorReturn3.default)(_this, _ret2);
@@ -2708,7 +2913,7 @@
 	   * @event UP
 	   * @returns {string} event, wheelUp を返します
 	   * @default wheelUp
-	   */(0, _createClass3.default)(Wheel, [{ key: 'watch',
+	   */(0, _createClass3.default)(Wheel, [{ key: 'start',
 
 
 
@@ -2721,35 +2926,42 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
+	    // // ----------------------------------------
+	    // // GETTER / SETTER
+	    // // ----------------------------------------
+	    // /**
+	    //  * bind 済み mouseWheel
+	    //  * @returns {function} bind 済み mouseWheel を返します
+	    //  */
+	    // get boundWheel() {
+	    //   return this[wheelSymbol];
+	    // }
 	    // ----------------------------------------
 	    // METHOD
 	    // ----------------------------------------
 	    /**
-	     * mousewheel event を監視します<br>
-	     * 監視前に二重に addEventListener しないように unwatch を実行します
+	     * mousewheel event を監視します
 	     * @returns {Wheel} method chain 可能なように instance を返します
-	     */value: function watch()
+	     */value: function start()
 	    {
-	      this.unwatch();
-	      window.addEventListener('wheel', this.boundWheel, false);
+	      if (this.started) {
+	        return this;
+	      }
+	      this.started = true;
+	      // this.unwatch();
+	      window.addEventListener('wheel', this.boundWheel(), false);
 	      return this;
 	    }
 	    /**
 	       * mousewheel event を監視を止めます
 	       * @returns {Wheel} method chain 可能なように instance を返します
-	       */ }, { key: 'unwatch', value: function unwatch()
+	       */ }, { key: 'stop', value: function stop()
 	    {
-	      window.removeEventListener('wheel', this.boundWheel);
+	      if (!this.started) {
+	        return this;
+	      }
+	      this.started = false;
+	      window.removeEventListener('wheel', this.boundWheel());
 	      return this;
 	    }
 	    /**
@@ -2786,19 +2998,19 @@
 
 	      // 閾値チェック
 	      if (Math.abs(moved) >= this.threshold) {
+	        // scroll event を発火します
 	        if (moved > 0) {
 	          // scroll up
 	          this.up(moved);
 	        } else {
 	          this.down(moved);
 	        }
-	      } else {
-	        // 閾値を超えていないので処理をしない
+
+	        // initialize moved, 発火後に積算移動変数を初期化します
+	        this.moved = 0;
 	        return moved;
 	      }
-
-	      // initialize moved
-	      this.moved = 0;
+	      // 閾値を超えていないので処理をしない
 	      return moved;
 	    }
 	    /**
@@ -2808,7 +3020,7 @@
 	       */ }, { key: 'up', value: function up(
 	    moved) {
 	      // @type {Events}
-	      var events = new _Events2.default(Wheel.UP, this, this);
+	      var events = this.events().up;
 	      events.moved = moved;
 	      this.dispatch(events);
 
@@ -2821,7 +3033,7 @@
 	       */ }, { key: 'down', value: function down(
 	    moved) {
 	      // @type {Events}
-	      var events = new _Events2.default(Wheel.DOWN, this, this);
+	      var events = this.events().down;
 	      events.moved = moved;
 	      this.dispatch(events);
 
@@ -2833,24 +3045,24 @@
 	    /**
 	     * Wheel instance を singleton を保証し作成します
 	     * @returns {Wheel} Wheel instance を返します
-	     */ }, { key: 'boundWheel', // ----------------------------------------
-	    // GETTER / SETTER
-	    // ----------------------------------------
-	    /**
-	     * bind 済み mouseWheel
-	     * @returns {function} bind 済み mouseWheel を返します
-	     */get: function get() {return this[wheelSymbol];} }], [{ key: 'factory', value: function factory() {return new Wheel(singletonSymbol);} }, { key: 'UP', get: function get() {return 'wheelUp';} /**
-	                                                                                                                                                                                                      * wheel  で発生するイベントを取得します
-	                                                                                                                                                                                                      * @event DOWN
-	                                                                                                                                                                                                      * @returns {string} event, wheelUp を返します
-	                                                                                                                                                                                                      * @default wheelUp
-	                                                                                                                                                                                                      */ }, { key: 'DOWN', get: function get() {return 'wheelDown';} }]);return Wheel;}(_EventDispatcher3.default);exports.default = Wheel;
+	     */ }], [{ key: 'factory', value: function factory()
+	    {
+	      if (instance !== null) {
+	        return instance;
+	      }
+	      return new Wheel(singletonSymbol);
+	    } }, { key: 'UP', get: function get() {return 'wheelUp';} /**
+	                                                               * wheel  で発生するイベントを取得します
+	                                                               * @event DOWN
+	                                                               * @returns {string} event, wheelUp を返します
+	                                                               * @default wheelUp
+	                                                               */ }, { key: 'DOWN', get: function get() {return 'wheelDown';} }]);return Wheel;}(_EventDispatcher3.default);exports.default = Wheel;
 
 /***/ },
-/* 99 */
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _create = __webpack_require__(95);var _create2 = _interopRequireDefault(_create);var _getPrototypeOf = __webpack_require__(49);var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);var _possibleConstructorReturn2 = __webpack_require__(53);var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);var _inherits2 = __webpack_require__(90);var _inherits3 = _interopRequireDefault(_inherits2);var _symbol = __webpack_require__(74);var _symbol2 = _interopRequireDefault(_symbol);
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _getPrototypeOf = __webpack_require__(49);var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _possibleConstructorReturn2 = __webpack_require__(53);var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);var _inherits2 = __webpack_require__(90);var _inherits3 = _interopRequireDefault(_inherits2);
 
 
 
@@ -2862,124 +3074,153 @@
 
 
 
+	var _Events2 = __webpack_require__(47);var _Events3 = _interopRequireDefault(_Events2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
-	var _EventDispatcher2 = __webpack_require__(1);var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
-	var _Events = __webpack_require__(47);var _Events2 = _interopRequireDefault(_Events);
+	/**
+	                                                                                                                                                                                  * Wheel Events, mouse wheel で発生するイベントを管理します
+	                                                                                                                                                                                  */var
+	WheelEvents = function (_Events) {(0, _inherits3.default)(WheelEvents, _Events);
+	  /**
+	                                                                                  * custom Event Object
+	                                                                                  * @param {string} type イベント種類
+	                                                                                  * @param {*} currentTarget current イベント発生インスタンス
+	                                                                                  * @param {*} [target=undefined] イベント発生インスタンス
+	                                                                                  * */
+	  function WheelEvents(type, currentTarget) {var target = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;(0, _classCallCheck3.default)(this, WheelEvents);
+
+	    /**
+	                                                                                                                                                                                           * 移動距離(px)
+	                                                                                                                                                                                           * @type {number}
+	                                                                                                                                                                                           */var _this = (0, _possibleConstructorReturn3.default)(this, (WheelEvents.__proto__ || (0, _getPrototypeOf2.default)(WheelEvents)).call(this, type, currentTarget, target));
+	    _this.moved = 0;return _this;
+	  }return WheelEvents;}(_Events3.default); /**
+	                                            * Copyright (c) 2011-2016 inazumatv.com, inc.
+	                                            * @author (at)taikiken / http://inazumatv.com
+	                                            * @date 2016/11/20 - 12:11
+	                                            *
+	                                            * Distributed under the terms of the MIT license.
+	                                            * http://www.opensource.org/licenses/mit-license.html
+	                                            *
+	                                            * This notice shall be included in all copies or substantial portions of the Software.
+	                                            *
+	                                            */exports.default = WheelEvents;
+
+/***/ },
+/* 102 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _create = __webpack_require__(95);var _create2 = _interopRequireDefault(_create);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);
+
+
+
+
+
+
+
+
+
+
 
 
 	var _Type = __webpack_require__(22);var _Type2 = _interopRequireDefault(_Type);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 	// built-in function
 	// Safari, IE はサポートしていないのでライブラリを使用すること
-	var fetch = self.fetch; // util
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/07/01 - 19:41
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */ // event
+	var fetch = self.fetch; /**
+	                         * Copyright (c) 2011-2016 inazumatv.com, inc.
+	                         * @author (at)taikiken / http://inazumatv.com
+	                         * @date 2016/07/01 - 19:41
+	                         *
+	                         * Distributed under the terms of the MIT license.
+	                         * http://www.opensource.org/licenses/mit-license.html
+	                         *
+	                         * This notice shall be included in all copies or substantial portions of the Software.
+	                         *
+	                         */ // util
 	var Request = self.Request; // const Headers = self.Headers;
+	// /**
+	//  * can（Ajax 実行可能かの真偽値）フラッグを保存するための Symbol
+	//  * @type {Symbol}
+	//  * @private
+	//  */
+	// const canSymbol = Symbol('can start Ajax flag');
 	/**
-	 * can（Ajax 実行可能かの真偽値）フラッグを保存するための Symbol
-	 * @type {Symbol}
-	 * @private
-	 */var canSymbol = (0, _symbol2.default)('flag can ajax SYmbol'); /**
-	                                                                   * <p>fetch API を使用し Ajax request を行います</p>
-	                                                                   * <p>Safari, IE はサポートしていないので polyfill ライブラリを使用します<br>
-	                                                                   * また、 fetch は Promise も必要としています。</p>
-	                                                                   *
-	                                                                   * ```
-	                                                                   * $ bower install fetch
-	                                                                   *
-	                                                                   * $ bower install es6-promise
-	                                                                   * ```
-	                                                                   *
-	                                                                   * @see http://caniuse.com/#feat=fetch
-	                                                                   * @see https://github.com/github/fetch
-	                                                                   * @see https://github.com/github/fetch
-	                                                                   * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch
-	                                                                   * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API
-	                                                                   * @see https://developer.mozilla.org/ja/docs/Web/API/Request
-	                                                                   * @see https://developer.mozilla.org/ja/docs/Web/API/Request/Request
-	                                                                   * @see https://developer.mozilla.org/ja/docs/Web/API/Headers
-	                                                                   * @see https://developer.mozilla.org/ja/docs/Web/API/Body
-	                                                                   */var Ajax = function (_EventDispatcher) {(0, _inherits3.default)(Ajax, _EventDispatcher); /**
-	                                                                                                                                                               * request 可能 / 不可能 flag を true に設定します
-	                                                                                                                                                               */function Ajax() {(0, _classCallCheck3.default)(this, Ajax); /**
-	                                                                                                                                                                                                                              * request 可能 / 不可能 flag
-	                                                                                                                                                                                                                              * @type {boolean}
-	                                                                                                                                                                                                                              * @private
-	                                                                                                                                                                                                                              * @default true
-	                                                                                                                                                                                                                              */var _this = (0, _possibleConstructorReturn3.default)(this, (Ajax.__proto__ || (0, _getPrototypeOf2.default)(Ajax)).call(this));_this[canSymbol] = true;return _this;
+	 * <p>fetch API を使用し Ajax request を行います</p>
+	 * <p>Safari, IE はサポートしていないので polyfill ライブラリを使用します<br>
+	 * また、 fetch は Promise も必要としています。</p>
+	 *
+	 * ```
+	 * $ bower install fetch
+	 *
+	 * $ bower install es6-promise
+	 * ```
+	 *
+	 * @see http://caniuse.com/#feat=fetch
+	 * @see https://github.com/github/fetch
+	 * @see https://github.com/github/fetch
+	 * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch
+	 * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API
+	 * @see https://developer.mozilla.org/ja/docs/Web/API/Request
+	 * @see https://developer.mozilla.org/ja/docs/Web/API/Request/Request
+	 * @see https://developer.mozilla.org/ja/docs/Web/API/Headers
+	 * @see https://developer.mozilla.org/ja/docs/Web/API/Body
+	 */var Ajax = function () {/**
+	                            * request 可能 / 不可能 flag を true に設定します
+	                            * @param {Function} resolve Promise success callback
+	                            * @param {Function} reject Promise fail callback
+	                            */function Ajax(resolve, reject) {(0, _classCallCheck3.default)(this, Ajax); // /**
+	    //  * request 可能 / 不可能 flag
+	    //  * @type {boolean}
+	    //  * @private
+	    //  * @default true
+	    //  */
+	    // this[canSymbol] = true;
+	    /**
+	     * request 可能 / 不可能 flag, true: 実行可能
+	     * @type {boolean}
+	     */this.can = true; /**
+	                         * Promise success callback
+	                         * @type {Function}
+	                         */this.resolve = resolve;
+	    /**
+	                                                    * Promise fail callback
+	                                                    * @type {Function}
+	                                                    */
+	    this.reject = reject;
 	  }
+	  // // ----------------------------------------
+	  // // GETTER / SETTER
+	  // // ----------------------------------------
+	  // /**
+	  //  * request 可能 / 不可能 flag を取得します
+	  //  * @return {boolean} request 可能 / 不可能 flag を返します
+	  //  */
+	  // get can() {
+	  //   return this[canSymbol];
+	  // }
+	  // /**
+	  //  * request 可能 / 不可能 flag を設定します
+	  //  * @param {boolean} flag request 可能 / 不可能 flag
+	  //  */
+	  // set can(flag) {
+	  //   this[canSymbol] = !!flag;
+	  // }
 	  // ----------------------------------------
-	  // EVENT
+	  // METHOD
 	  // ----------------------------------------
 	  /**
-	   * START event を取得します
-	   * @event START
-	   * @returns {string} リクエスト開始イベント, ajaxStart を返します
-	   * @default ajaxStart
-	   */(0, _createClass3.default)(Ajax, [{ key: 'start',
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	    // ----------------------------------------
-	    // METHOD
-	    // ----------------------------------------
-	    /**
-	     * <p>Ajax request 開始します</p>
-	     * <p>request 可能 / 不可能 flag が false の時は実行しません<br>
-	     * true の時は false にしリクエストを開始します</p>
-	     * <p>START, COMPLETE, ERROR イベントを発生させます</p>
-	     *
-	     * @param {string} path Ajax request path
-	     * @param {string} method GET, POST, PUT, DELETE...etc request method
-	     * @param {?Headers|?Object|null} [headers=null] Headers option, nullable
-	     * @param {?FormData|null} [formData=null] 送信フォームデータオプション, nullable
-	     * @returns {boolean} ajax request を開始したかどうかの真偽値を返します
-	     */value: function start(
-	    path, method) {var _this2 = this;var headers = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;var formData = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+	   * <p>Ajax request 開始します</p>
+	   * <p>request 可能 / 不可能 flag が false の時は実行しません<br>
+	   * true の時は false にしリクエストを開始します</p>
+	   * <p>START, COMPLETE, ERROR イベントを発生させます</p>
+	   *
+	   * @param {string} path Ajax request path
+	   * @param {string} method GET, POST, PUT, DELETE...etc request method
+	   * @param {?Headers} [headers=null] Headers option, token などを埋め込むのに使用します
+	   * @param {?FormData} [formData=null] フォームデータを送信するのに使用します
+	   * @return {boolean} ajax request を開始したかどうかの真偽値を返します
+	   */(0, _createClass3.default)(Ajax, [{ key: 'start', value: function start(
+	    path, method) {var _this = this;var headers = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;var formData = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
 	      // ajax request 開始
 	      if (!this.can) {
 	        // flag が off なので処理しない
@@ -2992,11 +3233,6 @@
 	      // @type {Request} Request instance
 	      var request = Ajax.option(path, method, headers, formData);
 
-	      // start event fire
-	      var startEvents = new _Events2.default(Ajax.START, this, this);
-	      startEvents.request = request;
-	      this.dispatch(startEvents);
-
 	      // fetch start
 	      fetch(request)
 	      // @param {Object} response - Ajax response
@@ -3005,29 +3241,21 @@
 	        if (response.status !== 200) {
 	          throw new Error('Ajax status error: (' + response.status + ')');
 	        }
-
 	        return response.json();
 	      })
 	      // @param {Object} - JSON パース済み Object
 	      .then(function (json) {
-	        // @type {Evens} - Ajax.COMPLETE events Object
-	        var events = new _Events2.default(Ajax.COMPLETE, _this2, _this2);
-	        events.data = json;
 	        // complete event fire
-	        _this2.dispatch(events);
+	        _this.resolve(json);
 	        // flag true
-	        _this2.enable();
+	        _this.enable();
 	      })
 	      // @param {Error} - Ajax something error
 	      .catch(function (error) {
-	        // @type {Evens} - Ajax.COMPLETE events Object
-	        var events = new _Events2.default(Ajax.ERROR, _this2, _this2);
-	        events.data = null;
-	        events.error = error;
 	        // error event fire
-	        _this2.dispatch(events);
+	        _this.reject(error);
 	        // flag true
-	        _this2.enable();
+	        _this.enable();
 	      });
 
 	      return true;
@@ -3054,24 +3282,34 @@
 	    /**
 	     * <p>fetch API へ送るオプションを作成します</p>
 	     *
+	     * 必ず設定します
+	     * - method: GET, POST, PUT, DELETE...etc
+	     * - cache: 'no-cache'
+	     * - credentials: 'same-origin'
+	     *
+	     * headers, formData は存在すれば option に追加されます
+	     *
 	     * @param {string} path Ajax request path
 	     * @param {string} method GET, POST, PUT, DELETE...etc request method
 	     * @param {Headers|Object|null} headers Headers option
 	     * @param {FormData|null} formData 送信フォームデータオプション
 	     * @returns {Request} fetch API へ送る Request instance を返します
-	     */ }, { key: 'can', // ----------------------------------------
-	    // GETTER / SETTER
-	    // ----------------------------------------
-	    /**
-	     * request 可能 / 不可能 flag を取得します
-	     * @returns {boolean} request 可能 / 不可能 flag を返します
-	     */get: function get() {return this[canSymbol];} /**
-	                                                      * request 可能 / 不可能 flag を設定します
-	                                                      * @param {boolean} flag request 可能 / 不可能 flag
-	                                                      */, set: function set(flag) {this[canSymbol] = flag;} }], [{ key: 'option', value: function option(path, method, headers, formData) {// request option
-	      var option = (0, _create2.default)({ method: method, cache: 'no-cache', // https://developers.google.com/web/updates/2015/03/introduction-to-fetch
-	        credentials: 'same-origin' }); // headers option
-	      if (_Type2.default.exist(headers)) {option.headers = headers;
+	     *
+	     * @see https://developers.google.com/web/updates/2015/03/introduction-to-fetch
+	     * @see https://developer.mozilla.org/ja/docs/Web/API/Request
+	     */ }], [{ key: 'option', value: function option(
+	    path, method, headers, formData) {
+	      // request option
+	      var option = (0, _create2.default)({
+	        method: method,
+	        cache: 'no-cache',
+	        // https://developers.google.com/web/updates/2015/03/introduction-to-fetch
+	        credentials: 'same-origin' });
+
+
+	      // headers option
+	      if (_Type2.default.exist(headers)) {
+	        option.headers = headers;
 	      }
 
 	      // body へ FormData をセット
@@ -3081,20 +3319,10 @@
 
 	      // https://developer.mozilla.org/ja/docs/Web/API/Request
 	      return new Request(path, option);
-	    } }, { key: 'START', get: function get() {return 'ajaxStart';} /**
-	                                                                    * COMPLETE event を取得します
-	                                                                    * @event COMPLETE
-	                                                                    * @returns {string} リクエスト完了イベント, ajaxComplete を返します
-	                                                                    * @default ajaxComplete
-	                                                                    */ }, { key: 'COMPLETE', get: function get() {return 'ajaxComplete';} /**
-	                                                                                                                                           * ERROR event を取得します
-	                                                                                                                                           * @event ERROR
-	                                                                                                                                           * @returns {string} リクエストエラー イベント, ajaxError を返します
-	                                                                                                                                           * @default ajaxError
-	                                                                                                                                           */ }, { key: 'ERROR', get: function get() {return 'ajaxError';} }]);return Ajax;}(_EventDispatcher3.default);exports.default = Ajax;
+	    } }]);return Ajax;}();exports.default = Ajax;
 
 /***/ },
-/* 100 */
+/* 103 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _getPrototypeOf = __webpack_require__(49);var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);var _possibleConstructorReturn2 = __webpack_require__(53);var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);var _inherits2 = __webpack_require__(90);var _inherits3 = _interopRequireDefault(_inherits2);var _symbol = __webpack_require__(74);var _symbol2 = _interopRequireDefault(_symbol);
@@ -3135,64 +3363,69 @@
 	                                                                    * @type {?Cycle}
 	                                                                    * @private
 	                                                                    * @static
-	                                                                    */var instance = null; /**
-	                                                                                            * private property key, requestAnimationFrame ID を保存するための Symbol
-	                                                                                            * @type {Symbol}
-	                                                                                            * @private
-	                                                                                            */var requestSymbol = (0, _symbol2.default)('requestAnimationFrame id'); /**
-	                                                                                                                                                                      * private property key, this.update.bind(this) を保存するための Symbol
-	                                                                                                                                                                      * @type {Symbol}
-	                                                                                                                                                                      * @private
-	                                                                                                                                                                      */var updateSymbol = (0, _symbol2.default)('bind update'); /**
-	                                                                                                                                                                                                                                  * private property key, requestAnimationFrame を開始したかを表す真偽値を保存するための Symbol
-	                                                                                                                                                                                                                                  * @type {Symbol}
-	                                                                                                                                                                                                                                  * @private
-	                                                                                                                                                                                                                                  */var startSymbol = (0, _symbol2.default)('is requestAnimationFrame started flag'); /**
-	                                                                                                                                                                                                                                                                                                                       * Cycle.UPDATE event を発火する時の Events instance を保存するための Symbol
-	                                                                                                                                                                                                                                                                                                                       * @type {Symbol}
-	                                                                                                                                                                                                                                                                                                                       * @private
-	                                                                                                                                                                                                                                                                                                                       */var eventsSymbol = (0, _symbol2.default)('Cycle.UPDATE Events instance');
-
+	                                                                    */var instance = null; // /**
+	//  * private property key, requestAnimationFrame ID を保存するための Symbol
+	//  * @type {Symbol}
+	//  * @private
+	//  */
+	// const requestSymbol = Symbol('requestAnimationFrame id');
+	// /**
+	//  * private property key, this.update.bind(this) を保存するための Symbol
+	//  * @type {Symbol}
+	//  * @private
+	//  */
+	// const updateSymbol = Symbol('bind update');
+	// /**
+	//  * private property key, requestAnimationFrame を開始したかを表す真偽値を保存するための Symbol
+	//  * @type {Symbol}
+	//  * @private
+	//  */
+	// const startSymbol = Symbol('is requestAnimationFrame started flag');
+	// /**
+	//  * Cycle.UPDATE event を発火する時の Events instance を保存するための Symbol
+	//  * @type {Symbol}
+	//  * @private
+	//  */
+	// const eventsSymbol = Symbol('Cycle.UPDATE Events instance');
 	/**
-	                                                                                                                                                                                                                                                                                                                                                                                                    * <p>requestAnimationFrame を使用しループイベントを発生させます</p>
-	                                                                                                                                                                                                                                                                                                                                                                                                    * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
-	                                                                                                                                                                                                                                                                                                                                                                                                    *
-	                                                                                                                                                                                                                                                                                                                                                                                                    * ```
-	                                                                                                                                                                                                                                                                                                                                                                                                    * const loop = Cycle.factory();
-	                                                                                                                                                                                                                                                                                                                                                                                                    * ```
-	                                                                                                                                                                                                                                                                                                                                                                                                    *
-	                                                                                                                                                                                                                                                                                                                                                                                                    * <p>requestAnimationFrame は tab が active(focus) な時のみ発生します</p>
-	                                                                                                                                                                                                                                                                                                                                                                                                    */var
-	Cycle = function (_EventDispatcher) {(0, _inherits3.default)(Cycle, _EventDispatcher);
-	  /**
-	                                                                                        * singleton です
-	                                                                                        * @param {Symbol} checkSymbol singleton を保証するための private instance
-	                                                                                        * @returns {Cycle} singleton instance を返します
-	                                                                                        */
-	  function Cycle(checkSymbol) {var _ret2;(0, _classCallCheck3.default)(this, Cycle);
-	    // checkSymbol と singleton が等価かをチェックします
-	    if (checkSymbol !== singletonSymbol) {
-	      throw new Error('don\'t use new, instead use static factory method.');
-	    }
+	 * <p>requestAnimationFrame を使用しループイベントを発生させます</p>
+	 * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
+	 *
+	 * ```
+	 * const loop = Cycle.factory();
+	 * ```
+	 *
+	 * <p>requestAnimationFrame は tab が active(focus) な時のみ発生します</p>
+	 */var Cycle = function (_EventDispatcher) {(0, _inherits3.default)(Cycle, _EventDispatcher); /**
+	                                                                                               * singleton です
+	                                                                                               * @param {Symbol} checkSymbol singleton を保証するための private instance
+	                                                                                               * @returns {Cycle} singleton instance を返します
+	                                                                                               */function Cycle(checkSymbol) {var _ret2;(0, _classCallCheck3.default)(this, Cycle); // checkSymbol と singleton が等価かをチェックします
+	    if (checkSymbol !== singletonSymbol) {throw new Error('don\'t use new, instead use static factory method.');}
+
 	    // instance 作成済みかをチェックし instance が null の時 this を設定します
-	    if (instance !== null) {var _ret;
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (Cycle.__proto__ || (0, _getPrototypeOf2.default)(Cycle)).call(this));if (instance !== null) {var _ret;
 	      return _ret = instance, (0, _possibleConstructorReturn3.default)(_this, _ret);
 	    }
-
-
 	    // -------------------------------
 	    // onetime setting
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (Cycle.__proto__ || (0, _getPrototypeOf2.default)(Cycle)).call(this));instance = _this;
-	    // @type {Events} - Events
-	    _this[eventsSymbol] = new _Events2.default(Cycle.UPDATE, _this, _this);
+	    instance = _this;
+	    // // @type {Events} - Events
+	    // this[eventsSymbol] = new Events(Cycle.UPDATE, this, this);
+	    //
+	    // // @type {number} - requestAnimationFrame return id
+	    // this[requestSymbol] = 0;
+	    // // @type {function} - update bind function
+	    // this[updateSymbol] = this.update.bind(this);
+	    // // @type {boolean} - started flag
+	    // this[startSymbol] = false;
 
-	    // @type {number} - requestAnimationFrame return id
-	    _this[requestSymbol] = 0;
-	    // @type {function} - update bind function
-	    _this[updateSymbol] = _this.update.bind(_this);
-	    // @type {boolean} - started flag
-	    _this[startSymbol] = false;
-
+	    var events = new _Events2.default(Cycle.UPDATE, _this, _this);
+	    var boundUpdate = _this.update.bind(_this);
+	    _this.events = function () {return events;};
+	    _this.boundUpdate = function () {return boundUpdate;};
+	    _this.id = 0;
+	    _this.started = false;
 	    // 設定済み instance を返します
 	    return _ret2 = instance, (0, _possibleConstructorReturn3.default)(_this, _ret2);
 	  }
@@ -3208,16 +3441,16 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
+	    // // ----------------------------------------
+	    // // GETTER / SETTER
+	    // // ----------------------------------------
+	    // /**
+	    //  * Events instance を取得します
+	    //  * @returns {Events} Events instance
+	    //  */
+	    // get events() {
+	    //   return this[eventsSymbol];
+	    // }
 	    // ----------------------------------------
 	    // METHOD
 	    // ----------------------------------------
@@ -3226,12 +3459,11 @@
 	     * @returns {boolean} start に成功すると true を返します
 	     */value: function start()
 	    {
-	      if (this[startSymbol]) {
+	      if (this.started) {
 	        // already start
-	        // console.warn('Cycle.start already start', this[startSymbol]);
 	        return false;
 	      }
-	      this[startSymbol] = true;
+	      this.started = true;
 	      this.update();
 
 	      // @return
@@ -3242,14 +3474,14 @@
 	       * @param {number} [id] requestAnimationFrame id を使い cancelAnimationFrame をします
 	       * @returns {boolean} stop に成功すると true を返します
 	       */ }, { key: 'stop', value: function stop()
-	    {var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this[requestSymbol];
-	      if (!this[startSymbol]) {
+	    {var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.id;
+	      if (!this.started) {
 	        // not start
 	        return false;
 	      }
 
 	      cancelAnimationFrame(id);
-	      this[startSymbol] = false;
+	      this.started = false;
 
 	      // @return
 	      return true;
@@ -3259,18 +3491,19 @@
 	    // ----------------------------------------
 	    /**
 	     * loop(requestAnimationFrame)コールバック関数<br>Cycle.UPDATE event を発火します
-	     * @returns {undefined} no-return
+	     * @returns {number} requestAnimationFrame ID
 	     */ }, { key: 'update', value: function update()
 	    {
 	      // @type {number} - requestAnimationFrame id
-	      var id = requestAnimationFrame(this[updateSymbol]);
-	      this[requestSymbol] = id;
+	      var id = requestAnimationFrame(this.boundUpdate());
+	      this.id = id;
 
 	      // @type {Events} - events
-	      var events = this.events;
-	      events.id = id;
+	      var events = this.events();
+	      // events.id = id;
 	      // event fire
 	      this.dispatch(events);
+	      return id;
 	    }
 	    // ----------------------------------------
 	    // STATIC METHOD
@@ -3278,19 +3511,19 @@
 	    /**
 	     * Cycle instance を singleton を保証し作成します
 	     * @returns {Cycle} Cycle instance を返します
-	     */ }, { key: 'events', // ----------------------------------------
-	    // GETTER / SETTER
-	    // ----------------------------------------
-	    /**
-	     * Events instance を取得します
-	     * @returns {Events} Events instance
-	     */get: function get() {return this[eventsSymbol];} }], [{ key: 'factory', value: function factory() {if (instance === null) {return new Cycle(singletonSymbol);}return instance;} }, { key: 'UPDATE', get: function get() {return 'cycleUpdate';} }]);return Cycle;}(_EventDispatcher3.default);exports.default = Cycle;
+	     */ }], [{ key: 'factory', value: function factory()
+	    {
+	      if (instance === null) {
+	        return new Cycle(singletonSymbol);
+	      }
+	      return instance;
+	    } }, { key: 'UPDATE', get: function get() {return 'cycleUpdate';} }]);return Cycle;}(_EventDispatcher3.default);exports.default = Cycle;
 
 /***/ },
-/* 101 */
+/* 104 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _getPrototypeOf = __webpack_require__(49);var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);var _possibleConstructorReturn2 = __webpack_require__(53);var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);var _inherits2 = __webpack_require__(90);var _inherits3 = _interopRequireDefault(_inherits2);var _symbol = __webpack_require__(74);var _symbol2 = _interopRequireDefault(_symbol);
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _getPrototypeOf = __webpack_require__(49);var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);var _possibleConstructorReturn2 = __webpack_require__(53);var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);var _inherits2 = __webpack_require__(90);var _inherits3 = _interopRequireDefault(_inherits2);
 
 
 
@@ -3306,38 +3539,48 @@
 	var _Events = __webpack_require__(47);var _Events2 = _interopRequireDefault(_Events);
 
 
-	var _Polling2 = __webpack_require__(102);var _Polling3 = _interopRequireDefault(_Polling2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	var _Polling2 = __webpack_require__(105);var _Polling3 = _interopRequireDefault(_Polling2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+	// /**
+	//  * private property key, fps を保存するための Symbol
+	//  * @type {Symbol}
+	//  * @private
+	//  */
+	// const fpsSymbol = Symbol('Singleton Fps Symbol');
 
 	/**
-	                                                                                                                                                                                      * private property key, fps を保存するための Symbol
-	                                                                                                                                                                                      * @type {Symbol}
-	                                                                                                                                                                                      * @private
-	                                                                                                                                                                                      */ /**
-	                                                                                                                                                                                          * Copyright (c) 2011-2016 inazumatv.com, inc.
-	                                                                                                                                                                                          * @author (at)taikiken / http://inazumatv.com
-	                                                                                                                                                                                          * @date 2016/07/04 - 14:19
-	                                                                                                                                                                                          *
-	                                                                                                                                                                                          * Distributed under the terms of the MIT license.
-	                                                                                                                                                                                          * http://www.opensource.org/licenses/mit-license.html
-	                                                                                                                                                                                          *
-	                                                                                                                                                                                          * This notice shall be included in all copies or substantial portions of the Software.
-	                                                                                                                                                                                          *
-	                                                                                                                                                                                          */ // event
-	var fpsSymbol = (0, _symbol2.default)('Singleton Fps Symbol'); /**
-	                                                                * フレームレート毎に UPDATE イベントを発生させます
-	                                                                */ // tick
+	 * フレームレート毎に UPDATE イベントを発生させます
+	 */ /**
+	     * Copyright (c) 2011-2016 inazumatv.com, inc.
+	     * @author (at)taikiken / http://inazumatv.com
+	     * @date 2016/07/04 - 14:19
+	     *
+	     * Distributed under the terms of the MIT license.
+	     * http://www.opensource.org/licenses/mit-license.html
+	     *
+	     * This notice shall be included in all copies or substantial portions of the Software.
+	     *
+	     */ // event
 	var Fps = function (_Polling) {(0, _inherits3.default)(Fps, _Polling); /**
 	                                                                        * 引数の frame rate に合わせ UPDATE イベントを発生させます
 	                                                                        * @param {number} [fps=30] frame rate, default: 30
 	                                                                        */function Fps() {var fps = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 30;(0, _classCallCheck3.default)(this, Fps); // private property
 	    // @type {number} - frame rate, default: 30
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (Fps.__proto__ || (0, _getPrototypeOf2.default)(Fps)).call(this, 1000 / fps));_this[fpsSymbol] = fps; // @type {Events} - Events
-	    var events = new _Events2.default(Fps.UPDATE, _this, _this);events.fps = fps; /**
-	                                                                                   * Fps.UPDATE Events instance
-	                                                                                   * @type {Events}
-	                                                                                   */_this.events = events;return _this;
-	  }
-	  // ----------------------------------------
+	    // this[fpsSymbol] = fps;
+	    // @type {Events} - Events
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (Fps.__proto__ || (0, _getPrototypeOf2.default)(Fps)).call(this, 1000 / fps));var events = new _Events2.default(Fps.UPDATE, _this, _this); // events.fps = fps;
+	    // /**
+	    //  * Fps.UPDATE Events instance
+	    //  * @type {Events}
+	    //  */
+	    // this.events = events;
+	    /**
+	     * Fps.UPDATE Events instance
+	     * @returns {Events} Fps.UPDATE Events instance
+	     */_this.events = function () {return events;}; /**
+	                                                     * frame rate
+	                                                     * @type {number}
+	                                                     */_this.fps = fps;return _this;} // ----------------------------------------
 	  // EVENT
 	  // ----------------------------------------
 	  /**
@@ -3345,41 +3588,58 @@
 	   * @event UPDATE
 	   * @returns {string} event, fpsUpdate を返します
 	   * @default fpsUpdate
-	   */(0, _createClass3.default)(Fps, [{ key: 'fps',
+	   */(0, _createClass3.default)(Fps, [{ key: 'change',
 
 
 
 	    // ----------------------------------------
-	    // GETTER / SETTER
+	    // METHOD
 	    // ----------------------------------------
-	    // fps
 	    /**
-	     * frame rate を取得します
-	     * @returns {number} frame rate を返します
-	     */get: function get()
-	    {
-	      return this[fpsSymbol];
+	     * polling 時間を変更します<br>
+	     * 1. プロパティ polling 変更
+	     * 1. update 実行
+	     * @param {number} interval fps
+	     * @returns {boolean} `update` をコールし Polling.UPDATE event が発生すると true を返します
+	     */value: function change(
+	    interval) {
+	      this.interval = 1000 / interval;
+	      this.fps = interval;
+	      return this.update();
 	    }
-	    /**
-	       * frame rate を設定します, 1 ~ 60 の間で設定します
-	       * @param {number} rate frame rate
-	       */, set: function set(
-	    rate) {
-	      var events = this.events;
-	      events.fps = rate;
-	      this[fpsSymbol] = rate;
-	      /**
-	                               * interval milliseconds
-	                               * @type {number}
-	                               */
-	      this.polling = 1000 / rate;
-	    } }], [{ key: 'UPDATE', get: function get() {return 'fpsUpdate';} }]);return Fps;}(_Polling3.default);exports.default = Fps;
+	    // // ----------------------------------------
+	    // // GETTER / SETTER
+	    // // ----------------------------------------
+	    // // fps
+	    // /**
+	    //  * frame rate を取得します
+	    //  * @returns {number} frame rate を返します
+	    //  */
+	    // get fps() {
+	    //   return this[fpsSymbol];
+	    // }
+	    // /**
+	    //  * frame rate を設定します, 1 ~ 60 の間で設定します
+	    //  * @param {number} rate frame rate
+	    //  */
+	    // set fps(rate) {
+	    //   const events = this.events;
+	    //   events.fps = rate;
+	    //   this[fpsSymbol] = rate;
+	    //   /**
+	    //    * interval milliseconds
+	    //    * @type {number}
+	    //    */
+	    //   this.polling = 1000 / rate;
+	    // }
+	  }], [{ key: 'UPDATE', get: function get() {return 'fpsUpdate';} }]);return Fps;}(_Polling3.default); // tick
+	exports.default = Fps;
 
 /***/ },
-/* 102 */
+/* 105 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _assign = __webpack_require__(103);var _assign2 = _interopRequireDefault(_assign);var _getPrototypeOf = __webpack_require__(49);var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);var _possibleConstructorReturn2 = __webpack_require__(53);var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);var _inherits2 = __webpack_require__(90);var _inherits3 = _interopRequireDefault(_inherits2);var _symbol = __webpack_require__(74);var _symbol2 = _interopRequireDefault(_symbol);
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _getPrototypeOf = __webpack_require__(49);var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);var _possibleConstructorReturn2 = __webpack_require__(53);var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);var _inherits2 = __webpack_require__(90);var _inherits3 = _interopRequireDefault(_inherits2);
 
 
 
@@ -3396,68 +3656,100 @@
 	var _Events = __webpack_require__(47);var _Events2 = _interopRequireDefault(_Events);
 
 
-	var _Cycle = __webpack_require__(100);var _Cycle2 = _interopRequireDefault(_Cycle);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	var _Cycle = __webpack_require__(103);var _Cycle2 = _interopRequireDefault(_Cycle);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+	// /**
+	//  * private property key, this.update.bind(this) を保存するための Symbol
+	//  * @type {Symbol}
+	//  * @private
+	//  */
+	// const updateSymbol = Symbol('bound update');
+	// /**
+	//  * private property key, Cycle.UPDATE 監視を開始したかを表す真偽値を保存するための Symbol
+	//  * @type {Symbol}
+	//  * @private
+	//  */
+	// const startSymbol = Symbol('is started watch Cycle.UPDATE flag');
+	// /**
+	//  * private property key, Fps.start 時間を保存するための Symbol
+	//  * @type {Symbol}
+	//  * @private
+	//  */
+	// const beginSymbol = Symbol('start time');
+	// /**
+	//  * private property key, polling を保存するための Symbol
+	//  * @type {Symbol}
+	//  * @private
+	//  */
+	// const pollingSymbol = Symbol('polling duration');
+	// /**
+	//  * Polling.UPDATE event を発火する時の Events instance を保存するための Symbol
+	//  * @type {Symbol}
+	//  * @private
+	//  */
+	// const eventsSymbol = Symbol('Polling.UPDATE Events instance');
 
 	/**
-	                                                                                                                                                                            * private property key, this.update.bind(this) を保存するための Symbol
-	                                                                                                                                                                            * @type {Symbol}
-	                                                                                                                                                                            * @private
-	                                                                                                                                                                            */
-	var updateSymbol = (0, _symbol2.default)('bound update');
-	/**
-	                                                           * private property key, Cycle.UPDATE 監視を開始したかを表す真偽値を保存するための Symbol
-	                                                           * @type {Symbol}
-	                                                           * @private
-	                                                           */ // tick
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/07/04 - 16:46
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */ // event
-	var startSymbol = (0, _symbol2.default)('is started watch Cycle.UPDATE flag'); /**
-	                                                                                * private property key, Fps.start 時間を保存するための Symbol
-	                                                                                * @type {Symbol}
-	                                                                                * @private
-	                                                                                */var beginSymbol = (0, _symbol2.default)('start time'); /**
-	                                                                                                                                          * private property key, polling を保存するための Symbol
-	                                                                                                                                          * @type {Symbol}
-	                                                                                                                                          * @private
-	                                                                                                                                          */var pollingSymbol = (0, _symbol2.default)('polling duration'); /**
-	                                                                                                                                                                                                            * Polling.UPDATE event を発火する時の Events instance を保存するための Symbol
-	                                                                                                                                                                                                            * @type {Symbol}
-	                                                                                                                                                                                                            * @private
-	                                                                                                                                                                                                            */var eventsSymbol = (0, _symbol2.default)('Polling.UPDATE Events instance'); /**
-	                                                                                                                                                                                                                                                                                           * 一定間隔毎に UPDATE イベントを発生させます
-	                                                                                                                                                                                                                                                                                           */var Polling = function (_EventDispatcher) {(0, _inherits3.default)(Polling, _EventDispatcher); /**
-	                                                                                                                                                                                                                                                                                                                                                                                             * 引数の polling に合わせ UPDATE イベントを発生させます
-	                                                                                                                                                                                                                                                                                                                                                                                             * @param {number} [polling=1000] polling milliseconds
-	                                                                                                                                                                                                                                                                                                                                                                                             */function Polling() {var polling = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1000;(0, _classCallCheck3.default)(this, Polling);
+	 * 一定間隔毎に UPDATE イベントを発生させます
+	 */var
+	Polling = function (_EventDispatcher) {(0, _inherits3.default)(Polling, _EventDispatcher);
+	  /**
+	                                                                                            * 引数の polling に合わせ UPDATE イベントを発生させます
+	                                                                                            * @param {number} [interval=1000] polling milliseconds
+	                                                                                            */
+	  function Polling() {var interval = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1000;(0, _classCallCheck3.default)(this, Polling);
 
 	    // @type {Cycle} - Cycle instance
 	    var _this = (0, _possibleConstructorReturn3.default)(this, (Polling.__proto__ || (0, _getPrototypeOf2.default)(Polling)).call(this));var cycle = _Cycle2.default.factory();
 	    // public property
-	    /**
-	     * @property {Cycle} this.cycle - Cycle instance
-	     */
-	    (0, _assign2.default)(_this, { cycle: cycle });
+	    // /**
+	    //  * @property {Cycle} this.cycle - Cycle instance
+	    //  */
+	    // Object.assign(this, { cycle });
 
 	    // private property
 	    // @type {number} - polling rate(milliseconds), default: 1000(1 sec.)
-	    _this[pollingSymbol] = polling;
-	    // @type {function} - Cycle.UPDATE event handler
-	    _this[updateSymbol] = _this.update.bind(_this);
-	    // @type {boolean} - started flag
-	    _this[startSymbol] = false;
-	    // @type {number} - 開始時間
-	    _this[beginSymbol] = 0;
-	    // @type {Events} - Events
-	    _this[eventsSymbol] = new _Events2.default(Polling.UPDATE, _this, _this);return _this;
+	    // this[pollingSymbol] = polling;
+	    // // @type {function} - Cycle.UPDATE event handler
+	    // this[updateSymbol] = this.update.bind(this);
+	    // // @type {boolean} - started flag
+	    // this[startSymbol] = false;
+	    // // @type {number} - 開始時間
+	    // this[beginSymbol] = 0;
+	    // // @type {Events} - Events
+	    // this[eventsSymbol] = new Events(Polling.UPDATE, this, this);
+	    var boundUpdate = _this.update.bind(_this);
+	    var events = new _Events2.default(Polling.UPDATE, _this, _this);
+	    /**
+	                                                                      * Cycle instance を取得します
+	                                                                      * @returns {Cycle} Cycle instance
+	                                                                      */
+	    _this.cycle = function () {return cycle;};
+	    /**
+	                                                * 間隔(ms)
+	                                                * @type {number}
+	                                                */
+	    _this.interval = interval;
+	    /**
+	                                * bound update, Cycle.UPDATE event handler
+	                                * @returns {function} bound update
+	                                */
+	    _this.boundUpdate = function () {return boundUpdate;};
+	    /**
+	                                                            * Events instance
+	                                                            * @returns {Events} Polling.UPDATE Events object
+	                                                            */
+	    _this.events = function () {return events;};
+	    /**
+	                                                  * polling event 発生時間, event を発火すると 0 にリセットされます
+	                                                  * @type {number}
+	                                                  */
+	    _this.begin = 0;
+	    /**
+	                      * Cycle 監視開始フラッグ
+	                      * @type {boolean}
+	                      */
+	    _this.started = false;return _this;
 	  }
 	  // ----------------------------------------
 	  // EVENT
@@ -3469,63 +3761,63 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	    // // ----------------------------------------
+	    // // GETTER / SETTER
+	    // // ----------------------------------------
+	    // // fps
+	    // /**
+	    //  * polling(milliseconds) を取得します
+	    //  * @returns {number} polling(milliseconds) を返します
+	    //  */
+	    // get polling() {
+	    //   return this[pollingSymbol];
+	    // }
+	    // /**
+	    //  * polling(milliseconds) を設定します
+	    //  * @param {number} rate polling(milliseconds)
+	    //  */
+	    // set polling(rate) {
+	    //   this[pollingSymbol] = rate;
+	    // }
+	    // // begin
+	    // /**
+	    //  * 開始時間を取得します
+	    //  * @returns {number} 開始時間を返します
+	    //  */
+	    // get begin() {
+	    //   return this[beginSymbol];
+	    // }
+	    // /**
+	    //  * 開始時間を設定します
+	    //  * @param {number} time 開始時間
+	    //  */
+	    // set begin(time) {
+	    //   this[beginSymbol] = time;
+	    // }
+	    // // events
+	    // /**
+	    //  * Events instance を取得します
+	    //  * @returns {Events} Events instance を返します
+	    //  */
+	    // get events() {
+	    //   return this[eventsSymbol];
+	    // }
+	    // /**
+	    //  * Events instance を設定します
+	    //  * @param {Events} events Events instance
+	    //  */
+	    // set events(events) {
+	    //   this[eventsSymbol] = events;
+	    // }
+	    // // flag
+	    // /**
+	    //  * started flag 状態を取得します
+	    //  * @readonly
+	    //  * @returns {boolean} 現在の started flag 状態を返します
+	    //  */
+	    // get started() {
+	    //   return this[startSymbol];
+	    // }
 	    // ----------------------------------------
 	    // METHOD
 	    // ----------------------------------------
@@ -3533,11 +3825,11 @@
 	     * polling 時間を変更します<br>
 	     * 1. プロパティ polling 変更
 	     * 1. update 実行
-	     * @param {number} polling polling 時間
+	     * @param {number} interval polling 時間
 	     * @returns {boolean} `update` をコールし Polling.UPDATE event が発生すると true を返します
 	     */value: function change(
-	    polling) {
-	      this.polling = polling;
+	    interval) {
+	      this.interval = interval;
 	      return this.update();
 	    }
 	    /**
@@ -3545,7 +3837,7 @@
 	       * @returns {boolean} 現在の started flag 状態を返します
 	       */ }, { key: 'turnOver', value: function turnOver()
 	    {
-	      this[startSymbol] = !this[startSymbol];
+	      this.started = !this.started;
 	      return this.started;
 	    }
 	    /**
@@ -3557,7 +3849,7 @@
 	    begin, present) {
 	      this.begin = begin;
 	      // @type {Events} - start event
-	      var events = this.events;
+	      var events = this.events();
 	      events.begin = begin;
 	      events.present = present;
 	      events.polling = this.polling;
@@ -3570,9 +3862,9 @@
 	       */ }, { key: 'initCycle', value: function initCycle()
 	    {
 	      // cycle
-	      var cycle = this.cycle;
+	      var cycle = this.cycle();
 	      // bind Cycle.UPDATE
-	      cycle.on(_Cycle2.default.UPDATE, this[updateSymbol]);
+	      cycle.on(_Cycle2.default.UPDATE, this.boundUpdate());
 	      // cycle 開始
 	      cycle.start();
 	      return cycle;
@@ -3607,7 +3899,7 @@
 	        // not start
 	        return false;
 	      }
-	      this.cycle.off(_Cycle2.default.UPDATE, this[updateSymbol]);
+	      this.cycle.off(_Cycle2.default.UPDATE, this.boundUpdate());
 	      // this[startSymbol] = false;
 	      this.turnOver();
 	      return true;
@@ -3622,12 +3914,12 @@
 	      // 現在時間
 	      // @type {number}
 	      var present = Date.now();
-	      // @type {number} - polling 間隔
-	      var polling = this.polling;
+	      // @type {number} - interval 間隔
+	      var interval = this.interval;
 	      // @type {number} - 開始時間
 	      var begin = this.begin;
 	      // 現在時間 が interval より大きくなったか
-	      if (present - begin >= polling) {
+	      if (present - begin >= interval) {
 	        // event 発火
 	        this.fire(this.updateEvents(begin, present));
 	        // 開始時間を update
@@ -3644,102 +3936,25 @@
 	       */ }, { key: 'fire', value: function fire(
 	    events) {
 	      this.dispatch(events);
-	    } }, { key: 'polling', // ----------------------------------------
-	    // GETTER / SETTER
-	    // ----------------------------------------
-	    // fps
-	    /**
-	     * polling(milliseconds) を取得します
-	     * @returns {number} polling(milliseconds) を返します
-	     */get: function get() {return this[pollingSymbol];} /**
-	                                                          * polling(milliseconds) を設定します
-	                                                          * @param {number} rate polling(milliseconds)
-	                                                          */, set: function set(rate) {this[pollingSymbol] = rate;} // begin
-	    /**
-	     * 開始時間を取得します
-	     * @returns {number} 開始時間を返します
-	     */ }, { key: 'begin', get: function get() {return this[beginSymbol];} /**
-	                                                                            * 開始時間を設定します
-	                                                                            * @param {number} time 開始時間
-	                                                                            */, set: function set(time) {this[beginSymbol] = time;} // events
-	    /**
-	     * Events instance を取得します
-	     * @returns {Events} Events instance を返します
-	     */ }, { key: 'events', get: function get() {return this[eventsSymbol];} /**
-	                                                                              * Events instance を設定します
-	                                                                              * @param {Events} events Events instance
-	                                                                              */, set: function set(events) {this[eventsSymbol] = events;} // flag
-	    /**
-	     * started flag 状態を取得します
-	     * @readonly
-	     * @returns {boolean} 現在の started flag 状態を返します
-	     */ }, { key: 'started', get: function get() {return this[startSymbol];} }], [{ key: 'UPDATE', get: function get() {return 'pollingUpdate';} }]);return Polling;}(_EventDispatcher3.default);exports.default = Polling;
-
-/***/ },
-/* 103 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(104), __esModule: true };
-
-/***/ },
-/* 104 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(105);
-	module.exports = __webpack_require__(9).Object.assign;
-
-/***/ },
-/* 105 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// 19.1.3.1 Object.assign(target, source)
-	var $export = __webpack_require__(7);
-
-	$export($export.S + $export.F, 'Object', {assign: __webpack_require__(106)});
+	    } }], [{ key: 'UPDATE', get: function get() {return 'pollingUpdate';} }]);return Polling;}(_EventDispatcher3.default); // tick
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/07/04 - 16:46
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */ // event
+	exports.default = Polling;
 
 /***/ },
 /* 106 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-	// 19.1.2.1 Object.assign(target, source, ...)
-	var getKeys  = __webpack_require__(28)
-	  , gOPS     = __webpack_require__(81)
-	  , pIE      = __webpack_require__(82)
-	  , toObject = __webpack_require__(26)
-	  , IObject  = __webpack_require__(32)
-	  , $assign  = Object.assign;
-
-	// should work with symbols and should have deterministic property order (V8 bug)
-	module.exports = !$assign || __webpack_require__(18)(function(){
-	  var A = {}
-	    , B = {}
-	    , S = Symbol()
-	    , K = 'abcdefghijklmnopqrst';
-	  A[S] = 7;
-	  K.split('').forEach(function(k){ B[k] = k; });
-	  return $assign({}, A)[S] != 7 || Object.keys($assign({}, B)).join('') != K;
-	}) ? function assign(target, source){ // eslint-disable-line no-unused-vars
-	  var T     = toObject(target)
-	    , aLen  = arguments.length
-	    , index = 1
-	    , getSymbols = gOPS.f
-	    , isEnum     = pIE.f;
-	  while(aLen > index){
-	    var S      = IObject(arguments[index++])
-	      , keys   = getSymbols ? getKeys(S).concat(getSymbols(S)) : getKeys(S)
-	      , length = keys.length
-	      , j      = 0
-	      , key;
-	    while(length > j)if(isEnum.call(S, key = keys[j++]))T[key] = S[key];
-	  } return T;
-	} : $assign;
-
-/***/ },
-/* 107 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _getPrototypeOf = __webpack_require__(49);var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);var _possibleConstructorReturn2 = __webpack_require__(53);var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);var _inherits2 = __webpack_require__(90);var _inherits3 = _interopRequireDefault(_inherits2);var _symbol = __webpack_require__(74);var _symbol2 = _interopRequireDefault(_symbol);
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _getPrototypeOf = __webpack_require__(49);var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);var _possibleConstructorReturn2 = __webpack_require__(53);var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);var _inherits2 = __webpack_require__(90);var _inherits3 = _interopRequireDefault(_inherits2);
 
 
 
@@ -3756,76 +3971,119 @@
 	var _Events = __webpack_require__(47);var _Events2 = _interopRequireDefault(_Events);
 
 
-	var _Polling2 = __webpack_require__(102);var _Polling3 = _interopRequireDefault(_Polling2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	var _Polling2 = __webpack_require__(105);var _Polling3 = _interopRequireDefault(_Polling2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
+	// /**
+	//  * private property key, fps を保存するための Symbol
+	//  * @type {Symbol}
+	//  * @private
+	//  */
+	// const rateSymbol = Symbol('save fps');
+	// /**
+	//  * private property key, count を保存するための Symbol
+	//  * @type {Symbol}
+	//  * @private
+	//  */
+	// const countSymbol = Symbol('for update count');
+	// /**
+	//  * private property key, rates を保存するための Symbol
+	//  * @type {Symbol}
+	//  * @private
+	//  */
+	// const ratesSymbol = Symbol('save rate');
 	/**
-	                                                                                                                                                                                      * private property key, fps を保存するための Symbol
-	                                                                                                                                                                                      * @type {Symbol}
-	                                                                                                                                                                                      * @private
-	                                                                                                                                                                                      */ /**
-	                                                                                                                                                                                          * @license inazumatv.com
-	                                                                                                                                                                                          * @author (at)taikiken / http://inazumatv.com
-	                                                                                                                                                                                          * @date 2016/07/16
-	                                                                                                                                                                                          *
-	                                                                                                                                                                                          * Copyright (c) 2011-2015 inazumatv.com, inc.
-	                                                                                                                                                                                          *
-	                                                                                                                                                                                          * Distributed under the terms of the MIT license.
-	                                                                                                                                                                                          * http://www.opensource.org/licenses/mit-license.html
-	                                                                                                                                                                                          *
-	                                                                                                                                                                                          * This notice shall be included in all copies or substantial portions of the Software.
-	                                                                                                                                                                                          */ // event
-	var rateSymbol = (0, _symbol2.default)('save fps'); /**
-	                                                     * private property key, count を保存するための Symbol
-	                                                     * @type {Symbol}
-	                                                     * @private
-	                                                     */ // tick
-	var countSymbol = (0, _symbol2.default)('for update count'); /**
-	                                                              * private property key, rates を保存するための Symbol
-	                                                              * @type {Symbol}
-	                                                              * @private
-	                                                              */var ratesSymbol = (0, _symbol2.default)('save rate'); /**
-	                                                                                                                       * 固定値を使用し fps を決定します
-	                                                                                                                       *
-	                                                                                                                       * 以下のフレームレートが設定可能です
-	                                                                                                                       *
-	                                                                                                                       * - 60: Rate.RATE_60
-	                                                                                                                       * - 30: RATE_30
-	                                                                                                                       * - 20: RATE_20
-	                                                                                                                       * - 15: RATE_15
-	                                                                                                                       * - 12: RATE_12
-	                                                                                                                       * - 10: RATE_10
-	                                                                                                                       * - 6: RATE_6
-	                                                                                                                       * - 5: RATE_5
-	                                                                                                                       *
-	                                                                                                                       */var Rate = function (_Polling) {(0, _inherits3.default)(Rate, _Polling); /**
-	                                                                                                                                                                                                   * 固定値フレームレート毎に UPDATE イベントを発生させます
-	                                                                                                                                                                                                   * @param {number} rate fps, 固定値以外設定できません
-	                                                                                                                                                                                                   */function Rate(rate) {(0, _classCallCheck3.default)(this, Rate); // @type {Events - Events
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (Rate.__proto__ || (0, _getPrototypeOf2.default)(Rate)).call(this, 1));var events = new _Events2.default(Rate.UPDATE, _this, _this);events.rate = rate; /**
-	                                                                                                                                                                                                                        * Rate.UPDATE Events instance
-	                                                                                                                                                                                                                        * @type {Events}
-	                                                                                                                                                                                                                        */
-	    _this.events = events;
-
+	 * 固定値を使用し fps を決定します
+	 *
+	 * 以下のフレームレートが設定可能です
+	 *
+	 * - 60: Rate.RATE_60
+	 * - 30: RATE_30
+	 * - 20: RATE_20
+	 * - 15: RATE_15
+	 * - 12: RATE_12
+	 * - 10: RATE_10
+	 * - 6: RATE_6
+	 * - 5: RATE_5
+	 *
+	 */ /**
+	     * @license inazumatv.com
+	     * @author (at)taikiken / http://inazumatv.com
+	     * @date 2016/07/16
+	     *
+	     * Copyright (c) 2011-2015 inazumatv.com, inc.
+	     *
+	     * Distributed under the terms of the MIT license.
+	     * http://www.opensource.org/licenses/mit-license.html
+	     *
+	     * This notice shall be included in all copies or substantial portions of the Software.
+	     */ // event
+	var Rate = function (_Polling) {(0, _inherits3.default)(Rate, _Polling); /**
+	                                                                          * 固定値フレームレート毎に UPDATE イベントを発生させます
+	                                                                          * @param {number} rateValue fps, 固定値以外設定できません
+	                                                                          */function Rate(rateValue) {(0, _classCallCheck3.default)(this, Rate); // @type {Events - Events
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (Rate.__proto__ || (0, _getPrototypeOf2.default)(Rate)).call(this, 1000 / 60));var events = new _Events2.default(Rate.UPDATE, _this, _this); // events.rate = rate;
+	    // /**
+	    //  * Rate.UPDATE Events instance
+	    //  * @type {Events}
+	    //  */
+	    // this.events = events;
 	    // @type {number} - count, rate に達したかを計測するための counter 変数
-	    _this[countSymbol] = 0;
-
+	    // this[countSymbol] = 0;
 	    // correct rate list
 	    // サポートするレートリスト
-	    _this[ratesSymbol] = [
-	    Rate.RATE_60,
-	    Rate.RATE_30,
-	    Rate.RATE_20,
-	    Rate.RATE_15,
+	    // this[ratesSymbol] = [
+	    //   Rate.RATE_60,
+	    //   Rate.RATE_30,
+	    //   Rate.RATE_20,
+	    //   Rate.RATE_15,
+	    //   Rate.RATE_12,
+	    //   Rate.RATE_10,
+	    //   Rate.RATE_6,
+	    //   Rate.RATE_5,
+	    // ];
+	    //
+	    // // frame rate
+	    // this[rateSymbol] = 0;
+	    var rates = [Rate.RATE_60, Rate.RATE_30, Rate.RATE_20, Rate.RATE_15,
 	    Rate.RATE_12,
 	    Rate.RATE_10,
 	    Rate.RATE_6,
 	    Rate.RATE_5];
 
-
-	    // frame rate
-	    _this[rateSymbol] = 0;
-	    _this.change(rate);return _this;
+	    /**
+	                   * @returns {Events} Events instance
+	                   */
+	    _this.events = function () {return events;};
+	    /**
+	                                                  * 許容可能な rate
+	                                                  * @return {Array<number>} 許容可能な rate
+	                                                  */
+	    _this.rates = function () {return rates;};
+	    /**
+	                                                * rate count, update 毎にカウントアップします
+	                                                * @type {number}
+	                                                */
+	    _this.count = 0;
+	    var rate = null;
+	    /**
+	                      * rate 値
+	                      * @returns {?number} rate 値
+	                      */
+	    _this.rate = function () {return rate;};
+	    /**
+	                                              * rate 値を設定します
+	                                              * @param {number} value rate 値
+	                                              * @returns {boolean} rate 設定に成功すると true を返します
+	                                              */
+	    _this.setRate = function (value) {
+	      if (_this.validate(rateValue)) {
+	        rate = value;
+	        return true;
+	      }
+	      return false;
+	    };
+	    // init
+	    _this.setRate(rate);return _this;
 	  }
 	  // ----------------------------------------
 	  // CONST
@@ -3835,7 +4093,7 @@
 	   * @const RATE_60
 	   * @returns {number} fps 60 基準値を返します
 	   * @default 1
-	   */(0, _createClass3.default)(Rate, [{ key: 'change',
+	   */(0, _createClass3.default)(Rate, [{ key: 'validate',
 
 
 
@@ -3913,61 +4171,79 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	    // // ----------------------------------------
+	    // // GETTER / SETTER
+	    // // ----------------------------------------
+	    // /**
+	    //  * fps 基準値リストを取得します
+	    //  * @returns {number} fps 基準値リストを返します
+	    //  */
+	    // get rates() {
+	    //   return this[ratesSymbol];
+	    // }
+	    // /**
+	    //  * fps 基準値を取得します
+	    //  * @returns {number} fps 基準値を返します
+	    //  */
+	    // get rate() {
+	    //   return this[rateSymbol];
+	    // }
+	    //
+	    // /**
+	    //  * rate に達したかを計測するための counter 変数を取得します
+	    //  * @returns {number} rate に達したかを計測するための counter 変数を返します
+	    //  */
+	    // get count() {
+	    //   return this[countSymbol];
+	    // }
+	    // /**
+	    //  * rate に達したかを計測するための counter 変数を設定します
+	    //  * @param {number} step rate に達したかを計測するための counter 数
+	    //  */
+	    // set count(step) {
+	    //   this[countSymbol] = step;
+	    // }
 	    // ----------------------------------------
 	    // METHOD
 	    // ----------------------------------------
 	    /**
-	     * fps 基準値を設定します
-	     * @throws {Error} 引数 rate が設定可能値以外の時に例外エラーが発生します
-	     * @param {number} rate fps 基準値, <br>
-	     * this.RATE_30, this.RATE_20, this.RATE_15, this.RATE_12, this.RATE_10, <br>
-	     * this.RATE_6, this.RATE_5 の何れかが必須です
-	     * @returns {undefined} no-return
-	     */value: function change(
+	     * 正規な rate 値かをチェックします
+	     * @param {number} rate 対象 rate
+	     * @returns {boolean} 正しいと true を返します
+	     */value: function validate(
 	    rate) {
-	      if (this.rates.indexOf(rate) !== -1) {
-	        this[rateSymbol] = rate;
-	      } else {
-	        throw new Error('illegal rate: ' + rate + '. use const RATE_NN');
-	      }
+	      return this.rates().indexOf(rate) !== -1;
+	    }
+	    /**
+	       * fps 基準値を設定します
+	       * @throws {Error} 引数 rate が設定可能値以外の時に例外エラーが発生します
+	       * @param {number} rate fps 基準値, <br>
+	       * this.RATE_30, this.RATE_20, this.RATE_15, this.RATE_12, this.RATE_10, <br>
+	       * this.RATE_6, this.RATE_5 の何れかが必須です
+	       * @returns {boolean} rate 設定に成功すると true を返します
+	       */ }, { key: 'change', value: function change(
+	    rate) {
+	      // if (this.validate(rate)) {
+	      //   this.rate = rate;
+	      //   return true;
+	      // }
+	      // // else {
+	      // //   throw new Error(`illegal rate: ${rate}. use const RATE_NN`);
+	      // // }
+	      // return false;
+	      var result = this.setRate(rate);
+	      this.update();
+	      return result;
 	    }
 	    /**
 	       * loop(requestAnimationFrame) を開始します
 	       * @returns {boolean} start に成功すると true を返します
 	       */ }, { key: 'start', value: function start()
 	    {
+	      var rate = this.rate();
+	      if (rate === null) {
+	        throw new Error('rate are not correct. ' + rate);
+	      }
 	      if (this.started) {
 	        // already start
 	        return false;
@@ -3988,7 +4264,7 @@
 	    {
 	      // 余りが 0 の時にイベントを発火します
 	      this.count += 1;
-	      var reminder = this.count % this.rate;
+	      var reminder = this.count % this.rate();
 	      if (reminder === 0) {
 	        this.count = 0;
 	        this.fire(this.updateEvents(0, 0));
@@ -3997,57 +4273,42 @@
 	      }
 
 	      return false;
-	    } }, { key: 'rates', // ----------------------------------------
-	    // GETTER / SETTER
-	    // ----------------------------------------
-	    /**
-	     * fps 基準値リストを取得します
-	     * @returns {number} fps 基準値リストを返します
-	     */get: function get() {return this[ratesSymbol];} /**
-	                                                        * fps 基準値を取得します
-	                                                        * @returns {number} fps 基準値を返します
-	                                                        */ }, { key: 'rate', get: function get() {return this[rateSymbol];} /**
-	                                                                                                                             * rate に達したかを計測するための counter 変数を取得します
-	                                                                                                                             * @returns {number} rate に達したかを計測するための counter 変数を返します
-	                                                                                                                             */ }, { key: 'count', get: function get() {return this[countSymbol];} /**
-	                                                                                                                                                                                                    * rate に達したかを計測するための counter 変数を設定します
-	                                                                                                                                                                                                    * @param {number} step rate に達したかを計測するための counter 数
-	                                                                                                                                                                                                    */, set: function set(step) {this[countSymbol] = step;} }], [{ key: 'RATE_60', get: function get() {return 1;} /**
-	                                                                                                                                                                                                                                                                                                                   * fps 30 基準値を取得します
-	                                                                                                                                                                                                                                                                                                                   * @const RATE_30
-	                                                                                                                                                                                                                                                                                                                   * @returns {number} fps 30 基準値を返します
-	                                                                                                                                                                                                                                                                                                                   * @default 2
-	                                                                                                                                                                                                                                                                                                                   */ }, { key: 'RATE_30', get: function get() {return 2;} /**
-	                                                                                                                                                                                                                                                                                                                                                                            * fps 20 基準値を取得します
-	                                                                                                                                                                                                                                                                                                                                                                            * @const RATE_20
-	                                                                                                                                                                                                                                                                                                                                                                            * @returns {number} fps 20 基準値を返します
-	                                                                                                                                                                                                                                                                                                                                                                            * @default 3
-	                                                                                                                                                                                                                                                                                                                                                                            */ }, { key: 'RATE_20', get: function get() {return 3;} /**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                     * fps 15 基準値を取得します
-	                                                                                                                                                                                                                                                                                                                                                                                                                                     * @const RATE_15
-	                                                                                                                                                                                                                                                                                                                                                                                                                                     * @returns {number} fps 15 基準値を返します
-	                                                                                                                                                                                                                                                                                                                                                                                                                                     * @default 4
-	                                                                                                                                                                                                                                                                                                                                                                                                                                     */ }, { key: 'RATE_15', get: function get() {return 4;} /**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * fps 12 基準値を取得します
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * @const RATE_12
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * @returns {number} fps 12 基準値を返します
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * @default 5
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              */ }, { key: 'RATE_12', get: function get() {return 5;} /**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * fps 10 基準値を取得します
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @const RATE_10
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @returns {number} fps 10 基準値を返します
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @default 6
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */ }, { key: 'RATE_10', get: function get() {return 6;} /**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * fps 6 基準値を取得します
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @const RATE_6
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @returns {number} fps 6 基準値を返します
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @default 10
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */ }, { key: 'RATE_6', get: function get() {return 10;} /**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * fps 5 基準値を取得します
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * @const RATE_5
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * @returns {number} fps 6 基準値を返します
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * @default 12
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         */ }, { key: 'RATE_5', get: function get() {return 12;} // ----------------------------------------
+	    } }], [{ key: 'RATE_60', get: function get() {return 1;} /**
+	                                                             * fps 30 基準値を取得します
+	                                                             * @const RATE_30
+	                                                             * @returns {number} fps 30 基準値を返します
+	                                                             * @default 2
+	                                                             */ }, { key: 'RATE_30', get: function get() {return 2;} /**
+	                                                                                                                      * fps 20 基準値を取得します
+	                                                                                                                      * @const RATE_20
+	                                                                                                                      * @returns {number} fps 20 基準値を返します
+	                                                                                                                      * @default 3
+	                                                                                                                      */ }, { key: 'RATE_20', get: function get() {return 3;} /**
+	                                                                                                                                                                               * fps 15 基準値を取得します
+	                                                                                                                                                                               * @const RATE_15
+	                                                                                                                                                                               * @returns {number} fps 15 基準値を返します
+	                                                                                                                                                                               * @default 4
+	                                                                                                                                                                               */ }, { key: 'RATE_15', get: function get() {return 4;} /**
+	                                                                                                                                                                                                                                        * fps 12 基準値を取得します
+	                                                                                                                                                                                                                                        * @const RATE_12
+	                                                                                                                                                                                                                                        * @returns {number} fps 12 基準値を返します
+	                                                                                                                                                                                                                                        * @default 5
+	                                                                                                                                                                                                                                        */ }, { key: 'RATE_12', get: function get() {return 5;} /**
+	                                                                                                                                                                                                                                                                                                 * fps 10 基準値を取得します
+	                                                                                                                                                                                                                                                                                                 * @const RATE_10
+	                                                                                                                                                                                                                                                                                                 * @returns {number} fps 10 基準値を返します
+	                                                                                                                                                                                                                                                                                                 * @default 6
+	                                                                                                                                                                                                                                                                                                 */ }, { key: 'RATE_10', get: function get() {return 6;} /**
+	                                                                                                                                                                                                                                                                                                                                                          * fps 6 基準値を取得します
+	                                                                                                                                                                                                                                                                                                                                                          * @const RATE_6
+	                                                                                                                                                                                                                                                                                                                                                          * @returns {number} fps 6 基準値を返します
+	                                                                                                                                                                                                                                                                                                                                                          * @default 10
+	                                                                                                                                                                                                                                                                                                                                                          */ }, { key: 'RATE_6', get: function get() {return 10;} /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                   * fps 5 基準値を取得します
+	                                                                                                                                                                                                                                                                                                                                                                                                                   * @const RATE_5
+	                                                                                                                                                                                                                                                                                                                                                                                                                   * @returns {number} fps 6 基準値を返します
+	                                                                                                                                                                                                                                                                                                                                                                                                                   * @default 12
+	                                                                                                                                                                                                                                                                                                                                                                                                                   */ }, { key: 'RATE_5', get: function get() {return 12;} // ----------------------------------------
 	    // EVENT
 	    // ----------------------------------------
 	    /**
@@ -4055,7 +4316,8 @@
 	     * @event UPDATE
 	     * @returns {string} event, rateUpdate を返します
 	     * @default rateUpdate
-	     */ }, { key: 'UPDATE', get: function get() {return 'rateUpdate';} }]);return Rate;}(_Polling3.default);exports.default = Rate;
+	     */ }, { key: 'UPDATE', get: function get() {return 'rateUpdate';} }]);return Rate;}(_Polling3.default); // tick
+	exports.default = Rate;
 
 /***/ }
 /******/ ]);
