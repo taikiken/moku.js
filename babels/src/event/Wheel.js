@@ -12,7 +12,7 @@
 
 // event
 import { default as EventDispatcher } from './EventDispatcher';
-import { default as Events } from './Events';
+import { default as WheelEvents } from './WheelEvents';
 
 /**
  * new を許可しないための Symbol
@@ -26,12 +26,12 @@ const singletonSymbol = Symbol('Scroll singleton symbol');
  * @private
  */
 let instance = null;
-/**
- * private property key, bind 済み mouseWheel を保存するための Symbol
- * @type {Symbol}
- * @private
- */
-const wheelSymbol = Symbol('bound mouseWheel Symbol');
+// /**
+//  * private property key, bind 済み mouseWheel を保存するための Symbol
+//  * @type {Symbol}
+//  * @private
+//  */
+// const wheelSymbol = Symbol('bound mouseWheel Symbol');
 
 /**
  * mousewheel event を監視し通知を行います
@@ -64,7 +64,13 @@ export default class Wheel extends EventDispatcher {
     instance = this;
 
     // event handler
-    this[wheelSymbol] = this.mouseWheel.bind(this);
+    // this[wheelSymbol] = this.mouseWheel.bind(this);
+    const boundWheel = this.mouseWheel.bind(this);
+    /**
+     * bound mouseWheel
+     * @returns {function} window.wheel event handler
+     */
+    this.boundWheel = () => boundWheel;
     /**
      * 閾値, wheel 移動量が閾値を超えたときにイベントを発生させます
      * @type {number}
@@ -76,11 +82,21 @@ export default class Wheel extends EventDispatcher {
      * @type {number}
      */
     this.moved = 0;
+    // /**
+    //  * firefox wheel event.detail 数値を他 Browser wheel 値と揃えるための係数
+    //  * @type {number}
+    //  */
+    // this.coefficient = -7.5;
+    this.started = false;
+    const events = {
+      up: new WheelEvents(Wheel.UP, this),
+      down: new WheelEvents(Wheel.DOWN, this),
+    };
     /**
-     * firefox wheel event.detail 数値を他 Browser wheel 値と揃えるための係数
-     * @type {number}
+     * UP / DOWN Events instance
+     * @returns {{up: WheelEvents, down: WheelEvents}} UP / DOWN Events instance
      */
-    this.coefficient = -7.5;
+    this.events = () => events;
 
     // 設定済み instance を返します
     return instance;
@@ -106,35 +122,42 @@ export default class Wheel extends EventDispatcher {
   static get DOWN() {
     return 'wheelDown';
   }
-  // ----------------------------------------
-  // GETTER / SETTER
-  // ----------------------------------------
-  /**
-   * bind 済み mouseWheel
-   * @returns {function} bind 済み mouseWheel を返します
-   */
-  get boundWheel() {
-    return this[wheelSymbol];
-  }
+  // // ----------------------------------------
+  // // GETTER / SETTER
+  // // ----------------------------------------
+  // /**
+  //  * bind 済み mouseWheel
+  //  * @returns {function} bind 済み mouseWheel を返します
+  //  */
+  // get boundWheel() {
+  //   return this[wheelSymbol];
+  // }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
   /**
-   * mousewheel event を監視します<br>
-   * 監視前に二重に addEventListener しないように unwatch を実行します
+   * mousewheel event を監視します
    * @returns {Wheel} method chain 可能なように instance を返します
    */
-  watch() {
-    this.unwatch();
-    window.addEventListener('wheel', this.boundWheel, false);
+  start() {
+    if (this.started) {
+      return this;
+    }
+    this.started = true;
+    // this.unwatch();
+    window.addEventListener('wheel', this.boundWheel(), false);
     return this;
   }
   /**
    * mousewheel event を監視を止めます
    * @returns {Wheel} method chain 可能なように instance を返します
    */
-  unwatch() {
-    window.removeEventListener('wheel', this.boundWheel);
+  stop() {
+    if (!this.started) {
+      return this;
+    }
+    this.started = false;
+    window.removeEventListener('wheel', this.boundWheel());
     return this;
   }
   /**
@@ -171,19 +194,19 @@ export default class Wheel extends EventDispatcher {
 
     // 閾値チェック
     if (Math.abs(moved) >= this.threshold) {
+      // scroll event を発火します
       if (moved > 0) {
         // scroll up
         this.up(moved);
       } else {
         this.down(moved);
       }
-    } else {
-      // 閾値を超えていないので処理をしない
+
+      // initialize moved, 発火後に積算移動変数を初期化します
+      this.moved = 0;
       return moved;
     }
-
-    // initialize moved
-    this.moved = 0;
+    // 閾値を超えていないので処理をしない
     return moved;
   }
   /**
@@ -193,7 +216,7 @@ export default class Wheel extends EventDispatcher {
    */
   up(moved) {
     // @type {Events}
-    const events = new Events(Wheel.UP, this, this);
+    const events = this.events().up;
     events.moved = moved;
     this.dispatch(events);
 
@@ -206,7 +229,7 @@ export default class Wheel extends EventDispatcher {
    */
   down(moved) {
     // @type {Events}
-    const events = new Events(Wheel.DOWN, this, this);
+    const events = this.events().down;
     events.moved = moved;
     this.dispatch(events);
 
@@ -220,6 +243,9 @@ export default class Wheel extends EventDispatcher {
    * @returns {Wheel} Wheel instance を返します
    */
   static factory() {
+    if (instance !== null) {
+      return instance;
+    }
     return new Wheel(singletonSymbol);
   }
 }
