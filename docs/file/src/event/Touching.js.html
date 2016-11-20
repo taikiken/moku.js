@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/event/Touching.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+<link data-ice="userStyle" rel="stylesheet" href="user/css/0-esdoc_extension.css">
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">event</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html">EventDispatcher</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Events.js~Events.html">Events</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Freeze.js~Freeze.html">Freeze</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scroll.js~Scroll.html">Scroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/ScrollEvents.js~ScrollEvents.html">ScrollEvents</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scrolling.js~Scrolling.html">Scrolling</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Touching.js~Touching.html">Touching</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/TouchingEvents.js~TouchingEvents.html">TouchingEvents</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/WheelEvents.js~WheelEvents.html">WheelEvents</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">net</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">tick</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html">Cycle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Fps.js~Fps.html">Fps</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Polling.js~Polling.html">Polling</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Rate.js~Rate.html">Rate</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/List.js~List.html">List</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Vectors.js~Vectors.html">Vectors</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/event/Touching.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * @license inazumatv.com
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/10/08
+ *
+ * Copyright (c) 2011-2015 inazumatv.com, inc.
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ * f
+ */
+
+// event
+import { default as EventDispatcher } from &apos;./EventDispatcher&apos;;
+import { default as TouchingEvents } from &apos;./TouchingEvents&apos;;
+
+// util
+import { default as Vectors } from &apos;../util/Vectors&apos;;
+import { default as Type } from &apos;../util/Type&apos;;
+
+// // private
+// /**
+//  * bound start event handler
+//  * @private
+//  * @type {Symbol}
+//  */
+// const boundStart = Symbol(&apos;bound start event handler&apos;);
+// /**
+//  * bound move event handler
+//  * @private
+//  * @type {Symbol}
+//  */
+// const boundMove = Symbol(&apos;bound move event handler&apos;);
+// /**
+//  * bound end event handler
+//  * @private
+//  * @type {Symbol}
+//  */
+// const boundEnd = Symbol(&apos;bound end event handler&apos;);
+// /**
+//  * bound cancel event handler
+//  * @private
+//  * @type {Symbol}
+//  */
+// const boundCancel = Symbol(&apos;bound cancel event handler&apos;);
+// /**
+//  * bound blur event handler
+//  * @private
+//  * @type {Symbol}
+//  */
+// const boundBlur = Symbol(&apos;bound blur event handler&apos;);
+
+/**
+ * Touch event &#x3092;&#x76E3;&#x8996;&#x3057; y&#x65B9;&#x5411;&#x79FB;&#x52D5;&#x304C; `threshold` &#x4EE5;&#x5185;&#x306E;&#x6642;&#x306B; `TOUCH` event &#x3092;&#x767A;&#x706B;&#x3057;&#x307E;&#x3059;
+ */
+export default class Touching extends EventDispatcher {
+  /**
+   * &#x51E6;&#x7406;&#x5BFE;&#x8C61; element &#x306A;&#x3069;&#x3092;&#x4FDD;&#x5B58;&#x3057;&#x307E;&#x3059;
+   * @param {Element} element &#x51E6;&#x7406;&#x5BFE;&#x8C61; Element
+   * @param {boolean} [canceling=false] touchmove &#x4E2D;&#x306B; `preventDefault` &#x3092;&#x884C;&#x3046;
+   * @param {number} [threshold=10] y &#x65B9;&#x5411;&#x95BE;&#x5024;
+   */
+  constructor(element, canceling = false, threshold = 10) {
+    super();
+
+    /**
+     * &#x51E6;&#x7406;&#x5BFE;&#x8C61; Element
+     * @type {Element}
+     */
+    this.element = element;
+    /**
+     * touchmove &#x4E2D;&#x306B; `preventDefault` &#x3092;&#x884C;&#x3046;&#x304B;&#x306E;&#x30D5;&#x30E9;&#x30C3;&#x30B0;
+     * @type {boolean}
+     * @default false
+     */
+    this.canceling = canceling;
+    /**
+     * y &#x65B9;&#x5411;&#x95BE;&#x5024;, default: 10px
+     * @type {number}
+     * @default 10
+     */
+    this.threshold = threshold;
+    // /**
+    //  * bind &#x6E08;&#x307F; `onStart`
+    //  * @type {Function}
+    //  */
+    // this[boundStart] = this.onStart.bind(this);
+    const boundStart = this.onStart.bind(this);
+    /**
+     * bound onStart
+     * @returns {function} bound onStart
+     */
+    this.boundStart = () =&gt; boundStart;
+    // /**
+    //  * bind &#x6E08;&#x307F; `onMove`
+    //  * @type {Function}
+    //  */
+    // this[boundMove] = this.onMove.bind(this);
+    const boundMove = this.onMove.bind(this);
+    /**
+     * bound onMove
+     * @returns {function} bound onMove
+     */
+    this.boundMove = () =&gt; boundMove;
+    // /**
+    //  * bind &#x6E08;&#x307F; `onEnd`
+    //  * @type {Function}
+    //  */
+    // this[boundEnd] = this.onEnd.bind(this);
+    const boundEnd = this.onEnd.bind(this);
+    /**
+     * bound onEnd
+     * @returns {function} bound onEnd
+     */
+    this.boundEnd = () =&gt; boundEnd;
+    // /**
+    //  * bind &#x6E08;&#x307F; `onCancel`
+    //  * @type {Function}
+    //  */
+    // this[boundCancel] = this.onCancel.bind(this);
+    const boundCancel = this.onCancel.bind(this);
+    /**
+     * bound onCancel
+     * @returns {function} onCancel onStart
+     */
+    this.boundCancel = () =&gt; boundCancel;
+    // /**
+    //  * bind &#x6E08;&#x307F; `onBlur`
+    //  * @type {Function}
+    //  */
+    // this[boundBlur] = this.onBlur.bind(this);
+    const boundBlur = this.onBlur.bind(this);
+    /**
+     * bound onBlur
+     * @returns {function} bound onBlur
+     */
+    this.boundBlur = () =&gt; boundBlur;
+    // /**
+    //  * &#x4F4D;&#x7F6E;&#x7BA1;&#x7406;&#x3092;&#x884C;&#x3046; Vectors instance &#x3092;&#x7BA1;&#x7406;&#x3057;&#x307E;&#x3059;
+    //  * @type {{start: Vectors, end: Vectors, moving: Array.&lt;Vectors&gt;}}
+    //  */
+    // this.vectors = {
+    //   start: new Vectors(),
+    //   end: new Vectors(),
+    //   moving: [].slice(0),
+    // };
+    const vectors = {
+      start: new Vectors(),
+      end: new Vectors(),
+      moving: [].slice(0),
+    };
+    /**
+     * vectors object
+     * @returns {{start: Vectors, end: Vectors, moving: Array.&lt;Vectors&gt;}} vectors object
+     */
+    this.vectors = () =&gt; vectors;
+  }
+  // ---------------------------------------------------
+  //  EVENT
+  // ---------------------------------------------------
+  /**
+   * touchstart event type
+   * @event START
+   * @returns {string} touchingStart &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  static get START() {
+    return &apos;touchingStart&apos;;
+  }
+  /**
+   * touchend event type
+   * @event END
+   * @returns {string} touchingEnd &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  static get END() {
+    return &apos;touchingEnd&apos;;
+  }
+  /**
+   * touchend event type
+   * @event CANCEL
+   * @returns {string} touchingCancel &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  static get CANCEL() {
+    return &apos;touchingCancel&apos;;
+  }
+  /**
+   * touchmove event type
+   * @event MOVE
+   * @returns {string} touchingMove &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  static get MOVE() {
+    return &apos;touchingMove&apos;;
+  }
+  /**
+   * touch(click) event type
+   * @event TOUCH
+   * @returns {string} touchingTouch &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  static get TOUCH() {
+    return &apos;touchingTouch&apos;;
+  }
+  // // ---------------------------------------------------
+  // //  GETTER / SETTER
+  // // ---------------------------------------------------
+  // /**
+  //  * bind &#x6E08;&#x307F; `onStart` &#x95A2;&#x6570;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+  //  * @returns {function} bind &#x6E08;&#x307F; `onStart` &#x95A2;&#x6570;&#x8FD4;&#x3057;&#x307E;&#x3059;
+  //  */
+  // get boundStart() {
+  //   return this[boundStart];
+  // }
+  // /**
+  //  * bind &#x6E08;&#x307F; `onMove` &#x95A2;&#x6570;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+  //  * @returns {function} bind &#x6E08;&#x307F; `onMove` &#x95A2;&#x6570;&#x8FD4;&#x3057;&#x307E;&#x3059;
+  //  */
+  // get boundMove() {
+  //   return this[boundMove];
+  // }
+  // /**
+  //  * bind &#x6E08;&#x307F; `onEnd` &#x95A2;&#x6570;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+  //  * @returns {function} bind &#x6E08;&#x307F; `onEnd` &#x95A2;&#x6570;&#x8FD4;&#x3057;&#x307E;&#x3059;
+  //  */
+  // get boundEnd() {
+  //   return this[boundEnd];
+  // }
+  // /**
+  //  * bind &#x6E08;&#x307F; `onCancel` &#x95A2;&#x6570;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+  //  * @returns {function} bind &#x6E08;&#x307F; `onCancel` &#x95A2;&#x6570;&#x8FD4;&#x3057;&#x307E;&#x3059;
+  //  */
+  // get boundCancel() {
+  //   return this[boundCancel];
+  // }
+  // /**
+  //  * bind &#x6E08;&#x307F; `onBlur` &#x95A2;&#x6570;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+  //  * @returns {function} bind &#x6E08;&#x307F; `onBlur` &#x95A2;&#x6570;&#x8FD4;&#x3057;&#x307E;&#x3059;
+  //  */
+  // get boundBlur() {
+  //   return this[boundBlur];
+  // }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * &#x521D;&#x671F;&#x51E6;&#x7406;&lt;br&gt;
+   * element &#x3078;&#x306E; `touchstart` &#x3068;&lt;br&gt;
+   * window.blur event &#x3092;&#x305D;&#x308C;&#x305E;&#x308C; bind &#x3057;&#x307E;&#x3059;
+   * @returns {void}
+   */
+  init() {
+    // console.log(&apos;Touching.init&apos;, this.element, this.boundStart);
+    this.element.addEventListener(&apos;touchstart&apos;, this.boundStart(), false);
+    window.addEventListener(&apos;blur&apos;, this.boundBlur(), false);
+  }
+  /**
+   * touchstart event handler
+   * @param {Event} event touchstart event
+   * @returns {void}
+   */
+  onStart(event) {
+    // event unbind &lt;- &#x4E8C;&#x91CD; bind &#x306B;&#x306A;&#x3089;&#x306A;&#x3044;&#x3088;&#x3046;&#x306B;
+    this.dispose();
+    // vectors &#x3092;&#x521D;&#x671F;&#x5316;
+    this.reset();
+    // &#x73FE;&#x5728; position &#x3092;&#x4FDD;&#x5B58;
+    const vectors = this.vectors;
+    const point = Touching.point(event);
+    vectors.start.update(point.x, point.y);
+    vectors.moving.push(vectors.start);
+
+    // &#x30AD;&#x30E3;&#x30F3;&#x30BB;&#x30EB; event &#x76E3;&#x8996;&#x3092;&#x958B;&#x59CB;
+    const body = document.body;
+    body.addEventListener(&apos;touchend&apos;, this.boundEnd(), false);
+    body.addEventListener(&apos;touchmove&apos;, this.boundMove(), false);
+    body.addEventListener(&apos;touchcancel&apos;, this.boundCancel(), false);
+
+    // Touching.START &#x767A;&#x706B;
+    this.dispatch(new TouchingEvents(
+      Touching.START,
+      this,
+      event,
+      vectors.start
+    ));
+  }
+  /**
+   * touchmove event handler
+   * @param {Event} event touchmove event
+   * @returns {void}
+   */
+  onMove(event) {
+    // console.log(&apos;Touching.onMove&apos;, event);
+    const vectors = this.vectors();
+    const movingArray = vectors.moving;
+
+    // &#x73FE;&#x5728; position
+    const point = Touching.point(event);
+    const position = new Vectors(point.x, point.y, Date.now());
+
+    // &#x524D;&#x56DE; position &lt;- moving &#x914D;&#x5217;&#x6700;&#x5F8C;
+    const previous = movingArray.pop();
+    // &#x623B;&#x3059;
+    movingArray.push(previous);
+
+    // scroll checked
+    const scrolling = Touching.scrolling(position, previous, this.threshold);
+    position.scrolling = scrolling;
+    // &#x73FE;&#x5728; position &#x3092;&#x914D;&#x5217;&#x5F8C;&#x308D;&#x306B;&#x30BB;&#x30C3;&#x30C8;
+    movingArray.push(position);
+
+    // global cancel &#x3068; &#x95BE;&#x5024;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3067; `preventDefault` &#x3092;&#x5B9F;&#x884C;&#x3057; scroll &#x3092;&#x6B62;&#x3081;&#x308B;
+    if (this.canceling &amp;&amp; !scrolling) {
+      event.preventDefault();
+    }
+
+    // &#x79FB;&#x52D5;&#x91CF;
+    const between = position.between(previous);
+
+    // Touching.MOVE &#x767A;&#x706B;
+    this.dispatch(new TouchingEvents(
+      Touching.MOVE,
+      this,
+      event,
+      position,
+      between,
+      scrolling,
+    ));
+  }
+  /**
+   * touchend event handler
+   * @param {Event} event touchend event
+   * @returns {void}
+   */
+  onEnd(event) {
+    // console.log(&apos;Touching.onEnd&apos;, event);
+    const vectors = this.vectors;
+
+    // &#x73FE;&#x5728; position
+    const point = Touching.point(event);
+    const position = new Vectors(point.x, point.y, Date.now());
+
+    // &#x524D;&#x56DE; position &#x3092; touchstart &#x4F4D;&#x7F6E;&#x3068;&#x3057;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3057;&#x307E;&#x3059;
+    const previous = vectors.start;
+    const scrolling = Touching.scrolling(position, previous, this.threshold);
+    position.scrolling = scrolling;
+
+    // global cancel &#x3068; &#x95BE;&#x5024;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3067; `preventDefault` &#x3092;&#x5B9F;&#x884C;&#x3057; scroll &#x3092;&#x6B62;&#x3081;&#x308B;
+    if (this.canceling &amp;&amp; !scrolling) {
+      event.preventDefault();
+    }
+
+    // &#x79FB;&#x52D5;&#x91CF;
+    const between = position.between(previous);
+
+    // Touching.END &#x767A;&#x706B;
+    this.dispatch(new TouchingEvents(
+      Touching.END,
+      event,
+      position,
+      between,
+      scrolling
+    ));
+
+    // Touching.Touch &#x767A;&#x706B;
+    this.dispatch(new TouchingEvents(
+      Touching.TOUCH,
+      event,
+      position,
+      between,
+      scrolling
+    ));
+  }
+  /**
+   * touchcancel event handler&lt;br&gt;
+   * &#x51E6;&#x7406;&#x3092;&#x30AD;&#x30E3;&#x30F3;&#x30BB;&#x30EB;&#x3057;&#x307E;&#x3059;
+   * @param {Event} event touchend event
+   * @returns {boolean} &#x6B63;&#x5E38;&#x7D42;&#x4E86;&#x6642;&#x306B; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  onCancel(event) {
+  //   this.dispose();
+  //   this.reset();
+  //   // this.dispatch({
+  //   //   type: Touching.CANCEL,
+  //   //   originalEVent: event,
+  //   // });
+  //   this.dispatch(new TouchingEvents(
+  //     Touching.CANCEL,
+  //     this,
+  //     event,
+  // ));
+    return this.abort(event);
+  }
+  /**
+   * window.blur event handler&lt;br&gt;
+   * &#x51E6;&#x7406;&#x3092;&#x30AD;&#x30E3;&#x30F3;&#x30BB;&#x30EB;&#x3057;&#x307E;&#x3059;
+   * @param {Event} event window blur event
+   * @returns {boolean} &#x6B63;&#x5E38;&#x7D42;&#x4E86;&#x6642;&#x306B; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  onBlur(event) {
+    return this.abort(event);
+  }
+  /**
+   * touch event &#x3067;&#x306E;&#x51E6;&#x7406;&#x3092;&#x30AD;&#x30E3;&#x30F3;&#x30BB;&#x30EB;&#x3057;&#x3001;&#x8A2D;&#x5B9A;&#x5024;&#x3092;&#x521D;&#x671F;&#x5024;&#x306B;&#x623B;&#x3057;&#x307E;&#x3059;
+   * @param {Event} event touch / window.onblur Event
+   * @returns {boolean} &#x6B63;&#x5E38;&#x7D42;&#x4E86;&#x6642;&#x306B; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  abort(event) {
+    this.dispose();
+    this.reset();
+    this.dispatch(new TouchingEvents(
+      Touching.CANCEL,
+      this,
+      event,
+    ));
+    return true;
+  }
+  /**
+   * bind &#x3057;&#x305F; event &#x3092; unbind &#x3057;&#x307E;&#x3059;
+   * @returns {boolean} &#x6B63;&#x5E38;&#x7D42;&#x4E86;&#x6642;&#x306B; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  dispose() {
+    const body = document.body;
+
+    body.removeEventListener(&apos;touchend&apos;, this.boundEnd());
+    body.removeEventListener(&apos;touchmove&apos;, this.boundMove());
+    body.removeEventListener(&apos;touchcancel&apos;, this.boundCancel());
+    return true;
+  }
+  /**
+   * &#x79FB;&#x52D5;&#x76E3;&#x8996;&#x306B;&#x4F7F;&#x7528;&#x3057;&#x305F; vectors instance &#x3092;&#x5168;&#x3066; reset &#x3057;&#x307E;&#x3059;
+   * @returns {{start: Vectors, end: Vectors, moving: Array.&lt;Vectors&gt;}}
+   * reset &#x5F8C;&#x306E; vectors instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  reset() {
+    const vectors = this.vectors();
+    vectors.start.reset();
+    vectors.end.reset();
+    vectors.moving = [].slice(0);
+
+    return vectors;
+  }
+  // ----------------------------------------
+  // STATIC METHOD
+  // ----------------------------------------
+  /**
+   * y &#x65B9;&#x5411;&#x79FB;&#x52D5;&#x304C; threshold &#x4EE5;&#x5185;&#x304B;&#x5224;&#x5B9A;&#x3057;&#x307E;&#x3059;
+   * @param {Vectors} pointA &#x30B9;&#x30BF;&#x30FC;&#x30C8;&#x30DD;&#x30A4;&#x30F3;&#x30C8;(Vectors)
+   * @param {Vectors} pointB &#x30A8;&#x30F3;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;(Vectors)
+   * @param {number} threshold &#x95BE;&#x5024;
+   * @returns {boolean} true &#x306E;&#x6642;&#x306F;&#x95BE;&#x5024;&#x4EE5;&#x4E0A;&#x306A;&#x306E;&#x3067;&#x30B9;&#x30AF;&#x30ED;&#x30FC;&#x30EB;&#x5224;&#x5B9A;&#x306B;&#x306A;&#x308A;&#x307E;&#x3059;
+   */
+  static scrolling(pointA, pointB, threshold) {
+    const y = pointA.betweenY(pointB);
+    // &#x6B63;&#x6570;&#x5024;&#x306B;&#x3057;&#x95BE;&#x5024;&#x3068;&#x6BD4;&#x8F03;
+    return Math.abs(y) &gt;= threshold;
+  }
+  /**
+   * MouseEvent|TouchEvent &#x304B;&#x3089; pageX / pageY &#x5EA7;&#x6A19;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @param {MouseEvent|TouchEvent} event down / move / up event object
+   * @returns {{x: number, y: number}} pageX / pageY &#x5EA7;&#x6A19;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  static point(event) {
+    const x = event.pageX;
+    const y = event.pageY;
+
+    // event.pageX / pageY &#x304C;&#x3042;&#x308C;&#x3070;&#x305D;&#x306E;&#x307E;&#x307E;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+    if (Type.number(x) &amp;&amp; Type.number(y)) {
+      return { x, y };
+    }
+
+    // event.pageX / pageY &#x304C;&#x306A;&#x3044;&#x6642;&#x306F; TouchEvent &#x306E; changedTouches &#x304B;&#x3089;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+    // touch event
+    // @type {TouchList}
+    const touches = event.changedTouches;
+    // touches &#x304C;&#x53D6;&#x5F97;&#x3067;&#x304D;&#x306A;&#x3044;&#x6642;&#x306F; 0 &#x3092;&#x30BB;&#x30C3;&#x30C8;&#x3057;&#x8FD4;&#x3057;&#x307E;&#x3059;
+    if (!Type.exist(touches)) {
+      return { x: 0, y: 0 };
+    }
+
+    // changedTouches list &#x306E;&#x5148;&#x982D;&#x30C7;&#x30FC;&#x30BF;&#x3092;&#x53D6;&#x308A;&#x51FA;&#x3057; pageX / pageY &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+    // @type {Touch}
+    const touch = touches[0];
+    return { x: touch.pageX, y: touch.pageY };
+  }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

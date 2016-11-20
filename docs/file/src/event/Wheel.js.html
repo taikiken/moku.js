@@ -35,14 +35,22 @@
     
   <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">event</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html">EventDispatcher</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Events.js~Events.html">Events</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Freeze.js~Freeze.html">Freeze</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scroll.js~Scroll.html">Scroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/ScrollEvents.js~ScrollEvents.html">ScrollEvents</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scrolling.js~Scrolling.html">Scrolling</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Touching.js~Touching.html">Touching</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/TouchingEvents.js~TouchingEvents.html">TouchingEvents</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/WheelEvents.js~WheelEvents.html">WheelEvents</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">net</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">tick</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html">Cycle</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Fps.js~Fps.html">Fps</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Polling.js~Polling.html">Polling</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Rate.js~Rate.html">Rate</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/List.js~List.html">List</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Vectors.js~Vectors.html">Vectors</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -61,33 +69,27 @@
  */
 
 // event
-import { EventDispatcher } from &apos;./EventDispatcher&apos;;
-import { Events } from &apos;./Events&apos;;
+import { default as EventDispatcher } from &apos;./EventDispatcher&apos;;
+import { default as WheelEvents } from &apos;./WheelEvents&apos;;
 
 /**
  * new &#x3092;&#x8A31;&#x53EF;&#x3057;&#x306A;&#x3044;&#x305F;&#x3081;&#x306E; Symbol
  * @type {Symbol}
  * @private
  */
-const singletonSymbol = Symbol();
+const singletonSymbol = Symbol(&apos;Scroll singleton symbol&apos;);
 /**
  * singleton instance, nullable
  * @type {?Wheel}
  * @private
  */
 let instance = null;
-/**
- * private property key, bind &#x6E08;&#x307F; mouseWheel &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
- * @type {Symbol}
- * @private
- */
-const wheelSymbol = Symbol();
 // /**
-//  * private property key, bind &#x6E08;&#x307F; mouseScroll &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+//  * private property key, bind &#x6E08;&#x307F; mouseWheel &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
 //  * @type {Symbol}
 //  * @private
 //  */
-// const scrollSymbol = Symbol();
+// const wheelSymbol = Symbol(&apos;bound mouseWheel Symbol&apos;);
 
 /**
  * mousewheel event &#x3092;&#x76E3;&#x8996;&#x3057;&#x901A;&#x77E5;&#x3092;&#x884C;&#x3044;&#x307E;&#x3059;
@@ -97,7 +99,7 @@ const wheelSymbol = Symbol();
  * const instance:Wheel = Wheel.factory();
  * ```
  */
-export class Wheel extends EventDispatcher {
+export default class Wheel extends EventDispatcher {
   /**
    * singleton &#x3067;&#x3059;
    * @param {Symbol} checkSymbol singleton &#x3092;&#x4FDD;&#x8A3C;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; private instance
@@ -120,34 +122,43 @@ export class Wheel extends EventDispatcher {
     instance = this;
 
     // event handler
-    this[wheelSymbol] = this.mouseWheel.bind(this);
-    // this[scrollSymbol] = this.mouseScroll.bind(this);
-
-    // public property
+    // this[wheelSymbol] = this.mouseWheel.bind(this);
+    const boundWheel = this.mouseWheel.bind(this);
+    /**
+     * bound mouseWheel
+     * @returns {function} window.wheel event handler
+     */
+    this.boundWheel = () =&gt; boundWheel;
     /**
      * &#x95BE;&#x5024;, wheel &#x79FB;&#x52D5;&#x91CF;&#x304C;&#x95BE;&#x5024;&#x3092;&#x8D85;&#x3048;&#x305F;&#x3068;&#x304D;&#x306B;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x307E;&#x3059;
      * @type {number}
      * @default 200
      */
-    const threshold = 200;
+    this.threshold = 200;
     /**
-     * wheelDelta &#x79FB;&#x52D5;&#x91CF;&#x304C;&#x95BE;&#x5024;&#x3092;&#x8D85;&#x3048;&#x308B;&#x304B;&#x3092;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x8A08;&#x7B97;&#x5909;&#x6570;
+     * wheelDelta &#x79FB;&#x52D5;&#x91CF;&#x304C;&#x95BE;&#x5024;&#x3092;&#x8D85;&#x3048;&#x308B;&#x304B;&#x3092;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x7A4D;&#x7B97;&#x8A08;&#x7B97;&#x5909;&#x6570;
      * @type {number}
-     * @default 0
      */
-    const moved = 0;
+    this.moved = 0;
     // /**
-    //  * firefox wheel event.detail &#x6570;&#x5024;&#x3092;&#x4ED6;&#x3068;&#x63C3;&#x3048;&#x308B;&#x305F;&#x3081;&#x306E;&#x4FC2;&#x6570;
+    //  * firefox wheel event.detail &#x6570;&#x5024;&#x3092;&#x4ED6; Browser wheel &#x5024;&#x3068;&#x63C3;&#x3048;&#x308B;&#x305F;&#x3081;&#x306E;&#x4FC2;&#x6570;
     //  * @type {number}
-    //  * @default -7.5
     //  */
-    // const coefficient = -7.5;
+    // this.coefficient = -7.5;
     /**
-     * @type {Wheel}
-     * @property {number} this.threshold &#x95BE;&#x5024;, wheel &#x79FB;&#x52D5;&#x91CF;&#x304C;&#x95BE;&#x5024;&#x3092;&#x8D85;&#x3048;&#x305F;&#x3068;&#x304D;&#x306B;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x307E;&#x3059;
-     * @property {number} this.moved wheelDelta &#x79FB;&#x52D5;&#x91CF;&#x304C;&#x95BE;&#x5024;&#x3092;&#x8D85;&#x3048;&#x308B;&#x304B;&#x3092;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x8A08;&#x7B97;&#x5909;&#x6570;
+     * start flag
+     * @type {boolean}
      */
-    Object.assign(this, { threshold, moved });
+    this.started = false;
+    const events = {
+      up: new WheelEvents(Wheel.UP, this),
+      down: new WheelEvents(Wheel.DOWN, this),
+    };
+    /**
+     * UP / DOWN Events instance
+     * @returns {{up: WheelEvents, down: WheelEvents}} UP / DOWN Events instance
+     */
+    this.events = () =&gt; events;
 
     // &#x8A2D;&#x5B9A;&#x6E08;&#x307F; instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
     return instance;
@@ -158,7 +169,7 @@ export class Wheel extends EventDispatcher {
   /**
    * wheel up &#x3067;&#x767A;&#x751F;&#x3059;&#x308B;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
    * @event UP
-   * @return {string} event, wheelUp &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {string} event, wheelUp &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    * @default wheelUp
    */
   static get UP() {
@@ -167,58 +178,48 @@ export class Wheel extends EventDispatcher {
   /**
    * wheel  &#x3067;&#x767A;&#x751F;&#x3059;&#x308B;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
    * @event DOWN
-   * @return {string} event, wheelUp &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {string} event, wheelUp &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    * @default wheelUp
    */
   static get DOWN() {
     return &apos;wheelDown&apos;;
   }
-  // ----------------------------------------
-  // GETTER / SETTER
-  // ----------------------------------------
-  /**
-   * bind &#x6E08;&#x307F; mouseWheel
-   * @returns {function} bind &#x6E08;&#x307F; mouseWheel &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   */
-  get boundWheel() {
-    return this[wheelSymbol];
-  }
+  // // ----------------------------------------
+  // // GETTER / SETTER
+  // // ----------------------------------------
   // /**
-  //  * bind &#x6E08;&#x307F; mouseScroll
-  //  * @returns {function} bind &#x6E08;&#x307F; mouseScroll &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+  //  * bind &#x6E08;&#x307F; mouseWheel
+  //  * @returns {function} bind &#x6E08;&#x307F; mouseWheel &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
   //  */
-  // get boundScroll() {
-  //   return this[scrollSymbol];
+  // get boundWheel() {
+  //   return this[wheelSymbol];
   // }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
   /**
-   * mousewheel event &#x3092;&#x76E3;&#x8996;&#x3057;&#x307E;&#x3059;&lt;br&gt;
-   * &#x76E3;&#x8996;&#x524D;&#x306B;&#x4E8C;&#x91CD;&#x306B; addEventListener &#x3057;&#x306A;&#x3044;&#x3088;&#x3046;&#x306B; unwatch &#x3092;&#x5B9F;&#x884C;&#x3057;&#x307E;&#x3059;
+   * mousewheel event &#x3092;&#x76E3;&#x8996;&#x3057;&#x307E;&#x3059;
    * @returns {Wheel} method chain &#x53EF;&#x80FD;&#x306A;&#x3088;&#x3046;&#x306B; instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
-  watch() {
-    this.unwatch();
-    // // firefox
-    // window.addEventListener(&apos;DOMMouseScroll&apos;, this.boundScroll, false);
-    // // other modern browser
-    // window.addEventListener(&apos;mousewheel&apos;, this.boundWheel, false);
-
-    window.addEventListener(&apos;wheel&apos;, this.boundWheel, false);
-
+  start() {
+    if (this.started) {
+      return this;
+    }
+    this.started = true;
+    // this.unwatch();
+    window.addEventListener(&apos;wheel&apos;, this.boundWheel(), false);
     return this;
   }
   /**
    * mousewheel event &#x3092;&#x76E3;&#x8996;&#x3092;&#x6B62;&#x3081;&#x307E;&#x3059;
    * @returns {Wheel} method chain &#x53EF;&#x80FD;&#x306A;&#x3088;&#x3046;&#x306B; instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
-  unwatch() {
-    // window.removeEventListener(&apos;DOMMouseScroll&apos;, this.boundScroll);
-    // window.removeEventListener(&apos;mousewheel&apos;, this.boundWheel);
-
-    window.removeEventListener(&apos;wheel&apos;, this.boundWheel);
-
+  stop() {
+    if (!this.started) {
+      return this;
+    }
+    this.started = false;
+    window.removeEventListener(&apos;wheel&apos;, this.boundWheel());
     return this;
   }
   /**
@@ -230,24 +231,9 @@ export class Wheel extends EventDispatcher {
    * @returns {number} &#x524D;&#x56DE;&#x79FB;&#x52D5;&#x91CF;&#x306B; delta &#x5024; &#x3092;&#x52A0;&#x7B97;&#x3057;&#x305F;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   mouseWheel(event) {
-    // const wheelDelta = event.wheelDelta;
     const wheelDelta = event.deltaY;
     return this.moving(wheelDelta);
   }
-  // /**
-  //  * window DOMMouseScroll event handler
-  //  * &lt;p&gt;detail &#x5024;&#x3092;&#x53D6;&#x5F97;&#x3057; `this.moving` &#x3092;&#x5B9F;&#x884C;&#x3057;&#x307E;&#x3059;&lt;/p&gt;
-  //  * @param {Event} event window DOMMouseScroll event
-  //  * @returns {number} &#x524D;&#x56DE;&#x79FB;&#x52D5;&#x91CF;&#x306B; delta &#x5024; &#x3092;&#x52A0;&#x7B97;&#x3057;&#x305F;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-  //  */
-  // mouseScroll(event) {
-  //   let wheelDetail = event.detail;
-  //   // firefox &#x6570;&#x5024;&#x304C;&#x5C0F;&#x3055;&#x3044;&#x305F;&#x3081;&#x306B;&#x88DC;&#x6B63;&#x3059;&#x308B;
-  //   // up / down &#x304C; wheelDelta &#x3068;&#x9006;&#x306A;&#x306E;&#x3067;&#x88DC;&#x6B63;&#x3059;&#x308B;
-  //   // -7.5(default) &#x3092;&#x304B;&#x3051;&#x308B;
-  //   wheelDetail *= this.coefficient;
-  //   return this.moving(wheelDetail);
-  // }
   /**
    * mouse delta &#x304B;&#x3089;&#x79FB;&#x52D5;&#x91CF;&#x3092;&#x8A08;&#x7B97;&#x3057;&#x307E;&#x3059;
    * @param {number} delta mouse delta &#x5024;
@@ -270,19 +256,19 @@ export class Wheel extends EventDispatcher {
 
     // &#x95BE;&#x5024;&#x30C1;&#x30A7;&#x30C3;&#x30AF;
     if (Math.abs(moved) &gt;= this.threshold) {
+      // scroll event &#x3092;&#x767A;&#x706B;&#x3057;&#x307E;&#x3059;
       if (moved &gt; 0) {
         // scroll up
         this.up(moved);
       } else {
         this.down(moved);
       }
-    } else {
-      // &#x95BE;&#x5024;&#x3092;&#x8D85;&#x3048;&#x3066;&#x3044;&#x306A;&#x3044;&#x306E;&#x3067;&#x51E6;&#x7406;&#x3092;&#x3057;&#x306A;&#x3044;
+
+      // initialize moved, &#x767A;&#x706B;&#x5F8C;&#x306B;&#x7A4D;&#x7B97;&#x79FB;&#x52D5;&#x5909;&#x6570;&#x3092;&#x521D;&#x671F;&#x5316;&#x3057;&#x307E;&#x3059;
+      this.moved = 0;
       return moved;
     }
-
-    // initialize moved
-    this.moved = 0;
+    // &#x95BE;&#x5024;&#x3092;&#x8D85;&#x3048;&#x3066;&#x3044;&#x306A;&#x3044;&#x306E;&#x3067;&#x51E6;&#x7406;&#x3092;&#x3057;&#x306A;&#x3044;
     return moved;
   }
   /**
@@ -292,7 +278,7 @@ export class Wheel extends EventDispatcher {
    */
   up(moved) {
     // @type {Events}
-    const events = new Events(Wheel.UP, this, this);
+    const events = this.events().up;
     events.moved = moved;
     this.dispatch(events);
 
@@ -305,7 +291,7 @@ export class Wheel extends EventDispatcher {
    */
   down(moved) {
     // @type {Events}
-    const events = new Events(Wheel.DOWN, this, this);
+    const events = this.events().down;
     events.moved = moved;
     this.dispatch(events);
 
@@ -316,9 +302,12 @@ export class Wheel extends EventDispatcher {
   // ----------------------------------------
   /**
    * Wheel instance &#x3092; singleton &#x3092;&#x4FDD;&#x8A3C;&#x3057;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;
-   * @return {Wheel} Wheel instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {Wheel} Wheel instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   static factory() {
+    if (instance !== null) {
+      return instance;
+    }
     return new Wheel(singletonSymbol);
   }
 }
@@ -327,7 +316,7 @@ export class Wheel extends EventDispatcher {
 </div>
 
 <footer class="footer">
-  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.4)</span></a>
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
 </footer>
 
 <script src="script/search_index.js"></script>

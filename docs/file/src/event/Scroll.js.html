@@ -35,14 +35,22 @@
     
   <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">event</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html">EventDispatcher</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Events.js~Events.html">Events</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Freeze.js~Freeze.html">Freeze</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scroll.js~Scroll.html">Scroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/ScrollEvents.js~ScrollEvents.html">ScrollEvents</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scrolling.js~Scrolling.html">Scrolling</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Touching.js~Touching.html">Touching</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/TouchingEvents.js~TouchingEvents.html">TouchingEvents</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/WheelEvents.js~WheelEvents.html">WheelEvents</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">net</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">tick</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html">Cycle</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Fps.js~Fps.html">Fps</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Polling.js~Polling.html">Polling</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Rate.js~Rate.html">Rate</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/List.js~List.html">List</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Vectors.js~Vectors.html">Vectors</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -61,15 +69,16 @@
  */
 
 // event
-import { EventDispatcher } from &apos;../event/EventDispatcher&apos;;
-import { Events } from &apos;../event/Events&apos;;
+import { default as EventDispatcher } from &apos;./EventDispatcher&apos;;
+import { default as ScrollEvents } from &apos;./ScrollEvents&apos;;
+import { default as Freeze } from &apos;./Freeze&apos;;
 
 /**
  * new &#x3092;&#x8A31;&#x53EF;&#x3057;&#x306A;&#x3044;&#x305F;&#x3081;&#x306E; Symbol
  * @type {Symbol}
  * @private
  */
-const singletonSymbol = Symbol();
+const singletonSymbol = Symbol(&apos;Scroll singleton symbol&apos;);
 /**
  * singleton instance, nullable
  * @type {?Scroll}
@@ -77,32 +86,54 @@ const singletonSymbol = Symbol();
  */
 let instance = null;
 
-/**
- * private property key, bind &#x6E08;&#x307F; mouseWheel &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
- * @type {Symbol}
- * @private
- */
-const bindSymbol = Symbol();
-/**
- * Cycle.UPDATE event &#x3092;&#x767A;&#x706B;&#x3059;&#x308B;&#x6642;&#x306E; Events instance &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
- * @type {Symbol}
- * @private
- */
-const eventsSymbol = Symbol();
+// /**
+//  * private property key, bind &#x6E08;&#x307F; mouseWheel &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+//  * @type {Symbol}
+//  * @private
+//  */
+// const bindSymbol = Symbol(&apos;bound mouseWheel symbol&apos;);
+// /**
+//  * Cycle.UPDATE event &#x3092;&#x767A;&#x706B;&#x3059;&#x308B;&#x6642;&#x306E; Events instance &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+//  * @type {Symbol}
+//  * @private
+//  */
+// const eventsSymbol = Symbol(&apos;Cycle.UPDATE symbol&apos;);
+// /**
+//  * scroll top &#x4F4D;&#x7F6E;&#x304C;&#x5909;&#x66F4;&#x306B;&#x306A;&#x3063;&#x305F;&#x304B;&#x3092;&#x78BA;&#x8A8D;&#x3059;&#x308B;&#x305F;&#x3081;&#x306B;&#x524D;&#x56DE;&#x5024;&#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+//  * @type {Symbol}
+//  */
+// const topSymbol = Symbol(&apos;previous scroll top&apos;);
+//
+// /**
+//  * scroll freeze timeout id
+//  * @private
+//  * @static
+//  * @type {number}
+//  */
+// let timerId = 0;
+//
+// /**
+//  * scroll &#x3092;&#x6B62;&#x3081;&#x308B;&#x6642;&#x9593;
+//  * @private
+//  * @static
+//  * @type {number}
+//  * @default 200
+//  */
+// let freezeTime = 200;
 
 /**
  * window scroll event &#x3092;&#x76E3;&#x8996;&#x3057;&#x901A;&#x77E5;&#x3092;&#x884C;&#x3044;&#x307E;&#x3059;
  * &lt;p&gt;singleton &#x306A;&#x306E;&#x3067; new &#x3067;&#x306F;&#x306A;&#x304F; factory &#x3092;&#x4F7F;&#x7528;&#x3057; instance &#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&lt;/p&gt;
  *
  * ```
- * const instance:Scroll = Scroll.factory();
+ * const instance = Scroll.factory();
  * ```
  */
-export class Scroll extends EventDispatcher {
+export default class Scroll extends EventDispatcher {
   /**
    * singleton &#x3067;&#x3059;
    * @param {Symbol} checkSymbol singleton &#x3092;&#x4FDD;&#x8A3C;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; private instance
-   * @return {Scroll} singleton instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {Scroll} singleton instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   constructor(checkSymbol) {
     // checkSymbol &#x3068; singleton &#x304C;&#x7B49;&#x4FA1;&#x304B;&#x3092;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3057;&#x307E;&#x3059;
@@ -122,9 +153,36 @@ export class Scroll extends EventDispatcher {
 
     // event handler
     // @type {function} - bound scroll function
-    this[bindSymbol] = this.scroll.bind(this);
+    // this[bindSymbol] = this.scroll.bind(this);
+    const boundScroll = this.scroll.bind(this);
+    /**
+     * bound scroll, window.onscroll event handler
+     * @returns {function} bound scroll
+     */
+    this.boundScroll = () =&gt; boundScroll;
     // @type {Events} - events instance
-    this[eventsSymbol] = new Events(Scroll.SCROLL, this, this);
+    // this[eventsSymbol] = new Events(Scroll.SCROLL, this, this);
+    const events = new ScrollEvents(Scroll.SCROLL, this, this);
+    /**
+     * ScrollEvents instance, &#x767A;&#x706B;&#x6642;&#x306B;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;
+     * @returns {ScrollEvents} ScrollEvents instance
+     */
+    this.events = () =&gt; events;
+    // @type {number} - scroll top &#x524D;&#x56DE;&#x5024;&#x3092;&#x4FDD;&#x5B58;&#x3057;&#x307E;&#x3059;
+    // @default -1
+    // this[topSymbol] = -1;
+    /**
+     * &#x524D;&#x56DE; scroll top &#x4F4D;&#x7F6E;
+     * @type {number}
+     * @default -1
+     */
+    this.previous = -1;
+    /**
+     * start &#x6E08;&#x307F;&#x30D5;&#x30E9;&#x30C3;&#x30B0;
+     * @type {boolean}
+     * @default false
+     */
+    this.started = false;
 
     // &#x8A2D;&#x5B9A;&#x6E08;&#x307F; instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
     return instance;
@@ -135,94 +193,241 @@ export class Scroll extends EventDispatcher {
   /**
    * scroll &#x3067;&#x767A;&#x751F;&#x3059;&#x308B;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
    * @event SCROLL
-   * @return {string} event, scrollScroll &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {string} event, scrollScroll &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    * @default scrollScroll
    */
   static get SCROLL() {
     return &apos;scrollScroll&apos;;
   }
+  // /**
+  //  * scroll motion start event
+  //  * @event START
+  //  * @returns {string} event, scrollStart &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+  //  * @default scrollStart
+  //  */
+  // static get START() {
+  //   return &apos;scrollStart&apos;;
+  // }
+  // /**
+  //  * scroll motion complete event
+  //  * @event COMPLETE
+  //  * @returns {string} event, scrollComplete &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+  //  * @default scrollComplete
+  //  */
+  // static get COMPLETE() {
+  //   return &apos;scrollComplete&apos;;
+  // }
+  // // ----------------------------------------
+  // // STATIC GETTER / SETTER
+  // // ----------------------------------------
+  // /**
+  //  * scroll top &#x4F4D;&#x7F6E;
+  //  * @returns {number} scroll top &#x4F4D;&#x7F6E;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+  //  * @see https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY
+  //  * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
+  //  */
+  // static get y() {
+  //   return (typeof window.pageYOffset !== &apos;undefined&apos;) ?
+  //     window.pageYOffset :
+  //     (document.documentElement || document.body.parentNode || document.body).scrollTop;
+  // }
+  // /**
+  //  * scroll top &#x4F4D;&#x7F6E; &#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
+  //  * @param {number} top &#x30B9;&#x30AF;&#x30ED;&#x30FC;&#x30EB;&#x4F4D;&#x7F6E;(px)
+  //  */
+  // static set y(top) {
+  //   // window.scrollTo(0, top);
+  //   Scroll.jump(top);
+  // }
   // ----------------------------------------
   // GETTER / SETTER
-  // ----------------------------------------
-  /**
-   * bind &#x6E08;&#x307F; mouseWheel
-   * @return {function} bind &#x6E08;&#x307F; mouseWheel &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   */
-  get bindScroll() {
-    return this[bindSymbol];
-  }
-  /**
-   * scroll top &#x4F4D;&#x7F6E;
-   * @return {number} scroll top &#x4F4D;&#x7F6E;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   */
-  static get y() {
-    // https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY
-    // https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
-    return (typeof window.pageYOffset !== &apos;undefined&apos;) ?
-      window.pageYOffset :
-      (document.documentElement || document.body.parentNode || document.body).scrollTop;
-  }
-  /**
-   * scroll top &#x4F4D;&#x7F6E; &#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
-   * @param {number} top &#x30B9;&#x30AF;&#x30ED;&#x30FC;&#x30EB;&#x4F4D;&#x7F6E;(px)
-   */
-  static set y(top) {
-    window.scrollTo(0, top);
-  }
-  /**
-   * Events instance &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
-   * @return {Events} Events instance
-   */
-  static get events() {
-    return this[eventsSymbol];
-  }
+  // ----------------------------------------}
+  // scroll
+  // /**
+  //  * bind &#x6E08;&#x307F; mouseWheel
+  //  * @returns {function} bind &#x6E08;&#x307F; mouseWheel &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+  //  */
+  // get bindScroll() {
+  //   return this[bindSymbol];
+  // }
+  // // events
+  // /**
+  //  * Events instance &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+  //  * @returns {Events} Events instance
+  //  */
+  // get events() {
+  //   return this[eventsSymbol];
+  // }
+  // /**
+  //  * Events instance &#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
+  //  * @param {Events} events Events instance
+  //  */
+  // set events(events) {
+  //   this[eventsSymbol] = events;
+  // }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
   /**
-   * scroll event &#x3092;&#x76E3;&#x8996;&#x3057;&#x307E;&#x3059;&lt;br&gt;
-   * &#x76E3;&#x8996;&#x524D;&#x306B;&#x4E8C;&#x91CD;&#x306B; addEventListener &#x3057;&#x306A;&#x3044;&#x3088;&#x3046;&#x306B; unwatch &#x3092;&#x5B9F;&#x884C;&#x3057;&#x307E;&#x3059;
-   * @return {Scroll} method chain &#x53EF;&#x80FD;&#x306A;&#x3088;&#x3046;&#x306B; instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * scroll event &#x3092;&#x76E3;&#x8996;&#x3057;&#x307E;&#x3059;
+   * @returns {Scroll} method chain &#x53EF;&#x80FD;&#x306A;&#x3088;&#x3046;&#x306B; instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
-  watch() {
-    this.unwatch();
-
-    window.addEventListener(&apos;scroll&apos;, this.bindScroll, false);
-
+  start() {
+    if (this.started) {
+      return this;
+    }
+    this.started = true;
+    window.addEventListener(&apos;scroll&apos;, this.boundScroll(), false);
     return this;
   }
   /**
    * scroll event &#x3092;&#x76E3;&#x8996;&#x3092;&#x6B62;&#x3081;&#x307E;&#x3059;
-   * @return {Scroll} method chain &#x53EF;&#x80FD;&#x306A;&#x3088;&#x3046;&#x306B; instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {Scroll} method chain &#x53EF;&#x80FD;&#x306A;&#x3088;&#x3046;&#x306B; instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
-  unwatch() {
-    window.removeEventListener(&apos;scroll&apos;, this.bindScroll);
-
+  stop() {
+    if (!this.started) {
+      return this;
+    }
+    this.started = false;
+    window.removeEventListener(&apos;scroll&apos;, this.boundScroll());
     return this;
   }
   /**
    * window scroll event handler&lt;br&gt;
    * window scroll event &#x767A;&#x751F;&#x5F8C;&#x306B; scroll top &#x4F4D;&#x7F6E;&#x3092;&#x3082;&#x305F;&#x305B;&#x305F; Scroll.SCROLL custom event &#x3092;&#x767A;&#x706B;&#x3057;&#x307E;&#x3059;
    * @param {?Event} event window scroll event, nullable
-   * @return {undefined} no-return
+   * @returns {void}
    */
   scroll(event) {
+    // @type {number} - scroll top
+    const y = Scroll.y();
+    // @type {number} - window height
+    const height = window.innerHeight;
+    // @type {number} - &#x524D;&#x56DE;&#x306E; scroll top
+    const previous = this.previous;
+
     // @type {Events} - events
-    const events = this.events;
-    // @ttype {Event}
+    const events = this.events();
+    // @type {Event} - scroll event
     events.original = event;
-    events.y = Scroll.y;
+    // @type {number} - scroll top
+    events.y = y;
+    // @type {number} - window height
+    events.height = height;
+    // @type {number} - window bottom(y + height)
+    events.bottom = y + height;
+    events.previous = previous;
+    // @type {boolean} - &#x524D;&#x56DE;&#x306E; scroll top &#x3068;&#x6BD4;&#x8F03;&#x3057;&#x79FB;&#x52D5;&#x3057;&#x305F;&#x304B;&#x3092;&#x771F;&#x507D;&#x5024;&#x3067;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;, true: &#x79FB;&#x52D5;&#x3057;&#x305F;
+    events.changed = previous !== y;
+    // @type {number} - &#x79FB;&#x52D5;&#x91CF; +&#xFF08;&#x6B63;&#xFF09;: down, -&#xFF08;&#x8CA0;&#xFF09;: up
+    events.moving = y - previous;
     // event fire
     this.dispatch(events);
+    this.previous = y;
   }
   // ----------------------------------------
   // STATIC METHOD
   // ----------------------------------------
   /**
-   * Wheel instance &#x3092; singleton &#x3092;&#x4FDD;&#x8A3C;&#x3057;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;
-   * @return {Scroll} Scroll instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * y &#x4F4D;&#x7F6E;&#x306B; scroll top &#x3092;&#x5373;&#x5EA7;&#x306B;&#x79FB;&#x52D5;&#x3055;&#x305B;&#x307E;&#x3059;
+   * @param {number} [y=0] scroll top &#x76EE;&#x6A19;&#x5024;
+   * @param {number} [delay=0] time out &#x9045;&#x5EF6; ms
+   * @returns {number} time out id
+   */
+  static jump(y = 0, delay = 0) {
+    return setTimeout(() =&gt; { window.scrollTo(0, y); }, delay);
+  }
+  // // ----------------------------------------
+  // /**
+  //  * scroll &#x52D5;&#x4F5C;&#x3092;&#x53D7;&#x4ED8;&#x4E0D;&#x80FD;&#x306B;&#x3057;&#x307E;&#x3059;
+  //  * @returns {void}
+  //  */
+  // static abort() {
+  //   window.addEventListener(&apos;touchstart&apos;, Scroll.onScroll, false);
+  //   window.addEventListener(&apos;touchmove&apos;, Scroll.onScroll, false);
+  //   window.addEventListener(&apos;touchend&apos;, Scroll.onScroll, false);
+  //   window.addEventListener(&apos;scroll&apos;, Scroll.onScroll, false);
+  //   document.addEventListener(&apos;wheel&apos;, Scroll.onScroll, false);
+  //   document.addEventListener(&apos;mousewheel&apos;, Scroll.onScroll, false);
+  //   window.addEventListener(&apos;DOMMouseScroll&apos;, Scroll.onScroll, false);
+  // }
+  // /**
+  //  * scroll &#x52D5;&#x4F5C;&#x3092;&#x56DE;&#x5FA9;&#x3057;&#x307E;&#x3059;
+  //  * @returns {void}
+  //  */
+  // static activate() {
+  //   window.removeEventListener(&apos;touchstart&apos;, Scroll.onScroll);
+  //   window.removeEventListener(&apos;touchmove&apos;, Scroll.onScroll);
+  //   window.removeEventListener(&apos;touchend&apos;, Scroll.onScroll);
+  //   window.removeEventListener(&apos;scroll&apos;, Scroll.onScroll);
+  //   document.removeEventListener(&apos;wheel&apos;, Scroll.onScroll);
+  //   document.removeEventListener(&apos;mousewheel&apos;, Scroll.onScroll);
+  //   window.removeEventListener(&apos;DOMMouseScroll&apos;, Scroll.onScroll);
+  // }
+  // /**
+  //  * window scroll event handler, &#x30D0;&#x30D6;&#x30EA;&#x30F3;&#x30B0;&#x30FB;&#x4F1D;&#x64AD;&#x5168;&#x3066;&#x30AD;&#x30E3;&#x30F3;&#x30BB;&#x30EB;&#x3057;&#x307E;&#x3059;
+  //  * @param {Event} event window scroll event
+  //  * @returns {boolean} event &#x3092;&#x30AD;&#x30E3;&#x30F3;&#x30BB;&#x30EB;&#x3059;&#x308B;&#x305F;&#x3081;&#x306B; false &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+  //  */
+  // static onScroll(event) {
+  //   event.preventDefault();
+  //   event.stopPropagation();
+  //   return false;
+  // }
+  // /**
+  //  * scroll &#x64CD;&#x4F5C;&#x3092;&#x5F15;&#x6570;(delay)&#x306E;&#x9593;&#x30AD;&#x30E3;&#x30F3;&#x30BB;&#x30EB;&#x3057;&#x307E;&#x3059;
+  //  * @param {number} [delay=100] &#x9045;&#x5EF6;&#x6642;&#x9593;(ms), pc: 100, mobile: 500
+  //  * @returns {number} time out id
+  //  */
+  // static freeze(delay = Scroll.freezeTime()) {
+  //   clearTimeout(timerId);
+  //
+  //   Scroll.abort();
+  //   timerId = setTimeout(Scroll.activate, delay);
+  //   return timerId;
+  // }
+  // /**
+  //  * scroll &#x64CD;&#x4F5C;&#x3092;&#x4E0D;&#x80FD;&#x306B;&#x3059;&#x308B;&#x6642;&#x9593;&#x9593;&#x9694;(ms)&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+  //  * @returns {number} scroll &#x64CD;&#x4F5C;&#x3092;&#x4E0D;&#x80FD;&#x306B;&#x3059;&#x308B;&#x6642;&#x9593;&#x9593;&#x9694;(ms)
+  //  */
+  // static freezeTime() {
+  //   return freezeTime;
+  // }
+  // /**
+  //  * scroll &#x64CD;&#x4F5C;&#x3092;&#x4E0D;&#x80FD;&#x306B;&#x3059;&#x308B;&#x6642;&#x9593;&#x9593;&#x9694;(ms)&#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
+  //  * @param {number} time scroll &#x64CD;&#x4F5C;&#x3092;&#x4E0D;&#x80FD;&#x306B;&#x3059;&#x308B;&#x6642;&#x9593;(ms)
+  //  * @returns {void}
+  //  */
+  // static setFreezeTime(time) {
+  //   freezeTime = time;
+  // }
+  /**
+   * {@link Freeze}.freeze &#x3092;&#x5B9F;&#x884C;&#x3057; scroll &#x64CD;&#x4F5C;&#x3092;&#x4E00;&#x5B9A;&#x671F;&#x9593;&#x4E0D;&#x80FD;&#x306B;&#x3057;&#x307E;&#x3059;
+   * @returns {number} time out ID
+   */
+  static freeze() {
+    return Freeze.freeze();
+  }
+  /**
+   * scroll top &#x4F4D;&#x7F6E;
+   * @returns {number} scroll top &#x4F4D;&#x7F6E;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @see https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
+   */
+  static y() {
+    return (typeof window.pageYOffset !== &apos;undefined&apos;) ?
+      window.pageYOffset :
+      (document.documentElement || document.body.parentNode || document.body).scrollTop;
+  }
+  // ----------------------------------------
+  /**
+   * Scroll instance &#x3092; singleton &#x3092;&#x4FDD;&#x8A3C;&#x3057;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;
+   * @returns {Scroll} Scroll instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   static factory() {
+    if (instance !== null) {
+      return instance;
+    }
     return new Scroll(singletonSymbol);
   }
 }
@@ -231,7 +436,7 @@ export class Scroll extends EventDispatcher {
 </div>
 
 <footer class="footer">
-  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.4)</span></a>
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
 </footer>
 
 <script src="script/search_index.js"></script>

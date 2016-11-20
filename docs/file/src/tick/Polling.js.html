@@ -35,14 +35,22 @@
     
   <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">event</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html">EventDispatcher</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Events.js~Events.html">Events</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Freeze.js~Freeze.html">Freeze</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scroll.js~Scroll.html">Scroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/ScrollEvents.js~ScrollEvents.html">ScrollEvents</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scrolling.js~Scrolling.html">Scrolling</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Touching.js~Touching.html">Touching</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/TouchingEvents.js~TouchingEvents.html">TouchingEvents</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/WheelEvents.js~WheelEvents.html">WheelEvents</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">net</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">tick</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html">Cycle</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Fps.js~Fps.html">Fps</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Polling.js~Polling.html">Polling</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Rate.js~Rate.html">Rate</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/List.js~List.html">List</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Vectors.js~Vectors.html">Vectors</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -61,161 +69,204 @@
  */
 
 // event
-import { EventDispatcher } from &apos;../event/EventDispatcher&apos;;
-import { Events } from &apos;../event/Events&apos;;
+import { default as EventDispatcher } from &apos;../event/EventDispatcher&apos;;
+import { default as Events } from &apos;../event/Events&apos;;
 
 // tick
-import { Cycle } from &apos;./Cycle&apos;;
+import { default as Cycle } from &apos;./Cycle&apos;;
 
-/**
- * private property key, this.update.bind(this) &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
- * @type {Symbol}
- * @private
- */
-const updateSymbol = Symbol();
-/**
- * private property key, Cycle.UPDATE &#x76E3;&#x8996;&#x3092;&#x958B;&#x59CB;&#x3057;&#x305F;&#x304B;&#x3092;&#x8868;&#x3059;&#x771F;&#x507D;&#x5024;&#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
- * @type {Symbol}
- * @private
- */
-const startSymbol = Symbol();
-/**
- * private property key, Fps.start &#x6642;&#x9593;&#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
- * @type {Symbol}
- * @private
- */
-const beginSymbol = Symbol();
-/**
- * private property key, polling &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
- * @type {Symbol}
- * @private
- */
-const pollingSymbol = Symbol();
-/**
- * Polling.UPDATE event &#x3092;&#x767A;&#x706B;&#x3059;&#x308B;&#x6642;&#x306E; Events instance &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
- * @type {Symbol}
- * @private
- */
-const eventsSymbol = Symbol();
+// /**
+//  * private property key, this.update.bind(this) &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+//  * @type {Symbol}
+//  * @private
+//  */
+// const updateSymbol = Symbol(&apos;bound update&apos;);
+// /**
+//  * private property key, Cycle.UPDATE &#x76E3;&#x8996;&#x3092;&#x958B;&#x59CB;&#x3057;&#x305F;&#x304B;&#x3092;&#x8868;&#x3059;&#x771F;&#x507D;&#x5024;&#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+//  * @type {Symbol}
+//  * @private
+//  */
+// const startSymbol = Symbol(&apos;is started watch Cycle.UPDATE flag&apos;);
+// /**
+//  * private property key, Fps.start &#x6642;&#x9593;&#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+//  * @type {Symbol}
+//  * @private
+//  */
+// const beginSymbol = Symbol(&apos;start time&apos;);
+// /**
+//  * private property key, polling &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+//  * @type {Symbol}
+//  * @private
+//  */
+// const pollingSymbol = Symbol(&apos;polling duration&apos;);
+// /**
+//  * Polling.UPDATE event &#x3092;&#x767A;&#x706B;&#x3059;&#x308B;&#x6642;&#x306E; Events instance &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+//  * @type {Symbol}
+//  * @private
+//  */
+// const eventsSymbol = Symbol(&apos;Polling.UPDATE Events instance&apos;);
 
 /**
  * &#x4E00;&#x5B9A;&#x9593;&#x9694;&#x6BCE;&#x306B; UPDATE &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x307E;&#x3059;
  */
-export class Polling extends EventDispatcher {
+export default class Polling extends EventDispatcher {
   /**
    * &#x5F15;&#x6570;&#x306E; polling &#x306B;&#x5408;&#x308F;&#x305B; UPDATE &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x307E;&#x3059;
-   * @param {number} [polling=1000] polling milliseconds
+   * @param {number} [interval=1000] polling milliseconds
    */
-  constructor(polling = 1000) {
+  constructor(interval = 1000) {
     super();
     // @type {Cycle} - Cycle instance
     const cycle = Cycle.factory();
     // public property
-    /**
-     * @property {Cycle} this.cycle - Cycle instance
-     */
-    Object.assign(this, { cycle });
+    // /**
+    //  * @property {Cycle} this.cycle - Cycle instance
+    //  */
+    // Object.assign(this, { cycle });
 
     // private property
     // @type {number} - polling rate(milliseconds), default: 1000(1 sec.)
-    this[pollingSymbol] = polling;
-    // @type {function} - Cycle.UPDATE event handler
-    this[updateSymbol] = this.update.bind(this);
-    // @type {boolean} - started flag
-    this[startSymbol] = false;
-    // @type {number} - &#x958B;&#x59CB;&#x6642;&#x9593;
-    this[beginSymbol] = 0;
-    // @type {Events} - Events
-    this[eventsSymbol] = new Events(Polling.UPDATE, this, this);
+    // this[pollingSymbol] = polling;
+    // // @type {function} - Cycle.UPDATE event handler
+    // this[updateSymbol] = this.update.bind(this);
+    // // @type {boolean} - started flag
+    // this[startSymbol] = false;
+    // // @type {number} - &#x958B;&#x59CB;&#x6642;&#x9593;
+    // this[beginSymbol] = 0;
+    // // @type {Events} - Events
+    // this[eventsSymbol] = new Events(Polling.UPDATE, this, this);
+    const boundUpdate = this.update.bind(this);
+    const events = new Events(Polling.UPDATE, this, this);
+    /**
+     * Cycle instance &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+     * @returns {Cycle} Cycle instance
+     */
+    this.cycle = () =&gt; cycle;
+    /**
+     * &#x9593;&#x9694;(ms)
+     * @type {number}
+     */
+    this.interval = interval;
+    /**
+     * bound update, Cycle.UPDATE event handler
+     * @returns {function} bound update
+     */
+    this.boundUpdate = () =&gt; boundUpdate;
+    /**
+     * Events instance
+     * @returns {Events} Polling.UPDATE Events object
+     */
+    this.events = () =&gt; events;
+    /**
+     * polling event &#x767A;&#x751F;&#x6642;&#x9593;, event &#x3092;&#x767A;&#x706B;&#x3059;&#x308B;&#x3068; 0 &#x306B;&#x30EA;&#x30BB;&#x30C3;&#x30C8;&#x3055;&#x308C;&#x307E;&#x3059;
+     * @type {number}
+     */
+    this.begin = 0;
+    /**
+     * Cycle &#x76E3;&#x8996;&#x958B;&#x59CB;&#x30D5;&#x30E9;&#x30C3;&#x30B0;
+     * @type {boolean}
+     */
+    this.started = false;
   }
   // ----------------------------------------
   // EVENT
   // ----------------------------------------
   /**
    * &#x4E00;&#x5B9A;&#x9593;&#x9694;(milliseconds)&#x6BCE;&#x306B;&#x767A;&#x751F;&#x3059;&#x308B;&#x30A4;&#x30D9;&#x30F3;&#x30C8; type &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
-   * @return {string} event, pollingUpdate &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {string} event, pollingUpdate &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   static get UPDATE() {
     return &apos;pollingUpdate&apos;;
   }
-  // ----------------------------------------
-  // GETTER / SETTER
-  // ----------------------------------------
-  // fps
-  /**
-   * polling(milliseconds) &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
-   * @return {number} polling(milliseconds) &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   */
-  get polling() {
-    return this[pollingSymbol];
-  }
-  /**
-   * polling(milliseconds) &#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
-   * @param {number} rate polling(milliseconds)
-   */
-  set polling(rate) {
-    this[pollingSymbol] = rate;
-  }
-  // begin
-  /**
-   * &#x958B;&#x59CB;&#x6642;&#x9593;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
-   * @return {number} &#x958B;&#x59CB;&#x6642;&#x9593;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   */
-  get begin() {
-    return this[beginSymbol];
-  }
-  /**
-   * &#x958B;&#x59CB;&#x6642;&#x9593;&#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
-   * @param {number} time &#x958B;&#x59CB;&#x6642;&#x9593;
-   */
-  set begin(time) {
-    this[beginSymbol] = time;
-  }
-  // events
-  /**
-   * Events instance &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
-   * @return {Events} Events instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   */
-  get events() {
-    return this[eventsSymbol];
-  }
-  /**
-   * Events instance &#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
-   * @param {Events} events Events instance
-   */
-  set events(events) {
-    this[eventsSymbol] = events;
-  }
-  // flag
-  /**
-   * started flag &#x72B6;&#x614B;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
-   * @readonly
-   * @return {boolean} &#x73FE;&#x5728;&#x306E; started flag &#x72B6;&#x614B;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   */
-  get started() {
-    return this[startSymbol];
-  }
+  // // ----------------------------------------
+  // // GETTER / SETTER
+  // // ----------------------------------------
+  // // fps
+  // /**
+  //  * polling(milliseconds) &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+  //  * @returns {number} polling(milliseconds) &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+  //  */
+  // get polling() {
+  //   return this[pollingSymbol];
+  // }
+  // /**
+  //  * polling(milliseconds) &#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
+  //  * @param {number} rate polling(milliseconds)
+  //  */
+  // set polling(rate) {
+  //   this[pollingSymbol] = rate;
+  // }
+  // // begin
+  // /**
+  //  * &#x958B;&#x59CB;&#x6642;&#x9593;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+  //  * @returns {number} &#x958B;&#x59CB;&#x6642;&#x9593;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+  //  */
+  // get begin() {
+  //   return this[beginSymbol];
+  // }
+  // /**
+  //  * &#x958B;&#x59CB;&#x6642;&#x9593;&#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
+  //  * @param {number} time &#x958B;&#x59CB;&#x6642;&#x9593;
+  //  */
+  // set begin(time) {
+  //   this[beginSymbol] = time;
+  // }
+  // // events
+  // /**
+  //  * Events instance &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+  //  * @returns {Events} Events instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+  //  */
+  // get events() {
+  //   return this[eventsSymbol];
+  // }
+  // /**
+  //  * Events instance &#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
+  //  * @param {Events} events Events instance
+  //  */
+  // set events(events) {
+  //   this[eventsSymbol] = events;
+  // }
+  // // flag
+  // /**
+  //  * started flag &#x72B6;&#x614B;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+  //  * @readonly
+  //  * @returns {boolean} &#x73FE;&#x5728;&#x306E; started flag &#x72B6;&#x614B;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+  //  */
+  // get started() {
+  //   return this[startSymbol];
+  // }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
   /**
+   * polling &#x6642;&#x9593;&#x3092;&#x5909;&#x66F4;&#x3057;&#x307E;&#x3059;&lt;br&gt;
+   * 1. &#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3; polling &#x5909;&#x66F4;
+   * 1. update &#x5B9F;&#x884C;
+   * @param {number} interval polling &#x6642;&#x9593;
+   * @returns {boolean} `update` &#x3092;&#x30B3;&#x30FC;&#x30EB;&#x3057; Polling.UPDATE event &#x304C;&#x767A;&#x751F;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  change(interval) {
+    this.interval = interval;
+    return this.update();
+  }
+  /**
    * started flag &#x3092;&#x53CD;&#x8EE2;&#x3055;&#x305B;&#x73FE;&#x5728;&#x306E; started flag &#x72B6;&#x614B;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
-   * @return {boolean} &#x73FE;&#x5728;&#x306E; started flag &#x72B6;&#x614B;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {boolean} &#x73FE;&#x5728;&#x306E; started flag &#x72B6;&#x614B;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   turnOver() {
-    this[startSymbol] = !this[startSymbol];
+    this.started = !this.started;
     return this.started;
   }
   /**
    * events object &#x3092;&#x767A;&#x706B;&#x524D;&#x306B;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;
    * @param {number} begin &#x958B;&#x59CB;&#x6642;&#x9593;: &#x524D;&#x56DE;&#x306E;&#x767A;&#x706B;&#x6642;&#x9593;
    * @param {number} present &#x73FE;&#x5728;&#x6642;&#x9593;
-   * @return {Events} &#x30A2;&#x30C3;&#x30D7;&#x30C7;&#x30FC;&#x30C8;&#x3057;&#x305F; Events &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {Events} &#x30A2;&#x30C3;&#x30D7;&#x30C7;&#x30FC;&#x30C8;&#x3057;&#x305F; Events &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   updateEvents(begin, present) {
     this.begin = begin;
     // @type {Events} - start event
-    const events = this.events;
+    const events = this.events();
     events.begin = begin;
     events.present = present;
     events.polling = this.polling;
@@ -224,20 +275,20 @@ export class Polling extends EventDispatcher {
   /**
    * cycle &#x30EB;&#x30FC;&#x30D7;&#x3092;&#x958B;&#x59CB;&#x3057;&#x307E;&#x3059;&lt;br&gt;
    * watch Cycle.UPDATE event
-   * @return {Cycle} cycle &#x30EB;&#x30FC;&#x30D7;&#x3092;&#x958B;&#x59CB;&#x3057;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {Cycle} cycle &#x30EB;&#x30FC;&#x30D7;&#x3092;&#x958B;&#x59CB;&#x3057;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   initCycle() {
     // cycle
-    const cycle = this.cycle;
+    const cycle = this.cycle();
     // bind Cycle.UPDATE
-    cycle.on(Cycle.UPDATE, this[updateSymbol]);
+    cycle.on(Cycle.UPDATE, this.boundUpdate());
     // cycle &#x958B;&#x59CB;
     cycle.start();
     return cycle;
   }
   /**
    * polling &#x3092;&#x958B;&#x59CB;&#x3057;&#x307E;&#x3059;
-   * @return {boolean} start &#x306B;&#x6210;&#x529F;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {boolean} start &#x306B;&#x6210;&#x529F;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   start() {
     if (this.started) {
@@ -258,14 +309,14 @@ export class Polling extends EventDispatcher {
   }
   /**
    * polling &#x3092;&#x6B62;&#x3081;&#x307E;&#x3059;
-   * @return {boolean} stop &#x306B;&#x6210;&#x529F;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {boolean} stop &#x306B;&#x6210;&#x529F;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   stop() {
     if (!this.started) {
       // not start
       return false;
     }
-    this.cycle.off(Cycle.UPDATE, this[updateSymbol]);
+    this.cycle.off(Cycle.UPDATE, this.boundUpdate());
     // this[startSymbol] = false;
     this.turnOver();
     return true;
@@ -274,18 +325,18 @@ export class Polling extends EventDispatcher {
    * Cycle.UPDATE event handler, polling &#x3092;&#x8A08;&#x6E2C;&#x3057;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x706B;&#x3059;&#x308B;&#x304B;&#x3092;&#x5224;&#x65AD;&#x3057;&#x307E;&#x3059;
    *
    * @listens {Cycle.UPDATE} Cycle.UPDATE &#x304C;&#x767A;&#x751F;&#x3059;&#x308B;&#x3068;&#x5B9F;&#x884C;&#x3055;&#x308C;&#x307E;&#x3059;
-   * @return {boolean} Polling.UPDATE event &#x304C;&#x767A;&#x751F;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {boolean} Polling.UPDATE event &#x304C;&#x767A;&#x751F;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   update() {
     // &#x73FE;&#x5728;&#x6642;&#x9593;
     // @type {number}
     const present = Date.now();
-    // @type {number} - polling &#x9593;&#x9694;
-    const polling = this.polling;
+    // @type {number} - interval &#x9593;&#x9694;
+    const interval = this.interval;
     // @type {number} - &#x958B;&#x59CB;&#x6642;&#x9593;
     const begin = this.begin;
     // &#x73FE;&#x5728;&#x6642;&#x9593; &#x304C; interval &#x3088;&#x308A;&#x5927;&#x304D;&#x304F;&#x306A;&#x3063;&#x305F;&#x304B;
-    if ((present - begin) &gt;= polling) {
+    if ((present - begin) &gt;= interval) {
       // event &#x767A;&#x706B;
       this.fire(this.updateEvents(begin, present));
       // &#x958B;&#x59CB;&#x6642;&#x9593;&#x3092; update
@@ -298,7 +349,7 @@ export class Polling extends EventDispatcher {
   /**
    * Polling.UPDATE event &#x3092;&#x767A;&#x751F;&#x3057;&#x307E;&#x3059;
    * @param {Events} events Polling.UPDATE event object
-   * @return {undefined} no-return
+   * @returns {void}
    */
   fire(events) {
     this.dispatch(events);
@@ -309,7 +360,7 @@ export class Polling extends EventDispatcher {
 </div>
 
 <footer class="footer">
-  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.4)</span></a>
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
 </footer>
 
 <script src="script/search_index.js"></script>

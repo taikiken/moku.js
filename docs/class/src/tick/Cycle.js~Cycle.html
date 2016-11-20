@@ -35,26 +35,34 @@
     
   <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">event</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html">EventDispatcher</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Events.js~Events.html">Events</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Freeze.js~Freeze.html">Freeze</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scroll.js~Scroll.html">Scroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/ScrollEvents.js~ScrollEvents.html">ScrollEvents</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scrolling.js~Scrolling.html">Scrolling</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Touching.js~Touching.html">Touching</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/TouchingEvents.js~TouchingEvents.html">TouchingEvents</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/WheelEvents.js~WheelEvents.html">WheelEvents</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">net</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">tick</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html">Cycle</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Fps.js~Fps.html">Fps</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Polling.js~Polling.html">Polling</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Rate.js~Rate.html">Rate</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/List.js~List.html">List</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Vectors.js~Vectors.html">Vectors</a></span></span></li>
 </ul>
 </div>
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {Cycle} from &apos;<span><a href="file/src/tick/Cycle.js.html#lineNumber66">./src/tick/Cycle.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Cycle from &apos;<span><a href="file/src/tick/Cycle.js.html#lineNumber67">./src/tick/Cycle.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/tick/Cycle.js.html#lineNumber66">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/tick/Cycle.js.html#lineNumber67">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -74,10 +82,12 @@
 
   
   
-  <div class="description" data-ice="description"><p></p><p>requestAnimationFrame &#x3067;&#x30EB;&#x30FC;&#x30D7;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x307E;&#x3059;</p>
+  <div class="description" data-ice="description"><p></p><p>requestAnimationFrame &#x3092;&#x4F7F;&#x7528;&#x3057;&#x30EB;&#x30FC;&#x30D7;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x307E;&#x3059;</p>
 <p>singleton &#x306A;&#x306E;&#x3067; new &#x3067;&#x306F;&#x306A;&#x304F; factory &#x3092;&#x4F7F;&#x7528;&#x3057; instance &#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;</p>
-<code>const loop:Cycle = Cycle.factory();</code>
-<p>requestAnimationFrame &#x306F; tab &#x304C; active(focus) &#x306A;&#x6642;&#x306E;&#x307F;&#x767A;&#x751F;&#x3057;&#x307E;&#x3059;</p><p></p>
+
+<p></p>
+<pre><code><code class="source-code prettyprint">const loop = Cycle.factory();</code>
+</code></pre><p></p><p>requestAnimationFrame &#x306F; tab &#x304C; active(focus) &#x306A;&#x6642;&#x306E;&#x307F;&#x767A;&#x751F;&#x3057;&#x307E;&#x3059;</p><p></p>
 </div>
 
   
@@ -111,32 +121,6 @@
         
         
         <div data-ice="description"><p>requestAnimationFrame &#x6BCE;&#x306B;&#x767A;&#x751F;&#x3059;&#x308B;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      <span data-ice="static">static</span>
-      <span class="kind" data-ice="kind">get</span>
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-           <span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html#static-get-events">events</a></span></span><span data-ice="signature">: <span><a href="class/src/event/Events.js~Events.html">Events</a></span>: <span>*</span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>Events instance &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;</p>
 </div>
       </div>
     </td>
@@ -214,7 +198,117 @@
 </tbody>
 </table>
 </div>
-
+<div data-ice="memberSummary"><h2>Member Summary</h2><table class="summary" data-ice="summary">
+  <thead><tr><td data-ice="title" colspan="3">Public Members</td></tr></thead>
+  <tbody>
+  
+  <tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html#instance-member-boundUpdate">boundUpdate</a></span></span><span data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span>: <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>bound update requestAnimationFrame callback</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html#instance-member-events">events</a></span></span><span data-ice="signature">: <span><a href="class/src/event/Events.js~Events.html">Events</a></span>: <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Cycle.UPDATE Events instance</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html#instance-member-id">id</a></span></span><span data-ice="signature">: <span><a href="class/src/util/Type.js~Type.html#static-method-number">number</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>requestAnimationFrame ID</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html#instance-member-started">started</a></span></span><span data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>start &#x6E08;&#x307F;&#x30D5;&#x30E9;&#x30C3;&#x30B0;</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
 <div data-ice="methodSummary"><h2>Method Summary</h2><table class="summary" data-ice="summary">
   <thead><tr><td data-ice="title" colspan="3">Public Methods</td></tr></thead>
   <tbody>
@@ -282,7 +376,7 @@
     <td>
       <div>
         <p>
-           <span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html#instance-method-update">update</a></span></span><span data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined">undefined</a></span></span>
+           <span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html#instance-method-update">update</a></span></span><span data-ice="signature">(): <span><a href="class/src/util/Type.js~Type.html#static-method-number">number</a></span></span>
         </p>
       </div>
       <div>
@@ -309,14 +403,40 @@
     <td>
       <span class="access" data-ice="access">public</span>
       
-      <span class="kind" data-ice="kind">get</span>
+      
       
       <span class="override" data-ice="override"></span>
     </td>
     <td>
       <div>
         <p>
-           <span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html#instance-get-listeners">listeners</a></span></span><span data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>: <span>*</span></span>
+           <span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html#instance-member-destroy">destroy</a></span></span><span data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span>: <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>&#x5168;&#x3066;&#x306E;&#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x3092;&#x7834;&#x68C4;&#x3057;&#x307E;&#x3059;</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html#instance-member-listeners">listeners</a></span></span><span data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -346,7 +466,7 @@
         </p>
       </div>
       <div>
-        
+        <div class="deprecated" data-ice="deprecated">this method was deprecated. instead use on</div>
         
         <div data-ice="description"><p><strong>alias on</strong></p>
 <p></p><p>event type &#x306B; &#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x95A2;&#x6570;&#x3092; bind &#x3057;&#x307E;&#x3059;</p><p></p>
@@ -396,32 +516,6 @@
     <td>
       <div>
         <p>
-           <span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html#instance-method-destroy">destroy</a></span></span><span data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>&#x5168;&#x3066;&#x306E;&#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x3092;&#x7834;&#x68C4;&#x3057;&#x307E;&#x3059;</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
            <span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html#instance-method-dispatch">dispatch</a></span></span><span data-ice="signature">(events: <span><a href="class/src/event/Events.js~Events.html">Events</a></span> | <span>*</span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
         </p>
       </div>
@@ -452,7 +546,7 @@
         </p>
       </div>
       <div>
-        
+        <div class="deprecated" data-ice="deprecated">this method was deprecated. instead use dispatch</div>
         
         <div data-ice="description"><p><strong>alias dispatch</strong></p>
 <p></p><p>&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x95A2;&#x6570;&#x3092; call &#x3057;&#x307E;&#x3059;</p><p></p>
@@ -505,7 +599,7 @@
         </p>
       </div>
       <div>
-        
+        <div class="deprecated" data-ice="deprecated">this method was deprecated. instead use has</div>
         
         <div data-ice="description"><p><strong>alias has</strong></p>
 <p></p><p>event type &#x306B;&#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x95A2;&#x6570;&#x304C;&#x767B;&#x9332;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x304B;&#x3092;&#x8ABF;&#x3079;&#x307E;&#x3059;</p><p></p>
@@ -585,7 +679,7 @@
         </p>
       </div>
       <div>
-        
+        <div class="deprecated" data-ice="deprecated">this method was deprecated. instead use off</div>
         
         <div data-ice="description"><p><strong>alias off</strong></p>
 <p></p><p>event type &#x304B;&#x3089;&#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x95A2;&#x6570;&#x3092; remove &#x3057;&#x307E;&#x3059;</p><p></p>
@@ -614,7 +708,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber104">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber130">source</a></span></span>
     </span>
   </h3>
 
@@ -655,58 +749,6 @@
   
   
 </div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="static-get-events">
-    <span class="access" data-ice="access">public</span>
-    <span data-ice="static">static</span>
-    <span class="kind" data-ice="kind">get</span>
-    
-    
-    <span data-ice="name">events</span><span data-ice="signature">: <span><a href="class/src/event/Events.js~Events.html">Events</a></span>: <span>*</span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber114">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>Events instance &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;</p>
-</div>
-
-  
-
-  <div data-ice="properties">
-</div>
-
-  <div class="return-params" data-ice="returnParams">
-    <h4>Return:</h4>
-    <table>
-      <tr>
-        <td class="return-type" data-ice="returnType"><span><a href="class/src/event/Events.js~Events.html">Events</a></span></td>
-        <td class="return-desc" data-ice="returnDescription"><p>Events instance</p>
-</td>
-      </tr>
-    </table>
-    <div data-ice="returnProperties">
-</div>
-  </div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
 </div>
 <div data-ice="staticMethodDetails"><h2 data-ice="title">Static Public Methods</h2>
 
@@ -721,7 +763,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber177">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber204">source</a></span></span>
     </span>
   </h3>
 
@@ -776,7 +818,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber72">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber73">source</a></span></span>
     </span>
   </h3>
 
@@ -835,7 +877,195 @@
   
 </div>
 </div>
+<div data-ice="memberDetails"><h2 data-ice="title">Public Members</h2>
 
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-boundUpdate">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    <span data-ice="name">boundUpdate</span><span data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span>: <span>*</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber107">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>bound update requestAnimationFrame callback</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tr>
+        <td class="return-type" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span></td>
+        <td class="return-desc" data-ice="returnDescription"><p>bound update</p>
+</td>
+      </tr>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-events">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    <span data-ice="name">events</span><span data-ice="signature">: <span><a href="class/src/event/Events.js~Events.html">Events</a></span>: <span>*</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber102">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Cycle.UPDATE Events instance</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tr>
+        <td class="return-type" data-ice="returnType"><span><a href="class/src/event/Events.js~Events.html">Events</a></span></td>
+        <td class="return-desc" data-ice="returnDescription"><p>Cycle.UPDATE Events instance</p>
+</td>
+      </tr>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-id">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    <span data-ice="name">id</span><span data-ice="signature">: <span><a href="class/src/util/Type.js~Type.html#static-method-number">number</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber112">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>requestAnimationFrame ID</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-started">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    <span data-ice="name">started</span><span data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber117">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>start &#x6E08;&#x307F;&#x30D5;&#x30E9;&#x30C3;&#x30B0;</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+</div>
 <div data-ice="methodDetails"><h2 data-ice="title">Public Methods</h2>
 
 <div class="detail" data-ice="detail">
@@ -849,7 +1079,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber124">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber150">source</a></span></span>
     </span>
   </h3>
 
@@ -901,7 +1131,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber141">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber166">source</a></span></span>
     </span>
   </h3>
 
@@ -966,11 +1196,11 @@
     
     
     
-    <span data-ice="name">update</span><span data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined">undefined</a></span></span>
+    <span data-ice="name">update</span><span data-ice="signature">(): <span><a href="class/src/util/Type.js~Type.html#static-method-number">number</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber160">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber185">source</a></span></span>
     </span>
   </h3>
 
@@ -989,8 +1219,8 @@
     <h4>Return:</h4>
     <table>
       <tr>
-        <td class="return-type" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined">undefined</a></span></td>
-        <td class="return-desc" data-ice="returnDescription"><p>no-return</p>
+        <td class="return-type" data-ice="returnType"><span><a href="class/src/util/Type.js~Type.html#static-method-number">number</a></span></td>
+        <td class="return-desc" data-ice="returnDescription"><p>requestAnimationFrame ID</p>
 </td>
       </tr>
     </table>
@@ -1015,7 +1245,7 @@
 </div>
 
 <footer class="footer">
-  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.4)</span></a>
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
 </footer>
 
 <script src="script/search_index.js"></script>

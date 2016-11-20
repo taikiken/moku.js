@@ -35,14 +35,22 @@
     
   <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">event</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html">EventDispatcher</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Events.js~Events.html">Events</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Freeze.js~Freeze.html">Freeze</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scroll.js~Scroll.html">Scroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/ScrollEvents.js~ScrollEvents.html">ScrollEvents</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scrolling.js~Scrolling.html">Scrolling</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Touching.js~Touching.html">Touching</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/TouchingEvents.js~TouchingEvents.html">TouchingEvents</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/WheelEvents.js~WheelEvents.html">WheelEvents</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">net</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">tick</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html">Cycle</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Fps.js~Fps.html">Fps</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Polling.js~Polling.html">Polling</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Rate.js~Rate.html">Rate</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/List.js~List.html">List</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Vectors.js~Vectors.html">Vectors</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -62,62 +70,63 @@
  */
 
 // event
-import { EventDispatcher } from &apos;../event/EventDispatcher&apos;;
-import { Events } from &apos;../event/Events&apos;;
+import { default as EventDispatcher } from &apos;../event/EventDispatcher&apos;;
+import { default as Events } from &apos;../event/Events&apos;;
 
 /**
  * new &#x3092;&#x8A31;&#x53EF;&#x3057;&#x306A;&#x3044;&#x305F;&#x3081;&#x306E; Symbol
  * @type {Symbol}
  * @private
  */
-const singletonSymbol = Symbol();
+const singletonSymbol = Symbol(&apos;singleton instance&apos;);
 /**
  * singleton instance, nullable
  * @type {?Cycle}
  * @private
+ * @static
  */
 let instance = null;
 
-/**
- * private property key, requestAnimationFrame ID &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
- * @type {Symbol}
- * @private
- */
-const requestSymbol = Symbol();
-/**
- * private property key, this.update.bind(this) &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
- * @type {Symbol}
- * @private
- */
-const updateSymbol = Symbol();
-/**
- * private property key, requestAnimationFrame &#x3092;&#x958B;&#x59CB;&#x3057;&#x305F;&#x304B;&#x3092;&#x8868;&#x3059;&#x771F;&#x507D;&#x5024;&#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
- * @type {Symbol}
- * @private
- */
-const startSymbol = Symbol();
-/**
- * Cycle.UPDATE event &#x3092;&#x767A;&#x706B;&#x3059;&#x308B;&#x6642;&#x306E; Events instance &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
- * @type {Symbol}
- * @private
- */
-const eventsSymbol = Symbol();
+// /**
+//  * private property key, requestAnimationFrame ID &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+//  * @type {Symbol}
+//  * @private
+//  */
+// const requestSymbol = Symbol(&apos;requestAnimationFrame id&apos;);
+// /**
+//  * private property key, this.update.bind(this) &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+//  * @type {Symbol}
+//  * @private
+//  */
+// const updateSymbol = Symbol(&apos;bind update&apos;);
+// /**
+//  * private property key, requestAnimationFrame &#x3092;&#x958B;&#x59CB;&#x3057;&#x305F;&#x304B;&#x3092;&#x8868;&#x3059;&#x771F;&#x507D;&#x5024;&#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+//  * @type {Symbol}
+//  * @private
+//  */
+// const startSymbol = Symbol(&apos;is requestAnimationFrame started flag&apos;);
+// /**
+//  * Cycle.UPDATE event &#x3092;&#x767A;&#x706B;&#x3059;&#x308B;&#x6642;&#x306E; Events instance &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+//  * @type {Symbol}
+//  * @private
+//  */
+// const eventsSymbol = Symbol(&apos;Cycle.UPDATE Events instance&apos;);
 
 /**
- * &lt;p&gt;requestAnimationFrame &#x3067;&#x30EB;&#x30FC;&#x30D7;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x307E;&#x3059;&lt;/p&gt;
+ * &lt;p&gt;requestAnimationFrame &#x3092;&#x4F7F;&#x7528;&#x3057;&#x30EB;&#x30FC;&#x30D7;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x307E;&#x3059;&lt;/p&gt;
  * &lt;p&gt;singleton &#x306A;&#x306E;&#x3067; new &#x3067;&#x306F;&#x306A;&#x304F; factory &#x3092;&#x4F7F;&#x7528;&#x3057; instance &#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&lt;/p&gt;
  *
  * ```
- * const loop:Cycle = Cycle.factory();
+ * const loop = Cycle.factory();
  * ```
  *
  * &lt;p&gt;requestAnimationFrame &#x306F; tab &#x304C; active(focus) &#x306A;&#x6642;&#x306E;&#x307F;&#x767A;&#x751F;&#x3057;&#x307E;&#x3059;&lt;/p&gt;
  */
-export class Cycle extends EventDispatcher {
+export default class Cycle extends EventDispatcher {
   /**
    * singleton &#x3067;&#x3059;
    * @param {Symbol} checkSymbol singleton &#x3092;&#x4FDD;&#x8A3C;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; private instance
-   * @return {Cycle} singleton instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {Cycle} singleton instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   constructor(checkSymbol) {
     // checkSymbol &#x3068; singleton &#x304C;&#x7B49;&#x4FA1;&#x304B;&#x3092;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3057;&#x307E;&#x3059;
@@ -129,16 +138,41 @@ export class Cycle extends EventDispatcher {
     if (instance !== null) {
       return instance;
     }
+    // -------------------------------
     // onetime setting
     instance = this;
-    // @type {number} - requestAnimationFrame return id
-    this[requestSymbol] = 0;
-    // @type {function} - update bind function
-    this[updateSymbol] = this.update.bind(this);
-    // @type {boolean} - started flag
-    this[startSymbol] = false;
-    // @type {Events} - Events
-    this[eventsSymbol] = new Events(Cycle.UPDATE, this, this);
+    // // @type {Events} - Events
+    // this[eventsSymbol] = new Events(Cycle.UPDATE, this, this);
+    //
+    // // @type {number} - requestAnimationFrame return id
+    // this[requestSymbol] = 0;
+    // // @type {function} - update bind function
+    // this[updateSymbol] = this.update.bind(this);
+    // // @type {boolean} - started flag
+    // this[startSymbol] = false;
+
+    const events = new Events(Cycle.UPDATE, this, this);
+    const boundUpdate = this.update.bind(this);
+    /**
+     * Cycle.UPDATE Events instance
+     * @returns {Events} Cycle.UPDATE Events instance
+     */
+    this.events = () =&gt; events;
+    /**
+     * bound update requestAnimationFrame callback
+     * @returns {function} bound update
+     */
+    this.boundUpdate = () =&gt; boundUpdate;
+    /**
+     * requestAnimationFrame ID
+     * @type {number}
+     */
+    this.id = 0;
+    /**
+     * start &#x6E08;&#x307F;&#x30D5;&#x30E9;&#x30C3;&#x30B0;
+     * @type {boolean}
+     */
+    this.started = false;
     // &#x8A2D;&#x5B9A;&#x6E08;&#x307F; instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
     return instance;
   }
@@ -148,36 +182,35 @@ export class Cycle extends EventDispatcher {
   /**
    * requestAnimationFrame &#x6BCE;&#x306B;&#x767A;&#x751F;&#x3059;&#x308B;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
    * @event UPDATE
-   * @return {string} event, cycleUpdate &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {string} event, cycleUpdate &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    * @default cycleUpdate
    */
   static get UPDATE() {
     return &apos;cycleUpdate&apos;;
   }
-  // ----------------------------------------
-  // GETTER / SETTER
-  // ----------------------------------------
-  /**
-   * Events instance &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
-   * @return {Events} Events instance
-   */
-  static get events() {
-    return this[eventsSymbol];
-  }
+  // // ----------------------------------------
+  // // GETTER / SETTER
+  // // ----------------------------------------
+  // /**
+  //  * Events instance &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+  //  * @returns {Events} Events instance
+  //  */
+  // get events() {
+  //   return this[eventsSymbol];
+  // }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
   /**
    * loop(requestAnimationFrame) &#x3092;&#x958B;&#x59CB;&#x3057;&#x307E;&#x3059;
-   * @return {boolean} start &#x306B;&#x6210;&#x529F;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {boolean} start &#x306B;&#x6210;&#x529F;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   start() {
-    if (this[startSymbol]) {
+    if (this.started) {
       // already start
-      console.warn(&apos;Cycle.start already start&apos;, this[startSymbol]);
       return false;
     }
-    this[startSymbol] = true;
+    this.started = true;
     this.update();
 
     // @return
@@ -186,16 +219,16 @@ export class Cycle extends EventDispatcher {
   /**
    * loop(cancelAnimationFrame) &#x3092;&#x6B62;&#x3081;&#x307E;&#x3059;
    * @param {number} [id] requestAnimationFrame id &#x3092;&#x4F7F;&#x3044; cancelAnimationFrame &#x3092;&#x3057;&#x307E;&#x3059;
-   * @return {boolean} stop &#x306B;&#x6210;&#x529F;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {boolean} stop &#x306B;&#x6210;&#x529F;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
-  stop(id = this[requestSymbol]) {
-    if (!this[startSymbol]) {
+  stop(id = this.id) {
+    if (!this.started) {
       // not start
       return false;
     }
 
     cancelAnimationFrame(id);
-    this[startSymbol] = false;
+    this.started = false;
 
     // @return
     return true;
@@ -205,27 +238,32 @@ export class Cycle extends EventDispatcher {
   // ----------------------------------------
   /**
    * loop(requestAnimationFrame)&#x30B3;&#x30FC;&#x30EB;&#x30D0;&#x30C3;&#x30AF;&#x95A2;&#x6570;&lt;br&gt;Cycle.UPDATE event &#x3092;&#x767A;&#x706B;&#x3057;&#x307E;&#x3059;
-   * @return {undefined} no-return
+   * @returns {number} requestAnimationFrame ID
    */
   update() {
     // @type {number} - requestAnimationFrame id
-    const id = requestAnimationFrame(this[updateSymbol]);
-    this[requestSymbol] = id;
+    const id = requestAnimationFrame(this.boundUpdate());
+    this.id = id;
+
     // @type {Events} - events
-    const events = this.events;
-    events.id = id;
+    const events = this.events();
+    // events.id = id;
     // event fire
     this.dispatch(events);
+    return id;
   }
   // ----------------------------------------
   // STATIC METHOD
   // ----------------------------------------
   /**
    * Cycle instance &#x3092; singleton &#x3092;&#x4FDD;&#x8A3C;&#x3057;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;
-   * @return {Cycle} Cycle instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {Cycle} Cycle instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   static factory() {
-    return new Cycle(singletonSymbol);
+    if (instance === null) {
+      return new Cycle(singletonSymbol);
+    }
+    return instance;
   }
 }
 </code></pre>
@@ -233,7 +271,7 @@ export class Cycle extends EventDispatcher {
 </div>
 
 <footer class="footer">
-  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.4)</span></a>
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
 </footer>
 
 <script src="script/search_index.js"></script>

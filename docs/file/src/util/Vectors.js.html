@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/util/Vectors.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+<link data-ice="userStyle" rel="stylesheet" href="user/css/0-esdoc_extension.css">
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">event</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html">EventDispatcher</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Events.js~Events.html">Events</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Freeze.js~Freeze.html">Freeze</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scroll.js~Scroll.html">Scroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/ScrollEvents.js~ScrollEvents.html">ScrollEvents</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scrolling.js~Scrolling.html">Scrolling</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Touching.js~Touching.html">Touching</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/TouchingEvents.js~TouchingEvents.html">TouchingEvents</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/WheelEvents.js~WheelEvents.html">WheelEvents</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">net</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">tick</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html">Cycle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Fps.js~Fps.html">Fps</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Polling.js~Polling.html">Polling</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Rate.js~Rate.html">Rate</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/List.js~List.html">List</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Vectors.js~Vectors.html">Vectors</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/util/Vectors.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * @license inazumatv.com
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/10/08
+ *
+ * Copyright (c) 2011-2015 inazumatv.com, inc.
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ * Vectors
+ */
+
+/**
+ * &#x3042;&#x308B;&#x70B9;&#x306E;&#x5EA7;&#x6A19;(x, y)&#x3068;&#x6642;&#x9593;(time)&#x3092;&#x7BA1;&#x7406;&#x3057;&#x307E;&#x3059;
+ */
+export default class Vectors {
+  /**
+   * &#x5EA7;&#x6A19;&#x3068;&#x73FE;&#x5728;&#x6642;&#x9593;&#x3092;&#x5143;&#x306B;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;
+   * @param {number} [x=0] &#x5EA7;&#x6A19; x
+   * @param {number} [y=0] &#x5EA7;&#x6A19; y
+   * @param {number} [time=0] &#x6642;&#x9593; milli seconds
+   */
+  constructor(x = 0, y = 0, time = 0) {
+    /**
+     * &#x5EA7;&#x6A19; x
+     * @type {number}
+     */
+    this.x = x;
+    /**
+     * &#x5EA7;&#x6A19; y
+     * @type {number}
+     */
+    this.y = y;
+    /**
+     * &#x6642;&#x9593; milli seconds
+     * @type {number}
+     */
+    this.time = time;
+    /**
+     * &#x30B9;&#x30AF;&#x30ED;&#x30FC;&#x30EB;&#x4E2D;&#x304B;&#x306E;&#x30D5;&#x30E9;&#x30C3;&#x30B0;, true: &#x30B9;&#x30AF;&#x30ED;&#x30FC;&#x30EB;&#x4E2D;
+     * @type {boolean}
+     */
+    this.scrolling = false;
+  }
+  /**
+   * x, y, time &#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3;&#x3092;&#x5168;&#x3066; `0` &#x306B;&#x3057;&#x307E;&#x3059;
+   * @returns {Vectors} &#x30E1;&#x30BD;&#x30C3;&#x30C9;&#x30C1;&#x30A7;&#x30A4;&#x30F3;&#x53EF;&#x80FD;&#x306A;&#x3088;&#x3046;&#x306B;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  reset() {
+    this.x = 0;
+    this.y = 0;
+    this.time = 0;
+
+    return this;
+  }
+  /**
+   * x, y, time &#x3092;&#x66F4;&#x65B0;&#x3057;&#x307E;&#x3059;
+   * @param {number} x &#x5EA7;&#x6A19; x
+   * @param {number} y &#x5EA7;&#x6A19; y
+   * @param {number} [time=Date.now] &#x6642;&#x9593; milli seconds
+   * @returns {Vectors} &#x30E1;&#x30BD;&#x30C3;&#x30C9;&#x30C1;&#x30A7;&#x30A4;&#x30F3;&#x53EF;&#x80FD;&#x306A;&#x3088;&#x3046;&#x306B;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  update(x, y, time = Date.now()) {
+    this.x = x;
+    this.y = y;
+    this.time = time;
+
+    return this;
+  }
+  /**
+   * &#x5F15;&#x6570; vectors &#x9593;&#x306E;&#x8DDD;&#x96E2;&#x3092;&#x6E2C;&#x308A;&#x307E;&#x3059;
+   * @param {Vectors} vectors &#x8A08;&#x6E2C;&#x3057;&#x305F;&#x3044;&#x5BFE;&#x8C61; Vector instance
+   * @returns {number} &#x8DDD;&#x96E2;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  distance(vectors) {
+    const distanceX = this.x - vectors.x;
+    const distanceY = this.y - vectors.y;
+    const sqrt = (distanceX * distanceX) + (distanceY * distanceY);
+    return Math.sqrt(sqrt);
+  }
+  /**
+   * &#x5F15;&#x6570; vectors &#x3068;&#x306E;&#x6642;&#x9593;&#x5DEE;&#x3092;&#x8A08;&#x7B97;&#x3057;&#x307E;&#x3059;
+   * @param {Vectors} vectors &#x8A08;&#x6E2C;&#x3057;&#x305F;&#x3044;&#x5BFE;&#x8C61; Vector instance
+   * @returns {number} &#x6642;&#x9593;&#x5DEE;(milli seconds) &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  duration(vectors) {
+    return this.time - vectors.time;
+  }
+  /**
+   * &#x8907;&#x88FD;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {Vectors} &#x8907;&#x88FD;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  clone() {
+    const clone = new Vectors(this.x, this.y, this.time);
+    clone.scrolling = this.scrolling;
+    return clone;
+  }
+  /**
+   * &#x30D9;&#x30AF;&#x30C8;&#x30EB;&#x306E;&#x5927;&#x304D;&#x3055;&#x306E;&#xFF12;&#x4E57;&#x306E;&#x5E73;&#x65B9;&#x6839;&#x3092;&#x8A08;&#x7B97;&#x3057;&#x307E;&#x3059;
+   * @returns {number} &#x30D9;&#x30AF;&#x30C8;&#x30EB;&#x306E;&#x5927;&#x304D;&#x3055;&#x306E;&#xFF12;&#x4E57;&#x306E;&#x5E73;&#x65B9;&#x6839;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  length() {
+    const x = this.x;
+    const y = this.y;
+    return Math.sqrt((x * x) + (y * y));
+  }
+  /**
+   * &#x30D9;&#x30AF;&#x30C8;&#x30EB;&#x306E;&#x5024;&#x3092; scalar &#x5024;&#x3067;&#x9664;&#x7B97;&#x3057;&#x307E;&#x3059;
+   *
+   * @param {number} scalar &#x9664;&#x7B97;&#x6BCD;&#x6570;
+   * @returns {Vectors} &#x9664;&#x7B97;&#x5F8C;&#x306E; Vector &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  divideByScalar(scalar) {
+    const clone = this.clone();
+    if (scalar === 0) {
+      clone.x = 0;
+      clone.y = 0;
+    } else {
+      const x = clone.x;
+      const y = clone.y;
+      const inverse = 1 / scalar;
+      clone.x = x * inverse;
+      clone.y = y * inverse;
+    }
+
+    return clone;
+  }
+  /**
+   * &#x30D9;&#x30AF;&#x30C8;&#x30EB;&#x306E;&#x5927;&#x304D;&#x3055;&#x3092;&#x6B63;&#x898F;&#x5316;&#xFF08;&#x5927;&#x304D;&#x3055;&#x3092;1&#xFF09;&#x3057;&#x305F; Vector &#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;
+   * @returns {Vectors} &#x30D9;&#x30AF;&#x30C8;&#x30EB;&#x306E;&#x5927;&#x304D;&#x3055;&#x3092;&#x6B63;&#x898F;&#x5316;&#xFF08;&#x5927;&#x304D;&#x3055;&#x3092;1&#xFF09;&#x3057;&#x305F; Vectors &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  normalize() {
+    return this.divideByScalar(this.length());
+  }
+  /**
+   * &#x5F15;&#x6570; vectors &#x3068;&#x306E; X &#x5024;&#x3092;&#x6E1B;&#x7B97;&#x3057;&#x307E;&#x3059;
+   * @param {Vectors} vectors &#x8A08;&#x6E2C;&#x3057;&#x305F;&#x3044;&#x5BFE;&#x8C61; Vectors instance
+   * @returns {number} X &#x5024;&#x3092;&#x6E1B;&#x7B97;&#x3057;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  betweenX(vectors) {
+    return this.x - vectors.x;
+  }
+  /**
+   * &#x5F15;&#x6570; vectors &#x3068;&#x306E; Y &#x5024;&#x3092;&#x6E1B;&#x7B97;&#x3057;&#x307E;&#x3059;
+   * @param {Vectors} vectors &#x8A08;&#x6E2C;&#x3057;&#x305F;&#x3044;&#x5BFE;&#x8C61; Vectors instance
+   * @returns {number} Y &#x5024;&#x3092;&#x6E1B;&#x7B97;&#x3057;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  betweenY(vectors) {
+    return this.y - vectors.y;
+  }
+  /**
+   * &#x5F15;&#x6570; vectors &#x3068;&#x306E; time &#x5024;&#x3092;&#x6E1B;&#x7B97;&#x3057;&#x307E;&#x3059;
+   * @param {Vectors} vectors &#x8A08;&#x6E2C;&#x3057;&#x305F;&#x3044;&#x5BFE;&#x8C61; Vectors instance
+   * @returns {number} time &#x5024;&#x3092;&#x6E1B;&#x7B97;&#x3057;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  betweenTime(vectors) {
+    return this.time - vectors.time;
+  }
+  /**
+   * &#x5F15;&#x6570; vectors &#x3068;&#x306E; x, y, time &#x5024;&#x3092;&#x6E1B;&#x7B97;&#x3057;&#x307E;&#x3059;
+   * @param {Vectors} vectors &#x8A08;&#x6E2C;&#x3057;&#x305F;&#x3044;&#x5BFE;&#x8C61; Vectors instance
+   * @returns {Vectors} &#x5F15;&#x6570; vectors &#x3068;&#x306E; x, y, time &#x5024;&#x3092;&#x6E1B;&#x7B97;&#x3057;&#x305F; clone &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  between(vectors) {
+    const clone = this.clone();
+    clone.x = clone.betweenX(vectors);
+    clone.y = clone.betweenY(vectors);
+    clone.time = clone.betweenTime(vectors);
+
+    return clone;
+  }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

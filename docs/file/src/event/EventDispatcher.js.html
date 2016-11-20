@@ -35,14 +35,22 @@
     
   <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">event</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html">EventDispatcher</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Events.js~Events.html">Events</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Freeze.js~Freeze.html">Freeze</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scroll.js~Scroll.html">Scroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/ScrollEvents.js~ScrollEvents.html">ScrollEvents</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scrolling.js~Scrolling.html">Scrolling</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Touching.js~Touching.html">Touching</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/TouchingEvents.js~TouchingEvents.html">TouchingEvents</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/WheelEvents.js~WheelEvents.html">WheelEvents</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">net</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">tick</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html">Cycle</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Fps.js~Fps.html">Fps</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Polling.js~Polling.html">Polling</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Rate.js~Rate.html">Rate</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/List.js~List.html">List</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Vectors.js~Vectors.html">Vectors</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -61,93 +69,116 @@
  */
 
 // util
-import { Type } from &apos;../util/Type&apos;;
+import { default as Type } from &apos;../util/Type&apos;;
 
-/**
- * private property key, listeners Object
- * @type {Symbol}
- * @private
- */
-const listenersKey = Symbol();
+// /**
+//  * private property key, listeners Object
+//  * @type {Symbol}
+//  * @private
+//  */
+// const listenersKey = Symbol(&apos;event listeners object&apos;);
 
 /**
  * &lt;p&gt;Custom Event &#x3092;&#x4F5C;&#x6210;&#x3057; Event &#x901A;&#x77E5;&#x3092;&#x884C;&#x3044;&#x307E;&#x3059;&lt;/p&gt;
  *
  * ```
- * const callback = () =&gt; {};
+ * const callback = (event) =&gt; {
+ *  console.log(event);
+ * };
  *
- * const event:EventDispatcher = new EventDispatcher();
+ * const event = new EventDispatcher();
  * event.on(&apos;abc&apos;, callback);
  *
  * console.log(event.has(&apos;abc&apos;, callback));// true
  *
- * event.dispatch({type: &apos;abc&apos;});
+ * event.dispatch(new Events(&apos;abc&apos;));
  *
  * event.off(&apos;abc&apos;, callback);
  * console.log(event.has(&apos;abc&apos;, callback));// false
  * ```
+ *
+ * {@link Events}
  */
-export class EventDispatcher {
+export default class EventDispatcher {
   /**
    * listener property &#x3092;&#x30A4;&#x30CB;&#x30B7;&#x30E3;&#x30E9;&#x30A4;&#x30BA;&#x3057;&#x307E;&#x3059;
    */
   constructor() {
+    // /**
+    //  * &#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x30EA;&#x30B9;&#x30C8;
+    //  * @type {Object}
+    //  * @private
+    //  */
+    // this[listenersKey] = {};
+    let listeners = {};
     /**
-     * &#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x30EA;&#x30B9;&#x30C8;
-     * @type {Object}
-     * @private
+     * &#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x30EA;&#x30B9;&#x30C8;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+     * @returns {Object} &#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x30EA;&#x30B9;&#x30C8;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
      */
-    this[listenersKey] = {};
+    this.listeners = () =&gt; listeners;
+    /**
+     * &#x5168;&#x3066;&#x306E;&#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x3092;&#x7834;&#x68C4;&#x3057;&#x307E;&#x3059;
+     * @returns {boolean} &#x6210;&#x529F;&#x30FB;&#x4E0D;&#x6210;&#x529F;&#x306E;&#x771F;&#x507D;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+     */
+    this.destroy = () =&gt; {
+      listeners = {};
+      return true;
+    };
   }
-  // ----------------------------------------
-  // GETTER / SETTER
-  // ----------------------------------------
-  /**
-   * &#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x30EA;&#x30B9;&#x30C8;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
-   * @return {Object} &#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x30EA;&#x30B9;&#x30C8;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   */
-  get listeners() {
-    return this[listenersKey];
-  }
+  // // ----------------------------------------
+  // // GETTER / SETTER
+  // // ----------------------------------------
+  // /**
+  //  * &#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x30EA;&#x30B9;&#x30C8;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+  //  * @returns {Object} &#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x30EA;&#x30B9;&#x30C8;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+  //  */
+  // get listeners() {
+  //   return this[listenersKey];
+  // }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
-  /**
-   * &#x5168;&#x3066;&#x306E;&#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x3092;&#x7834;&#x68C4;&#x3057;&#x307E;&#x3059;
-   * @return {boolean} &#x6210;&#x529F;&#x30FB;&#x4E0D;&#x6210;&#x529F;&#x306E;&#x771F;&#x507D;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   */
-  destroy() {
-    this[listenersKey] = {};
-    return true;
-  }
+  // /**
+  //  * &#x5168;&#x3066;&#x306E;&#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x3092;&#x7834;&#x68C4;&#x3057;&#x307E;&#x3059;
+  //  * @returns {boolean} &#x6210;&#x529F;&#x30FB;&#x4E0D;&#x6210;&#x529F;&#x306E;&#x771F;&#x507D;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+  //  */
+  // destroy() {
+  //   // this[listenersKey] = {};
+  //   let listeners = this.listeners();
+  //   listeners = {};
+  //   return true;
+  // }
   /**
    * event type &#x306B; &#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x95A2;&#x6570;&#x3092; bind &#x3057;&#x307E;&#x3059;
    * @param {string} type event type&#xFF08;&#x7A2E;&#x985E;&#xFF09;
    * @param {Function} listener callback&#x95A2;&#x6570;
-   * @return {boolean} &#x6210;&#x529F;&#x30FB;&#x4E0D;&#x6210;&#x529F;&#x306E;&#x771F;&#x507D;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {boolean} &#x6210;&#x529F;&#x30FB;&#x4E0D;&#x6210;&#x529F;&#x306E;&#x771F;&#x507D;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   on(type, listener) {
+    if (!Type.exist(type)) {
+      // type &#x304C;&#x6709;&#x52B9;&#x5024;&#x3067;&#x306F;&#x306A;&#x3044;&#x306E;&#x3067;&#x51E6;&#x7406;&#x3057;&#x306A;&#x3044;
+      return false;
+    }
     if (!Type.method(listener)) {
       // listener &#x304C; &#x95A2;&#x6570;&#x3067;&#x306A;&#x3044;&#x306E;&#x3067;&#x51E6;&#x7406;&#x3057;&#x306A;&#x3044;
       return false;
     }
 
-    const listeners = this.listeners;
+    // type {Object} - {{eventType: array [listener: Function...]...}}
+    const listeners = this.listeners();
 
-    // listeners.type &#x304C;&#x5B58;&#x5728;&#x3059;&#x308B;&#x304B;&#x3092;&#x8ABF;&#x3079;&#x307E;&#x3059;
-    if (!listeners.hasOwnProperty(type)) {
-      // listeners.type &#x304C;&#x5B58;&#x5728;&#x3057;&#x306A;&#x3044;
-      // listeners.type &#x65B0;&#x898F;&#x914D;&#x5217;&#x3092;&#x4F5C;&#x6210;&#x3057;
-      // listener &#x3092;&#x914D;&#x5217;&#x3078;&#x767B;&#x9332;&#x3057;&#x307E;&#x3059;
+    if (!Type.hasKey(listeners, type)) {
+      // listeners.type &#x304C;&#x5B58;&#x5728;&#x3057;&#x306A;&#x3044;&#x5834;&#x5408;&#x306F;
+      // listeners.type &#x3092;&#x30AD;&#x30FC;&#x306B;&#x65B0;&#x898F;&#x914D;&#x5217;&#x3092;&#x4F5C;&#x6210;&#x3057;
+      // listener {function} &#x3092;&#x914D;&#x5217;&#x3078;&#x8FFD;&#x52A0;&#xFF08;&#x767B;&#x9332;&#xFF09;&#x3057;&#x307E;&#x3059;
       listeners[type] = [];
-      listeners[type].push(listener);
-    } else {
-      // &#x3059;&#x3067;&#x306B; listeners.type &#x304C;&#x5B58;&#x5728;&#x3059;&#x308B;
-      // listeners.type &#x914D;&#x5217;&#x306B; listener &#x304C;&#x5B58;&#x5728;&#x3057;&#x306A;&#x3044;&#x306A;&#x3089;&#x3070;&#x767B;&#x9332;&#x3057;&#x307E;&#x3059;
-      if (listeners[type].indexOf(listener) === -1) {
-        listeners[type].push(listener);
-      }
+      // listeners[type].push(listener);
     }
+    // else {
+    //   // &#x3059;&#x3067;&#x306B; listeners.type &#x304C;&#x5B58;&#x5728;&#x3059;&#x308B;
+    //   listeners[type].push(listener);
+    // }
+    listeners[type].push(listener);
 
     return true;
   }
@@ -156,7 +187,7 @@ export class EventDispatcher {
    * &#x5185;&#x90E8;&#x51E6;&#x7406;&#x306F;&#x4E00;&#x6642;&#x7684;&#x306B; null &#x8A2D;&#x5B9A;&#x306B;&#x3057;&#x307E;&#x3059;&lt;/p&gt;
    * @param {string} type event type&#xFF08;&#x7A2E;&#x985E;&#xFF09;
    * @param {Function} listener &#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x95A2;&#x6570;
-   * @return {boolean} &#x6210;&#x529F;&#x30FB;&#x4E0D;&#x6210;&#x529F;&#x306E;&#x771F;&#x507D;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {boolean} &#x6210;&#x529F;&#x30FB;&#x4E0D;&#x6210;&#x529F;&#x306E;&#x771F;&#x507D;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   off(type, listener) {
     if (!Type.method(listener)) {
@@ -165,9 +196,8 @@ export class EventDispatcher {
     }
 
     // @type {Object} - events.type:String: [listener:Function...]
-    const listeners = this.listeners;
-
-    if (!listeners.hasOwnProperty(type)) {
+    const listeners = this.listeners();
+    if (!Type.hasKey(listeners, type)) {
       // listener.type &#x304C;&#x5B58;&#x5728;&#x3057;&#x306A;&#x3044;
       // &#x51E6;&#x7406;&#x3057;&#x306A;&#x3044;
       return false;
@@ -199,14 +229,14 @@ export class EventDispatcher {
    * &#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x30EA;&#x30B9;&#x30C8;&#x304C;&#x5168;&#x3066; null &#x306E;&#x6642;&#x306B; &#x7A7A;&#x914D;&#x5217;&#x306B;&#x3057;&#x307E;&#x3059;&lt;/p&gt;
    * @param {string} type event type&#xFF08;&#x7A2E;&#x985E;&#xFF09;
    * @param {Array&lt;Function&gt;} types event type &#x306B;&#x767B;&#x9332;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x914D;&#x5217;&#xFF08;&#x95A2;&#x6570;&#xFF09;
-   * @return {boolean} &#x6210;&#x529F;&#x30FB;&#x4E0D;&#x6210;&#x529F;&#x306E;&#x771F;&#x507D;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;, true: &#x7A7A;&#x306B;&#x3057;&#x305F;
+   * @returns {boolean} &#x6210;&#x529F;&#x30FB;&#x4E0D;&#x6210;&#x529F;&#x306E;&#x771F;&#x507D;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;, true: &#x7A7A;&#x306B;&#x3057;&#x305F;
    */
   clean(type, types) {
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
     // Array.some &#x306F; &#x623B;&#x308A;&#x5024;&#x304C; true &#x306E;&#x6642;&#x306B;&#x8D70;&#x67FB;&#x3092;&#x6B62;&#x3081;&#x307E;&#x3059;
     // types &#x914D;&#x5217;&#x306B; null &#x4EE5;&#x5916;&#x304C;&#x3042;&#x308B;&#x304B;&#x3092;&#x8ABF;&#x3079;&#x307E;&#x3059;
     // @type {boolean} - listener list &#x306B; &#x95A2;&#x6570;(typeof &apos;function&apos;)&#x304C;&#x5B58;&#x5728;&#x3059;&#x308B;&#x3068; true &#x306B;&#x306A;&#x308A;&#x307E;&#x3059;
-    const hasFunction = types.some((listener) =&gt; typeof listener === &apos;function&apos;);
+    const hasFunction = types.some(listener =&gt; Type.method(listener));
 
     if (!hasFunction) {
       // null &#x4EE5;&#x5916;&#x304C;&#x7121;&#x3044;&#x306E;&#x3067;&#x7A7A;&#x306B;&#x3059;&#x308B;
@@ -220,7 +250,7 @@ export class EventDispatcher {
    * event type &#x306B;&#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x95A2;&#x6570;&#x304C;&#x767B;&#x9332;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x304B;&#x3092;&#x8ABF;&#x3079;&#x307E;&#x3059;
    * @param {string} type event type&#xFF08;&#x7A2E;&#x985E;&#xFF09;
    * @param {Function} listener &#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x95A2;&#x6570;
-   * @return {boolean} event type &#x306B;&#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x95A2;&#x6570;&#x304C;&#x767B;&#x9332;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x304B;&#x306E;&#x771F;&#x507D;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {boolean} event type &#x306B;&#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x95A2;&#x6570;&#x304C;&#x767B;&#x9332;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x304B;&#x306E;&#x771F;&#x507D;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   has(type, listener) {
     if (!Type.method(listener)) {
@@ -229,9 +259,9 @@ export class EventDispatcher {
     }
 
     // @type {Object} - events.type:String: [listener:Function...]
-    const listeners = this.listeners;
+    const listeners = this.listeners();
 
-    if (!listeners.hasOwnProperty(type)) {
+    if (!Type.hasKey(listeners, type)) {
       // listener.type &#x304C;&#x5B58;&#x5728;&#x3057;&#x306A;&#x3044;
       // &#x51E6;&#x7406;&#x3057;&#x306A;&#x3044;
       return false;
@@ -244,16 +274,15 @@ export class EventDispatcher {
    * &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x95A2;&#x6570;&#x3092; call &#x3057;&#x307E;&#x3059;
    * @param {Events|*} events &#x9001;&#x4FE1;&#x3055;&#x308C;&#x308B; Event Object.&lt;br&gt;
    *   type &#x30AD;&#x30FC;&#x306B;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x7A2E;&#x985E;&#x304C;&#x8A2D;&#x5B9A;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3001;dispatch &#x6642;&#x306B; target &#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3;&#x3092;&#x8FFD;&#x52A0;&#x3057; this &#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
-   * @return {boolean} &#x6210;&#x529F;&#x30FB;&#x4E0D;&#x6210;&#x529F;&#x306E;&#x771F;&#x507D;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {boolean} &#x6210;&#x529F;&#x30FB;&#x4E0D;&#x6210;&#x529F;&#x306E;&#x771F;&#x507D;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   dispatch(events) {
     // @type {Object} - events.type:string: [listener:Function...]
-    const listeners = this.listeners;
+    const listeners = this.listeners();
     // @type {string} - event type
     const type = events.type;
 
-    // typeof &#x3067;&#x306A;&#x304F; hasOwnProperty &#x3067;&#x8ABF;&#x3079;&#x308B;
-    if (!listeners.hasOwnProperty(type)) {
+    if (!Type.hasKey(listeners, type)) {
       // listener.type &#x304C;&#x5B58;&#x5728;&#x3057;&#x306A;&#x3044;
       // &#x51E6;&#x7406;&#x3057;&#x306A;&#x3044;
       return false;
@@ -275,7 +304,6 @@ export class EventDispatcher {
           if (Type.method(listener)) {
             return listener.call(this, eventObject);
           }
-
           return null;
         }
       );
@@ -285,9 +313,10 @@ export class EventDispatcher {
   /**
    * **alias on**
    * &lt;p&gt;event type &#x306B; &#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x95A2;&#x6570;&#x3092; bind &#x3057;&#x307E;&#x3059;&lt;/p&gt;
+   * @deprecated instead use on
    * @param {string} type event type&#xFF08;&#x7A2E;&#x985E;&#xFF09;
    * @param {Function} listener callback&#x95A2;&#x6570;
-   * @return {boolean} &#x6210;&#x529F;&#x30FB;&#x4E0D;&#x6210;&#x529F;&#x306E;&#x771F;&#x507D;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {boolean} &#x6210;&#x529F;&#x30FB;&#x4E0D;&#x6210;&#x529F;&#x306E;&#x771F;&#x507D;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   addEventListener(type, listener) {
     return this.on(type, listener);
@@ -295,9 +324,10 @@ export class EventDispatcher {
   /**
    * **alias off**
    * &lt;p&gt;event type &#x304B;&#x3089;&#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x95A2;&#x6570;&#x3092; remove &#x3057;&#x307E;&#x3059;&lt;/p&gt;
+   * @deprecated instead use off
    * @param {string} type event type&#xFF08;&#x7A2E;&#x985E;&#xFF09;
    * @param {Function} listener &#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x95A2;&#x6570;
-   * @return {boolean} &#x6210;&#x529F;&#x30FB;&#x4E0D;&#x6210;&#x529F;&#x306E;&#x771F;&#x507D;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {boolean} &#x6210;&#x529F;&#x30FB;&#x4E0D;&#x6210;&#x529F;&#x306E;&#x771F;&#x507D;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   removeEventListener(type, listener) {
     return this.off(type, listener);
@@ -305,9 +335,10 @@ export class EventDispatcher {
   /**
    * **alias has**
    * &lt;p&gt;event type &#x306B;&#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x95A2;&#x6570;&#x304C;&#x767B;&#x9332;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x304B;&#x3092;&#x8ABF;&#x3079;&#x307E;&#x3059;&lt;/p&gt;
+   * @deprecated instead use has
    * @param {string} type event type&#xFF08;&#x7A2E;&#x985E;&#xFF09;
    * @param {Function} listener &#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x95A2;&#x6570;
-   * @return {boolean} event type &#x306B;&#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x95A2;&#x6570;&#x304C;&#x767B;&#x9332;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x304B;&#x306E;&#x771F;&#x507D;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {boolean} event type &#x306B;&#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x95A2;&#x6570;&#x304C;&#x767B;&#x9332;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x304B;&#x306E;&#x771F;&#x507D;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   hasEventListener(type, listener) {
     return this.has(type, listener);
@@ -315,8 +346,9 @@ export class EventDispatcher {
   /**
    * **alias dispatch**
    * &lt;p&gt;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x95A2;&#x6570;&#x3092; call &#x3057;&#x307E;&#x3059;&lt;/p&gt;
+   * @deprecated instead use dispatch
    * @param {Events} events type&#x30AD;&#x30FC; &#x304C;&#x5FC5;&#x9808;&#x3067;&#x3059;
-   * @return {boolean} &#x6210;&#x529F;&#x30FB;&#x4E0D;&#x6210;&#x529F;&#x306E;&#x771F;&#x507D;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {boolean} &#x6210;&#x529F;&#x30FB;&#x4E0D;&#x6210;&#x529F;&#x306E;&#x771F;&#x507D;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   dispatchEvent(events) {
     return this.dispatch(events);
@@ -327,7 +359,7 @@ export class EventDispatcher {
 </div>
 
 <footer class="footer">
-  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.4)</span></a>
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
 </footer>
 
 <script src="script/search_index.js"></script>

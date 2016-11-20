@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/event/Scrolling.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+<link data-ice="userStyle" rel="stylesheet" href="user/css/0-esdoc_extension.css">
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">event</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html">EventDispatcher</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Events.js~Events.html">Events</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Freeze.js~Freeze.html">Freeze</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scroll.js~Scroll.html">Scroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/ScrollEvents.js~ScrollEvents.html">ScrollEvents</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scrolling.js~Scrolling.html">Scrolling</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Touching.js~Touching.html">Touching</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/TouchingEvents.js~TouchingEvents.html">TouchingEvents</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/WheelEvents.js~WheelEvents.html">WheelEvents</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">net</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">tick</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html">Cycle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Fps.js~Fps.html">Fps</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Polling.js~Polling.html">Polling</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Rate.js~Rate.html">Rate</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/List.js~List.html">List</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Vectors.js~Vectors.html">Vectors</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/event/Scrolling.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * @license inazumatv.com
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/11/04
+ *
+ * Copyright (c) 2011-2015 inazumatv.com, inc.
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ */
+
+// event
+import { default as Scroll } from &apos;./Scroll&apos;;
+import { default as EventDispatcher } from &apos;./EventDispatcher&apos;;
+import { default as ScrollEvents } from &apos;./ScrollEvents&apos;;
+
+// tick
+import { default as Rate } from &apos;../tick/Rate&apos;;
+
+/**
+ * new &#x3092;&#x8A31;&#x53EF;&#x3057;&#x306A;&#x3044;&#x305F;&#x3081;&#x306E; Symbol
+ * @type {Symbol}
+ * @private
+ */
+const singletonSymbol = Symbol(&apos;Scrolling singleton symbol&apos;);
+/**
+ * singleton instance, nullable
+ * @type {?Scrolling}
+ * @private
+ */
+let instance = null;
+// /**
+//  * private property key, bind &#x6E08;&#x307F; mouseWheel &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+//  * @type {Symbol}
+//  * @private
+//  */
+// const bindSymbol = Symbol(&apos;bound mouseWheel&apos;);
+// /**
+//  * Cycle.UPDATE event &#x3092;&#x767A;&#x706B;&#x3059;&#x308B;&#x6642;&#x306E; Events instance &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+//  * @type {Symbol}
+//  * @private
+//  */
+// const eventsSymbol = Symbol(&apos;Cycle.UPDATE event&apos;);
+// /**
+//  * scroll top &#x4F4D;&#x7F6E;&#x304C;&#x5909;&#x66F4;&#x306B;&#x306A;&#x3063;&#x305F;&#x304B;&#x3092;&#x78BA;&#x8A8D;&#x3059;&#x308B;&#x305F;&#x3081;&#x306B;&#x524D;&#x56DE;&#x5024;&#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+//  * @type {Symbol}
+//  */
+// const topSymbol = Symbol(&apos;previous scroll top&apos;);
+
+/**
+ * &#x5F15;&#x6570; rate instance &#x306B;&#x8A2D;&#x5B9A;&#x3057;&#x305F; fps &#x3067;&#x30B9;&#x30AF;&#x30ED;&#x30FC;&#x30EB;&#x4F4D;&#x7F6E;&#x3092;&#x901A;&#x77E5;&#x3057;&#x307E;&#x3059;
+ * &lt;p&gt;singleton &#x306A;&#x306E;&#x3067; new &#x3067;&#x306F;&#x306A;&#x304F; factory &#x3092;&#x4F7F;&#x7528;&#x3057; instance &#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&lt;/p&gt;
+ *
+ * ```
+ * const instance = Scrolling.factory();
+ *
+ * instance.mother = new Elements(Elements.id(js-tc_scanimation-motion))
+ * ```
+ * */
+export default class Scrolling extends EventDispatcher {
+  /**
+   * singleton &#x3067;&#x3059;
+   * @param {Symbol} checkSymbol singleton &#x3092;&#x4FDD;&#x8A3C;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; private instance
+   * @returns {Scrolling} singleton instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  constructor(checkSymbol) {
+    // checkSymbol &#x3068; singleton &#x304C;&#x7B49;&#x4FA1;&#x304B;&#x3092;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3057;&#x307E;&#x3059;
+    if (checkSymbol !== singletonSymbol) {
+      throw new Error(&apos;don\&apos;t use new, instead use static factory method.&apos;);
+    }
+
+    super();
+
+    // instance &#x4F5C;&#x6210;&#x6E08;&#x307F;&#x304B;&#x3092;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3057; instance &#x304C; null &#x306E;&#x6642; this &#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
+    if (instance !== null) {
+      return instance;
+    }
+
+    // onetime setting
+    instance = this;
+
+    // @type {function} - bound scroll function
+    // this[bindSymbol] = this.scroll.bind(this);
+    //
+    // // @type {Events} - events instance
+    // this[eventsSymbol] = new ScrollEvents(Scrolling.SCROLL, this, this);
+    const boundScroll = this.scroll.bind(this);
+    /**
+     * bound scroll, Rate.UPDATE event handler
+     * @returns {function} bound scroll
+     */
+    this.boundScroll = () =&gt; boundScroll;
+    const events = new ScrollEvents(Scrolling.UPDATE, this, this);
+    /**
+     * ScrollEvents instance, &#x767A;&#x706B;&#x6642;&#x306B;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;
+     * @returns {ScrollEvents} ScrollEvents instance
+     */
+    this.events = () =&gt; events;
+
+    // @type {number} - scroll top &#x524D;&#x56DE;&#x5024;&#x3092;&#x4FDD;&#x5B58;&#x3057;&#x307E;&#x3059;
+    // @default -1
+    // this[topSymbol] = -1;
+    /**
+     * &#x524D;&#x56DE; scroll top &#x4F4D;&#x7F6E;
+     * @type {number}
+     * @default -1
+     */
+    this.previous = -1;
+    /**
+     * start &#x6E08;&#x307F;&#x30D5;&#x30E9;&#x30C3;&#x30B0;
+     * @type {boolean}
+     * @default false
+     */
+    this.started = false;
+
+    // /**
+    //  * @property {Rate} this.rate - Rate instance
+    //  */
+    // Object.assign(this, { rate });
+    /**
+     * Rate instance
+     * @type {?Rate}
+     */
+    this.rate = null;
+
+    // &#x8A2D;&#x5B9A;&#x6E08;&#x307F; instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+    return instance;
+  }
+  // ----------------------------------------
+  // EVENT
+  // ----------------------------------------
+  /**
+   * fps &#x3067;&#x767A;&#x751F;&#x3059;&#x308B;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @event SCROLL
+   * @returns {string} event, scrollingScroll &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @default scrollingScroll
+   */
+  static get UPDATE() {
+    return &apos;scrollingUpdate&apos;;
+  }
+  // // ----------------------------------------
+  // // GETTER / SETTER
+  // // ----------------------------------------
+  // /**
+  //  * bind &#x6E08;&#x307F; mouseWheel
+  //  * @returns {function} bind &#x6E08;&#x307F; mouseWheel &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+  //  */
+  // get bindScroll() {
+  //   return this[bindSymbol];
+  // }
+  // // events
+  // /**
+  //  * Events instance &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+  //  * @returns {Events} Events instance
+  //  */
+  // get events() {
+  //   return this[eventsSymbol];
+  // }
+  // /**
+  //  * Events instance &#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
+  //  * @param {Events} events Events instance
+  //  */
+  // set events(events) {
+  //   this[eventsSymbol] = events;
+  // }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
+  /**
+   * Rate instance &#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
+   * @param {Rate} [rate=new Rate(Rate.Rate_5)] Rate instance, scroll &#x76E3;&#x8996; fps &#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
+   * @returns {Scrolling} method chain &#x53EF;&#x80FD;&#x306A;&#x3088;&#x3046;&#x306B; instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  init(rate = new Rate(Rate.RATE_5)) {
+    this.rate = rate;
+    return this;
+  }
+  /**
+   * fps &#x3092;&#x76E3;&#x8996;&#x3057;&#x30B9;&#x30AF;&#x30ED;&#x30FC;&#x30EB;&#x4F4D;&#x7F6E;&#x3092;&#x77E5;&#x3089;&#x305B;&#x307E;&#x3059;
+   * @returns {Scrolling} method chain &#x53EF;&#x80FD;&#x306A;&#x3088;&#x3046;&#x306B; instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  start() {
+    const rate = this.rate;
+    if (rate === null) {
+      throw new Error(`rate: ${rate} error. have to set rate, before start.`);
+    }
+    if (this.started) {
+      return this;
+    }
+    this.started = true;
+    rate.on(Rate.UPDATE, this.boundScroll());
+    rate.start();
+    return this;
+  }
+  /**
+   * fps &#x76E3;&#x8996;&#x3092;&#x6B62;&#x3081;&#x307E;&#x3059;
+   * @returns {Scrolling} method chain &#x53EF;&#x80FD;&#x306A;&#x3088;&#x3046;&#x306B; instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  stop() {
+    if (!this.started) {
+      return this;
+    }
+    this.started = false;
+    this.rate.off(Rate.UPDATE, this.boundScroll());
+    return this;
+  }
+  /**
+   * window scroll event handler&lt;br&gt;
+   * window scroll event &#x767A;&#x751F;&#x5F8C;&#x306B; scroll top &#x4F4D;&#x7F6E;&#x3092;&#x3082;&#x305F;&#x305B;&#x305F; Scroll.SCROLL custom event &#x3092;&#x767A;&#x706B;&#x3057;&#x307E;&#x3059;
+   *
+   * &#x4E0B;&#x8A18;&#x306E;&#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3;&#x3092;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x30FB;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x306B;&#x8FFD;&#x52A0;&#x3057;&#x307E;&#x3059;
+   *
+   * - original {Events} - Rate Events instance
+   * - y {number} - scroll top
+   * - height {number} - window height
+   * - width {number} - window width
+   * - bottom {number} - window bottom &#x4F4D;&#x7F6E; (y + height)
+   * - previous {number} - &#x524D;&#x56DE;&#x306E; scroll top
+   * - moving {number} - &#x524D;&#x56DE;&#x304B;&#x3089;&#x306E;&#x79FB;&#x52D5;&#x91CF;, &#x6B63;: scroll down, &#x8CA0;: scroll up
+   * - wide {boolean} - width &#x304C; 768 &#x4EE5;&#x4E0A;&#x306E;&#x6642;&#x306B; true
+   * - changed {boolean} - scroll top &#x304C;&#x524D;&#x56DE;&#x3068;&#x5909;&#x308F;&#x3063;&#x3066;&#x3044;&#x305F;&#x3089; true
+   *
+   * @param {?Event|?Events} event window scroll event, nullable
+   * @returns {void}
+   */
+  scroll(event) {
+    // @type {number} - scroll top
+    const y = Scroll.y();
+    // @type {number} - window height
+    const height = window.innerHeight;
+    // @type {number} - window width
+    const width = window.innerWidth;
+    // @type {number} - previous scroll top
+    const previous = this.previous;
+
+    // @type {ScrollEvents} - events
+    const events = this.events();
+
+    // @type {Event} - Rate Events instance
+    events.original = event;
+    // @type {number} - scroll top
+    events.y = y;
+    // @type {number} - window height
+    events.height = height;
+    // @type {number} - window width
+    events.width = width;
+    // @type {number} - window bottom(y + height)
+    events.bottom = y + height;
+    // @type {boolean} - &#x79FB;&#x52D5;&#x3057;&#x305F;&#x304B;&#x3092;&#x8868;&#x3057;&#x307E;&#x3059;,
+    // event &#x304C; null &#x306E;&#x6642;&#x306F;&#x5F37;&#x5236;&#x767A;&#x706B;&#x306A;&#x306E;&#x3067;&#x79FB;&#x52D5;&#x91CF; 0 &#xFF08;scroll top &#x4F4D;&#x7F6E;&#x306B;&#x5909;&#x66F4;&#x304C;&#x306A;&#x3044;&#xFF09;&#x3067;&#x3082; changed &#x3092; true &#x306B;&#x3057;&#x307E;&#x3059;
+    events.changed = event === null || previous !== y;
+    // @type {number} - &#x524D;&#x56DE;&#x306E; y &#x4F4D;&#x7F6E;
+    events.previous = previous;
+    // @type {number} - &#x79FB;&#x52D5;&#x91CF; +: down, -: up
+    events.moving = y - previous;
+    // event fire
+    // console.log(&apos;Scrolling.scroll&apos;, events);
+    this.dispatch(events);
+
+    // save scroll top -&gt; previous
+    this.previous = y;
+  }
+  /**
+   * &#x5F37;&#x5236;&#x7684;&#x306B; Scrolling.SCROLL event &#x3092;&#x767A;&#x706B;&#x3055;&#x305B;&#x307E;&#x3059;
+   * @returns {void}
+   */
+  fire() {
+    this.scroll(null);
+  }
+  // ----------------------------------------
+  // STATIC METHOD
+  // ----------------------------------------
+  /**
+   * Scrolling instance &#x3092; singleton &#x3092;&#x4FDD;&#x8A3C;&#x3057;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;
+   * @returns {Scrolling} Scrolling instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  static factory() {
+    if (instance !== null) {
+      return instance;
+    }
+    return new Scrolling(singletonSymbol);
+  }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

@@ -87,6 +87,10 @@ export default class Wheel extends EventDispatcher {
     //  * @type {number}
     //  */
     // this.coefficient = -7.5;
+    /**
+     * start flag
+     * @type {boolean}
+     */
     this.started = false;
     const events = {
       up: new WheelEvents(Wheel.UP, this),

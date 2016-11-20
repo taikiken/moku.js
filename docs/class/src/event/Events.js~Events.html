@@ -35,20 +35,28 @@
     
   <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">event</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html">EventDispatcher</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Events.js~Events.html">Events</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Freeze.js~Freeze.html">Freeze</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scroll.js~Scroll.html">Scroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/ScrollEvents.js~ScrollEvents.html">ScrollEvents</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scrolling.js~Scrolling.html">Scrolling</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Touching.js~Touching.html">Touching</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/TouchingEvents.js~TouchingEvents.html">TouchingEvents</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/WheelEvents.js~WheelEvents.html">WheelEvents</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">net</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">tick</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html">Cycle</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Fps.js~Fps.html">Fps</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Polling.js~Polling.html">Polling</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Rate.js~Rate.html">Rate</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/List.js~List.html">List</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Vectors.js~Vectors.html">Vectors</a></span></span></li>
 </ul>
 </div>
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {Events} from &apos;<span><a href="file/src/event/Events.js.html#lineNumber24">./src/event/Events.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Events from &apos;<span><a href="file/src/event/Events.js.html#lineNumber24">./src/event/Events.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
@@ -65,7 +73,7 @@
   
   
   
-  
+  <div class="flat-list" data-ice="directSubclass"><h4>Direct Subclass:</h4><div><span><a href="class/src/event/ScrollEvents.js~ScrollEvents.html">ScrollEvents</a></span>, <span><a href="class/src/event/TouchingEvents.js~TouchingEvents.html">TouchingEvents</a></span>, <span><a href="class/src/event/WheelEvents.js~WheelEvents.html">WheelEvents</a></span></div></div>
   
   
   
@@ -74,9 +82,9 @@
 
   
   
-  <div class="description" data-ice="description"><p>custom Event &#x306E;&#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x95A2;&#x6570;&#x5F15;&#x6570;&#x306B;&#x9001;&#x3089;&#x308C;&#x308B; Event Object
-EventDispatcher.dispatch &#x3059;&#x308B;&#x6642;&#x306E;&#x5F15;&#x6570;&#x3068;&#x3057;&#x3066;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;
-3&#x3064;&#x306E;&#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3;&#x306F;&#x5FC5;&#x9808;&#x9805;&#x76EE;&#x3067;&#x3059;&#x3001;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x306B;&#x3042;&#x308F;&#x305B;&#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3;&#x3092;&#x8FFD;&#x52A0;&#x3057;&#x307E;&#x3059;</p>
+  <div class="description" data-ice="description"><p>custom Event &#x306E;&#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x95A2;&#x6570;&#x5F15;&#x6570;&#x306B;&#x9001;&#x3089;&#x308C;&#x308B; Event Object</p>
+<p>EventDispatcher.dispatch &#x3059;&#x308B;&#x6642;&#x306E;&#x5F15;&#x6570;&#x3068;&#x3057;&#x3066;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;</p>
+<p>3&#x3064;&#x306E;&#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3;&#x306F;&#x5FC5;&#x9808;&#x9805;&#x76EE;&#x3067;&#x3059;&#x3001;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x306B;&#x3042;&#x308F;&#x305B;&#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3;&#x3092;&#x8FFD;&#x52A0;&#x3057;&#x307E;&#x3059;</p>
 <ul>
 <li>type: string, &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x7A2E;&#x985E;</li>
 <li>target: *, &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x767A;&#x751F;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;</li>
@@ -110,7 +118,7 @@ EventDispatcher.dispatch &#x3059;&#x308B;&#x6642;&#x306E;&#x5F15;&#x6570;&#x3068
     <td>
       <div>
         <p>
-           <span data-ice="name"><span><a href="class/src/event/Events.js~Events.html#instance-constructor-constructor">constructor</a></span></span><span data-ice="signature">(type: <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span>, target: <span>*</span>, currentTarget: <span>*</span>)</span>
+           <span data-ice="name"><span><a href="class/src/event/Events.js~Events.html#instance-constructor-constructor">constructor</a></span></span><span data-ice="signature">(type: <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span>, currentTarget: <span>*</span>, target: <span>*</span>)</span>
         </p>
       </div>
       <div>
@@ -128,7 +136,91 @@ EventDispatcher.dispatch &#x3059;&#x308B;&#x6642;&#x306E;&#x5F15;&#x6570;&#x3068
 </tbody>
 </table>
 </div>
-
+<div data-ice="memberSummary"><h2>Member Summary</h2><table class="summary" data-ice="summary">
+  <thead><tr><td data-ice="title" colspan="3">Public Members</td></tr></thead>
+  <tbody>
+  
+  <tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="class/src/event/Events.js~Events.html#instance-member-currentTarget">currentTarget</a></span></span><span data-ice="signature">: <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>currentTarget instance</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="class/src/event/Events.js~Events.html#instance-member-target">target</a></span></span><span data-ice="signature">: <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>target instance</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="class/src/event/Events.js~Events.html#instance-member-type">type</a></span></span><span data-ice="signature">: <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x7A2E;&#x985E;</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
 
 
 
@@ -144,7 +236,7 @@ EventDispatcher.dispatch &#x3059;&#x308B;&#x6642;&#x306E;&#x5F15;&#x6570;&#x3068
     
     
     
-    <span data-ice="name">constructor</span><span data-ice="signature">(type: <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span>, target: <span>*</span>, currentTarget: <span>*</span>)</span>
+    <span data-ice="name">constructor</span><span data-ice="signature">(type: <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span>, currentTarget: <span>*</span>, target: <span>*</span>)</span>
     <span class="right-info">
       
       
@@ -176,19 +268,19 @@ EventDispatcher.dispatch &#x3059;&#x308B;&#x6642;&#x306E;&#x5F15;&#x6570;&#x3068
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
-      <td data-ice="name" data-depth="0">target</td>
-      <td data-ice="type"><span>*</span></td>
-      <td data-ice="appendix"><ul><li>optional</li>
-<li>default: this</li></ul></td>
-      <td data-ice="description"><p>&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x767A;&#x751F;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;</p>
-</td>
-    </tr>
-<tr data-ice="property" data-depth="0">
       <td data-ice="name" data-depth="0">currentTarget</td>
       <td data-ice="type"><span>*</span></td>
       <td data-ice="appendix"><ul><li>optional</li>
 <li>default: this</li></ul></td>
       <td data-ice="description"><p>current &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x767A;&#x751F;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">target</td>
+      <td data-ice="type"><span>*</span></td>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: this</li></ul></td>
+      <td data-ice="description"><p>&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x767A;&#x751F;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;</p>
 </td>
     </tr>
 </tbody>
@@ -212,12 +304,137 @@ EventDispatcher.dispatch &#x3059;&#x308B;&#x6642;&#x306E;&#x5F15;&#x6570;&#x3068
   
 </div>
 </div>
+<div data-ice="memberDetails"><h2 data-ice="title">Public Members</h2>
 
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-currentTarget">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    <span data-ice="name">currentTarget</span><span data-ice="signature">: <span>*</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/event/Events.js.html#lineNumber46">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>currentTarget instance</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-target">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    <span data-ice="name">target</span><span data-ice="signature">: <span>*</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/event/Events.js.html#lineNumber41">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>target instance</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-type">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    <span data-ice="name">type</span><span data-ice="signature">: <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/event/Events.js.html#lineNumber36">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x7A2E;&#x985E;</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+</div>
 
 </div>
 
 <footer class="footer">
-  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.4)</span></a>
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
 </footer>
 
 <script src="script/search_index.js"></script>

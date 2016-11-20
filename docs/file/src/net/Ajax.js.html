@@ -35,14 +35,22 @@
     
   <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">event</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html">EventDispatcher</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Events.js~Events.html">Events</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Freeze.js~Freeze.html">Freeze</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scroll.js~Scroll.html">Scroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/ScrollEvents.js~ScrollEvents.html">ScrollEvents</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scrolling.js~Scrolling.html">Scrolling</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Touching.js~Touching.html">Touching</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/TouchingEvents.js~TouchingEvents.html">TouchingEvents</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/WheelEvents.js~WheelEvents.html">WheelEvents</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">net</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">tick</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html">Cycle</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Fps.js~Fps.html">Fps</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Polling.js~Polling.html">Polling</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Rate.js~Rate.html">Rate</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/List.js~List.html">List</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Vectors.js~Vectors.html">Vectors</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -60,12 +68,8 @@
  *
  */
 
-// event
-import { EventDispatcher } from &apos;../event/EventDispatcher&apos;;
-import { Events } from &apos;../event/Events&apos;;
-
 // util
-import { Type } from &apos;../util/Type&apos;;
+import { default as Type } from &apos;../util/Type&apos;;
 
 // built-in function
 // Safari, IE &#x306F;&#x30B5;&#x30DD;&#x30FC;&#x30C8;&#x3057;&#x3066;&#x3044;&#x306A;&#x3044;&#x306E;&#x3067;&#x30E9;&#x30A4;&#x30D6;&#x30E9;&#x30EA;&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x3053;&#x3068;
@@ -73,12 +77,12 @@ const fetch = self.fetch;
 const Request = self.Request;
 // const Headers = self.Headers;
 
-/**
- * can&#xFF08;Ajax &#x5B9F;&#x884C;&#x53EF;&#x80FD;&#x304B;&#x306E;&#x771F;&#x507D;&#x5024;&#xFF09;&#x30D5;&#x30E9;&#x30C3;&#x30B0;&#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
- * @type {Symbol}
- * @private
- */
-const canSymbol = Symbol();
+// /**
+//  * can&#xFF08;Ajax &#x5B9F;&#x884C;&#x53EF;&#x80FD;&#x304B;&#x306E;&#x771F;&#x507D;&#x5024;&#xFF09;&#x30D5;&#x30E9;&#x30C3;&#x30B0;&#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+//  * @type {Symbol}
+//  * @private
+//  */
+// const canSymbol = Symbol(&apos;can start Ajax flag&apos;);
 
 /**
  * &lt;p&gt;fetch API &#x3092;&#x4F7F;&#x7528;&#x3057; Ajax request &#x3092;&#x884C;&#x3044;&#x307E;&#x3059;&lt;/p&gt;
@@ -101,67 +105,53 @@ const canSymbol = Symbol();
  * @see https://developer.mozilla.org/ja/docs/Web/API/Headers
  * @see https://developer.mozilla.org/ja/docs/Web/API/Body
  */
-export class Ajax extends EventDispatcher {
+export default class Ajax {
   /**
    * request &#x53EF;&#x80FD; / &#x4E0D;&#x53EF;&#x80FD; flag &#x3092; true &#x306B;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
+   * @param {Function} resolve Promise success callback
+   * @param {Function} reject Promise fail callback
    */
-  constructor() {
-    super();
+  constructor(resolve, reject) {
+    // /**
+    //  * request &#x53EF;&#x80FD; / &#x4E0D;&#x53EF;&#x80FD; flag
+    //  * @type {boolean}
+    //  * @private
+    //  * @default true
+    //  */
+    // this[canSymbol] = true;
     /**
-     * request &#x53EF;&#x80FD; / &#x4E0D;&#x53EF;&#x80FD; flag
+     * request &#x53EF;&#x80FD; / &#x4E0D;&#x53EF;&#x80FD; flag, true: &#x5B9F;&#x884C;&#x53EF;&#x80FD;
      * @type {boolean}
-     * @private
-     * @default true
      */
-    this[canSymbol] = true;
+    this.can = true;
+    /**
+     * Promise success callback
+     * @type {Function}
+     */
+    this.resolve = resolve;
+    /**
+     * Promise fail callback
+     * @type {Function}
+     */
+    this.reject = reject;
   }
-  // ----------------------------------------
-  // EVENT
-  // ----------------------------------------
-  /**
-   * START event &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
-   * @event START
-   * @returns {string} &#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x958B;&#x59CB;&#x30A4;&#x30D9;&#x30F3;&#x30C8;, ajaxStart &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   * @default ajaxStart
-   */
-  static get START() {
-    return &apos;ajaxStart&apos;;
-  }
-  /**
-   * COMPLETE event &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
-   * @event COMPLETE
-   * @returns {string} &#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x5B8C;&#x4E86;&#x30A4;&#x30D9;&#x30F3;&#x30C8;, ajaxComplete &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   * @default ajaxComplete
-   */
-  static get COMPLETE() {
-    return &apos;ajaxComplete&apos;;
-  }
-  /**
-   * ERROR event &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
-   * @event ERROR
-   * @returns {string} &#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x30A8;&#x30E9;&#x30FC; &#x30A4;&#x30D9;&#x30F3;&#x30C8;, ajaxError &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   * @default ajaxError
-   */
-  static get ERROR() {
-    return &apos;ajaxError&apos;;
-  }
-  // ----------------------------------------
-  // GETTER / SETTER
-  // ----------------------------------------
-  /**
-   * request &#x53EF;&#x80FD; / &#x4E0D;&#x53EF;&#x80FD; flag &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
-   * @return {boolean} request &#x53EF;&#x80FD; / &#x4E0D;&#x53EF;&#x80FD; flag &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   */
-  get can() {
-    return this[canSymbol];
-  }
-  /**
-   * request &#x53EF;&#x80FD; / &#x4E0D;&#x53EF;&#x80FD; flag &#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
-   * @param {boolean} flag request &#x53EF;&#x80FD; / &#x4E0D;&#x53EF;&#x80FD; flag
-   */
-  set can(flag) {
-    this[canSymbol] = flag;
-  }
+  // // ----------------------------------------
+  // // GETTER / SETTER
+  // // ----------------------------------------
+  // /**
+  //  * request &#x53EF;&#x80FD; / &#x4E0D;&#x53EF;&#x80FD; flag &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+  //  * @return {boolean} request &#x53EF;&#x80FD; / &#x4E0D;&#x53EF;&#x80FD; flag &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+  //  */
+  // get can() {
+  //   return this[canSymbol];
+  // }
+  // /**
+  //  * request &#x53EF;&#x80FD; / &#x4E0D;&#x53EF;&#x80FD; flag &#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
+  //  * @param {boolean} flag request &#x53EF;&#x80FD; / &#x4E0D;&#x53EF;&#x80FD; flag
+  //  */
+  // set can(flag) {
+  //   this[canSymbol] = !!flag;
+  // }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
@@ -173,8 +163,8 @@ export class Ajax extends EventDispatcher {
    *
    * @param {string} path Ajax request path
    * @param {string} method GET, POST, PUT, DELETE...etc request method
-   * @param {?Headers|?Object|null} [headers=null] Headers option, nullable
-   * @param {?FormData|null} [formData=null] &#x9001;&#x4FE1;&#x30D5;&#x30A9;&#x30FC;&#x30E0;&#x30C7;&#x30FC;&#x30BF;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;, nullable
+   * @param {?Headers} [headers=null] Headers option, token &#x306A;&#x3069;&#x3092;&#x57CB;&#x3081;&#x8FBC;&#x3080;&#x306E;&#x306B;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;
+   * @param {?FormData} [formData=null] &#x30D5;&#x30A9;&#x30FC;&#x30E0;&#x30C7;&#x30FC;&#x30BF;&#x3092;&#x9001;&#x4FE1;&#x3059;&#x308B;&#x306E;&#x306B;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;
    * @return {boolean} ajax request &#x3092;&#x958B;&#x59CB;&#x3057;&#x305F;&#x304B;&#x3069;&#x3046;&#x304B;&#x306E;&#x771F;&#x507D;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   start(path, method, headers = null, formData = null) {
@@ -190,40 +180,27 @@ export class Ajax extends EventDispatcher {
     // @type {Request} Request instance
     const request = Ajax.option(path, method, headers, formData);
 
-    // start event fire
-    const startEvents = new Events(Ajax.START, this, this);
-    startEvents.request = request;
-    this.dispatch(startEvents);
-
     // fetch start
     fetch(request)
-      // @param {Object} response - Ajax response
+    // @param {Object} response - Ajax response
       .then((response) =&gt; {
         // may be success
         if (response.status !== 200) {
           throw new Error(`Ajax status error: (${response.status})`);
         }
-
         return response.json();
       })
       // @param {Object} - JSON &#x30D1;&#x30FC;&#x30B9;&#x6E08;&#x307F; Object
       .then((json) =&gt; {
-        // @type {Evens} - Ajax.COMPLETE events Object
-        const events = new Events(Ajax.COMPLETE, this, this);
-        events.data = json;
         // complete event fire
-        this.dispatch(events);
+        this.resolve(json);
         // flag true
         this.enable();
       })
       // @param {Error} - Ajax something error
       .catch((error) =&gt; {
-        // @type {Evens} - Ajax.COMPLETE events Object
-        const events = new Events(Ajax.ERROR, this, this);
-        events.data = null;
-        events.error = error;
         // error event fire
-        this.dispatch(events);
+        this.reject(error);
         // flag true
         this.enable();
       });
@@ -252,11 +229,21 @@ export class Ajax extends EventDispatcher {
   /**
    * &lt;p&gt;fetch API &#x3078;&#x9001;&#x308B;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&lt;/p&gt;
    *
+   * &#x5FC5;&#x305A;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
+   * - method: GET, POST, PUT, DELETE...etc
+   * - cache: &apos;no-cache&apos;
+   * - credentials: &apos;same-origin&apos;
+   *
+   * headers, formData &#x306F;&#x5B58;&#x5728;&#x3059;&#x308C;&#x3070; option &#x306B;&#x8FFD;&#x52A0;&#x3055;&#x308C;&#x307E;&#x3059;
+   *
    * @param {string} path Ajax request path
    * @param {string} method GET, POST, PUT, DELETE...etc request method
    * @param {Headers|Object|null} headers Headers option
    * @param {FormData|null} formData &#x9001;&#x4FE1;&#x30D5;&#x30A9;&#x30FC;&#x30E0;&#x30C7;&#x30FC;&#x30BF;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;
-   * @return {Request} fetch API &#x3078;&#x9001;&#x308B; Request instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {Request} fetch API &#x3078;&#x9001;&#x308B; Request instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   *
+   * @see https://developers.google.com/web/updates/2015/03/introduction-to-fetch
+   * @see https://developer.mozilla.org/ja/docs/Web/API/Request
    */
   static option(path, method, headers, formData) {
     // request option
@@ -286,7 +273,7 @@ export class Ajax extends EventDispatcher {
 </div>
 
 <footer class="footer">
-  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.4)</span></a>
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
 </footer>
 
 <script src="script/search_index.js"></script>

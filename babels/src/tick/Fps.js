@@ -78,6 +78,10 @@ export default class Fps extends Polling {
    * @returns {boolean} `update` をコールし Polling.UPDATE event が発生すると true を返します
    */
   change(interval) {
+    /**
+     * polling 間隔
+     * @type {number}
+     */
     this.interval = 1000 / interval;
     this.fps = interval;
     return this.update();

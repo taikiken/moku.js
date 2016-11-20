@@ -35,14 +35,22 @@
     
   <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">event</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html">EventDispatcher</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Events.js~Events.html">Events</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Freeze.js~Freeze.html">Freeze</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scroll.js~Scroll.html">Scroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/ScrollEvents.js~ScrollEvents.html">ScrollEvents</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scrolling.js~Scrolling.html">Scrolling</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Touching.js~Touching.html">Touching</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/TouchingEvents.js~TouchingEvents.html">TouchingEvents</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/WheelEvents.js~WheelEvents.html">WheelEvents</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">net</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">tick</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html">Cycle</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Fps.js~Fps.html">Fps</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Polling.js~Polling.html">Polling</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Rate.js~Rate.html">Rate</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/List.js~List.html">List</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Vectors.js~Vectors.html">Vectors</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -61,22 +69,22 @@
  */
 
 // event
-import { Events } from &apos;../event/Events&apos;;
+import { default as Events } from &apos;../event/Events&apos;;
 
 // tick
-import { Polling } from &apos;./Polling&apos;;
+import { default as Polling } from &apos;./Polling&apos;;
 
-/**
- * private property key, fps &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
- * @type {Symbol}
- * @private
- */
-const fpsSymbol = Symbol();
+// /**
+//  * private property key, fps &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
+//  * @type {Symbol}
+//  * @private
+//  */
+// const fpsSymbol = Symbol(&apos;Singleton Fps Symbol&apos;);
 
 /**
  * &#x30D5;&#x30EC;&#x30FC;&#x30E0;&#x30EC;&#x30FC;&#x30C8;&#x6BCE;&#x306B; UPDATE &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x307E;&#x3059;
  */
-export class Fps extends Polling {
+export default class Fps extends Polling {
   /**
    * &#x5F15;&#x6570;&#x306E; frame rate &#x306B;&#x5408;&#x308F;&#x305B; UPDATE &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x307E;&#x3059;
    * @param {number} [fps=30] frame rate, default: 30
@@ -85,15 +93,25 @@ export class Fps extends Polling {
     super(1000 / fps);
     // private property
     // @type {number} - frame rate, default: 30
-    this[fpsSymbol] = fps;
+    // this[fpsSymbol] = fps;
     // @type {Events} - Events
     const events = new Events(Fps.UPDATE, this, this);
-    events.fps = fps;
+    // events.fps = fps;
+    // /**
+    //  * Fps.UPDATE Events instance
+    //  * @type {Events}
+    //  */
+    // this.events = events;
     /**
      * Fps.UPDATE Events instance
-     * @type {Events}
+     * @returns {Events} Fps.UPDATE Events instance
      */
-    this.events = events;
+    this.events = () =&gt; events;
+    /**
+     * frame rate
+     * @type {number}
+     */
+    this.fps = fps;
   }
   // ----------------------------------------
   // EVENT
@@ -101,44 +119,63 @@ export class Fps extends Polling {
   /**
    * &#x30D5;&#x30EC;&#x30FC;&#x30E0;&#x30EC;&#x30FC;&#x30C8;&#x6BCE;&#x306B;&#x767A;&#x751F;&#x3059;&#x308B;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
    * @event UPDATE
-   * @return {string} event, fpsUpdate &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {string} event, fpsUpdate &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    * @default fpsUpdate
    */
   static get UPDATE() {
     return &apos;fpsUpdate&apos;;
   }
   // ----------------------------------------
-  // GETTER / SETTER
+  // METHOD
   // ----------------------------------------
-  // fps
   /**
-   * frame rate &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
-   * @return {number} frame rate &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * polling &#x6642;&#x9593;&#x3092;&#x5909;&#x66F4;&#x3057;&#x307E;&#x3059;&lt;br&gt;
+   * 1. &#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3; polling &#x5909;&#x66F4;
+   * 1. update &#x5B9F;&#x884C;
+   * @param {number} interval fps
+   * @returns {boolean} `update` &#x3092;&#x30B3;&#x30FC;&#x30EB;&#x3057; Polling.UPDATE event &#x304C;&#x767A;&#x751F;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
-  get fps() {
-    return this[fpsSymbol];
-  }
-  /**
-   * frame rate &#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;, 1 ~ 60 &#x306E;&#x9593;&#x3067;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
-   * @param {number} rate frame rate
-   */
-  set fps(rate) {
-    const events = this.events;
-    events.fps = rate;
-    this[fpsSymbol] = rate;
+  change(interval) {
     /**
-     * interval milliseconds
+     * polling &#x9593;&#x9694;
      * @type {number}
      */
-    this.polling = 1000 / rate;
+    this.interval = 1000 / interval;
+    this.fps = interval;
+    return this.update();
   }
+  // // ----------------------------------------
+  // // GETTER / SETTER
+  // // ----------------------------------------
+  // // fps
+  // /**
+  //  * frame rate &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+  //  * @returns {number} frame rate &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+  //  */
+  // get fps() {
+  //   return this[fpsSymbol];
+  // }
+  // /**
+  //  * frame rate &#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;, 1 ~ 60 &#x306E;&#x9593;&#x3067;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
+  //  * @param {number} rate frame rate
+  //  */
+  // set fps(rate) {
+  //   const events = this.events;
+  //   events.fps = rate;
+  //   this[fpsSymbol] = rate;
+  //   /**
+  //    * interval milliseconds
+  //    * @type {number}
+  //    */
+  //   this.polling = 1000 / rate;
+  // }
 }
 </code></pre>
 
 </div>
 
 <footer class="footer">
-  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.4)</span></a>
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
 </footer>
 
 <script src="script/search_index.js"></script>

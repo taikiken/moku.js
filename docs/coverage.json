@@ -1,21 +1,26 @@
 {
   "coverage": "100%",
-  "expectCount": 103,
-  "actualCount": 103,
+  "expectCount": 213,
+  "actualCount": 213,
   "files": {
     "src/net/Ajax.js": {
+      "expectCount": 9,
+      "actualCount": 9,
+      "undocumentLines": []
+    },
+    "src/event/Touching.js": {
+      "expectCount": 27,
+      "actualCount": 27,
+      "undocumentLines": []
+    },
+    "src/tick/Cycle.js": {
       "expectCount": 11,
       "actualCount": 11,
       "undocumentLines": []
     },
-    "src/tick/Cycle.js": {
-      "expectCount": 8,
-      "actualCount": 8,
-      "undocumentLines": []
-    },
     "src/event/Wheel.js": {
-      "expectCount": 13,
-      "actualCount": 13,
+      "expectCount": 16,
+      "actualCount": 16,
       "undocumentLines": []
     },
     "src/event/EventDispatcher.js": {
@@ -24,13 +29,23 @@
       "undocumentLines": []
     },
     "src/event/Events.js": {
-      "expectCount": 2,
-      "actualCount": 2,
+      "expectCount": 5,
+      "actualCount": 5,
       "undocumentLines": []
     },
     "src/tick/Fps.js": {
       "expectCount": 7,
       "actualCount": 7,
+      "undocumentLines": []
+    },
+    "src/event/Freeze.js": {
+      "expectCount": 7,
+      "actualCount": 7,
+      "undocumentLines": []
+    },
+    "src/util/List.js": {
+      "expectCount": 3,
+      "actualCount": 3,
       "undocumentLines": []
     },
     "src/tick/Polling.js": {
@@ -39,18 +54,43 @@
       "undocumentLines": []
     },
     "src/tick/Rate.js": {
-      "expectCount": 15,
-      "actualCount": 15,
+      "expectCount": 20,
+      "actualCount": 20,
       "undocumentLines": []
     },
     "src/event/Scroll.js": {
-      "expectCount": 11,
-      "actualCount": 11,
+      "expectCount": 14,
+      "actualCount": 14,
+      "undocumentLines": []
+    },
+    "src/event/ScrollEvents.js": {
+      "expectCount": 10,
+      "actualCount": 10,
+      "undocumentLines": []
+    },
+    "src/event/Scrolling.js": {
+      "expectCount": 14,
+      "actualCount": 14,
+      "undocumentLines": []
+    },
+    "src/event/TouchingEvents.js": {
+      "expectCount": 6,
+      "actualCount": 6,
       "undocumentLines": []
     },
     "src/util/Type.js": {
-      "expectCount": 6,
-      "actualCount": 6,
+      "expectCount": 13,
+      "actualCount": 13,
+      "undocumentLines": []
+    },
+    "src/util/Vectors.js": {
+      "expectCount": 18,
+      "actualCount": 18,
+      "undocumentLines": []
+    },
+    "src/event/WheelEvents.js": {
+      "expectCount": 3,
+      "actualCount": 3,
       "undocumentLines": []
     }
   }

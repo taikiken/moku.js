@@ -88,6 +88,10 @@ export default class Touching extends EventDispatcher {
     //  */
     // this[boundStart] = this.onStart.bind(this);
     const boundStart = this.onStart.bind(this);
+    /**
+     * bound onStart
+     * @returns {function} bound onStart
+     */
     this.boundStart = () => boundStart;
     // /**
     //  * bind 済み `onMove`
@@ -95,6 +99,10 @@ export default class Touching extends EventDispatcher {
     //  */
     // this[boundMove] = this.onMove.bind(this);
     const boundMove = this.onMove.bind(this);
+    /**
+     * bound onMove
+     * @returns {function} bound onMove
+     */
     this.boundMove = () => boundMove;
     // /**
     //  * bind 済み `onEnd`
@@ -102,6 +110,10 @@ export default class Touching extends EventDispatcher {
     //  */
     // this[boundEnd] = this.onEnd.bind(this);
     const boundEnd = this.onEnd.bind(this);
+    /**
+     * bound onEnd
+     * @returns {function} bound onEnd
+     */
     this.boundEnd = () => boundEnd;
     // /**
     //  * bind 済み `onCancel`
@@ -109,6 +121,10 @@ export default class Touching extends EventDispatcher {
     //  */
     // this[boundCancel] = this.onCancel.bind(this);
     const boundCancel = this.onCancel.bind(this);
+    /**
+     * bound onCancel
+     * @returns {function} onCancel onStart
+     */
     this.boundCancel = () => boundCancel;
     // /**
     //  * bind 済み `onBlur`
@@ -116,6 +132,10 @@ export default class Touching extends EventDispatcher {
     //  */
     // this[boundBlur] = this.onBlur.bind(this);
     const boundBlur = this.onBlur.bind(this);
+    /**
+     * bound onBlur
+     * @returns {function} bound onBlur
+     */
     this.boundBlur = () => boundBlur;
     // /**
     //  * 位置管理を行う Vectors instance を管理します
@@ -131,6 +151,10 @@ export default class Touching extends EventDispatcher {
       end: new Vectors(),
       moving: [].slice(0),
     };
+    /**
+     * vectors object
+     * @returns {{start: Vectors, end: Vectors, moving: Array.<Vectors>}} vectors object
+     */
     this.vectors = () => vectors;
   }
   // ---------------------------------------------------

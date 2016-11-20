@@ -35,26 +35,34 @@
     
   <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">event</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html">EventDispatcher</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Events.js~Events.html">Events</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Freeze.js~Freeze.html">Freeze</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scroll.js~Scroll.html">Scroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/ScrollEvents.js~ScrollEvents.html">ScrollEvents</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scrolling.js~Scrolling.html">Scrolling</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Touching.js~Touching.html">Touching</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/TouchingEvents.js~TouchingEvents.html">TouchingEvents</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/WheelEvents.js~WheelEvents.html">WheelEvents</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">net</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">tick</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html">Cycle</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Fps.js~Fps.html">Fps</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Polling.js~Polling.html">Polling</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Rate.js~Rate.html">Rate</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/List.js~List.html">List</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Vectors.js~Vectors.html">Vectors</a></span></span></li>
 </ul>
 </div>
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {Wheel} from &apos;<span><a href="file/src/event/Wheel.js.html#lineNumber50">./src/event/Wheel.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Wheel from &apos;<span><a href="file/src/event/Wheel.js.html#lineNumber44">./src/event/Wheel.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/event/Wheel.js.html#lineNumber50">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/event/Wheel.js.html#lineNumber44">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -75,7 +83,9 @@
   
   
   <div class="description" data-ice="description"><p>mousewheel event &#x3092;&#x76E3;&#x8996;&#x3057;&#x901A;&#x77E5;&#x3092;&#x884C;&#x3044;&#x307E;&#x3059;</p>
-<p></p><p>singleton &#x306A;&#x306E;&#x3067; new &#x3067;&#x306F;&#x306A;&#x304F; factory &#x3092;&#x4F7F;&#x7528;&#x3057; instance &#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;</p><p></p>
+<p></p><p>singleton &#x306A;&#x306E;&#x3067; new &#x3067;&#x306F;&#x306A;&#x304F; factory &#x3092;&#x4F7F;&#x7528;&#x3057; instance &#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;</p>
+
+<p></p>
 <pre><code><code class="source-code prettyprint">const instance:Wheel = Wheel.factory();</code>
 </code></pre></div>
 
@@ -221,20 +231,46 @@
     <td>
       <span class="access" data-ice="access">public</span>
       
-      <span class="kind" data-ice="kind">get</span>
+      
       
       <span class="override" data-ice="override"></span>
     </td>
     <td>
       <div>
         <p>
-           <span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html#instance-get-boundWheel">boundWheel</a></span></span><span data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span>: <span>*</span></span>
+           <span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html#instance-member-boundWheel">boundWheel</a></span></span><span data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span>: <span>*</span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>bind &#x6E08;&#x307F; mouseWheel</p>
+        <div data-ice="description"><p>bound mouseWheel</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html#instance-member-events">events</a></span></span><span data-ice="signature">: {up: <span><a href="class/src/event/WheelEvents.js~WheelEvents.html">WheelEvents</a></span>, down: <span><a href="class/src/event/WheelEvents.js~WheelEvents.html">WheelEvents</a></span>}: <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>UP / DOWN Events instance</p>
 </div>
       </div>
     </td>
@@ -260,7 +296,59 @@
       <div>
         
         
-        <div data-ice="description"><p>&#x79FB;&#x52D5;&#x91CF;&#x304C;&#x95BE;&#x5024;&#x3092;&#x8D85;&#x3048;&#x308B;&#x304B;&#x3092;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x8A08;&#x7B97;&#x5909;&#x6570;</p>
+        <div data-ice="description"><p>wheelDelta &#x79FB;&#x52D5;&#x91CF;&#x304C;&#x95BE;&#x5024;&#x3092;&#x8D85;&#x3048;&#x308B;&#x304B;&#x3092;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x7A4D;&#x7B97;&#x8A08;&#x7B97;&#x5909;&#x6570;</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html#instance-member-started">started</a></span></span><span data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>start flag</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html#instance-member-threshold">threshold</a></span></span><span data-ice="signature">: <span><a href="class/src/util/Type.js~Type.html#static-method-number">number</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>&#x95BE;&#x5024;, wheel &#x79FB;&#x52D5;&#x91CF;&#x304C;&#x95BE;&#x5024;&#x3092;&#x8D85;&#x3048;&#x305F;&#x3068;&#x304D;&#x306B;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x307E;&#x3059;</p>
 </div>
       </div>
     </td>
@@ -366,7 +454,33 @@
     <td>
       <div>
         <p>
-           <span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html#instance-method-unwatch">unwatch</a></span></span><span data-ice="signature">(): <span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span>
+           <span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html#instance-method-start">start</a></span></span><span data-ice="signature">(): <span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>mousewheel event &#x3092;&#x76E3;&#x8996;&#x3057;&#x307E;&#x3059;</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html#instance-method-stop">stop</a></span></span><span data-ice="signature">(): <span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span>
         </p>
       </div>
       <div>
@@ -407,33 +521,6 @@
       
     </td>
   </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-           <span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html#instance-method-watch">watch</a></span></span><span data-ice="signature">(): <span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>mousewheel event &#x3092;&#x76E3;&#x8996;&#x3057;&#x307E;&#x3059;<br>
-&#x76E3;&#x8996;&#x524D;&#x306B;&#x4E8C;&#x91CD;&#x306B; addEventListener &#x3057;&#x306A;&#x3044;&#x3088;&#x3046;&#x306B; unwatch &#x3092;&#x5B9F;&#x884C;&#x3057;&#x307E;&#x3059;</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
 </tbody>
 </table>
 </div>
@@ -446,14 +533,40 @@
     <td>
       <span class="access" data-ice="access">public</span>
       
-      <span class="kind" data-ice="kind">get</span>
+      
       
       <span class="override" data-ice="override"></span>
     </td>
     <td>
       <div>
         <p>
-           <span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html#instance-get-listeners">listeners</a></span></span><span data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>: <span>*</span></span>
+           <span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html#instance-member-destroy">destroy</a></span></span><span data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span>: <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>&#x5168;&#x3066;&#x306E;&#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x3092;&#x7834;&#x68C4;&#x3057;&#x307E;&#x3059;</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html#instance-member-listeners">listeners</a></span></span><span data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -483,7 +596,7 @@
         </p>
       </div>
       <div>
-        
+        <div class="deprecated" data-ice="deprecated">this method was deprecated. instead use on</div>
         
         <div data-ice="description"><p><strong>alias on</strong></p>
 <p></p><p>event type &#x306B; &#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x95A2;&#x6570;&#x3092; bind &#x3057;&#x307E;&#x3059;</p><p></p>
@@ -533,32 +646,6 @@
     <td>
       <div>
         <p>
-           <span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html#instance-method-destroy">destroy</a></span></span><span data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>&#x5168;&#x3066;&#x306E;&#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x3092;&#x7834;&#x68C4;&#x3057;&#x307E;&#x3059;</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
            <span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html#instance-method-dispatch">dispatch</a></span></span><span data-ice="signature">(events: <span><a href="class/src/event/Events.js~Events.html">Events</a></span> | <span>*</span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
         </p>
       </div>
@@ -589,7 +676,7 @@
         </p>
       </div>
       <div>
-        
+        <div class="deprecated" data-ice="deprecated">this method was deprecated. instead use dispatch</div>
         
         <div data-ice="description"><p><strong>alias dispatch</strong></p>
 <p></p><p>&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x95A2;&#x6570;&#x3092; call &#x3057;&#x307E;&#x3059;</p><p></p>
@@ -642,7 +729,7 @@
         </p>
       </div>
       <div>
-        
+        <div class="deprecated" data-ice="deprecated">this method was deprecated. instead use has</div>
         
         <div data-ice="description"><p><strong>alias has</strong></p>
 <p></p><p>event type &#x306B;&#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x95A2;&#x6570;&#x304C;&#x767B;&#x9332;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x304B;&#x3092;&#x8ABF;&#x3079;&#x307E;&#x3059;</p><p></p>
@@ -722,7 +809,7 @@
         </p>
       </div>
       <div>
-        
+        <div class="deprecated" data-ice="deprecated">this method was deprecated. instead use off</div>
         
         <div data-ice="description"><p><strong>alias off</strong></p>
 <p></p><p>event type &#x304B;&#x3089;&#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x95A2;&#x6570;&#x3092; remove &#x3057;&#x307E;&#x3059;</p><p></p>
@@ -751,7 +838,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber123">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber126">source</a></span></span>
     </span>
   </h3>
 
@@ -803,7 +890,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber114">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber117">source</a></span></span>
     </span>
   </h3>
 
@@ -858,7 +945,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber271">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber249">source</a></span></span>
     </span>
   </h3>
 
@@ -913,7 +1000,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber56">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber50">source</a></span></span>
     </span>
   </h3>
 
@@ -975,24 +1062,24 @@
 <div data-ice="memberDetails"><h2 data-ice="title">Public Members</h2>
 
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-get-boundWheel">
+  <h3 data-ice="anchor" id="instance-member-boundWheel">
     <span class="access" data-ice="access">public</span>
     
-    <span class="kind" data-ice="kind">get</span>
+    
     
     
     <span data-ice="name">boundWheel</span><span data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span>: <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber133">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber73">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>bind &#x6E08;&#x307F; mouseWheel</p>
+  <div data-ice="description"><p>bound mouseWheel</p>
 </div>
 
   
@@ -1005,7 +1092,59 @@
     <table>
       <tr>
         <td class="return-type" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span></td>
-        <td class="return-desc" data-ice="returnDescription"><p>bind &#x6E08;&#x307F; mouseWheel &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;</p>
+        <td class="return-desc" data-ice="returnDescription"><p>window.wheel event handler</p>
+</td>
+      </tr>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-events">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    <span data-ice="name">events</span><span data-ice="signature">: {up: <span><a href="class/src/event/WheelEvents.js~WheelEvents.html">WheelEvents</a></span>, down: <span><a href="class/src/event/WheelEvents.js~WheelEvents.html">WheelEvents</a></span>}: <span>*</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber103">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>UP / DOWN Events instance</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tr>
+        <td class="return-type" data-ice="returnType">{up: <span><a href="class/src/event/WheelEvents.js~WheelEvents.html">WheelEvents</a></span>, down: <span><a href="class/src/event/WheelEvents.js~WheelEvents.html">WheelEvents</a></span>}</td>
+        <td class="return-desc" data-ice="returnDescription"><p>UP / DOWN Events instance</p>
 </td>
       </tr>
     </table>
@@ -1037,14 +1176,96 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber211">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber84">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>&#x79FB;&#x52D5;&#x91CF;&#x304C;&#x95BE;&#x5024;&#x3092;&#x8D85;&#x3048;&#x308B;&#x304B;&#x3092;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x8A08;&#x7B97;&#x5909;&#x6570;</p>
+  <div data-ice="description"><p>wheelDelta &#x79FB;&#x52D5;&#x91CF;&#x304C;&#x95BE;&#x5024;&#x3092;&#x8D85;&#x3048;&#x308B;&#x304B;&#x3092;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x7A4D;&#x7B97;&#x8A08;&#x7B97;&#x5909;&#x6570;</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-started">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    <span data-ice="name">started</span><span data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber94">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>start flag</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-threshold">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    <span data-ice="name">threshold</span><span data-ice="signature">: <span><a href="class/src/util/Type.js~Type.html#static-method-number">number</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber79">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>&#x95BE;&#x5024;, wheel &#x79FB;&#x52D5;&#x91CF;&#x304C;&#x95BE;&#x5024;&#x3092;&#x8D85;&#x3048;&#x305F;&#x3068;&#x304D;&#x306B;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x307E;&#x3059;</p>
 </div>
 
   
@@ -1081,7 +1302,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber256">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber234">source</a></span></span>
     </span>
   </h3>
 
@@ -1150,7 +1371,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber182">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber175">source</a></span></span>
     </span>
   </h3>
 
@@ -1232,7 +1453,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber206">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber184">source</a></span></span>
     </span>
   </h3>
 
@@ -1291,17 +1512,69 @@
   
 </div>
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-unwatch">
+  <h3 data-ice="anchor" id="instance-method-start">
     <span class="access" data-ice="access">public</span>
     
     
     
     
-    <span data-ice="name">unwatch</span><span data-ice="signature">(): <span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span>
+    <span data-ice="name">start</span><span data-ice="signature">(): <span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber166">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber146">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>mousewheel event &#x3092;&#x76E3;&#x8996;&#x3057;&#x307E;&#x3059;</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tr>
+        <td class="return-type" data-ice="returnType"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></td>
+        <td class="return-desc" data-ice="returnDescription"><p>method chain &#x53EF;&#x80FD;&#x306A;&#x3088;&#x3046;&#x306B; instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;</p>
+</td>
+      </tr>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-stop">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    <span data-ice="name">stop</span><span data-ice="signature">(): <span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber159">source</a></span></span>
     </span>
   </h3>
 
@@ -1353,7 +1626,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber243">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber221">source</a></span></span>
     </span>
   </h3>
 
@@ -1411,64 +1684,11 @@
   
   
 </div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-watch">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    <span data-ice="name">watch</span><span data-ice="signature">(): <span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber151">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>mousewheel event &#x3092;&#x76E3;&#x8996;&#x3057;&#x307E;&#x3059;<br>
-&#x76E3;&#x8996;&#x524D;&#x306B;&#x4E8C;&#x91CD;&#x306B; addEventListener &#x3057;&#x306A;&#x3044;&#x3088;&#x3046;&#x306B; unwatch &#x3092;&#x5B9F;&#x884C;&#x3057;&#x307E;&#x3059;</p>
-</div>
-
-  
-
-  <div data-ice="properties">
-</div>
-
-  <div class="return-params" data-ice="returnParams">
-    <h4>Return:</h4>
-    <table>
-      <tr>
-        <td class="return-type" data-ice="returnType"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></td>
-        <td class="return-desc" data-ice="returnDescription"><p>method chain &#x53EF;&#x80FD;&#x306A;&#x3088;&#x3046;&#x306B; instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;</p>
-</td>
-      </tr>
-    </table>
-    <div data-ice="returnProperties">
-</div>
-  </div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
 </div>
 </div>
 
 <footer class="footer">
-  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.4)</span></a>
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
 </footer>
 
 <script src="script/search_index.js"></script>

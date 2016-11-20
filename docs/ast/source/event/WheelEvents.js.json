@@ -1,0 +1,685 @@
+{
+  "type": "Program",
+  "start": 0,
+  "end": 832,
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 34,
+      "column": 0
+    }
+  },
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "ImportDeclaration",
+      "start": 334,
+      "end": 379,
+      "loc": {
+        "start": {
+          "line": 13,
+          "column": 0
+        },
+        "end": {
+          "line": 13,
+          "column": 45
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "start": 343,
+          "end": 360,
+          "loc": {
+            "start": {
+              "line": 13,
+              "column": 9
+            },
+            "end": {
+              "line": 13,
+              "column": 26
+            }
+          },
+          "imported": {
+            "type": "Identifier",
+            "start": 343,
+            "end": 350,
+            "loc": {
+              "start": {
+                "line": 13,
+                "column": 9
+              },
+              "end": {
+                "line": 13,
+                "column": 16
+              }
+            },
+            "name": "default",
+            "leadingComments": null
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 354,
+            "end": 360,
+            "loc": {
+              "start": {
+                "line": 13,
+                "column": 20
+              },
+              "end": {
+                "line": 13,
+                "column": 26
+              }
+            },
+            "name": "Events"
+          },
+          "leadingComments": null
+        }
+      ],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "start": 368,
+        "end": 378,
+        "loc": {
+          "start": {
+            "line": 13,
+            "column": 34
+          },
+          "end": {
+            "line": 13,
+            "column": 44
+          }
+        },
+        "value": "./Events",
+        "rawValue": "./Events",
+        "raw": "'./Events'"
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/11/20 - 12:11\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n ",
+          "start": 0,
+          "end": 332,
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 0
+            },
+            "end": {
+              "line": 11,
+              "column": 3
+            }
+          },
+          "range": [
+            0,
+            332
+          ]
+        }
+      ],
+      "trailingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * Wheel Events, mouse wheel で発生するイベントを管理します\n ",
+          "start": 381,
+          "end": 433,
+          "loc": {
+            "start": {
+              "line": 15,
+              "column": 0
+            },
+            "end": {
+              "line": 17,
+              "column": 3
+            }
+          },
+          "range": [
+            381,
+            433
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExportDefaultDeclaration",
+      "start": 434,
+      "end": 831,
+      "loc": {
+        "start": {
+          "line": 18,
+          "column": 0
+        },
+        "end": {
+          "line": 33,
+          "column": 1
+        }
+      },
+      "declaration": {
+        "type": "ClassDeclaration",
+        "start": 449,
+        "end": 831,
+        "loc": {
+          "start": {
+            "line": 18,
+            "column": 15
+          },
+          "end": {
+            "line": 33,
+            "column": 1
+          }
+        },
+        "id": {
+          "type": "Identifier",
+          "start": 455,
+          "end": 466,
+          "loc": {
+            "start": {
+              "line": 18,
+              "column": 21
+            },
+            "end": {
+              "line": 18,
+              "column": 32
+            }
+          },
+          "name": "WheelEvents",
+          "leadingComments": null
+        },
+        "superClass": {
+          "type": "Identifier",
+          "start": 475,
+          "end": 481,
+          "loc": {
+            "start": {
+              "line": 18,
+              "column": 41
+            },
+            "end": {
+              "line": 18,
+              "column": 47
+            }
+          },
+          "name": "Events"
+        },
+        "body": {
+          "type": "ClassBody",
+          "start": 482,
+          "end": 831,
+          "loc": {
+            "start": {
+              "line": 18,
+              "column": 48
+            },
+            "end": {
+              "line": 33,
+              "column": 1
+            }
+          },
+          "body": [
+            {
+              "type": "MethodDefinition",
+              "start": 657,
+              "end": 829,
+              "loc": {
+                "start": {
+                  "line": 25,
+                  "column": 2
+                },
+                "end": {
+                  "line": 32,
+                  "column": 3
+                }
+              },
+              "computed": false,
+              "key": {
+                "type": "Identifier",
+                "start": 657,
+                "end": 668,
+                "loc": {
+                  "start": {
+                    "line": 25,
+                    "column": 2
+                  },
+                  "end": {
+                    "line": 25,
+                    "column": 13
+                  }
+                },
+                "name": "constructor",
+                "leadingComments": null
+              },
+              "static": false,
+              "kind": "constructor",
+              "value": {
+                "type": "FunctionExpression",
+                "start": 668,
+                "end": 829,
+                "loc": {
+                  "start": {
+                    "line": 25,
+                    "column": 13
+                  },
+                  "end": {
+                    "line": 32,
+                    "column": 3
+                  }
+                },
+                "id": null,
+                "generator": false,
+                "expression": false,
+                "async": false,
+                "params": [
+                  {
+                    "type": "Identifier",
+                    "start": 669,
+                    "end": 673,
+                    "loc": {
+                      "start": {
+                        "line": 25,
+                        "column": 14
+                      },
+                      "end": {
+                        "line": 25,
+                        "column": 18
+                      }
+                    },
+                    "name": "type"
+                  },
+                  {
+                    "type": "Identifier",
+                    "start": 675,
+                    "end": 688,
+                    "loc": {
+                      "start": {
+                        "line": 25,
+                        "column": 20
+                      },
+                      "end": {
+                        "line": 25,
+                        "column": 33
+                      }
+                    },
+                    "name": "currentTarget"
+                  },
+                  {
+                    "type": "AssignmentPattern",
+                    "start": 690,
+                    "end": 708,
+                    "loc": {
+                      "start": {
+                        "line": 25,
+                        "column": 35
+                      },
+                      "end": {
+                        "line": 25,
+                        "column": 53
+                      }
+                    },
+                    "operator": "=",
+                    "left": {
+                      "type": "Identifier",
+                      "start": 690,
+                      "end": 696,
+                      "loc": {
+                        "start": {
+                          "line": 25,
+                          "column": 35
+                        },
+                        "end": {
+                          "line": 25,
+                          "column": 41
+                        }
+                      },
+                      "name": "target"
+                    },
+                    "right": {
+                      "type": "Identifier",
+                      "start": 699,
+                      "end": 708,
+                      "loc": {
+                        "start": {
+                          "line": 25,
+                          "column": 44
+                        },
+                        "end": {
+                          "line": 25,
+                          "column": 53
+                        }
+                      },
+                      "name": "undefined"
+                    }
+                  }
+                ],
+                "body": {
+                  "type": "BlockStatement",
+                  "start": 710,
+                  "end": 829,
+                  "loc": {
+                    "start": {
+                      "line": 25,
+                      "column": 55
+                    },
+                    "end": {
+                      "line": 32,
+                      "column": 3
+                    }
+                  },
+                  "body": [
+                    {
+                      "type": "ExpressionStatement",
+                      "start": 716,
+                      "end": 751,
+                      "loc": {
+                        "start": {
+                          "line": 26,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 26,
+                          "column": 39
+                        }
+                      },
+                      "expression": {
+                        "type": "CallExpression",
+                        "start": 716,
+                        "end": 750,
+                        "loc": {
+                          "start": {
+                            "line": 26,
+                            "column": 4
+                          },
+                          "end": {
+                            "line": 26,
+                            "column": 38
+                          }
+                        },
+                        "callee": {
+                          "type": "Super",
+                          "start": 716,
+                          "end": 721,
+                          "loc": {
+                            "start": {
+                              "line": 26,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 26,
+                              "column": 9
+                            }
+                          }
+                        },
+                        "arguments": [
+                          {
+                            "type": "Identifier",
+                            "start": 722,
+                            "end": 726,
+                            "loc": {
+                              "start": {
+                                "line": 26,
+                                "column": 10
+                              },
+                              "end": {
+                                "line": 26,
+                                "column": 14
+                              }
+                            },
+                            "name": "type"
+                          },
+                          {
+                            "type": "Identifier",
+                            "start": 728,
+                            "end": 741,
+                            "loc": {
+                              "start": {
+                                "line": 26,
+                                "column": 16
+                              },
+                              "end": {
+                                "line": 26,
+                                "column": 29
+                              }
+                            },
+                            "name": "currentTarget"
+                          },
+                          {
+                            "type": "Identifier",
+                            "start": 743,
+                            "end": 749,
+                            "loc": {
+                              "start": {
+                                "line": 26,
+                                "column": 31
+                              },
+                              "end": {
+                                "line": 26,
+                                "column": 37
+                              }
+                            },
+                            "name": "target"
+                          }
+                        ]
+                      },
+                      "trailingComments": [
+                        {
+                          "type": "Block",
+                          "value": "*\n     * 移動距離(px)\n     * @type {number}\n     ",
+                          "start": 756,
+                          "end": 805,
+                          "loc": {
+                            "start": {
+                              "line": 27,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 30,
+                              "column": 7
+                            }
+                          },
+                          "range": [
+                            756,
+                            805
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "start": 810,
+                      "end": 825,
+                      "loc": {
+                        "start": {
+                          "line": 31,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 31,
+                          "column": 19
+                        }
+                      },
+                      "expression": {
+                        "type": "AssignmentExpression",
+                        "start": 810,
+                        "end": 824,
+                        "loc": {
+                          "start": {
+                            "line": 31,
+                            "column": 4
+                          },
+                          "end": {
+                            "line": 31,
+                            "column": 18
+                          }
+                        },
+                        "operator": "=",
+                        "left": {
+                          "type": "MemberExpression",
+                          "start": 810,
+                          "end": 820,
+                          "loc": {
+                            "start": {
+                              "line": 31,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 31,
+                              "column": 14
+                            }
+                          },
+                          "object": {
+                            "type": "ThisExpression",
+                            "start": 810,
+                            "end": 814,
+                            "loc": {
+                              "start": {
+                                "line": 31,
+                                "column": 4
+                              },
+                              "end": {
+                                "line": 31,
+                                "column": 8
+                              }
+                            },
+                            "leadingComments": null
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "start": 815,
+                            "end": 820,
+                            "loc": {
+                              "start": {
+                                "line": 31,
+                                "column": 9
+                              },
+                              "end": {
+                                "line": 31,
+                                "column": 14
+                              }
+                            },
+                            "name": "moved"
+                          },
+                          "computed": false,
+                          "leadingComments": null
+                        },
+                        "right": {
+                          "type": "Literal",
+                          "start": 823,
+                          "end": 824,
+                          "loc": {
+                            "start": {
+                              "line": 31,
+                              "column": 17
+                            },
+                            "end": {
+                              "line": 31,
+                              "column": 18
+                            }
+                          },
+                          "value": 0,
+                          "rawValue": 0,
+                          "raw": "0"
+                        },
+                        "leadingComments": null
+                      },
+                      "leadingComments": [
+                        {
+                          "type": "Block",
+                          "value": "*\n     * 移動距離(px)\n     * @type {number}\n     ",
+                          "start": 756,
+                          "end": 805,
+                          "loc": {
+                            "start": {
+                              "line": 27,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 30,
+                              "column": 7
+                            }
+                          },
+                          "range": [
+                            756,
+                            805
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\n   * custom Event Object\n   * @param {string} type イベント種類\n   * @param {*} currentTarget current イベント発生インスタンス\n   * @param {*} [target=undefined] イベント発生インスタンス\n   * ",
+                  "start": 486,
+                  "end": 654,
+                  "loc": {
+                    "start": {
+                      "line": 19,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 24,
+                      "column": 7
+                    }
+                  },
+                  "range": [
+                    486,
+                    654
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "leadingComments": [
+          {
+            "type": "Block",
+            "value": "*\n * Wheel Events, mouse wheel で発生するイベントを管理します\n ",
+            "start": 381,
+            "end": 433,
+            "loc": {
+              "start": {
+                "line": 15,
+                "column": 0
+              },
+              "end": {
+                "line": 17,
+                "column": 3
+              }
+            },
+            "range": [
+              381,
+              433
+            ]
+          }
+        ],
+        "trailingComments": []
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * Wheel Events, mouse wheel で発生するイベントを管理します\n ",
+          "start": 381,
+          "end": 433,
+          "loc": {
+            "start": {
+              "line": 15,
+              "column": 0
+            },
+            "end": {
+              "line": 17,
+              "column": 3
+            }
+          },
+          "range": [
+            381,
+            433
+          ]
+        }
+      ]
+    }
+  ]
+}

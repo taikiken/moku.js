@@ -95,9 +95,25 @@ export default class Cycle extends EventDispatcher {
 
     const events = new Events(Cycle.UPDATE, this, this);
     const boundUpdate = this.update.bind(this);
+    /**
+     * Cycle.UPDATE Events instance
+     * @returns {Events} Cycle.UPDATE Events instance
+     */
     this.events = () => events;
+    /**
+     * bound update requestAnimationFrame callback
+     * @returns {function} bound update
+     */
     this.boundUpdate = () => boundUpdate;
+    /**
+     * requestAnimationFrame ID
+     * @type {number}
+     */
     this.id = 0;
+    /**
+     * start 済みフラッグ
+     * @type {boolean}
+     */
     this.started = false;
     // 設定済み instance を返します
     return instance;

@@ -35,14 +35,22 @@
     
   <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">event</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html">EventDispatcher</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Events.js~Events.html">Events</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Freeze.js~Freeze.html">Freeze</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scroll.js~Scroll.html">Scroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/ScrollEvents.js~ScrollEvents.html">ScrollEvents</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scrolling.js~Scrolling.html">Scrolling</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Touching.js~Touching.html">Touching</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/TouchingEvents.js~TouchingEvents.html">TouchingEvents</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/WheelEvents.js~WheelEvents.html">WheelEvents</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">net</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">tick</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html">Cycle</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Fps.js~Fps.html">Fps</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Polling.js~Polling.html">Polling</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Rate.js~Rate.html">Rate</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/List.js~List.html">List</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Vectors.js~Vectors.html">Vectors</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -63,22 +71,26 @@
 // use strict &#x306F;&#x672C;&#x6765;&#x4E0D;&#x8981;&#x3067;&#x30A8;&#x30E9;&#x30FC;&#x306B;&#x306A;&#x308B;
 // &#x7121;&#x3044;&#x3068; webpack.optimize.UglifyJsPlugin &#x304C;&#x30B3;&#x30E1;&#x30F3;&#x30C8;&#x3092;&#x5168;&#x90E8;&#x524A;&#x9664;&#x3059;&#x308B;&#x306E;&#x3067;&#x8A18;&#x8FF0;&#x3059;&#x308B;
 /* eslint strict: [0, &quot;global&quot;] */
+
 &apos;use strict&apos;;
 
 // event
-import { EventDispatcher } from &apos;./event/EventDispatcher&apos;;
-import { Events } from &apos;./event/Events&apos;;
+import { default as EventDispatcher } from &apos;./event/EventDispatcher&apos;;
+import { default as Events } from &apos;./event/Events&apos;;
+import { default as Scroll } from &apos;./event/Scroll&apos;;
+import { default as Wheel } from &apos;./event/Wheel&apos;;
 
 // net
-import { Ajax } from &apos;./net/Ajax&apos;;
+import { default as Ajax } from &apos;./net/Ajax&apos;;
 
 // tick
-import { Cycle } from &apos;./tick/Cycle&apos;;
-import { Fps } from &apos;./tick/Fps&apos;;
-import { Polling } from &apos;./tick/Polling&apos;;
+import { default as Cycle } from &apos;./tick/Cycle&apos;;
+import { default as Fps } from &apos;./tick/Fps&apos;;
+import { default as Polling } from &apos;./tick/Polling&apos;;
+import { default as Rate } from &apos;./tick/Rate&apos;;
 
 // util
-import { Type } from &apos;./util/Type&apos;;
+import { default as Type } from &apos;./util/Type&apos;;
 /**
  * **MOKU**
  * &lt;p&gt;global Object&lt;/p&gt;
@@ -88,12 +100,12 @@ import { Type } from &apos;./util/Type&apos;;
 const MOKU = {};
 /**
  * version number &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
- * @return {string} version number &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+ * @returns {string} version number &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
  */
 MOKU.version = () =&gt; &apos;@@version&apos;;
 /**
  * build &#x65E5;&#x6642;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
- * @return {string}  build &#x65E5;&#x6642;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+ * @returns {string}  build &#x65E5;&#x6642;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
  */
 MOKU.build = () =&gt; &apos;@@buildTime&apos;;
 /**
@@ -103,6 +115,8 @@ MOKU.build = () =&gt; &apos;@@buildTime&apos;;
 MOKU.event = {
   EventDispatcher,
   Events,
+  Scroll,
+  Wheel,
 };
 /**
  * MOKU.net
@@ -119,6 +133,7 @@ MOKU.tick = {
   Cycle,
   Fps,
   Polling,
+  Rate,
 };
 /**
  * MOKU.util
@@ -135,7 +150,7 @@ window.MOKU = MOKU;
 </div>
 
 <footer class="footer">
-  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.4)</span></a>
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
 </footer>
 
 <script src="script/search_index.js"></script>

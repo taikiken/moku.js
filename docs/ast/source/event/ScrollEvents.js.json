@@ -1,0 +1,1703 @@
+{
+  "type": "Program",
+  "start": 0,
+  "end": 1493,
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 69,
+      "column": 0
+    }
+  },
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "ImportDeclaration",
+      "start": 334,
+      "end": 379,
+      "loc": {
+        "start": {
+          "line": 13,
+          "column": 0
+        },
+        "end": {
+          "line": 13,
+          "column": 45
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "start": 343,
+          "end": 360,
+          "loc": {
+            "start": {
+              "line": 13,
+              "column": 9
+            },
+            "end": {
+              "line": 13,
+              "column": 26
+            }
+          },
+          "imported": {
+            "type": "Identifier",
+            "start": 343,
+            "end": 350,
+            "loc": {
+              "start": {
+                "line": 13,
+                "column": 9
+              },
+              "end": {
+                "line": 13,
+                "column": 16
+              }
+            },
+            "name": "default",
+            "leadingComments": null
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 354,
+            "end": 360,
+            "loc": {
+              "start": {
+                "line": 13,
+                "column": 20
+              },
+              "end": {
+                "line": 13,
+                "column": 26
+              }
+            },
+            "name": "Events"
+          },
+          "leadingComments": null
+        }
+      ],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "start": 368,
+        "end": 378,
+        "loc": {
+          "start": {
+            "line": 13,
+            "column": 34
+          },
+          "end": {
+            "line": 13,
+            "column": 44
+          }
+        },
+        "value": "./Events",
+        "rawValue": "./Events",
+        "raw": "'./Events'"
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/11/20 - 10:54\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n ",
+          "start": 0,
+          "end": 332,
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 0
+            },
+            "end": {
+              "line": 11,
+              "column": 3
+            }
+          },
+          "range": [
+            0,
+            332
+          ]
+        }
+      ],
+      "trailingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * Scroll events 管理クラス\n ",
+          "start": 381,
+          "end": 411,
+          "loc": {
+            "start": {
+              "line": 15,
+              "column": 0
+            },
+            "end": {
+              "line": 17,
+              "column": 3
+            }
+          },
+          "range": [
+            381,
+            411
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExportDefaultDeclaration",
+      "start": 412,
+      "end": 1492,
+      "loc": {
+        "start": {
+          "line": 18,
+          "column": 0
+        },
+        "end": {
+          "line": 68,
+          "column": 1
+        }
+      },
+      "declaration": {
+        "type": "ClassDeclaration",
+        "start": 427,
+        "end": 1492,
+        "loc": {
+          "start": {
+            "line": 18,
+            "column": 15
+          },
+          "end": {
+            "line": 68,
+            "column": 1
+          }
+        },
+        "id": {
+          "type": "Identifier",
+          "start": 433,
+          "end": 445,
+          "loc": {
+            "start": {
+              "line": 18,
+              "column": 21
+            },
+            "end": {
+              "line": 18,
+              "column": 33
+            }
+          },
+          "name": "ScrollEvents",
+          "leadingComments": null
+        },
+        "superClass": {
+          "type": "Identifier",
+          "start": 454,
+          "end": 460,
+          "loc": {
+            "start": {
+              "line": 18,
+              "column": 42
+            },
+            "end": {
+              "line": 18,
+              "column": 48
+            }
+          },
+          "name": "Events"
+        },
+        "body": {
+          "type": "ClassBody",
+          "start": 461,
+          "end": 1492,
+          "loc": {
+            "start": {
+              "line": 18,
+              "column": 49
+            },
+            "end": {
+              "line": 68,
+              "column": 1
+            }
+          },
+          "body": [
+            {
+              "type": "MethodDefinition",
+              "start": 636,
+              "end": 1490,
+              "loc": {
+                "start": {
+                  "line": 25,
+                  "column": 2
+                },
+                "end": {
+                  "line": 67,
+                  "column": 3
+                }
+              },
+              "computed": false,
+              "key": {
+                "type": "Identifier",
+                "start": 636,
+                "end": 647,
+                "loc": {
+                  "start": {
+                    "line": 25,
+                    "column": 2
+                  },
+                  "end": {
+                    "line": 25,
+                    "column": 13
+                  }
+                },
+                "name": "constructor",
+                "leadingComments": null
+              },
+              "static": false,
+              "kind": "constructor",
+              "value": {
+                "type": "FunctionExpression",
+                "start": 647,
+                "end": 1490,
+                "loc": {
+                  "start": {
+                    "line": 25,
+                    "column": 13
+                  },
+                  "end": {
+                    "line": 67,
+                    "column": 3
+                  }
+                },
+                "id": null,
+                "generator": false,
+                "expression": false,
+                "async": false,
+                "params": [
+                  {
+                    "type": "Identifier",
+                    "start": 648,
+                    "end": 652,
+                    "loc": {
+                      "start": {
+                        "line": 25,
+                        "column": 14
+                      },
+                      "end": {
+                        "line": 25,
+                        "column": 18
+                      }
+                    },
+                    "name": "type"
+                  },
+                  {
+                    "type": "Identifier",
+                    "start": 654,
+                    "end": 667,
+                    "loc": {
+                      "start": {
+                        "line": 25,
+                        "column": 20
+                      },
+                      "end": {
+                        "line": 25,
+                        "column": 33
+                      }
+                    },
+                    "name": "currentTarget"
+                  },
+                  {
+                    "type": "AssignmentPattern",
+                    "start": 669,
+                    "end": 687,
+                    "loc": {
+                      "start": {
+                        "line": 25,
+                        "column": 35
+                      },
+                      "end": {
+                        "line": 25,
+                        "column": 53
+                      }
+                    },
+                    "operator": "=",
+                    "left": {
+                      "type": "Identifier",
+                      "start": 669,
+                      "end": 675,
+                      "loc": {
+                        "start": {
+                          "line": 25,
+                          "column": 35
+                        },
+                        "end": {
+                          "line": 25,
+                          "column": 41
+                        }
+                      },
+                      "name": "target"
+                    },
+                    "right": {
+                      "type": "Identifier",
+                      "start": 678,
+                      "end": 687,
+                      "loc": {
+                        "start": {
+                          "line": 25,
+                          "column": 44
+                        },
+                        "end": {
+                          "line": 25,
+                          "column": 53
+                        }
+                      },
+                      "name": "undefined"
+                    }
+                  }
+                ],
+                "body": {
+                  "type": "BlockStatement",
+                  "start": 689,
+                  "end": 1490,
+                  "loc": {
+                    "start": {
+                      "line": 25,
+                      "column": 55
+                    },
+                    "end": {
+                      "line": 67,
+                      "column": 3
+                    }
+                  },
+                  "body": [
+                    {
+                      "type": "ExpressionStatement",
+                      "start": 695,
+                      "end": 730,
+                      "loc": {
+                        "start": {
+                          "line": 26,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 26,
+                          "column": 39
+                        }
+                      },
+                      "expression": {
+                        "type": "CallExpression",
+                        "start": 695,
+                        "end": 729,
+                        "loc": {
+                          "start": {
+                            "line": 26,
+                            "column": 4
+                          },
+                          "end": {
+                            "line": 26,
+                            "column": 38
+                          }
+                        },
+                        "callee": {
+                          "type": "Super",
+                          "start": 695,
+                          "end": 700,
+                          "loc": {
+                            "start": {
+                              "line": 26,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 26,
+                              "column": 9
+                            }
+                          }
+                        },
+                        "arguments": [
+                          {
+                            "type": "Identifier",
+                            "start": 701,
+                            "end": 705,
+                            "loc": {
+                              "start": {
+                                "line": 26,
+                                "column": 10
+                              },
+                              "end": {
+                                "line": 26,
+                                "column": 14
+                              }
+                            },
+                            "name": "type"
+                          },
+                          {
+                            "type": "Identifier",
+                            "start": 707,
+                            "end": 720,
+                            "loc": {
+                              "start": {
+                                "line": 26,
+                                "column": 16
+                              },
+                              "end": {
+                                "line": 26,
+                                "column": 29
+                              }
+                            },
+                            "name": "currentTarget"
+                          },
+                          {
+                            "type": "Identifier",
+                            "start": 722,
+                            "end": 728,
+                            "loc": {
+                              "start": {
+                                "line": 26,
+                                "column": 31
+                              },
+                              "end": {
+                                "line": 26,
+                                "column": 37
+                              }
+                            },
+                            "name": "target"
+                          }
+                        ]
+                      },
+                      "trailingComments": [
+                        {
+                          "type": "Block",
+                          "value": "*\n     * scroll top 前回位置(px)\n     * @type {number}\n     ",
+                          "start": 735,
+                          "end": 795,
+                          "loc": {
+                            "start": {
+                              "line": 27,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 30,
+                              "column": 7
+                            }
+                          },
+                          "range": [
+                            735,
+                            795
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "start": 800,
+                      "end": 819,
+                      "loc": {
+                        "start": {
+                          "line": 31,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 31,
+                          "column": 23
+                        }
+                      },
+                      "expression": {
+                        "type": "AssignmentExpression",
+                        "start": 800,
+                        "end": 818,
+                        "loc": {
+                          "start": {
+                            "line": 31,
+                            "column": 4
+                          },
+                          "end": {
+                            "line": 31,
+                            "column": 22
+                          }
+                        },
+                        "operator": "=",
+                        "left": {
+                          "type": "MemberExpression",
+                          "start": 800,
+                          "end": 813,
+                          "loc": {
+                            "start": {
+                              "line": 31,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 31,
+                              "column": 17
+                            }
+                          },
+                          "object": {
+                            "type": "ThisExpression",
+                            "start": 800,
+                            "end": 804,
+                            "loc": {
+                              "start": {
+                                "line": 31,
+                                "column": 4
+                              },
+                              "end": {
+                                "line": 31,
+                                "column": 8
+                              }
+                            },
+                            "leadingComments": null
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "start": 805,
+                            "end": 813,
+                            "loc": {
+                              "start": {
+                                "line": 31,
+                                "column": 9
+                              },
+                              "end": {
+                                "line": 31,
+                                "column": 17
+                              }
+                            },
+                            "name": "previous"
+                          },
+                          "computed": false,
+                          "leadingComments": null
+                        },
+                        "right": {
+                          "type": "UnaryExpression",
+                          "start": 816,
+                          "end": 818,
+                          "loc": {
+                            "start": {
+                              "line": 31,
+                              "column": 20
+                            },
+                            "end": {
+                              "line": 31,
+                              "column": 22
+                            }
+                          },
+                          "operator": "-",
+                          "prefix": true,
+                          "argument": {
+                            "type": "Literal",
+                            "start": 817,
+                            "end": 818,
+                            "loc": {
+                              "start": {
+                                "line": 31,
+                                "column": 21
+                              },
+                              "end": {
+                                "line": 31,
+                                "column": 22
+                              }
+                            },
+                            "value": 1,
+                            "rawValue": 1,
+                            "raw": "1"
+                          }
+                        },
+                        "leadingComments": null
+                      },
+                      "leadingComments": [
+                        {
+                          "type": "Block",
+                          "value": "*\n     * scroll top 前回位置(px)\n     * @type {number}\n     ",
+                          "start": 735,
+                          "end": 795,
+                          "loc": {
+                            "start": {
+                              "line": 27,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 30,
+                              "column": 7
+                            }
+                          },
+                          "range": [
+                            735,
+                            795
+                          ]
+                        }
+                      ],
+                      "trailingComments": [
+                        {
+                          "type": "Block",
+                          "value": "*\n     * オリジナルイベント(.onscroll)\n     * @type {?Event}\n     ",
+                          "start": 824,
+                          "end": 885,
+                          "loc": {
+                            "start": {
+                              "line": 32,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 35,
+                              "column": 7
+                            }
+                          },
+                          "range": [
+                            824,
+                            885
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "start": 890,
+                      "end": 911,
+                      "loc": {
+                        "start": {
+                          "line": 36,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 36,
+                          "column": 25
+                        }
+                      },
+                      "expression": {
+                        "type": "AssignmentExpression",
+                        "start": 890,
+                        "end": 910,
+                        "loc": {
+                          "start": {
+                            "line": 36,
+                            "column": 4
+                          },
+                          "end": {
+                            "line": 36,
+                            "column": 24
+                          }
+                        },
+                        "operator": "=",
+                        "left": {
+                          "type": "MemberExpression",
+                          "start": 890,
+                          "end": 903,
+                          "loc": {
+                            "start": {
+                              "line": 36,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 36,
+                              "column": 17
+                            }
+                          },
+                          "object": {
+                            "type": "ThisExpression",
+                            "start": 890,
+                            "end": 894,
+                            "loc": {
+                              "start": {
+                                "line": 36,
+                                "column": 4
+                              },
+                              "end": {
+                                "line": 36,
+                                "column": 8
+                              }
+                            },
+                            "leadingComments": null
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "start": 895,
+                            "end": 903,
+                            "loc": {
+                              "start": {
+                                "line": 36,
+                                "column": 9
+                              },
+                              "end": {
+                                "line": 36,
+                                "column": 17
+                              }
+                            },
+                            "name": "original"
+                          },
+                          "computed": false,
+                          "leadingComments": null
+                        },
+                        "right": {
+                          "type": "Literal",
+                          "start": 906,
+                          "end": 910,
+                          "loc": {
+                            "start": {
+                              "line": 36,
+                              "column": 20
+                            },
+                            "end": {
+                              "line": 36,
+                              "column": 24
+                            }
+                          },
+                          "value": null,
+                          "rawValue": null,
+                          "raw": "null"
+                        },
+                        "leadingComments": null
+                      },
+                      "leadingComments": [
+                        {
+                          "type": "Block",
+                          "value": "*\n     * オリジナルイベント(.onscroll)\n     * @type {?Event}\n     ",
+                          "start": 824,
+                          "end": 885,
+                          "loc": {
+                            "start": {
+                              "line": 32,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 35,
+                              "column": 7
+                            }
+                          },
+                          "range": [
+                            824,
+                            885
+                          ]
+                        }
+                      ],
+                      "trailingComments": [
+                        {
+                          "type": "Block",
+                          "value": "*\n     * scroll top 現在位置(px)\n     * @type {number}\n     ",
+                          "start": 916,
+                          "end": 976,
+                          "loc": {
+                            "start": {
+                              "line": 37,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 40,
+                              "column": 7
+                            }
+                          },
+                          "range": [
+                            916,
+                            976
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "start": 981,
+                      "end": 992,
+                      "loc": {
+                        "start": {
+                          "line": 41,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 41,
+                          "column": 15
+                        }
+                      },
+                      "expression": {
+                        "type": "AssignmentExpression",
+                        "start": 981,
+                        "end": 991,
+                        "loc": {
+                          "start": {
+                            "line": 41,
+                            "column": 4
+                          },
+                          "end": {
+                            "line": 41,
+                            "column": 14
+                          }
+                        },
+                        "operator": "=",
+                        "left": {
+                          "type": "MemberExpression",
+                          "start": 981,
+                          "end": 987,
+                          "loc": {
+                            "start": {
+                              "line": 41,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 41,
+                              "column": 10
+                            }
+                          },
+                          "object": {
+                            "type": "ThisExpression",
+                            "start": 981,
+                            "end": 985,
+                            "loc": {
+                              "start": {
+                                "line": 41,
+                                "column": 4
+                              },
+                              "end": {
+                                "line": 41,
+                                "column": 8
+                              }
+                            },
+                            "leadingComments": null
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "start": 986,
+                            "end": 987,
+                            "loc": {
+                              "start": {
+                                "line": 41,
+                                "column": 9
+                              },
+                              "end": {
+                                "line": 41,
+                                "column": 10
+                              }
+                            },
+                            "name": "y"
+                          },
+                          "computed": false,
+                          "leadingComments": null
+                        },
+                        "right": {
+                          "type": "Literal",
+                          "start": 990,
+                          "end": 991,
+                          "loc": {
+                            "start": {
+                              "line": 41,
+                              "column": 13
+                            },
+                            "end": {
+                              "line": 41,
+                              "column": 14
+                            }
+                          },
+                          "value": 0,
+                          "rawValue": 0,
+                          "raw": "0"
+                        },
+                        "leadingComments": null
+                      },
+                      "leadingComments": [
+                        {
+                          "type": "Block",
+                          "value": "*\n     * scroll top 現在位置(px)\n     * @type {number}\n     ",
+                          "start": 916,
+                          "end": 976,
+                          "loc": {
+                            "start": {
+                              "line": 37,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 40,
+                              "column": 7
+                            }
+                          },
+                          "range": [
+                            916,
+                            976
+                          ]
+                        }
+                      ],
+                      "trailingComments": [
+                        {
+                          "type": "Block",
+                          "value": "*\n     * window innerHeight\n     * @type {number}\n     ",
+                          "start": 997,
+                          "end": 1056,
+                          "loc": {
+                            "start": {
+                              "line": 42,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 45,
+                              "column": 7
+                            }
+                          },
+                          "range": [
+                            997,
+                            1056
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "start": 1061,
+                      "end": 1077,
+                      "loc": {
+                        "start": {
+                          "line": 46,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 46,
+                          "column": 20
+                        }
+                      },
+                      "expression": {
+                        "type": "AssignmentExpression",
+                        "start": 1061,
+                        "end": 1076,
+                        "loc": {
+                          "start": {
+                            "line": 46,
+                            "column": 4
+                          },
+                          "end": {
+                            "line": 46,
+                            "column": 19
+                          }
+                        },
+                        "operator": "=",
+                        "left": {
+                          "type": "MemberExpression",
+                          "start": 1061,
+                          "end": 1072,
+                          "loc": {
+                            "start": {
+                              "line": 46,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 46,
+                              "column": 15
+                            }
+                          },
+                          "object": {
+                            "type": "ThisExpression",
+                            "start": 1061,
+                            "end": 1065,
+                            "loc": {
+                              "start": {
+                                "line": 46,
+                                "column": 4
+                              },
+                              "end": {
+                                "line": 46,
+                                "column": 8
+                              }
+                            },
+                            "leadingComments": null
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "start": 1066,
+                            "end": 1072,
+                            "loc": {
+                              "start": {
+                                "line": 46,
+                                "column": 9
+                              },
+                              "end": {
+                                "line": 46,
+                                "column": 15
+                              }
+                            },
+                            "name": "height"
+                          },
+                          "computed": false,
+                          "leadingComments": null
+                        },
+                        "right": {
+                          "type": "Literal",
+                          "start": 1075,
+                          "end": 1076,
+                          "loc": {
+                            "start": {
+                              "line": 46,
+                              "column": 18
+                            },
+                            "end": {
+                              "line": 46,
+                              "column": 19
+                            }
+                          },
+                          "value": 0,
+                          "rawValue": 0,
+                          "raw": "0"
+                        },
+                        "leadingComments": null
+                      },
+                      "leadingComments": [
+                        {
+                          "type": "Block",
+                          "value": "*\n     * window innerHeight\n     * @type {number}\n     ",
+                          "start": 997,
+                          "end": 1056,
+                          "loc": {
+                            "start": {
+                              "line": 42,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 45,
+                              "column": 7
+                            }
+                          },
+                          "range": [
+                            997,
+                            1056
+                          ]
+                        }
+                      ],
+                      "trailingComments": [
+                        {
+                          "type": "Block",
+                          "value": "*\n     * window innerWidth\n     * @type {number}\n     ",
+                          "start": 1082,
+                          "end": 1140,
+                          "loc": {
+                            "start": {
+                              "line": 47,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 50,
+                              "column": 7
+                            }
+                          },
+                          "range": [
+                            1082,
+                            1140
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "start": 1145,
+                      "end": 1160,
+                      "loc": {
+                        "start": {
+                          "line": 51,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 51,
+                          "column": 19
+                        }
+                      },
+                      "expression": {
+                        "type": "AssignmentExpression",
+                        "start": 1145,
+                        "end": 1159,
+                        "loc": {
+                          "start": {
+                            "line": 51,
+                            "column": 4
+                          },
+                          "end": {
+                            "line": 51,
+                            "column": 18
+                          }
+                        },
+                        "operator": "=",
+                        "left": {
+                          "type": "MemberExpression",
+                          "start": 1145,
+                          "end": 1155,
+                          "loc": {
+                            "start": {
+                              "line": 51,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 51,
+                              "column": 14
+                            }
+                          },
+                          "object": {
+                            "type": "ThisExpression",
+                            "start": 1145,
+                            "end": 1149,
+                            "loc": {
+                              "start": {
+                                "line": 51,
+                                "column": 4
+                              },
+                              "end": {
+                                "line": 51,
+                                "column": 8
+                              }
+                            },
+                            "leadingComments": null
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "start": 1150,
+                            "end": 1155,
+                            "loc": {
+                              "start": {
+                                "line": 51,
+                                "column": 9
+                              },
+                              "end": {
+                                "line": 51,
+                                "column": 14
+                              }
+                            },
+                            "name": "width"
+                          },
+                          "computed": false,
+                          "leadingComments": null
+                        },
+                        "right": {
+                          "type": "Literal",
+                          "start": 1158,
+                          "end": 1159,
+                          "loc": {
+                            "start": {
+                              "line": 51,
+                              "column": 17
+                            },
+                            "end": {
+                              "line": 51,
+                              "column": 18
+                            }
+                          },
+                          "value": 0,
+                          "rawValue": 0,
+                          "raw": "0"
+                        },
+                        "leadingComments": null
+                      },
+                      "leadingComments": [
+                        {
+                          "type": "Block",
+                          "value": "*\n     * window innerWidth\n     * @type {number}\n     ",
+                          "start": 1082,
+                          "end": 1140,
+                          "loc": {
+                            "start": {
+                              "line": 47,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 50,
+                              "column": 7
+                            }
+                          },
+                          "range": [
+                            1082,
+                            1140
+                          ]
+                        }
+                      ],
+                      "trailingComments": [
+                        {
+                          "type": "Block",
+                          "value": "*\n     * window 下端位置(scroll top + window height)\n     * @type {number}\n     ",
+                          "start": 1165,
+                          "end": 1245,
+                          "loc": {
+                            "start": {
+                              "line": 52,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 55,
+                              "column": 7
+                            }
+                          },
+                          "range": [
+                            1165,
+                            1245
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "start": 1250,
+                      "end": 1266,
+                      "loc": {
+                        "start": {
+                          "line": 56,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 56,
+                          "column": 20
+                        }
+                      },
+                      "expression": {
+                        "type": "AssignmentExpression",
+                        "start": 1250,
+                        "end": 1265,
+                        "loc": {
+                          "start": {
+                            "line": 56,
+                            "column": 4
+                          },
+                          "end": {
+                            "line": 56,
+                            "column": 19
+                          }
+                        },
+                        "operator": "=",
+                        "left": {
+                          "type": "MemberExpression",
+                          "start": 1250,
+                          "end": 1261,
+                          "loc": {
+                            "start": {
+                              "line": 56,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 56,
+                              "column": 15
+                            }
+                          },
+                          "object": {
+                            "type": "ThisExpression",
+                            "start": 1250,
+                            "end": 1254,
+                            "loc": {
+                              "start": {
+                                "line": 56,
+                                "column": 4
+                              },
+                              "end": {
+                                "line": 56,
+                                "column": 8
+                              }
+                            },
+                            "leadingComments": null
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "start": 1255,
+                            "end": 1261,
+                            "loc": {
+                              "start": {
+                                "line": 56,
+                                "column": 9
+                              },
+                              "end": {
+                                "line": 56,
+                                "column": 15
+                              }
+                            },
+                            "name": "bottom"
+                          },
+                          "computed": false,
+                          "leadingComments": null
+                        },
+                        "right": {
+                          "type": "Literal",
+                          "start": 1264,
+                          "end": 1265,
+                          "loc": {
+                            "start": {
+                              "line": 56,
+                              "column": 18
+                            },
+                            "end": {
+                              "line": 56,
+                              "column": 19
+                            }
+                          },
+                          "value": 0,
+                          "rawValue": 0,
+                          "raw": "0"
+                        },
+                        "leadingComments": null
+                      },
+                      "leadingComments": [
+                        {
+                          "type": "Block",
+                          "value": "*\n     * window 下端位置(scroll top + window height)\n     * @type {number}\n     ",
+                          "start": 1165,
+                          "end": 1245,
+                          "loc": {
+                            "start": {
+                              "line": 52,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 55,
+                              "column": 7
+                            }
+                          },
+                          "range": [
+                            1165,
+                            1245
+                          ]
+                        }
+                      ],
+                      "trailingComments": [
+                        {
+                          "type": "Block",
+                          "value": "*\n     * scroll top 位置が前回と違うかを表すフラッグ, true: 違う\n     * @type {boolean}\n     ",
+                          "start": 1271,
+                          "end": 1350,
+                          "loc": {
+                            "start": {
+                              "line": 57,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 60,
+                              "column": 7
+                            }
+                          },
+                          "range": [
+                            1271,
+                            1350
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "start": 1355,
+                      "end": 1376,
+                      "loc": {
+                        "start": {
+                          "line": 61,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 61,
+                          "column": 25
+                        }
+                      },
+                      "expression": {
+                        "type": "AssignmentExpression",
+                        "start": 1355,
+                        "end": 1375,
+                        "loc": {
+                          "start": {
+                            "line": 61,
+                            "column": 4
+                          },
+                          "end": {
+                            "line": 61,
+                            "column": 24
+                          }
+                        },
+                        "operator": "=",
+                        "left": {
+                          "type": "MemberExpression",
+                          "start": 1355,
+                          "end": 1367,
+                          "loc": {
+                            "start": {
+                              "line": 61,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 61,
+                              "column": 16
+                            }
+                          },
+                          "object": {
+                            "type": "ThisExpression",
+                            "start": 1355,
+                            "end": 1359,
+                            "loc": {
+                              "start": {
+                                "line": 61,
+                                "column": 4
+                              },
+                              "end": {
+                                "line": 61,
+                                "column": 8
+                              }
+                            },
+                            "leadingComments": null
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "start": 1360,
+                            "end": 1367,
+                            "loc": {
+                              "start": {
+                                "line": 61,
+                                "column": 9
+                              },
+                              "end": {
+                                "line": 61,
+                                "column": 16
+                              }
+                            },
+                            "name": "changed"
+                          },
+                          "computed": false,
+                          "leadingComments": null
+                        },
+                        "right": {
+                          "type": "Literal",
+                          "start": 1370,
+                          "end": 1375,
+                          "loc": {
+                            "start": {
+                              "line": 61,
+                              "column": 19
+                            },
+                            "end": {
+                              "line": 61,
+                              "column": 24
+                            }
+                          },
+                          "value": false,
+                          "rawValue": false,
+                          "raw": "false"
+                        },
+                        "leadingComments": null
+                      },
+                      "leadingComments": [
+                        {
+                          "type": "Block",
+                          "value": "*\n     * scroll top 位置が前回と違うかを表すフラッグ, true: 違う\n     * @type {boolean}\n     ",
+                          "start": 1271,
+                          "end": 1350,
+                          "loc": {
+                            "start": {
+                              "line": 57,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 60,
+                              "column": 7
+                            }
+                          },
+                          "range": [
+                            1271,
+                            1350
+                          ]
+                        }
+                      ],
+                      "trailingComments": [
+                        {
+                          "type": "Block",
+                          "value": "*\n     * UP / DOWN と前回からの移動距離(px), 正(+): scroll down\n     * @type {number}\n     ",
+                          "start": 1381,
+                          "end": 1465,
+                          "loc": {
+                            "start": {
+                              "line": 62,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 65,
+                              "column": 7
+                            }
+                          },
+                          "range": [
+                            1381,
+                            1465
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "start": 1470,
+                      "end": 1486,
+                      "loc": {
+                        "start": {
+                          "line": 66,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 66,
+                          "column": 20
+                        }
+                      },
+                      "expression": {
+                        "type": "AssignmentExpression",
+                        "start": 1470,
+                        "end": 1485,
+                        "loc": {
+                          "start": {
+                            "line": 66,
+                            "column": 4
+                          },
+                          "end": {
+                            "line": 66,
+                            "column": 19
+                          }
+                        },
+                        "operator": "=",
+                        "left": {
+                          "type": "MemberExpression",
+                          "start": 1470,
+                          "end": 1481,
+                          "loc": {
+                            "start": {
+                              "line": 66,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 66,
+                              "column": 15
+                            }
+                          },
+                          "object": {
+                            "type": "ThisExpression",
+                            "start": 1470,
+                            "end": 1474,
+                            "loc": {
+                              "start": {
+                                "line": 66,
+                                "column": 4
+                              },
+                              "end": {
+                                "line": 66,
+                                "column": 8
+                              }
+                            },
+                            "leadingComments": null
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "start": 1475,
+                            "end": 1481,
+                            "loc": {
+                              "start": {
+                                "line": 66,
+                                "column": 9
+                              },
+                              "end": {
+                                "line": 66,
+                                "column": 15
+                              }
+                            },
+                            "name": "moving"
+                          },
+                          "computed": false,
+                          "leadingComments": null
+                        },
+                        "right": {
+                          "type": "Literal",
+                          "start": 1484,
+                          "end": 1485,
+                          "loc": {
+                            "start": {
+                              "line": 66,
+                              "column": 18
+                            },
+                            "end": {
+                              "line": 66,
+                              "column": 19
+                            }
+                          },
+                          "value": 0,
+                          "rawValue": 0,
+                          "raw": "0"
+                        },
+                        "leadingComments": null
+                      },
+                      "leadingComments": [
+                        {
+                          "type": "Block",
+                          "value": "*\n     * UP / DOWN と前回からの移動距離(px), 正(+): scroll down\n     * @type {number}\n     ",
+                          "start": 1381,
+                          "end": 1465,
+                          "loc": {
+                            "start": {
+                              "line": 62,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 65,
+                              "column": 7
+                            }
+                          },
+                          "range": [
+                            1381,
+                            1465
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\n   * custom Event Object\n   * @param {string} type イベント種類\n   * @param {*} currentTarget current イベント発生インスタンス\n   * @param {*} [target=undefined] イベント発生インスタンス\n   * ",
+                  "start": 465,
+                  "end": 633,
+                  "loc": {
+                    "start": {
+                      "line": 19,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 24,
+                      "column": 7
+                    }
+                  },
+                  "range": [
+                    465,
+                    633
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "leadingComments": [
+          {
+            "type": "Block",
+            "value": "*\n * Scroll events 管理クラス\n ",
+            "start": 381,
+            "end": 411,
+            "loc": {
+              "start": {
+                "line": 15,
+                "column": 0
+              },
+              "end": {
+                "line": 17,
+                "column": 3
+              }
+            },
+            "range": [
+              381,
+              411
+            ]
+          }
+        ],
+        "trailingComments": []
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * Scroll events 管理クラス\n ",
+          "start": 381,
+          "end": 411,
+          "loc": {
+            "start": {
+              "line": 15,
+              "column": 0
+            },
+            "end": {
+              "line": 17,
+              "column": 3
+            }
+          },
+          "range": [
+            381,
+            411
+          ]
+        }
+      ]
+    }
+  ]
+}
