@@ -25,10 +25,10 @@ export default class Events {
   /**
    * custom Event Object
    * @param {string} type イベント種類
-   * @param {*} [target=this] イベント発生インスタンス
    * @param {*} [currentTarget=this] current イベント発生インスタンス
+   * @param {*} [target=this] イベント発生インスタンス
    * */
-  constructor(type, target = this, currentTarget = this) {
+  constructor(type, currentTarget = this, target = this) {
     /**
      * イベント種類
      * @type {string}

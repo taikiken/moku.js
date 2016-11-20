@@ -12,7 +12,7 @@
 
 // event
 import { default as EventDispatcher } from './EventDispatcher';
-import { default as Events } from './Events';
+import { default as ScrollEvents } from './ScrollEvents';
 import { default as Freeze } from './Freeze';
 
 /**
@@ -97,16 +97,33 @@ export default class Scroll extends EventDispatcher {
     // @type {function} - bound scroll function
     // this[bindSymbol] = this.scroll.bind(this);
     const boundScroll = this.scroll.bind(this);
+    /**
+     * bound scroll, window.onscroll event handler
+     * @returns {function} bound scroll
+     */
     this.boundScroll = () => boundScroll;
     // @type {Events} - events instance
     // this[eventsSymbol] = new Events(Scroll.SCROLL, this, this);
-    const events = new Events(Scroll.SCROLL, this, this);
+    const events = new ScrollEvents(Scroll.SCROLL, this, this);
+    /**
+     * ScrollEvents instance, 発火時に使用します
+     * @returns {ScrollEvents} ScrollEvents instance
+     */
     this.events = () => events;
     // @type {number} - scroll top 前回値を保存します
     // @default -1
     // this[topSymbol] = -1;
+    /**
+     * 前回 scroll top 位置
+     * @type {number}
+     * @default -1
+     */
     this.previous = -1;
-
+    /**
+     * start 済みフラッグ
+     * @type {boolean}
+     * @default false
+     */
     this.started = false;
 
     // 設定済み instance を返します
@@ -142,28 +159,28 @@ export default class Scroll extends EventDispatcher {
   // static get COMPLETE() {
   //   return 'scrollComplete';
   // }
-  // ----------------------------------------
-  // STATIC GETTER / SETTER
-  // ----------------------------------------
-  /**
-   * scroll top 位置
-   * @returns {number} scroll top 位置を返します
-   * @see https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY
-   * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
-   */
-  static get y() {
-    return (typeof window.pageYOffset !== 'undefined') ?
-      window.pageYOffset :
-      (document.documentElement || document.body.parentNode || document.body).scrollTop;
-  }
-  /**
-   * scroll top 位置 を設定します
-   * @param {number} top スクロール位置(px)
-   */
-  static set y(top) {
-    // window.scrollTo(0, top);
-    Scroll.jump(top);
-  }
+  // // ----------------------------------------
+  // // STATIC GETTER / SETTER
+  // // ----------------------------------------
+  // /**
+  //  * scroll top 位置
+  //  * @returns {number} scroll top 位置を返します
+  //  * @see https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY
+  //  * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
+  //  */
+  // static get y() {
+  //   return (typeof window.pageYOffset !== 'undefined') ?
+  //     window.pageYOffset :
+  //     (document.documentElement || document.body.parentNode || document.body).scrollTop;
+  // }
+  // /**
+  //  * scroll top 位置 を設定します
+  //  * @param {number} top スクロール位置(px)
+  //  */
+  // static set y(top) {
+  //   // window.scrollTo(0, top);
+  //   Scroll.jump(top);
+  // }
   // ----------------------------------------
   // GETTER / SETTER
   // ----------------------------------------}
@@ -225,7 +242,7 @@ export default class Scroll extends EventDispatcher {
    */
   scroll(event) {
     // @type {number} - scroll top
-    const y = Scroll.y;
+    const y = Scroll.y();
     // @type {number} - window height
     const height = window.innerHeight;
     // @type {number} - 前回の scroll top
@@ -333,12 +350,26 @@ export default class Scroll extends EventDispatcher {
   static freeze() {
     return Freeze.freeze();
   }
+  /**
+   * scroll top 位置
+   * @returns {number} scroll top 位置を返します
+   * @see https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
+   */
+  static y() {
+    return (typeof window.pageYOffset !== 'undefined') ?
+      window.pageYOffset :
+      (document.documentElement || document.body.parentNode || document.body).scrollTop;
+  }
   // ----------------------------------------
   /**
    * Scroll instance を singleton を保証し作成します
    * @returns {Scroll} Scroll instance を返します
    */
   static factory() {
+    if (instance !== null) {
+      return instance;
+    }
     return new Scroll(singletonSymbol);
   }
 }
