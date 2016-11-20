@@ -79,11 +79,35 @@ export default class Polling extends EventDispatcher {
     // this[eventsSymbol] = new Events(Polling.UPDATE, this, this);
     const boundUpdate = this.update.bind(this);
     const events = new Events(Polling.UPDATE, this, this);
+    /**
+     * Cycle instance を取得します
+     * @returns {Cycle} Cycle instance
+     */
     this.cycle = () => cycle;
+    /**
+     * 間隔(ms)
+     * @type {number}
+     */
     this.interval = interval;
+    /**
+     * bound update, Cycle.UPDATE event handler
+     * @returns {function} bound update
+     */
     this.boundUpdate = () => boundUpdate;
+    /**
+     * Events instance
+     * @returns {Events} Polling.UPDATE Events object
+     */
     this.events = () => events;
+    /**
+     * polling event 発生時間, event を発火すると 0 にリセットされます
+     * @type {number}
+     */
     this.begin = 0;
+    /**
+     * Cycle 監視開始フラッグ
+     * @type {boolean}
+     */
     this.started = false;
   }
   // ----------------------------------------
@@ -190,20 +214,20 @@ export default class Polling extends EventDispatcher {
     events.polling = this.polling;
     return events;
   }
-  // /**
-  //  * cycle ループを開始します<br>
-  //  * watch Cycle.UPDATE event
-  //  * @returns {Cycle} cycle ループを開始しインスタンスを返します
-  //  */
-  // initCycle() {
-  //   // cycle
-  //   const cycle = this.cycle;
-  //   // bind Cycle.UPDATE
-  //   cycle.on(Cycle.UPDATE, this.boundUpdate());
-  //   // cycle 開始
-  //   cycle.start();
-  //   return cycle;
-  // }
+  /**
+   * cycle ループを開始します<br>
+   * watch Cycle.UPDATE event
+   * @returns {Cycle} cycle ループを開始しインスタンスを返します
+   */
+  initCycle() {
+    // cycle
+    const cycle = this.cycle();
+    // bind Cycle.UPDATE
+    cycle.on(Cycle.UPDATE, this.boundUpdate());
+    // cycle 開始
+    cycle.start();
+    return cycle;
+  }
   /**
    * polling を開始します
    * @returns {boolean} start に成功すると true を返します
@@ -217,12 +241,7 @@ export default class Polling extends EventDispatcher {
     // this[startSymbol] = true;
     this.turnOver();
     // cycle
-    // this.initCycle();
-    const cycle = this.cycle;
-    // bind Cycle.UPDATE
-    cycle.on(Cycle.UPDATE, this.boundUpdate());
-    // cycle 開始
-    cycle.start();
+    this.initCycle();
     // @type {number} - 開始時間
     const present = Date.now();
     // 強制的に1回目を実行
