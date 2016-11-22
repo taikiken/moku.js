@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>Mocha</title>
-<link href="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+  <link href="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
 </head>
 <body>
 <div id="mocha"></div>
 <script src="//cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
 <script src="//cdn.rawgit.com/Automattic/expect.js/0.3.1/index.js"></script>
 <script src="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
-<script src="//chaijs.com/chai.js"></script>
+<script src="http://chaijs.com/chai.js"></script>
 <script src="../libs/moku.js" charset="utf-8"></script>
 <script>
   // mochaの機能を呼び出します。ここでは、BDDとTDDを使用します。
@@ -23,34 +23,19 @@
   chai.Should();
 </script>
 <script>
-  var event = window.MOKU.event;
-  var Events = event.Events;
+  var util = window.MOKU.util;
+  var List = util.List;
 
-  function callback(event) {
-    console.log('callback', event)
-  }
-  function callback2(event) {
-    console.log('callback2', event)
-  }
-
-  var events = new Events('abc', this, this);
-  console.log('events', events);
-  console.log('events.type', events.type);
-  console.log('events.target', events.target);
-  console.log('events.currentTarget', events.currentTarget);
-
-  //  EventDispatcher.on
-  describe('#Events.type', function() {
-    it("events.type is abc", function() {
-      expect(events.type).to.eql('abc');
+  //  List.fill
+  describe('#List.fill', function() {
+    it("List.fill(3, 0) is [0, 0, 0]", function() {
+      expect(List.fill(3, 0)).to.eql([0, 0, 0]);
     });
-
-    it("events.target is exist", function() {
-      expect(events.target).to.exist;
-    });
-
-    it("events.currentTarget is exist", function() {
-      expect(events.currentTarget).to.exist;
+  });
+  //  List.filling
+  describe('#List.filling', function() {
+    it("List.filling(3, 0) is [0, 0, 0]", function() {
+      expect(List.fill(3, 0)).to.eql([0, 0, 0]);
     });
   });
 

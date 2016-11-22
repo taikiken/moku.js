@@ -54,7 +54,7 @@
 	 *
 	 * This notice shall be included in all copies or substantial portions of the Software.
 	 * 0.0.1
-	 * 2016-11-22 17:02:44
+	 * 2016-11-22 21:54:17
 	 */
 	// use strict は本来不要でエラーになる
 	// 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -111,7 +111,7 @@
 	MOKU.version = function () {return '0.0.1';}; /**
 	                                                   * build 日時を取得します
 	                                                   * @returns {string}  build 日時を返します
-	                                                   */MOKU.build = function () {return '2016-11-22 17:02:44';}; /**
+	                                                   */MOKU.build = function () {return '2016-11-22 21:54:17';}; /**
 	                                                                                                        * MOKU.event
 	                                                                                                        * @type {Object} MOKU.event object を返します
 	                                                                                                        */
@@ -4868,7 +4868,11 @@
 	       * @returns {*|void|string|XML} キャメルケース文字列を返します
 	       */ }, { key: 'camel', value: function camel(
 	    str) {
-	      return str.replace(/^\s+|\s+$/g, '');
+	      // return str.replace(/^\s+|\s+$/g, '');
+	      return str.replace(/-([a-z])/g, function (g) {
+	        var first = g[1];
+	        return first.toUpperCase();
+	      });
 	    } }]);return Text;}();exports.default = Text;
 
 /***/ },
@@ -4962,41 +4966,42 @@
 
 
 	var _Type = __webpack_require__(22);var _Type2 = _interopRequireDefault(_Type);
+	var _Text = __webpack_require__(112);var _Text2 = _interopRequireDefault(_Text);
 
 
 	var _Patterns = __webpack_require__(113);var _Patterns2 = _interopRequireDefault(_Patterns);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-	//
-	// /**
-	//  * オリジナルの element.style.cssText を保持するための Symbol
-	//  * @private
-	//  * @type {Symbol}
-	//  */
-	// const cssSymbol = Symbol('original element style');
-	//
-	// // Sagen.Dom class
-	// const Dom = self.Sagen.Dom;
 
 	/**
-	 * Element の style を操作します
-	 */ /**
-	     * Copyright (c) 2011-2016 inazumatv.com, inc.
-	     * @author (at)taikiken / http://inazumatv.com
-	     * @date 2016/10/06 - 21:52
-	     *
-	     * Distributed under the terms of the MIT license.
-	     * http://www.opensource.org/licenses/mit-license.html
-	     *
-	     * This notice shall be included in all copies or substantial portions of the Software.
-	     *
-	     */ // util
-	var Style = function () {/**
-	                          * 引数 element の初期 style 設定を保存し復元できるようにします
-	                          * @param {?Element} element 操作対象 Element
-	                          */function Style(element) {(0, _classCallCheck3.default)(this, Style); // @type {string} - オリジナルの element.style.cssText を保持します
-	    var css = this.current();this.original = function () {return css;};this.update = function (style) {css = style;}; /**
-	                                                                                                                       * 操作対象 Element
-	                                                                                                                       * @returns {Element} 操作対象 Element
-	                                                                                                                       */this.element = function () {return element;};}
+	                                                                                                                                                                                        * Element の style を操作します
+	                                                                                                                                                                                        */var
+	Style = function () {
+	  /**
+	                      * 引数 element の初期 style 設定を保存し復元できるようにします
+	                      * @param {?Element} element 操作対象 Element
+	                      */
+	  function Style(element) {(0, _classCallCheck3.default)(this, Style);
+	    /**
+	                                                                        * 操作対象 Element
+	                                                                        * @returns {Element} 操作対象 Element
+	                                                                        */
+	    this.element = function () {return element;};
+	    // @type {string} - オリジナルの element.style.cssText を保持します
+	    var css = this.current();
+	    /**
+	                               * インスタンス作成時の CSS
+	                               * @returns {string} インスタンス作成時の CSS
+	                               */
+	    this.original = function () {return css;};
+	    /**
+	                                                * インスタンス作成時の CSS を上書きします
+	                                                * @param {string} style 上書き用 CSS 設定
+	                                                * @returns {string} 上書きされた CSS
+	                                                */
+	    this.update = function (style) {
+	      css = style;
+	      return style;
+	    };
+	  }
 	  // ----------------------------------------
 	  // STATIC METHOD
 	  // ----------------------------------------
@@ -5062,24 +5067,21 @@
 	    }
 	    /**
 	       * element へ css を設定します、設定済み css を上書きします
-	       * @param {string} css 設定する css
-	       * @param {boolean} [update=false] 保存済み css を上書きするか否かの真偽値, true: 上書き
-	       * @return {boolean} 保存済み css を上書きするか否かの真偽値を返します
+	       * @param {string} property 設定する css property name
+	       * @param {string} value 設定する css value
+	       * @return {boolean} 変更されると true を返します
 	       */ }, { key: 'set', value: function set(
-	    css) {var update = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-	      // 更新依頼ありの時のみ書換える
-	      if (update) {
-	        this.update(css);
-	      }
+	    property, value) {
 	      // 存在チェック
 	      var element = this.element();
 	      if (!_Type2.default.exist(element)) {
-	        return update;
+	        return false;
 	      }
 	      // 存在する時のみ処理を行います
-	      element.style.cssText = css;
+	      var prop = _Text2.default.camel(property);
+	      element.style[prop] = value;
 
-	      return update;
+	      return true;
 	    }
 	    /**
 	       * element の style.cssText を取得します
@@ -5100,7 +5102,7 @@
 	       */ }, { key: 'restore', value: function restore()
 	    {
 	      var css = this.original();
-	      this.element.style.cssText = css;
+	      this.element().style.cssText = css;
 	      return css;
 	    } }], [{ key: 'compute', value: function compute(view, element, property) {var style = view.getComputedStyle(element, null);if (_Type2.default.exist(property)) {var props = property.replace(/([A-Z])/g, '-$1').toLowerCase();return style.getPropertyValue(props);}return style;} /**
 	                                                                                                                                                                                                                                                                                         * CSS 設定値の short hand をパターン {@link Patterns} から探し返します
@@ -5109,6 +5111,17 @@
 	                                                                                                                                                                                                                                                                                         * @param {Array<string>} patterns 調査対象 CSS property name の配列
 	                                                                                                                                                                                                                                                                                         * @returns {CssStyle|string|undefined} style value を返します
 	                                                                                                                                                                                                                                                                                         */ }, { key: 'shortHand', value: function shortHand(view, element, patterns) {var top = Style.compute(view, element, patterns[0]);var right = Style.compute(view, element, patterns[1]);var bottom = Style.compute(view, element, patterns[2]);var left = Style.compute(view, element, patterns[3]);if (top === bottom) {if (right === left) {if (top === right) {return top;}return top + ' ' + right;}return top + ' ' + right + ' ' + bottom + ' ' + left;} else if (right === left) {return top + ' ' + right + ' ' + bottom;}return top + ' ' + right + ' ' + bottom + ' ' + left;} }]);return Style;}(); // css
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/10/06 - 21:52
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */ // util
 	exports.default = Style;
 
 /***/ },

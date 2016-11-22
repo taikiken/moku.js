@@ -23,34 +23,26 @@
   chai.Should();
 </script>
 <script>
-  var event = window.MOKU.event;
-  var Events = event.Events;
+  var css = window.MOKU.css;
+  var Patterns = css.Patterns;
 
-  function callback(event) {
-    console.log('callback', event)
-  }
-  function callback2(event) {
-    console.log('callback2', event)
-  }
-
-  var events = new Events('abc', this, this);
-  console.log('events', events);
-  console.log('events.type', events.type);
-  console.log('events.target', events.target);
-  console.log('events.currentTarget', events.currentTarget);
-
-  //  EventDispatcher.on
-  describe('#Events.type', function() {
-    it("events.type is abc", function() {
-      expect(events.type).to.eql('abc');
+  //  Patterns.match
+  describe('#Patterns.match', function() {
+    it("Patterns.match('padding') is true", function() {
+      expect(Patterns.match('padding')).to.eql(true);
     });
-
-    it("events.target is exist", function() {
-      expect(events.target).to.exist;
+    it("Patterns.match('border-color') is true", function() {
+      expect(Patterns.match('border-color')).to.eql(true);
     });
+    it("Patterns.match('font') is false", function() {
+      expect(Patterns.match('font')).to.eql(false);
+    });
+  });
 
-    it("events.currentTarget is exist", function() {
-      expect(events.currentTarget).to.exist;
+  //  Patterns.get
+  describe('#Patterns.get', function() {
+    it("Patterns.get('border-style') is ['borderTopStyle', 'borderRightStyle', 'borderBottomStyle', 'borderLeftStyle']", function() {
+      expect(Patterns.get('border-style')).to.eql(['borderTopStyle', 'borderRightStyle', 'borderBottomStyle', 'borderLeftStyle']);
     });
   });
 

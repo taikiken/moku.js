@@ -12,19 +12,10 @@
 
 // util
 import { default as Type } from '../util/Type';
+import { default as Text } from '../util/Text';
 
 // css
 import { default as Patterns } from './Patterns';
-//
-// /**
-//  * オリジナルの element.style.cssText を保持するための Symbol
-//  * @private
-//  * @type {Symbol}
-//  */
-// const cssSymbol = Symbol('original element style');
-//
-// // Sagen.Dom class
-// const Dom = self.Sagen.Dom;
 
 /**
  * Element の style を操作します
@@ -35,17 +26,27 @@ export default class Style {
    * @param {?Element} element 操作対象 Element
    */
   constructor(element) {
-    // @type {string} - オリジナルの element.style.cssText を保持します
-    let css = this.current();
-    this.original = () => css;
-    this.update = (style) => {
-      css = style;
-    };
     /**
      * 操作対象 Element
      * @returns {Element} 操作対象 Element
      */
     this.element = () => element;
+    // @type {string} - オリジナルの element.style.cssText を保持します
+    let css = this.current();
+    /**
+     * インスタンス作成時の CSS
+     * @returns {string} インスタンス作成時の CSS
+     */
+    this.original = () => css;
+    /**
+     * インスタンス作成時の CSS を上書きします
+     * @param {string} style 上書き用 CSS 設定
+     * @returns {string} 上書きされた CSS
+     */
+    this.update = (style) => {
+      css = style;
+      return style;
+    };
   }
   // ----------------------------------------
   // STATIC METHOD
@@ -112,24 +113,21 @@ export default class Style {
   }
   /**
    * element へ css を設定します、設定済み css を上書きします
-   * @param {string} css 設定する css
-   * @param {boolean} [update=false] 保存済み css を上書きするか否かの真偽値, true: 上書き
-   * @return {boolean} 保存済み css を上書きするか否かの真偽値を返します
+   * @param {string} property 設定する css property name
+   * @param {string} value 設定する css value
+   * @return {boolean} 変更されると true を返します
    */
-  set(css, update = false) {
-    // 更新依頼ありの時のみ書換える
-    if (update) {
-      this.update(css);
-    }
+  set(property, value) {
     // 存在チェック
     const element = this.element();
     if (!Type.exist(element)) {
-      return update;
+      return false;
     }
     // 存在する時のみ処理を行います
-    element.style.cssText = css;
+    const prop = Text.camel(property);
+    element.style[prop] = value;
 
-    return update;
+    return true;
   }
   /**
    * element の style.cssText を取得します
@@ -150,7 +148,7 @@ export default class Style {
    */
   restore() {
     const css = this.original();
-    this.element.style.cssText = css;
+    this.element().style.cssText = css;
     return css;
   }
 }

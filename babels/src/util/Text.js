@@ -28,6 +28,10 @@ export default class Text {
    * @returns {*|void|string|XML} キャメルケース文字列を返します
    */
   static camel(str) {
-    return str.replace(/^\s+|\s+$/g, '');
+    // return str.replace(/^\s+|\s+$/g, '');
+    return str.replace(/-([a-z])/g, (g) => {
+      const first = g[1];
+      return first.toUpperCase();
+    });
   }
 }
