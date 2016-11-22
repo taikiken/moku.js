@@ -49,7 +49,7 @@ export default class Patterns {
   /**
    * 引数 `str` をキーにした操作対象のリストを取得します
    * @param {string} str CSS className
-   * @returns {Array<string>|undefined}
+   * @returns {Array<string>|undefined} 引数 `str` をキーにした操作対象のリスト
    */
   static get(str) {
     // camel case を dash(hyphenation)へ変換します

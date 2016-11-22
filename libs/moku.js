@@ -54,7 +54,7 @@
 	 *
 	 * This notice shall be included in all copies or substantial portions of the Software.
 	 * 0.0.1
-	 * 2016-11-20 16:54:05
+	 * 2016-11-22 16:16:21
 	 */
 	// use strict は本来不要でエラーになる
 	// 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -95,7 +95,7 @@
 	                                                   * build 日時を取得します
 	                                                   * @returns {string}  build 日時を返します
 	                                                   */
-	MOKU.build = function () {return '2016-11-20 16:54:05';};
+	MOKU.build = function () {return '2016-11-22 16:16:21';};
 	/**
 	                                                   * MOKU.event
 	                                                   * @type {Object} MOKU.event object を返します
@@ -1265,54 +1265,19 @@
 	                                                                             * This notice shall be included in all copies or substantial portions of the Software.
 	                                                                             *
 	                                                                             */ // event
-	var instance = null; // /**
-	//  * private property key, bind 済み mouseWheel を保存するための Symbol
-	//  * @type {Symbol}
-	//  * @private
-	//  */
-	// const bindSymbol = Symbol('bound mouseWheel symbol');
-	// /**
-	//  * Cycle.UPDATE event を発火する時の Events instance を保存するための Symbol
-	//  * @type {Symbol}
-	//  * @private
-	//  */
-	// const eventsSymbol = Symbol('Cycle.UPDATE symbol');
-	// /**
-	//  * scroll top 位置が変更になったかを確認するために前回値を保存するための Symbol
-	//  * @type {Symbol}
-	//  */
-	// const topSymbol = Symbol('previous scroll top');
-	//
-	// /**
-	//  * scroll freeze timeout id
-	//  * @private
-	//  * @static
-	//  * @type {number}
-	//  */
-	// let timerId = 0;
-	//
-	// /**
-	//  * scroll を止める時間
-	//  * @private
-	//  * @static
-	//  * @type {number}
-	//  * @default 200
-	//  */
-	// let freezeTime = 200;
-	/**
-	 * window scroll event を監視し通知を行います
-	 * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
-	 *
-	 * ```
-	 * const instance = Scroll.factory();
-	 * ```
-	 */var Scroll = function (_EventDispatcher) {(0, _inherits3.default)(Scroll, _EventDispatcher); /**
-	                                                                                                 * singleton です
-	                                                                                                 * @param {Symbol} checkSymbol singleton を保証するための private instance
-	                                                                                                 * @returns {Scroll} singleton instance を返します
-	                                                                                                 */function Scroll(checkSymbol) {var _ret2;(0, _classCallCheck3.default)(this, Scroll); // checkSymbol と singleton が等価かをチェックします
+	var instance = null; /**
+	                      * window scroll event を監視し通知を行います
+	                      * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
+	                      *
+	                      * ```
+	                      * const instance = Scroll.factory();
+	                      * ```
+	                      */var Scroll = function (_EventDispatcher) {(0, _inherits3.default)(Scroll, _EventDispatcher); /**
+	                                                                                                                      * singleton です
+	                                                                                                                      * @param {Symbol} checkSymbol singleton を保証するための private instance
+	                                                                                                                      * @returns {Scroll} singleton instance を返します
+	                                                                                                                      */function Scroll(checkSymbol) {var _ret2;(0, _classCallCheck3.default)(this, Scroll); // checkSymbol と singleton が等価かをチェックします
 	    if (checkSymbol !== singletonSymbol) {throw new Error('don\'t use new, instead use static factory method.');}
-
 
 	    // instance 作成済みかをチェックし instance が null の時 this を設定します
 	    var _this = (0, _possibleConstructorReturn3.default)(this, (Scroll.__proto__ || (0, _getPrototypeOf2.default)(Scroll)).call(this));if (instance !== null) {var _ret;
@@ -1323,8 +1288,6 @@
 	    instance = _this;
 
 	    // event handler
-	    // @type {function} - bound scroll function
-	    // this[bindSymbol] = this.scroll.bind(this);
 	    var boundScroll = _this.scroll.bind(_this);
 	    /**
 	                                                 * bound scroll, window.onscroll event handler
@@ -1332,21 +1295,17 @@
 	                                                 */
 	    _this.boundScroll = function () {return boundScroll;};
 	    // @type {Events} - events instance
-	    // this[eventsSymbol] = new Events(Scroll.SCROLL, this, this);
 	    var events = new _ScrollEvents2.default(Scroll.SCROLL, _this, _this);
 	    /**
 	                                                                           * ScrollEvents instance, 発火時に使用します
 	                                                                           * @returns {ScrollEvents} ScrollEvents instance
 	                                                                           */
 	    _this.events = function () {return events;};
-	    // @type {number} - scroll top 前回値を保存します
-	    // @default -1
-	    // this[topSymbol] = -1;
 	    /**
-	     * 前回 scroll top 位置
-	     * @type {number}
-	     * @default -1
-	     */
+	                                                  * 前回 scroll top 位置
+	                                                  * @type {number}
+	                                                  * @default -1
+	                                                  */
 	    _this.previous = -1;
 	    /**
 	                          * start 済みフラッグ
@@ -1370,72 +1329,6 @@
 
 
 
-	    // /**
-	    //  * scroll motion start event
-	    //  * @event START
-	    //  * @returns {string} event, scrollStart を返します
-	    //  * @default scrollStart
-	    //  */
-	    // static get START() {
-	    //   return 'scrollStart';
-	    // }
-	    // /**
-	    //  * scroll motion complete event
-	    //  * @event COMPLETE
-	    //  * @returns {string} event, scrollComplete を返します
-	    //  * @default scrollComplete
-	    //  */
-	    // static get COMPLETE() {
-	    //   return 'scrollComplete';
-	    // }
-	    // // ----------------------------------------
-	    // // STATIC GETTER / SETTER
-	    // // ----------------------------------------
-	    // /**
-	    //  * scroll top 位置
-	    //  * @returns {number} scroll top 位置を返します
-	    //  * @see https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY
-	    //  * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
-	    //  */
-	    // static get y() {
-	    //   return (typeof window.pageYOffset !== 'undefined') ?
-	    //     window.pageYOffset :
-	    //     (document.documentElement || document.body.parentNode || document.body).scrollTop;
-	    // }
-	    // /**
-	    //  * scroll top 位置 を設定します
-	    //  * @param {number} top スクロール位置(px)
-	    //  */
-	    // static set y(top) {
-	    //   // window.scrollTo(0, top);
-	    //   Scroll.jump(top);
-	    // }
-	    // ----------------------------------------
-	    // GETTER / SETTER
-	    // ----------------------------------------}
-	    // scroll
-	    // /**
-	    //  * bind 済み mouseWheel
-	    //  * @returns {function} bind 済み mouseWheel を返します
-	    //  */
-	    // get bindScroll() {
-	    //   return this[bindSymbol];
-	    // }
-	    // // events
-	    // /**
-	    //  * Events instance を取得します
-	    //  * @returns {Events} Events instance
-	    //  */
-	    // get events() {
-	    //   return this[eventsSymbol];
-	    // }
-	    // /**
-	    //  * Events instance を設定します
-	    //  * @param {Events} events Events instance
-	    //  */
-	    // set events(events) {
-	    //   this[eventsSymbol] = events;
-	    // }
 	    // ----------------------------------------
 	    // METHOD
 	    // ----------------------------------------
@@ -1508,74 +1401,10 @@
 	    {var y = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 	      return setTimeout(function () {window.scrollTo(0, y);}, delay);
 	    }
-	    // // ----------------------------------------
-	    // /**
-	    //  * scroll 動作を受付不能にします
-	    //  * @returns {void}
-	    //  */
-	    // static abort() {
-	    //   window.addEventListener('touchstart', Scroll.onScroll, false);
-	    //   window.addEventListener('touchmove', Scroll.onScroll, false);
-	    //   window.addEventListener('touchend', Scroll.onScroll, false);
-	    //   window.addEventListener('scroll', Scroll.onScroll, false);
-	    //   document.addEventListener('wheel', Scroll.onScroll, false);
-	    //   document.addEventListener('mousewheel', Scroll.onScroll, false);
-	    //   window.addEventListener('DOMMouseScroll', Scroll.onScroll, false);
-	    // }
-	    // /**
-	    //  * scroll 動作を回復します
-	    //  * @returns {void}
-	    //  */
-	    // static activate() {
-	    //   window.removeEventListener('touchstart', Scroll.onScroll);
-	    //   window.removeEventListener('touchmove', Scroll.onScroll);
-	    //   window.removeEventListener('touchend', Scroll.onScroll);
-	    //   window.removeEventListener('scroll', Scroll.onScroll);
-	    //   document.removeEventListener('wheel', Scroll.onScroll);
-	    //   document.removeEventListener('mousewheel', Scroll.onScroll);
-	    //   window.removeEventListener('DOMMouseScroll', Scroll.onScroll);
-	    // }
-	    // /**
-	    //  * window scroll event handler, バブリング・伝播全てキャンセルします
-	    //  * @param {Event} event window scroll event
-	    //  * @returns {boolean} event をキャンセルするために false を返します
-	    //  */
-	    // static onScroll(event) {
-	    //   event.preventDefault();
-	    //   event.stopPropagation();
-	    //   return false;
-	    // }
-	    // /**
-	    //  * scroll 操作を引数(delay)の間キャンセルします
-	    //  * @param {number} [delay=100] 遅延時間(ms), pc: 100, mobile: 500
-	    //  * @returns {number} time out id
-	    //  */
-	    // static freeze(delay = Scroll.freezeTime()) {
-	    //   clearTimeout(timerId);
-	    //
-	    //   Scroll.abort();
-	    //   timerId = setTimeout(Scroll.activate, delay);
-	    //   return timerId;
-	    // }
-	    // /**
-	    //  * scroll 操作を不能にする時間間隔(ms)を取得します
-	    //  * @returns {number} scroll 操作を不能にする時間間隔(ms)
-	    //  */
-	    // static freezeTime() {
-	    //   return freezeTime;
-	    // }
-	    // /**
-	    //  * scroll 操作を不能にする時間間隔(ms)を設定します
-	    //  * @param {number} time scroll 操作を不能にする時間(ms)
-	    //  * @returns {void}
-	    //  */
-	    // static setFreezeTime(time) {
-	    //   freezeTime = time;
-	    // }
 	    /**
-	     * {@link Freeze}.freeze を実行し scroll 操作を一定期間不能にします
-	     * @returns {number} time out ID
-	     */ }, { key: 'freeze', value: function freeze()
+	       * {@link Freeze}.freeze を実行し scroll 操作を一定期間不能にします
+	       * @returns {number} time out ID
+	       */ }, { key: 'freeze', value: function freeze()
 	    {
 	      return _Freeze2.default.freeze();
 	    }
@@ -2837,24 +2666,18 @@
 	                                                                         * singleton instance, nullable
 	                                                                         * @type {?Wheel}
 	                                                                         * @private
-	                                                                         */var instance = null; // /**
-	//  * private property key, bind 済み mouseWheel を保存するための Symbol
-	//  * @type {Symbol}
-	//  * @private
-	//  */
-	// const wheelSymbol = Symbol('bound mouseWheel Symbol');
-	/**
-	 * mousewheel event を監視し通知を行います
-	 * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
-	 *
-	 * ```
-	 * const instance:Wheel = Wheel.factory();
-	 * ```
-	 */var Wheel = function (_EventDispatcher) {(0, _inherits3.default)(Wheel, _EventDispatcher); /**
-	                                                                                               * singleton です
-	                                                                                               * @param {Symbol} checkSymbol singleton を保証するための private instance
-	                                                                                               * @returns {Wheel} singleton instance を返します
-	                                                                                               */function Wheel(checkSymbol) {var _ret2;(0, _classCallCheck3.default)(this, Wheel); // checkSymbol と singleton が等価かをチェックします
+	                                                                         */var instance = null; /**
+	                                                                                                 * mousewheel event を監視し通知を行います
+	                                                                                                 * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
+	                                                                                                 *
+	                                                                                                 * ```
+	                                                                                                 * const instance:Wheel = Wheel.factory();
+	                                                                                                 * ```
+	                                                                                                 */var Wheel = function (_EventDispatcher) {(0, _inherits3.default)(Wheel, _EventDispatcher); /**
+	                                                                                                                                                                                               * singleton です
+	                                                                                                                                                                                               * @param {Symbol} checkSymbol singleton を保証するための private instance
+	                                                                                                                                                                                               * @returns {Wheel} singleton instance を返します
+	                                                                                                                                                                                               */function Wheel(checkSymbol) {var _ret2;(0, _classCallCheck3.default)(this, Wheel); // checkSymbol と singleton が等価かをチェックします
 	    if (checkSymbol !== singletonSymbol) {throw new Error('don\'t use new, instead use static factory method.');}
 
 
@@ -2891,6 +2714,10 @@
 	    //  * @type {number}
 	    //  */
 	    // this.coefficient = -7.5;
+	    /**
+	     * start flag
+	     * @type {boolean}
+	     */
 	    _this.started = false;
 	    var events = {
 	      up: new _WheelEvents2.default(Wheel.UP, _this),
@@ -2926,16 +2753,6 @@
 
 
 
-	    // // ----------------------------------------
-	    // // GETTER / SETTER
-	    // // ----------------------------------------
-	    // /**
-	    //  * bind 済み mouseWheel
-	    //  * @returns {function} bind 済み mouseWheel を返します
-	    //  */
-	    // get boundWheel() {
-	    //   return this[wheelSymbol];
-	    // }
 	    // ----------------------------------------
 	    // METHOD
 	    // ----------------------------------------
@@ -3137,74 +2954,42 @@
 	                         * This notice shall be included in all copies or substantial portions of the Software.
 	                         *
 	                         */ // util
-	var Request = self.Request; // const Headers = self.Headers;
-	// /**
-	//  * can（Ajax 実行可能かの真偽値）フラッグを保存するための Symbol
-	//  * @type {Symbol}
-	//  * @private
-	//  */
-	// const canSymbol = Symbol('can start Ajax flag');
-	/**
-	 * <p>fetch API を使用し Ajax request を行います</p>
-	 * <p>Safari, IE はサポートしていないので polyfill ライブラリを使用します<br>
-	 * また、 fetch は Promise も必要としています。</p>
-	 *
-	 * ```
-	 * $ bower install fetch
-	 *
-	 * $ bower install es6-promise
-	 * ```
-	 *
-	 * @see http://caniuse.com/#feat=fetch
-	 * @see https://github.com/github/fetch
-	 * @see https://github.com/github/fetch
-	 * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch
-	 * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API
-	 * @see https://developer.mozilla.org/ja/docs/Web/API/Request
-	 * @see https://developer.mozilla.org/ja/docs/Web/API/Request/Request
-	 * @see https://developer.mozilla.org/ja/docs/Web/API/Headers
-	 * @see https://developer.mozilla.org/ja/docs/Web/API/Body
-	 */var Ajax = function () {/**
-	                            * request 可能 / 不可能 flag を true に設定します
-	                            * @param {Function} resolve Promise success callback
-	                            * @param {Function} reject Promise fail callback
-	                            */function Ajax(resolve, reject) {(0, _classCallCheck3.default)(this, Ajax); // /**
-	    //  * request 可能 / 不可能 flag
-	    //  * @type {boolean}
-	    //  * @private
-	    //  * @default true
-	    //  */
-	    // this[canSymbol] = true;
-	    /**
-	     * request 可能 / 不可能 flag, true: 実行可能
-	     * @type {boolean}
-	     */this.can = true; /**
-	                         * Promise success callback
-	                         * @type {Function}
-	                         */this.resolve = resolve;
-	    /**
-	                                                    * Promise fail callback
-	                                                    * @type {Function}
-	                                                    */
+	var Request = self.Request; /**
+	                             * <p>fetch API を使用し Ajax request を行います</p>
+	                             * <p>Safari, IE はサポートしていないので polyfill ライブラリを使用します<br>
+	                             * また、 fetch は Promise も必要としています。</p>
+	                             *
+	                             * ```
+	                             * $ bower install fetch
+	                             *
+	                             * $ bower install es6-promise
+	                             * ```
+	                             *
+	                             * @see http://caniuse.com/#feat=fetch
+	                             * @see https://github.com/github/fetch
+	                             * @see https://github.com/github/fetch
+	                             * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch
+	                             * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API
+	                             * @see https://developer.mozilla.org/ja/docs/Web/API/Request
+	                             * @see https://developer.mozilla.org/ja/docs/Web/API/Request/Request
+	                             * @see https://developer.mozilla.org/ja/docs/Web/API/Headers
+	                             * @see https://developer.mozilla.org/ja/docs/Web/API/Body
+	                             */var Ajax = function () {/**
+	                                                        * request 可能 / 不可能 flag を true に設定します
+	                                                        * @param {Function} resolve Promise success callback
+	                                                        * @param {Function} reject Promise fail callback
+	                                                        */function Ajax(resolve, reject) {(0, _classCallCheck3.default)(this, Ajax); /**
+	                                                                                                                                      * request 可能 / 不可能 flag, true: 実行可能
+	                                                                                                                                      * @type {boolean}
+	                                                                                                                                      */this.can = true; /**
+	                                                                                                                                                          * Promise success callback
+	                                                                                                                                                          * @type {Function}
+	                                                                                                                                                          */this.resolve = resolve; /**
+	                                                                                                                                                                                     * Promise fail callback
+	                                                                                                                                                                                     * @type {Function}
+	                                                                                                                                                                                     */
 	    this.reject = reject;
 	  }
-	  // // ----------------------------------------
-	  // // GETTER / SETTER
-	  // // ----------------------------------------
-	  // /**
-	  //  * request 可能 / 不可能 flag を取得します
-	  //  * @return {boolean} request 可能 / 不可能 flag を返します
-	  //  */
-	  // get can() {
-	  //   return this[canSymbol];
-	  // }
-	  // /**
-	  //  * request 可能 / 不可能 flag を設定します
-	  //  * @param {boolean} flag request 可能 / 不可能 flag
-	  //  */
-	  // set can(flag) {
-	  //   this[canSymbol] = !!flag;
-	  // }
 	  // ----------------------------------------
 	  // METHOD
 	  // ----------------------------------------
@@ -3363,46 +3148,21 @@
 	                                                                    * @type {?Cycle}
 	                                                                    * @private
 	                                                                    * @static
-	                                                                    */var instance = null; // /**
-	//  * private property key, requestAnimationFrame ID を保存するための Symbol
-	//  * @type {Symbol}
-	//  * @private
-	//  */
-	// const requestSymbol = Symbol('requestAnimationFrame id');
-	// /**
-	//  * private property key, this.update.bind(this) を保存するための Symbol
-	//  * @type {Symbol}
-	//  * @private
-	//  */
-	// const updateSymbol = Symbol('bind update');
-	// /**
-	//  * private property key, requestAnimationFrame を開始したかを表す真偽値を保存するための Symbol
-	//  * @type {Symbol}
-	//  * @private
-	//  */
-	// const startSymbol = Symbol('is requestAnimationFrame started flag');
-	// /**
-	//  * Cycle.UPDATE event を発火する時の Events instance を保存するための Symbol
-	//  * @type {Symbol}
-	//  * @private
-	//  */
-	// const eventsSymbol = Symbol('Cycle.UPDATE Events instance');
-	/**
-	 * <p>requestAnimationFrame を使用しループイベントを発生させます</p>
-	 * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
-	 *
-	 * ```
-	 * const loop = Cycle.factory();
-	 * ```
-	 *
-	 * <p>requestAnimationFrame は tab が active(focus) な時のみ発生します</p>
-	 */var Cycle = function (_EventDispatcher) {(0, _inherits3.default)(Cycle, _EventDispatcher); /**
-	                                                                                               * singleton です
-	                                                                                               * @param {Symbol} checkSymbol singleton を保証するための private instance
-	                                                                                               * @returns {Cycle} singleton instance を返します
-	                                                                                               */function Cycle(checkSymbol) {var _ret2;(0, _classCallCheck3.default)(this, Cycle); // checkSymbol と singleton が等価かをチェックします
+	                                                                    */var instance = null; /**
+	                                                                                            * <p>requestAnimationFrame を使用しループイベントを発生させます</p>
+	                                                                                            * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
+	                                                                                            *
+	                                                                                            * ```
+	                                                                                            * const loop = Cycle.factory();
+	                                                                                            * ```
+	                                                                                            *
+	                                                                                            * <p>requestAnimationFrame は tab が active(focus) な時のみ発生します</p>
+	                                                                                            */var Cycle = function (_EventDispatcher) {(0, _inherits3.default)(Cycle, _EventDispatcher); /**
+	                                                                                                                                                                                          * singleton です
+	                                                                                                                                                                                          * @param {Symbol} checkSymbol singleton を保証するための private instance
+	                                                                                                                                                                                          * @returns {Cycle} singleton instance を返します
+	                                                                                                                                                                                          */function Cycle(checkSymbol) {var _ret2;(0, _classCallCheck3.default)(this, Cycle); // checkSymbol と singleton が等価かをチェックします
 	    if (checkSymbol !== singletonSymbol) {throw new Error('don\'t use new, instead use static factory method.');}
-
 	    // instance 作成済みかをチェックし instance が null の時 this を設定します
 	    var _this = (0, _possibleConstructorReturn3.default)(this, (Cycle.__proto__ || (0, _getPrototypeOf2.default)(Cycle)).call(this));if (instance !== null) {var _ret;
 	      return _ret = instance, (0, _possibleConstructorReturn3.default)(_this, _ret);
@@ -3410,21 +3170,27 @@
 	    // -------------------------------
 	    // onetime setting
 	    instance = _this;
-	    // // @type {Events} - Events
-	    // this[eventsSymbol] = new Events(Cycle.UPDATE, this, this);
-	    //
-	    // // @type {number} - requestAnimationFrame return id
-	    // this[requestSymbol] = 0;
-	    // // @type {function} - update bind function
-	    // this[updateSymbol] = this.update.bind(this);
-	    // // @type {boolean} - started flag
-	    // this[startSymbol] = false;
-
 	    var events = new _Events2.default(Cycle.UPDATE, _this, _this);
 	    var boundUpdate = _this.update.bind(_this);
+	    /**
+	                                                 * Cycle.UPDATE Events instance
+	                                                 * @returns {Events} Cycle.UPDATE Events instance
+	                                                 */
 	    _this.events = function () {return events;};
+	    /**
+	                                                  * bound update requestAnimationFrame callback
+	                                                  * @returns {function} bound update
+	                                                  */
 	    _this.boundUpdate = function () {return boundUpdate;};
+	    /**
+	                                                            * requestAnimationFrame ID
+	                                                            * @type {number}
+	                                                            */
 	    _this.id = 0;
+	    /**
+	                   * start 済みフラッグ
+	                   * @type {boolean}
+	                   */
 	    _this.started = false;
 	    // 設定済み instance を返します
 	    return _ret2 = instance, (0, _possibleConstructorReturn3.default)(_this, _ret2);
@@ -3441,16 +3207,6 @@
 
 
 
-	    // // ----------------------------------------
-	    // // GETTER / SETTER
-	    // // ----------------------------------------
-	    // /**
-	    //  * Events instance を取得します
-	    //  * @returns {Events} Events instance
-	    //  */
-	    // get events() {
-	    //   return this[eventsSymbol];
-	    // }
 	    // ----------------------------------------
 	    // METHOD
 	    // ----------------------------------------
@@ -3564,23 +3320,14 @@
 	var Fps = function (_Polling) {(0, _inherits3.default)(Fps, _Polling); /**
 	                                                                        * 引数の frame rate に合わせ UPDATE イベントを発生させます
 	                                                                        * @param {number} [fps=30] frame rate, default: 30
-	                                                                        */function Fps() {var fps = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 30;(0, _classCallCheck3.default)(this, Fps); // private property
-	    // @type {number} - frame rate, default: 30
-	    // this[fpsSymbol] = fps;
-	    // @type {Events} - Events
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (Fps.__proto__ || (0, _getPrototypeOf2.default)(Fps)).call(this, 1000 / fps));var events = new _Events2.default(Fps.UPDATE, _this, _this); // events.fps = fps;
-	    // /**
-	    //  * Fps.UPDATE Events instance
-	    //  * @type {Events}
-	    //  */
-	    // this.events = events;
-	    /**
-	     * Fps.UPDATE Events instance
-	     * @returns {Events} Fps.UPDATE Events instance
-	     */_this.events = function () {return events;}; /**
-	                                                     * frame rate
-	                                                     * @type {number}
-	                                                     */_this.fps = fps;return _this;} // ----------------------------------------
+	                                                                        */function Fps() {var fps = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 30;(0, _classCallCheck3.default)(this, Fps); // @type {Events} - Events
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (Fps.__proto__ || (0, _getPrototypeOf2.default)(Fps)).call(this, 1000 / fps));var events = new _Events2.default(Fps.UPDATE, _this, _this); /**
+	                                                                                                                                                                                                           * Fps.UPDATE Events instance
+	                                                                                                                                                                                                           * @returns {Events} Fps.UPDATE Events instance
+	                                                                                                                                                                                                           */_this.events = function () {return events;}; /**
+	                                                                                                                                                                                                                                                           * frame rate
+	                                                                                                                                                                                                                                                           * @type {number}
+	                                                                                                                                                                                                                                                           */_this.fps = fps;return _this;} // ----------------------------------------
 	  // EVENT
 	  // ----------------------------------------
 	  /**
@@ -3603,36 +3350,14 @@
 	     * @returns {boolean} `update` をコールし Polling.UPDATE event が発生すると true を返します
 	     */value: function change(
 	    interval) {
+	      /**
+	                * polling 間隔
+	                * @type {number}
+	                */
 	      this.interval = 1000 / interval;
 	      this.fps = interval;
 	      return this.update();
-	    }
-	    // // ----------------------------------------
-	    // // GETTER / SETTER
-	    // // ----------------------------------------
-	    // // fps
-	    // /**
-	    //  * frame rate を取得します
-	    //  * @returns {number} frame rate を返します
-	    //  */
-	    // get fps() {
-	    //   return this[fpsSymbol];
-	    // }
-	    // /**
-	    //  * frame rate を設定します, 1 ~ 60 の間で設定します
-	    //  * @param {number} rate frame rate
-	    //  */
-	    // set fps(rate) {
-	    //   const events = this.events;
-	    //   events.fps = rate;
-	    //   this[fpsSymbol] = rate;
-	    //   /**
-	    //    * interval milliseconds
-	    //    * @type {number}
-	    //    */
-	    //   this.polling = 1000 / rate;
-	    // }
-	  }], [{ key: 'UPDATE', get: function get() {return 'fpsUpdate';} }]);return Fps;}(_Polling3.default); // tick
+	    } }], [{ key: 'UPDATE', get: function get() {return 'fpsUpdate';} }]);return Fps;}(_Polling3.default); // tick
 	exports.default = Fps;
 
 /***/ },
@@ -3658,66 +3383,18 @@
 
 	var _Cycle = __webpack_require__(103);var _Cycle2 = _interopRequireDefault(_Cycle);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
-	// /**
-	//  * private property key, this.update.bind(this) を保存するための Symbol
-	//  * @type {Symbol}
-	//  * @private
-	//  */
-	// const updateSymbol = Symbol('bound update');
-	// /**
-	//  * private property key, Cycle.UPDATE 監視を開始したかを表す真偽値を保存するための Symbol
-	//  * @type {Symbol}
-	//  * @private
-	//  */
-	// const startSymbol = Symbol('is started watch Cycle.UPDATE flag');
-	// /**
-	//  * private property key, Fps.start 時間を保存するための Symbol
-	//  * @type {Symbol}
-	//  * @private
-	//  */
-	// const beginSymbol = Symbol('start time');
-	// /**
-	//  * private property key, polling を保存するための Symbol
-	//  * @type {Symbol}
-	//  * @private
-	//  */
-	// const pollingSymbol = Symbol('polling duration');
-	// /**
-	//  * Polling.UPDATE event を発火する時の Events instance を保存するための Symbol
-	//  * @type {Symbol}
-	//  * @private
-	//  */
-	// const eventsSymbol = Symbol('Polling.UPDATE Events instance');
-
 	/**
-	 * 一定間隔毎に UPDATE イベントを発生させます
-	 */var
+	                                                                                                                                                                            * 一定間隔毎に UPDATE イベントを発生させます
+	                                                                                                                                                                            */var
 	Polling = function (_EventDispatcher) {(0, _inherits3.default)(Polling, _EventDispatcher);
 	  /**
 	                                                                                            * 引数の polling に合わせ UPDATE イベントを発生させます
-	                                                                                            * @param {number} [interval=1000] polling milliseconds
+	                                                                                            * @param {number} [interval=1000] イベント発生間隔 milliseconds
 	                                                                                            */
 	  function Polling() {var interval = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1000;(0, _classCallCheck3.default)(this, Polling);
 
 	    // @type {Cycle} - Cycle instance
 	    var _this = (0, _possibleConstructorReturn3.default)(this, (Polling.__proto__ || (0, _getPrototypeOf2.default)(Polling)).call(this));var cycle = _Cycle2.default.factory();
-	    // public property
-	    // /**
-	    //  * @property {Cycle} this.cycle - Cycle instance
-	    //  */
-	    // Object.assign(this, { cycle });
-
-	    // private property
-	    // @type {number} - polling rate(milliseconds), default: 1000(1 sec.)
-	    // this[pollingSymbol] = polling;
-	    // // @type {function} - Cycle.UPDATE event handler
-	    // this[updateSymbol] = this.update.bind(this);
-	    // // @type {boolean} - started flag
-	    // this[startSymbol] = false;
-	    // // @type {number} - 開始時間
-	    // this[beginSymbol] = 0;
-	    // // @type {Events} - Events
-	    // this[eventsSymbol] = new Events(Polling.UPDATE, this, this);
 	    var boundUpdate = _this.update.bind(_this);
 	    var events = new _Events2.default(Polling.UPDATE, _this, _this);
 	    /**
@@ -3761,63 +3438,6 @@
 
 
 
-	    // // ----------------------------------------
-	    // // GETTER / SETTER
-	    // // ----------------------------------------
-	    // // fps
-	    // /**
-	    //  * polling(milliseconds) を取得します
-	    //  * @returns {number} polling(milliseconds) を返します
-	    //  */
-	    // get polling() {
-	    //   return this[pollingSymbol];
-	    // }
-	    // /**
-	    //  * polling(milliseconds) を設定します
-	    //  * @param {number} rate polling(milliseconds)
-	    //  */
-	    // set polling(rate) {
-	    //   this[pollingSymbol] = rate;
-	    // }
-	    // // begin
-	    // /**
-	    //  * 開始時間を取得します
-	    //  * @returns {number} 開始時間を返します
-	    //  */
-	    // get begin() {
-	    //   return this[beginSymbol];
-	    // }
-	    // /**
-	    //  * 開始時間を設定します
-	    //  * @param {number} time 開始時間
-	    //  */
-	    // set begin(time) {
-	    //   this[beginSymbol] = time;
-	    // }
-	    // // events
-	    // /**
-	    //  * Events instance を取得します
-	    //  * @returns {Events} Events instance を返します
-	    //  */
-	    // get events() {
-	    //   return this[eventsSymbol];
-	    // }
-	    // /**
-	    //  * Events instance を設定します
-	    //  * @param {Events} events Events instance
-	    //  */
-	    // set events(events) {
-	    //   this[eventsSymbol] = events;
-	    // }
-	    // // flag
-	    // /**
-	    //  * started flag 状態を取得します
-	    //  * @readonly
-	    //  * @returns {boolean} 現在の started flag 状態を返します
-	    //  */
-	    // get started() {
-	    //   return this[startSymbol];
-	    // }
 	    // ----------------------------------------
 	    // METHOD
 	    // ----------------------------------------
@@ -3852,7 +3472,7 @@
 	      var events = this.events();
 	      events.begin = begin;
 	      events.present = present;
-	      events.polling = this.polling;
+	      events.interval = this.interval;
 	      return events;
 	    }
 	    /**
@@ -4020,33 +3640,7 @@
 	var Rate = function (_Polling) {(0, _inherits3.default)(Rate, _Polling); /**
 	                                                                          * 固定値フレームレート毎に UPDATE イベントを発生させます
 	                                                                          * @param {number} rateValue fps, 固定値以外設定できません
-	                                                                          */function Rate(rateValue) {(0, _classCallCheck3.default)(this, Rate); // @type {Events - Events
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (Rate.__proto__ || (0, _getPrototypeOf2.default)(Rate)).call(this, 1000 / 60));var events = new _Events2.default(Rate.UPDATE, _this, _this); // events.rate = rate;
-	    // /**
-	    //  * Rate.UPDATE Events instance
-	    //  * @type {Events}
-	    //  */
-	    // this.events = events;
-	    // @type {number} - count, rate に達したかを計測するための counter 変数
-	    // this[countSymbol] = 0;
-	    // correct rate list
-	    // サポートするレートリスト
-	    // this[ratesSymbol] = [
-	    //   Rate.RATE_60,
-	    //   Rate.RATE_30,
-	    //   Rate.RATE_20,
-	    //   Rate.RATE_15,
-	    //   Rate.RATE_12,
-	    //   Rate.RATE_10,
-	    //   Rate.RATE_6,
-	    //   Rate.RATE_5,
-	    // ];
-	    //
-	    // // frame rate
-	    // this[rateSymbol] = 0;
-	    var rates = [Rate.RATE_60, Rate.RATE_30, Rate.RATE_20, Rate.RATE_15,
-	    Rate.RATE_12,
-	    Rate.RATE_10,
+	                                                                          */function Rate(rateValue) {(0, _classCallCheck3.default)(this, Rate);var _this = (0, _possibleConstructorReturn3.default)(this, (Rate.__proto__ || (0, _getPrototypeOf2.default)(Rate)).call(this, 1000 / 60));var events = new _Events2.default(Rate.UPDATE, _this, _this);var rates = [Rate.RATE_60, Rate.RATE_30, Rate.RATE_20, Rate.RATE_15, Rate.RATE_12, Rate.RATE_10,
 	    Rate.RATE_6,
 	    Rate.RATE_5];
 
@@ -4171,38 +3765,6 @@
 
 
 
-	    // // ----------------------------------------
-	    // // GETTER / SETTER
-	    // // ----------------------------------------
-	    // /**
-	    //  * fps 基準値リストを取得します
-	    //  * @returns {number} fps 基準値リストを返します
-	    //  */
-	    // get rates() {
-	    //   return this[ratesSymbol];
-	    // }
-	    // /**
-	    //  * fps 基準値を取得します
-	    //  * @returns {number} fps 基準値を返します
-	    //  */
-	    // get rate() {
-	    //   return this[rateSymbol];
-	    // }
-	    //
-	    // /**
-	    //  * rate に達したかを計測するための counter 変数を取得します
-	    //  * @returns {number} rate に達したかを計測するための counter 変数を返します
-	    //  */
-	    // get count() {
-	    //   return this[countSymbol];
-	    // }
-	    // /**
-	    //  * rate に達したかを計測するための counter 変数を設定します
-	    //  * @param {number} step rate に達したかを計測するための counter 数
-	    //  */
-	    // set count(step) {
-	    //   this[countSymbol] = step;
-	    // }
 	    // ----------------------------------------
 	    // METHOD
 	    // ----------------------------------------
@@ -4223,14 +3785,6 @@
 	       * @returns {boolean} rate 設定に成功すると true を返します
 	       */ }, { key: 'change', value: function change(
 	    rate) {
-	      // if (this.validate(rate)) {
-	      //   this.rate = rate;
-	      //   return true;
-	      // }
-	      // // else {
-	      // //   throw new Error(`illegal rate: ${rate}. use const RATE_NN`);
-	      // // }
-	      // return false;
 	      var result = this.setRate(rate);
 	      this.update();
 	      return result;
