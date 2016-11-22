@@ -96,9 +96,9 @@ export default class Classes {
     // 配列での削除対象 class の位置を取得します
     const index = elementClasses.indexOf(className);
     // 配列位置を元に削除実行します
-    const regular = elementClasses.splice(index, 1);
+    elementClasses.splice(index, 1);
     // 削除後配列を ' '（ワンスペース）でつなぎ文字列変換後に設定します
-    element.className = regular.join(' ');
+    element.className = elementClasses.join(' ');
     return true;
   }
 }

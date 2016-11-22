@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Mocha</title>
+  <link href="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+</head>
+<body>
+<div id="js-target" class="target target-1 fix sticky" style="border: 2px solid #000; margin-top: 10px; padding-bottom: 1em;"></div>
+<div id="mocha"></div>
+<script src="//cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
+<script src="//cdn.rawgit.com/Automattic/expect.js/0.3.1/index.js"></script>
+<script src="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+<script src="http://chaijs.com/chai.js"></script>
+<script src="../libs/moku.js" charset="utf-8"></script>
+<script>
+  // mochaの機能を呼び出します。ここでは、BDDとTDDを使用します。
+  mocha.setup('bdd');
+  mocha.setup('tdd');
+  var assert = chai.assert;
+  // expectの機能を読み込み
+  var expect = chai.expect;
+  // shouldの機能を読み込み
+  chai.Should();
+</script>
+<script>
+  var dom = window.MOKU.dom;
+  var Classes = dom.Classes;
+
+  var classes = new Classes(document.getElementById('js-target'));
+  console.log('bounding.offset', classes);
+  //  Classes.has
+  describe('#Classes.has', function() {
+    it("Classes.has('target') is true", function() {
+      expect(classes.has('target')).to.eql(true);
+    });
+    it("Classes.has('targetX') is false", function() {
+      expect(classes.has('targetX')).to.eql(false);
+    });
+  });
+  //  Classes.remove
+  describe('#Classes.remove', function() {
+    it("Classes.remove('target') is true", function() {
+      expect(classes.remove('target')).to.eql(true);
+    });
+    it("Classes.remove('targetX') is false", function() {
+      expect(classes.remove('targetX')).to.eql(false);
+    });
+  });
+  //  Classes.add
+  describe('#Classes.add', function() {
+    it("Classes.add('target') is true", function() {
+      expect(classes.add('target')).to.eql(true);
+    });
+    it("Classes.add('target') is false", function() {
+      expect(classes.add('target')).to.eql(false);
+    });
+  });
+
+</script>
+<script>
+  mocha.checkLeaks();
+  mocha.globals(['jQuery']);
+  mocha.run();
+</script>
+</body>
+</html>

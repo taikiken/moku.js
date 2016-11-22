@@ -54,7 +54,7 @@
 	 *
 	 * This notice shall be included in all copies or substantial portions of the Software.
 	 * 0.0.1
-	 * 2016-11-22 21:54:17
+	 * 2016-11-22 22:09:19
 	 */
 	// use strict は本来不要でエラーになる
 	// 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -111,7 +111,7 @@
 	MOKU.version = function () {return '0.0.1';}; /**
 	                                                   * build 日時を取得します
 	                                                   * @returns {string}  build 日時を返します
-	                                                   */MOKU.build = function () {return '2016-11-22 21:54:17';}; /**
+	                                                   */MOKU.build = function () {return '2016-11-22 22:09:19';}; /**
 	                                                                                                        * MOKU.event
 	                                                                                                        * @type {Object} MOKU.event object を返します
 	                                                                                                        */
@@ -5314,9 +5314,9 @@
 	      // 配列での削除対象 class の位置を取得します
 	      var index = elementClasses.indexOf(className);
 	      // 配列位置を元に削除実行します
-	      var regular = elementClasses.splice(index, 1);
+	      elementClasses.splice(index, 1);
 	      // 削除後配列を ' '（ワンスペース）でつなぎ文字列変換後に設定します
-	      element.className = regular.join(' ');
+	      element.className = elementClasses.join(' ');
 	      return true;
 	    } }]);return Classes;}();exports.default = Classes;
 

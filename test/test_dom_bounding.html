@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Mocha</title>
+  <link href="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+</head>
+<body>
+<div id="js-target" class="target fix sticky" style="border: 2px solid #000; margin-top: 10px; padding-bottom: 1em;"></div>
+<div id="mocha"></div>
+<script src="//cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
+<script src="//cdn.rawgit.com/Automattic/expect.js/0.3.1/index.js"></script>
+<script src="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+<script src="http://chaijs.com/chai.js"></script>
+<script src="../libs/moku.js" charset="utf-8"></script>
+<script>
+  // mochaの機能を呼び出します。ここでは、BDDとTDDを使用します。
+  mocha.setup('bdd');
+  mocha.setup('tdd');
+  var assert = chai.assert;
+  // expectの機能を読み込み
+  var expect = chai.expect;
+  // shouldの機能を読み込み
+  chai.Should();
+</script>
+<script>
+  var dom = window.MOKU.dom;
+  var Bounding = dom.Bounding;
+
+  var bounding = new Bounding(document.getElementById('js-target'));
+  console.log('bounding.offset', bounding.offset());
+  //  Bounding.offset
+  describe('#Bounding.offset', function() {
+    it("Bounding.offset() is {top: 0, left: 0, width: 0, height: 0}", function() {
+      expect(bounding.offset()).to.eql('{top: 0, left: 0, width: 0, height: 0}');
+    });
+  });
+  //  Bounding.clone
+  describe('#Bounding.clone', function() {
+    it("Bounding.clone() is {top: 10, right: 1430, bottom: 30, left: 0, width: 1430, height: 20}", function() {
+      expect(bounding.clone()).to.eql('{top: 10, right: 1430, bottom: 30, left: 0, width: 1430, height: 20}');
+    });
+  });
+</script>
+<script>
+  mocha.checkLeaks();
+  mocha.globals(['jQuery']);
+  mocha.run();
+</script>
+</body>
+</html>
