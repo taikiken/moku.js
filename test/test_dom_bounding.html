@@ -6,6 +6,7 @@
   <link href="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
 </head>
 <body>
+<div id="js-target" class="target fix sticky" style="border: 2px solid #000; margin-top: 10px; padding-bottom: 1em;"></div>
 <div id="mocha"></div>
 <script src="//cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
 <script src="//cdn.rawgit.com/Automattic/expect.js/0.3.1/index.js"></script>
@@ -23,37 +24,23 @@
   chai.Should();
 </script>
 <script>
-  var event = window.MOKU.event;
-  var Events = event.Events;
+  var dom = window.MOKU.dom;
+  var Bounding = dom.Bounding;
 
-  function callback(event) {
-    console.log('callback', event)
-  }
-  function callback2(event) {
-    console.log('callback2', event)
-  }
-
-  var events = new Events('abc', this, this);
-  console.log('events', events);
-  console.log('events.type', events.type);
-  console.log('events.target', events.target);
-  console.log('events.currentTarget', events.currentTarget);
-
-  //  EventDispatcher.on
-  describe('#Events.type', function() {
-    it("events.type is abc", function() {
-      expect(events.type).to.eql('abc');
-    });
-
-    it("events.target is exist", function() {
-      expect(events.target).to.exist;
-    });
-
-    it("events.currentTarget is exist", function() {
-      expect(events.currentTarget).to.exist;
+  var bounding = new Bounding(document.getElementById('js-target'));
+  console.log('bounding.offset', bounding.offset());
+  //  Bounding.offset
+  describe('#Bounding.offset', function() {
+    it("Bounding.offset() is {top: 0, left: 0, width: 0, height: 0}", function() {
+      expect(bounding.offset()).to.eql('{top: 0, left: 0, width: 0, height: 0}');
     });
   });
-
+  //  Bounding.clone
+  describe('#Bounding.clone', function() {
+    it("Bounding.clone() is {top: 10, right: 1430, bottom: 30, left: 0, width: 1430, height: 20}", function() {
+      expect(bounding.clone()).to.eql('{top: 10, right: 1430, bottom: 30, left: 0, width: 1430, height: 20}');
+    });
+  });
 </script>
 <script>
   mocha.checkLeaks();

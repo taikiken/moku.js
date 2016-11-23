@@ -6,6 +6,7 @@
   <link href="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
 </head>
 <body>
+<div id="js-target" class="target target-1 fix sticky" style="border: 2px solid #000; margin-top: 10px; padding-bottom: 1em;"></div>
 <div id="mocha"></div>
 <script src="//cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
 <script src="//cdn.rawgit.com/Automattic/expect.js/0.3.1/index.js"></script>
@@ -23,34 +24,19 @@
   chai.Should();
 </script>
 <script>
-  var event = window.MOKU.event;
-  var Events = event.Events;
+  var dom = window.MOKU.dom;
+  var Elements = dom.Elements;
 
-  function callback(event) {
-    console.log('callback', event)
-  }
-  function callback2(event) {
-    console.log('callback2', event)
-  }
-
-  var events = new Events('abc', this, this);
-  console.log('events', events);
-  console.log('events.type', events.type);
-  console.log('events.target', events.target);
-  console.log('events.currentTarget', events.currentTarget);
-
-  //  EventDispatcher.on
-  describe('#Events.type', function() {
-    it("events.type is abc", function() {
-      expect(events.type).to.eql('abc');
-    });
-
-    it("events.target is exist", function() {
-      expect(events.target).to.exist;
-    });
-
-    it("events.currentTarget is exist", function() {
-      expect(events.currentTarget).to.exist;
+  var elements = new Elements(document.getElementById('js-target'));
+  console.log('elements', elements);
+  console.log('elements.style', elements.style());
+  console.log('elements.classes', elements.classes());
+  console.log('elements.element', elements.element());
+  console.log('elements.bounding', elements.bounding());
+  //  Classes.has
+  describe('#elements.style', function() {
+    it("elements.style() is Object", function() {
+      expect(elements.style()).to.eql(Object);
     });
   });
 

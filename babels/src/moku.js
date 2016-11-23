@@ -21,6 +21,8 @@ import { default as EventDispatcher } from './event/EventDispatcher';
 import { default as Events } from './event/Events';
 import { default as Scroll } from './event/Scroll';
 import { default as Wheel } from './event/Wheel';
+import { default as Scrolling } from './event/Scrolling';
+import { default as Touching } from './event/Touching';
 
 // net
 import { default as Ajax } from './net/Ajax';
@@ -33,6 +35,19 @@ import { default as Rate } from './tick/Rate';
 
 // util
 import { default as Type } from './util/Type';
+import { default as List } from './util/List';
+import { default as Text } from './util/Text';
+import { default as Vectors } from './util/Vectors';
+
+// css
+import { default as Patterns } from './css/Patterns';
+import { default as Style } from './css/Style';
+
+// dom
+import { default as Bounding } from './dom/Bounding';
+import { default as Classes } from './dom/Classes';
+import { default as Elements } from './dom/Elements';
+
 /**
  * **MOKU**
  * <p>global Object</p>
@@ -59,6 +74,8 @@ MOKU.event = {
   Events,
   Scroll,
   Wheel,
+  Scrolling,
+  Touching,
 };
 /**
  * MOKU.net
@@ -83,6 +100,20 @@ MOKU.tick = {
  */
 MOKU.util = {
   Type,
+  List,
+  Text,
+  Vectors,
+};
+
+MOKU.css = {
+  Patterns,
+  Style,
+};
+
+MOKU.dom = {
+  Bounding,
+  Classes,
+  Elements,
 };
 
 // export

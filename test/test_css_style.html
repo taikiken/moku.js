@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Mocha</title>
+  <link href="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+</head>
+<body>
+<div id="js-target" class="target" style="border: 2px solid #000; margin-top: 10px; padding-bottom: 1em;"></div>
+<div id="mocha"></div>
+<script src="//cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
+<script src="//cdn.rawgit.com/Automattic/expect.js/0.3.1/index.js"></script>
+<script src="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+<script src="http://chaijs.com/chai.js"></script>
+<script src="../libs/moku.js" charset="utf-8"></script>
+<script>
+  // mochaの機能を呼び出します。ここでは、BDDとTDDを使用します。
+  mocha.setup('bdd');
+  mocha.setup('tdd');
+  var assert = chai.assert;
+  // expectの機能を読み込み
+  var expect = chai.expect;
+  // shouldの機能を読み込み
+  chai.Should();
+</script>
+<script>
+  var css = window.MOKU.css;
+  var Style = css.Style;
+
+  var style = new Style(document.getElementById('js-target'));
+  //  Style.current
+  describe('#Style.current', function() {
+    it("Style.current() is border: 2px solid #000; margin-top: 10px; padding-bottom: 1em;", function() {
+      expect(style.current()).to.eql('border: 2px solid #000; margin-top: 10px; padding-bottom: 1em;');
+    });
+  });
+  // Style.get
+  describe('#Style.get', function() {
+    it("Style.get('border') is border: 2px solid #000", function() {
+      expect(style.get('border')).to.eql('border: 2px solid #000');
+    });
+    it("Style.get('border-width') is 2px", function() {
+      expect(style.get('border-width')).to.eql('2px');
+    });
+    it("Style.get('border-top-width') is 2px", function() {
+      expect(style.get('border-top-width')).to.eql('2px');
+    });
+    it("Style.get('border-style') is solid", function() {
+      expect(style.get('border-style')).to.eql('solid');
+    });
+    it("Style.get('border-color') is rgb(0, 0, 0)", function() {
+      expect(style.get('border-color')).to.eql('rgb(0, 0, 0)');
+    });
+  });
+  // Style.set
+  describe('#Style.set', function() {
+    it("Style.set('border-color', '#f00') is true", function() {
+      expect(style.set('border-color', '#f00')).to.eql(true);
+    });
+    it("Style.set('background', '#ff0') is true", function() {
+      expect(style.set('background', '#ff0')).to.eql(true);
+    });
+    it("Style.set('border-top-width', '10px') is true", function() {
+      expect(style.set('border-top-width', '10px')).to.eql(true);
+    });
+  });
+  //  Style.restore
+  describe('#Style.restore', function() {
+    it("Style.restore() is border: 2px solid rgb(0, 0, 0); margin-top: 10px; padding-bottom: 1em;", function() {
+      expect(style.restore()).to.eql('border: 2px solid rgb(0, 0, 0); margin-top: 10px; padding-bottom: 1em;');
+    });
+  });
+</script>
+<script>
+  mocha.checkLeaks();
+  mocha.globals(['jQuery']);
+  mocha.run();
+</script>
+</body>
+</html>
