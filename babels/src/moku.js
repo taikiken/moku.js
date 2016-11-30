@@ -38,6 +38,7 @@ import { default as Type } from './util/Type';
 import { default as List } from './util/List';
 import { default as Text } from './util/Text';
 import { default as Vectors } from './util/Vectors';
+import { default as Hit } from './util/Hit';
 
 // css
 import { default as Patterns } from './css/Patterns';
@@ -103,6 +104,7 @@ MOKU.util = {
   List,
   Text,
   Vectors,
+  Hit,
 };
 
 MOKU.css = {

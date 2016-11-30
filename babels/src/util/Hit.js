@@ -10,6 +10,9 @@
  *
  */
 
+/**
+ * 衝突判定を行います
+ */
 export default class Hit {
   /**
    * element と window.top(0) window.bottom(height) のヒットテストを行います
@@ -25,6 +28,7 @@ export default class Hit {
   static test(height, offset) {
     // hit test
     const hit = {
+      result: false,
       top: false,
       bottom: false,
       contain: false,
@@ -55,6 +59,7 @@ export default class Hit {
     }
     // return
     // return hit.top || hit.bottom || hit.contain || hit.include;
+    hit.result = hit.top || hit.bottom || hit.contain || hit.include;
     return hit;
   }
 }
