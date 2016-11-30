@@ -18,20 +18,20 @@
  */
 const check = {
   transition() {
-    const p = document.createElement('div');
-    return 'transition' in p ||
-      'WebkitTransition' in p ||
-      'MozTransition' in p ||
-      'msTransition' in p ||
-      'OTransition' in p;
+    const p = document.createElement('p');
+    return typeof p.style.transition !== 'undefined' ||
+      typeof p.style.WebkitTransition !== 'undefined' ||
+      typeof p.style.MozTransition !== 'undefined' ||
+      typeof p.style.msTransition !== 'undefined' ||
+      typeof p.style.OTransition !== 'undefined';
   },
   transform() {
-    const p = document.createElement('div');
-    return 'transform' in p ||
-      'WebkitTransform' in p ||
-      'MozTransform' in p ||
-      'OTransform' in p ||
-      'msTransform' in p;
+    const p = document.createElement('p');
+    return typeof p.style.transform !== 'undefined' ||
+      typeof p.style.WebkitTransform !== 'undefined' ||
+      typeof p.style.MozTransform !== 'undefined' ||
+      typeof p.style.msTransform !== 'undefined' ||
+      typeof p.style.OTransform !== 'undefined';
   },
 };
 
