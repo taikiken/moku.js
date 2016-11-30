@@ -18,50 +18,44 @@ import { default as ScrollEvents } from './ScrollEvents';
 
 // tick
 import { default as Rate } from '../tick/Rate';
+//
+// /**
+//  * new を許可しないための Symbol
+//  * @type {Symbol}
+//  * @private
+//  */
+// const singletonSymbol = Symbol('Scrolling singleton symbol');
+// /**
+//  * singleton instance, nullable
+//  * @type {?Scrolling}
+//  * @private
+//  */
+// let instance = null;
 
 /**
- * new を許可しないための Symbol
- * @type {Symbol}
- * @private
- */
-const singletonSymbol = Symbol('Scrolling singleton symbol');
-/**
- * singleton instance, nullable
- * @type {?Scrolling}
- * @private
- */
-let instance = null;
-
-/**
- * 引数 rate instance に設定した fps でスクロール位置を通知します
- * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
- *
- * ```
- * const instance = Scrolling.factory();
- *
- * instance.mother = new Elements(Elements.id(js-tc_scanimation-motion))
- * ```
+ * Scroll 位置
  * */
 export default class Scrolling extends EventDispatcher {
   /**
    * singleton です
-   * @param {Symbol} checkSymbol singleton を保証するための private instance
+   * @param {Rate} [rate=new Rate(Rate.Rate_5)] Rate instance, scroll 監視 fps を設定します
    * @returns {Scrolling} singleton instance を返します
    */
-  constructor(checkSymbol) {
-    // checkSymbol と singleton が等価かをチェックします
-    if (checkSymbol !== singletonSymbol) {
-      throw new Error('don\'t use new, instead use static factory method.');
-    }
-
+  constructor(rate = new Rate(Rate.RATE_5)) {
+    // // checkSymbol と singleton が等価かをチェックします
+    // if (checkSymbol !== singletonSymbol) {
+    //   throw new Error('don\'t use new, instead use static factory method.');
+    // }
+    //
+    // super();
+    //
+    // // instance 作成済みかをチェックし instance が null の時 this を設定します
+    // if (instance !== null) {
+    //   return instance;
+    // }
+    // // onetime setting
+    // instance = this;
     super();
-
-    // instance 作成済みかをチェックし instance が null の時 this を設定します
-    if (instance !== null) {
-      return instance;
-    }
-    // onetime setting
-    instance = this;
     const boundScroll = this.scroll.bind(this);
     /**
      * bound scroll, Rate.UPDATE event handler
@@ -90,10 +84,10 @@ export default class Scrolling extends EventDispatcher {
      * Rate instance
      * @type {?Rate}
      */
-    this.rate = null;
-
-    // 設定済み instance を返します
-    return instance;
+    this.rate = rate;
+    //
+    // // 設定済み instance を返します
+    // return instance;
   }
   // ----------------------------------------
   // EVENT
@@ -110,24 +104,24 @@ export default class Scrolling extends EventDispatcher {
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
-  /**
-   * Rate instance を設定します
-   * @param {Rate} [rate=new Rate(Rate.Rate_5)] Rate instance, scroll 監視 fps を設定します
-   * @returns {Scrolling} method chain 可能なように instance を返します
-   */
-  init(rate = new Rate(Rate.RATE_5)) {
-    this.rate = rate;
-    return this;
-  }
+  // /**
+  //  * Rate instance を設定します
+  //  * @param {Rate} [rate=new Rate(Rate.Rate_5)] Rate instance, scroll 監視 fps を設定します
+  //  * @returns {Scrolling} method chain 可能なように instance を返します
+  //  */
+  // init(rate = new Rate(Rate.RATE_5)) {
+  //   this.rate = rate;
+  //   return this;
+  // }
   /**
    * fps を監視しスクロール位置を知らせます
    * @returns {Scrolling} method chain 可能なように instance を返します
    */
   start() {
     const rate = this.rate;
-    if (rate === null) {
-      throw new Error(`rate: ${rate} error. have to set rate, before start.`);
-    }
+    // if (rate === null) {
+    //   throw new Error(`rate: ${rate} error. have to set rate, before start.`);
+    // }
     if (this.started) {
       return this;
     }
@@ -211,17 +205,17 @@ export default class Scrolling extends EventDispatcher {
   fire() {
     this.scroll(null);
   }
-  // ----------------------------------------
-  // STATIC METHOD
-  // ----------------------------------------
-  /**
-   * Scrolling instance を singleton を保証し作成します
-   * @returns {Scrolling} Scrolling instance を返します
-   */
-  static factory() {
-    if (instance !== null) {
-      return instance;
-    }
-    return new Scrolling(singletonSymbol);
-  }
+  // // ----------------------------------------
+  // // STATIC METHOD
+  // // ----------------------------------------
+  // /**
+  //  * Scrolling instance を singleton を保証し作成します
+  //  * @returns {Scrolling} Scrolling instance を返します
+  //  */
+  // static factory() {
+  //   if (instance !== null) {
+  //     return instance;
+  //   }
+  //   return new Scrolling(singletonSymbol);
+  // }
 }
