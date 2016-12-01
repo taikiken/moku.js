@@ -54,7 +54,7 @@ export default class Style {
   /**
    * element style を取得します, `getComputedStyle` を使用します
    * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
-   * @param {Object} view, Document.defaultView @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
+   * @param {Object} view Document.defaultView @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
    * @param {Element} element 操作対象 Element
    * @param {string} property 調査対象 CSS property name
    * @returns {CssStyle|string|undefined} style value を返します
@@ -70,7 +70,7 @@ export default class Style {
 
   /**
    * CSS 設定値の short hand をパターン {@link Patterns} から探し返します
-   * @param {Object} view, Document.defaultView @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
+   * @param {Object} view Document.defaultView @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
    * @param {Element} element 操作対象 Element
    * @param {Array<string>} patterns 調査対象 CSS property name の配列
    * @returns {CssStyle|string|undefined} style value を返します
