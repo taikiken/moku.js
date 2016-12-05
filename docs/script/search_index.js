@@ -6,9 +6,33 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "./src/dom/bounding.js~bounding",
+    "class/src/dom/Bounding.js~Bounding.html",
+    "<span>Bounding</span> <span class=\"search-result-import-path\">./src/dom/Bounding.js</span>",
+    "class"
+  ],
+  [
+    "./src/css/can.js~can",
+    "class/src/css/Can.js~Can.html",
+    "<span>Can</span> <span class=\"search-result-import-path\">./src/css/Can.js</span>",
+    "class"
+  ],
+  [
+    "./src/dom/classes.js~classes",
+    "class/src/dom/Classes.js~Classes.html",
+    "<span>Classes</span> <span class=\"search-result-import-path\">./src/dom/Classes.js</span>",
+    "class"
+  ],
+  [
     "./src/tick/cycle.js~cycle",
     "class/src/tick/Cycle.js~Cycle.html",
     "<span>Cycle</span> <span class=\"search-result-import-path\">./src/tick/Cycle.js</span>",
+    "class"
+  ],
+  [
+    "./src/dom/elements.js~elements",
+    "class/src/dom/Elements.js~Elements.html",
+    "<span>Elements</span> <span class=\"search-result-import-path\">./src/dom/Elements.js</span>",
     "class"
   ],
   [
@@ -30,15 +54,27 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "./src/event/freeze.js~freeze",
-    "class/src/event/Freeze.js~Freeze.html",
-    "<span>Freeze</span> <span class=\"search-result-import-path\">./src/event/Freeze.js</span>",
+    "./src/util/freeze.js~freeze",
+    "class/src/util/Freeze.js~Freeze.html",
+    "<span>Freeze</span> <span class=\"search-result-import-path\">./src/util/Freeze.js</span>",
+    "class"
+  ],
+  [
+    "./src/util/hit.js~hit",
+    "class/src/util/Hit.js~Hit.html",
+    "<span>Hit</span> <span class=\"search-result-import-path\">./src/util/Hit.js</span>",
     "class"
   ],
   [
     "./src/util/list.js~list",
     "class/src/util/List.js~List.html",
     "<span>List</span> <span class=\"search-result-import-path\">./src/util/List.js</span>",
+    "class"
+  ],
+  [
+    "./src/css/patterns.js~patterns",
+    "class/src/css/Patterns.js~Patterns.html",
+    "<span>Patterns</span> <span class=\"search-result-import-path\">./src/css/Patterns.js</span>",
     "class"
   ],
   [
@@ -51,6 +87,12 @@ window.esdocSearchIndex = [
     "./src/tick/rate.js~rate",
     "class/src/tick/Rate.js~Rate.html",
     "<span>Rate</span> <span class=\"search-result-import-path\">./src/tick/Rate.js</span>",
+    "class"
+  ],
+  [
+    "./src/event/rising.js~rising",
+    "class/src/event/Rising.js~Rising.html",
+    "<span>Rising</span> <span class=\"search-result-import-path\">./src/event/Rising.js</span>",
     "class"
   ],
   [
@@ -69,6 +111,24 @@ window.esdocSearchIndex = [
     "./src/event/scrolling.js~scrolling",
     "class/src/event/Scrolling.js~Scrolling.html",
     "<span>Scrolling</span> <span class=\"search-result-import-path\">./src/event/Scrolling.js</span>",
+    "class"
+  ],
+  [
+    "./src/event/scrollingsingle.js~scrollingsingle",
+    "class/src/event/ScrollingSingle.js~ScrollingSingle.html",
+    "<span>ScrollingSingle</span> <span class=\"search-result-import-path\">./src/event/ScrollingSingle.js</span>",
+    "class"
+  ],
+  [
+    "./src/css/style.js~style",
+    "class/src/css/Style.js~Style.html",
+    "<span>Style</span> <span class=\"search-result-import-path\">./src/css/Style.js</span>",
+    "class"
+  ],
+  [
+    "./src/util/text.js~text",
+    "class/src/util/Text.js~Text.html",
+    "<span>Text</span> <span class=\"search-result-import-path\">./src/util/Text.js</span>",
     "class"
   ],
   [
@@ -438,6 +498,276 @@ window.esdocSearchIndex = [
     "external"
   ],
   [
+    "src/css/can.js",
+    "file/src/css/Can.js.html",
+    "src/css/Can.js",
+    "file"
+  ],
+  [
+    "src/css/can.js~can.transform",
+    "class/src/css/Can.js~Can.html#static-method-transform",
+    "src/css/Can.js~Can.transform",
+    "method"
+  ],
+  [
+    "src/css/can.js~can.transition",
+    "class/src/css/Can.js~Can.html#static-method-transition",
+    "src/css/Can.js~Can.transition",
+    "method"
+  ],
+  [
+    "src/css/patterns.js",
+    "file/src/css/Patterns.js.html",
+    "src/css/Patterns.js",
+    "file"
+  ],
+  [
+    "src/css/patterns.js~patterns.get",
+    "class/src/css/Patterns.js~Patterns.html#static-method-get",
+    "src/css/Patterns.js~Patterns.get",
+    "method"
+  ],
+  [
+    "src/css/patterns.js~patterns.match",
+    "class/src/css/Patterns.js~Patterns.html#static-method-match",
+    "src/css/Patterns.js~Patterns.match",
+    "method"
+  ],
+  [
+    "src/css/patterns.js~patterns.settings",
+    "class/src/css/Patterns.js~Patterns.html#static-method-settings",
+    "src/css/Patterns.js~Patterns.settings",
+    "method"
+  ],
+  [
+    "src/css/style.js",
+    "file/src/css/Style.js.html",
+    "src/css/Style.js",
+    "file"
+  ],
+  [
+    "src/css/style.js~style#constructor",
+    "class/src/css/Style.js~Style.html#instance-constructor-constructor",
+    "src/css/Style.js~Style#constructor",
+    "method"
+  ],
+  [
+    "src/css/style.js~style#current",
+    "class/src/css/Style.js~Style.html#instance-method-current",
+    "src/css/Style.js~Style#current",
+    "method"
+  ],
+  [
+    "src/css/style.js~style#element",
+    "class/src/css/Style.js~Style.html#instance-member-element",
+    "src/css/Style.js~Style#element",
+    "member"
+  ],
+  [
+    "src/css/style.js~style#get",
+    "class/src/css/Style.js~Style.html#instance-method-get",
+    "src/css/Style.js~Style#get",
+    "method"
+  ],
+  [
+    "src/css/style.js~style#original",
+    "class/src/css/Style.js~Style.html#instance-member-original",
+    "src/css/Style.js~Style#original",
+    "member"
+  ],
+  [
+    "src/css/style.js~style#restore",
+    "class/src/css/Style.js~Style.html#instance-method-restore",
+    "src/css/Style.js~Style#restore",
+    "method"
+  ],
+  [
+    "src/css/style.js~style#save",
+    "class/src/css/Style.js~Style.html#instance-method-save",
+    "src/css/Style.js~Style#save",
+    "method"
+  ],
+  [
+    "src/css/style.js~style#set",
+    "class/src/css/Style.js~Style.html#instance-method-set",
+    "src/css/Style.js~Style#set",
+    "method"
+  ],
+  [
+    "src/css/style.js~style#update",
+    "class/src/css/Style.js~Style.html#instance-member-update",
+    "src/css/Style.js~Style#update",
+    "member"
+  ],
+  [
+    "src/css/style.js~style.compute",
+    "class/src/css/Style.js~Style.html#static-method-compute",
+    "src/css/Style.js~Style.compute",
+    "method"
+  ],
+  [
+    "src/css/style.js~style.shorthand",
+    "class/src/css/Style.js~Style.html#static-method-shortHand",
+    "src/css/Style.js~Style.shortHand",
+    "method"
+  ],
+  [
+    "src/dom/bounding.js",
+    "file/src/dom/Bounding.js.html",
+    "src/dom/Bounding.js",
+    "file"
+  ],
+  [
+    "src/dom/bounding.js~bounding#clone",
+    "class/src/dom/Bounding.js~Bounding.html#instance-method-clone",
+    "src/dom/Bounding.js~Bounding#clone",
+    "method"
+  ],
+  [
+    "src/dom/bounding.js~bounding#constructor",
+    "class/src/dom/Bounding.js~Bounding.html#instance-constructor-constructor",
+    "src/dom/Bounding.js~Bounding#constructor",
+    "method"
+  ],
+  [
+    "src/dom/bounding.js~bounding#element",
+    "class/src/dom/Bounding.js~Bounding.html#instance-member-element",
+    "src/dom/Bounding.js~Bounding#element",
+    "member"
+  ],
+  [
+    "src/dom/bounding.js~bounding#offset",
+    "class/src/dom/Bounding.js~Bounding.html#instance-method-offset",
+    "src/dom/Bounding.js~Bounding#offset",
+    "method"
+  ],
+  [
+    "src/dom/bounding.js~bounding.clone",
+    "class/src/dom/Bounding.js~Bounding.html#static-method-clone",
+    "src/dom/Bounding.js~Bounding.clone",
+    "method"
+  ],
+  [
+    "src/dom/bounding.js~bounding.offset",
+    "class/src/dom/Bounding.js~Bounding.html#static-method-offset",
+    "src/dom/Bounding.js~Bounding.offset",
+    "method"
+  ],
+  [
+    "src/dom/classes.js",
+    "file/src/dom/Classes.js.html",
+    "src/dom/Classes.js",
+    "file"
+  ],
+  [
+    "src/dom/classes.js~classes#add",
+    "class/src/dom/Classes.js~Classes.html#instance-method-add",
+    "src/dom/Classes.js~Classes#add",
+    "method"
+  ],
+  [
+    "src/dom/classes.js~classes#constructor",
+    "class/src/dom/Classes.js~Classes.html#instance-constructor-constructor",
+    "src/dom/Classes.js~Classes#constructor",
+    "method"
+  ],
+  [
+    "src/dom/classes.js~classes#element",
+    "class/src/dom/Classes.js~Classes.html#instance-member-element",
+    "src/dom/Classes.js~Classes#element",
+    "member"
+  ],
+  [
+    "src/dom/classes.js~classes#has",
+    "class/src/dom/Classes.js~Classes.html#instance-method-has",
+    "src/dom/Classes.js~Classes#has",
+    "method"
+  ],
+  [
+    "src/dom/classes.js~classes#remove",
+    "class/src/dom/Classes.js~Classes.html#instance-method-remove",
+    "src/dom/Classes.js~Classes#remove",
+    "method"
+  ],
+  [
+    "src/dom/classes.js~classes.add",
+    "class/src/dom/Classes.js~Classes.html#static-method-add",
+    "src/dom/Classes.js~Classes.add",
+    "method"
+  ],
+  [
+    "src/dom/classes.js~classes.has",
+    "class/src/dom/Classes.js~Classes.html#static-method-has",
+    "src/dom/Classes.js~Classes.has",
+    "method"
+  ],
+  [
+    "src/dom/classes.js~classes.remove",
+    "class/src/dom/Classes.js~Classes.html#static-method-remove",
+    "src/dom/Classes.js~Classes.remove",
+    "method"
+  ],
+  [
+    "src/dom/elements.js",
+    "file/src/dom/Elements.js.html",
+    "src/dom/Elements.js",
+    "file"
+  ],
+  [
+    "src/dom/elements.js~elements#bounding",
+    "class/src/dom/Elements.js~Elements.html#instance-member-bounding",
+    "src/dom/Elements.js~Elements#bounding",
+    "member"
+  ],
+  [
+    "src/dom/elements.js~elements#classes",
+    "class/src/dom/Elements.js~Elements.html#instance-member-classes",
+    "src/dom/Elements.js~Elements#classes",
+    "member"
+  ],
+  [
+    "src/dom/elements.js~elements#constructor",
+    "class/src/dom/Elements.js~Elements.html#instance-constructor-constructor",
+    "src/dom/Elements.js~Elements#constructor",
+    "method"
+  ],
+  [
+    "src/dom/elements.js~elements#element",
+    "class/src/dom/Elements.js~Elements.html#instance-member-element",
+    "src/dom/Elements.js~Elements#element",
+    "member"
+  ],
+  [
+    "src/dom/elements.js~elements#offset",
+    "class/src/dom/Elements.js~Elements.html#instance-method-offset",
+    "src/dom/Elements.js~Elements#offset",
+    "method"
+  ],
+  [
+    "src/dom/elements.js~elements#style",
+    "class/src/dom/Elements.js~Elements.html#instance-member-style",
+    "src/dom/Elements.js~Elements#style",
+    "member"
+  ],
+  [
+    "src/dom/elements.js~elements.id",
+    "class/src/dom/Elements.js~Elements.html#static-method-id",
+    "src/dom/Elements.js~Elements.id",
+    "method"
+  ],
+  [
+    "src/dom/elements.js~elements.select",
+    "class/src/dom/Elements.js~Elements.html#static-method-select",
+    "src/dom/Elements.js~Elements.select",
+    "method"
+  ],
+  [
+    "src/dom/elements.js~elements.selects",
+    "class/src/dom/Elements.js~Elements.html#static-method-selects",
+    "src/dom/Elements.js~Elements.selects",
+    "method"
+  ],
+  [
     "src/event/eventdispatcher.js",
     "file/src/event/EventDispatcher.js.html",
     "src/event/EventDispatcher.js",
@@ -546,46 +876,70 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/event/freeze.js",
-    "file/src/event/Freeze.js.html",
-    "src/event/Freeze.js",
+    "src/event/rising.js",
+    "file/src/event/Rising.js.html",
+    "src/event/Rising.js",
     "file"
   ],
   [
-    "src/event/freeze.js~freeze.duration",
-    "class/src/event/Freeze.js~Freeze.html#static-method-duration",
-    "src/event/Freeze.js~Freeze.duration",
+    "src/event/rising.js~rising#boundscroll",
+    "class/src/event/Rising.js~Rising.html#instance-member-boundScroll",
+    "src/event/Rising.js~Rising#boundScroll",
+    "member"
+  ],
+  [
+    "src/event/rising.js~rising#constructor",
+    "class/src/event/Rising.js~Rising.html#instance-constructor-constructor",
+    "src/event/Rising.js~Rising#constructor",
     "method"
   ],
   [
-    "src/event/freeze.js~freeze.freeze",
-    "class/src/event/Freeze.js~Freeze.html#static-method-freeze",
-    "src/event/Freeze.js~Freeze.freeze",
+    "src/event/rising.js~rising#elements",
+    "class/src/event/Rising.js~Rising.html#instance-member-elements",
+    "src/event/Rising.js~Rising#elements",
+    "member"
+  ],
+  [
+    "src/event/rising.js~rising#scroll",
+    "class/src/event/Rising.js~Rising.html#instance-method-scroll",
+    "src/event/Rising.js~Rising#scroll",
     "method"
   ],
   [
-    "src/event/freeze.js~freeze.onscroll",
-    "class/src/event/Freeze.js~Freeze.html#static-method-onScroll",
-    "src/event/Freeze.js~Freeze.onScroll",
+    "src/event/rising.js~rising#scrolling",
+    "class/src/event/Rising.js~Rising.html#instance-member-scrolling",
+    "src/event/Rising.js~Rising#scrolling",
+    "member"
+  ],
+  [
+    "src/event/rising.js~rising#start",
+    "class/src/event/Rising.js~Rising.html#instance-method-start",
+    "src/event/Rising.js~Rising#start",
     "method"
   ],
   [
-    "src/event/freeze.js~freeze.setduration",
-    "class/src/event/Freeze.js~Freeze.html#static-method-setDuration",
-    "src/event/Freeze.js~Freeze.setDuration",
+    "src/event/rising.js~rising#started",
+    "class/src/event/Rising.js~Rising.html#instance-member-started",
+    "src/event/Rising.js~Rising#started",
+    "member"
+  ],
+  [
+    "src/event/rising.js~rising#stop",
+    "class/src/event/Rising.js~Rising.html#instance-method-stop",
+    "src/event/Rising.js~Rising#stop",
     "method"
   ],
   [
-    "src/event/freeze.js~freeze.start",
-    "class/src/event/Freeze.js~Freeze.html#static-method-start",
-    "src/event/Freeze.js~Freeze.start",
-    "method"
+    "src/event/rising.js~rising.alien",
+    "class/src/event/Rising.js~Rising.html#static-get-ALIEN",
+    "src/event/Rising.js~Rising.ALIEN",
+    "member"
   ],
   [
-    "src/event/freeze.js~freeze.stop",
-    "class/src/event/Freeze.js~Freeze.html#static-method-stop",
-    "src/event/Freeze.js~Freeze.stop",
-    "method"
+    "src/event/rising.js~rising.collision",
+    "class/src/event/Rising.js~Rising.html#static-get-COLLISION",
+    "src/event/Rising.js~Rising.COLLISION",
+    "member"
   ],
   [
     "src/event/scroll.js",
@@ -762,12 +1116,6 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/event/scrolling.js~scrolling#init",
-    "class/src/event/Scrolling.js~Scrolling.html#instance-method-init",
-    "src/event/Scrolling.js~Scrolling#init",
-    "method"
-  ],
-  [
     "src/event/scrolling.js~scrolling#previous",
     "class/src/event/Scrolling.js~Scrolling.html#instance-member-previous",
     "src/event/Scrolling.js~Scrolling#previous",
@@ -810,9 +1158,15 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/event/scrolling.js~scrolling.factory",
-    "class/src/event/Scrolling.js~Scrolling.html#static-method-factory",
-    "src/event/Scrolling.js~Scrolling.factory",
+    "src/event/scrollingsingle.js",
+    "file/src/event/ScrollingSingle.js.html",
+    "src/event/ScrollingSingle.js",
+    "file"
+  ],
+  [
+    "src/event/scrollingsingle.js~scrollingsingle.factory",
+    "class/src/event/ScrollingSingle.js~ScrollingSingle.html#static-method-factory",
+    "src/event/ScrollingSingle.js~ScrollingSingle.factory",
     "method"
   ],
   [
@@ -1518,6 +1872,60 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/util/freeze.js",
+    "file/src/util/Freeze.js.html",
+    "src/util/Freeze.js",
+    "file"
+  ],
+  [
+    "src/util/freeze.js~freeze.duration",
+    "class/src/util/Freeze.js~Freeze.html#static-method-duration",
+    "src/util/Freeze.js~Freeze.duration",
+    "method"
+  ],
+  [
+    "src/util/freeze.js~freeze.freeze",
+    "class/src/util/Freeze.js~Freeze.html#static-method-freeze",
+    "src/util/Freeze.js~Freeze.freeze",
+    "method"
+  ],
+  [
+    "src/util/freeze.js~freeze.onscroll",
+    "class/src/util/Freeze.js~Freeze.html#static-method-onScroll",
+    "src/util/Freeze.js~Freeze.onScroll",
+    "method"
+  ],
+  [
+    "src/util/freeze.js~freeze.setduration",
+    "class/src/util/Freeze.js~Freeze.html#static-method-setDuration",
+    "src/util/Freeze.js~Freeze.setDuration",
+    "method"
+  ],
+  [
+    "src/util/freeze.js~freeze.start",
+    "class/src/util/Freeze.js~Freeze.html#static-method-start",
+    "src/util/Freeze.js~Freeze.start",
+    "method"
+  ],
+  [
+    "src/util/freeze.js~freeze.stop",
+    "class/src/util/Freeze.js~Freeze.html#static-method-stop",
+    "src/util/Freeze.js~Freeze.stop",
+    "method"
+  ],
+  [
+    "src/util/hit.js",
+    "file/src/util/Hit.js.html",
+    "src/util/Hit.js",
+    "file"
+  ],
+  [
+    "src/util/hit.js~hit.test",
+    "class/src/util/Hit.js~Hit.html#static-method-test",
+    "src/util/Hit.js~Hit.test",
+    "method"
+  ],
+  [
     "src/util/list.js",
     "file/src/util/List.js.html",
     "src/util/List.js",
@@ -1533,6 +1941,24 @@ window.esdocSearchIndex = [
     "src/util/list.js~list.filling",
     "class/src/util/List.js~List.html#static-method-filling",
     "src/util/List.js~List.filling",
+    "method"
+  ],
+  [
+    "src/util/text.js",
+    "file/src/util/Text.js.html",
+    "src/util/Text.js",
+    "file"
+  ],
+  [
+    "src/util/text.js~text.camel",
+    "class/src/util/Text.js~Text.html#static-method-camel",
+    "src/util/Text.js~Text.camel",
+    "method"
+  ],
+  [
+    "src/util/text.js~text.dash",
+    "class/src/util/Text.js~Text.html#static-method-dash",
+    "src/util/Text.js~Text.dash",
     "method"
   ],
   [

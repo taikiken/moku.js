@@ -1,0 +1,747 @@
+{
+  "type": "Program",
+  "start": 0,
+  "end": 928,
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 41,
+      "column": 0
+    }
+  },
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "ImportDeclaration",
+      "start": 334,
+      "end": 385,
+      "loc": {
+        "start": {
+          "line": 13,
+          "column": 0
+        },
+        "end": {
+          "line": 13,
+          "column": 51
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "start": 343,
+          "end": 363,
+          "loc": {
+            "start": {
+              "line": 13,
+              "column": 9
+            },
+            "end": {
+              "line": 13,
+              "column": 29
+            }
+          },
+          "imported": {
+            "type": "Identifier",
+            "start": 343,
+            "end": 350,
+            "loc": {
+              "start": {
+                "line": 13,
+                "column": 9
+              },
+              "end": {
+                "line": 13,
+                "column": 16
+              }
+            },
+            "name": "default",
+            "leadingComments": null
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 354,
+            "end": 363,
+            "loc": {
+              "start": {
+                "line": 13,
+                "column": 20
+              },
+              "end": {
+                "line": 13,
+                "column": 29
+              }
+            },
+            "name": "Scrolling"
+          },
+          "leadingComments": null
+        }
+      ],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "start": 371,
+        "end": 384,
+        "loc": {
+          "start": {
+            "line": 13,
+            "column": 37
+          },
+          "end": {
+            "line": 13,
+            "column": 50
+          }
+        },
+        "value": "./Scrolling",
+        "rawValue": "./Scrolling",
+        "raw": "'./Scrolling'"
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/11/30 - 15:16\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n ",
+          "start": 0,
+          "end": 332,
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 0
+            },
+            "end": {
+              "line": 11,
+              "column": 3
+            }
+          },
+          "range": [
+            0,
+            332
+          ]
+        }
+      ],
+      "trailingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * singleton instance, nullable\n * @type {?Scrolling}\n * @private\n ",
+          "start": 387,
+          "end": 460,
+          "loc": {
+            "start": {
+              "line": 15,
+              "column": 0
+            },
+            "end": {
+              "line": 19,
+              "column": 3
+            }
+          },
+          "range": [
+            387,
+            460
+          ]
+        }
+      ]
+    },
+    {
+      "type": "VariableDeclaration",
+      "start": 461,
+      "end": 481,
+      "loc": {
+        "start": {
+          "line": 20,
+          "column": 0
+        },
+        "end": {
+          "line": 20,
+          "column": 20
+        }
+      },
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "start": 465,
+          "end": 480,
+          "loc": {
+            "start": {
+              "line": 20,
+              "column": 4
+            },
+            "end": {
+              "line": 20,
+              "column": 19
+            }
+          },
+          "id": {
+            "type": "Identifier",
+            "start": 465,
+            "end": 473,
+            "loc": {
+              "start": {
+                "line": 20,
+                "column": 4
+              },
+              "end": {
+                "line": 20,
+                "column": 12
+              }
+            },
+            "name": "instance",
+            "leadingComments": null
+          },
+          "init": {
+            "type": "Literal",
+            "start": 476,
+            "end": 480,
+            "loc": {
+              "start": {
+                "line": 20,
+                "column": 15
+              },
+              "end": {
+                "line": 20,
+                "column": 19
+              }
+            },
+            "value": null,
+            "rawValue": null,
+            "raw": "null"
+          },
+          "leadingComments": null
+        }
+      ],
+      "kind": "let",
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * singleton instance, nullable\n * @type {?Scrolling}\n * @private\n ",
+          "start": 387,
+          "end": 460,
+          "loc": {
+            "start": {
+              "line": 15,
+              "column": 0
+            },
+            "end": {
+              "line": 19,
+              "column": 3
+            }
+          },
+          "range": [
+            387,
+            460
+          ]
+        }
+      ],
+      "trailingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * Scrolling instance を singleton 提供します\n ",
+          "start": 483,
+          "end": 530,
+          "loc": {
+            "start": {
+              "line": 22,
+              "column": 0
+            },
+            "end": {
+              "line": 24,
+              "column": 3
+            }
+          },
+          "range": [
+            483,
+            530
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExportDefaultDeclaration",
+      "start": 531,
+      "end": 927,
+      "loc": {
+        "start": {
+          "line": 25,
+          "column": 0
+        },
+        "end": {
+          "line": 40,
+          "column": 1
+        }
+      },
+      "declaration": {
+        "type": "ClassDeclaration",
+        "start": 546,
+        "end": 927,
+        "loc": {
+          "start": {
+            "line": 25,
+            "column": 15
+          },
+          "end": {
+            "line": 40,
+            "column": 1
+          }
+        },
+        "id": {
+          "type": "Identifier",
+          "start": 552,
+          "end": 567,
+          "loc": {
+            "start": {
+              "line": 25,
+              "column": 21
+            },
+            "end": {
+              "line": 25,
+              "column": 36
+            }
+          },
+          "name": "ScrollingSingle",
+          "leadingComments": null
+        },
+        "superClass": null,
+        "body": {
+          "type": "ClassBody",
+          "start": 568,
+          "end": 927,
+          "loc": {
+            "start": {
+              "line": 25,
+              "column": 37
+            },
+            "end": {
+              "line": 40,
+              "column": 1
+            }
+          },
+          "body": [
+            {
+              "type": "MethodDefinition",
+              "start": 792,
+              "end": 925,
+              "loc": {
+                "start": {
+                  "line": 33,
+                  "column": 2
+                },
+                "end": {
+                  "line": 39,
+                  "column": 3
+                }
+              },
+              "computed": false,
+              "key": {
+                "type": "Identifier",
+                "start": 799,
+                "end": 806,
+                "loc": {
+                  "start": {
+                    "line": 33,
+                    "column": 9
+                  },
+                  "end": {
+                    "line": 33,
+                    "column": 16
+                  }
+                },
+                "name": "factory"
+              },
+              "static": true,
+              "kind": "method",
+              "value": {
+                "type": "FunctionExpression",
+                "start": 806,
+                "end": 925,
+                "loc": {
+                  "start": {
+                    "line": 33,
+                    "column": 16
+                  },
+                  "end": {
+                    "line": 39,
+                    "column": 3
+                  }
+                },
+                "id": null,
+                "generator": false,
+                "expression": false,
+                "async": false,
+                "params": [],
+                "body": {
+                  "type": "BlockStatement",
+                  "start": 809,
+                  "end": 925,
+                  "loc": {
+                    "start": {
+                      "line": 33,
+                      "column": 19
+                    },
+                    "end": {
+                      "line": 39,
+                      "column": 3
+                    }
+                  },
+                  "body": [
+                    {
+                      "type": "IfStatement",
+                      "start": 815,
+                      "end": 868,
+                      "loc": {
+                        "start": {
+                          "line": 34,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 36,
+                          "column": 5
+                        }
+                      },
+                      "test": {
+                        "type": "BinaryExpression",
+                        "start": 819,
+                        "end": 836,
+                        "loc": {
+                          "start": {
+                            "line": 34,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 34,
+                            "column": 25
+                          }
+                        },
+                        "left": {
+                          "type": "Identifier",
+                          "start": 819,
+                          "end": 827,
+                          "loc": {
+                            "start": {
+                              "line": 34,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 34,
+                              "column": 16
+                            }
+                          },
+                          "name": "instance"
+                        },
+                        "operator": "!==",
+                        "right": {
+                          "type": "Literal",
+                          "start": 832,
+                          "end": 836,
+                          "loc": {
+                            "start": {
+                              "line": 34,
+                              "column": 21
+                            },
+                            "end": {
+                              "line": 34,
+                              "column": 25
+                            }
+                          },
+                          "value": null,
+                          "rawValue": null,
+                          "raw": "null"
+                        }
+                      },
+                      "consequent": {
+                        "type": "BlockStatement",
+                        "start": 838,
+                        "end": 868,
+                        "loc": {
+                          "start": {
+                            "line": 34,
+                            "column": 27
+                          },
+                          "end": {
+                            "line": 36,
+                            "column": 5
+                          }
+                        },
+                        "body": [
+                          {
+                            "type": "ReturnStatement",
+                            "start": 846,
+                            "end": 862,
+                            "loc": {
+                              "start": {
+                                "line": 35,
+                                "column": 6
+                              },
+                              "end": {
+                                "line": 35,
+                                "column": 22
+                              }
+                            },
+                            "argument": {
+                              "type": "Identifier",
+                              "start": 853,
+                              "end": 861,
+                              "loc": {
+                                "start": {
+                                  "line": 35,
+                                  "column": 13
+                                },
+                                "end": {
+                                  "line": 35,
+                                  "column": 21
+                                }
+                              },
+                              "name": "instance"
+                            }
+                          }
+                        ]
+                      },
+                      "alternate": null
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "start": 873,
+                      "end": 900,
+                      "loc": {
+                        "start": {
+                          "line": 37,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 37,
+                          "column": 31
+                        }
+                      },
+                      "expression": {
+                        "type": "AssignmentExpression",
+                        "start": 873,
+                        "end": 899,
+                        "loc": {
+                          "start": {
+                            "line": 37,
+                            "column": 4
+                          },
+                          "end": {
+                            "line": 37,
+                            "column": 30
+                          }
+                        },
+                        "operator": "=",
+                        "left": {
+                          "type": "Identifier",
+                          "start": 873,
+                          "end": 881,
+                          "loc": {
+                            "start": {
+                              "line": 37,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 37,
+                              "column": 12
+                            }
+                          },
+                          "name": "instance"
+                        },
+                        "right": {
+                          "type": "NewExpression",
+                          "start": 884,
+                          "end": 899,
+                          "loc": {
+                            "start": {
+                              "line": 37,
+                              "column": 15
+                            },
+                            "end": {
+                              "line": 37,
+                              "column": 30
+                            }
+                          },
+                          "callee": {
+                            "type": "Identifier",
+                            "start": 888,
+                            "end": 897,
+                            "loc": {
+                              "start": {
+                                "line": 37,
+                                "column": 19
+                              },
+                              "end": {
+                                "line": 37,
+                                "column": 28
+                              }
+                            },
+                            "name": "Scrolling"
+                          },
+                          "arguments": []
+                        }
+                      }
+                    },
+                    {
+                      "type": "ReturnStatement",
+                      "start": 905,
+                      "end": 921,
+                      "loc": {
+                        "start": {
+                          "line": 38,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 38,
+                          "column": 20
+                        }
+                      },
+                      "argument": {
+                        "type": "Identifier",
+                        "start": 912,
+                        "end": 920,
+                        "loc": {
+                          "start": {
+                            "line": 38,
+                            "column": 11
+                          },
+                          "end": {
+                            "line": 38,
+                            "column": 19
+                          }
+                        },
+                        "name": "instance"
+                      }
+                    }
+                  ]
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "CommentLine",
+                  "value": " ----------------------------------------",
+                  "start": 572,
+                  "end": 615,
+                  "loc": {
+                    "start": {
+                      "line": 26,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 26,
+                      "column": 45
+                    }
+                  },
+                  "range": [
+                    572,
+                    615
+                  ]
+                },
+                {
+                  "type": "CommentLine",
+                  "value": " STATIC METHOD",
+                  "start": 618,
+                  "end": 634,
+                  "loc": {
+                    "start": {
+                      "line": 27,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 27,
+                      "column": 18
+                    }
+                  },
+                  "range": [
+                    618,
+                    634
+                  ]
+                },
+                {
+                  "type": "CommentLine",
+                  "value": " ----------------------------------------",
+                  "start": 637,
+                  "end": 680,
+                  "loc": {
+                    "start": {
+                      "line": 28,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 28,
+                      "column": 45
+                    }
+                  },
+                  "range": [
+                    637,
+                    680
+                  ]
+                },
+                {
+                  "type": "Block",
+                  "value": "*\n   * Scrolling instance を singleton を保証し作成します\n   * @returns {Scrolling} Scrolling instance を返します\n   ",
+                  "start": 683,
+                  "end": 789,
+                  "loc": {
+                    "start": {
+                      "line": 29,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 32,
+                      "column": 5
+                    }
+                  },
+                  "range": [
+                    683,
+                    789
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "leadingComments": [
+          {
+            "type": "Block",
+            "value": "*\n * Scrolling instance を singleton 提供します\n ",
+            "start": 483,
+            "end": 530,
+            "loc": {
+              "start": {
+                "line": 22,
+                "column": 0
+              },
+              "end": {
+                "line": 24,
+                "column": 3
+              }
+            },
+            "range": [
+              483,
+              530
+            ]
+          }
+        ],
+        "trailingComments": []
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * Scrolling instance を singleton 提供します\n ",
+          "start": 483,
+          "end": 530,
+          "loc": {
+            "start": {
+              "line": 22,
+              "column": 0
+            },
+            "end": {
+              "line": 24,
+              "column": 3
+            }
+          },
+          "range": [
+            483,
+            530
+          ]
+        }
+      ]
+    }
+  ]
+}

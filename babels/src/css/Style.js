@@ -56,7 +56,7 @@ export default class Style {
    * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
    * @param {Object} view Document.defaultView @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
    * @param {Element} element 操作対象 Element
-   * @param {string} property 調査対象 CSS property name
+   * @param {string} [property] 調査対象 CSS property name, 省略すると `CSSStyleDeclaration` 全セットを返します
    * @returns {CssStyle|string|undefined} style value を返します
    */
   static compute(view, element, property) {
@@ -98,7 +98,7 @@ export default class Style {
   // ----------------------------------------
   /**
    * style value を取得します
-   * @param {string} property 調査する style property name
+   * @param {string} [property] 調査する style property name
    * @return {string} style value を返します
    */
   get(property) {
@@ -106,7 +106,7 @@ export default class Style {
     const ownerDocument = element.ownerDocument;
     const defaultView = ownerDocument.defaultView;
     let style = Style.compute(defaultView, element, property);
-    if (style === '' && Patterns.match(property)) {
+    if (style === '' && property && Patterns.match(property)) {
       style = Style.shortHand(defaultView, element, Patterns.get(property));
     }
     return style;
