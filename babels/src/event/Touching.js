@@ -32,7 +32,6 @@ export default class Touching extends EventDispatcher {
    */
   constructor(element, canceling = false, threshold = 10) {
     super();
-
     /**
      * 処理対象 Element
      * @type {Element}
@@ -50,6 +49,7 @@ export default class Touching extends EventDispatcher {
      * @default 10
      */
     this.threshold = threshold;
+    // @type {function}
     const boundStart = this.onStart.bind(this);
     /**
      * bound onStart
@@ -144,7 +144,6 @@ export default class Touching extends EventDispatcher {
    * @returns {void}
    */
   init() {
-    // console.log('Touching.init', this.element, this.boundStart);
     this.element.addEventListener('touchstart', this.boundStart(), false);
     window.addEventListener('blur', this.boundBlur(), false);
   }

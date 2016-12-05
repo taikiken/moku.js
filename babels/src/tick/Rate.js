@@ -35,11 +35,14 @@ import { default as Polling } from './Polling';
 export default class Rate extends Polling {
   /**
    * 固定値フレームレート毎に UPDATE イベントを発生させます
-   * @param {number} rateValue fps, 固定値以外設定できません
+   * @param {number} [rateValue=Rate.RATE_5] fps, 固定値以外設定できません
    */
-  constructor(rateValue) {
+  constructor(rateValue = Rate.RATE_5) {
+    // 60fps で polling を行う
     super(1000 / 60);
+    // @type {Events}
     const events = new Events(Rate.UPDATE, this, this);
+    // 設定可能な rate list
     const rates = [
       Rate.RATE_60,
       Rate.RATE_30,
@@ -60,11 +63,12 @@ export default class Rate extends Polling {
      */
     this.rates = () => rates;
     /**
-     * rate count, update 毎にカウントアップします
+     * rate count, update 毎にカウントアップします<br>
+     * 不正値の時は `Rate.RATE_5` を使用します
      * @type {number}
      */
     this.count = 0;
-    let rate = null;
+    let rate = this.validate(rateValue) ? rateValue : Rate.RATE_5;
     /**
      * rate 値
      * @returns {?number} rate 値
@@ -200,10 +204,6 @@ export default class Rate extends Polling {
    * @returns {boolean} start に成功すると true を返します
    */
   start() {
-    const rate = this.rate();
-    if (rate === null) {
-      throw new Error(`rate are not correct. ${rate}`);
-    }
     if (this.started) {
       // already start
       return false;

@@ -30,12 +30,14 @@ export default class Scrolling extends EventDispatcher {
    */
   constructor(rate = new Rate(Rate.RATE_5)) {
     super();
+    // @type {function}
     const boundScroll = this.scroll.bind(this);
     /**
      * bound scroll, Rate.UPDATE event handler
      * @returns {function} bound scroll
      */
     this.boundScroll = () => boundScroll;
+    // @type {ScrollEvents}
     const events = new ScrollEvents(Scrolling.UPDATE, this, this);
     /**
      * ScrollEvents instance, 発火時に使用します
@@ -80,14 +82,13 @@ export default class Scrolling extends EventDispatcher {
    * @returns {Scrolling} method chain 可能なように instance を返します
    */
   start() {
-    const rate = this.rate;
-    // if (rate === null) {
-    //   throw new Error(`rate: ${rate} error. have to set rate, before start.`);
-    // }
+    // flag check
     if (this.started) {
       return this;
     }
     this.started = true;
+    // loop start
+    const rate = this.rate;
     rate.on(Rate.UPDATE, this.boundScroll());
     rate.start();
     return this;

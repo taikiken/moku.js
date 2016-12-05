@@ -144,7 +144,7 @@ export default class Cycle extends EventDispatcher {
 
     // @type {Events} - events
     const events = this.events();
-    // events.id = id;
+    events.id = id;
     // event fire
     this.dispatch(events);
     return id;

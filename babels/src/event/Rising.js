@@ -45,20 +45,6 @@ export default class Rising extends EventDispatcher {
      * @returns {function} bound scroll
      */
     this.boundScroll = () => boundScroll;
-    // // events
-    // const events = new Events(Rising.UPDATE, this, this);
-    // events.hit = {
-    //   result: false,
-    //   top: false,
-    //   bottom: false,
-    //   contain: false,
-    //   include: false,
-    // };
-    // /**
-    //  * ScrollEvents instance, 発火時に使用します
-    //  * @returns {Events} ScrollEvents instance
-    //  */
-    // this.events = () => events;
     /**
      * start 済みフラッグ
      * @type {boolean}
@@ -93,13 +79,12 @@ export default class Rising extends EventDispatcher {
    * @returns {Rising} method chain 可能なように instance を返します
    */
   start() {
-    // if (rate === null) {
-    //   throw new Error(`rate: ${rate} error. have to set rate, before start.`);
-    // }
+    // flag check
     if (this.started) {
       return this;
     }
     this.started = true;
+    // scrolling
     const scrolling = this.scrolling();
     scrolling.on(Scrolling.UPDATE, this.boundScroll());
     scrolling.start();

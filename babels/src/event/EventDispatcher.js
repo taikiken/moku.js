@@ -46,12 +46,7 @@ export default class EventDispatcher {
    * listener property をイニシャライズします
    */
   constructor() {
-    // /**
-    //  * リスナーリスト
-    //  * @type {Object}
-    //  * @private
-    //  */
-    // this[listenersKey] = {};
+    // @type {Object}
     let listeners = {};
     /**
      * リスナーリストを取得します
@@ -67,29 +62,9 @@ export default class EventDispatcher {
       return true;
     };
   }
-  // // ----------------------------------------
-  // // GETTER / SETTER
-  // // ----------------------------------------
-  // /**
-  //  * リスナーリストを取得します
-  //  * @returns {Object} リスナーリストを返します
-  //  */
-  // get listeners() {
-  //   return this[listenersKey];
-  // }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
-  // /**
-  //  * 全てのリスナーを破棄します
-  //  * @returns {boolean} 成功・不成功の真偽値を返します
-  //  */
-  // destroy() {
-  //   // this[listenersKey] = {};
-  //   let listeners = this.listeners();
-  //   listeners = {};
-  //   return true;
-  // }
   /**
    * event type に リスナー関数を bind します
    * @param {string} type event type（種類）
@@ -114,14 +89,9 @@ export default class EventDispatcher {
       // listeners.type をキーに新規配列を作成し
       // listener {function} を配列へ追加（登録）します
       listeners[type] = [];
-      // listeners[type].push(listener);
     }
-    // else {
-    //   // すでに listeners.type が存在する
-    //   listeners[type].push(listener);
-    // }
+    // すでに listeners.type が存在する
     listeners[type].push(listener);
-
     return true;
   }
   /**

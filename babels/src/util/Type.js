@@ -37,12 +37,11 @@ export default class Type {
    * @returns {boolean} 引数(target)が number かを調べ結果を返します、true: number
    */
   static number(target) {
-    // return typeof target === 'number';
-    // jQuery 2.x
+    // [参考] jQuery 2.x, jQuery 2 関数は文字列 "2" も true にするので type check を追加した
     return typeof target === 'number' && !Type.array(target) && ((target - parseFloat(target)) + 1) >= 0;
   }
   /**
-   * 引数(target)が int かを調べます
+   * 引数(target)が int かを `Number.isInteger` を使用し調べます
    * @param {*} target 調査対象
    * @returns {boolean} 引数(target)が int かを調べ結果を返します、true: int
    */
@@ -74,7 +73,7 @@ export default class Type {
     return target === null;
   }
   /**
-   * Object型 引数 `object` は String型 引数 `key` を [key] として存在するかを調べます
+   * Object型 引数 `object` は String型 引数 `key` を [key] として所持しているかを調べます
    * @param {Object} target 調査対象
    * @param {string} key Object.key 名称
    * @returns {boolean} 存在する時は true を返します
@@ -101,7 +100,6 @@ export default class Type {
     const split = fileName.split('.');
 
     if (split.length === 1 || (split[0] === '' && split.length === 2)) {
-      // console.warn(`not correct file name. ${fileName}`);
       return '';
     }
 
