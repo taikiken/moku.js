@@ -50,30 +50,28 @@ const files = [
 
 // ESLint
 // --------------------------------------
-gulp.task('babels:lint', () => {
-  return gulp.src(files)
-    .pipe($.eslint({ useEslintrc: true }))
-    .pipe($.eslint.format())
-    .pipe($.eslint.failAfterError())
-    .pipe($.size({ title: '*** babels:eslint ***' }));
-});
+gulp.task('babels:lint', () => gulp.src(files)
+  .pipe($.eslint({ useEslintrc: true }))
+  .pipe($.eslint.format())
+  .pipe($.eslint.failAfterError())
+  .pipe($.size({ title: '*** babels:eslint ***' }))
+);
 
 // babel
 // --------------------------------------
-gulp.task('babels:babel', () => {
-  return gulp.src(files)
-    .pipe($.babel({
-      presets: [
-        'es2015',
-        'react',
-        'stage-0',
-      ],
-      plugins: ['transform-runtime'],
-    }))
-    .pipe($.replaceTask({ patterns }))
-    .pipe(gulp.dest(dir.babels.compile))
-    .pipe($.size({ title: '*** babels:babel ***' }));
-});
+gulp.task('babels:babel', () => gulp.src(files)
+  .pipe($.babel({
+    presets: [
+      'es2015',
+      'react',
+      'stage-0',
+    ],
+    plugins: ['transform-runtime'],
+  }))
+  .pipe($.replaceTask({ patterns }))
+  .pipe(gulp.dest(dir.babels.compile))
+  .pipe($.size({ title: '*** babels:babel ***' }))
+);
 
 // webpack [DEV]
 // --------------------------------------
@@ -107,6 +105,7 @@ gulp.task('babels:pack:build', (callback) => {
   ];
   config.entry = `${config.entry}/babels/compile/moku.js`;
   config.output.path = dir.dist.libs;
+  config.output.filename = 'moku.min.js';
   // webpack
   return $$.webpack(config, (error, stats) => {
     if (error) {
@@ -132,9 +131,9 @@ gulp.task('babels:dev', (callback) => {
   );
 });
 
-gulp.task('babels:build', (callback) => {
+gulp.task('babels:build', ['babels:dev'], (callback) => {
   return $$.runSequence(
-    'babels:lint',
+    // 'babels:lint',
     'babels:babel',
     'babels:pack:build',
     callback,
