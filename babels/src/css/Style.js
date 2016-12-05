@@ -34,12 +34,12 @@ export default class Style {
     // @type {string} - オリジナルの element.style.cssText を保持します
     let css = this.current();
     /**
-     * インスタンス作成時の CSS
-     * @returns {string} インスタンス作成時の CSS
+     * インスタンス作成時の inline CSS
+     * @returns {string} インスタンス作成時の inline CSS
      */
     this.original = () => css;
     /**
-     * インスタンス作成時の CSS を上書きします
+     * インスタンス作成時の inline CSS を上書きします
      * @param {string} style 上書き用 CSS 設定
      * @returns {string} 上書きされた CSS
      */
@@ -130,7 +130,7 @@ export default class Style {
     return true;
   }
   /**
-   * element の style.cssText を取得します
+   * element の inline style(style.cssText) を取得します
    * @return {string} style.cssText を返します
    */
   current() {
@@ -143,12 +143,20 @@ export default class Style {
     return '';
   }
   /**
-   * element の style.cssText を変更前まで戻します
+   * element の style.cssText をインスタンス作成時点まで戻します
    * @return {string} 設定した css を返します
    */
   restore() {
     const css = this.original();
     this.element().style.cssText = css;
     return css;
+  }
+  /**
+   * `save` 実行時に設定されている inline style を default にします
+   * @returns {string} 設定されている inline style を返します
+   */
+  save() {
+    const style = this.current();
+    return this.update(style);
   }
 }

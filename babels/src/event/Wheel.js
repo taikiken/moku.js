@@ -58,7 +58,6 @@ export default class Wheel extends EventDispatcher {
     instance = this;
 
     // event handler
-    // this[wheelSymbol] = this.mouseWheel.bind(this);
     const boundWheel = this.mouseWheel.bind(this);
     /**
      * bound mouseWheel
@@ -76,11 +75,6 @@ export default class Wheel extends EventDispatcher {
      * @type {number}
      */
     this.moved = 0;
-    // /**
-    //  * firefox wheel event.detail 数値を他 Browser wheel 値と揃えるための係数
-    //  * @type {number}
-    //  */
-    // this.coefficient = -7.5;
     /**
      * start flag
      * @type {boolean}
