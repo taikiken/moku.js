@@ -13,7 +13,9 @@
 // event
 import { default as EventDispatcher } from './EventDispatcher';
 import { default as ScrollEvents } from './ScrollEvents';
-import { default as Freeze } from './Freeze';
+
+// util
+import { default as Freeze } from '../util/Freeze';
 
 /**
  * new を許可しないための Symbol
