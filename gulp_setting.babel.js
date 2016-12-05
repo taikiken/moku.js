@@ -12,11 +12,6 @@
  */
 
 // --------------------------------------
-//  PKG(package.json)
-// --------------------------------------
-import pkg from './package.json';
-
-// --------------------------------------
 //  Node / Gulp plugins
 // --------------------------------------
 import gulp from 'gulp';
@@ -25,6 +20,16 @@ import runSequence from 'run-sequence';
 import browserSync from 'browser-sync';
 import webpack from 'webpack';
 import del from 'del';
+
+// --------------------------------------
+//  PKG(package.json)
+// --------------------------------------
+import pkg from './package.json';
+
+// --------------------------------------
+//  PORT SETTING
+// --------------------------------------
+import { port } from './gulp_port.babel';
 
 // --------------------------------------
 //  CONSTANT
@@ -166,8 +171,6 @@ compress.css = true;
 //  SERVER (PORT / INDEXES)
 // --------------------------------------
 const server = {};
-
-import { port } from './gulp_port.babel';
 
 if (!port) {
   console.warn('*********************************');
