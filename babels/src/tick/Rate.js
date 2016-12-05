@@ -94,14 +94,14 @@ export default class Rate extends Polling {
      * @returns {boolean} rate 設定に成功すると true を返します
      */
     this.setRate = (value) => {
-      if (this.validate(rateValue)) {
+      if (this.validate(value)) {
         rate = value;
         return true;
       }
       return false;
     };
     // init
-    this.setRate(rate);
+    this.setRate(rateValue);
   }
   // ----------------------------------------
   // CONST
