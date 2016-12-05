@@ -17,24 +17,6 @@ import { default as Events } from '../event/Events';
 // tick
 import { default as Polling } from './Polling';
 
-// /**
-//  * private property key, fps を保存するための Symbol
-//  * @type {Symbol}
-//  * @private
-//  */
-// const rateSymbol = Symbol('save fps');
-// /**
-//  * private property key, count を保存するための Symbol
-//  * @type {Symbol}
-//  * @private
-//  */
-// const countSymbol = Symbol('for update count');
-// /**
-//  * private property key, rates を保存するための Symbol
-//  * @type {Symbol}
-//  * @private
-//  */
-// const ratesSymbol = Symbol('save rate');
 /**
  * 固定値を使用し fps を決定します
  *
