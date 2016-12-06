@@ -132,19 +132,22 @@
     });
   });
 
-  // Type.getExtension
-  describe('#Type.getExtension', function() {
+  // Type.extension
+  describe('#Type.extension', function() {
     it("moku.js is js", function() {
-      expect(Type.getExtension('moku.js')).to.eql('js');
+      expect(Type.extension('moku.js')).to.eql('js');
     });
     it("moku.min.js js js", function() {
-      expect(Type.getExtension('moku.min.js')).to.eql('js');
+      expect(Type.extension('moku.min.js')).to.eql('js');
     });
     it("moku.min.abc.js js js", function() {
-      expect(Type.getExtension('moku.min.abc.js')).to.eql('js');
+      expect(Type.extension('moku.min.abc.js')).to.eql('js');
     });
-    it(".js js ''", function() {
-      expect(Type.getExtension('.js')).to.eql('');
+    it(".js is js", function() {
+      expect(Type.extension('.js')).to.eql('js');
+    });
+    it("js is ''", function() {
+      expect(Type.extension('js')).to.eql('');
     });
   });
 </script>

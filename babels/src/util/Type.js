@@ -73,12 +73,22 @@ export default class Type {
     return target === null;
   }
   /**
+   * @deprecated instead use Type.has
    * Object型 引数 `object` は String型 引数 `key` を [key] として所持しているかを調べます
    * @param {Object} target 調査対象
    * @param {string} key Object.key 名称
    * @returns {boolean} 存在する時は true を返します
    */
   static hasKey(target, key) {
+    return Type.has(target, key);
+  }
+  /**
+   * Object型 引数 `object` は String型 引数 `key` を [key] として所持しているかを調べます
+   * @param {Object} target 調査対象
+   * @param {string} key Object.key 名称
+   * @returns {boolean} 存在する時は true を返します
+   */
+  static has(target, key) {
     return Object.keys(target).indexOf(key) !== -1;
   }
   /**
@@ -91,19 +101,36 @@ export default class Type {
     return typeof target === 'undefined';
   }
   /**
+   * @deprecated instead use Type.extension
    * ファイル名から拡張子を取得します
    * @param {string} fileName 取得したいファイル名称
    * @returns {string} ファイル名の拡張子を返します
    */
   static getExtension(fileName) {
-    // http://stackoverflow.com/questions/190852/how-can-i-get-file-extensions-with-javascript
-    const split = fileName.split('.');
-
-    if (split.length === 1 || (split[0] === '' && split.length === 2)) {
+    // // http://stackoverflow.com/questions/190852/how-can-i-get-file-extensions-with-javascript
+    // const split = fileName.split('.');
+    //
+    // if (split.length === 1 || (split[0] === '' && split.length === 2)) {
+    //   return '';
+    // }
+    //
+    // return split.pop().toLowerCase();
+    return Type.extension(fileName);
+  }
+  /**
+   * ファイル名から拡張子を取得します
+   * @param {string} fileName 取得したいファイル名称
+   * @returns {string} ファイル名の拡張子を返します
+   */
+  static extension(fileName) {
+    if (typeof fileName !== 'string') {
       return '';
     }
-
-    return split.pop().toLowerCase();
+    const splits = fileName.split('.');
+    if (splits.length === 1) {
+      return '';
+    }
+    return splits.pop().toLowerCase();
   }
   // ----------------------------------------------------------
   // 画像パスが正規かチェックする
