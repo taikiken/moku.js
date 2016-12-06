@@ -12,4 +12,4 @@ EventDispatcher written in ES2016
 - [ESDoc](https://esdoc.org/)
 
 ## API
-- [docs](docs/index.html)
+- [docs](https://taikiken.github.io/moku.js/docs/)
