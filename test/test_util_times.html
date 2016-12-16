@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Mocha</title>
+  <link href="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+</head>
+<body>
+<div id="mocha"></div>
+<script src="//cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
+<script src="//cdn.rawgit.com/Automattic/expect.js/0.3.1/index.js"></script>
+<script src="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+<script src="http://chaijs.com/chai.js"></script>
+<script src="../libs/moku.js" charset="utf-8"></script>
+<script>
+  // mochaの機能を呼び出します。ここでは、BDDとTDDを使用します。
+  mocha.setup('bdd');
+  mocha.setup('tdd');
+  var assert = chai.assert;
+  // expectの機能を読み込み
+  var expect = chai.expect;
+  // shouldの機能を読み込み
+  chai.Should();
+</script>
+<script>
+  var util = window.MOKU.util;
+  var Times = util.Times;
+  console.log('Times', Times);
+//  //  Times.standard
+//  describe('#Times.standard', function() {
+//    it("Times.standard() is exist", function() {
+//      expect(Times.standard()).to.exist;
+//    });
+//    it("Times.standard() is xxx", function() {
+//      expect(Times.standard()).to.eql('xxx');
+//    });
+//    it("Times.standard().toUTCString is xxx", function() {
+//      expect(Times.standard().toUTCString()).to.eql('xxx');
+//    });
+//  });
+  //  Times.present
+  describe('#Times.present', function() {
+    it("Times.present() is exist", function() {
+      expect(Times.present()).to.exist;
+    });
+    it("Times.present() is xxx", function() {
+      expect(Times.present()).to.eql('xxx');
+    });
+    it("Times.present().toUTCString is xxx", function() {
+      expect(Times.present().toUTCString()).to.eql('xxx');
+    });
+  });
+
+  //  Times.minute
+  describe('#Times.minute', function() {
+    it("Times.present(30) is exist", function() {
+      expect(Times.minute(30)).to.exist;
+    });
+    it("Times.minute(30) is xxx", function() {
+      expect(Times.minute(30)).to.eql('xxx');
+    });
+    it("Times.minute(60) is xxx", function() {
+      expect(Times.minute(60)).to.eql('xxx');
+    });
+  });
+
+  //  Times.hour
+  describe('#Times.hour', function() {
+    it("Times.present(1) is exist", function() {
+      expect(Times.hour(1)).to.exist;
+    });
+    it("Times.hour(1) is xxx", function() {
+      expect(Times.hour(1)).to.eql('xxx');
+    });
+    it("Times.hour(2) is xxx", function() {
+      expect(Times.hour(2)).to.eql('xxx');
+    });
+  });
+
+</script>
+<script>
+  mocha.checkLeaks();
+  mocha.globals(['jQuery']);
+  mocha.run();
+</script>
+</body>
+</html>
