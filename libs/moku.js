@@ -54,7 +54,7 @@
 	 *
 	 * This notice shall be included in all copies or substantial portions of the Software.
 	 * 0.0.1
-	 * 2016-12-06 16:12:24
+	 * 2016-12-16 16:01:07
 	 */
 	// use strict は本来不要でエラーになる
 	// 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -72,28 +72,29 @@
 
 
 	var _Ajax = __webpack_require__(109);var _Ajax2 = _interopRequireDefault(_Ajax);
+	var _Cookie = __webpack_require__(110);var _Cookie2 = _interopRequireDefault(_Cookie);
 
 
 	var _Cycle = __webpack_require__(105);var _Cycle2 = _interopRequireDefault(_Cycle);
-	var _Fps = __webpack_require__(110);var _Fps2 = _interopRequireDefault(_Fps);
+	var _Fps = __webpack_require__(111);var _Fps2 = _interopRequireDefault(_Fps);
 	var _Polling = __webpack_require__(104);var _Polling2 = _interopRequireDefault(_Polling);
 	var _Rate = __webpack_require__(103);var _Rate2 = _interopRequireDefault(_Rate);
 
 
 	var _Type = __webpack_require__(22);var _Type2 = _interopRequireDefault(_Type);
-	var _List = __webpack_require__(111);var _List2 = _interopRequireDefault(_List);
-	var _Text = __webpack_require__(112);var _Text2 = _interopRequireDefault(_Text);
+	var _List = __webpack_require__(112);var _List2 = _interopRequireDefault(_List);
+	var _Text = __webpack_require__(113);var _Text2 = _interopRequireDefault(_Text);
 	var _Vectors = __webpack_require__(108);var _Vectors2 = _interopRequireDefault(_Vectors);
-	var _Hit = __webpack_require__(113);var _Hit2 = _interopRequireDefault(_Hit);
+	var _Hit = __webpack_require__(114);var _Hit2 = _interopRequireDefault(_Hit);
 
 
-	var _Patterns = __webpack_require__(114);var _Patterns2 = _interopRequireDefault(_Patterns);
-	var _Style = __webpack_require__(115);var _Style2 = _interopRequireDefault(_Style);
+	var _Patterns = __webpack_require__(115);var _Patterns2 = _interopRequireDefault(_Patterns);
+	var _Style = __webpack_require__(116);var _Style2 = _interopRequireDefault(_Style);
 
 
-	var _Bounding = __webpack_require__(116);var _Bounding2 = _interopRequireDefault(_Bounding);
-	var _Classes = __webpack_require__(117);var _Classes2 = _interopRequireDefault(_Classes);
-	var _Elements = __webpack_require__(127);var _Elements2 = _interopRequireDefault(_Elements);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	var _Bounding = __webpack_require__(117);var _Bounding2 = _interopRequireDefault(_Bounding);
+	var _Classes = __webpack_require__(118);var _Classes2 = _interopRequireDefault(_Classes);
+	var _Elements = __webpack_require__(128);var _Elements2 = _interopRequireDefault(_Elements);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 	/**
 	                                                                                                                                                                                            * **MOKU**
@@ -102,16 +103,16 @@
 	                                                                                                                                                                                            * @type {Object}
 	                                                                                                                                                                                            */ // util
 	// tick
+	// net
 	var MOKU = {}; /**
 	                * version number を取得します
 	                * @returns {string} version number を返します
 	                */ // dom
 	// css
-	// net
 	MOKU.version = function () {return '0.0.1';}; /**
 	                                                   * build 日時を取得します
 	                                                   * @returns {string}  build 日時を返します
-	                                                   */MOKU.build = function () {return '2016-12-06 16:12:24';};
+	                                                   */MOKU.build = function () {return '2016-12-16 16:01:07';};
 	/**
 	                                                                                                        * MOKU.event
 	                                                                                                        * @type {Object} MOKU.event object を返します
@@ -129,12 +130,13 @@
 	                                   * @type {Object} MOKU.net object を返します
 	                                   */
 	MOKU.net = {
-	  Ajax: _Ajax2.default };
+	  Ajax: _Ajax2.default,
+	  Cookie: _Cookie2.default };
 
 	/**
-	                           * MOKU.tick
-	                           * @type {Object} MOKU.tick object を返します
-	                           */
+	                               * MOKU.tick
+	                               * @type {Object} MOKU.tick object を返します
+	                               */
 	MOKU.tick = {
 	  Cycle: _Cycle2.default,
 	  Fps: _Fps2.default,
@@ -4609,6 +4611,143 @@
 /* 110 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * Copyright (c) 2011-2016 inazumatv.com, inc.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * @author (at)taikiken / http://inazumatv.com
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * @date 2016/12/16 - 14:45
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * Distributed under the terms of the MIT license.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * http://www.opensource.org/licenses/mit-license.html
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * This notice shall be included in all copies or substantial portions of the Software.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            */
+
+	var decodeURIComponent = self.decodeURIComponent;
+	var encodeURIComponent = self.encodeURIComponent;
+	var RegExp = self.RegExp;
+
+	/**
+	                           * cookie を取得・保存・削除します
+	                           */var
+	Cookie = function () {
+	  /**
+	                       * cookie を処理します
+	                       *
+	                       * インスタンスは key 毎に作成します
+	                       * @param {string} keyName cookie key
+	                       * @param {?Date} [endValue=null] cookie end Date instance, null の時はプラウザ `quit` で削除されます
+	                       * @param {string} [defaultPath='/'] cookie path
+	                       * @param {string} [defaultDomain=''] cookie domain
+	                       * @param {boolean} [secureSetting=false] true: https 通信のときのみ、クッキーが送信されます
+	                       */
+	  function Cookie(keyName) {var endValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;var defaultPath = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '/';var defaultDomain = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';var secureSetting = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;(0, _classCallCheck3.default)(this, Cookie);
+	    var key = keyName;
+	    var end = endValue;
+	    var path = defaultPath;
+	    var domain = defaultDomain;
+	    var secure = secureSetting;
+
+	    /**
+	                                 * cookie key を取得します
+	                                 * @returns {string} cookie key を返します
+	                                 */
+	    this.key = function () {return key;};
+	    /**
+	                                           * cookie key を設定します
+	                                           * @param {string} setting 設定する key name
+	                                           * @returns {string} 設定した key name を返します
+	                                           */
+	    this.setKey = function (setting) {key = setting;};
+	    /**
+	                                                        * cookie end を取得します
+	                                                        * @returns {?Date} cookie end Date instance
+	                                                        */
+	    this.end = function () {return end;};
+	    /**
+	                                           * cookie end を設定します
+	                                           * @param {Date} setting cookie end Date instance
+	                                           * @returns {Date} 設定した Date instance を返します
+	                                           */
+	    this.setEnd = function (setting) {end = setting;};
+	    /**
+	                                                        * cookie path を取得します
+	                                                        * @returns {string} cookie path を返します
+	                                                        */
+	    this.path = function () {return path;};
+	    /**
+	                                             * cookie path を設定します
+	                                             * @param {string} setting 設定する path name
+	                                             * @returns {string} 設定した path name を返します
+	                                             */
+	    this.setPath = function (setting) {path = setting;};
+	    /**
+	                                                          * cookie domain を取得します
+	                                                          * @returns {string} cookie domain を返します
+	                                                          */
+	    this.domain = function () {return domain;};
+	    /**
+	                                                 * cookie domain を設定します
+	                                                 * @param {string} setting 設定する domain name
+	                                                 * @returns {string} 設定した domain name を返します
+	                                                 */
+	    this.setDomain = function (setting) {domain = setting;};
+	    this.secure = function () {return secure;};
+	    this.setSecure = function (setting) {secure = setting;};
+	  }
+	  // ----------------------------------------
+	  // METHOD
+	  // ----------------------------------------
+	  (0, _createClass3.default)(Cookie, [{ key: 'get', value: function get() {
+	      return Cookie.get(this.key());
+	    } }, { key: 'set', value: function set(
+	    value) {var end = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.end();var path = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.path();var domain = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : this.domain();var secure = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : this.secure();
+	      return Cookie.set(this.key(), value, end, path, domain, secure);
+	    } }, { key: 'remove', value: function remove()
+	    {
+	      return Cookie.delete(this.key());
+	    }
+	    // ----------------------------------------
+	    // STATIC METHOD
+	    // ----------------------------------------
+	  }], [{ key: 'get', value: function get(key) {
+	      var cookie = document.cookie;
+	      var escapeKey = encodeURIComponent(key).replace(/[-.+*]/g, '\\$&');
+	      var exp = new RegExp('(?:(?:^|.*;)\\s*' + escapeKey + '\\s*\\=\\s*([^;]*).*$)|^.*$');
+	      return decodeURIComponent(cookie.replace(exp, '$1')) || null;
+	    } }, { key: 'set', value: function set(
+	    key, value) {var end = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;var path = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '/';var domain = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';var secure = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : false;
+	      var cookie = encodeURIComponent(key) + '=' + encodeURIComponent(value);
+	      if (end) {
+	        cookie += '; expires=' + end.toUTCString();
+	      }
+	      if (path) {
+	        cookie += '; path=' + path;
+	      }
+	      if (domain) {
+	        cookie += '; domain=' + domain;
+	      }
+	      if (secure) {
+	        cookie += '; secure';
+	      }
+	      document.cookie = cookie;
+	      return cookie;
+	    } }, { key: 'remove', value: function remove(
+	    key) {
+	      if (Cookie.has(key)) {
+	        Cookie.set(key, '', new Date());
+	        return true;
+	      }
+	      return false;
+	    } }, { key: 'has', value: function has(
+	    key) {
+	      return Cookie.get(key) !== null;
+	    } }]);return Cookie;}();exports.default = Cookie;
+
+/***/ },
+/* 111 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _getPrototypeOf = __webpack_require__(49);var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);var _possibleConstructorReturn2 = __webpack_require__(53);var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);var _inherits2 = __webpack_require__(90);var _inherits3 = _interopRequireDefault(_inherits2);
 
 
@@ -4691,7 +4830,7 @@
 	exports.default = Fps;
 
 /***/ },
-/* 111 */
+/* 112 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);
@@ -4754,7 +4893,7 @@
 	                            */exports.default = List;
 
 /***/ },
-/* 112 */
+/* 113 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
@@ -4795,7 +4934,7 @@
 	    } }]);return Text;}();exports.default = Text;
 
 /***/ },
-/* 113 */
+/* 114 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";Object.defineProperty(exports, "__esModule", { value: true });var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
@@ -4864,7 +5003,7 @@
 	    } }]);return Hit;}();exports.default = Hit;
 
 /***/ },
-/* 114 */
+/* 115 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _keys = __webpack_require__(23);var _keys2 = _interopRequireDefault(_keys);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);
@@ -4879,7 +5018,7 @@
 
 
 
-	var _Text = __webpack_require__(112);var _Text2 = _interopRequireDefault(_Text);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	var _Text = __webpack_require__(113);var _Text2 = _interopRequireDefault(_Text);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 	/**
 	                                                                                                                                                                              * CSS short hand pattern を管理します
@@ -4937,7 +5076,7 @@
 	                                */exports.default = Patterns;
 
 /***/ },
-/* 115 */
+/* 116 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);
@@ -4954,10 +5093,10 @@
 
 
 	var _Type = __webpack_require__(22);var _Type2 = _interopRequireDefault(_Type);
-	var _Text = __webpack_require__(112);var _Text2 = _interopRequireDefault(_Text);
+	var _Text = __webpack_require__(113);var _Text2 = _interopRequireDefault(_Text);
 
 
-	var _Patterns = __webpack_require__(114);var _Patterns2 = _interopRequireDefault(_Patterns);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	var _Patterns = __webpack_require__(115);var _Patterns2 = _interopRequireDefault(_Patterns);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 	/**
 	                                                                                                                                                                                        * Element の style を操作します
@@ -5121,7 +5260,7 @@
 	exports.default = Style;
 
 /***/ },
-/* 116 */
+/* 117 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";Object.defineProperty(exports, "__esModule", { value: true });var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
@@ -5209,10 +5348,10 @@
 	    } }]);return Bounding;}();exports.default = Bounding;
 
 /***/ },
-/* 117 */
+/* 118 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _from = __webpack_require__(118);var _from2 = _interopRequireDefault(_from);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _from = __webpack_require__(119);var _from2 = _interopRequireDefault(_from);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * Copyright (c) 2011-2016 inazumatv.com, inc.
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * @author (at)taikiken / http://inazumatv.com
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * @date 2016/11/22 - 11:38
@@ -5286,7 +5425,9 @@
 	      // argument copy
 	      var element = node;
 	      // @type {Array<string>} - element class を取得し配列へ変換
-	      var elementClasses = (0, _from2.default)(element.classList);
+	      var elementClasses = element.classList ?
+	      (0, _from2.default)(element.classList) :
+	      Classes.convert(element);
 	      // 置換え配列最後尾に新規 `className` を追加します
 	      elementClasses.push(className);
 	      // 配列を ' '（ワンスペース）でつなぎ文字列変換後に設定します
@@ -5306,7 +5447,9 @@
 	      // argument copy
 	      var element = node;
 	      // @type {Array<string>} - element class を取得し配列へ変換
-	      var elementClasses = (0, _from2.default)(element.classList);
+	      var elementClasses = element.classList ?
+	      (0, _from2.default)(element.classList) :
+	      Classes.convert(element);
 	      // 配列での削除対象 class の位置を取得します
 	      var index = elementClasses.indexOf(className);
 	      // 配列位置を元に削除実行します
@@ -5314,37 +5457,57 @@
 	      // 削除後配列を ' '（ワンスペース）でつなぎ文字列変換後に設定します
 	      element.className = elementClasses.join(' ');
 	      return true;
+	    }
+	    /**
+	       * 可哀相な IE のための配列コンバーター, .classList 代用します
+	       * @param {Element} element 操作対象 NodeList
+	       * @returns {Array} 配列にコンバートして返します
+	       */ }, { key: 'convert', value: function convert(
+	    element) {
+	      var arr = element.classList ?
+	      element.classList :
+	      element.className.split(' ');
+	      var i = 0;
+	      var limit = arr.length;
+	      var empty = [];
+	      for (; i < limit; i += 1) {
+	        var className = arr[i];
+	        if (!!className || className !== ' ') {
+	          empty.push(className);
+	        }
+	      }
+	      return empty;
 	    } }]);return Classes;}();exports.default = Classes;
-
-/***/ },
-/* 118 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(119), __esModule: true };
 
 /***/ },
 /* 119 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(57);
-	__webpack_require__(120);
-	module.exports = __webpack_require__(9).Array.from;
+	module.exports = { "default": __webpack_require__(120), __esModule: true };
 
 /***/ },
 /* 120 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(57);
+	__webpack_require__(121);
+	module.exports = __webpack_require__(9).Array.from;
+
+/***/ },
+/* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	var ctx            = __webpack_require__(10)
 	  , $export        = __webpack_require__(7)
 	  , toObject       = __webpack_require__(26)
-	  , call           = __webpack_require__(121)
-	  , isArrayIter    = __webpack_require__(122)
+	  , call           = __webpack_require__(122)
+	  , isArrayIter    = __webpack_require__(123)
 	  , toLength       = __webpack_require__(35)
-	  , createProperty = __webpack_require__(123)
-	  , getIterFn      = __webpack_require__(124);
+	  , createProperty = __webpack_require__(124)
+	  , getIterFn      = __webpack_require__(125);
 
-	$export($export.S + $export.F * !__webpack_require__(126)(function(iter){ Array.from(iter); }), 'Array', {
+	$export($export.S + $export.F * !__webpack_require__(127)(function(iter){ Array.from(iter); }), 'Array', {
 	  // 22.1.2.1 Array.from(arrayLike, mapfn = undefined, thisArg = undefined)
 	  from: function from(arrayLike/*, mapfn = undefined, thisArg = undefined*/){
 	    var O       = toObject(arrayLike)
@@ -5374,7 +5537,7 @@
 
 
 /***/ },
-/* 121 */
+/* 122 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// call something on iterator step with safe closing on error
@@ -5391,7 +5554,7 @@
 	};
 
 /***/ },
-/* 122 */
+/* 123 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// check on default Array iterator
@@ -5404,7 +5567,7 @@
 	};
 
 /***/ },
-/* 123 */
+/* 124 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5417,10 +5580,10 @@
 	};
 
 /***/ },
-/* 124 */
+/* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var classof   = __webpack_require__(125)
+	var classof   = __webpack_require__(126)
 	  , ITERATOR  = __webpack_require__(68)('iterator')
 	  , Iterators = __webpack_require__(62);
 	module.exports = __webpack_require__(9).getIteratorMethod = function(it){
@@ -5430,7 +5593,7 @@
 	};
 
 /***/ },
-/* 125 */
+/* 126 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// getting tag from 19.1.3.6 Object.prototype.toString()
@@ -5458,7 +5621,7 @@
 	};
 
 /***/ },
-/* 126 */
+/* 127 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var ITERATOR     = __webpack_require__(68)('iterator')
@@ -5484,7 +5647,7 @@
 	};
 
 /***/ },
-/* 127 */
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);
@@ -5500,11 +5663,11 @@
 
 
 
-	var _Style = __webpack_require__(115);var _Style2 = _interopRequireDefault(_Style);
+	var _Style = __webpack_require__(116);var _Style2 = _interopRequireDefault(_Style);
 
 
-	var _Bounding = __webpack_require__(116);var _Bounding2 = _interopRequireDefault(_Bounding);
-	var _Classes = __webpack_require__(117);var _Classes2 = _interopRequireDefault(_Classes);
+	var _Bounding = __webpack_require__(117);var _Bounding2 = _interopRequireDefault(_Bounding);
+	var _Classes = __webpack_require__(118);var _Classes2 = _interopRequireDefault(_Classes);
 
 
 	var _Type = __webpack_require__(22);var _Type2 = _interopRequireDefault(_Type);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}

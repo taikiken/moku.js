@@ -26,6 +26,7 @@ import { default as Touching } from './event/Touching';
 
 // net
 import { default as Ajax } from './net/Ajax';
+import { default as Cookie } from './net/Cookie';
 
 // tick
 import { default as Cycle } from './tick/Cycle';
@@ -84,6 +85,7 @@ MOKU.event = {
  */
 MOKU.net = {
   Ajax,
+  Cookie,
 };
 /**
  * MOKU.tick
