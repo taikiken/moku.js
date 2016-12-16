@@ -19,13 +19,15 @@
 // event
 import { default as EventDispatcher } from './event/EventDispatcher';
 import { default as Events } from './event/Events';
+import { default as Rising } from './event/Rising';
 import { default as Scroll } from './event/Scroll';
-import { default as Wheel } from './event/Wheel';
 import { default as Scrolling } from './event/Scrolling';
 import { default as Touching } from './event/Touching';
+import { default as Wheel } from './event/Wheel';
 
 // net
 import { default as Ajax } from './net/Ajax';
+import { default as Cookie } from './net/Cookie';
 
 // tick
 import { default as Cycle } from './tick/Cycle';
@@ -35,12 +37,14 @@ import { default as Rate } from './tick/Rate';
 
 // util
 import { default as Type } from './util/Type';
+import { default as Hit } from './util/Hit';
 import { default as List } from './util/List';
 import { default as Text } from './util/Text';
+import { default as Times } from './util/Times';
 import { default as Vectors } from './util/Vectors';
-import { default as Hit } from './util/Hit';
 
 // css
+import { default as Can } from './css/Can';
 import { default as Patterns } from './css/Patterns';
 import { default as Style } from './css/Style';
 
@@ -73,6 +77,7 @@ MOKU.build = () => '@@buildTime';
 MOKU.event = {
   EventDispatcher,
   Events,
+  Rising,
   Scroll,
   Wheel,
   Scrolling,
@@ -84,6 +89,7 @@ MOKU.event = {
  */
 MOKU.net = {
   Ajax,
+  Cookie,
 };
 /**
  * MOKU.tick
@@ -103,6 +109,7 @@ MOKU.util = {
   Type,
   List,
   Text,
+  Times,
   Vectors,
   Hit,
 };
@@ -110,6 +117,7 @@ MOKU.util = {
 MOKU.css = {
   Patterns,
   Style,
+  Can,
 };
 
 MOKU.dom = {

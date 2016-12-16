@@ -54,7 +54,7 @@
 	 *
 	 * This notice shall be included in all copies or substantial portions of the Software.
 	 * 0.0.1
-	 * 2016-12-06 16:12:24
+	 * 2016-12-16 17:18:29
 	 */
 	// use strict は本来不要でエラーになる
 	// 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -65,53 +65,57 @@
 	// event
 	var _EventDispatcher = __webpack_require__(1);var _EventDispatcher2 = _interopRequireDefault(_EventDispatcher);
 	var _Events = __webpack_require__(47);var _Events2 = _interopRequireDefault(_Events);
-	var _Scroll = __webpack_require__(48);var _Scroll2 = _interopRequireDefault(_Scroll);
-	var _Wheel = __webpack_require__(100);var _Wheel2 = _interopRequireDefault(_Wheel);
-	var _Scrolling = __webpack_require__(102);var _Scrolling2 = _interopRequireDefault(_Scrolling);
+	var _Rising = __webpack_require__(48);var _Rising2 = _interopRequireDefault(_Rising);
+	var _Scroll = __webpack_require__(99);var _Scroll2 = _interopRequireDefault(_Scroll);
+	var _Scrolling = __webpack_require__(98);var _Scrolling2 = _interopRequireDefault(_Scrolling);
 	var _Touching = __webpack_require__(106);var _Touching2 = _interopRequireDefault(_Touching);
+	var _Wheel = __webpack_require__(109);var _Wheel2 = _interopRequireDefault(_Wheel);
 
 
-	var _Ajax = __webpack_require__(109);var _Ajax2 = _interopRequireDefault(_Ajax);
+	var _Ajax = __webpack_require__(111);var _Ajax2 = _interopRequireDefault(_Ajax);
+	var _Cookie = __webpack_require__(112);var _Cookie2 = _interopRequireDefault(_Cookie);
 
 
-	var _Cycle = __webpack_require__(105);var _Cycle2 = _interopRequireDefault(_Cycle);
-	var _Fps = __webpack_require__(110);var _Fps2 = _interopRequireDefault(_Fps);
-	var _Polling = __webpack_require__(104);var _Polling2 = _interopRequireDefault(_Polling);
-	var _Rate = __webpack_require__(103);var _Rate2 = _interopRequireDefault(_Rate);
+	var _Cycle = __webpack_require__(104);var _Cycle2 = _interopRequireDefault(_Cycle);
+	var _Fps = __webpack_require__(113);var _Fps2 = _interopRequireDefault(_Fps);
+	var _Polling = __webpack_require__(103);var _Polling2 = _interopRequireDefault(_Polling);
+	var _Rate = __webpack_require__(102);var _Rate2 = _interopRequireDefault(_Rate);
 
 
 	var _Type = __webpack_require__(22);var _Type2 = _interopRequireDefault(_Type);
-	var _List = __webpack_require__(111);var _List2 = _interopRequireDefault(_List);
-	var _Text = __webpack_require__(112);var _Text2 = _interopRequireDefault(_Text);
+	var _Hit = __webpack_require__(105);var _Hit2 = _interopRequireDefault(_Hit);
+	var _List = __webpack_require__(114);var _List2 = _interopRequireDefault(_List);
+	var _Text = __webpack_require__(115);var _Text2 = _interopRequireDefault(_Text);
+	var _Times = __webpack_require__(116);var _Times2 = _interopRequireDefault(_Times);
 	var _Vectors = __webpack_require__(108);var _Vectors2 = _interopRequireDefault(_Vectors);
-	var _Hit = __webpack_require__(113);var _Hit2 = _interopRequireDefault(_Hit);
 
 
-	var _Patterns = __webpack_require__(114);var _Patterns2 = _interopRequireDefault(_Patterns);
-	var _Style = __webpack_require__(115);var _Style2 = _interopRequireDefault(_Style);
+	var _Can = __webpack_require__(117);var _Can2 = _interopRequireDefault(_Can);
+	var _Patterns = __webpack_require__(118);var _Patterns2 = _interopRequireDefault(_Patterns);
+	var _Style = __webpack_require__(119);var _Style2 = _interopRequireDefault(_Style);
 
 
-	var _Bounding = __webpack_require__(116);var _Bounding2 = _interopRequireDefault(_Bounding);
-	var _Classes = __webpack_require__(117);var _Classes2 = _interopRequireDefault(_Classes);
-	var _Elements = __webpack_require__(127);var _Elements2 = _interopRequireDefault(_Elements);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	var _Bounding = __webpack_require__(120);var _Bounding2 = _interopRequireDefault(_Bounding);
+	var _Classes = __webpack_require__(121);var _Classes2 = _interopRequireDefault(_Classes);
+	var _Elements = __webpack_require__(131);var _Elements2 = _interopRequireDefault(_Elements);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 	/**
 	                                                                                                                                                                                            * **MOKU**
 	                                                                                                                                                                                            * <p>global Object</p>
 	                                                                                                                                                                                            * <p>public な Class はここからアクセス可能です</p>
 	                                                                                                                                                                                            * @type {Object}
-	                                                                                                                                                                                            */ // util
+	                                                                                                                                                                                            */ // css
+	// util
 	// tick
+	// net
 	var MOKU = {}; /**
 	                * version number を取得します
 	                * @returns {string} version number を返します
 	                */ // dom
-	// css
-	// net
 	MOKU.version = function () {return '0.0.1';}; /**
 	                                                   * build 日時を取得します
 	                                                   * @returns {string}  build 日時を返します
-	                                                   */MOKU.build = function () {return '2016-12-06 16:12:24';};
+	                                                   */MOKU.build = function () {return '2016-12-16 17:18:29';};
 	/**
 	                                                                                                        * MOKU.event
 	                                                                                                        * @type {Object} MOKU.event object を返します
@@ -119,6 +123,7 @@
 	MOKU.event = {
 	  EventDispatcher: _EventDispatcher2.default,
 	  Events: _Events2.default,
+	  Rising: _Rising2.default,
 	  Scroll: _Scroll2.default,
 	  Wheel: _Wheel2.default,
 	  Scrolling: _Scrolling2.default,
@@ -129,12 +134,13 @@
 	                                   * @type {Object} MOKU.net object を返します
 	                                   */
 	MOKU.net = {
-	  Ajax: _Ajax2.default };
+	  Ajax: _Ajax2.default,
+	  Cookie: _Cookie2.default };
 
 	/**
-	                           * MOKU.tick
-	                           * @type {Object} MOKU.tick object を返します
-	                           */
+	                               * MOKU.tick
+	                               * @type {Object} MOKU.tick object を返します
+	                               */
 	MOKU.tick = {
 	  Cycle: _Cycle2.default,
 	  Fps: _Fps2.default,
@@ -149,13 +155,15 @@
 	  Type: _Type2.default,
 	  List: _List2.default,
 	  Text: _Text2.default,
+	  Times: _Times2.default,
 	  Vectors: _Vectors2.default,
 	  Hit: _Hit2.default };
 
 
 	MOKU.css = {
 	  Patterns: _Patterns2.default,
-	  Style: _Style2.default };
+	  Style: _Style2.default,
+	  Can: _Can2.default };
 
 
 	MOKU.dom = {
@@ -1255,7 +1263,7 @@
 /* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _getPrototypeOf = __webpack_require__(49);var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);var _possibleConstructorReturn2 = __webpack_require__(53);var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);var _inherits2 = __webpack_require__(90);var _inherits3 = _interopRequireDefault(_inherits2);var _symbol = __webpack_require__(74);var _symbol2 = _interopRequireDefault(_symbol);
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _getPrototypeOf = __webpack_require__(49);var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);var _possibleConstructorReturn2 = __webpack_require__(53);var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);var _inherits2 = __webpack_require__(90);var _inherits3 = _interopRequireDefault(_inherits2);
 
 
 
@@ -1268,94 +1276,63 @@
 
 
 
+	var _Scrolling = __webpack_require__(98);var _Scrolling2 = _interopRequireDefault(_Scrolling);
+	var _Events = __webpack_require__(47);var _Events2 = _interopRequireDefault(_Events);
 	var _EventDispatcher2 = __webpack_require__(1);var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
-	var _ScrollEvents = __webpack_require__(98);var _ScrollEvents2 = _interopRequireDefault(_ScrollEvents);
 
 
-	var _Freeze = __webpack_require__(99);var _Freeze2 = _interopRequireDefault(_Freeze);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	var _Hit = __webpack_require__(105);var _Hit2 = _interopRequireDefault(_Hit);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 	/**
-	                                                                                                                                                                                      * new を許可しないための Symbol
-	                                                                                                                                                                                      * @type {Symbol}
-	                                                                                                                                                                                      * @private
-	                                                                                                                                                                                      */
-	var singletonSymbol = (0, _symbol2.default)('Scroll singleton symbol');
-	/**
-	                                                                         * singleton instance, nullable
-	                                                                         * @type {?Scroll}
-	                                                                         * @private
-	                                                                         */ // util
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/07/26 - 21:05
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */ // event
-	var instance = null; /**
-	                      * window scroll event を監視し通知を行います
-	                      * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
-	                      *
-	                      * ```
-	                      * const instance = Scroll.factory();
-	                      * ```
-	                      */var Scroll = function (_EventDispatcher) {(0, _inherits3.default)(Scroll, _EventDispatcher); /**
-	                                                                                                                      * singleton です
-	                                                                                                                      * @param {Symbol} checkSymbol singleton を保証するための private instance
-	                                                                                                                      * @returns {Scroll} singleton instance を返します
-	                                                                                                                      */function Scroll(checkSymbol) {var _ret2;(0, _classCallCheck3.default)(this, Scroll); // checkSymbol と singleton が等価かをチェックします
-	    if (checkSymbol !== singletonSymbol) {throw new Error('don\'t use new, instead use static factory method.');}
-	    // instance 作成済みかをチェックし instance が null の時 this を設定します
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (Scroll.__proto__ || (0, _getPrototypeOf2.default)(Scroll)).call(this));if (instance !== null) {var _ret;
-	      return _ret = instance, (0, _possibleConstructorReturn3.default)(_this, _ret);
-	    }
-
-	    // onetime setting
-	    instance = _this;
-
-	    // event handler
-	    var boundScroll = _this.scroll.bind(_this);
+	                                                                                                                                                                          * Scrolling class を使用しスクロールトップ位置をチェクし対象 element と window の衝突判定を行います
+	                                                                                                                                                                          */ /**
+	                                                                                                                                                                              * Copyright (c) 2011-2016 inazumatv.com, inc.
+	                                                                                                                                                                              * @author (at)taikiken / http://inazumatv.com
+	                                                                                                                                                                              * @date 2016/11/30 - 14:37
+	                                                                                                                                                                              *
+	                                                                                                                                                                              * Distributed under the terms of the MIT license.
+	                                                                                                                                                                              * http://www.opensource.org/licenses/mit-license.html
+	                                                                                                                                                                              *
+	                                                                                                                                                                              * This notice shall be included in all copies or substantial portions of the Software.
+	                                                                                                                                                                              *
+	                                                                                                                                                                              */ // event
+	var Rising = function (_EventDispatcher) {(0, _inherits3.default)(Rising, _EventDispatcher); /**
+	                                                                                              * elements instance と scrolling instance を保存します
+	                                                                                              * @param {Elements} elements 対象 element を Elements インスタンスに変換します
+	                                                                                              * @param {Scrolling} scrolling スクロールトップ監視インスタンス
+	                                                                                              */function Rising(elements) {var scrolling = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _Scrolling2.default();(0, _classCallCheck3.default)(this, Rising); /**
+	                                                                                                                                                                                                                                                                                       * 対象 element を Elements インスタンスに変換します
+	                                                                                                                                                                                                                                                                                       * @return {elements} 対象 element を Elements インスタンスに変換します
+	                                                                                                                                                                                                                                                                                       */var _this = (0, _possibleConstructorReturn3.default)(this, (Rising.__proto__ || (0, _getPrototypeOf2.default)(Rising)).call(this));_this.elements = function () {return elements;}; /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * スクロールトップ監視インスタンス
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * @return {Scrolling} スクロールトップ監視インスタンス
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                              */_this.scrolling = function () {return scrolling;};var boundScroll = _this.scroll.bind(_this); /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * bound scroll, Rate.UPDATE event handler
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * @returns {function} bound scroll
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */_this.boundScroll = function () {return boundScroll;};
 	    /**
-	                                                 * bound scroll, window.onscroll event handler
-	                                                 * @returns {function} bound scroll
-	                                                 */
-	    _this.boundScroll = function () {return boundScroll;};
-	    // @type {Events} - events instance
-	    var events = new _ScrollEvents2.default(Scroll.SCROLL, _this, _this);
-	    /**
-	                                                                           * ScrollEvents instance, 発火時に使用します
-	                                                                           * @returns {ScrollEvents} ScrollEvents instance
-	                                                                           */
-	    _this.events = function () {return events;};
-	    /**
-	                                                  * 前回 scroll top 位置
-	                                                  * @type {number}
-	                                                  * @default -1
-	                                                  */
-	    _this.previous = -1;
-	    /**
-	                          * start 済みフラッグ
-	                          * @type {boolean}
-	                          * @default false
-	                          */
-	    _this.started = false;
-
-	    // 設定済み instance を返します
-	    return _ret2 = instance, (0, _possibleConstructorReturn3.default)(_this, _ret2);
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * start 済みフラッグ
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * @type {boolean}
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * @default false
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         */
+	    _this.started = false;return _this;
 	  }
 	  // ----------------------------------------
 	  // EVENT
 	  // ----------------------------------------
 	  /**
-	   * scroll で発生するイベントを取得します
-	   * @event SCROLL
-	   * @returns {string} event, scrollScroll を返します
-	   * @default scrollScroll
-	   */(0, _createClass3.default)(Scroll, [{ key: 'start',
+	   * 衝突イベント
+	   * @event COLLISION
+	   * @return {string} risingCollision を返します
+	   */(0, _createClass3.default)(Rising, [{ key: 'start',
+
+
+
+
+
+
+
+
 
 
 
@@ -1363,103 +1340,67 @@
 	    // METHOD
 	    // ----------------------------------------
 	    /**
-	     * scroll event を監視します
-	     * @returns {Scroll} method chain 可能なように instance を返します
+	     * fps を監視しスクロール位置を知らせます
+	     * @returns {Rising} method chain 可能なように instance を返します
 	     */value: function start()
 	    {
+	      // flag check
 	      if (this.started) {
 	        return this;
 	      }
 	      this.started = true;
-	      window.addEventListener('scroll', this.boundScroll(), false);
+	      // scrolling
+	      var scrolling = this.scrolling();
+	      scrolling.on(_Scrolling2.default.UPDATE, this.boundScroll());
+	      scrolling.start();
 	      return this;
 	    }
 	    /**
-	       * scroll event を監視を止めます
-	       * @returns {Scroll} method chain 可能なように instance を返します
+	       * fps 監視を止めます
+	       * @returns {Rising} method chain 可能なように instance を返します
 	       */ }, { key: 'stop', value: function stop()
 	    {
 	      if (!this.started) {
 	        return this;
 	      }
 	      this.started = false;
-	      window.removeEventListener('scroll', this.boundScroll());
+	      var scrolling = this.scrolling();
+	      scrolling.off(_Scrolling2.default.UPDATE, this.boundScroll());
 	      return this;
 	    }
 	    /**
-	       * window scroll event handler<br>
-	       * window scroll event 発生後に scroll top 位置をもたせた Scroll.SCROLL custom event を発火します
-	       * @param {?Event} event window scroll event, nullable
-	       * @returns {void}
+	       * Scrolling.UPDATE event handler
+	       * @param {ScrollEvents} scrollEvents scroll events object
+	       * @return {boolean} 衝突時に true を返します
 	       */ }, { key: 'scroll', value: function scroll(
-	    event) {
-	      // @type {number} - scroll top
-	      var y = Scroll.y();
-	      // @type {number} - window height
-	      var height = window.innerHeight;
-	      // @type {number} - 前回の scroll top
-	      var previous = this.previous;
-
-	      // @type {Events} - events
-	      var events = this.events();
-	      // @type {Event} - scroll event
-	      events.original = event;
-	      // @type {number} - scroll top
-	      events.y = y;
-	      // @type {number} - window height
-	      events.height = height;
-	      // @type {number} - window bottom(y + height)
-	      events.bottom = y + height;
-	      events.previous = previous;
-	      // @type {boolean} - 前回の scroll top と比較し移動したかを真偽値で取得します, true: 移動した
-	      events.changed = previous !== y;
-	      // @type {number} - 移動量 +（正）: down, -（負）: up
-	      events.moving = y - previous;
-	      // event fire
-	      this.dispatch(events);
-	      this.previous = y;
-	    }
-	    // ----------------------------------------
-	    // STATIC METHOD
-	    // ----------------------------------------
-	    /**
-	     * y 位置に scroll top を即座に移動させます
-	     * @param {number} [y=0] scroll top 目標値
-	     * @param {number} [delay=0] time out 遅延 ms
-	     * @returns {number} time out id
-	     */ }], [{ key: 'jump', value: function jump()
-	    {var y = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-	      return setTimeout(function () {window.scrollTo(0, y);}, delay);
-	    }
-	    /**
-	       * {@link Freeze}.freeze を実行し scroll 操作を一定期間不能にします
-	       * @returns {number} time out ID
-	       */ }, { key: 'freeze', value: function freeze()
-	    {
-	      return _Freeze2.default.freeze();
-	    }
-	    /**
-	       * scroll top 位置
-	       * @returns {number} scroll top 位置を返します
-	       * @see https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY
-	       * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
-	       */ }, { key: 'y', value: function y()
-	    {
-	      return typeof window.pageYOffset !== 'undefined' ?
-	      window.pageYOffset :
-	      (document.documentElement || document.body.parentNode || document.body).scrollTop;
-	    }
-	    // ----------------------------------------
-	    /**
-	     * Scroll instance を singleton を保証し作成します
-	     * @returns {Scroll} Scroll instance を返します
-	     */ }, { key: 'factory', value: function factory()
-	    {
-	      if (instance !== null) {
-	        return instance;
+	    scrollEvents) {
+	      if (!scrollEvents.changed) {
+	        return false;
 	      }
-	      return new Scroll(singletonSymbol);
-	    } }, { key: 'SCROLL', get: function get() {return 'scrollScroll';} }]);return Scroll;}(_EventDispatcher3.default);exports.default = Scroll;
+	      // element offset
+	      var offset = this.elements().offset();
+	      // hit result
+	      var hit = _Hit2.default.test(scrollEvents.height, offset);
+	      // @type {?Elements}
+	      var events = null;
+	      if (hit.result) {
+	        events = new _Events2.default(Rising.COLLISION, this, this);
+	      } else {
+	        events = new _Events2.default(Rising.ALIEN, this, this);
+	      }
+	      // hit / original / offset を追加します
+	      events.hit = hit;
+	      events.original = scrollEvents;
+	      events.offset = offset;
+	      // 発火
+	      this.dispatch(events);
+	      return hit.result;
+	    } }], [{ key: 'COLLISION', get: function get() {return 'risingCollision';} /**
+	                                                                                * 衝突「していない」イベント
+	                                                                                * @event ALIEN
+	                                                                                * @return {string} risingAlien を返します
+	                                                                                */ }, { key: 'ALIEN', get: function get() {return 'risingAlien';} }]);return Rising;}(_EventDispatcher3.default); // hit
+	exports.default = Rising;
 
 /***/ },
 /* 49 */
@@ -2477,479 +2418,6 @@
 /* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _getPrototypeOf = __webpack_require__(49);var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _possibleConstructorReturn2 = __webpack_require__(53);var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);var _inherits2 = __webpack_require__(90);var _inherits3 = _interopRequireDefault(_inherits2);
-
-
-
-
-
-
-
-
-
-
-
-	var _Events2 = __webpack_require__(47);var _Events3 = _interopRequireDefault(_Events2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-
-	/**
-	                                                                                                                                                                                  * Scroll events 管理クラス
-	                                                                                                                                                                                  */var
-	ScrollEvents = function (_Events) {(0, _inherits3.default)(ScrollEvents, _Events);
-	  /**
-	                                                                                    * custom Event Object
-	                                                                                    * @param {string} type イベント種類
-	                                                                                    * @param {*} currentTarget current イベント発生インスタンス
-	                                                                                    * @param {*} [target=undefined] イベント発生インスタンス
-	                                                                                    * */
-	  function ScrollEvents(type, currentTarget) {var target = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;(0, _classCallCheck3.default)(this, ScrollEvents);
-
-	    /**
-	                                                                                                                                                                                             * scroll top 前回位置(px)
-	                                                                                                                                                                                             * @type {number}
-	                                                                                                                                                                                             */var _this = (0, _possibleConstructorReturn3.default)(this, (ScrollEvents.__proto__ || (0, _getPrototypeOf2.default)(ScrollEvents)).call(this, type, currentTarget, target));
-	    _this.previous = -1;
-	    /**
-	                          * オリジナルイベント(.onscroll)
-	                          * @type {?Event}
-	                          */
-	    _this.original = null;
-	    /**
-	                            * scroll top 現在位置(px)
-	                            * @type {number}
-	                            */
-	    _this.y = 0;
-	    /**
-	                  * window innerHeight
-	                  * @type {number}
-	                  */
-	    _this.height = 0;
-	    /**
-	                       * window innerWidth
-	                       * @type {number}
-	                       */
-	    _this.width = 0;
-	    /**
-	                      * window 下端位置(scroll top + window height)
-	                      * @type {number}
-	                      */
-	    _this.bottom = 0;
-	    /**
-	                       * scroll top 位置が前回と違うかを表すフラッグ, true: 違う
-	                       * @type {boolean}
-	                       */
-	    _this.changed = false;
-	    /**
-	                            * UP / DOWN と前回からの移動距離(px), 正(+): scroll down
-	                            * @type {number}
-	                            */
-	    _this.moving = 0;return _this;
-	  }return ScrollEvents;}(_Events3.default); /**
-	                                             * Copyright (c) 2011-2016 inazumatv.com, inc.
-	                                             * @author (at)taikiken / http://inazumatv.com
-	                                             * @date 2016/11/20 - 10:54
-	                                             *
-	                                             * Distributed under the terms of the MIT license.
-	                                             * http://www.opensource.org/licenses/mit-license.html
-	                                             *
-	                                             * This notice shall be included in all copies or substantial portions of the Software.
-	                                             *
-	                                             */exports.default = ScrollEvents;
-
-/***/ },
-/* 99 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                            * Copyright (c) 2011-2016 inazumatv.com, inc.
-	                                                                                                                                                                                                                                                                                                                                                                                                                                            * @author (at)taikiken / http://inazumatv.com
-	                                                                                                                                                                                                                                                                                                                                                                                                                                            * @date 2016/11/19 - 22:10
-	                                                                                                                                                                                                                                                                                                                                                                                                                                            *
-	                                                                                                                                                                                                                                                                                                                                                                                                                                            * Distributed under the terms of the MIT license.
-	                                                                                                                                                                                                                                                                                                                                                                                                                                            * http://www.opensource.org/licenses/mit-license.html
-	                                                                                                                                                                                                                                                                                                                                                                                                                                            *
-	                                                                                                                                                                                                                                                                                                                                                                                                                                            * This notice shall be included in all copies or substantial portions of the Software.
-	                                                                                                                                                                                                                                                                                                                                                                                                                                            *
-	                                                                                                                                                                                                                                                                                                                                                                                                                                            */
-
-
-	/**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                * scroll freeze timeout id
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                * @private
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                * @static
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                * @type {number}
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                */
-	var timerId = 0;
-
-	/**
-	                  * scroll を止める時間
-	                  * @private
-	                  * @static
-	                  * @type {number}
-	                  * @default 200
-	                  */
-	var _duration = 200;
-
-	/**
-	                      * scroll 操作を強制的に不可能にします
-	                      */var
-	Freeze = function () {function Freeze() {(0, _classCallCheck3.default)(this, Freeze);}(0, _createClass3.default)(Freeze, null, [{ key: 'start',
-	    /**
-	                                                                                                                                                 * scroll 動作を受付不能にします
-	                                                                                                                                                 * @returns {void}
-	                                                                                                                                                 */value: function start()
-	    {
-	      window.addEventListener('touchstart', Freeze.onScroll, false);
-	      window.addEventListener('touchmove', Freeze.onScroll, false);
-	      window.addEventListener('touchend', Freeze.onScroll, false);
-	      window.addEventListener('scroll', Freeze.onScroll, false);
-	      document.addEventListener('wheel', Freeze.onScroll, false);
-	      document.addEventListener('mousewheel', Freeze.onScroll, false);
-	      window.addEventListener('DOMMouseScroll', Freeze.onScroll, false);
-	    }
-	    /**
-	       * scroll 動作を回復します
-	       * @returns {void}
-	       */ }, { key: 'stop', value: function stop()
-	    {
-	      window.removeEventListener('touchstart', Freeze.onScroll);
-	      window.removeEventListener('touchmove', Freeze.onScroll);
-	      window.removeEventListener('touchend', Freeze.onScroll);
-	      window.removeEventListener('scroll', Freeze.onScroll);
-	      document.removeEventListener('wheel', Freeze.onScroll);
-	      document.removeEventListener('mousewheel', Freeze.onScroll);
-	      window.removeEventListener('DOMMouseScroll', Freeze.onScroll);
-	    }
-	    /**
-	       * window scroll event handler, バブリング・伝播全てキャンセルします
-	       * @param {Event} event window scroll event
-	       * @returns {boolean} event をキャンセルするために false を返します
-	       */ }, { key: 'onScroll', value: function onScroll(
-	    event) {
-	      event.preventDefault();
-	      event.stopPropagation();
-	      return false;
-	    }
-	    /**
-	       * scroll 操作を引数(delay)の間キャンセルします
-	       * @param {number} [delay=200] 遅延時間(ms), 200
-	       * @returns {number} time out id
-	       */ }, { key: 'freeze', value: function freeze()
-	    {var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Freeze.duration();
-	      clearTimeout(timerId);
-
-	      Freeze.stop();
-	      timerId = setTimeout(Freeze.start, delay);
-	      return timerId;
-	    }
-	    /**
-	       * scroll 操作を不能にする時間間隔(ms)を取得します
-	       * @returns {number} scroll 操作を不能にする時間間隔(ms)
-	       */ }, { key: 'duration', value: function duration()
-	    {
-	      return _duration;
-	    }
-	    /**
-	       * scroll 操作を不能にする時間間隔(ms)を設定します
-	       * @param {number} time scroll 操作を不能にする時間(ms)
-	       * @returns {void}
-	       */ }, { key: 'setDuration', value: function setDuration(
-	    time) {
-	      _duration = time;
-	    } }]);return Freeze;}();exports.default = Freeze;
-
-/***/ },
-/* 100 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _getPrototypeOf = __webpack_require__(49);var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);var _possibleConstructorReturn2 = __webpack_require__(53);var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);var _inherits2 = __webpack_require__(90);var _inherits3 = _interopRequireDefault(_inherits2);var _symbol = __webpack_require__(74);var _symbol2 = _interopRequireDefault(_symbol);
-
-
-
-
-
-
-
-
-
-
-
-
-	var _EventDispatcher2 = __webpack_require__(1);var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
-	var _WheelEvents = __webpack_require__(101);var _WheelEvents2 = _interopRequireDefault(_WheelEvents);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-
-	/**
-	                                                                                                                                                                                                    * new を許可しないための Symbol
-	                                                                                                                                                                                                    * @type {Symbol}
-	                                                                                                                                                                                                    * @private
-	                                                                                                                                                                                                    */ /**
-	                                                                                                                                                                                                        * Copyright (c) 2011-2016 inazumatv.com, inc.
-	                                                                                                                                                                                                        * @author (at)taikiken / http://inazumatv.com
-	                                                                                                                                                                                                        * @date 2016/07/26 - 19:12
-	                                                                                                                                                                                                        *
-	                                                                                                                                                                                                        * Distributed under the terms of the MIT license.
-	                                                                                                                                                                                                        * http://www.opensource.org/licenses/mit-license.html
-	                                                                                                                                                                                                        *
-	                                                                                                                                                                                                        * This notice shall be included in all copies or substantial portions of the Software.
-	                                                                                                                                                                                                        *
-	                                                                                                                                                                                                        */ // event
-	var singletonSymbol = (0, _symbol2.default)('Scroll singleton symbol'); /**
-	                                                                         * singleton instance, nullable
-	                                                                         * @type {?Wheel}
-	                                                                         * @private
-	                                                                         */var instance = null; /**
-	                                                                                                 * mousewheel event を監視し通知を行います
-	                                                                                                 * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
-	                                                                                                 *
-	                                                                                                 * ```
-	                                                                                                 * const instance:Wheel = Wheel.factory();
-	                                                                                                 * ```
-	                                                                                                 */var Wheel = function (_EventDispatcher) {(0, _inherits3.default)(Wheel, _EventDispatcher); /**
-	                                                                                                                                                                                               * singleton です
-	                                                                                                                                                                                               * @param {Symbol} checkSymbol singleton を保証するための private instance
-	                                                                                                                                                                                               * @returns {Wheel} singleton instance を返します
-	                                                                                                                                                                                               */function Wheel(checkSymbol) {var _ret2;(0, _classCallCheck3.default)(this, Wheel); // checkSymbol と singleton が等価かをチェックします
-	    if (checkSymbol !== singletonSymbol) {throw new Error('don\'t use new, instead use static factory method.');}
-
-
-
-	    // instance 作成済みかをチェックし instance が null の時 this を設定します
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (Wheel.__proto__ || (0, _getPrototypeOf2.default)(Wheel)).call(this));if (instance !== null) {var _ret;
-	      return _ret = instance, (0, _possibleConstructorReturn3.default)(_this, _ret);
-	    }
-
-	    // onetime setting
-	    instance = _this;
-
-	    // event handler
-	    var boundWheel = _this.mouseWheel.bind(_this);
-	    /**
-	                                                    * bound mouseWheel
-	                                                    * @returns {function} window.wheel event handler
-	                                                    */
-	    _this.boundWheel = function () {return boundWheel;};
-	    /**
-	                                                          * 閾値, wheel 移動量が閾値を超えたときにイベントを発生させます
-	                                                          * @type {number}
-	                                                          * @default 200
-	                                                          */
-	    _this.threshold = 200;
-	    /**
-	                            * wheelDelta 移動量が閾値を超えるかをチェックするための積算計算変数
-	                            * @type {number}
-	                            */
-	    _this.moved = 0;
-	    /**
-	                      * start flag
-	                      * @type {boolean}
-	                      */
-	    _this.started = false;
-	    var events = {
-	      up: new _WheelEvents2.default(Wheel.UP, _this),
-	      down: new _WheelEvents2.default(Wheel.DOWN, _this) };
-
-	    /**
-	                                                             * UP / DOWN Events instance
-	                                                             * @returns {{up: WheelEvents, down: WheelEvents}} UP / DOWN Events instance
-	                                                             */
-	    _this.events = function () {return events;};
-
-	    // 設定済み instance を返します
-	    return _ret2 = instance, (0, _possibleConstructorReturn3.default)(_this, _ret2);
-	  }
-	  // ----------------------------------------
-	  // EVENT
-	  // ----------------------------------------
-	  /**
-	   * wheel up で発生するイベントを取得します
-	   * @event UP
-	   * @returns {string} event, wheelUp を返します
-	   * @default wheelUp
-	   */(0, _createClass3.default)(Wheel, [{ key: 'start',
-
-
-
-
-
-
-
-
-
-
-
-
-	    // ----------------------------------------
-	    // METHOD
-	    // ----------------------------------------
-	    /**
-	     * mousewheel event を監視します
-	     * @returns {Wheel} method chain 可能なように instance を返します
-	     */value: function start()
-	    {
-	      if (this.started) {
-	        return this;
-	      }
-	      this.started = true;
-	      // this.unwatch();
-	      window.addEventListener('wheel', this.boundWheel(), false);
-	      return this;
-	    }
-	    /**
-	       * mousewheel event を監視を止めます
-	       * @returns {Wheel} method chain 可能なように instance を返します
-	       */ }, { key: 'stop', value: function stop()
-	    {
-	      if (!this.started) {
-	        return this;
-	      }
-	      this.started = false;
-	      window.removeEventListener('wheel', this.boundWheel());
-	      return this;
-	    }
-	    /**
-	       * window mousewheel event handler
-	       * <p>delta 値を取得し `this.moving` を実行します</p>
-	       *
-	       * @listens {WheelEvent} WheelEvent.wheel
-	       * @param {WheelEvent} event window wheel event
-	       * @returns {number} 前回移動量に delta 値 を加算した値を返します
-	       */ }, { key: 'mouseWheel', value: function mouseWheel(
-	    event) {
-	      var wheelDelta = event.deltaY;
-	      return this.moving(wheelDelta);
-	    }
-	    /**
-	       * mouse delta から移動量を計算します
-	       * @param {number} delta mouse delta 値
-	       * @returns {number} 前回移動量に delta 値 を加算した値を返します
-	       */ }, { key: 'moving', value: function moving(
-	    delta) {
-	      /**
-	             * 移動量が閾値を超えるかをチェックするための計算変数
-	             * @type {number}
-	             */
-	      this.moved += delta;
-	      // @type {number}
-	      var moved = this.moved;
-
-	      // 0 check
-	      if (moved === 0) {
-	        // 移動量が 0 なので処理をしない
-	        return moved;
-	      }
-
-	      // 閾値チェック
-	      if (Math.abs(moved) >= this.threshold) {
-	        // scroll event を発火します
-	        if (moved > 0) {
-	          // scroll up
-	          this.up(moved);
-	        } else {
-	          this.down(moved);
-	        }
-
-	        // initialize moved, 発火後に積算移動変数を初期化します
-	        this.moved = 0;
-	        return moved;
-	      }
-	      // 閾値を超えていないので処理をしない
-	      return moved;
-	    }
-	    /**
-	       * scroll up イベントを発火します
-	       * @param {number} moved 移動量
-	       * @returns {number} 加算移動量を返します
-	       */ }, { key: 'up', value: function up(
-	    moved) {
-	      // @type {Events}
-	      var events = this.events().up;
-	      events.moved = moved;
-	      this.dispatch(events);
-
-	      return moved;
-	    }
-	    /**
-	       * scroll down イベントを発火します
-	       * @param {number} moved 移動量
-	       * @returns {number} 加算移動量を返します
-	       */ }, { key: 'down', value: function down(
-	    moved) {
-	      // @type {Events}
-	      var events = this.events().down;
-	      events.moved = moved;
-	      this.dispatch(events);
-
-	      return moved;
-	    }
-	    // ----------------------------------------
-	    // STATIC METHOD
-	    // ----------------------------------------
-	    /**
-	     * Wheel instance を singleton を保証し作成します
-	     * @returns {Wheel} Wheel instance を返します
-	     */ }], [{ key: 'factory', value: function factory()
-	    {
-	      if (instance !== null) {
-	        return instance;
-	      }
-	      return new Wheel(singletonSymbol);
-	    } }, { key: 'UP', get: function get() {return 'wheelUp';} /**
-	                                                               * wheel  で発生するイベントを取得します
-	                                                               * @event DOWN
-	                                                               * @returns {string} event, wheelUp を返します
-	                                                               * @default wheelUp
-	                                                               */ }, { key: 'DOWN', get: function get() {return 'wheelDown';} }]);return Wheel;}(_EventDispatcher3.default);exports.default = Wheel;
-
-/***/ },
-/* 101 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _getPrototypeOf = __webpack_require__(49);var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _possibleConstructorReturn2 = __webpack_require__(53);var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);var _inherits2 = __webpack_require__(90);var _inherits3 = _interopRequireDefault(_inherits2);
-
-
-
-
-
-
-
-
-
-
-
-	var _Events2 = __webpack_require__(47);var _Events3 = _interopRequireDefault(_Events2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-
-	/**
-	                                                                                                                                                                                  * Wheel Events, mouse wheel で発生するイベントを管理します
-	                                                                                                                                                                                  */var
-	WheelEvents = function (_Events) {(0, _inherits3.default)(WheelEvents, _Events);
-	  /**
-	                                                                                  * custom Event Object
-	                                                                                  * @param {string} type イベント種類
-	                                                                                  * @param {*} currentTarget current イベント発生インスタンス
-	                                                                                  * @param {*} [target=undefined] イベント発生インスタンス
-	                                                                                  * */
-	  function WheelEvents(type, currentTarget) {var target = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;(0, _classCallCheck3.default)(this, WheelEvents);
-
-	    /**
-	                                                                                                                                                                                           * 移動距離(px)
-	                                                                                                                                                                                           * @type {number}
-	                                                                                                                                                                                           */var _this = (0, _possibleConstructorReturn3.default)(this, (WheelEvents.__proto__ || (0, _getPrototypeOf2.default)(WheelEvents)).call(this, type, currentTarget, target));
-	    _this.moved = 0;return _this;
-	  }return WheelEvents;}(_Events3.default); /**
-	                                            * Copyright (c) 2011-2016 inazumatv.com, inc.
-	                                            * @author (at)taikiken / http://inazumatv.com
-	                                            * @date 2016/11/20 - 12:11
-	                                            *
-	                                            * Distributed under the terms of the MIT license.
-	                                            * http://www.opensource.org/licenses/mit-license.html
-	                                            *
-	                                            * This notice shall be included in all copies or substantial portions of the Software.
-	                                            *
-	                                            */exports.default = WheelEvents;
-
-/***/ },
-/* 102 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _getPrototypeOf = __webpack_require__(49);var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);var _possibleConstructorReturn2 = __webpack_require__(53);var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);var _inherits2 = __webpack_require__(90);var _inherits3 = _interopRequireDefault(_inherits2);
 
 
@@ -2964,12 +2432,12 @@
 
 
 
-	var _Scroll = __webpack_require__(48);var _Scroll2 = _interopRequireDefault(_Scroll);
+	var _Scroll = __webpack_require__(99);var _Scroll2 = _interopRequireDefault(_Scroll);
 	var _EventDispatcher2 = __webpack_require__(1);var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
-	var _ScrollEvents = __webpack_require__(98);var _ScrollEvents2 = _interopRequireDefault(_ScrollEvents);
+	var _ScrollEvents = __webpack_require__(100);var _ScrollEvents2 = _interopRequireDefault(_ScrollEvents);
 
 
-	var _Rate = __webpack_require__(103);var _Rate2 = _interopRequireDefault(_Rate);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	var _Rate = __webpack_require__(102);var _Rate2 = _interopRequireDefault(_Rate);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 	/**
 	                                                                                                                                                                              * Scroll 位置
@@ -3123,7 +2591,401 @@
 	exports.default = Scrolling;
 
 /***/ },
-/* 103 */
+/* 99 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _getPrototypeOf = __webpack_require__(49);var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);var _possibleConstructorReturn2 = __webpack_require__(53);var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);var _inherits2 = __webpack_require__(90);var _inherits3 = _interopRequireDefault(_inherits2);var _symbol = __webpack_require__(74);var _symbol2 = _interopRequireDefault(_symbol);
+
+
+
+
+
+
+
+
+
+
+
+
+	var _EventDispatcher2 = __webpack_require__(1);var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
+	var _ScrollEvents = __webpack_require__(100);var _ScrollEvents2 = _interopRequireDefault(_ScrollEvents);
+
+
+	var _Freeze = __webpack_require__(101);var _Freeze2 = _interopRequireDefault(_Freeze);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+	/**
+	                                                                                                                                                                                      * new を許可しないための Symbol
+	                                                                                                                                                                                      * @type {Symbol}
+	                                                                                                                                                                                      * @private
+	                                                                                                                                                                                      */
+	var singletonSymbol = (0, _symbol2.default)('Scroll singleton symbol');
+	/**
+	                                                                         * singleton instance, nullable
+	                                                                         * @type {?Scroll}
+	                                                                         * @private
+	                                                                         */ // util
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/07/26 - 21:05
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */ // event
+	var instance = null; /**
+	                      * window scroll event を監視し通知を行います
+	                      * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
+	                      *
+	                      * ```
+	                      * const instance = Scroll.factory();
+	                      * ```
+	                      */var Scroll = function (_EventDispatcher) {(0, _inherits3.default)(Scroll, _EventDispatcher); /**
+	                                                                                                                      * singleton です
+	                                                                                                                      * @param {Symbol} checkSymbol singleton を保証するための private instance
+	                                                                                                                      * @returns {Scroll} singleton instance を返します
+	                                                                                                                      */function Scroll(checkSymbol) {var _ret2;(0, _classCallCheck3.default)(this, Scroll); // checkSymbol と singleton が等価かをチェックします
+	    if (checkSymbol !== singletonSymbol) {throw new Error('don\'t use new, instead use static factory method.');}
+	    // instance 作成済みかをチェックし instance が null の時 this を設定します
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (Scroll.__proto__ || (0, _getPrototypeOf2.default)(Scroll)).call(this));if (instance !== null) {var _ret;
+	      return _ret = instance, (0, _possibleConstructorReturn3.default)(_this, _ret);
+	    }
+
+	    // onetime setting
+	    instance = _this;
+
+	    // event handler
+	    var boundScroll = _this.scroll.bind(_this);
+	    /**
+	                                                 * bound scroll, window.onscroll event handler
+	                                                 * @returns {function} bound scroll
+	                                                 */
+	    _this.boundScroll = function () {return boundScroll;};
+	    // @type {Events} - events instance
+	    var events = new _ScrollEvents2.default(Scroll.SCROLL, _this, _this);
+	    /**
+	                                                                           * ScrollEvents instance, 発火時に使用します
+	                                                                           * @returns {ScrollEvents} ScrollEvents instance
+	                                                                           */
+	    _this.events = function () {return events;};
+	    /**
+	                                                  * 前回 scroll top 位置
+	                                                  * @type {number}
+	                                                  * @default -1
+	                                                  */
+	    _this.previous = -1;
+	    /**
+	                          * start 済みフラッグ
+	                          * @type {boolean}
+	                          * @default false
+	                          */
+	    _this.started = false;
+
+	    // 設定済み instance を返します
+	    return _ret2 = instance, (0, _possibleConstructorReturn3.default)(_this, _ret2);
+	  }
+	  // ----------------------------------------
+	  // EVENT
+	  // ----------------------------------------
+	  /**
+	   * scroll で発生するイベントを取得します
+	   * @event SCROLL
+	   * @returns {string} event, scrollScroll を返します
+	   * @default scrollScroll
+	   */(0, _createClass3.default)(Scroll, [{ key: 'start',
+
+
+
+	    // ----------------------------------------
+	    // METHOD
+	    // ----------------------------------------
+	    /**
+	     * scroll event を監視します
+	     * @returns {Scroll} method chain 可能なように instance を返します
+	     */value: function start()
+	    {
+	      if (this.started) {
+	        return this;
+	      }
+	      this.started = true;
+	      window.addEventListener('scroll', this.boundScroll(), false);
+	      return this;
+	    }
+	    /**
+	       * scroll event を監視を止めます
+	       * @returns {Scroll} method chain 可能なように instance を返します
+	       */ }, { key: 'stop', value: function stop()
+	    {
+	      if (!this.started) {
+	        return this;
+	      }
+	      this.started = false;
+	      window.removeEventListener('scroll', this.boundScroll());
+	      return this;
+	    }
+	    /**
+	       * window scroll event handler<br>
+	       * window scroll event 発生後に scroll top 位置をもたせた Scroll.SCROLL custom event を発火します
+	       * @param {?Event} event window scroll event, nullable
+	       * @returns {void}
+	       */ }, { key: 'scroll', value: function scroll(
+	    event) {
+	      // @type {number} - scroll top
+	      var y = Scroll.y();
+	      // @type {number} - window height
+	      var height = window.innerHeight;
+	      // @type {number} - 前回の scroll top
+	      var previous = this.previous;
+
+	      // @type {Events} - events
+	      var events = this.events();
+	      // @type {Event} - scroll event
+	      events.original = event;
+	      // @type {number} - scroll top
+	      events.y = y;
+	      // @type {number} - window height
+	      events.height = height;
+	      // @type {number} - window bottom(y + height)
+	      events.bottom = y + height;
+	      events.previous = previous;
+	      // @type {boolean} - 前回の scroll top と比較し移動したかを真偽値で取得します, true: 移動した
+	      events.changed = previous !== y;
+	      // @type {number} - 移動量 +（正）: down, -（負）: up
+	      events.moving = y - previous;
+	      // event fire
+	      this.dispatch(events);
+	      this.previous = y;
+	    }
+	    // ----------------------------------------
+	    // STATIC METHOD
+	    // ----------------------------------------
+	    /**
+	     * y 位置に scroll top を即座に移動させます
+	     * @param {number} [y=0] scroll top 目標値
+	     * @param {number} [delay=0] time out 遅延 ms
+	     * @returns {number} time out id
+	     */ }], [{ key: 'jump', value: function jump()
+	    {var y = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+	      return setTimeout(function () {window.scrollTo(0, y);}, delay);
+	    }
+	    /**
+	       * {@link Freeze}.freeze を実行し scroll 操作を一定期間不能にします
+	       * @returns {number} time out ID
+	       */ }, { key: 'freeze', value: function freeze()
+	    {
+	      return _Freeze2.default.freeze();
+	    }
+	    /**
+	       * scroll top 位置
+	       * @returns {number} scroll top 位置を返します
+	       * @see https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY
+	       * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
+	       */ }, { key: 'y', value: function y()
+	    {
+	      return typeof window.pageYOffset !== 'undefined' ?
+	      window.pageYOffset :
+	      (document.documentElement || document.body.parentNode || document.body).scrollTop;
+	    }
+	    // ----------------------------------------
+	    /**
+	     * Scroll instance を singleton を保証し作成します
+	     * @returns {Scroll} Scroll instance を返します
+	     */ }, { key: 'factory', value: function factory()
+	    {
+	      if (instance !== null) {
+	        return instance;
+	      }
+	      return new Scroll(singletonSymbol);
+	    } }, { key: 'SCROLL', get: function get() {return 'scrollScroll';} }]);return Scroll;}(_EventDispatcher3.default);exports.default = Scroll;
+
+/***/ },
+/* 100 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _getPrototypeOf = __webpack_require__(49);var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _possibleConstructorReturn2 = __webpack_require__(53);var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);var _inherits2 = __webpack_require__(90);var _inherits3 = _interopRequireDefault(_inherits2);
+
+
+
+
+
+
+
+
+
+
+
+	var _Events2 = __webpack_require__(47);var _Events3 = _interopRequireDefault(_Events2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+	/**
+	                                                                                                                                                                                  * Scroll events 管理クラス
+	                                                                                                                                                                                  */var
+	ScrollEvents = function (_Events) {(0, _inherits3.default)(ScrollEvents, _Events);
+	  /**
+	                                                                                    * custom Event Object
+	                                                                                    * @param {string} type イベント種類
+	                                                                                    * @param {*} currentTarget current イベント発生インスタンス
+	                                                                                    * @param {*} [target=undefined] イベント発生インスタンス
+	                                                                                    * */
+	  function ScrollEvents(type, currentTarget) {var target = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;(0, _classCallCheck3.default)(this, ScrollEvents);
+
+	    /**
+	                                                                                                                                                                                             * scroll top 前回位置(px)
+	                                                                                                                                                                                             * @type {number}
+	                                                                                                                                                                                             */var _this = (0, _possibleConstructorReturn3.default)(this, (ScrollEvents.__proto__ || (0, _getPrototypeOf2.default)(ScrollEvents)).call(this, type, currentTarget, target));
+	    _this.previous = -1;
+	    /**
+	                          * オリジナルイベント(.onscroll)
+	                          * @type {?Event}
+	                          */
+	    _this.original = null;
+	    /**
+	                            * scroll top 現在位置(px)
+	                            * @type {number}
+	                            */
+	    _this.y = 0;
+	    /**
+	                  * window innerHeight
+	                  * @type {number}
+	                  */
+	    _this.height = 0;
+	    /**
+	                       * window innerWidth
+	                       * @type {number}
+	                       */
+	    _this.width = 0;
+	    /**
+	                      * window 下端位置(scroll top + window height)
+	                      * @type {number}
+	                      */
+	    _this.bottom = 0;
+	    /**
+	                       * scroll top 位置が前回と違うかを表すフラッグ, true: 違う
+	                       * @type {boolean}
+	                       */
+	    _this.changed = false;
+	    /**
+	                            * UP / DOWN と前回からの移動距離(px), 正(+): scroll down
+	                            * @type {number}
+	                            */
+	    _this.moving = 0;return _this;
+	  }return ScrollEvents;}(_Events3.default); /**
+	                                             * Copyright (c) 2011-2016 inazumatv.com, inc.
+	                                             * @author (at)taikiken / http://inazumatv.com
+	                                             * @date 2016/11/20 - 10:54
+	                                             *
+	                                             * Distributed under the terms of the MIT license.
+	                                             * http://www.opensource.org/licenses/mit-license.html
+	                                             *
+	                                             * This notice shall be included in all copies or substantial portions of the Software.
+	                                             *
+	                                             */exports.default = ScrollEvents;
+
+/***/ },
+/* 101 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * Copyright (c) 2011-2016 inazumatv.com, inc.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * @author (at)taikiken / http://inazumatv.com
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * @date 2016/11/19 - 22:10
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * Distributed under the terms of the MIT license.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * http://www.opensource.org/licenses/mit-license.html
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * This notice shall be included in all copies or substantial portions of the Software.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            */
+
+
+	/**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                * scroll freeze timeout id
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                * @private
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                * @static
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                * @type {number}
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+	var timerId = 0;
+
+	/**
+	                  * scroll を止める時間
+	                  * @private
+	                  * @static
+	                  * @type {number}
+	                  * @default 200
+	                  */
+	var _duration = 200;
+
+	/**
+	                      * scroll 操作を強制的に不可能にします
+	                      */var
+	Freeze = function () {function Freeze() {(0, _classCallCheck3.default)(this, Freeze);}(0, _createClass3.default)(Freeze, null, [{ key: 'start',
+	    /**
+	                                                                                                                                                 * scroll 動作を受付不能にします
+	                                                                                                                                                 * @returns {void}
+	                                                                                                                                                 */value: function start()
+	    {
+	      window.addEventListener('touchstart', Freeze.onScroll, false);
+	      window.addEventListener('touchmove', Freeze.onScroll, false);
+	      window.addEventListener('touchend', Freeze.onScroll, false);
+	      window.addEventListener('scroll', Freeze.onScroll, false);
+	      document.addEventListener('wheel', Freeze.onScroll, false);
+	      document.addEventListener('mousewheel', Freeze.onScroll, false);
+	      window.addEventListener('DOMMouseScroll', Freeze.onScroll, false);
+	    }
+	    /**
+	       * scroll 動作を回復します
+	       * @returns {void}
+	       */ }, { key: 'stop', value: function stop()
+	    {
+	      window.removeEventListener('touchstart', Freeze.onScroll);
+	      window.removeEventListener('touchmove', Freeze.onScroll);
+	      window.removeEventListener('touchend', Freeze.onScroll);
+	      window.removeEventListener('scroll', Freeze.onScroll);
+	      document.removeEventListener('wheel', Freeze.onScroll);
+	      document.removeEventListener('mousewheel', Freeze.onScroll);
+	      window.removeEventListener('DOMMouseScroll', Freeze.onScroll);
+	    }
+	    /**
+	       * window scroll event handler, バブリング・伝播全てキャンセルします
+	       * @param {Event} event window scroll event
+	       * @returns {boolean} event をキャンセルするために false を返します
+	       */ }, { key: 'onScroll', value: function onScroll(
+	    event) {
+	      event.preventDefault();
+	      event.stopPropagation();
+	      return false;
+	    }
+	    /**
+	       * scroll 操作を引数(delay)の間キャンセルします
+	       * @param {number} [delay=200] 遅延時間(ms), 200
+	       * @returns {number} time out id
+	       */ }, { key: 'freeze', value: function freeze()
+	    {var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Freeze.duration();
+	      clearTimeout(timerId);
+
+	      Freeze.stop();
+	      timerId = setTimeout(Freeze.start, delay);
+	      return timerId;
+	    }
+	    /**
+	       * scroll 操作を不能にする時間間隔(ms)を取得します
+	       * @returns {number} scroll 操作を不能にする時間間隔(ms)
+	       */ }, { key: 'duration', value: function duration()
+	    {
+	      return _duration;
+	    }
+	    /**
+	       * scroll 操作を不能にする時間間隔(ms)を設定します
+	       * @param {number} time scroll 操作を不能にする時間(ms)
+	       * @returns {void}
+	       */ }, { key: 'setDuration', value: function setDuration(
+	    time) {
+	      _duration = time;
+	    } }]);return Freeze;}();exports.default = Freeze;
+
+/***/ },
+/* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _getPrototypeOf = __webpack_require__(49);var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);var _possibleConstructorReturn2 = __webpack_require__(53);var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);var _inherits2 = __webpack_require__(90);var _inherits3 = _interopRequireDefault(_inherits2);
@@ -3143,7 +3005,7 @@
 	var _Events = __webpack_require__(47);var _Events2 = _interopRequireDefault(_Events);
 
 
-	var _Polling2 = __webpack_require__(104);var _Polling3 = _interopRequireDefault(_Polling2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	var _Polling2 = __webpack_require__(103);var _Polling3 = _interopRequireDefault(_Polling2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 	/**
 	                                                                                                                                                                                      * 固定値を使用し fps を決定します
@@ -3408,7 +3270,7 @@
 	exports.default = Rate;
 
 /***/ },
-/* 104 */
+/* 103 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _getPrototypeOf = __webpack_require__(49);var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);var _possibleConstructorReturn2 = __webpack_require__(53);var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);var _inherits2 = __webpack_require__(90);var _inherits3 = _interopRequireDefault(_inherits2);
@@ -3428,7 +3290,7 @@
 	var _Events = __webpack_require__(47);var _Events2 = _interopRequireDefault(_Events);
 
 
-	var _Cycle = __webpack_require__(105);var _Cycle2 = _interopRequireDefault(_Cycle);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	var _Cycle = __webpack_require__(104);var _Cycle2 = _interopRequireDefault(_Cycle);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 	/**
 	                                                                                                                                                                            * 一定間隔毎に UPDATE イベントを発生させます
@@ -3618,7 +3480,7 @@
 	exports.default = Polling;
 
 /***/ },
-/* 105 */
+/* 104 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _getPrototypeOf = __webpack_require__(49);var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);var _possibleConstructorReturn2 = __webpack_require__(53);var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);var _inherits2 = __webpack_require__(90);var _inherits3 = _interopRequireDefault(_inherits2);var _symbol = __webpack_require__(74);var _symbol2 = _interopRequireDefault(_symbol);
@@ -3785,6 +3647,75 @@
 	      }
 	      return instance;
 	    } }, { key: 'UPDATE', get: function get() {return 'cycleUpdate';} }]);return Cycle;}(_EventDispatcher3.default);exports.default = Cycle;
+
+/***/ },
+/* 105 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";Object.defineProperty(exports, "__esModule", { value: true });var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * Copyright (c) 2011-2016 inazumatv.com, inc.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * @author (at)taikiken / http://inazumatv.com
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * @date 2016/11/29 - 22:06
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * Distributed under the terms of the MIT license.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * http://www.opensource.org/licenses/mit-license.html
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * This notice shall be included in all copies or substantial portions of the Software.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            */
+
+	/**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                * 衝突判定を行います
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                */var
+	Hit = function () {function Hit() {(0, _classCallCheck3.default)(this, Hit);}(0, _createClass3.default)(Hit, null, [{ key: "test",
+	    /**
+	                                                                                                                                    * element と window.top(0) window.bottom(height) のヒットテストを行います
+	                                                                                                                                    * @param {number} height 衝突対象物の高さ window.innerHeight
+	                                                                                                                                    * @param {ClientRect|Object} offset 比較対象物の element ClientRect または同等の Object
+	                                                                                                                                    * @returns {{
+	                                                                                                                                    *  top: boolean,
+	                                                                                                                                    *  bottom: boolean,
+	                                                                                                                                    *  contain: boolean,
+	                                                                                                                                    *  include: boolean
+	                                                                                                                                    * }} hit check object を返します
+	                                                                                                                                    */value: function test(
+	    height, offset) {
+	      // hit test
+	      var hit = {
+	        result: false,
+	        top: false,
+	        bottom: false,
+	        contain: false,
+	        include: false };
+
+
+	      // top
+	      if (offset.top <= height && offset.top >= 0) {
+	        hit.top = true;
+	      }
+
+	      // bottom
+	      if (offset.bottom <= height && offset.bottom >= 0) {
+	        hit.bottom = true;
+	      }
+
+	      // contain check を行います
+	      if (offset.top <= 0 && offset.bottom >= height) {
+	        hit.contain = true;
+	      }
+
+	      // include check を行います
+	      if (
+	      offset.top >= 0 && offset.top <= height &&
+	      offset.bottom >= 0 && offset.bottom <= height)
+	      {
+	        hit.include = true;
+	      }
+	      // return
+	      // return hit.top || hit.bottom || hit.contain || hit.include;
+	      hit.result = hit.top || hit.bottom || hit.contain || hit.include;
+	      return hit;
+	    } }]);return Hit;}();exports.default = Hit;
 
 /***/ },
 /* 106 */
@@ -4425,6 +4356,295 @@
 /* 109 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _getPrototypeOf = __webpack_require__(49);var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);var _possibleConstructorReturn2 = __webpack_require__(53);var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);var _inherits2 = __webpack_require__(90);var _inherits3 = _interopRequireDefault(_inherits2);var _symbol = __webpack_require__(74);var _symbol2 = _interopRequireDefault(_symbol);
+
+
+
+
+
+
+
+
+
+
+
+
+	var _EventDispatcher2 = __webpack_require__(1);var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
+	var _WheelEvents = __webpack_require__(110);var _WheelEvents2 = _interopRequireDefault(_WheelEvents);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+	/**
+	                                                                                                                                                                                                    * new を許可しないための Symbol
+	                                                                                                                                                                                                    * @type {Symbol}
+	                                                                                                                                                                                                    * @private
+	                                                                                                                                                                                                    */ /**
+	                                                                                                                                                                                                        * Copyright (c) 2011-2016 inazumatv.com, inc.
+	                                                                                                                                                                                                        * @author (at)taikiken / http://inazumatv.com
+	                                                                                                                                                                                                        * @date 2016/07/26 - 19:12
+	                                                                                                                                                                                                        *
+	                                                                                                                                                                                                        * Distributed under the terms of the MIT license.
+	                                                                                                                                                                                                        * http://www.opensource.org/licenses/mit-license.html
+	                                                                                                                                                                                                        *
+	                                                                                                                                                                                                        * This notice shall be included in all copies or substantial portions of the Software.
+	                                                                                                                                                                                                        *
+	                                                                                                                                                                                                        */ // event
+	var singletonSymbol = (0, _symbol2.default)('Scroll singleton symbol'); /**
+	                                                                         * singleton instance, nullable
+	                                                                         * @type {?Wheel}
+	                                                                         * @private
+	                                                                         */var instance = null; /**
+	                                                                                                 * mousewheel event を監視し通知を行います
+	                                                                                                 * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
+	                                                                                                 *
+	                                                                                                 * ```
+	                                                                                                 * const instance:Wheel = Wheel.factory();
+	                                                                                                 * ```
+	                                                                                                 */var Wheel = function (_EventDispatcher) {(0, _inherits3.default)(Wheel, _EventDispatcher); /**
+	                                                                                                                                                                                               * singleton です
+	                                                                                                                                                                                               * @param {Symbol} checkSymbol singleton を保証するための private instance
+	                                                                                                                                                                                               * @returns {Wheel} singleton instance を返します
+	                                                                                                                                                                                               */function Wheel(checkSymbol) {var _ret2;(0, _classCallCheck3.default)(this, Wheel); // checkSymbol と singleton が等価かをチェックします
+	    if (checkSymbol !== singletonSymbol) {throw new Error('don\'t use new, instead use static factory method.');}
+
+
+
+	    // instance 作成済みかをチェックし instance が null の時 this を設定します
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (Wheel.__proto__ || (0, _getPrototypeOf2.default)(Wheel)).call(this));if (instance !== null) {var _ret;
+	      return _ret = instance, (0, _possibleConstructorReturn3.default)(_this, _ret);
+	    }
+
+	    // onetime setting
+	    instance = _this;
+
+	    // event handler
+	    var boundWheel = _this.mouseWheel.bind(_this);
+	    /**
+	                                                    * bound mouseWheel
+	                                                    * @returns {function} window.wheel event handler
+	                                                    */
+	    _this.boundWheel = function () {return boundWheel;};
+	    /**
+	                                                          * 閾値, wheel 移動量が閾値を超えたときにイベントを発生させます
+	                                                          * @type {number}
+	                                                          * @default 200
+	                                                          */
+	    _this.threshold = 200;
+	    /**
+	                            * wheelDelta 移動量が閾値を超えるかをチェックするための積算計算変数
+	                            * @type {number}
+	                            */
+	    _this.moved = 0;
+	    /**
+	                      * start flag
+	                      * @type {boolean}
+	                      */
+	    _this.started = false;
+	    var events = {
+	      up: new _WheelEvents2.default(Wheel.UP, _this),
+	      down: new _WheelEvents2.default(Wheel.DOWN, _this) };
+
+	    /**
+	                                                             * UP / DOWN Events instance
+	                                                             * @returns {{up: WheelEvents, down: WheelEvents}} UP / DOWN Events instance
+	                                                             */
+	    _this.events = function () {return events;};
+
+	    // 設定済み instance を返します
+	    return _ret2 = instance, (0, _possibleConstructorReturn3.default)(_this, _ret2);
+	  }
+	  // ----------------------------------------
+	  // EVENT
+	  // ----------------------------------------
+	  /**
+	   * wheel up で発生するイベントを取得します
+	   * @event UP
+	   * @returns {string} event, wheelUp を返します
+	   * @default wheelUp
+	   */(0, _createClass3.default)(Wheel, [{ key: 'start',
+
+
+
+
+
+
+
+
+
+
+
+
+	    // ----------------------------------------
+	    // METHOD
+	    // ----------------------------------------
+	    /**
+	     * mousewheel event を監視します
+	     * @returns {Wheel} method chain 可能なように instance を返します
+	     */value: function start()
+	    {
+	      if (this.started) {
+	        return this;
+	      }
+	      this.started = true;
+	      // this.unwatch();
+	      window.addEventListener('wheel', this.boundWheel(), false);
+	      return this;
+	    }
+	    /**
+	       * mousewheel event を監視を止めます
+	       * @returns {Wheel} method chain 可能なように instance を返します
+	       */ }, { key: 'stop', value: function stop()
+	    {
+	      if (!this.started) {
+	        return this;
+	      }
+	      this.started = false;
+	      window.removeEventListener('wheel', this.boundWheel());
+	      return this;
+	    }
+	    /**
+	       * window mousewheel event handler
+	       * <p>delta 値を取得し `this.moving` を実行します</p>
+	       *
+	       * @listens {WheelEvent} WheelEvent.wheel
+	       * @param {WheelEvent} event window wheel event
+	       * @returns {number} 前回移動量に delta 値 を加算した値を返します
+	       */ }, { key: 'mouseWheel', value: function mouseWheel(
+	    event) {
+	      var wheelDelta = event.deltaY;
+	      return this.moving(wheelDelta);
+	    }
+	    /**
+	       * mouse delta から移動量を計算します
+	       * @param {number} delta mouse delta 値
+	       * @returns {number} 前回移動量に delta 値 を加算した値を返します
+	       */ }, { key: 'moving', value: function moving(
+	    delta) {
+	      /**
+	             * 移動量が閾値を超えるかをチェックするための計算変数
+	             * @type {number}
+	             */
+	      this.moved += delta;
+	      // @type {number}
+	      var moved = this.moved;
+
+	      // 0 check
+	      if (moved === 0) {
+	        // 移動量が 0 なので処理をしない
+	        return moved;
+	      }
+
+	      // 閾値チェック
+	      if (Math.abs(moved) >= this.threshold) {
+	        // scroll event を発火します
+	        if (moved > 0) {
+	          // scroll up
+	          this.up(moved);
+	        } else {
+	          this.down(moved);
+	        }
+
+	        // initialize moved, 発火後に積算移動変数を初期化します
+	        this.moved = 0;
+	        return moved;
+	      }
+	      // 閾値を超えていないので処理をしない
+	      return moved;
+	    }
+	    /**
+	       * scroll up イベントを発火します
+	       * @param {number} moved 移動量
+	       * @returns {number} 加算移動量を返します
+	       */ }, { key: 'up', value: function up(
+	    moved) {
+	      // @type {Events}
+	      var events = this.events().up;
+	      events.moved = moved;
+	      this.dispatch(events);
+
+	      return moved;
+	    }
+	    /**
+	       * scroll down イベントを発火します
+	       * @param {number} moved 移動量
+	       * @returns {number} 加算移動量を返します
+	       */ }, { key: 'down', value: function down(
+	    moved) {
+	      // @type {Events}
+	      var events = this.events().down;
+	      events.moved = moved;
+	      this.dispatch(events);
+
+	      return moved;
+	    }
+	    // ----------------------------------------
+	    // STATIC METHOD
+	    // ----------------------------------------
+	    /**
+	     * Wheel instance を singleton を保証し作成します
+	     * @returns {Wheel} Wheel instance を返します
+	     */ }], [{ key: 'factory', value: function factory()
+	    {
+	      if (instance !== null) {
+	        return instance;
+	      }
+	      return new Wheel(singletonSymbol);
+	    } }, { key: 'UP', get: function get() {return 'wheelUp';} /**
+	                                                               * wheel  で発生するイベントを取得します
+	                                                               * @event DOWN
+	                                                               * @returns {string} event, wheelUp を返します
+	                                                               * @default wheelUp
+	                                                               */ }, { key: 'DOWN', get: function get() {return 'wheelDown';} }]);return Wheel;}(_EventDispatcher3.default);exports.default = Wheel;
+
+/***/ },
+/* 110 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _getPrototypeOf = __webpack_require__(49);var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _possibleConstructorReturn2 = __webpack_require__(53);var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);var _inherits2 = __webpack_require__(90);var _inherits3 = _interopRequireDefault(_inherits2);
+
+
+
+
+
+
+
+
+
+
+
+	var _Events2 = __webpack_require__(47);var _Events3 = _interopRequireDefault(_Events2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+	/**
+	                                                                                                                                                                                  * Wheel Events, mouse wheel で発生するイベントを管理します
+	                                                                                                                                                                                  */var
+	WheelEvents = function (_Events) {(0, _inherits3.default)(WheelEvents, _Events);
+	  /**
+	                                                                                  * custom Event Object
+	                                                                                  * @param {string} type イベント種類
+	                                                                                  * @param {*} currentTarget current イベント発生インスタンス
+	                                                                                  * @param {*} [target=undefined] イベント発生インスタンス
+	                                                                                  * */
+	  function WheelEvents(type, currentTarget) {var target = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;(0, _classCallCheck3.default)(this, WheelEvents);
+
+	    /**
+	                                                                                                                                                                                           * 移動距離(px)
+	                                                                                                                                                                                           * @type {number}
+	                                                                                                                                                                                           */var _this = (0, _possibleConstructorReturn3.default)(this, (WheelEvents.__proto__ || (0, _getPrototypeOf2.default)(WheelEvents)).call(this, type, currentTarget, target));
+	    _this.moved = 0;return _this;
+	  }return WheelEvents;}(_Events3.default); /**
+	                                            * Copyright (c) 2011-2016 inazumatv.com, inc.
+	                                            * @author (at)taikiken / http://inazumatv.com
+	                                            * @date 2016/11/20 - 12:11
+	                                            *
+	                                            * Distributed under the terms of the MIT license.
+	                                            * http://www.opensource.org/licenses/mit-license.html
+	                                            *
+	                                            * This notice shall be included in all copies or substantial portions of the Software.
+	                                            *
+	                                            */exports.default = WheelEvents;
+
+/***/ },
+/* 111 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _create = __webpack_require__(95);var _create2 = _interopRequireDefault(_create);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);
 
 
@@ -4606,7 +4826,198 @@
 	    } }]);return Ajax;}();exports.default = Ajax;
 
 /***/ },
-/* 110 */
+/* 112 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * Copyright (c) 2011-2016 inazumatv.com, inc.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * @author (at)taikiken / http://inazumatv.com
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * @date 2016/12/16 - 14:45
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * Distributed under the terms of the MIT license.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * http://www.opensource.org/licenses/mit-license.html
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * This notice shall be included in all copies or substantial portions of the Software.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            */
+
+	var decodeURIComponent = self.decodeURIComponent;
+	var encodeURIComponent = self.encodeURIComponent;
+	var RegExp = self.RegExp;
+
+	/**
+	                           * cookie を取得・保存・削除します
+	                           */var
+	Cookie = function () {
+	  /**
+	                       * cookie を処理します
+	                       *
+	                       * インスタンスは key 毎に作成します
+	                       * @param {string} keyName cookie key
+	                       * @param {?Date} [endValue=null] cookie end Date instance, null の時はプラウザ `quit` で削除されます
+	                       * @param {string} [defaultPath='/'] cookie path
+	                       * @param {string} [defaultDomain=''] cookie domain
+	                       * @param {boolean} [secureSetting=false] true: https 通信のときのみ、クッキーが送信されます
+	                       */
+	  function Cookie(keyName) {var endValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;var defaultPath = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '/';var defaultDomain = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';var secureSetting = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;(0, _classCallCheck3.default)(this, Cookie);
+	    var key = keyName;
+	    var end = endValue;
+	    var path = defaultPath;
+	    var domain = defaultDomain;
+	    var secure = secureSetting;
+
+	    /**
+	                                 * cookie key を取得します
+	                                 * @returns {string} cookie key を返します
+	                                 */
+	    this.key = function () {return key;};
+	    /**
+	                                           * cookie key を設定します
+	                                           * @param {string} setting 設定する key name
+	                                           * @returns {string} 設定した key name を返します
+	                                           */
+	    this.setKey = function (setting) {key = setting;};
+	    /**
+	                                                        * cookie end を取得します
+	                                                        * @returns {?Date} cookie end Date instance
+	                                                        */
+	    this.end = function () {return end;};
+	    /**
+	                                           * cookie end を設定します
+	                                           * @param {Date} setting cookie end Date instance
+	                                           * @returns {Date} 設定した Date instance を返します
+	                                           */
+	    this.setEnd = function (setting) {end = setting;};
+	    /**
+	                                                        * cookie path を取得します
+	                                                        * @returns {string} cookie path を返します
+	                                                        */
+	    this.path = function () {return path;};
+	    /**
+	                                             * cookie path を設定します
+	                                             * @param {string} setting 設定する path name
+	                                             * @returns {string} 設定した path name を返します
+	                                             */
+	    this.setPath = function (setting) {path = setting;};
+	    /**
+	                                                          * cookie domain を取得します
+	                                                          * @returns {string} cookie domain を返します
+	                                                          */
+	    this.domain = function () {return domain;};
+	    /**
+	                                                 * cookie domain を設定します
+	                                                 * @param {string} setting 設定する domain name
+	                                                 * @returns {string} 設定した domain name を返します
+	                                                 */
+	    this.setDomain = function (setting) {domain = setting;};
+	    /**
+	                                                              * https 通信のときのみクッキー送信を行うかのフラッグを取得します
+	                                                              * @returns {boolean} https 通信のときのみクッキー送信を行うかのフラッグ
+	                                                              */
+	    this.secure = function () {return secure;};
+	    /**
+	                                                 * https 通信のときのみクッキー送信を行うかのフラッグを設定します
+	                                                 * @param {boolean} setting https 通信のときのみクッキー送信を行うかのフラッグ
+	                                                 * @returns {boolean} 設定した secure フラッグを返します
+	                                                 */
+	    this.setSecure = function (setting) {secure = setting;};
+	  }
+	  // ----------------------------------------
+	  // METHOD
+	  // ----------------------------------------
+	  /**
+	   * cookie value を取得します
+	   * @returns {string|null} cookie value を返します
+	   */(0, _createClass3.default)(Cookie, [{ key: 'get', value: function get()
+	    {
+	      return Cookie.get(this.key());
+	    }
+
+	    /**
+	       * cookie value を設定します
+	       * @param {string} value cookie value
+	       * @param {?Date} [end=null] cookie end Date instance, null の時はプラウザ `quit` で削除されます
+	       * @param {string} [path='/'] cookie path
+	       * @param {string} [domain=''] cookie domain
+	       * @param {boolean} [secure=false] true: https 通信のときのみ、クッキーが送信されます
+	       * @returns {string} 設定した cookie 文字列
+	       */ }, { key: 'set', value: function set(
+	    value) {var end = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.end();var path = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.path();var domain = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : this.domain();var secure = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : this.secure();
+	      return Cookie.set(this.key(), value, end, path, domain, secure);
+	    }
+	    /**
+	       * cookie を削除します
+	       * @returns {boolean} true: cookie 削除成功
+	       */ }, { key: 'remove', value: function remove()
+	    {
+	      return Cookie.remove(this.key());
+	    }
+	    // ----------------------------------------
+	    // STATIC METHOD
+	    // ----------------------------------------
+	    /**
+	     * cookie value を取得します
+	     * @param {string} key 取得する cookie key 名称
+	     * @returns {string|null} cookie value
+	     */ }], [{ key: 'get', value: function get(
+	    key) {
+	      var cookie = document.cookie;
+	      var escapeKey = encodeURIComponent(key).replace(/[-.+*]/g, '\\$&');
+	      var exp = new RegExp('(?:(?:^|.*;)\\s*' + escapeKey + '\\s*\\=\\s*([^;]*).*$)|^.*$');
+	      return decodeURIComponent(cookie.replace(exp, '$1')) || null;
+	    }
+	    /**
+	       * cookie value を設定します
+	       * @param {string} key cookie key
+	       * @param {string} value cookie value
+	       * @param {?Date} [end=null] cookie end date Date instance
+	       * @param {string} [path=/] cookie path
+	       * @param {string} [domain=''] cookie domain
+	       * @param {boolean} [secure=false] true: https 通信のときのみ、クッキーが送信されます
+	       * @returns {string} 設定した cookie 文字列
+	       */ }, { key: 'set', value: function set(
+	    key, value) {var end = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;var path = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '/';var domain = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';var secure = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : false;
+	      var cookie = encodeURIComponent(key) + '=' + encodeURIComponent(value);
+	      if (end) {
+	        cookie += '; expires=' + end.toUTCString();
+	      }
+	      if (path) {
+	        cookie += '; path=' + path;
+	      }
+	      if (domain) {
+	        cookie += '; domain=' + domain;
+	      }
+	      if (secure) {
+	        cookie += '; secure';
+	      }
+	      document.cookie = cookie;
+	      return cookie;
+	    }
+	    /**
+	       * cookie を削除します
+	       *
+	       * 現在時間より前の時刻を設定します
+	       * @param {string} key cookie key
+	       * @returns {boolean} true: 削除成功
+	       */ }, { key: 'remove', value: function remove(
+	    key) {
+	      if (Cookie.has(key)) {
+	        Cookie.set(key, '', new Date());
+	        return true;
+	      }
+	      return false;
+	    }
+	    /**
+	       * cookie key が存在するかを調べます
+	       * @param {string} key cookie key
+	       * @returns {boolean} true: cookie key が存在します
+	       */ }, { key: 'has', value: function has(
+	    key) {
+	      return Cookie.get(key) !== null;
+	    } }]);return Cookie;}();exports.default = Cookie;
+
+/***/ },
+/* 113 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _getPrototypeOf = __webpack_require__(49);var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);var _possibleConstructorReturn2 = __webpack_require__(53);var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);var _inherits2 = __webpack_require__(90);var _inherits3 = _interopRequireDefault(_inherits2);
@@ -4625,7 +5036,7 @@
 	var _Events = __webpack_require__(47);var _Events2 = _interopRequireDefault(_Events);
 
 
-	var _Polling2 = __webpack_require__(104);var _Polling3 = _interopRequireDefault(_Polling2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	var _Polling2 = __webpack_require__(103);var _Polling3 = _interopRequireDefault(_Polling2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 	// /**
 	//  * private property key, fps を保存するための Symbol
@@ -4691,7 +5102,7 @@
 	exports.default = Fps;
 
 /***/ },
-/* 111 */
+/* 114 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);
@@ -4754,7 +5165,7 @@
 	                            */exports.default = List;
 
 /***/ },
-/* 112 */
+/* 115 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
@@ -4795,13 +5206,94 @@
 	    } }]);return Text;}();exports.default = Text;
 
 /***/ },
-/* 113 */
+/* 116 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";Object.defineProperty(exports, "__esModule", { value: true });var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
 	                                                                                                                                                                                                                                                                                                                                                                                                                                            * Copyright (c) 2011-2016 inazumatv.com, inc.
 	                                                                                                                                                                                                                                                                                                                                                                                                                                            * @author (at)taikiken / http://inazumatv.com
-	                                                                                                                                                                                                                                                                                                                                                                                                                                            * @date 2016/11/29 - 22:06
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * @date 2016/12/16 - 16:50
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * Distributed under the terms of the MIT license.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * http://www.opensource.org/licenses/mit-license.html
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * This notice shall be included in all copies or substantial portions of the Software.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            */
+
+	var oneMinute = 1000 * 60;
+	var oneHour = oneMinute * 60;
+	var oneDay = oneHour * 24;
+	var oneWeek = oneDay * 7;
+	var oneMonth = oneDay * 30;
+
+	/**
+	                             * 指定時間を計算し Date instance を作成します
+	                             */var
+	Times = function () {function Times() {(0, _classCallCheck3.default)(this, Times);}(0, _createClass3.default)(Times, null, [{ key: "present",
+	    // /**
+	    //  * 1970-1-1 00:00
+	    //  * @returns {Date} 1970-1-1 00:00
+	    //  */
+	    // static standard() {
+	    //   return new Date();
+	    // }
+	    /**
+	     * 現在時間 Date instance
+	     * @returns {Date} 現在時間 Date instance
+	     */value: function present()
+	    {
+	      return new Date();
+	    }
+	    /**
+	       * 指定分後の Date instance
+	       * @param {number} n 指定分
+	       * @returns {Date} 指定分後の Date instance
+	       */ }, { key: "minute", value: function minute(
+	    n) {
+	      return new Date(Date.now() + n * oneMinute);
+	    }
+	    /**
+	       * 指定時間後の Date instance
+	       * @param {number} n 指定時間
+	       * @returns {Date} 指定時間後の Date instance
+	       */ }, { key: "hour", value: function hour(
+	    n) {
+	      return new Date(Date.now() + n * oneHour);
+	    }
+	    /**
+	       * 指定日後の Date instance
+	       * @param {number} n 指定日
+	       * @returns {Date} 指定日後の Date instance
+	       */ }, { key: "day", value: function day(
+	    n) {
+	      return new Date(Date.now() + n * oneDay);
+	    }
+	    /**
+	       * 指定週後の Date instance
+	       * @param {number} n 指定週
+	       * @returns {Date} 指定週後の Date instance
+	       */ }, { key: "week", value: function week(
+	    n) {
+	      return new Date(Date.now() + n * oneWeek);
+	    }
+	    /**
+	       * 指定月後の Date instance
+	       * @param {number} n 指定月
+	       * @returns {Date} 指定月後の Date instance
+	       */ }, { key: "month", value: function month(
+	    n) {
+	      return new Date(Date.now() + n * oneMonth);
+	    } }]);return Times;}();exports.default = Times;
+
+/***/ },
+/* 117 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * Copyright (c) 2011-2016 inazumatv.com, inc.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * @author (at)taikiken / http://inazumatv.com
+	                                                                                                                                                                                                                                                                                                                                                                                                                                            * @date 2016/11/30 - 16:47
 	                                                                                                                                                                                                                                                                                                                                                                                                                                            *
 	                                                                                                                                                                                                                                                                                                                                                                                                                                            * Distributed under the terms of the MIT license.
 	                                                                                                                                                                                                                                                                                                                                                                                                                                            * http://www.opensource.org/licenses/mit-license.html
@@ -4811,60 +5303,66 @@
 	                                                                                                                                                                                                                                                                                                                                                                                                                                            */
 
 	/**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                * 衝突判定を行います
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                */var
-	Hit = function () {function Hit() {(0, _classCallCheck3.default)(this, Hit);}(0, _createClass3.default)(Hit, null, [{ key: "test",
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                * 確認用関数
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                * @private
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                * @static
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                * @type {{transition: (()), transform: (())}}
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+	var check = {
+	  transition: function transition() {
+	    var p = document.createElement('p');
+	    return typeof p.style.transition !== 'undefined' ||
+	    typeof p.style.WebkitTransition !== 'undefined' ||
+	    typeof p.style.MozTransition !== 'undefined' ||
+	    typeof p.style.msTransition !== 'undefined' ||
+	    typeof p.style.OTransition !== 'undefined';
+	  },
+	  transform: function transform() {
+	    var p = document.createElement('p');
+	    return typeof p.style.transform !== 'undefined' ||
+	    typeof p.style.WebkitTransform !== 'undefined' ||
+	    typeof p.style.MozTransform !== 'undefined' ||
+	    typeof p.style.msTransform !== 'undefined' ||
+	    typeof p.style.OTransform !== 'undefined';
+	  } };
+
+
+	/**
+	        * CSS3 transition
+	        * @type {boolean}
+	        * @private
+	        * @static
+	        */
+	var _transition = check.transition();
+	/**
+	                                       * CSS3 transform
+	                                       * @type {boolean}
+	                                       * @private
+	                                       * @static
+	                                       */
+	var _transform = check.transform();
+
+	/**
+	                                     * CSS3 機能使用可能かを調べます
+	                                     */var
+	Can = function () {function Can() {(0, _classCallCheck3.default)(this, Can);}(0, _createClass3.default)(Can, null, [{ key: 'transition',
 	    /**
-	                                                                                                                                    * element と window.top(0) window.bottom(height) のヒットテストを行います
-	                                                                                                                                    * @param {number} height 衝突対象物の高さ window.innerHeight
-	                                                                                                                                    * @param {ClientRect|Object} offset 比較対象物の element ClientRect または同等の Object
-	                                                                                                                                    * @returns {{
-	                                                                                                                                    *  top: boolean,
-	                                                                                                                                    *  bottom: boolean,
-	                                                                                                                                    *  contain: boolean,
-	                                                                                                                                    *  include: boolean
-	                                                                                                                                    * }} hit check object を返します
-	                                                                                                                                    */value: function test(
-	    height, offset) {
-	      // hit test
-	      var hit = {
-	        result: false,
-	        top: false,
-	        bottom: false,
-	        contain: false,
-	        include: false };
-
-
-	      // top
-	      if (offset.top <= height && offset.top >= 0) {
-	        hit.top = true;
-	      }
-
-	      // bottom
-	      if (offset.bottom <= height && offset.bottom >= 0) {
-	        hit.bottom = true;
-	      }
-
-	      // contain check を行います
-	      if (offset.top <= 0 && offset.bottom >= height) {
-	        hit.contain = true;
-	      }
-
-	      // include check を行います
-	      if (
-	      offset.top >= 0 && offset.top <= height &&
-	      offset.bottom >= 0 && offset.bottom <= height)
-	      {
-	        hit.include = true;
-	      }
-	      // return
-	      // return hit.top || hit.bottom || hit.contain || hit.include;
-	      hit.result = hit.top || hit.bottom || hit.contain || hit.include;
-	      return hit;
-	    } }]);return Hit;}();exports.default = Hit;
+	                                                                                                                                          * CSS3 transition が使用可能かを調べます
+	                                                                                                                                          * @returns {boolean} true: 使用可能
+	                                                                                                                                          */value: function transition()
+	    {
+	      return _transition;
+	    }
+	    /**
+	       * CSS3 transform が使用可能かを調べます
+	       * @returns {boolean} true: 使用可能
+	       */ }, { key: 'transform', value: function transform()
+	    {
+	      return _transform;
+	    } }]);return Can;}();exports.default = Can;
 
 /***/ },
-/* 114 */
+/* 118 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _keys = __webpack_require__(23);var _keys2 = _interopRequireDefault(_keys);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);
@@ -4879,7 +5377,7 @@
 
 
 
-	var _Text = __webpack_require__(112);var _Text2 = _interopRequireDefault(_Text);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	var _Text = __webpack_require__(115);var _Text2 = _interopRequireDefault(_Text);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 	/**
 	                                                                                                                                                                              * CSS short hand pattern を管理します
@@ -4937,7 +5435,7 @@
 	                                */exports.default = Patterns;
 
 /***/ },
-/* 115 */
+/* 119 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);
@@ -4954,10 +5452,10 @@
 
 
 	var _Type = __webpack_require__(22);var _Type2 = _interopRequireDefault(_Type);
-	var _Text = __webpack_require__(112);var _Text2 = _interopRequireDefault(_Text);
+	var _Text = __webpack_require__(115);var _Text2 = _interopRequireDefault(_Text);
 
 
-	var _Patterns = __webpack_require__(114);var _Patterns2 = _interopRequireDefault(_Patterns);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	var _Patterns = __webpack_require__(118);var _Patterns2 = _interopRequireDefault(_Patterns);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 	/**
 	                                                                                                                                                                                        * Element の style を操作します
@@ -5121,7 +5619,7 @@
 	exports.default = Style;
 
 /***/ },
-/* 116 */
+/* 120 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";Object.defineProperty(exports, "__esModule", { value: true });var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
@@ -5209,10 +5707,10 @@
 	    } }]);return Bounding;}();exports.default = Bounding;
 
 /***/ },
-/* 117 */
+/* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _from = __webpack_require__(118);var _from2 = _interopRequireDefault(_from);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _from = __webpack_require__(122);var _from2 = _interopRequireDefault(_from);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * Copyright (c) 2011-2016 inazumatv.com, inc.
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * @author (at)taikiken / http://inazumatv.com
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * @date 2016/11/22 - 11:38
@@ -5286,7 +5784,9 @@
 	      // argument copy
 	      var element = node;
 	      // @type {Array<string>} - element class を取得し配列へ変換
-	      var elementClasses = (0, _from2.default)(element.classList);
+	      var elementClasses = element.classList ?
+	      (0, _from2.default)(element.classList) :
+	      Classes.convert(element);
 	      // 置換え配列最後尾に新規 `className` を追加します
 	      elementClasses.push(className);
 	      // 配列を ' '（ワンスペース）でつなぎ文字列変換後に設定します
@@ -5306,7 +5806,9 @@
 	      // argument copy
 	      var element = node;
 	      // @type {Array<string>} - element class を取得し配列へ変換
-	      var elementClasses = (0, _from2.default)(element.classList);
+	      var elementClasses = element.classList ?
+	      (0, _from2.default)(element.classList) :
+	      Classes.convert(element);
 	      // 配列での削除対象 class の位置を取得します
 	      var index = elementClasses.indexOf(className);
 	      // 配列位置を元に削除実行します
@@ -5314,37 +5816,57 @@
 	      // 削除後配列を ' '（ワンスペース）でつなぎ文字列変換後に設定します
 	      element.className = elementClasses.join(' ');
 	      return true;
+	    }
+	    /**
+	       * 可哀相な IE のための配列コンバーター, .classList 代用します
+	       * @param {Element} element 操作対象 NodeList
+	       * @returns {Array} 配列にコンバートして返します
+	       */ }, { key: 'convert', value: function convert(
+	    element) {
+	      var arr = element.classList ?
+	      element.classList :
+	      element.className.split(' ');
+	      var i = 0;
+	      var limit = arr.length;
+	      var empty = [];
+	      for (; i < limit; i += 1) {
+	        var className = arr[i];
+	        if (!!className || className !== ' ') {
+	          empty.push(className);
+	        }
+	      }
+	      return empty;
 	    } }]);return Classes;}();exports.default = Classes;
 
 /***/ },
-/* 118 */
+/* 122 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(119), __esModule: true };
+	module.exports = { "default": __webpack_require__(123), __esModule: true };
 
 /***/ },
-/* 119 */
+/* 123 */
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(57);
-	__webpack_require__(120);
+	__webpack_require__(124);
 	module.exports = __webpack_require__(9).Array.from;
 
 /***/ },
-/* 120 */
+/* 124 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	var ctx            = __webpack_require__(10)
 	  , $export        = __webpack_require__(7)
 	  , toObject       = __webpack_require__(26)
-	  , call           = __webpack_require__(121)
-	  , isArrayIter    = __webpack_require__(122)
+	  , call           = __webpack_require__(125)
+	  , isArrayIter    = __webpack_require__(126)
 	  , toLength       = __webpack_require__(35)
-	  , createProperty = __webpack_require__(123)
-	  , getIterFn      = __webpack_require__(124);
+	  , createProperty = __webpack_require__(127)
+	  , getIterFn      = __webpack_require__(128);
 
-	$export($export.S + $export.F * !__webpack_require__(126)(function(iter){ Array.from(iter); }), 'Array', {
+	$export($export.S + $export.F * !__webpack_require__(130)(function(iter){ Array.from(iter); }), 'Array', {
 	  // 22.1.2.1 Array.from(arrayLike, mapfn = undefined, thisArg = undefined)
 	  from: function from(arrayLike/*, mapfn = undefined, thisArg = undefined*/){
 	    var O       = toObject(arrayLike)
@@ -5374,7 +5896,7 @@
 
 
 /***/ },
-/* 121 */
+/* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// call something on iterator step with safe closing on error
@@ -5391,7 +5913,7 @@
 	};
 
 /***/ },
-/* 122 */
+/* 126 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// check on default Array iterator
@@ -5404,7 +5926,7 @@
 	};
 
 /***/ },
-/* 123 */
+/* 127 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5417,10 +5939,10 @@
 	};
 
 /***/ },
-/* 124 */
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var classof   = __webpack_require__(125)
+	var classof   = __webpack_require__(129)
 	  , ITERATOR  = __webpack_require__(68)('iterator')
 	  , Iterators = __webpack_require__(62);
 	module.exports = __webpack_require__(9).getIteratorMethod = function(it){
@@ -5430,7 +5952,7 @@
 	};
 
 /***/ },
-/* 125 */
+/* 129 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// getting tag from 19.1.3.6 Object.prototype.toString()
@@ -5458,7 +5980,7 @@
 	};
 
 /***/ },
-/* 126 */
+/* 130 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var ITERATOR     = __webpack_require__(68)('iterator')
@@ -5484,7 +6006,7 @@
 	};
 
 /***/ },
-/* 127 */
+/* 131 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);
@@ -5500,11 +6022,11 @@
 
 
 
-	var _Style = __webpack_require__(115);var _Style2 = _interopRequireDefault(_Style);
+	var _Style = __webpack_require__(119);var _Style2 = _interopRequireDefault(_Style);
 
 
-	var _Bounding = __webpack_require__(116);var _Bounding2 = _interopRequireDefault(_Bounding);
-	var _Classes = __webpack_require__(117);var _Classes2 = _interopRequireDefault(_Classes);
+	var _Bounding = __webpack_require__(120);var _Bounding2 = _interopRequireDefault(_Bounding);
+	var _Classes = __webpack_require__(121);var _Classes2 = _interopRequireDefault(_Classes);
 
 
 	var _Type = __webpack_require__(22);var _Type2 = _interopRequireDefault(_Type);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
