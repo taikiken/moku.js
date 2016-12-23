@@ -20,22 +20,21 @@
   "license": "MIT",
   "homepage": "",
   "dependencies": {
-    "babel-core": "^6.18.2",
+    "babel-core": "^6.21.0",
     "babel-plugin-transform-runtime": "^6.15.0",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-es2016": "^6.16.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
-    "babel-runtime": "^6.18.0",
+    "babel-runtime": "^6.20.0",
     "bower": "^1.8.0",
-    "browser-sync": "^2.18.1",
-    "coffee-script": "^1.11.1",
+    "browser-sync": "^2.18.5",
     "del": "^2.2.2",
-    "eslint": "^3.10.2",
+    "eslint": "^3.12.2",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.7.1",
+    "eslint-plugin-react": "^6.8.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-concat": "^2.6.1",
@@ -51,6 +50,6 @@
     "gulp-util": "^3.0.7",
     "require-dir": "^0.3.1",
     "run-sequence": "^1.2.2",
-    "webpack": "^1.13.3"
+    "webpack": "^1.14.0"
   }
 }
