@@ -88,24 +88,28 @@ export default class Queries {
    */
   static naked(targetText) {
     const queryString = Queries.amp(targetText);
-    return queryString.substr(0, 1) === '?' ? queryString.substring(1) : string;
+    return queryString.substr(0, 1) === '?' ? queryString.substring(1) : targetText;
   }
   /**
    * query を kye: value 形式にします
-   * @param targetText
-   * @returns {[*,*]}
+   * @param {string} targetText 操作対象文字列
+   * @returns {[*,*]} data, keys を返します
    */
   static parse(targetText) {
     const query = Queries.naked(targetText);
     const pairs = query.split('&');
     const data = {};
-    const keys = pairs.map((pair) => {
+    const keys = [];
+    pairs.map((pair) => {
+      let keyName = '';
       if (pair && pair.indexOf('=') !== -1) {
         const keyValue = pair.split('=');
         const key = keyValue.shift();
-        data[keys] = keyValue.shift();
-        return key;
+        data[key] = keyValue.shift();
+        keyName = key;
+        keys.push(key);
       }
+      return keyName;
     });
 
     return [data, keys];
@@ -126,7 +130,7 @@ export default class Queries {
    * @returns {(*|*)[]} URL query を key: value 形式で返します
    */
   static getAll(targetText = window.location.search) {
-    const [data] = Queries.parse(targetText);
+    // const [data] = Queries.parse(targetText);
     return Queries.parse(targetText);
   }
 }
