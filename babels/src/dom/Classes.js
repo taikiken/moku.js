@@ -119,7 +119,7 @@ export default class Classes {
     const empty = [];
     for (;i < limit; i += 1) {
       const className = arr[i];
-      if (!!className || className !== ' ') {
+      if (!!className && className !== ' ') {
         empty.push(className);
       }
     }
