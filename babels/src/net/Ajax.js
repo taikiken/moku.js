@@ -31,7 +31,7 @@ const Request = self.Request;
  *
  * @see http://caniuse.com/#feat=fetch
  * @see https://github.com/github/fetch
- * @see https://github.com/github/fetch
+ * @see https://github.com/taylorhakes/promise-polyfill
  * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch
  * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API
  * @see https://developer.mozilla.org/ja/docs/Web/API/Request
