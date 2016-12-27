@@ -28,6 +28,7 @@ import { default as Wheel } from './event/Wheel';
 // net
 import { default as Ajax } from './net/Ajax';
 import { default as Cookie } from './net/Cookie';
+import { default as Queries } from './net/Queries';
 
 // tick
 import { default as Cycle } from './tick/Cycle';
@@ -90,6 +91,7 @@ MOKU.event = {
 MOKU.net = {
   Ajax,
   Cookie,
+  Queries,
 };
 /**
  * MOKU.tick

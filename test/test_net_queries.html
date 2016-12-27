@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Mocha</title>
+  <link href="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+</head>
+<body>
+<div id="mocha"></div>
+<script src="//cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
+<script src="//cdn.rawgit.com/Automattic/expect.js/0.3.1/index.js"></script>
+<script src="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+<script src="http://chaijs.com/chai.js"></script>
+<script src="../libs/moku.js" charset="utf-8"></script>
+<script>
+  // mochaの機能を呼び出します。ここでは、BDDとTDDを使用します。
+  mocha.setup('bdd');
+  mocha.setup('tdd');
+  var assert = chai.assert;
+  // expectの機能を読み込み
+  var expect = chai.expect;
+  // shouldの機能を読み込み
+  chai.Should();
+</script>
+<script>
+  var net = window.MOKU.net;
+  var Queries = net.Queries;
+
+  // Queries.amp
+  describe('#Queries.amp', function() {
+    it("Queries.amp('?q=cx-5&oq=cx-5&aqs=chrome..69i57j69i60l2j69i61j0l2.1449j0j8&sourceid=chrome&ie=UTF-8') is ?q=cx-5&oq=cx-5&aqs=chrome..69i57j69i60l2j69i61j0l2.1449j0j8&sourceid=chrome&ie=UTF-8", function() {
+      expect(Queries.amp('?q=cx-5&oq=cx-5&aqs=chrome..69i57j69i60l2j69i61j0l2.1449j0j8&sourceid=chrome&ie=UTF-8')).to.eql('?q=cx-5&oq=cx-5&aqs=chrome..69i57j69i60l2j69i61j0l2.1449j0j8&sourceid=chrome&ie=UTF-8');
+    });
+
+    it("Queries.amp('?q=cx-5&amp;oq=cx-5&aqs=chrome..69i57j69i60l2j69i61j0l2.1449j0j8&sourceid=chrome&ie=UTF-8') is ?q=cx-5&oq=cx-5&aqs=chrome..69i57j69i60l2j69i61j0l2.1449j0j8&sourceid=chrome&ie=UTF-8", function() {
+      expect(Queries.amp('?q=cx-5&amp;oq=cx-5&aqs=chrome..69i57j69i60l2j69i61j0l2.1449j0j8&sourceid=chrome&ie=UTF-8')).to.eql('?q=cx-5&oq=cx-5&aqs=chrome..69i57j69i60l2j69i61j0l2.1449j0j8&sourceid=chrome&ie=UTF-8');
+    });
+  });
+
+  // Queries.naked
+  describe('#Queries.naked', function() {
+    it("Queries.naked('?q=cx-5&oq=cx-5&aqs=chrome..69i57j69i60l2j69i61j0l2.1449j0j8&sourceid=chrome&ie=UTF-8') is q=cx-5&oq=cx-5&aqs=chrome..69i57j69i60l2j69i61j0l2.1449j0j8&sourceid=chrome&ie=UTF-8", function() {
+      expect(Queries.naked('?q=cx-5&oq=cx-5&aqs=chrome..69i57j69i60l2j69i61j0l2.1449j0j8&sourceid=chrome&ie=UTF-8')).to.eql('q=cx-5&oq=cx-5&aqs=chrome..69i57j69i60l2j69i61j0l2.1449j0j8&sourceid=chrome&ie=UTF-8');
+    });
+
+    it("Queries.amp('?q=cx-5&amp;oq=cx-5&aqs=chrome..69i57j69i60l2j69i61j0l2.1449j0j8&sourceid=chrome&ie=UTF-8') is q=cx-5&oq=cx-5&aqs=chrome..69i57j69i60l2j69i61j0l2.1449j0j8&sourceid=chrome&ie=UTF-8", function() {
+      expect(Queries.naked('?q=cx-5&amp;oq=cx-5&aqs=chrome..69i57j69i60l2j69i61j0l2.1449j0j8&sourceid=chrome&ie=UTF-8')).to.eql('q=cx-5&oq=cx-5&aqs=chrome..69i57j69i60l2j69i61j0l2.1449j0j8&sourceid=chrome&ie=UTF-8');
+    });
+  });
+
+  var queries = new Queries('?q=cx-5&amp;oq=cx-5&aqs=chrome..69i57j69i60l2j69i61j0l2.1449j0j8&sourceid=chrome&ie=UTF-8');
+
+  console.log('queries.keys', queries.keys());
+  console.log('queries.data', queries.data());
+  // Queries.has
+  describe('#Queries.has', function() {
+    it("queries.has('q') is true", function() {
+      expect(queries.has('q')).to.be.true;
+
+    });
+
+    it("queries.has('XXX') is false", function() {
+      expect(queries.has('XXX')).to.be.false;
+    });
+  });
+
+  var queries2 = new Queries();
+  console.log('queries2.data', queries2.data());
+
+  // Queries.get
+  describe('#Queries.get', function() {
+    it("queries.get('q') is cx-5", function() {
+      expect(queries.get('q')).to.eql('cx-5');
+
+    });
+
+    it("queries.get('oq') is cx-5", function() {
+      expect(queries.get('oq')).to.eql('cx-5');
+    });
+
+    it("queries.get('sourceid') is chrome", function() {
+      expect(queries.get('sourceid')).to.eql('chrome');
+    });
+
+    it("Queries.get('_ijt') is snlias780p6euj608fmhfcarr1", function() {
+      expect(Queries.get('_ijt')).to.eql('snlias780p6euj608fmhfcarr1');
+
+    });
+  });
+
+
+</script>
+<script>
+  mocha.checkLeaks();
+  mocha.globals(['jQuery']);
+  mocha.run();
+</script>
+</body>
+</html>
