@@ -51,6 +51,8 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/WheelEvents.js~WheelEvents.html">WheelEvents</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">net</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Cookie.js~Cookie.html">Cookie</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Queries.js~Queries.html">Queries</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">tick</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html">Cycle</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Fps.js~Fps.html">Fps</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Polling.js~Polling.html">Polling</a></span></span></li>
@@ -59,6 +61,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Hit.js~Hit.html">Hit</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/List.js~List.html">List</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Text.js~Text.html">Text</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Times.js~Times.html">Times</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Vectors.js~Vectors.html">Vectors</a></span></span></li>
 </ul>
@@ -114,12 +117,7 @@ export default class EventDispatcher {
    * listener property &#x3092;&#x30A4;&#x30CB;&#x30B7;&#x30E3;&#x30E9;&#x30A4;&#x30BA;&#x3057;&#x307E;&#x3059;
    */
   constructor() {
-    // /**
-    //  * &#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x30EA;&#x30B9;&#x30C8;
-    //  * @type {Object}
-    //  * @private
-    //  */
-    // this[listenersKey] = {};
+    // @type {Object}
     let listeners = {};
     /**
      * &#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x30EA;&#x30B9;&#x30C8;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
@@ -135,29 +133,9 @@ export default class EventDispatcher {
       return true;
     };
   }
-  // // ----------------------------------------
-  // // GETTER / SETTER
-  // // ----------------------------------------
-  // /**
-  //  * &#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x30EA;&#x30B9;&#x30C8;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
-  //  * @returns {Object} &#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x30EA;&#x30B9;&#x30C8;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-  //  */
-  // get listeners() {
-  //   return this[listenersKey];
-  // }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
-  // /**
-  //  * &#x5168;&#x3066;&#x306E;&#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x3092;&#x7834;&#x68C4;&#x3057;&#x307E;&#x3059;
-  //  * @returns {boolean} &#x6210;&#x529F;&#x30FB;&#x4E0D;&#x6210;&#x529F;&#x306E;&#x771F;&#x507D;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-  //  */
-  // destroy() {
-  //   // this[listenersKey] = {};
-  //   let listeners = this.listeners();
-  //   listeners = {};
-  //   return true;
-  // }
   /**
    * event type &#x306B; &#x30EA;&#x30B9;&#x30CA;&#x30FC;&#x95A2;&#x6570;&#x3092; bind &#x3057;&#x307E;&#x3059;
    * @param {string} type event type&#xFF08;&#x7A2E;&#x985E;&#xFF09;
@@ -182,14 +160,9 @@ export default class EventDispatcher {
       // listeners.type &#x3092;&#x30AD;&#x30FC;&#x306B;&#x65B0;&#x898F;&#x914D;&#x5217;&#x3092;&#x4F5C;&#x6210;&#x3057;
       // listener {function} &#x3092;&#x914D;&#x5217;&#x3078;&#x8FFD;&#x52A0;&#xFF08;&#x767B;&#x9332;&#xFF09;&#x3057;&#x307E;&#x3059;
       listeners[type] = [];
-      // listeners[type].push(listener);
     }
-    // else {
-    //   // &#x3059;&#x3067;&#x306B; listeners.type &#x304C;&#x5B58;&#x5728;&#x3059;&#x308B;
-    //   listeners[type].push(listener);
-    // }
+    // &#x3059;&#x3067;&#x306B; listeners.type &#x304C;&#x5B58;&#x5728;&#x3059;&#x308B;
     listeners[type].push(listener);
-
     return true;
   }
   /**

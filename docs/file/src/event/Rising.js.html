@@ -51,6 +51,8 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/WheelEvents.js~WheelEvents.html">WheelEvents</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">net</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Cookie.js~Cookie.html">Cookie</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Queries.js~Queries.html">Queries</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">tick</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html">Cycle</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Fps.js~Fps.html">Fps</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Polling.js~Polling.html">Polling</a></span></span></li>
@@ -59,6 +61,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Hit.js~Hit.html">Hit</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/List.js~List.html">List</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Text.js~Text.html">Text</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Times.js~Times.html">Times</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Vectors.js~Vectors.html">Vectors</a></span></span></li>
 </ul>
@@ -113,20 +116,6 @@ export default class Rising extends EventDispatcher {
      * @returns {function} bound scroll
      */
     this.boundScroll = () =&gt; boundScroll;
-    // // events
-    // const events = new Events(Rising.UPDATE, this, this);
-    // events.hit = {
-    //   result: false,
-    //   top: false,
-    //   bottom: false,
-    //   contain: false,
-    //   include: false,
-    // };
-    // /**
-    //  * ScrollEvents instance, &#x767A;&#x706B;&#x6642;&#x306B;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;
-    //  * @returns {Events} ScrollEvents instance
-    //  */
-    // this.events = () =&gt; events;
     /**
      * start &#x6E08;&#x307F;&#x30D5;&#x30E9;&#x30C3;&#x30B0;
      * @type {boolean}
@@ -161,13 +150,12 @@ export default class Rising extends EventDispatcher {
    * @returns {Rising} method chain &#x53EF;&#x80FD;&#x306A;&#x3088;&#x3046;&#x306B; instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   start() {
-    // if (rate === null) {
-    //   throw new Error(`rate: ${rate} error. have to set rate, before start.`);
-    // }
+    // flag check
     if (this.started) {
       return this;
     }
     this.started = true;
+    // scrolling
     const scrolling = this.scrolling();
     scrolling.on(Scrolling.UPDATE, this.boundScroll());
     scrolling.start();

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../">
-  <title data-ice="title">Bounding | API Document</title>
+  <title data-ice="title">Times | API Document</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -69,17 +69,17 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Bounding from &apos;<span><a href="file/src/dom/Bounding.js.html#lineNumber16">./src/dom/Bounding.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Times from &apos;<span><a href="file/src/util/Times.js.html#lineNumber22">./src/util/Times.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/dom/Bounding.js.html#lineNumber16">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/util/Times.js.html#lineNumber22">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
-  <h1 data-ice="name">Bounding</h1>
+  <h1 data-ice="name">Times</h1>
 
   
 
@@ -95,7 +95,7 @@
 
   
   
-  <div class="description" data-ice="description"><p>Element &#x306E; ClientRect &#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;</p>
+  <div class="description" data-ice="description"><p>&#x6307;&#x5B9A;&#x6642;&#x9593;&#x3092;&#x8A08;&#x7B97;&#x3057; Date instance &#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;</p>
 </div>
 
   
@@ -123,19 +123,13 @@
     <td>
       <div>
         <p>
-           <span data-ice="name"><span><a href="class/src/dom/Bounding.js~Bounding.html#static-method-clone">clone</a></span></span><span data-ice="signature">(offset: <span>ClientRect</span>): <span>{
- top: number,
- right: number,
- bottom: number,
- left: number,
- width: number,
- height: number}</span></span>
+           <span data-ice="name"><span><a href="class/src/util/Times.js~Times.html#static-method-day">day</a></span></span><span data-ice="signature">(n: <span><a href="class/src/util/Type.js~Type.html#static-method-number">number</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>ClientRect &#x306E;&#x8907;&#x88FD;&#x3092; Object &#x5316;&#x3057; writable &#x306B;&#x3057;&#x307E;&#x3059;</p>
+        <div data-ice="description"><p>&#x6307;&#x5B9A;&#x65E5;&#x5F8C;&#x306E; Date instance</p>
 </div>
       </div>
     </td>
@@ -155,118 +149,13 @@
     <td>
       <div>
         <p>
-           <span data-ice="name"><span><a href="class/src/dom/Bounding.js~Bounding.html#static-method-offset">offset</a></span></span><span data-ice="signature">(element: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span>): <span>ClientRect</span></span>
+           <span data-ice="name"><span><a href="class/src/util/Times.js~Times.html#static-method-hour">hour</a></span></span><span data-ice="signature">(n: <span><a href="class/src/util/Type.js~Type.html#static-method-number">number</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p><code>getBoundingClientRect</code> &#x3092;&#x4F7F;&#x7528;&#x3057;&#x5F15;&#x6570; element &#x306E; offset &#x5024;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-</tbody>
-</table>
-</div>
-<div data-ice="constructorSummary"><h2>Constructor Summary</h2><table class="summary" data-ice="summary">
-  <thead><tr><td data-ice="title" colspan="3">Public Constructor</td></tr></thead>
-  <tbody>
-  
-  <tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-           <span data-ice="name"><span><a href="class/src/dom/Bounding.js~Bounding.html#instance-constructor-constructor">constructor</a></span></span><span data-ice="signature">(element: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span>)</span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>&#x64CD;&#x4F5C;&#x5BFE;&#x8C61; Element &#x3092;&#x4FDD;&#x5B58;&#x3057;&#x307E;&#x3059;</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-</tbody>
-</table>
-</div>
-<div data-ice="memberSummary"><h2>Member Summary</h2><table class="summary" data-ice="summary">
-  <thead><tr><td data-ice="title" colspan="3">Public Members</td></tr></thead>
-  <tbody>
-  
-  <tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-           <span data-ice="name"><span><a href="class/src/dom/Bounding.js~Bounding.html#instance-member-element">element</a></span></span><span data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>&#x64CD;&#x4F5C;&#x5BFE;&#x8C61; Element</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-</tbody>
-</table>
-</div>
-<div data-ice="methodSummary"><h2>Method Summary</h2><table class="summary" data-ice="summary">
-  <thead><tr><td data-ice="title" colspan="3">Public Methods</td></tr></thead>
-  <tbody>
-  
-  <tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-           <span data-ice="name"><span><a href="class/src/dom/Bounding.js~Bounding.html#instance-method-clone">clone</a></span></span><span data-ice="signature">(): <span>{
- top: number,
- right: number,
- bottom: number,
- left: number,
- width: number,
- height: number}</span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>writable &#x306A; element &#x306E; offset &#x5024;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;</p>
+        <div data-ice="description"><p>&#x6307;&#x5B9A;&#x6642;&#x9593;&#x5F8C;&#x306E; Date instance</p>
 </div>
       </div>
     </td>
@@ -278,7 +167,7 @@
 <tr data-ice="target">
     <td>
       <span class="access" data-ice="access">public</span>
-      
+      <span data-ice="static">static</span>
       
       
       <span class="override" data-ice="override"></span>
@@ -286,13 +175,91 @@
     <td>
       <div>
         <p>
-           <span data-ice="name"><span><a href="class/src/dom/Bounding.js~Bounding.html#instance-method-offset">offset</a></span></span><span data-ice="signature">(): <span>ClientRect</span></span>
+           <span data-ice="name"><span><a href="class/src/util/Times.js~Times.html#static-method-minute">minute</a></span></span><span data-ice="signature">(n: <span><a href="class/src/util/Type.js~Type.html#static-method-number">number</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p><code>getBoundingClientRect</code> &#x3092;&#x4F7F;&#x7528;&#x3057;&#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3; element &#x306E; offset &#x5024;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;</p>
+        <div data-ice="description"><p>&#x6307;&#x5B9A;&#x5206;&#x5F8C;&#x306E; Date instance</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="class/src/util/Times.js~Times.html#static-method-month">month</a></span></span><span data-ice="signature">(n: <span><a href="class/src/util/Type.js~Type.html#static-method-number">number</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>&#x6307;&#x5B9A;&#x6708;&#x5F8C;&#x306E; Date instance</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="class/src/util/Times.js~Times.html#static-method-present">present</a></span></span><span data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>&#x73FE;&#x5728;&#x6642;&#x9593; Date instance</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="class/src/util/Times.js~Times.html#static-method-week">week</a></span></span><span data-ice="signature">(n: <span><a href="class/src/util/Type.js~Type.html#static-method-number">number</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>&#x6307;&#x5B9A;&#x9031;&#x5F8C;&#x306E; Date instance</p>
 </div>
       </div>
     </td>
@@ -308,33 +275,30 @@
 
 
 
+
+
+
 <div data-ice="staticMethodDetails"><h2 data-ice="title">Static Public Methods</h2>
 
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="static-method-clone">
+  <h3 data-ice="anchor" id="static-method-day">
     <span class="access" data-ice="access">public</span>
     <span data-ice="static">static</span>
     
     
     
-    <span data-ice="name">clone</span><span data-ice="signature">(offset: <span>ClientRect</span>): <span>{
- top: number,
- right: number,
- bottom: number,
- left: number,
- width: number,
- height: number}</span></span>
+    <span data-ice="name">day</span><span data-ice="signature">(n: <span><a href="class/src/util/Type.js~Type.html#static-method-number">number</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/dom/Bounding.js.html#lineNumber74">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/util/Times.js.html#lineNumber58">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>ClientRect &#x306E;&#x8907;&#x88FD;&#x3092; Object &#x5316;&#x3057; writable &#x306B;&#x3057;&#x307E;&#x3059;</p>
+  <div data-ice="description"><p>&#x6307;&#x5B9A;&#x65E5;&#x5F8C;&#x306E; Date instance</p>
 </div>
 
   
@@ -348,10 +312,10 @@
     <tbody>
     
     <tr data-ice="property" data-depth="0">
-      <td data-ice="name" data-depth="0">offset</td>
-      <td data-ice="type"><span>ClientRect</span></td>
+      <td data-ice="name" data-depth="0">n</td>
+      <td data-ice="type"><span><a href="class/src/util/Type.js~Type.html#static-method-number">number</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>&#x8907;&#x88FD;&#x5143; ClientRect</p>
+      <td data-ice="description"><p>&#x6307;&#x5B9A;&#x65E5;</p>
 </td>
     </tr>
 </tbody>
@@ -363,14 +327,8 @@
     <h4>Return:</h4>
     <table>
       <tr>
-        <td class="return-type" data-ice="returnType"><span>{
- top: number,
- right: number,
- bottom: number,
- left: number,
- width: number,
- height: number}</span></td>
-        <td class="return-desc" data-ice="returnDescription"><p>ClientRect &#x306E;&#x8907;&#x88FD; (Object) &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;</p>
+        <td class="return-type" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a></span></td>
+        <td class="return-desc" data-ice="returnDescription"><p>&#x6307;&#x5B9A;&#x65E5;&#x5F8C;&#x306E; Date instance</p>
 </td>
       </tr>
     </table>
@@ -392,97 +350,24 @@
   
 </div>
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="static-method-offset">
+  <h3 data-ice="anchor" id="static-method-hour">
     <span class="access" data-ice="access">public</span>
     <span data-ice="static">static</span>
     
     
     
-    <span data-ice="name">offset</span><span data-ice="signature">(element: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span>): <span>ClientRect</span></span>
+    <span data-ice="name">hour</span><span data-ice="signature">(n: <span><a href="class/src/util/Type.js~Type.html#static-method-number">number</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/dom/Bounding.js.html#lineNumber60">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/util/Times.js.html#lineNumber50">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p><code>getBoundingClientRect</code> &#x3092;&#x4F7F;&#x7528;&#x3057;&#x5F15;&#x6570; element &#x306E; offset &#x5024;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;</p>
-<pre><code><code class="source-code prettyprint">{{top: Number, right: Number, left: Number, bottom: Number, width: Number, height: Number}}</code>
-</code></pre></div>
-
-  
-
-  <div data-ice="properties"><div data-ice="properties">
-  <h4 data-ice="title">Params:</h4>
-  <table class="params">
-    <thead>
-    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-    
-    <tr data-ice="property" data-depth="0">
-      <td data-ice="name" data-depth="0">element</td>
-      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>&#x8ABF;&#x67FB;&#x5BFE;&#x8C61; Element</p>
-</td>
-    </tr>
-</tbody>
-  </table>
-</div>
-</div>
-
-  <div class="return-params" data-ice="returnParams">
-    <h4>Return:</h4>
-    <table>
-      <tr>
-        <td class="return-type" data-ice="returnType"><span>ClientRect</span></td>
-        <td class="return-desc" data-ice="returnDescription"><p>&#x5F15;&#x6570; element &#x306E; offset &#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;</p>
-</td>
-      </tr>
-    </table>
-    <div data-ice="returnProperties">
-</div>
-  </div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  <div data-ice="see"><h4>See:</h4><ul><li><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect">https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect</a></span></li></ul></div>
-  
-</div>
-</div>
-<div data-ice="constructorDetails"><h2 data-ice="title">Public Constructors</h2>
-
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-constructor-constructor">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    <span data-ice="name">constructor</span><span data-ice="signature">(element: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span>)</span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/dom/Bounding.js.html#lineNumber21">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>&#x64CD;&#x4F5C;&#x5BFE;&#x8C61; Element &#x3092;&#x4FDD;&#x5B58;&#x3057;&#x307E;&#x3059;</p>
+  <div data-ice="description"><p>&#x6307;&#x5B9A;&#x6642;&#x9593;&#x5F8C;&#x306E; Date instance</p>
 </div>
 
   
@@ -496,10 +381,10 @@
     <tbody>
     
     <tr data-ice="property" data-depth="0">
-      <td data-ice="name" data-depth="0">element</td>
-      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span></td>
+      <td data-ice="name" data-depth="0">n</td>
+      <td data-ice="type"><span><a href="class/src/util/Type.js~Type.html#static-method-number">number</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>&#x64CD;&#x4F5C;&#x5BFE;&#x8C61; Element</p>
+      <td data-ice="description"><p>&#x6307;&#x5B9A;&#x6642;&#x9593;</p>
 </td>
     </tr>
 </tbody>
@@ -507,112 +392,12 @@
 </div>
 </div>
 
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-</div>
-<div data-ice="memberDetails"><h2 data-ice="title">Public Members</h2>
-
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-element">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    <span data-ice="name">element</span><span data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/dom/Bounding.js.html#lineNumber26">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>&#x64CD;&#x4F5C;&#x5BFE;&#x8C61; Element</p>
-</div>
-
-  
-
-  <div data-ice="properties">
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-</div>
-<div data-ice="methodDetails"><h2 data-ice="title">Public Methods</h2>
-
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-clone">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    <span data-ice="name">clone</span><span data-ice="signature">(): <span>{
- top: number,
- right: number,
- bottom: number,
- left: number,
- width: number,
- height: number}</span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/dom/Bounding.js.html#lineNumber45">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>writable &#x306A; element &#x306E; offset &#x5024;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;</p>
-</div>
-
-  
-
-  <div data-ice="properties">
-</div>
-
   <div class="return-params" data-ice="returnParams">
     <h4>Return:</h4>
     <table>
       <tr>
-        <td class="return-type" data-ice="returnType"><span>{
- top: number,
- right: number,
- bottom: number,
- left: number,
- width: number,
- height: number}</span></td>
-        <td class="return-desc" data-ice="returnDescription"><p>writable &#x306A; element &#x306E; offset</p>
+        <td class="return-type" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a></span></td>
+        <td class="return-desc" data-ice="returnDescription"><p>&#x6307;&#x5B9A;&#x6642;&#x9593;&#x5F8C;&#x306E; Date instance</p>
 </td>
       </tr>
     </table>
@@ -634,24 +419,162 @@
   
 </div>
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-offset">
+  <h3 data-ice="anchor" id="static-method-minute">
     <span class="access" data-ice="access">public</span>
+    <span data-ice="static">static</span>
     
     
     
-    
-    <span data-ice="name">offset</span><span data-ice="signature">(): <span>ClientRect</span></span>
+    <span data-ice="name">minute</span><span data-ice="signature">(n: <span><a href="class/src/util/Type.js~Type.html#static-method-number">number</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/dom/Bounding.js.html#lineNumber32">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/util/Times.js.html#lineNumber42">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p><code>getBoundingClientRect</code> &#x3092;&#x4F7F;&#x7528;&#x3057;&#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3; element &#x306E; offset &#x5024;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;</p>
+  <div data-ice="description"><p>&#x6307;&#x5B9A;&#x5206;&#x5F8C;&#x306E; Date instance</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">n</td>
+      <td data-ice="type"><span><a href="class/src/util/Type.js~Type.html#static-method-number">number</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>&#x6307;&#x5B9A;&#x5206;</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tr>
+        <td class="return-type" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a></span></td>
+        <td class="return-desc" data-ice="returnDescription"><p>&#x6307;&#x5B9A;&#x5206;&#x5F8C;&#x306E; Date instance</p>
+</td>
+      </tr>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-method-month">
+    <span class="access" data-ice="access">public</span>
+    <span data-ice="static">static</span>
+    
+    
+    
+    <span data-ice="name">month</span><span data-ice="signature">(n: <span><a href="class/src/util/Type.js~Type.html#static-method-number">number</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/util/Times.js.html#lineNumber74">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>&#x6307;&#x5B9A;&#x6708;&#x5F8C;&#x306E; Date instance</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">n</td>
+      <td data-ice="type"><span><a href="class/src/util/Type.js~Type.html#static-method-number">number</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>&#x6307;&#x5B9A;&#x6708;</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tr>
+        <td class="return-type" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a></span></td>
+        <td class="return-desc" data-ice="returnDescription"><p>&#x6307;&#x5B9A;&#x6708;&#x5F8C;&#x306E; Date instance</p>
+</td>
+      </tr>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-method-present">
+    <span class="access" data-ice="access">public</span>
+    <span data-ice="static">static</span>
+    
+    
+    
+    <span data-ice="name">present</span><span data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/util/Times.js.html#lineNumber34">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>&#x73FE;&#x5728;&#x6642;&#x9593; Date instance</p>
 </div>
 
   
@@ -663,8 +586,77 @@
     <h4>Return:</h4>
     <table>
       <tr>
-        <td class="return-type" data-ice="returnType"><span>ClientRect</span></td>
-        <td class="return-desc" data-ice="returnDescription"><p>read only ClientRect &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;</p>
+        <td class="return-type" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a></span></td>
+        <td class="return-desc" data-ice="returnDescription"><p>&#x73FE;&#x5728;&#x6642;&#x9593; Date instance</p>
+</td>
+      </tr>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-method-week">
+    <span class="access" data-ice="access">public</span>
+    <span data-ice="static">static</span>
+    
+    
+    
+    <span data-ice="name">week</span><span data-ice="signature">(n: <span><a href="class/src/util/Type.js~Type.html#static-method-number">number</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/util/Times.js.html#lineNumber66">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>&#x6307;&#x5B9A;&#x9031;&#x5F8C;&#x306E; Date instance</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">n</td>
+      <td data-ice="type"><span><a href="class/src/util/Type.js~Type.html#static-method-number">number</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>&#x6307;&#x5B9A;&#x9031;</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tr>
+        <td class="return-type" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a></span></td>
+        <td class="return-desc" data-ice="returnDescription"><p>&#x6307;&#x5B9A;&#x9031;&#x5F8C;&#x306E; Date instance</p>
 </td>
       </tr>
     </table>
@@ -686,6 +678,9 @@
   
 </div>
 </div>
+
+
+
 </div>
 
 <footer class="footer">

@@ -24,6 +24,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "./src/net/cookie.js~cookie",
+    "class/src/net/Cookie.js~Cookie.html",
+    "<span>Cookie</span> <span class=\"search-result-import-path\">./src/net/Cookie.js</span>",
+    "class"
+  ],
+  [
     "./src/tick/cycle.js~cycle",
     "class/src/tick/Cycle.js~Cycle.html",
     "<span>Cycle</span> <span class=\"search-result-import-path\">./src/tick/Cycle.js</span>",
@@ -84,6 +90,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "./src/net/queries.js~queries",
+    "class/src/net/Queries.js~Queries.html",
+    "<span>Queries</span> <span class=\"search-result-import-path\">./src/net/Queries.js</span>",
+    "class"
+  ],
+  [
     "./src/tick/rate.js~rate",
     "class/src/tick/Rate.js~Rate.html",
     "<span>Rate</span> <span class=\"search-result-import-path\">./src/tick/Rate.js</span>",
@@ -129,6 +141,12 @@ window.esdocSearchIndex = [
     "./src/util/text.js~text",
     "class/src/util/Text.js~Text.html",
     "<span>Text</span> <span class=\"search-result-import-path\">./src/util/Text.js</span>",
+    "class"
+  ],
+  [
+    "./src/util/times.js~times",
+    "class/src/util/Times.js~Times.html",
+    "<span>Times</span> <span class=\"search-result-import-path\">./src/util/Times.js</span>",
     "class"
   ],
   [
@@ -693,6 +711,12 @@ window.esdocSearchIndex = [
     "src/dom/classes.js~classes.add",
     "class/src/dom/Classes.js~Classes.html#static-method-add",
     "src/dom/Classes.js~Classes.add",
+    "method"
+  ],
+  [
+    "src/dom/classes.js~classes.convert",
+    "class/src/dom/Classes.js~Classes.html#static-method-convert",
+    "src/dom/Classes.js~Classes.convert",
     "method"
   ],
   [
@@ -1542,6 +1566,204 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/net/cookie.js",
+    "file/src/net/Cookie.js.html",
+    "src/net/Cookie.js",
+    "file"
+  ],
+  [
+    "src/net/cookie.js~cookie#constructor",
+    "class/src/net/Cookie.js~Cookie.html#instance-constructor-constructor",
+    "src/net/Cookie.js~Cookie#constructor",
+    "method"
+  ],
+  [
+    "src/net/cookie.js~cookie#domain",
+    "class/src/net/Cookie.js~Cookie.html#instance-member-domain",
+    "src/net/Cookie.js~Cookie#domain",
+    "member"
+  ],
+  [
+    "src/net/cookie.js~cookie#end",
+    "class/src/net/Cookie.js~Cookie.html#instance-member-end",
+    "src/net/Cookie.js~Cookie#end",
+    "member"
+  ],
+  [
+    "src/net/cookie.js~cookie#get",
+    "class/src/net/Cookie.js~Cookie.html#instance-method-get",
+    "src/net/Cookie.js~Cookie#get",
+    "method"
+  ],
+  [
+    "src/net/cookie.js~cookie#key",
+    "class/src/net/Cookie.js~Cookie.html#instance-member-key",
+    "src/net/Cookie.js~Cookie#key",
+    "member"
+  ],
+  [
+    "src/net/cookie.js~cookie#path",
+    "class/src/net/Cookie.js~Cookie.html#instance-member-path",
+    "src/net/Cookie.js~Cookie#path",
+    "member"
+  ],
+  [
+    "src/net/cookie.js~cookie#remove",
+    "class/src/net/Cookie.js~Cookie.html#instance-method-remove",
+    "src/net/Cookie.js~Cookie#remove",
+    "method"
+  ],
+  [
+    "src/net/cookie.js~cookie#secure",
+    "class/src/net/Cookie.js~Cookie.html#instance-member-secure",
+    "src/net/Cookie.js~Cookie#secure",
+    "member"
+  ],
+  [
+    "src/net/cookie.js~cookie#set",
+    "class/src/net/Cookie.js~Cookie.html#instance-method-set",
+    "src/net/Cookie.js~Cookie#set",
+    "method"
+  ],
+  [
+    "src/net/cookie.js~cookie#setdomain",
+    "class/src/net/Cookie.js~Cookie.html#instance-member-setDomain",
+    "src/net/Cookie.js~Cookie#setDomain",
+    "member"
+  ],
+  [
+    "src/net/cookie.js~cookie#setend",
+    "class/src/net/Cookie.js~Cookie.html#instance-member-setEnd",
+    "src/net/Cookie.js~Cookie#setEnd",
+    "member"
+  ],
+  [
+    "src/net/cookie.js~cookie#setkey",
+    "class/src/net/Cookie.js~Cookie.html#instance-member-setKey",
+    "src/net/Cookie.js~Cookie#setKey",
+    "member"
+  ],
+  [
+    "src/net/cookie.js~cookie#setpath",
+    "class/src/net/Cookie.js~Cookie.html#instance-member-setPath",
+    "src/net/Cookie.js~Cookie#setPath",
+    "member"
+  ],
+  [
+    "src/net/cookie.js~cookie#setsecure",
+    "class/src/net/Cookie.js~Cookie.html#instance-member-setSecure",
+    "src/net/Cookie.js~Cookie#setSecure",
+    "member"
+  ],
+  [
+    "src/net/cookie.js~cookie.get",
+    "class/src/net/Cookie.js~Cookie.html#static-method-get",
+    "src/net/Cookie.js~Cookie.get",
+    "method"
+  ],
+  [
+    "src/net/cookie.js~cookie.has",
+    "class/src/net/Cookie.js~Cookie.html#static-method-has",
+    "src/net/Cookie.js~Cookie.has",
+    "method"
+  ],
+  [
+    "src/net/cookie.js~cookie.remove",
+    "class/src/net/Cookie.js~Cookie.html#static-method-remove",
+    "src/net/Cookie.js~Cookie.remove",
+    "method"
+  ],
+  [
+    "src/net/cookie.js~cookie.set",
+    "class/src/net/Cookie.js~Cookie.html#static-method-set",
+    "src/net/Cookie.js~Cookie.set",
+    "method"
+  ],
+  [
+    "src/net/queries.js",
+    "file/src/net/Queries.js.html",
+    "src/net/Queries.js",
+    "file"
+  ],
+  [
+    "src/net/queries.js~queries#constructor",
+    "class/src/net/Queries.js~Queries.html#instance-constructor-constructor",
+    "src/net/Queries.js~Queries#constructor",
+    "method"
+  ],
+  [
+    "src/net/queries.js~queries#data",
+    "class/src/net/Queries.js~Queries.html#instance-member-data",
+    "src/net/Queries.js~Queries#data",
+    "member"
+  ],
+  [
+    "src/net/queries.js~queries#get",
+    "class/src/net/Queries.js~Queries.html#instance-method-get",
+    "src/net/Queries.js~Queries#get",
+    "method"
+  ],
+  [
+    "src/net/queries.js~queries#getall",
+    "class/src/net/Queries.js~Queries.html#instance-method-getAll",
+    "src/net/Queries.js~Queries#getAll",
+    "method"
+  ],
+  [
+    "src/net/queries.js~queries#has",
+    "class/src/net/Queries.js~Queries.html#instance-method-has",
+    "src/net/Queries.js~Queries#has",
+    "method"
+  ],
+  [
+    "src/net/queries.js~queries#keys",
+    "class/src/net/Queries.js~Queries.html#instance-member-keys",
+    "src/net/Queries.js~Queries#keys",
+    "member"
+  ],
+  [
+    "src/net/queries.js~queries#naked",
+    "class/src/net/Queries.js~Queries.html#instance-member-naked",
+    "src/net/Queries.js~Queries#naked",
+    "member"
+  ],
+  [
+    "src/net/queries.js~queries#querystring",
+    "class/src/net/Queries.js~Queries.html#instance-member-queryString",
+    "src/net/Queries.js~Queries#queryString",
+    "member"
+  ],
+  [
+    "src/net/queries.js~queries.amp",
+    "class/src/net/Queries.js~Queries.html#static-method-amp",
+    "src/net/Queries.js~Queries.amp",
+    "method"
+  ],
+  [
+    "src/net/queries.js~queries.get",
+    "class/src/net/Queries.js~Queries.html#static-method-get",
+    "src/net/Queries.js~Queries.get",
+    "method"
+  ],
+  [
+    "src/net/queries.js~queries.getall",
+    "class/src/net/Queries.js~Queries.html#static-method-getAll",
+    "src/net/Queries.js~Queries.getAll",
+    "method"
+  ],
+  [
+    "src/net/queries.js~queries.naked",
+    "class/src/net/Queries.js~Queries.html#static-method-naked",
+    "src/net/Queries.js~Queries.naked",
+    "method"
+  ],
+  [
+    "src/net/queries.js~queries.parse",
+    "class/src/net/Queries.js~Queries.html#static-method-parse",
+    "src/net/Queries.js~Queries.parse",
+    "method"
+  ],
+  [
     "src/tick/cycle.js",
     "file/src/tick/Cycle.js.html",
     "src/tick/Cycle.js",
@@ -1962,6 +2184,48 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/util/times.js",
+    "file/src/util/Times.js.html",
+    "src/util/Times.js",
+    "file"
+  ],
+  [
+    "src/util/times.js~times.day",
+    "class/src/util/Times.js~Times.html#static-method-day",
+    "src/util/Times.js~Times.day",
+    "method"
+  ],
+  [
+    "src/util/times.js~times.hour",
+    "class/src/util/Times.js~Times.html#static-method-hour",
+    "src/util/Times.js~Times.hour",
+    "method"
+  ],
+  [
+    "src/util/times.js~times.minute",
+    "class/src/util/Times.js~Times.html#static-method-minute",
+    "src/util/Times.js~Times.minute",
+    "method"
+  ],
+  [
+    "src/util/times.js~times.month",
+    "class/src/util/Times.js~Times.html#static-method-month",
+    "src/util/Times.js~Times.month",
+    "method"
+  ],
+  [
+    "src/util/times.js~times.present",
+    "class/src/util/Times.js~Times.html#static-method-present",
+    "src/util/Times.js~Times.present",
+    "method"
+  ],
+  [
+    "src/util/times.js~times.week",
+    "class/src/util/Times.js~Times.html#static-method-week",
+    "src/util/Times.js~Times.week",
+    "method"
+  ],
+  [
     "src/util/type.js",
     "file/src/util/Type.js.html",
     "src/util/Type.js",
@@ -1986,9 +2250,21 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/util/type.js~type.extension",
+    "class/src/util/Type.js~Type.html#static-method-extension",
+    "src/util/Type.js~Type.extension",
+    "method"
+  ],
+  [
     "src/util/type.js~type.getextension",
     "class/src/util/Type.js~Type.html#static-method-getExtension",
     "src/util/Type.js~Type.getExtension",
+    "method"
+  ],
+  [
+    "src/util/type.js~type.has",
+    "class/src/util/Type.js~Type.html#static-method-has",
+    "src/util/Type.js~Type.has",
     "method"
   ],
   [

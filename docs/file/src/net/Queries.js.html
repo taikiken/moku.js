@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../">
-  <title data-ice="title">src/dom/Elements.js | API Document</title>
+  <title data-ice="title">src/net/Queries.js | API Document</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -68,111 +68,141 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1 data-ice="title">src/dom/Elements.js</h1>
+<div class="content" data-ice="content"><h1 data-ice="title">src/net/Queries.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
- * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * @license inazumatv.com
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/10/06 - 21:49
+ * @date 2016/12/23
+ *
+ * Copyright (c) 2011-2015 inazumatv.com, inc.
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
  *
  * This notice shall be included in all copies or substantial portions of the Software.
- *
  */
-
-// css
-import { default as Style } from &apos;../css/Style&apos;;
-
-// don
-import { default as Bounding } from &apos;./Bounding&apos;;
-import { default as Classes } from &apos;./Classes&apos;;
-
-// util
-import { default as Type } from &apos;../util/Type&apos;;
 
 /**
- * HTMLElement &#x306E;&#x64CD;&#x4F5C;&#x3092;&#x884C;&#x3044;&#x307E;&#x3059;
+ * URL query &#x3092;&#x30D1;&#x30FC;&#x30B9;&#x3057;&#x307E;&#x3059;
  */
-export default class Elements {
+export default class Queries {
   /**
-   * &#x64CD;&#x4F5C;&#x5BFE;&#x8C61; Element &#x3092;&#x4FDD;&#x5B58;&#x3057;&#x307E;&#x3059;
-   * @param {Element|Node} element &#x64CD;&#x4F5C;&#x5BFE;&#x8C61; Element
+   * URL query &#x3092;&#x53D7;&#x53D6;&#x30D1;&#x30FC;&#x30B9;&#x3057;&#x307E;&#x3059;
+   * @param {string} [queryString=location.search] &#x30D1;&#x30FC;&#x30B9;&#x3059;&#x308B; URL &#x6587;&#x5B57;&#x5217;
    */
-  constructor(element) {
-    const style = new Style(element);
-    const classes = new Classes(element);
-    const bounding = new Bounding(element);
+  constructor(queryString = window.location.search) {
+    const [data, keys] = Queries.parse(queryString);
+    const naked = Queries.naked(queryString);
     /**
-     * &#x5BFE;&#x8C61; Element &#x306E; CSS &#x64CD;&#x4F5C;&#x3092;&#x884C;&#x3046; Style instance
-     * @returns {Style} Style instance
+     * query key &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+     * @returns {Array&lt;string&gt;} query key array
      */
-    this.style = () =&gt; style;
+    this.keys = () =&gt; keys;
     /**
-     * Element class &#x64CD;&#x4F5C;&#x306E;&#x305F;&#x3081;&#x306B; instance &#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;
-     * @returns {Classes} Classes instance
+     * key: value &#x5F62;&#x5F0F;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+     * @returns {Object} URL query &#x3092; key: value &#x5F62;&#x5F0F;&#x3067;&#x8FD4;&#x3057;&#x307E;&#x3059;
      */
-    this.classes = () =&gt; classes;
+    this.data = () =&gt; data;
     /**
-     * &#x64CD;&#x4F5C;&#x5BFE;&#x8C61; Element
-     * @returns {Element} &#x64CD;&#x4F5C;&#x5BFE;&#x8C61; Element
+     * query &#x6587;&#x5B57;&#x5217;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+     * @returns {string} &#x30D1;&#x30FC;&#x30B9;&#x3059;&#x308B; query &#x6587;&#x5B57;&#x5217;
      */
-    this.element = () =&gt; element;
+    this.queryString = () =&gt; queryString;
     /**
-     * Element class `ClientRect` &#x53D6;&#x5F97;&#x306E;&#x305F;&#x3081;&#x306B; instance &#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;
-     * @returns {Bounding} Element class `ClientRect` &#x53D6;&#x5F97;&#x306E;&#x305F;&#x3081;&#x306E; instance
+     * &#x30D1;&#x30FC;&#x30B9;&#x3057;&#x3084;&#x3059;&#x3044;&#x3088;&#x3046;&#x306B;&#x6B63;&#x898F;&#x5316;&#x3057;&#x305F; query &#x6587;&#x5B57;&#x5217;
+     * @returns {string} `?` &#x4EE5;&#x964D;&#x6587;&#x5B57; + `&amp;amp;` &#x3092; `&amp;` &#x3078;&#x7F6E;&#x63DB;&#x3048;&#x307E;&#x3059;
      */
-    this.bounding = () =&gt; bounding;
+    this.naked = () =&gt; naked;
   }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
   /**
-   * `getBoundingClientRect` &#x3092;&#x4F7F;&#x7528;&#x3057;&#x5F15;&#x6570; element &#x306E; offset &#x5024;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
-   *
-   * ```
-   * {{top: Number, right: Number, left: Number, bottom: Number, width: Number, height: Number}}
-   * ```
-   *
-   * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
-   *
-   * @return {ClientRect} &#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3; element &#x306E; offset &#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * key &#x304C;&#x5B58;&#x5728;&#x3059;&#x308B;&#x304B;&#x3092;&#x8ABF;&#x3079;&#x307E;&#x3059;
+   * @param {string} keyName &#x8ABF;&#x67FB;&#x5BFE;&#x8C61; key &#x540D;&#x79F0;
+   * @returns {boolean} true: &#x5B58;&#x5728;&#x3059;&#x308B;
    */
-  offset() {
-    return this.bounding().offset();
+  has(keyName) {
+    return this.keys().indexOf(keyName) !== -1;
+  }
+  /**
+   * key &#x5024;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @param {string} keyName &#x8ABF;&#x67FB;&#x5BFE;&#x8C61; key &#x540D;&#x79F0;
+   * @returns {string|undefined} &#x898B;&#x3064;&#x304B;&#x308B;&#x3068;&#x6587;&#x5B57;&#x5217;&#x3067;&#x8FD4;&#x3057;&#x307E;&#x3059;, &#x898B;&#x3064;&#x304B;&#x3089;&#x306A;&#x3044;&#x6642;&#x306F; undefined &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  get(keyName) {
+    return this.data()[keyName];
+  }
+  /**
+   * key: value &#x5F62;&#x5F0F;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @returns {Object} URL query &#x3092; key: value &#x5F62;&#x5F0F;&#x3067;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  getAll() {
+    return this.data();
   }
   // ----------------------------------------
   // STATIC METHOD
   // ----------------------------------------
   /**
-   * &#x5F15;&#x6570;&#x306E; id attribute value &#x3067; HTMLElement &#x3092; `document.getElementById` &#x3067;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
-   * @param {string} idName id attribute value
-   * @return {?Element} Element &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;, &#x53D6;&#x5F97;&#x3067;&#x304D;&#x306A;&#x3044;&#x6642;&#x306F; null &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * `&amp;amp;` &#x3092; `&amp;` &#x3078;&#x7F6E;&#x63DB;&#x3048;&#x307E;&#x3059;
+   * @param {string} targetText &#x64CD;&#x4F5C;&#x5BFE;&#x8C61;&#x6587;&#x5B57;&#x5217;
+   * @returns {string} `&amp;amp;` &#x3092; `&amp;` &#x3078;&#x7F6E;&#x63DB;&#x3048;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
-  static id(idName) {
-    const element = self.document.getElementById(idName);
-    // &#x5B58;&#x5728;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3092;&#x884C;&#x3044;&#x307E;&#x3059;
-    return Type.exist(element) ? element : null;
-  }
-  /**
-   * querySelector &#x3092;&#x4F7F;&#x7528;&#x3057; Element &#x3092;&#x63A2;&#x3057;&#x307E;&#x3059;
-   * @param {string} selector &#x63A2;&#x7D22; selector
-   * @param {Element|*} [parentNode=document] &#x89AA; Node|Element
-   * @return {?Element} Element or null
-   */
-  static select(selector, parentNode = self.document) {
-    return parentNode.querySelector(selector);
+  static amp(targetText) {
+    return targetText.split(&apos;&amp;amp;&apos;).join(&apos;&amp;&apos;);
   }
 
   /**
-   * querySelectorAll &#x3092;&#x4F7F;&#x7528;&#x3057; Element &#x3092;&#x63A2;&#x3057;&#x307E;&#x3059;
-   * @param {string} selector &#x63A2;&#x7D22; selector
-   * @param {Element|*} [parentNode=document] &#x89AA; Node|Element
-   * @return {?NodeList} NodeList or null
+   * &#x6587;&#x5B57;&#x5217;&#x5148;&#x982D;&#x306B; `?` &#x304C;&#x3042;&#x308C;&#x3070;&#x305D;&#x308C;&#x4EE5;&#x964D;&#x306E;&#x6587;&#x5B57;&#x5217;&#x3092;&#x8FD4;&#x3057; `Query.amp` &#x3092;&#x5B9F;&#x884C;&#x3057;&#x307E;&#x3059;
+   * @param {string} targetText &#x64CD;&#x4F5C;&#x5BFE;&#x8C61;&#x6587;&#x5B57;&#x5217;
+   * @returns {string} query &#x3092;&#x6B63;&#x898F;&#x5316;&#x3057;&#x307E;&#x3059;
    */
-  static selects(selector, parentNode = self.document) {
-    const elements = parentNode.querySelectorAll(selector);
-    return elements.length &gt; 0 ? elements : null;
+  static naked(targetText) {
+    const queryString = Queries.amp(targetText);
+    return queryString.substr(0, 1) === &apos;?&apos; ? queryString.substring(1) : targetText;
+  }
+  /**
+   * query &#x3092; kye: value &#x5F62;&#x5F0F;&#x306B;&#x3057;&#x307E;&#x3059;
+   * @param {string} targetText &#x64CD;&#x4F5C;&#x5BFE;&#x8C61;&#x6587;&#x5B57;&#x5217;
+   * @returns {[Object, Array]} data, keys &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  static parse(targetText) {
+    const query = Queries.naked(targetText);
+    const pairs = query.split(&apos;&amp;&apos;);
+    const data = {};
+    const keys = [];
+    pairs.map((pair) =&gt; {
+      let keyName = &apos;&apos;;
+      if (pair &amp;&amp; pair.indexOf(&apos;=&apos;) !== -1) {
+        const keyValue = pair.split(&apos;=&apos;);
+        const key = keyValue.shift();
+        data[key] = keyValue.shift();
+        keyName = key;
+        keys.push(key);
+      }
+      return keyName;
+    });
+
+    return [data, keys];
+  }
+  /**
+   * &#x5F15;&#x6570; targetText (query) &#x304B;&#x3089;&#x5F15;&#x6570; keyName &#x5024;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @param {string} keyName key &#x540D;&#x79F0;
+   * @param {string} targetText query
+   * @returns {string|undefined} &#x898B;&#x3064;&#x304B;&#x308B;&#x3068;&#x6587;&#x5B57;&#x5217;&#x3067;&#x8FD4;&#x3057;&#x307E;&#x3059;, &#x898B;&#x3064;&#x304B;&#x3089;&#x306A;&#x3044;&#x6642;&#x306F; undefined &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  static get(keyName, targetText = window.location.search) {
+    const [data] = Queries.parse(targetText);
+    return data[keyName];
+  }
+  /**
+   * URL query &#x306E; key: value &#x5F62;&#x5F0F;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @param {string} targetText query
+   * @returns {[Object, Array]} URL query &#x3092; key: value &#x5F62;&#x5F0F;&#x3067;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  static getAll(targetText = window.location.search) {
+    // const [data] = Queries.parse(targetText);
+    return Queries.parse(targetText);
   }
 }
 </code></pre>

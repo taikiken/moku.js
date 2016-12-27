@@ -51,6 +51,8 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/WheelEvents.js~WheelEvents.html">WheelEvents</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">net</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Cookie.js~Cookie.html">Cookie</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Queries.js~Queries.html">Queries</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">tick</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html">Cycle</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Fps.js~Fps.html">Fps</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Polling.js~Polling.html">Polling</a></span></span></li>
@@ -59,6 +61,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Hit.js~Hit.html">Hit</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/List.js~List.html">List</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Text.js~Text.html">Text</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Times.js~Times.html">Times</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Vectors.js~Vectors.html">Vectors</a></span></span></li>
 </ul>
@@ -105,12 +108,11 @@ export default class Type {
    * @returns {boolean} &#x5F15;&#x6570;(target)&#x304C; number &#x304B;&#x3092;&#x8ABF;&#x3079;&#x7D50;&#x679C;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;&#x3001;true: number
    */
   static number(target) {
-    // return typeof target === &apos;number&apos;;
-    // jQuery 2.x
+    // [&#x53C2;&#x8003;] jQuery 2.x, jQuery 2 &#x95A2;&#x6570;&#x306F;&#x6587;&#x5B57;&#x5217; &quot;2&quot; &#x3082; true &#x306B;&#x3059;&#x308B;&#x306E;&#x3067; type check &#x3092;&#x8FFD;&#x52A0;&#x3057;&#x305F;
     return typeof target === &apos;number&apos; &amp;&amp; !Type.array(target) &amp;&amp; ((target - parseFloat(target)) + 1) &gt;= 0;
   }
   /**
-   * &#x5F15;&#x6570;(target)&#x304C; int &#x304B;&#x3092;&#x8ABF;&#x3079;&#x307E;&#x3059;
+   * &#x5F15;&#x6570;(target)&#x304C; int &#x304B;&#x3092; `Number.isInteger` &#x3092;&#x4F7F;&#x7528;&#x3057;&#x8ABF;&#x3079;&#x307E;&#x3059;
    * @param {*} target &#x8ABF;&#x67FB;&#x5BFE;&#x8C61;
    * @returns {boolean} &#x5F15;&#x6570;(target)&#x304C; int &#x304B;&#x3092;&#x8ABF;&#x3079;&#x7D50;&#x679C;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;&#x3001;true: int
    */
@@ -142,12 +144,22 @@ export default class Type {
     return target === null;
   }
   /**
-   * Object&#x578B; &#x5F15;&#x6570; `object` &#x306F; String&#x578B; &#x5F15;&#x6570; `key` &#x3092; [key] &#x3068;&#x3057;&#x3066;&#x5B58;&#x5728;&#x3059;&#x308B;&#x304B;&#x3092;&#x8ABF;&#x3079;&#x307E;&#x3059;
+   * @deprecated instead use Type.has
+   * Object&#x578B; &#x5F15;&#x6570; `object` &#x306F; String&#x578B; &#x5F15;&#x6570; `key` &#x3092; [key] &#x3068;&#x3057;&#x3066;&#x6240;&#x6301;&#x3057;&#x3066;&#x3044;&#x308B;&#x304B;&#x3092;&#x8ABF;&#x3079;&#x307E;&#x3059;
    * @param {Object} target &#x8ABF;&#x67FB;&#x5BFE;&#x8C61;
    * @param {string} key Object.key &#x540D;&#x79F0;
    * @returns {boolean} &#x5B58;&#x5728;&#x3059;&#x308B;&#x6642;&#x306F; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   static hasKey(target, key) {
+    return Type.has(target, key);
+  }
+  /**
+   * Object&#x578B; &#x5F15;&#x6570; `object` &#x306F; String&#x578B; &#x5F15;&#x6570; `key` &#x3092; [key] &#x3068;&#x3057;&#x3066;&#x6240;&#x6301;&#x3057;&#x3066;&#x3044;&#x308B;&#x304B;&#x3092;&#x8ABF;&#x3079;&#x307E;&#x3059;
+   * @param {Object} target &#x8ABF;&#x67FB;&#x5BFE;&#x8C61;
+   * @param {string} key Object.key &#x540D;&#x79F0;
+   * @returns {boolean} &#x5B58;&#x5728;&#x3059;&#x308B;&#x6642;&#x306F; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  static has(target, key) {
     return Object.keys(target).indexOf(key) !== -1;
   }
   /**
@@ -160,20 +172,36 @@ export default class Type {
     return typeof target === &apos;undefined&apos;;
   }
   /**
+   * @deprecated instead use Type.extension
    * &#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x540D;&#x304B;&#x3089;&#x62E1;&#x5F35;&#x5B50;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
    * @param {string} fileName &#x53D6;&#x5F97;&#x3057;&#x305F;&#x3044;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x540D;&#x79F0;
    * @returns {string} &#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x540D;&#x306E;&#x62E1;&#x5F35;&#x5B50;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   static getExtension(fileName) {
-    // http://stackoverflow.com/questions/190852/how-can-i-get-file-extensions-with-javascript
-    const split = fileName.split(&apos;.&apos;);
-
-    if (split.length === 1 || (split[0] === &apos;&apos; &amp;&amp; split.length === 2)) {
-      // console.warn(`not correct file name. ${fileName}`);
+    // // http://stackoverflow.com/questions/190852/how-can-i-get-file-extensions-with-javascript
+    // const split = fileName.split(&apos;.&apos;);
+    //
+    // if (split.length === 1 || (split[0] === &apos;&apos; &amp;&amp; split.length === 2)) {
+    //   return &apos;&apos;;
+    // }
+    //
+    // return split.pop().toLowerCase();
+    return Type.extension(fileName);
+  }
+  /**
+   * &#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x540D;&#x304B;&#x3089;&#x62E1;&#x5F35;&#x5B50;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @param {string} fileName &#x53D6;&#x5F97;&#x3057;&#x305F;&#x3044;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x540D;&#x79F0;
+   * @returns {string} &#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x540D;&#x306E;&#x62E1;&#x5F35;&#x5B50;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  static extension(fileName) {
+    if (typeof fileName !== &apos;string&apos;) {
       return &apos;&apos;;
     }
-
-    return split.pop().toLowerCase();
+    const splits = fileName.split(&apos;.&apos;);
+    if (splits.length === 1) {
+      return &apos;&apos;;
+    }
+    return splits.pop().toLowerCase();
   }
   // ----------------------------------------------------------
   // &#x753B;&#x50CF;&#x30D1;&#x30B9;&#x304C;&#x6B63;&#x898F;&#x304B;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3059;&#x308B;

@@ -39,7 +39,7 @@ export default class Queries {
     this.queryString = () => queryString;
     /**
      * パースしやすいように正規化した query 文字列
-     * @returns {string} ? 以降文字 + `&amp;` を `&` へ置換えます
+     * @returns {string} `?` 以降文字 + `&amp;` を `&` へ置換えます
      */
     this.naked = () => naked;
   }
@@ -93,7 +93,7 @@ export default class Queries {
   /**
    * query を kye: value 形式にします
    * @param {string} targetText 操作対象文字列
-   * @returns {[*,*]} data, keys を返します
+   * @returns {[Object, Array]} data, keys を返します
    */
   static parse(targetText) {
     const query = Queries.naked(targetText);
@@ -127,7 +127,7 @@ export default class Queries {
   /**
    * URL query の key: value 形式を取得します
    * @param {string} targetText query
-   * @returns {(*|*)[]} URL query を key: value 形式で返します
+   * @returns {[Object, Array]} URL query を key: value 形式で返します
    */
   static getAll(targetText = window.location.search) {
     // const [data] = Queries.parse(targetText);

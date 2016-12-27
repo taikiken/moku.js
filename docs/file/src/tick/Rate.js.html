@@ -51,6 +51,8 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/WheelEvents.js~WheelEvents.html">WheelEvents</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">net</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Cookie.js~Cookie.html">Cookie</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Queries.js~Queries.html">Queries</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">tick</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html">Cycle</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Fps.js~Fps.html">Fps</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Polling.js~Polling.html">Polling</a></span></span></li>
@@ -59,6 +61,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Hit.js~Hit.html">Hit</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/List.js~List.html">List</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Text.js~Text.html">Text</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Times.js~Times.html">Times</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Vectors.js~Vectors.html">Vectors</a></span></span></li>
 </ul>
@@ -85,24 +88,6 @@ import { default as Events } from &apos;../event/Events&apos;;
 // tick
 import { default as Polling } from &apos;./Polling&apos;;
 
-// /**
-//  * private property key, fps &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
-//  * @type {Symbol}
-//  * @private
-//  */
-// const rateSymbol = Symbol(&apos;save fps&apos;);
-// /**
-//  * private property key, count &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
-//  * @type {Symbol}
-//  * @private
-//  */
-// const countSymbol = Symbol(&apos;for update count&apos;);
-// /**
-//  * private property key, rates &#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Symbol
-//  * @type {Symbol}
-//  * @private
-//  */
-// const ratesSymbol = Symbol(&apos;save rate&apos;);
 /**
  * &#x56FA;&#x5B9A;&#x5024;&#x3092;&#x4F7F;&#x7528;&#x3057; fps &#x3092;&#x6C7A;&#x5B9A;&#x3057;&#x307E;&#x3059;
  *
@@ -121,11 +106,14 @@ import { default as Polling } from &apos;./Polling&apos;;
 export default class Rate extends Polling {
   /**
    * &#x56FA;&#x5B9A;&#x5024;&#x30D5;&#x30EC;&#x30FC;&#x30E0;&#x30EC;&#x30FC;&#x30C8;&#x6BCE;&#x306B; UPDATE &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x307E;&#x3059;
-   * @param {number} rateValue fps, &#x56FA;&#x5B9A;&#x5024;&#x4EE5;&#x5916;&#x8A2D;&#x5B9A;&#x3067;&#x304D;&#x307E;&#x305B;&#x3093;
+   * @param {number} [rateValue=Rate.RATE_5] fps, &#x56FA;&#x5B9A;&#x5024;&#x4EE5;&#x5916;&#x8A2D;&#x5B9A;&#x3067;&#x304D;&#x307E;&#x305B;&#x3093;
    */
-  constructor(rateValue) {
+  constructor(rateValue = Rate.RATE_5) {
+    // 60fps &#x3067; polling &#x3092;&#x884C;&#x3046;
     super(1000 / 60);
+    // @type {Events}
     const events = new Events(Rate.UPDATE, this, this);
+    // &#x8A2D;&#x5B9A;&#x53EF;&#x80FD;&#x306A; rate list
     const rates = [
       Rate.RATE_60,
       Rate.RATE_30,
@@ -146,11 +134,12 @@ export default class Rate extends Polling {
      */
     this.rates = () =&gt; rates;
     /**
-     * rate count, update &#x6BCE;&#x306B;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x30A2;&#x30C3;&#x30D7;&#x3057;&#x307E;&#x3059;
+     * rate count, update &#x6BCE;&#x306B;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x30A2;&#x30C3;&#x30D7;&#x3057;&#x307E;&#x3059;&lt;br&gt;
+     * &#x4E0D;&#x6B63;&#x5024;&#x306E;&#x6642;&#x306F; `Rate.RATE_5` &#x3092;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;
      * @type {number}
      */
     this.count = 0;
-    let rate = null;
+    let rate = this.validate(rateValue) ? rateValue : Rate.RATE_5;
     /**
      * rate &#x5024;
      * @returns {?number} rate &#x5024;
@@ -286,10 +275,6 @@ export default class Rate extends Polling {
    * @returns {boolean} start &#x306B;&#x6210;&#x529F;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   start() {
-    const rate = this.rate();
-    if (rate === null) {
-      throw new Error(`rate are not correct. ${rate}`);
-    }
     if (this.started) {
       // already start
       return false;

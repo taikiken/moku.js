@@ -51,6 +51,8 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/WheelEvents.js~WheelEvents.html">WheelEvents</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">net</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Cookie.js~Cookie.html">Cookie</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Queries.js~Queries.html">Queries</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">tick</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html">Cycle</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Fps.js~Fps.html">Fps</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Polling.js~Polling.html">Polling</a></span></span></li>
@@ -59,6 +61,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Hit.js~Hit.html">Hit</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/List.js~List.html">List</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Text.js~Text.html">Text</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Times.js~Times.html">Times</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Vectors.js~Vectors.html">Vectors</a></span></span></li>
 </ul>
@@ -87,13 +90,16 @@
 // event
 import { default as EventDispatcher } from &apos;./event/EventDispatcher&apos;;
 import { default as Events } from &apos;./event/Events&apos;;
+import { default as Rising } from &apos;./event/Rising&apos;;
 import { default as Scroll } from &apos;./event/Scroll&apos;;
-import { default as Wheel } from &apos;./event/Wheel&apos;;
 import { default as Scrolling } from &apos;./event/Scrolling&apos;;
 import { default as Touching } from &apos;./event/Touching&apos;;
+import { default as Wheel } from &apos;./event/Wheel&apos;;
 
 // net
 import { default as Ajax } from &apos;./net/Ajax&apos;;
+import { default as Cookie } from &apos;./net/Cookie&apos;;
+import { default as Queries } from &apos;./net/Queries&apos;;
 
 // tick
 import { default as Cycle } from &apos;./tick/Cycle&apos;;
@@ -103,12 +109,14 @@ import { default as Rate } from &apos;./tick/Rate&apos;;
 
 // util
 import { default as Type } from &apos;./util/Type&apos;;
+import { default as Hit } from &apos;./util/Hit&apos;;
 import { default as List } from &apos;./util/List&apos;;
 import { default as Text } from &apos;./util/Text&apos;;
+import { default as Times } from &apos;./util/Times&apos;;
 import { default as Vectors } from &apos;./util/Vectors&apos;;
-import { default as Hit } from &apos;./util/Hit&apos;;
 
 // css
+import { default as Can } from &apos;./css/Can&apos;;
 import { default as Patterns } from &apos;./css/Patterns&apos;;
 import { default as Style } from &apos;./css/Style&apos;;
 
@@ -141,6 +149,7 @@ MOKU.build = () =&gt; &apos;@@buildTime&apos;;
 MOKU.event = {
   EventDispatcher,
   Events,
+  Rising,
   Scroll,
   Wheel,
   Scrolling,
@@ -152,6 +161,8 @@ MOKU.event = {
  */
 MOKU.net = {
   Ajax,
+  Cookie,
+  Queries,
 };
 /**
  * MOKU.tick
@@ -171,6 +182,7 @@ MOKU.util = {
   Type,
   List,
   Text,
+  Times,
   Vectors,
   Hit,
 };
@@ -178,6 +190,7 @@ MOKU.util = {
 MOKU.css = {
   Patterns,
   Style,
+  Can,
 };
 
 MOKU.dom = {

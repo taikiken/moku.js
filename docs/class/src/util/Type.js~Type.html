@@ -51,6 +51,8 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/WheelEvents.js~WheelEvents.html">WheelEvents</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">net</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Cookie.js~Cookie.html">Cookie</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Queries.js~Queries.html">Queries</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">tick</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html">Cycle</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Fps.js~Fps.html">Fps</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Polling.js~Polling.html">Polling</a></span></span></li>
@@ -59,6 +61,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Hit.js~Hit.html">Hit</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/List.js~List.html">List</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Text.js~Text.html">Text</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Times.js~Times.html">Times</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Vectors.js~Vectors.html">Vectors</a></span></span></li>
 </ul>
@@ -198,7 +201,7 @@
     <td>
       <div>
         <p>
-           <span data-ice="name"><span><a href="class/src/util/Type.js~Type.html#static-method-getExtension">getExtension</a></span></span><span data-ice="signature">(fileName: <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span>): <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span></span>
+           <span data-ice="name"><span><a href="class/src/util/Type.js~Type.html#static-method-extension">extension</a></span></span><span data-ice="signature">(fileName: <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span>): <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span></span>
         </p>
       </div>
       <div>
@@ -224,14 +227,66 @@
     <td>
       <div>
         <p>
-           <span data-ice="name"><span><a href="class/src/util/Type.js~Type.html#static-method-hasKey">hasKey</a></span></span><span data-ice="signature">(target: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>, key: <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
+           <span data-ice="name"><span><a href="class/src/util/Type.js~Type.html#static-method-getExtension">getExtension</a></span></span><span data-ice="signature">(fileName: <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span>): <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span></span>
+        </p>
+      </div>
+      <div>
+        <div class="deprecated" data-ice="deprecated">this method was deprecated. instead use Type.extension
+&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x540D;&#x304B;&#x3089;&#x62E1;&#x5F35;&#x5B50;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;</div>
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="class/src/util/Type.js~Type.html#static-method-has">has</a></span></span><span data-ice="signature">(target: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>, key: <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>Object&#x578B; &#x5F15;&#x6570; <code>object</code> &#x306F; String&#x578B; &#x5F15;&#x6570; <code>key</code> &#x3092; [key] &#x3068;&#x3057;&#x3066;&#x5B58;&#x5728;&#x3059;&#x308B;&#x304B;&#x3092;&#x8ABF;&#x3079;&#x307E;&#x3059;</p>
+        <div data-ice="description"><p>Object&#x578B; &#x5F15;&#x6570; <code>object</code> &#x306F; String&#x578B; &#x5F15;&#x6570; <code>key</code> &#x3092; [key] &#x3068;&#x3057;&#x3066;&#x6240;&#x6301;&#x3057;&#x3066;&#x3044;&#x308B;&#x304B;&#x3092;&#x8ABF;&#x3079;&#x307E;&#x3059;</p>
 </div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="class/src/util/Type.js~Type.html#static-method-hasKey">hasKey</a></span></span><span data-ice="signature">(target: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>, key: <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
+        </p>
+      </div>
+      <div>
+        <div class="deprecated" data-ice="deprecated">this method was deprecated. instead use Type.has
+Object&#x578B; &#x5F15;&#x6570; `object` &#x306F; String&#x578B; &#x5F15;&#x6570; `key` &#x3092; [key] &#x3068;&#x3057;&#x3066;&#x6240;&#x6301;&#x3057;&#x3066;&#x3044;&#x308B;&#x304B;&#x3092;&#x8ABF;&#x3079;&#x307E;&#x3059;</div>
+        
+        
       </div>
     </td>
     <td>
@@ -282,7 +337,7 @@
       <div>
         
         
-        <div data-ice="description"><p>&#x5F15;&#x6570;(target)&#x304C; int &#x304B;&#x3092;&#x8ABF;&#x3079;&#x307E;&#x3059;</p>
+        <div data-ice="description"><p>&#x5F15;&#x6570;(target)&#x304C; int &#x304B;&#x3092; <code>Number.isInteger</code> &#x3092;&#x4F7F;&#x7528;&#x3057;&#x8ABF;&#x3079;&#x307E;&#x3059;</p>
 </div>
       </div>
     </td>
@@ -444,7 +499,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/util/Type.js.html#lineNumber65">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/util/Type.js.html#lineNumber64">source</a></span></span>
     </span>
   </h3>
 
@@ -513,7 +568,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/util/Type.js.html#lineNumber117">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/util/Type.js.html#lineNumber142">source</a></span></span>
     </span>
   </h3>
 
@@ -641,17 +696,17 @@
   
 </div>
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="static-method-getExtension">
+  <h3 data-ice="anchor" id="static-method-extension">
     <span class="access" data-ice="access">public</span>
     <span data-ice="static">static</span>
     
     
     
-    <span data-ice="name">getExtension</span><span data-ice="signature">(fileName: <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span>): <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span></span>
+    <span data-ice="name">extension</span><span data-ice="signature">(fileName: <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span>): <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/util/Type.js.html#lineNumber99">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/util/Type.js.html#lineNumber125">source</a></span></span>
     </span>
   </h3>
 
@@ -710,6 +765,151 @@
   
 </div>
 <div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-method-getExtension">
+    <span class="access" data-ice="access">public</span>
+    <span data-ice="static">static</span>
+    
+    
+    
+    <span data-ice="name">getExtension</span><span data-ice="signature">(fileName: <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span>): <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/util/Type.js.html#lineNumber109">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  <div class="deprecated" data-ice="deprecated">this method was deprecated. instead use Type.extension
+&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x540D;&#x304B;&#x3089;&#x62E1;&#x5F35;&#x5B50;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;</div>
+  
+  
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">fileName</td>
+      <td data-ice="type"><span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>&#x53D6;&#x5F97;&#x3057;&#x305F;&#x3044;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x540D;&#x79F0;</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tr>
+        <td class="return-type" data-ice="returnType"><span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span></td>
+        <td class="return-desc" data-ice="returnDescription"><p>&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x540D;&#x306E;&#x62E1;&#x5F35;&#x5B50;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;</p>
+</td>
+      </tr>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-method-has">
+    <span class="access" data-ice="access">public</span>
+    <span data-ice="static">static</span>
+    
+    
+    
+    <span data-ice="name">has</span><span data-ice="signature">(target: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>, key: <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/util/Type.js.html#lineNumber91">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Object&#x578B; &#x5F15;&#x6570; <code>object</code> &#x306F; String&#x578B; &#x5F15;&#x6570; <code>key</code> &#x3092; [key] &#x3068;&#x3057;&#x3066;&#x6240;&#x6301;&#x3057;&#x3066;&#x3044;&#x308B;&#x304B;&#x3092;&#x8ABF;&#x3079;&#x307E;&#x3059;</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">target</td>
+      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>&#x8ABF;&#x67FB;&#x5BFE;&#x8C61;</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">key</td>
+      <td data-ice="type"><span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>Object.key &#x540D;&#x79F0;</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tr>
+        <td class="return-type" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></td>
+        <td class="return-desc" data-ice="returnDescription"><p>&#x5B58;&#x5728;&#x3059;&#x308B;&#x6642;&#x306F; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;</p>
+</td>
+      </tr>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="static-method-hasKey">
     <span class="access" data-ice="access">public</span>
     <span data-ice="static">static</span>
@@ -725,10 +925,10 @@
   </h3>
 
   
+  <div class="deprecated" data-ice="deprecated">this method was deprecated. instead use Type.has
+Object&#x578B; &#x5F15;&#x6570; `object` &#x306F; String&#x578B; &#x5F15;&#x6570; `key` &#x3092; [key] &#x3068;&#x3057;&#x3066;&#x6240;&#x6301;&#x3057;&#x3066;&#x3044;&#x308B;&#x304B;&#x3092;&#x8ABF;&#x3079;&#x307E;&#x3059;</div>
   
   
-  <div data-ice="description"><p>Object&#x578B; &#x5F15;&#x6570; <code>object</code> &#x306F; String&#x578B; &#x5F15;&#x6570; <code>key</code> &#x3092; [key] &#x3068;&#x3057;&#x3066;&#x5B58;&#x5728;&#x3059;&#x308B;&#x304B;&#x3092;&#x8ABF;&#x3079;&#x307E;&#x3059;</p>
-</div>
 
   
 
@@ -796,7 +996,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/util/Type.js.html#lineNumber131">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/util/Type.js.html#lineNumber156">source</a></span></span>
     </span>
   </h3>
 
@@ -865,14 +1065,14 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/util/Type.js.html#lineNumber49">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/util/Type.js.html#lineNumber48">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>&#x5F15;&#x6570;(target)&#x304C; int &#x304B;&#x3092;&#x8ABF;&#x3079;&#x307E;&#x3059;</p>
+  <div data-ice="description"><p>&#x5F15;&#x6570;(target)&#x304C; int &#x304B;&#x3092; <code>Number.isInteger</code> &#x3092;&#x4F7F;&#x7528;&#x3057;&#x8ABF;&#x3079;&#x307E;&#x3059;</p>
 </div>
 
   
@@ -1003,7 +1203,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/util/Type.js.html#lineNumber73">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/util/Type.js.html#lineNumber72">source</a></span></span>
     </span>
   </h3>
 
@@ -1141,7 +1341,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/util/Type.js.html#lineNumber57">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/util/Type.js.html#lineNumber56">source</a></span></span>
     </span>
   </h3>
 
@@ -1210,7 +1410,7 @@
     <span class="right-info">
       
       <span class="since" data-ice="since">since 2016-10-25</span>
-      <span data-ice="source"><span><a href="file/src/util/Type.js.html#lineNumber91">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/util/Type.js.html#lineNumber100">source</a></span></span>
     </span>
   </h3>
 
