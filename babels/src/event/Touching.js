@@ -249,6 +249,7 @@ export default class Touching extends EventDispatcher {
     // Touching.END 発火
     this.dispatch(new TouchingEvents(
       Touching.END,
+      this,
       event,
       position,
       between,
@@ -258,6 +259,7 @@ export default class Touching extends EventDispatcher {
     // Touching.Touch 発火
     this.dispatch(new TouchingEvents(
       Touching.TOUCH,
+      this,
       event,
       position,
       between,
