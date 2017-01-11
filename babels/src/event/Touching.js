@@ -158,7 +158,7 @@ export default class Touching extends EventDispatcher {
     // vectors を初期化
     this.reset();
     // 現在 position を保存
-    const vectors = this.vectors;
+    const vectors = this.vectors();
     const point = Touching.point(event);
     vectors.start.update(point.x, point.y);
     vectors.moving.push(vectors.start);
@@ -227,7 +227,7 @@ export default class Touching extends EventDispatcher {
    */
   onEnd(event) {
     // console.log('Touching.onEnd', event);
-    const vectors = this.vectors;
+    const vectors = this.vectors();
 
     // 現在 position
     const point = Touching.point(event);
