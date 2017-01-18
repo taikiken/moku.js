@@ -349,14 +349,15 @@ export default class Touching extends EventDispatcher {
     const y = event.pageY;
 
     // event.pageX / pageY があればそのまま値を返します
-    if (Type.number(x) && Type.number(y)) {
+    // Android で pageX / pageY 存在しても 0, 0 しか返さない端末あり
+    if (Type.number(x) && Type.number(y) && (x !== 0 && y !== 0)) {
       return { x, y };
     }
 
     // event.pageX / pageY がない時は TouchEvent の changedTouches から取得します
     // touch event
     // @type {TouchList}
-    const touches = event.changedTouches;
+    const touches = event.changedTouches || event.touches;
     // touches が取得できない時は 0 をセットし返します
     if (!Type.exist(touches)) {
       return { x: 0, y: 0 };
