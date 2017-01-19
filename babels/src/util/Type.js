@@ -74,6 +74,7 @@ export default class Type {
   }
   /**
    * @deprecated instead use Type.has
+   *
    * Object型 引数 `object` は String型 引数 `key` を [key] として所持しているかを調べます
    * @param {Object} target 調査対象
    * @param {string} key Object.key 名称
@@ -102,19 +103,12 @@ export default class Type {
   }
   /**
    * @deprecated instead use Type.extension
+   *
    * ファイル名から拡張子を取得します
    * @param {string} fileName 取得したいファイル名称
    * @returns {string} ファイル名の拡張子を返します
    */
   static getExtension(fileName) {
-    // // http://stackoverflow.com/questions/190852/how-can-i-get-file-extensions-with-javascript
-    // const split = fileName.split('.');
-    //
-    // if (split.length === 1 || (split[0] === '' && split.length === 2)) {
-    //   return '';
-    // }
-    //
-    // return split.pop().toLowerCase();
     return Type.extension(fileName);
   }
   /**
@@ -162,6 +156,6 @@ export default class Type {
       return true;
     }
     // 拡張子チェック
-    return ['jpg', 'png', 'jpeg', 'gif'].indexOf(Type.getExtension(fileName)) !== -1;
+    return ['jpg', 'png', 'jpeg', 'gif'].indexOf(Type.extension(fileName)) !== -1;
   }
 }

@@ -10696,7 +10696,7 @@
     "access": null,
     "description": null,
     "lineNumber": 1,
-    "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/12 - 18:24\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n/**\n * 型チェックを行います\n * @static\n */\nexport default class Type {\n  /**\n   * 引数(target)が関数かを調べます\n   * @param {Function|*} target 調査対象\n   * @returns {boolean} 引数(target)が関数かを調べ結果を返します、true: 関数\n   */\n  static method(target) {\n    return typeof target === 'function';\n  }\n  /**\n   * 引数(target)を `!!` で調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)を `!!` で調べ結果を返します\n   */\n  static exist(target) {\n    return !!target;\n  }\n  /**\n   * 引数(target)が number かを調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)が number かを調べ結果を返します、true: number\n   */\n  static number(target) {\n    // [参考] jQuery 2.x, jQuery 2 関数は文字列 \"2\" も true にするので type check を追加した\n    return typeof target === 'number' && !Type.array(target) && ((target - parseFloat(target)) + 1) >= 0;\n  }\n  /**\n   * 引数(target)が int かを `Number.isInteger` を使用し調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)が int かを調べ結果を返します、true: int\n   */\n  static int(target) {\n    return Number.isInteger(target);\n  }\n  /**\n   * 引数(target)が string かを調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)が string かを調べ結果を返します、true: string\n   */\n  static string(target) {\n    return typeof target === 'string';\n  }\n  /**\n   * 引数(target)を `Array.isArray` で配列かを調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)が 配列 かを調べ結果を返します、true: 配列\n   */\n  static array(target) {\n    return Array.isArray(target);\n  }\n  /**\n   * 引数(target)が null かを調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)が null かを調べ結果を返します、true: null\n   */\n  static nil(target) {\n    return target === null;\n  }\n  /**\n   * @deprecated instead use Type.has\n   * Object型 引数 `object` は String型 引数 `key` を [key] として所持しているかを調べます\n   * @param {Object} target 調査対象\n   * @param {string} key Object.key 名称\n   * @returns {boolean} 存在する時は true を返します\n   */\n  static hasKey(target, key) {\n    return Type.has(target, key);\n  }\n  /**\n   * Object型 引数 `object` は String型 引数 `key` を [key] として所持しているかを調べます\n   * @param {Object} target 調査対象\n   * @param {string} key Object.key 名称\n   * @returns {boolean} 存在する時は true を返します\n   */\n  static has(target, key) {\n    return Object.keys(target).indexOf(key) !== -1;\n  }\n  /**\n   * target が undefined かを調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} true: undefined\n   * @since 2016-10-25\n   */\n  static undef(target) {\n    return typeof target === 'undefined';\n  }\n  /**\n   * @deprecated instead use Type.extension\n   * ファイル名から拡張子を取得します\n   * @param {string} fileName 取得したいファイル名称\n   * @returns {string} ファイル名の拡張子を返します\n   */\n  static getExtension(fileName) {\n    // // http://stackoverflow.com/questions/190852/how-can-i-get-file-extensions-with-javascript\n    // const split = fileName.split('.');\n    //\n    // if (split.length === 1 || (split[0] === '' && split.length === 2)) {\n    //   return '';\n    // }\n    //\n    // return split.pop().toLowerCase();\n    return Type.extension(fileName);\n  }\n  /**\n   * ファイル名から拡張子を取得します\n   * @param {string} fileName 取得したいファイル名称\n   * @returns {string} ファイル名の拡張子を返します\n   */\n  static extension(fileName) {\n    if (typeof fileName !== 'string') {\n      return '';\n    }\n    const splits = fileName.split('.');\n    if (splits.length === 1) {\n      return '';\n    }\n    return splits.pop().toLowerCase();\n  }\n  // ----------------------------------------------------------\n  // 画像パスが正規かチェックする\n  /**\n   * 使用可能なbase64 file かを調べます\n   * @param {string} fileName 調査対象ファイル名\n   * @returns {boolean} jpeg / png の時に true を返します\n   */\n  static base64(fileName) {\n    if (!Type.exist(fileName)) {\n      return false;\n    }\n    return fileName.indexOf('data:image/jpeg;base64') !== -1 ||\n      fileName.indexOf('data:image/png;base64') !== -1 ||\n      fileName.indexOf('data:image/jpg;base64') !== -1 ||\n      fileName.indexOf('data:image/gif;base64') !== -1;\n  }\n  /**\n   * 拡張子から画像ファイルかを調べます\n   * @param {string} fileName 調査対象ファイル名\n   * @returns {Boolean} 'jpg', 'png', 'jpeg', 'gif' のいづれかに該当するかの真偽値を返します\n   */\n  static img(fileName) {\n    if (!Type.exist(fileName)) {\n      return false;\n    }\n    // base64\n    if (Type.base64(fileName)) {\n      return true;\n    }\n    // 拡張子チェック\n    return ['jpg', 'png', 'jpeg', 'gif'].indexOf(Type.getExtension(fileName)) !== -1;\n  }\n}\n"
+    "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/12 - 18:24\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n/**\n * 型チェックを行います\n * @static\n */\nexport default class Type {\n  /**\n   * 引数(target)が関数かを調べます\n   * @param {Function|*} target 調査対象\n   * @returns {boolean} 引数(target)が関数かを調べ結果を返します、true: 関数\n   */\n  static method(target) {\n    return typeof target === 'function';\n  }\n  /**\n   * 引数(target)を `!!` で調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)を `!!` で調べ結果を返します\n   */\n  static exist(target) {\n    return !!target;\n  }\n  /**\n   * 引数(target)が number かを調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)が number かを調べ結果を返します、true: number\n   */\n  static number(target) {\n    // [参考] jQuery 2.x, jQuery 2 関数は文字列 \"2\" も true にするので type check を追加した\n    return typeof target === 'number' && !Type.array(target) && ((target - parseFloat(target)) + 1) >= 0;\n  }\n  /**\n   * 引数(target)が int かを `Number.isInteger` を使用し調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)が int かを調べ結果を返します、true: int\n   */\n  static int(target) {\n    return Number.isInteger(target);\n  }\n  /**\n   * 引数(target)が string かを調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)が string かを調べ結果を返します、true: string\n   */\n  static string(target) {\n    return typeof target === 'string';\n  }\n  /**\n   * 引数(target)を `Array.isArray` で配列かを調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)が 配列 かを調べ結果を返します、true: 配列\n   */\n  static array(target) {\n    return Array.isArray(target);\n  }\n  /**\n   * 引数(target)が null かを調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)が null かを調べ結果を返します、true: null\n   */\n  static nil(target) {\n    return target === null;\n  }\n  /**\n   * @deprecated instead use Type.has\n   *\n   * Object型 引数 `object` は String型 引数 `key` を [key] として所持しているかを調べます\n   * @param {Object} target 調査対象\n   * @param {string} key Object.key 名称\n   * @returns {boolean} 存在する時は true を返します\n   */\n  static hasKey(target, key) {\n    return Type.has(target, key);\n  }\n  /**\n   * Object型 引数 `object` は String型 引数 `key` を [key] として所持しているかを調べます\n   * @param {Object} target 調査対象\n   * @param {string} key Object.key 名称\n   * @returns {boolean} 存在する時は true を返します\n   */\n  static has(target, key) {\n    return Object.keys(target).indexOf(key) !== -1;\n  }\n  /**\n   * target が undefined かを調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} true: undefined\n   * @since 2016-10-25\n   */\n  static undef(target) {\n    return typeof target === 'undefined';\n  }\n  /**\n   * @deprecated instead use Type.extension\n   *\n   * ファイル名から拡張子を取得します\n   * @param {string} fileName 取得したいファイル名称\n   * @returns {string} ファイル名の拡張子を返します\n   */\n  static getExtension(fileName) {\n    return Type.extension(fileName);\n  }\n  /**\n   * ファイル名から拡張子を取得します\n   * @param {string} fileName 取得したいファイル名称\n   * @returns {string} ファイル名の拡張子を返します\n   */\n  static extension(fileName) {\n    if (typeof fileName !== 'string') {\n      return '';\n    }\n    const splits = fileName.split('.');\n    if (splits.length === 1) {\n      return '';\n    }\n    return splits.pop().toLowerCase();\n  }\n  // ----------------------------------------------------------\n  // 画像パスが正規かチェックする\n  /**\n   * 使用可能なbase64 file かを調べます\n   * @param {string} fileName 調査対象ファイル名\n   * @returns {boolean} jpeg / png の時に true を返します\n   */\n  static base64(fileName) {\n    if (!Type.exist(fileName)) {\n      return false;\n    }\n    return fileName.indexOf('data:image/jpeg;base64') !== -1 ||\n      fileName.indexOf('data:image/png;base64') !== -1 ||\n      fileName.indexOf('data:image/jpg;base64') !== -1 ||\n      fileName.indexOf('data:image/gif;base64') !== -1;\n  }\n  /**\n   * 拡張子から画像ファイルかを調べます\n   * @param {string} fileName 調査対象ファイル名\n   * @returns {Boolean} 'jpg', 'png', 'jpeg', 'gif' のいづれかに該当するかの真偽値を返します\n   */\n  static img(fileName) {\n    if (!Type.exist(fileName)) {\n      return false;\n    }\n    // base64\n    if (Type.base64(fileName)) {\n      return true;\n    }\n    // 拡張子チェック\n    return ['jpg', 'png', 'jpeg', 'gif'].indexOf(Type.extension(fileName)) !== -1;\n  }\n}\n"
   },
   {
     "__docId__": 362,
@@ -11004,8 +11004,8 @@
     "longname": "src/util/Type.js~Type.hasKey",
     "access": null,
     "description": "",
-    "lineNumber": 82,
-    "deprecated": "instead use Type.has\nObject型 引数 `object` は String型 引数 `key` を [key] として所持しているかを調べます",
+    "lineNumber": 83,
+    "deprecated": "instead use Type.has\n\nObject型 引数 `object` は String型 引数 `key` を [key] として所持しているかを調べます",
     "unknown": [
       {
         "tagName": "@returns",
@@ -11054,7 +11054,7 @@
     "longname": "src/util/Type.js~Type.has",
     "access": null,
     "description": "Object型 引数 `object` は String型 引数 `key` を [key] として所持しているかを調べます",
-    "lineNumber": 91,
+    "lineNumber": 92,
     "unknown": [
       {
         "tagName": "@returns",
@@ -11103,7 +11103,7 @@
     "longname": "src/util/Type.js~Type.undef",
     "access": null,
     "description": "target が undefined かを調べます",
-    "lineNumber": 100,
+    "lineNumber": 101,
     "since": "2016-10-25",
     "unknown": [
       {
@@ -11143,8 +11143,8 @@
     "longname": "src/util/Type.js~Type.getExtension",
     "access": null,
     "description": "",
-    "lineNumber": 109,
-    "deprecated": "instead use Type.extension\nファイル名から拡張子を取得します",
+    "lineNumber": 111,
+    "deprecated": "instead use Type.extension\n\nファイル名から拡張子を取得します",
     "unknown": [
       {
         "tagName": "@returns",
@@ -11183,7 +11183,7 @@
     "longname": "src/util/Type.js~Type.extension",
     "access": null,
     "description": "ファイル名から拡張子を取得します",
-    "lineNumber": 125,
+    "lineNumber": 119,
     "unknown": [
       {
         "tagName": "@returns",
@@ -11222,7 +11222,7 @@
     "longname": "src/util/Type.js~Type.base64",
     "access": null,
     "description": "使用可能なbase64 file かを調べます",
-    "lineNumber": 142,
+    "lineNumber": 136,
     "unknown": [
       {
         "tagName": "@returns",
@@ -11261,7 +11261,7 @@
     "longname": "src/util/Type.js~Type.img",
     "access": null,
     "description": "拡張子から画像ファイルかを調べます",
-    "lineNumber": 156,
+    "lineNumber": 150,
     "unknown": [
       {
         "tagName": "@returns",
