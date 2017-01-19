@@ -54,7 +54,7 @@
 	 *
 	 * This notice shall be included in all copies or substantial portions of the Software.
 	 * 0.0.1
-	 * 2017-01-19 13:38:29
+	 * 2017-01-19 14:11:20
 	 */
 	// use strict は本来不要でエラーになる
 	// 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -116,7 +116,7 @@
 	MOKU.version = function () {return '0.0.1';}; /**
 	                                                   * build 日時を取得します
 	                                                   * @returns {string}  build 日時を返します
-	                                                   */MOKU.build = function () {return '2017-01-19 13:38:29';};
+	                                                   */MOKU.build = function () {return '2017-01-19 14:11:20';};
 	/**
 	                                                                                                        * MOKU.event
 	                                                                                                        * @type {Object} MOKU.event object を返します
@@ -848,8 +848,8 @@
 	      return target === null;
 	    }
 	    /**
-	       * @deprecated instead use Type.has
 	       * Object型 引数 `object` は String型 引数 `key` を [key] として所持しているかを調べます
+	       * @deprecated instead use Type.has
 	       * @param {Object} target 調査対象
 	       * @param {string} key Object.key 名称
 	       * @returns {boolean} 存在する時は true を返します
@@ -876,20 +876,12 @@
 	      return typeof target === 'undefined';
 	    }
 	    /**
-	       * @deprecated instead use Type.extension
 	       * ファイル名から拡張子を取得します
+	       * @deprecated instead use Type.extension
 	       * @param {string} fileName 取得したいファイル名称
 	       * @returns {string} ファイル名の拡張子を返します
 	       */ }, { key: 'getExtension', value: function getExtension(
 	    fileName) {
-	      // // http://stackoverflow.com/questions/190852/how-can-i-get-file-extensions-with-javascript
-	      // const split = fileName.split('.');
-	      //
-	      // if (split.length === 1 || (split[0] === '' && split.length === 2)) {
-	      //   return '';
-	      // }
-	      //
-	      // return split.pop().toLowerCase();
 	      return Type.extension(fileName);
 	    }
 	    /**
@@ -937,7 +929,7 @@
 	        return true;
 	      }
 	      // 拡張子チェック
-	      return ['jpg', 'png', 'jpeg', 'gif'].indexOf(Type.getExtension(fileName)) !== -1;
+	      return ['jpg', 'png', 'jpeg', 'gif'].indexOf(Type.extension(fileName)) !== -1;
 	    } }]);return Type;}();exports.default = Type;
 
 /***/ },
@@ -3054,6 +3046,7 @@
 	    Rate.RATE_5];
 
 	    /**
+	                   * Rate 通知 Events instance
 	                   * @returns {Events} Events instance
 	                   */
 	    _this.events = function () {return events;};
