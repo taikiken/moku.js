@@ -96,7 +96,16 @@ import { default as Polling } from &apos;./Polling&apos;;
 
 /**
  * &#x30D5;&#x30EC;&#x30FC;&#x30E0;&#x30EC;&#x30FC;&#x30C8;&#x6BCE;&#x306B; UPDATE &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x307E;&#x3059;
- */
+ *
+ * @example
+ * // 2sec. interval
+ * const fps = new Fps(0.5);
+ * const update = () =&gt; {
+ *  // code here, something do
+ * };
+ * fps.on(Fps.UPDATE, update);
+ * fps.start();
+ * */
 export default class Fps extends Polling {
   /**
    * &#x5F15;&#x6570;&#x306E; frame rate &#x306B;&#x5408;&#x308F;&#x305B; UPDATE &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x307E;&#x3059;

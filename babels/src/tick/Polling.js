@@ -19,6 +19,15 @@ import { default as Cycle } from './Cycle';
 
 /**
  * 一定間隔毎に UPDATE イベントを発生させます
+ *
+ * @example
+ * // 3sec. interval
+ * const polling = new Polling(1000 * 3);
+ * const update = () => {
+ *  // code here, something do
+ * };
+ * polling.on(Polling.UPDATE, update);
+ * polling.start();
  */
 export default class Polling extends EventDispatcher {
   /**

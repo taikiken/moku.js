@@ -35,6 +35,11 @@ let instance = null;
  *
  * ```
  * const loop = Cycle.factory();
+ * const update = () => {
+ *  // code here, something do
+ * };
+ * loop.on(Cycle.UPDATE, update);
+ * loop.start();
  * ```
  *
  * <p>requestAnimationFrame は tab が active(focus) な時のみ発生します</p>

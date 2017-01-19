@@ -229,7 +229,7 @@ export default class Touching extends EventDispatcher {
     // vectors &#x3092;&#x521D;&#x671F;&#x5316;
     this.reset();
     // &#x73FE;&#x5728; position &#x3092;&#x4FDD;&#x5B58;
-    const vectors = this.vectors;
+    const vectors = this.vectors();
     const point = Touching.point(event);
     vectors.start.update(point.x, point.y);
     vectors.moving.push(vectors.start);
@@ -298,7 +298,7 @@ export default class Touching extends EventDispatcher {
    */
   onEnd(event) {
     // console.log(&apos;Touching.onEnd&apos;, event);
-    const vectors = this.vectors;
+    const vectors = this.vectors();
 
     // &#x73FE;&#x5728; position
     const point = Touching.point(event);
@@ -320,6 +320,7 @@ export default class Touching extends EventDispatcher {
     // Touching.END &#x767A;&#x706B;
     this.dispatch(new TouchingEvents(
       Touching.END,
+      this,
       event,
       position,
       between,
@@ -329,6 +330,7 @@ export default class Touching extends EventDispatcher {
     // Touching.Touch &#x767A;&#x706B;
     this.dispatch(new TouchingEvents(
       Touching.TOUCH,
+      this,
       event,
       position,
       between,
@@ -418,14 +420,15 @@ export default class Touching extends EventDispatcher {
     const y = event.pageY;
 
     // event.pageX / pageY &#x304C;&#x3042;&#x308C;&#x3070;&#x305D;&#x306E;&#x307E;&#x307E;&#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-    if (Type.number(x) &amp;&amp; Type.number(y)) {
+    // Android &#x3067; pageX / pageY &#x5B58;&#x5728;&#x3057;&#x3066;&#x3082; 0, 0 &#x3057;&#x304B;&#x8FD4;&#x3055;&#x306A;&#x3044;&#x7AEF;&#x672B;&#x3042;&#x308A;
+    if (Type.number(x) &amp;&amp; Type.number(y) &amp;&amp; (x !== 0 &amp;&amp; y !== 0)) {
       return { x, y };
     }
 
     // event.pageX / pageY &#x304C;&#x306A;&#x3044;&#x6642;&#x306F; TouchEvent &#x306E; changedTouches &#x304B;&#x3089;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
     // touch event
     // @type {TouchList}
-    const touches = event.changedTouches;
+    const touches = event.changedTouches || event.touches;
     // touches &#x304C;&#x53D6;&#x5F97;&#x3067;&#x304D;&#x306A;&#x3044;&#x6642;&#x306F; 0 &#x3092;&#x30BB;&#x30C3;&#x30C8;&#x3057;&#x8FD4;&#x3057;&#x307E;&#x3059;
     if (!Type.exist(touches)) {
       return { x: 0, y: 0 };

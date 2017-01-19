@@ -54,7 +54,7 @@
 	 *
 	 * This notice shall be included in all copies or substantial portions of the Software.
 	 * 0.0.1
-	 * 2016-12-26 16:53:44
+	 * 2017-01-19 13:38:29
 	 */
 	// use strict は本来不要でエラーになる
 	// 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -116,7 +116,7 @@
 	MOKU.version = function () {return '0.0.1';}; /**
 	                                                   * build 日時を取得します
 	                                                   * @returns {string}  build 日時を返します
-	                                                   */MOKU.build = function () {return '2016-12-26 16:53:44';};
+	                                                   */MOKU.build = function () {return '2017-01-19 13:38:29';};
 	/**
 	                                                                                                        * MOKU.event
 	                                                                                                        * @type {Object} MOKU.event object を返します
@@ -3023,6 +3023,14 @@
 	                                                                                                                                                                                      * - 6: RATE_6
 	                                                                                                                                                                                      * - 5: RATE_5
 	                                                                                                                                                                                      *
+	                                                                                                                                                                                      * @example
+	                                                                                                                                                                                      * // 1sec interval
+	                                                                                                                                                                                      * const rate = new Rate(Rate.Rate_60);
+	                                                                                                                                                                                      * const update = () => {
+	                                                                                                                                                                                      *  // code here, something do
+	                                                                                                                                                                                      * };
+	                                                                                                                                                                                      * rate.on(Rate.UPDATE, update);
+	                                                                                                                                                                                      * rate.start();
 	                                                                                                                                                                                      */ /**
 	                                                                                                                                                                                          * @license inazumatv.com
 	                                                                                                                                                                                          * @author (at)taikiken / http://inazumatv.com
@@ -3296,6 +3304,15 @@
 
 	/**
 	                                                                                                                                                                            * 一定間隔毎に UPDATE イベントを発生させます
+	                                                                                                                                                                            *
+	                                                                                                                                                                            * @example
+	                                                                                                                                                                            * // 3sec. interval
+	                                                                                                                                                                            * const polling = new Polling(1000 * 3);
+	                                                                                                                                                                            * const update = () => {
+	                                                                                                                                                                            *  // code here, something do
+	                                                                                                                                                                            * };
+	                                                                                                                                                                            * polling.on(Polling.UPDATE, update);
+	                                                                                                                                                                            * polling.start();
 	                                                                                                                                                                            */var
 	Polling = function (_EventDispatcher) {(0, _inherits3.default)(Polling, _EventDispatcher);
 	  /**
@@ -3529,6 +3546,11 @@
 	                                                                                            *
 	                                                                                            * ```
 	                                                                                            * const loop = Cycle.factory();
+	                                                                                            * const update = () => {
+	                                                                                            *  // code here, something do
+	                                                                                            * };
+	                                                                                            * loop.on(Cycle.UPDATE, update);
+	                                                                                            * loop.start();
 	                                                                                            * ```
 	                                                                                            *
 	                                                                                            * <p>requestAnimationFrame は tab が active(focus) な時のみ発生します</p>
@@ -3883,7 +3905,7 @@
 	      // vectors を初期化
 	      this.reset();
 	      // 現在 position を保存
-	      var vectors = this.vectors;
+	      var vectors = this.vectors();
 	      var point = Touching.point(event);
 	      vectors.start.update(point.x, point.y);
 	      vectors.moving.push(vectors.start);
@@ -3952,7 +3974,7 @@
 	       */ }, { key: 'onEnd', value: function onEnd(
 	    event) {
 	      // console.log('Touching.onEnd', event);
-	      var vectors = this.vectors;
+	      var vectors = this.vectors();
 
 	      // 現在 position
 	      var point = Touching.point(event);
@@ -3974,6 +3996,7 @@
 	      // Touching.END 発火
 	      this.dispatch(new _TouchingEvents2.default(
 	      Touching.END,
+	      this,
 	      event,
 	      position,
 	      between,
@@ -3983,6 +4006,7 @@
 	      // Touching.Touch 発火
 	      this.dispatch(new _TouchingEvents2.default(
 	      Touching.TOUCH,
+	      this,
 	      event,
 	      position,
 	      between,
@@ -4072,14 +4096,15 @@
 	      var y = event.pageY;
 
 	      // event.pageX / pageY があればそのまま値を返します
-	      if (_Type2.default.number(x) && _Type2.default.number(y)) {
+	      // Android で pageX / pageY 存在しても 0, 0 しか返さない端末あり
+	      if (_Type2.default.number(x) && _Type2.default.number(y) && x !== 0 && y !== 0) {
 	        return { x: x, y: y };
 	      }
 
 	      // event.pageX / pageY がない時は TouchEvent の changedTouches から取得します
 	      // touch event
 	      // @type {TouchList}
-	      var touches = event.changedTouches;
+	      var touches = event.changedTouches || event.touches;
 	      // touches が取得できない時は 0 をセットし返します
 	      if (!_Type2.default.exist(touches)) {
 	        return { x: 0, y: 0 };
@@ -4688,7 +4713,7 @@
 	                             *
 	                             * @see http://caniuse.com/#feat=fetch
 	                             * @see https://github.com/github/fetch
-	                             * @see https://github.com/github/fetch
+	                             * @see https://github.com/taylorhakes/promise-polyfill
 	                             * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch
 	                             * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API
 	                             * @see https://developer.mozilla.org/ja/docs/Web/API/Request
@@ -5063,7 +5088,7 @@
 	    this.queryString = function () {return queryString;};
 	    /**
 	                                                           * パースしやすいように正規化した query 文字列
-	                                                           * @returns {string} ? 以降文字 + `&amp;` を `&` へ置換えます
+	                                                           * @returns {string} `?` 以降文字 + `&amp;` を `&` へ置換えます
 	                                                           */
 	    this.naked = function () {return naked;};
 	  }
@@ -5117,7 +5142,7 @@
 	    /**
 	       * query を kye: value 形式にします
 	       * @param {string} targetText 操作対象文字列
-	       * @returns {[*,*]} data, keys を返します
+	       * @returns {[Object, Array]} data, keys を返します
 	       */ }, { key: 'parse', value: function parse(
 	    targetText) {
 	      var query = Queries.naked(targetText);
@@ -5151,7 +5176,7 @@
 	    /**
 	       * URL query の key: value 形式を取得します
 	       * @param {string} targetText query
-	       * @returns {(*|*)[]} URL query を key: value 形式で返します
+	       * @returns {[Object, Array]} URL query を key: value 形式で返します
 	       */ }, { key: 'getAll', value: function getAll()
 	    {var targetText = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : window.location.search;
 	      // const [data] = Queries.parse(targetText);
@@ -5340,17 +5365,26 @@
 
 	/**
 	 * フレームレート毎に UPDATE イベントを発生させます
-	 */ /**
-	     * Copyright (c) 2011-2016 inazumatv.com, inc.
-	     * @author (at)taikiken / http://inazumatv.com
-	     * @date 2016/07/04 - 14:19
-	     *
-	     * Distributed under the terms of the MIT license.
-	     * http://www.opensource.org/licenses/mit-license.html
-	     *
-	     * This notice shall be included in all copies or substantial portions of the Software.
-	     *
-	     */ // event
+	 *
+	 * @example
+	 * // 2sec. interval
+	 * const fps = new Fps(0.5);
+	 * const update = () => {
+	 *  // code here, something do
+	 * };
+	 * fps.on(Fps.UPDATE, update);
+	 * fps.start();
+	 * */ /**
+	       * Copyright (c) 2011-2016 inazumatv.com, inc.
+	       * @author (at)taikiken / http://inazumatv.com
+	       * @date 2016/07/04 - 14:19
+	       *
+	       * Distributed under the terms of the MIT license.
+	       * http://www.opensource.org/licenses/mit-license.html
+	       *
+	       * This notice shall be included in all copies or substantial portions of the Software.
+	       *
+	       */ // event
 	var Fps = function (_Polling) {(0, _inherits3.default)(Fps, _Polling); /**
 	                                                                        * 引数の frame rate に合わせ UPDATE イベントを発生させます
 	                                                                        * @param {number} [fps=30] frame rate, default: 30

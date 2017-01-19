@@ -90,6 +90,15 @@ import { default as Cycle } from &apos;./Cycle&apos;;
 
 /**
  * &#x4E00;&#x5B9A;&#x9593;&#x9694;&#x6BCE;&#x306B; UPDATE &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x307E;&#x3059;
+ *
+ * @example
+ * // 3sec. interval
+ * const polling = new Polling(1000 * 3);
+ * const update = () =&gt; {
+ *  // code here, something do
+ * };
+ * polling.on(Polling.UPDATE, update);
+ * polling.start();
  */
 export default class Polling extends EventDispatcher {
   /**

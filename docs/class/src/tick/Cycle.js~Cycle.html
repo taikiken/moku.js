@@ -69,13 +69,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Cycle from &apos;<span><a href="file/src/tick/Cycle.js.html#lineNumber42">./src/tick/Cycle.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Cycle from &apos;<span><a href="file/src/tick/Cycle.js.html#lineNumber47">./src/tick/Cycle.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/tick/Cycle.js.html#lineNumber42">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/tick/Cycle.js.html#lineNumber47">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -99,7 +99,12 @@
 <p>singleton &#x306A;&#x306E;&#x3067; new &#x3067;&#x306F;&#x306A;&#x304F; factory &#x3092;&#x4F7F;&#x7528;&#x3057; instance &#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;</p>
 
 <p></p>
-<pre><code><code class="source-code prettyprint">const loop = Cycle.factory();</code>
+<pre><code><code class="source-code prettyprint">const loop = Cycle.factory();
+const update = () =&gt; {
+ // code here, something do
+};
+loop.on(Cycle.UPDATE, update);
+loop.start();</code>
 </code></pre><p></p><p>requestAnimationFrame &#x306F; tab &#x304C; active(focus) &#x306A;&#x6642;&#x306E;&#x307F;&#x767A;&#x751F;&#x3057;&#x307E;&#x3059;</p><p></p>
 </div>
 
@@ -721,7 +726,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber95">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber100">source</a></span></span>
     </span>
   </h3>
 
@@ -776,7 +781,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber159">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber164">source</a></span></span>
     </span>
   </h3>
 
@@ -831,7 +836,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber48">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber53">source</a></span></span>
     </span>
   </h3>
 
@@ -903,7 +908,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber72">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber77">source</a></span></span>
     </span>
   </h3>
 
@@ -955,7 +960,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber67">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber72">source</a></span></span>
     </span>
   </h3>
 
@@ -1007,7 +1012,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber77">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber82">source</a></span></span>
     </span>
   </h3>
 
@@ -1048,7 +1053,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber82">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber87">source</a></span></span>
     </span>
   </h3>
 
@@ -1092,7 +1097,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber105">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber110">source</a></span></span>
     </span>
   </h3>
 
@@ -1144,7 +1149,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber121">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber126">source</a></span></span>
     </span>
   </h3>
 
@@ -1213,7 +1218,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber140">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/tick/Cycle.js.html#lineNumber145">source</a></span></span>
     </span>
   </h3>
 

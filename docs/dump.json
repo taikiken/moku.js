@@ -3991,7 +3991,7 @@
     "access": null,
     "description": null,
     "lineNumber": 1,
-    "content": "/**\n * @license inazumatv.com\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/10/08\n *\n * Copyright (c) 2011-2015 inazumatv.com, inc.\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n * f\n */\n\n// event\nimport { default as EventDispatcher } from './EventDispatcher';\nimport { default as TouchingEvents } from './TouchingEvents';\n\n// util\nimport { default as Vectors } from '../util/Vectors';\nimport { default as Type } from '../util/Type';\n\n/**\n * Touch event を監視し y方向移動が `threshold` 以内の時に `TOUCH` event を発火します\n */\nexport default class Touching extends EventDispatcher {\n  /**\n   * 処理対象 element などを保存します\n   * @param {Element} element 処理対象 Element\n   * @param {boolean} [canceling=false] touchmove 中に `preventDefault` を行う\n   * @param {number} [threshold=10] y 方向閾値\n   */\n  constructor(element, canceling = false, threshold = 10) {\n    super();\n    /**\n     * 処理対象 Element\n     * @type {Element}\n     */\n    this.element = element;\n    /**\n     * touchmove 中に `preventDefault` を行うかのフラッグ\n     * @type {boolean}\n     * @default false\n     */\n    this.canceling = canceling;\n    /**\n     * y 方向閾値, default: 10px\n     * @type {number}\n     * @default 10\n     */\n    this.threshold = threshold;\n    // @type {function}\n    const boundStart = this.onStart.bind(this);\n    /**\n     * bound onStart\n     * @returns {function} bound onStart\n     */\n    this.boundStart = () => boundStart;\n    const boundMove = this.onMove.bind(this);\n    /**\n     * bound onMove\n     * @returns {function} bound onMove\n     */\n    this.boundMove = () => boundMove;\n    const boundEnd = this.onEnd.bind(this);\n    /**\n     * bound onEnd\n     * @returns {function} bound onEnd\n     */\n    this.boundEnd = () => boundEnd;\n    const boundCancel = this.onCancel.bind(this);\n    /**\n     * bound onCancel\n     * @returns {function} onCancel onStart\n     */\n    this.boundCancel = () => boundCancel;\n    const boundBlur = this.onBlur.bind(this);\n    /**\n     * bound onBlur\n     * @returns {function} bound onBlur\n     */\n    this.boundBlur = () => boundBlur;\n    const vectors = {\n      start: new Vectors(),\n      end: new Vectors(),\n      moving: [].slice(0),\n    };\n    /**\n     * 位置管理を行う Vectors instance\n     * @returns {{start: Vectors, end: Vectors, moving: Array.<Vectors>}} vectors object\n     */\n    this.vectors = () => vectors;\n  }\n  // ---------------------------------------------------\n  //  EVENT\n  // ---------------------------------------------------\n  /**\n   * touchstart event type\n   * @event START\n   * @returns {string} touchingStart を返します\n   */\n  static get START() {\n    return 'touchingStart';\n  }\n  /**\n   * touchend event type\n   * @event END\n   * @returns {string} touchingEnd を返します\n   */\n  static get END() {\n    return 'touchingEnd';\n  }\n  /**\n   * touchend event type\n   * @event CANCEL\n   * @returns {string} touchingCancel を返します\n   */\n  static get CANCEL() {\n    return 'touchingCancel';\n  }\n  /**\n   * touchmove event type\n   * @event MOVE\n   * @returns {string} touchingMove を返します\n   */\n  static get MOVE() {\n    return 'touchingMove';\n  }\n  /**\n   * touch(click) event type\n   * @event TOUCH\n   * @returns {string} touchingTouch を返します\n   */\n  static get TOUCH() {\n    return 'touchingTouch';\n  }\n  // ---------------------------------------------------\n  //  METHOD\n  // ---------------------------------------------------\n  /**\n   * 初期処理<br>\n   * element への `touchstart` と<br>\n   * window.blur event をそれぞれ bind します\n   * @returns {void}\n   */\n  init() {\n    this.element.addEventListener('touchstart', this.boundStart(), false);\n    window.addEventListener('blur', this.boundBlur(), false);\n  }\n  /**\n   * touchstart event handler\n   * @param {Event} event touchstart event\n   * @returns {void}\n   */\n  onStart(event) {\n    // event unbind <- 二重 bind にならないように\n    this.dispose();\n    // vectors を初期化\n    this.reset();\n    // 現在 position を保存\n    const vectors = this.vectors;\n    const point = Touching.point(event);\n    vectors.start.update(point.x, point.y);\n    vectors.moving.push(vectors.start);\n\n    // キャンセル event 監視を開始\n    const body = document.body;\n    body.addEventListener('touchend', this.boundEnd(), false);\n    body.addEventListener('touchmove', this.boundMove(), false);\n    body.addEventListener('touchcancel', this.boundCancel(), false);\n\n    // Touching.START 発火\n    this.dispatch(new TouchingEvents(\n      Touching.START,\n      this,\n      event,\n      vectors.start\n    ));\n  }\n  /**\n   * touchmove event handler\n   * @param {Event} event touchmove event\n   * @returns {void}\n   */\n  onMove(event) {\n    // console.log('Touching.onMove', event);\n    const vectors = this.vectors();\n    const movingArray = vectors.moving;\n\n    // 現在 position\n    const point = Touching.point(event);\n    const position = new Vectors(point.x, point.y, Date.now());\n\n    // 前回 position <- moving 配列最後\n    const previous = movingArray.pop();\n    // 戻す\n    movingArray.push(previous);\n\n    // scroll checked\n    const scrolling = Touching.scrolling(position, previous, this.threshold);\n    position.scrolling = scrolling;\n    // 現在 position を配列後ろにセット\n    movingArray.push(position);\n\n    // global cancel と 閾値チェックで `preventDefault` を実行し scroll を止める\n    if (this.canceling && !scrolling) {\n      event.preventDefault();\n    }\n\n    // 移動量\n    const between = position.between(previous);\n\n    // Touching.MOVE 発火\n    this.dispatch(new TouchingEvents(\n      Touching.MOVE,\n      this,\n      event,\n      position,\n      between,\n      scrolling,\n    ));\n  }\n  /**\n   * touchend event handler\n   * @param {Event} event touchend event\n   * @returns {void}\n   */\n  onEnd(event) {\n    // console.log('Touching.onEnd', event);\n    const vectors = this.vectors;\n\n    // 現在 position\n    const point = Touching.point(event);\n    const position = new Vectors(point.x, point.y, Date.now());\n\n    // 前回 position を touchstart 位置としチェックします\n    const previous = vectors.start;\n    const scrolling = Touching.scrolling(position, previous, this.threshold);\n    position.scrolling = scrolling;\n\n    // global cancel と 閾値チェックで `preventDefault` を実行し scroll を止める\n    if (this.canceling && !scrolling) {\n      event.preventDefault();\n    }\n\n    // 移動量\n    const between = position.between(previous);\n\n    // Touching.END 発火\n    this.dispatch(new TouchingEvents(\n      Touching.END,\n      event,\n      position,\n      between,\n      scrolling\n    ));\n\n    // Touching.Touch 発火\n    this.dispatch(new TouchingEvents(\n      Touching.TOUCH,\n      event,\n      position,\n      between,\n      scrolling\n    ));\n  }\n  /**\n   * touchcancel event handler<br>\n   * 処理をキャンセルします\n   * @param {Event} event touchend event\n   * @returns {boolean} 正常終了時に true を返します\n   */\n  onCancel(event) {\n    return this.abort(event);\n  }\n  /**\n   * window.blur event handler<br>\n   * 処理をキャンセルします\n   * @param {Event} event window blur event\n   * @returns {boolean} 正常終了時に true を返します\n   */\n  onBlur(event) {\n    return this.abort(event);\n  }\n  /**\n   * touch event での処理をキャンセルし、設定値を初期値に戻します\n   * @param {Event} event touch / window.onblur Event\n   * @returns {boolean} 正常終了時に true を返します\n   */\n  abort(event) {\n    this.dispose();\n    this.reset();\n    this.dispatch(new TouchingEvents(\n      Touching.CANCEL,\n      this,\n      event,\n    ));\n    return true;\n  }\n  /**\n   * bind した event を unbind します\n   * @returns {boolean} 正常終了時に true を返します\n   */\n  dispose() {\n    const body = document.body;\n\n    body.removeEventListener('touchend', this.boundEnd());\n    body.removeEventListener('touchmove', this.boundMove());\n    body.removeEventListener('touchcancel', this.boundCancel());\n    return true;\n  }\n  /**\n   * 移動監視に使用した vectors instance を全て reset します\n   * @returns {{start: Vectors, end: Vectors, moving: Array.<Vectors>}}\n   * reset 後の vectors instance を返します\n   */\n  reset() {\n    const vectors = this.vectors();\n    vectors.start.reset();\n    vectors.end.reset();\n    vectors.moving = [].slice(0);\n\n    return vectors;\n  }\n  // ----------------------------------------\n  // STATIC METHOD\n  // ----------------------------------------\n  /**\n   * y 方向移動が threshold 以内か判定します\n   * @param {Vectors} pointA スタートポイント(Vectors)\n   * @param {Vectors} pointB エンドポイント(Vectors)\n   * @param {number} threshold 閾値\n   * @returns {boolean} true の時は閾値以上なのでスクロール判定になります\n   */\n  static scrolling(pointA, pointB, threshold) {\n    const y = pointA.betweenY(pointB);\n    // 正数値にし閾値と比較\n    return Math.abs(y) >= threshold;\n  }\n  /**\n   * MouseEvent|TouchEvent から pageX / pageY 座標を取得します\n   * @param {MouseEvent|TouchEvent} event down / move / up event object\n   * @returns {{x: number, y: number}} pageX / pageY 座標を返します\n   */\n  static point(event) {\n    const x = event.pageX;\n    const y = event.pageY;\n\n    // event.pageX / pageY があればそのまま値を返します\n    if (Type.number(x) && Type.number(y)) {\n      return { x, y };\n    }\n\n    // event.pageX / pageY がない時は TouchEvent の changedTouches から取得します\n    // touch event\n    // @type {TouchList}\n    const touches = event.changedTouches;\n    // touches が取得できない時は 0 をセットし返します\n    if (!Type.exist(touches)) {\n      return { x: 0, y: 0 };\n    }\n\n    // changedTouches list の先頭データを取り出し pageX / pageY を取得します\n    // @type {Touch}\n    const touch = touches[0];\n    return { x: touch.pageX, y: touch.pageY };\n  }\n}\n"
+    "content": "/**\n * @license inazumatv.com\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/10/08\n *\n * Copyright (c) 2011-2015 inazumatv.com, inc.\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n * f\n */\n\n// event\nimport { default as EventDispatcher } from './EventDispatcher';\nimport { default as TouchingEvents } from './TouchingEvents';\n\n// util\nimport { default as Vectors } from '../util/Vectors';\nimport { default as Type } from '../util/Type';\n\n/**\n * Touch event を監視し y方向移動が `threshold` 以内の時に `TOUCH` event を発火します\n */\nexport default class Touching extends EventDispatcher {\n  /**\n   * 処理対象 element などを保存します\n   * @param {Element} element 処理対象 Element\n   * @param {boolean} [canceling=false] touchmove 中に `preventDefault` を行う\n   * @param {number} [threshold=10] y 方向閾値\n   */\n  constructor(element, canceling = false, threshold = 10) {\n    super();\n    /**\n     * 処理対象 Element\n     * @type {Element}\n     */\n    this.element = element;\n    /**\n     * touchmove 中に `preventDefault` を行うかのフラッグ\n     * @type {boolean}\n     * @default false\n     */\n    this.canceling = canceling;\n    /**\n     * y 方向閾値, default: 10px\n     * @type {number}\n     * @default 10\n     */\n    this.threshold = threshold;\n    // @type {function}\n    const boundStart = this.onStart.bind(this);\n    /**\n     * bound onStart\n     * @returns {function} bound onStart\n     */\n    this.boundStart = () => boundStart;\n    const boundMove = this.onMove.bind(this);\n    /**\n     * bound onMove\n     * @returns {function} bound onMove\n     */\n    this.boundMove = () => boundMove;\n    const boundEnd = this.onEnd.bind(this);\n    /**\n     * bound onEnd\n     * @returns {function} bound onEnd\n     */\n    this.boundEnd = () => boundEnd;\n    const boundCancel = this.onCancel.bind(this);\n    /**\n     * bound onCancel\n     * @returns {function} onCancel onStart\n     */\n    this.boundCancel = () => boundCancel;\n    const boundBlur = this.onBlur.bind(this);\n    /**\n     * bound onBlur\n     * @returns {function} bound onBlur\n     */\n    this.boundBlur = () => boundBlur;\n    const vectors = {\n      start: new Vectors(),\n      end: new Vectors(),\n      moving: [].slice(0),\n    };\n    /**\n     * 位置管理を行う Vectors instance\n     * @returns {{start: Vectors, end: Vectors, moving: Array.<Vectors>}} vectors object\n     */\n    this.vectors = () => vectors;\n  }\n  // ---------------------------------------------------\n  //  EVENT\n  // ---------------------------------------------------\n  /**\n   * touchstart event type\n   * @event START\n   * @returns {string} touchingStart を返します\n   */\n  static get START() {\n    return 'touchingStart';\n  }\n  /**\n   * touchend event type\n   * @event END\n   * @returns {string} touchingEnd を返します\n   */\n  static get END() {\n    return 'touchingEnd';\n  }\n  /**\n   * touchend event type\n   * @event CANCEL\n   * @returns {string} touchingCancel を返します\n   */\n  static get CANCEL() {\n    return 'touchingCancel';\n  }\n  /**\n   * touchmove event type\n   * @event MOVE\n   * @returns {string} touchingMove を返します\n   */\n  static get MOVE() {\n    return 'touchingMove';\n  }\n  /**\n   * touch(click) event type\n   * @event TOUCH\n   * @returns {string} touchingTouch を返します\n   */\n  static get TOUCH() {\n    return 'touchingTouch';\n  }\n  // ---------------------------------------------------\n  //  METHOD\n  // ---------------------------------------------------\n  /**\n   * 初期処理<br>\n   * element への `touchstart` と<br>\n   * window.blur event をそれぞれ bind します\n   * @returns {void}\n   */\n  init() {\n    this.element.addEventListener('touchstart', this.boundStart(), false);\n    window.addEventListener('blur', this.boundBlur(), false);\n  }\n  /**\n   * touchstart event handler\n   * @param {Event} event touchstart event\n   * @returns {void}\n   */\n  onStart(event) {\n    // event unbind <- 二重 bind にならないように\n    this.dispose();\n    // vectors を初期化\n    this.reset();\n    // 現在 position を保存\n    const vectors = this.vectors();\n    const point = Touching.point(event);\n    vectors.start.update(point.x, point.y);\n    vectors.moving.push(vectors.start);\n\n    // キャンセル event 監視を開始\n    const body = document.body;\n    body.addEventListener('touchend', this.boundEnd(), false);\n    body.addEventListener('touchmove', this.boundMove(), false);\n    body.addEventListener('touchcancel', this.boundCancel(), false);\n\n    // Touching.START 発火\n    this.dispatch(new TouchingEvents(\n      Touching.START,\n      this,\n      event,\n      vectors.start\n    ));\n  }\n  /**\n   * touchmove event handler\n   * @param {Event} event touchmove event\n   * @returns {void}\n   */\n  onMove(event) {\n    // console.log('Touching.onMove', event);\n    const vectors = this.vectors();\n    const movingArray = vectors.moving;\n\n    // 現在 position\n    const point = Touching.point(event);\n    const position = new Vectors(point.x, point.y, Date.now());\n\n    // 前回 position <- moving 配列最後\n    const previous = movingArray.pop();\n    // 戻す\n    movingArray.push(previous);\n\n    // scroll checked\n    const scrolling = Touching.scrolling(position, previous, this.threshold);\n    position.scrolling = scrolling;\n    // 現在 position を配列後ろにセット\n    movingArray.push(position);\n\n    // global cancel と 閾値チェックで `preventDefault` を実行し scroll を止める\n    if (this.canceling && !scrolling) {\n      event.preventDefault();\n    }\n\n    // 移動量\n    const between = position.between(previous);\n\n    // Touching.MOVE 発火\n    this.dispatch(new TouchingEvents(\n      Touching.MOVE,\n      this,\n      event,\n      position,\n      between,\n      scrolling,\n    ));\n  }\n  /**\n   * touchend event handler\n   * @param {Event} event touchend event\n   * @returns {void}\n   */\n  onEnd(event) {\n    // console.log('Touching.onEnd', event);\n    const vectors = this.vectors();\n\n    // 現在 position\n    const point = Touching.point(event);\n    const position = new Vectors(point.x, point.y, Date.now());\n\n    // 前回 position を touchstart 位置としチェックします\n    const previous = vectors.start;\n    const scrolling = Touching.scrolling(position, previous, this.threshold);\n    position.scrolling = scrolling;\n\n    // global cancel と 閾値チェックで `preventDefault` を実行し scroll を止める\n    if (this.canceling && !scrolling) {\n      event.preventDefault();\n    }\n\n    // 移動量\n    const between = position.between(previous);\n\n    // Touching.END 発火\n    this.dispatch(new TouchingEvents(\n      Touching.END,\n      this,\n      event,\n      position,\n      between,\n      scrolling\n    ));\n\n    // Touching.Touch 発火\n    this.dispatch(new TouchingEvents(\n      Touching.TOUCH,\n      this,\n      event,\n      position,\n      between,\n      scrolling\n    ));\n  }\n  /**\n   * touchcancel event handler<br>\n   * 処理をキャンセルします\n   * @param {Event} event touchend event\n   * @returns {boolean} 正常終了時に true を返します\n   */\n  onCancel(event) {\n    return this.abort(event);\n  }\n  /**\n   * window.blur event handler<br>\n   * 処理をキャンセルします\n   * @param {Event} event window blur event\n   * @returns {boolean} 正常終了時に true を返します\n   */\n  onBlur(event) {\n    return this.abort(event);\n  }\n  /**\n   * touch event での処理をキャンセルし、設定値を初期値に戻します\n   * @param {Event} event touch / window.onblur Event\n   * @returns {boolean} 正常終了時に true を返します\n   */\n  abort(event) {\n    this.dispose();\n    this.reset();\n    this.dispatch(new TouchingEvents(\n      Touching.CANCEL,\n      this,\n      event,\n    ));\n    return true;\n  }\n  /**\n   * bind した event を unbind します\n   * @returns {boolean} 正常終了時に true を返します\n   */\n  dispose() {\n    const body = document.body;\n\n    body.removeEventListener('touchend', this.boundEnd());\n    body.removeEventListener('touchmove', this.boundMove());\n    body.removeEventListener('touchcancel', this.boundCancel());\n    return true;\n  }\n  /**\n   * 移動監視に使用した vectors instance を全て reset します\n   * @returns {{start: Vectors, end: Vectors, moving: Array.<Vectors>}}\n   * reset 後の vectors instance を返します\n   */\n  reset() {\n    const vectors = this.vectors();\n    vectors.start.reset();\n    vectors.end.reset();\n    vectors.moving = [].slice(0);\n\n    return vectors;\n  }\n  // ----------------------------------------\n  // STATIC METHOD\n  // ----------------------------------------\n  /**\n   * y 方向移動が threshold 以内か判定します\n   * @param {Vectors} pointA スタートポイント(Vectors)\n   * @param {Vectors} pointB エンドポイント(Vectors)\n   * @param {number} threshold 閾値\n   * @returns {boolean} true の時は閾値以上なのでスクロール判定になります\n   */\n  static scrolling(pointA, pointB, threshold) {\n    const y = pointA.betweenY(pointB);\n    // 正数値にし閾値と比較\n    return Math.abs(y) >= threshold;\n  }\n  /**\n   * MouseEvent|TouchEvent から pageX / pageY 座標を取得します\n   * @param {MouseEvent|TouchEvent} event down / move / up event object\n   * @returns {{x: number, y: number}} pageX / pageY 座標を返します\n   */\n  static point(event) {\n    const x = event.pageX;\n    const y = event.pageY;\n\n    // event.pageX / pageY があればそのまま値を返します\n    // Android で pageX / pageY 存在しても 0, 0 しか返さない端末あり\n    if (Type.number(x) && Type.number(y) && (x !== 0 && y !== 0)) {\n      return { x, y };\n    }\n\n    // event.pageX / pageY がない時は TouchEvent の changedTouches から取得します\n    // touch event\n    // @type {TouchList}\n    const touches = event.changedTouches || event.touches;\n    // touches が取得できない時は 0 をセットし返します\n    if (!Type.exist(touches)) {\n      return { x: 0, y: 0 };\n    }\n\n    // changedTouches list の先頭データを取り出し pageX / pageY を取得します\n    // @type {Touch}\n    const touch = touches[0];\n    return { x: touch.pageX, y: touch.pageY };\n  }\n}\n"
   },
   {
     "__docId__": 141,
@@ -4654,7 +4654,7 @@
     "longname": "src/event/Touching.js~Touching#onCancel",
     "access": null,
     "description": "touchcancel event handler<br>\n処理をキャンセルします",
-    "lineNumber": 273,
+    "lineNumber": 275,
     "unknown": [
       {
         "tagName": "@returns",
@@ -4693,7 +4693,7 @@
     "longname": "src/event/Touching.js~Touching#onBlur",
     "access": null,
     "description": "window.blur event handler<br>\n処理をキャンセルします",
-    "lineNumber": 282,
+    "lineNumber": 284,
     "unknown": [
       {
         "tagName": "@returns",
@@ -4732,7 +4732,7 @@
     "longname": "src/event/Touching.js~Touching#abort",
     "access": null,
     "description": "touch event での処理をキャンセルし、設定値を初期値に戻します",
-    "lineNumber": 290,
+    "lineNumber": 292,
     "unknown": [
       {
         "tagName": "@returns",
@@ -4771,7 +4771,7 @@
     "longname": "src/event/Touching.js~Touching#dispose",
     "access": null,
     "description": "bind した event を unbind します",
-    "lineNumber": 304,
+    "lineNumber": 306,
     "unknown": [
       {
         "tagName": "@returns",
@@ -4799,7 +4799,7 @@
     "longname": "src/event/Touching.js~Touching#reset",
     "access": null,
     "description": "移動監視に使用した vectors instance を全て reset します",
-    "lineNumber": 317,
+    "lineNumber": 319,
     "unknown": [
       {
         "tagName": "@returns",
@@ -4827,7 +4827,7 @@
     "longname": "src/event/Touching.js~Touching.scrolling",
     "access": null,
     "description": "y 方向移動が threshold 以内か判定します",
-    "lineNumber": 335,
+    "lineNumber": 337,
     "unknown": [
       {
         "tagName": "@returns",
@@ -4886,7 +4886,7 @@
     "longname": "src/event/Touching.js~Touching.point",
     "access": null,
     "description": "MouseEvent|TouchEvent から pageX / pageY 座標を取得します",
-    "lineNumber": 345,
+    "lineNumber": 347,
     "unknown": [
       {
         "tagName": "@returns",
@@ -7704,7 +7704,7 @@
     "access": null,
     "description": null,
     "lineNumber": 1,
-    "content": "/**\n * @license inazumatv.com\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/03\n *\n * Copyright (c) 2011-2015 inazumatv.com, inc.\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n */\n\n// event\nimport { default as EventDispatcher } from '../event/EventDispatcher';\nimport { default as Events } from '../event/Events';\n\n/**\n * new を許可しないための Symbol\n * @type {Symbol}\n * @private\n */\nconst singletonSymbol = Symbol('singleton instance');\n/**\n * singleton instance, nullable\n * @type {?Cycle}\n * @private\n * @static\n */\nlet instance = null;\n\n/**\n * <p>requestAnimationFrame を使用しループイベントを発生させます</p>\n * <p>singleton なので new ではなく factory を使用し instance を作成します</p>\n *\n * ```\n * const loop = Cycle.factory();\n * ```\n *\n * <p>requestAnimationFrame は tab が active(focus) な時のみ発生します</p>\n */\nexport default class Cycle extends EventDispatcher {\n  /**\n   * singleton です\n   * @param {Symbol} checkSymbol singleton を保証するための private instance\n   * @returns {Cycle} singleton instance を返します\n   */\n  constructor(checkSymbol) {\n    // checkSymbol と singleton が等価かをチェックします\n    if (checkSymbol !== singletonSymbol) {\n      throw new Error('don\\'t use new, instead use static factory method.');\n    }\n    super();\n    // instance 作成済みかをチェックし instance が null の時 this を設定します\n    if (instance !== null) {\n      return instance;\n    }\n    // -------------------------------\n    // onetime setting\n    instance = this;\n    const events = new Events(Cycle.UPDATE, this, this);\n    const boundUpdate = this.update.bind(this);\n    /**\n     * Cycle.UPDATE Events instance\n     * @returns {Events} Cycle.UPDATE Events instance\n     */\n    this.events = () => events;\n    /**\n     * bound update requestAnimationFrame callback\n     * @returns {function} bound update\n     */\n    this.boundUpdate = () => boundUpdate;\n    /**\n     * requestAnimationFrame ID\n     * @type {number}\n     */\n    this.id = 0;\n    /**\n     * start 済みフラッグ\n     * @type {boolean}\n     */\n    this.started = false;\n    // 設定済み instance を返します\n    return instance;\n  }\n  // ----------------------------------------\n  // EVENT\n  // ----------------------------------------\n  /**\n   * requestAnimationFrame 毎に発生するイベントを取得します\n   * @event UPDATE\n   * @returns {string} event, cycleUpdate を返します\n   * @default cycleUpdate\n   */\n  static get UPDATE() {\n    return 'cycleUpdate';\n  }\n  // ----------------------------------------\n  // METHOD\n  // ----------------------------------------\n  /**\n   * loop(requestAnimationFrame) を開始します\n   * @returns {boolean} start に成功すると true を返します\n   */\n  start() {\n    if (this.started) {\n      // already start\n      return false;\n    }\n    this.started = true;\n    this.update();\n\n    // @return\n    return true;\n  }\n  /**\n   * loop(cancelAnimationFrame) を止めます\n   * @param {number} [id] requestAnimationFrame id を使い cancelAnimationFrame をします\n   * @returns {boolean} stop に成功すると true を返します\n   */\n  stop(id = this.id) {\n    if (!this.started) {\n      // not start\n      return false;\n    }\n\n    cancelAnimationFrame(id);\n    this.started = false;\n\n    // @return\n    return true;\n  }\n  // ----------------------------------------\n  // PRIVATE METHOD\n  // ----------------------------------------\n  /**\n   * loop(requestAnimationFrame)コールバック関数<br>Cycle.UPDATE event を発火します\n   * @returns {number} requestAnimationFrame ID\n   */\n  update() {\n    // @type {number} - requestAnimationFrame id\n    const id = requestAnimationFrame(this.boundUpdate());\n    this.id = id;\n\n    // @type {Events} - events\n    const events = this.events();\n    events.id = id;\n    // event fire\n    this.dispatch(events);\n    return id;\n  }\n  // ----------------------------------------\n  // STATIC METHOD\n  // ----------------------------------------\n  /**\n   * Cycle instance を singleton を保証し作成します\n   * @returns {Cycle} Cycle instance を返します\n   */\n  static factory() {\n    if (instance === null) {\n      return new Cycle(singletonSymbol);\n    }\n    return instance;\n  }\n}\n"
+    "content": "/**\n * @license inazumatv.com\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/03\n *\n * Copyright (c) 2011-2015 inazumatv.com, inc.\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n */\n\n// event\nimport { default as EventDispatcher } from '../event/EventDispatcher';\nimport { default as Events } from '../event/Events';\n\n/**\n * new を許可しないための Symbol\n * @type {Symbol}\n * @private\n */\nconst singletonSymbol = Symbol('singleton instance');\n/**\n * singleton instance, nullable\n * @type {?Cycle}\n * @private\n * @static\n */\nlet instance = null;\n\n/**\n * <p>requestAnimationFrame を使用しループイベントを発生させます</p>\n * <p>singleton なので new ではなく factory を使用し instance を作成します</p>\n *\n * ```\n * const loop = Cycle.factory();\n * const update = () => {\n *  // code here, something do\n * };\n * loop.on(Cycle.UPDATE, update);\n * loop.start();\n * ```\n *\n * <p>requestAnimationFrame は tab が active(focus) な時のみ発生します</p>\n */\nexport default class Cycle extends EventDispatcher {\n  /**\n   * singleton です\n   * @param {Symbol} checkSymbol singleton を保証するための private instance\n   * @returns {Cycle} singleton instance を返します\n   */\n  constructor(checkSymbol) {\n    // checkSymbol と singleton が等価かをチェックします\n    if (checkSymbol !== singletonSymbol) {\n      throw new Error('don\\'t use new, instead use static factory method.');\n    }\n    super();\n    // instance 作成済みかをチェックし instance が null の時 this を設定します\n    if (instance !== null) {\n      return instance;\n    }\n    // -------------------------------\n    // onetime setting\n    instance = this;\n    const events = new Events(Cycle.UPDATE, this, this);\n    const boundUpdate = this.update.bind(this);\n    /**\n     * Cycle.UPDATE Events instance\n     * @returns {Events} Cycle.UPDATE Events instance\n     */\n    this.events = () => events;\n    /**\n     * bound update requestAnimationFrame callback\n     * @returns {function} bound update\n     */\n    this.boundUpdate = () => boundUpdate;\n    /**\n     * requestAnimationFrame ID\n     * @type {number}\n     */\n    this.id = 0;\n    /**\n     * start 済みフラッグ\n     * @type {boolean}\n     */\n    this.started = false;\n    // 設定済み instance を返します\n    return instance;\n  }\n  // ----------------------------------------\n  // EVENT\n  // ----------------------------------------\n  /**\n   * requestAnimationFrame 毎に発生するイベントを取得します\n   * @event UPDATE\n   * @returns {string} event, cycleUpdate を返します\n   * @default cycleUpdate\n   */\n  static get UPDATE() {\n    return 'cycleUpdate';\n  }\n  // ----------------------------------------\n  // METHOD\n  // ----------------------------------------\n  /**\n   * loop(requestAnimationFrame) を開始します\n   * @returns {boolean} start に成功すると true を返します\n   */\n  start() {\n    if (this.started) {\n      // already start\n      return false;\n    }\n    this.started = true;\n    this.update();\n\n    // @return\n    return true;\n  }\n  /**\n   * loop(cancelAnimationFrame) を止めます\n   * @param {number} [id] requestAnimationFrame id を使い cancelAnimationFrame をします\n   * @returns {boolean} stop に成功すると true を返します\n   */\n  stop(id = this.id) {\n    if (!this.started) {\n      // not start\n      return false;\n    }\n\n    cancelAnimationFrame(id);\n    this.started = false;\n\n    // @return\n    return true;\n  }\n  // ----------------------------------------\n  // PRIVATE METHOD\n  // ----------------------------------------\n  /**\n   * loop(requestAnimationFrame)コールバック関数<br>Cycle.UPDATE event を発火します\n   * @returns {number} requestAnimationFrame ID\n   */\n  update() {\n    // @type {number} - requestAnimationFrame id\n    const id = requestAnimationFrame(this.boundUpdate());\n    this.id = id;\n\n    // @type {Events} - events\n    const events = this.events();\n    events.id = id;\n    // event fire\n    this.dispatch(events);\n    return id;\n  }\n  // ----------------------------------------\n  // STATIC METHOD\n  // ----------------------------------------\n  /**\n   * Cycle instance を singleton を保証し作成します\n   * @returns {Cycle} Cycle instance を返します\n   */\n  static factory() {\n    if (instance === null) {\n      return new Cycle(singletonSymbol);\n    }\n    return instance;\n  }\n}\n"
   },
   {
     "__docId__": 257,
@@ -7770,8 +7770,8 @@
     "export": true,
     "importPath": "./src/tick/Cycle.js",
     "importStyle": "Cycle",
-    "description": "<p>requestAnimationFrame を使用しループイベントを発生させます</p>\n<p>singleton なので new ではなく factory を使用し instance を作成します</p>\n\n```\nconst loop = Cycle.factory();\n```\n\n<p>requestAnimationFrame は tab が active(focus) な時のみ発生します</p>",
-    "lineNumber": 42,
+    "description": "<p>requestAnimationFrame を使用しループイベントを発生させます</p>\n<p>singleton なので new ではなく factory を使用し instance を作成します</p>\n\n```\nconst loop = Cycle.factory();\nconst update = () => {\n // code here, something do\n};\nloop.on(Cycle.UPDATE, update);\nloop.start();\n```\n\n<p>requestAnimationFrame は tab が active(focus) な時のみ発生します</p>",
+    "lineNumber": 47,
     "interface": false,
     "extends": [
       "src/event/EventDispatcher.js~EventDispatcher"
@@ -7787,7 +7787,7 @@
     "longname": "src/tick/Cycle.js~Cycle#constructor",
     "access": null,
     "description": "singleton です",
-    "lineNumber": 48,
+    "lineNumber": 53,
     "unknown": [
       {
         "tagName": "@returns",
@@ -7826,7 +7826,7 @@
     "longname": "src/tick/Cycle.js~Cycle#events",
     "access": null,
     "description": "Cycle.UPDATE Events instance",
-    "lineNumber": 67,
+    "lineNumber": 72,
     "unknown": [
       {
         "tagName": "@returns",
@@ -7857,7 +7857,7 @@
     "longname": "src/tick/Cycle.js~Cycle#boundUpdate",
     "access": null,
     "description": "bound update requestAnimationFrame callback",
-    "lineNumber": 72,
+    "lineNumber": 77,
     "unknown": [
       {
         "tagName": "@returns",
@@ -7888,7 +7888,7 @@
     "longname": "src/tick/Cycle.js~Cycle#id",
     "access": null,
     "description": "requestAnimationFrame ID",
-    "lineNumber": 77,
+    "lineNumber": 82,
     "type": {
       "nullable": null,
       "types": [
@@ -7908,7 +7908,7 @@
     "longname": "src/tick/Cycle.js~Cycle#started",
     "access": null,
     "description": "start 済みフラッグ",
-    "lineNumber": 82,
+    "lineNumber": 87,
     "type": {
       "nullable": null,
       "types": [
@@ -7928,7 +7928,7 @@
     "longname": "src/tick/Cycle.js~Cycle.UPDATE",
     "access": null,
     "description": "requestAnimationFrame 毎に発生するイベントを取得します",
-    "lineNumber": 95,
+    "lineNumber": 100,
     "unknown": [
       {
         "tagName": "@event",
@@ -7968,7 +7968,7 @@
     "longname": "src/tick/Cycle.js~Cycle#start",
     "access": null,
     "description": "loop(requestAnimationFrame) を開始します",
-    "lineNumber": 105,
+    "lineNumber": 110,
     "unknown": [
       {
         "tagName": "@returns",
@@ -7996,7 +7996,7 @@
     "longname": "src/tick/Cycle.js~Cycle#started",
     "access": null,
     "description": null,
-    "lineNumber": 110,
+    "lineNumber": 115,
     "undocument": true,
     "type": {
       "types": [
@@ -8014,7 +8014,7 @@
     "longname": "src/tick/Cycle.js~Cycle#stop",
     "access": null,
     "description": "loop(cancelAnimationFrame) を止めます",
-    "lineNumber": 121,
+    "lineNumber": 126,
     "unknown": [
       {
         "tagName": "@returns",
@@ -8053,7 +8053,7 @@
     "longname": "src/tick/Cycle.js~Cycle#started",
     "access": null,
     "description": null,
-    "lineNumber": 128,
+    "lineNumber": 133,
     "undocument": true,
     "type": {
       "types": [
@@ -8071,7 +8071,7 @@
     "longname": "src/tick/Cycle.js~Cycle#update",
     "access": null,
     "description": "loop(requestAnimationFrame)コールバック関数<br>Cycle.UPDATE event を発火します",
-    "lineNumber": 140,
+    "lineNumber": 145,
     "unknown": [
       {
         "tagName": "@returns",
@@ -8099,7 +8099,7 @@
     "longname": "src/tick/Cycle.js~Cycle#id",
     "access": null,
     "description": null,
-    "lineNumber": 143,
+    "lineNumber": 148,
     "undocument": true,
     "type": {
       "types": [
@@ -8117,7 +8117,7 @@
     "longname": "src/tick/Cycle.js~Cycle.factory",
     "access": null,
     "description": "Cycle instance を singleton を保証し作成します",
-    "lineNumber": 159,
+    "lineNumber": 164,
     "unknown": [
       {
         "tagName": "@returns",
@@ -8146,7 +8146,7 @@
     "access": null,
     "description": null,
     "lineNumber": 1,
-    "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/04 - 14:19\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n// event\nimport { default as Events } from '../event/Events';\n\n// tick\nimport { default as Polling } from './Polling';\n\n// /**\n//  * private property key, fps を保存するための Symbol\n//  * @type {Symbol}\n//  * @private\n//  */\n// const fpsSymbol = Symbol('Singleton Fps Symbol');\n\n/**\n * フレームレート毎に UPDATE イベントを発生させます\n */\nexport default class Fps extends Polling {\n  /**\n   * 引数の frame rate に合わせ UPDATE イベントを発生させます\n   * @param {number} [fps=30] frame rate, default: 30\n   */\n  constructor(fps = 30) {\n    super(1000 / fps);\n    // @type {Events} - Events\n    const events = new Events(Fps.UPDATE, this, this);\n    /**\n     * Fps.UPDATE Events instance\n     * @returns {Events} Fps.UPDATE Events instance\n     */\n    this.events = () => events;\n    /**\n     * frame rate\n     * @type {number}\n     */\n    this.fps = fps;\n  }\n  // ----------------------------------------\n  // EVENT\n  // ----------------------------------------\n  /**\n   * フレームレート毎に発生するイベントを取得します\n   * @event UPDATE\n   * @returns {string} event, fpsUpdate を返します\n   * @default fpsUpdate\n   */\n  static get UPDATE() {\n    return 'fpsUpdate';\n  }\n  // ----------------------------------------\n  // METHOD\n  // ----------------------------------------\n  /**\n   * polling 時間を変更します<br>\n   * 1. プロパティ polling 変更\n   * 1. update 実行\n   * @param {number} interval fps\n   * @returns {boolean} `update` をコールし Polling.UPDATE event が発生すると true を返します\n   */\n  change(interval) {\n    /**\n     * polling 間隔\n     * @type {number}\n     */\n    this.interval = 1000 / interval;\n    this.fps = interval;\n    return this.update();\n  }\n}\n"
+    "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/04 - 14:19\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n// event\nimport { default as Events } from '../event/Events';\n\n// tick\nimport { default as Polling } from './Polling';\n\n// /**\n//  * private property key, fps を保存するための Symbol\n//  * @type {Symbol}\n//  * @private\n//  */\n// const fpsSymbol = Symbol('Singleton Fps Symbol');\n\n/**\n * フレームレート毎に UPDATE イベントを発生させます\n *\n * @example\n * // 2sec. interval\n * const fps = new Fps(0.5);\n * const update = () => {\n *  // code here, something do\n * };\n * fps.on(Fps.UPDATE, update);\n * fps.start();\n * */\nexport default class Fps extends Polling {\n  /**\n   * 引数の frame rate に合わせ UPDATE イベントを発生させます\n   * @param {number} [fps=30] frame rate, default: 30\n   */\n  constructor(fps = 30) {\n    super(1000 / fps);\n    // @type {Events} - Events\n    const events = new Events(Fps.UPDATE, this, this);\n    /**\n     * Fps.UPDATE Events instance\n     * @returns {Events} Fps.UPDATE Events instance\n     */\n    this.events = () => events;\n    /**\n     * frame rate\n     * @type {number}\n     */\n    this.fps = fps;\n  }\n  // ----------------------------------------\n  // EVENT\n  // ----------------------------------------\n  /**\n   * フレームレート毎に発生するイベントを取得します\n   * @event UPDATE\n   * @returns {string} event, fpsUpdate を返します\n   * @default fpsUpdate\n   */\n  static get UPDATE() {\n    return 'fpsUpdate';\n  }\n  // ----------------------------------------\n  // METHOD\n  // ----------------------------------------\n  /**\n   * polling 時間を変更します<br>\n   * 1. プロパティ polling 変更\n   * 1. update 実行\n   * @param {number} interval fps\n   * @returns {boolean} `update` をコールし Polling.UPDATE event が発生すると true を返します\n   */\n  change(interval) {\n    /**\n     * polling 間隔\n     * @type {number}\n     */\n    this.interval = 1000 / interval;\n    this.fps = interval;\n    return this.update();\n  }\n}\n"
   },
   {
     "__docId__": 274,
@@ -8161,7 +8161,10 @@
     "importPath": "./src/tick/Fps.js",
     "importStyle": "Fps",
     "description": "フレームレート毎に UPDATE イベントを発生させます",
-    "lineNumber": 29,
+    "examples": [
+      "// 2sec. interval\nconst fps = new Fps(0.5);\nconst update = () => {\n // code here, something do\n};\nfps.on(Fps.UPDATE, update);\nfps.start();"
+    ],
+    "lineNumber": 38,
     "interface": false,
     "extends": [
       "src/tick/Polling.js~Polling"
@@ -8177,7 +8180,7 @@
     "longname": "src/tick/Fps.js~Fps#constructor",
     "access": null,
     "description": "引数の frame rate に合わせ UPDATE イベントを発生させます",
-    "lineNumber": 34,
+    "lineNumber": 43,
     "params": [
       {
         "nullable": null,
@@ -8204,7 +8207,7 @@
     "longname": "src/tick/Fps.js~Fps#events",
     "access": null,
     "description": "Fps.UPDATE Events instance",
-    "lineNumber": 42,
+    "lineNumber": 51,
     "unknown": [
       {
         "tagName": "@returns",
@@ -8235,7 +8238,7 @@
     "longname": "src/tick/Fps.js~Fps#fps",
     "access": null,
     "description": "frame rate",
-    "lineNumber": 47,
+    "lineNumber": 56,
     "type": {
       "nullable": null,
       "types": [
@@ -8255,7 +8258,7 @@
     "longname": "src/tick/Fps.js~Fps.UPDATE",
     "access": null,
     "description": "フレームレート毎に発生するイベントを取得します",
-    "lineNumber": 58,
+    "lineNumber": 67,
     "unknown": [
       {
         "tagName": "@event",
@@ -8295,7 +8298,7 @@
     "longname": "src/tick/Fps.js~Fps#change",
     "access": null,
     "description": "polling 時間を変更します<br>\n1. プロパティ polling 変更\n1. update 実行",
-    "lineNumber": 71,
+    "lineNumber": 80,
     "unknown": [
       {
         "tagName": "@returns",
@@ -8334,7 +8337,7 @@
     "longname": "src/tick/Fps.js~Fps#interval",
     "access": null,
     "description": "polling 間隔",
-    "lineNumber": 76,
+    "lineNumber": 85,
     "type": {
       "nullable": null,
       "types": [
@@ -8354,7 +8357,7 @@
     "longname": "src/tick/Fps.js~Fps#fps",
     "access": null,
     "description": null,
-    "lineNumber": 77,
+    "lineNumber": 86,
     "undocument": true,
     "type": {
       "types": [
@@ -8373,7 +8376,7 @@
     "access": null,
     "description": null,
     "lineNumber": 1,
-    "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/04 - 16:46\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n// event\nimport { default as EventDispatcher } from '../event/EventDispatcher';\nimport { default as Events } from '../event/Events';\n\n// tick\nimport { default as Cycle } from './Cycle';\n\n/**\n * 一定間隔毎に UPDATE イベントを発生させます\n */\nexport default class Polling extends EventDispatcher {\n  /**\n   * 引数の polling に合わせ UPDATE イベントを発生させます\n   * @param {number} [interval=1000] イベント発生間隔 milliseconds\n   */\n  constructor(interval = 1000) {\n    super();\n    // @type {Cycle} - Cycle instance\n    const cycle = Cycle.factory();\n    const boundUpdate = this.update.bind(this);\n    const events = new Events(Polling.UPDATE, this, this);\n    /**\n     * Cycle instance を取得します\n     * @returns {Cycle} Cycle instance\n     */\n    this.cycle = () => cycle;\n    /**\n     * 間隔(ms)\n     * @type {number}\n     */\n    this.interval = interval;\n    /**\n     * bound update, Cycle.UPDATE event handler\n     * @returns {function} bound update\n     */\n    this.boundUpdate = () => boundUpdate;\n    /**\n     * Events instance\n     * @returns {Events} Polling.UPDATE Events object\n     */\n    this.events = () => events;\n    /**\n     * polling event 発生時間, event を発火すると 0 にリセットされます\n     * @type {number}\n     */\n    this.begin = 0;\n    /**\n     * Cycle 監視開始フラッグ\n     * @type {boolean}\n     */\n    this.started = false;\n  }\n  // ----------------------------------------\n  // EVENT\n  // ----------------------------------------\n  /**\n   * 一定間隔(milliseconds)毎に発生するイベント type を取得します\n   * @returns {string} event, pollingUpdate を返します\n   */\n  static get UPDATE() {\n    return 'pollingUpdate';\n  }\n  // ----------------------------------------\n  // METHOD\n  // ----------------------------------------\n  /**\n   * polling 時間を変更します<br>\n   * 1. プロパティ polling 変更\n   * 1. update 実行\n   * @param {number} interval polling 時間\n   * @returns {boolean} `update` をコールし Polling.UPDATE event が発生すると true を返します\n   */\n  change(interval) {\n    this.interval = interval;\n    return this.update();\n  }\n  /**\n   * started flag を反転させ現在の started flag 状態を取得します\n   * @returns {boolean} 現在の started flag 状態を返します\n   */\n  turnOver() {\n    this.started = !this.started;\n    return this.started;\n  }\n  /**\n   * events object を発火前に作成します\n   * @param {number} begin 開始時間: 前回の発火時間\n   * @param {number} present 現在時間\n   * @returns {Events} アップデートした Events を返します\n   */\n  updateEvents(begin, present) {\n    this.begin = begin;\n    // @type {Events} - start event\n    const events = this.events();\n    events.begin = begin;\n    events.present = present;\n    events.interval = this.interval;\n    return events;\n  }\n  /**\n   * cycle ループを開始します<br>\n   * watch Cycle.UPDATE event\n   * @returns {Cycle} cycle ループを開始しインスタンスを返します\n   */\n  initCycle() {\n    // cycle\n    const cycle = this.cycle();\n    // bind Cycle.UPDATE\n    cycle.on(Cycle.UPDATE, this.boundUpdate());\n    // cycle 開始\n    cycle.start();\n    return cycle;\n  }\n  /**\n   * polling を開始します\n   * @returns {boolean} start に成功すると true を返します\n   */\n  start() {\n    if (this.started) {\n      // already start\n      return false;\n    }\n    // flag -> true\n    // this[startSymbol] = true;\n    this.turnOver();\n    // cycle\n    this.initCycle();\n    // @type {number} - 開始時間\n    const present = Date.now();\n    // 強制的に1回目を実行\n    this.fire(this.updateEvents(present, present));\n\n    return true;\n  }\n  /**\n   * polling を止めます\n   * @returns {boolean} stop に成功すると true を返します\n   */\n  stop() {\n    if (!this.started) {\n      // not start\n      return false;\n    }\n    this.cycle.off(Cycle.UPDATE, this.boundUpdate());\n    // this[startSymbol] = false;\n    this.turnOver();\n    return true;\n  }\n  /**\n   * Cycle.UPDATE event handler, polling を計測しイベントを発火するかを判断します\n   *\n   * @listens {Cycle.UPDATE} Cycle.UPDATE が発生すると実行されます\n   * @returns {boolean} Polling.UPDATE event が発生すると true を返します\n   */\n  update() {\n    // 現在時間\n    // @type {number}\n    const present = Date.now();\n    // @type {number} - interval 間隔\n    const interval = this.interval;\n    // @type {number} - 開始時間\n    const begin = this.begin;\n    // 現在時間 が interval より大きくなったか\n    if ((present - begin) >= interval) {\n      // event 発火\n      this.fire(this.updateEvents(begin, present));\n      // 開始時間を update\n      this.begin = present;\n      // event 発生\n      return true;\n    }\n    return false;\n  }\n  /**\n   * Polling.UPDATE event を発生します\n   * @param {Events} events Polling.UPDATE event object\n   * @returns {void}\n   */\n  fire(events) {\n    this.dispatch(events);\n  }\n}\n"
+    "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/04 - 16:46\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n// event\nimport { default as EventDispatcher } from '../event/EventDispatcher';\nimport { default as Events } from '../event/Events';\n\n// tick\nimport { default as Cycle } from './Cycle';\n\n/**\n * 一定間隔毎に UPDATE イベントを発生させます\n *\n * @example\n * // 3sec. interval\n * const polling = new Polling(1000 * 3);\n * const update = () => {\n *  // code here, something do\n * };\n * polling.on(Polling.UPDATE, update);\n * polling.start();\n */\nexport default class Polling extends EventDispatcher {\n  /**\n   * 引数の polling に合わせ UPDATE イベントを発生させます\n   * @param {number} [interval=1000] イベント発生間隔 milliseconds\n   */\n  constructor(interval = 1000) {\n    super();\n    // @type {Cycle} - Cycle instance\n    const cycle = Cycle.factory();\n    const boundUpdate = this.update.bind(this);\n    const events = new Events(Polling.UPDATE, this, this);\n    /**\n     * Cycle instance を取得します\n     * @returns {Cycle} Cycle instance\n     */\n    this.cycle = () => cycle;\n    /**\n     * 間隔(ms)\n     * @type {number}\n     */\n    this.interval = interval;\n    /**\n     * bound update, Cycle.UPDATE event handler\n     * @returns {function} bound update\n     */\n    this.boundUpdate = () => boundUpdate;\n    /**\n     * Events instance\n     * @returns {Events} Polling.UPDATE Events object\n     */\n    this.events = () => events;\n    /**\n     * polling event 発生時間, event を発火すると 0 にリセットされます\n     * @type {number}\n     */\n    this.begin = 0;\n    /**\n     * Cycle 監視開始フラッグ\n     * @type {boolean}\n     */\n    this.started = false;\n  }\n  // ----------------------------------------\n  // EVENT\n  // ----------------------------------------\n  /**\n   * 一定間隔(milliseconds)毎に発生するイベント type を取得します\n   * @returns {string} event, pollingUpdate を返します\n   */\n  static get UPDATE() {\n    return 'pollingUpdate';\n  }\n  // ----------------------------------------\n  // METHOD\n  // ----------------------------------------\n  /**\n   * polling 時間を変更します<br>\n   * 1. プロパティ polling 変更\n   * 1. update 実行\n   * @param {number} interval polling 時間\n   * @returns {boolean} `update` をコールし Polling.UPDATE event が発生すると true を返します\n   */\n  change(interval) {\n    this.interval = interval;\n    return this.update();\n  }\n  /**\n   * started flag を反転させ現在の started flag 状態を取得します\n   * @returns {boolean} 現在の started flag 状態を返します\n   */\n  turnOver() {\n    this.started = !this.started;\n    return this.started;\n  }\n  /**\n   * events object を発火前に作成します\n   * @param {number} begin 開始時間: 前回の発火時間\n   * @param {number} present 現在時間\n   * @returns {Events} アップデートした Events を返します\n   */\n  updateEvents(begin, present) {\n    this.begin = begin;\n    // @type {Events} - start event\n    const events = this.events();\n    events.begin = begin;\n    events.present = present;\n    events.interval = this.interval;\n    return events;\n  }\n  /**\n   * cycle ループを開始します<br>\n   * watch Cycle.UPDATE event\n   * @returns {Cycle} cycle ループを開始しインスタンスを返します\n   */\n  initCycle() {\n    // cycle\n    const cycle = this.cycle();\n    // bind Cycle.UPDATE\n    cycle.on(Cycle.UPDATE, this.boundUpdate());\n    // cycle 開始\n    cycle.start();\n    return cycle;\n  }\n  /**\n   * polling を開始します\n   * @returns {boolean} start に成功すると true を返します\n   */\n  start() {\n    if (this.started) {\n      // already start\n      return false;\n    }\n    // flag -> true\n    // this[startSymbol] = true;\n    this.turnOver();\n    // cycle\n    this.initCycle();\n    // @type {number} - 開始時間\n    const present = Date.now();\n    // 強制的に1回目を実行\n    this.fire(this.updateEvents(present, present));\n\n    return true;\n  }\n  /**\n   * polling を止めます\n   * @returns {boolean} stop に成功すると true を返します\n   */\n  stop() {\n    if (!this.started) {\n      // not start\n      return false;\n    }\n    this.cycle.off(Cycle.UPDATE, this.boundUpdate());\n    // this[startSymbol] = false;\n    this.turnOver();\n    return true;\n  }\n  /**\n   * Cycle.UPDATE event handler, polling を計測しイベントを発火するかを判断します\n   *\n   * @listens {Cycle.UPDATE} Cycle.UPDATE が発生すると実行されます\n   * @returns {boolean} Polling.UPDATE event が発生すると true を返します\n   */\n  update() {\n    // 現在時間\n    // @type {number}\n    const present = Date.now();\n    // @type {number} - interval 間隔\n    const interval = this.interval;\n    // @type {number} - 開始時間\n    const begin = this.begin;\n    // 現在時間 が interval より大きくなったか\n    if ((present - begin) >= interval) {\n      // event 発火\n      this.fire(this.updateEvents(begin, present));\n      // 開始時間を update\n      this.begin = present;\n      // event 発生\n      return true;\n    }\n    return false;\n  }\n  /**\n   * Polling.UPDATE event を発生します\n   * @param {Events} events Polling.UPDATE event object\n   * @returns {void}\n   */\n  fire(events) {\n    this.dispatch(events);\n  }\n}\n"
   },
   {
     "__docId__": 283,
@@ -8388,7 +8391,10 @@
     "importPath": "./src/tick/Polling.js",
     "importStyle": "Polling",
     "description": "一定間隔毎に UPDATE イベントを発生させます",
-    "lineNumber": 23,
+    "examples": [
+      "// 3sec. interval\nconst polling = new Polling(1000 * 3);\nconst update = () => {\n // code here, something do\n};\npolling.on(Polling.UPDATE, update);\npolling.start();"
+    ],
+    "lineNumber": 32,
     "interface": false,
     "extends": [
       "src/event/EventDispatcher.js~EventDispatcher"
@@ -8404,7 +8410,7 @@
     "longname": "src/tick/Polling.js~Polling#constructor",
     "access": null,
     "description": "引数の polling に合わせ UPDATE イベントを発生させます",
-    "lineNumber": 28,
+    "lineNumber": 37,
     "params": [
       {
         "nullable": null,
@@ -8431,7 +8437,7 @@
     "longname": "src/tick/Polling.js~Polling#cycle",
     "access": null,
     "description": "Cycle instance を取得します",
-    "lineNumber": 38,
+    "lineNumber": 47,
     "unknown": [
       {
         "tagName": "@returns",
@@ -8462,7 +8468,7 @@
     "longname": "src/tick/Polling.js~Polling#interval",
     "access": null,
     "description": "間隔(ms)",
-    "lineNumber": 43,
+    "lineNumber": 52,
     "type": {
       "nullable": null,
       "types": [
@@ -8482,7 +8488,7 @@
     "longname": "src/tick/Polling.js~Polling#boundUpdate",
     "access": null,
     "description": "bound update, Cycle.UPDATE event handler",
-    "lineNumber": 48,
+    "lineNumber": 57,
     "unknown": [
       {
         "tagName": "@returns",
@@ -8513,7 +8519,7 @@
     "longname": "src/tick/Polling.js~Polling#events",
     "access": null,
     "description": "Events instance",
-    "lineNumber": 53,
+    "lineNumber": 62,
     "unknown": [
       {
         "tagName": "@returns",
@@ -8544,7 +8550,7 @@
     "longname": "src/tick/Polling.js~Polling#begin",
     "access": null,
     "description": "polling event 発生時間, event を発火すると 0 にリセットされます",
-    "lineNumber": 58,
+    "lineNumber": 67,
     "type": {
       "nullable": null,
       "types": [
@@ -8564,7 +8570,7 @@
     "longname": "src/tick/Polling.js~Polling#started",
     "access": null,
     "description": "Cycle 監視開始フラッグ",
-    "lineNumber": 63,
+    "lineNumber": 72,
     "type": {
       "nullable": null,
       "types": [
@@ -8584,7 +8590,7 @@
     "longname": "src/tick/Polling.js~Polling.UPDATE",
     "access": null,
     "description": "一定間隔(milliseconds)毎に発生するイベント type を取得します",
-    "lineNumber": 72,
+    "lineNumber": 81,
     "unknown": [
       {
         "tagName": "@returns",
@@ -8616,7 +8622,7 @@
     "longname": "src/tick/Polling.js~Polling#change",
     "access": null,
     "description": "polling 時間を変更します<br>\n1. プロパティ polling 変更\n1. update 実行",
-    "lineNumber": 85,
+    "lineNumber": 94,
     "unknown": [
       {
         "tagName": "@returns",
@@ -8655,7 +8661,7 @@
     "longname": "src/tick/Polling.js~Polling#interval",
     "access": null,
     "description": null,
-    "lineNumber": 86,
+    "lineNumber": 95,
     "undocument": true,
     "type": {
       "types": [
@@ -8673,7 +8679,7 @@
     "longname": "src/tick/Polling.js~Polling#turnOver",
     "access": null,
     "description": "started flag を反転させ現在の started flag 状態を取得します",
-    "lineNumber": 93,
+    "lineNumber": 102,
     "unknown": [
       {
         "tagName": "@returns",
@@ -8701,7 +8707,7 @@
     "longname": "src/tick/Polling.js~Polling#started",
     "access": null,
     "description": null,
-    "lineNumber": 94,
+    "lineNumber": 103,
     "undocument": true,
     "type": {
       "types": [
@@ -8719,7 +8725,7 @@
     "longname": "src/tick/Polling.js~Polling#updateEvents",
     "access": null,
     "description": "events object を発火前に作成します",
-    "lineNumber": 103,
+    "lineNumber": 112,
     "unknown": [
       {
         "tagName": "@returns",
@@ -8768,7 +8774,7 @@
     "longname": "src/tick/Polling.js~Polling#begin",
     "access": null,
     "description": null,
-    "lineNumber": 104,
+    "lineNumber": 113,
     "undocument": true,
     "type": {
       "types": [
@@ -8786,7 +8792,7 @@
     "longname": "src/tick/Polling.js~Polling#initCycle",
     "access": null,
     "description": "cycle ループを開始します<br>\nwatch Cycle.UPDATE event",
-    "lineNumber": 117,
+    "lineNumber": 126,
     "unknown": [
       {
         "tagName": "@returns",
@@ -8814,7 +8820,7 @@
     "longname": "src/tick/Polling.js~Polling#start",
     "access": null,
     "description": "polling を開始します",
-    "lineNumber": 130,
+    "lineNumber": 139,
     "unknown": [
       {
         "tagName": "@returns",
@@ -8842,7 +8848,7 @@
     "longname": "src/tick/Polling.js~Polling#stop",
     "access": null,
     "description": "polling を止めます",
-    "lineNumber": 151,
+    "lineNumber": 160,
     "unknown": [
       {
         "tagName": "@returns",
@@ -8870,7 +8876,7 @@
     "longname": "src/tick/Polling.js~Polling#update",
     "access": null,
     "description": "Cycle.UPDATE event handler, polling を計測しイベントを発火するかを判断します",
-    "lineNumber": 167,
+    "lineNumber": 176,
     "unknown": [
       {
         "tagName": "@returns",
@@ -8906,7 +8912,7 @@
     "longname": "src/tick/Polling.js~Polling#begin",
     "access": null,
     "description": null,
-    "lineNumber": 180,
+    "lineNumber": 189,
     "undocument": true,
     "type": {
       "types": [
@@ -8924,7 +8930,7 @@
     "longname": "src/tick/Polling.js~Polling#fire",
     "access": null,
     "description": "Polling.UPDATE event を発生します",
-    "lineNumber": 191,
+    "lineNumber": 200,
     "unknown": [
       {
         "tagName": "@returns",
@@ -8964,7 +8970,7 @@
     "access": null,
     "description": null,
     "lineNumber": 1,
-    "content": "/**\n * @license inazumatv.com\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/16\n *\n * Copyright (c) 2011-2015 inazumatv.com, inc.\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n */\n\n// event\nimport { default as Events } from '../event/Events';\n\n// tick\nimport { default as Polling } from './Polling';\n\n/**\n * 固定値を使用し fps を決定します\n *\n * 以下のフレームレートが設定可能です\n *\n * - 60: Rate.RATE_60\n * - 30: RATE_30\n * - 20: RATE_20\n * - 15: RATE_15\n * - 12: RATE_12\n * - 10: RATE_10\n * - 6: RATE_6\n * - 5: RATE_5\n *\n */\nexport default class Rate extends Polling {\n  /**\n   * 固定値フレームレート毎に UPDATE イベントを発生させます\n   * @param {number} [rateValue=Rate.RATE_5] fps, 固定値以外設定できません\n   */\n  constructor(rateValue = Rate.RATE_5) {\n    // 60fps で polling を行う\n    super(1000 / 60);\n    // @type {Events}\n    const events = new Events(Rate.UPDATE, this, this);\n    // 設定可能な rate list\n    const rates = [\n      Rate.RATE_60,\n      Rate.RATE_30,\n      Rate.RATE_20,\n      Rate.RATE_15,\n      Rate.RATE_12,\n      Rate.RATE_10,\n      Rate.RATE_6,\n      Rate.RATE_5,\n    ];\n    /**\n     * @returns {Events} Events instance\n     */\n    this.events = () => events;\n    /**\n     * 許容可能な rate\n     * @return {Array<number>} 許容可能な rate\n     */\n    this.rates = () => rates;\n    /**\n     * rate count, update 毎にカウントアップします<br>\n     * 不正値の時は `Rate.RATE_5` を使用します\n     * @type {number}\n     */\n    this.count = 0;\n    let rate = this.validate(rateValue) ? rateValue : Rate.RATE_5;\n    /**\n     * rate 値\n     * @returns {?number} rate 値\n     */\n    this.rate = () => rate;\n    /**\n     * rate 値を設定します\n     * @param {number} value rate 値\n     * @returns {boolean} rate 設定に成功すると true を返します\n     */\n    this.setRate = (value) => {\n      if (this.validate(value)) {\n        rate = value;\n        return true;\n      }\n      return false;\n    };\n    // init\n    this.setRate(rateValue);\n  }\n  // ----------------------------------------\n  // CONST\n  // ----------------------------------------\n  /**\n   * fps 60 基準値を取得します\n   * @const RATE_60\n   * @returns {number} fps 60 基準値を返します\n   * @default 1\n   */\n  static get RATE_60() {\n    return 1;\n  }  /**\n   * fps 30 基準値を取得します\n   * @const RATE_30\n   * @returns {number} fps 30 基準値を返します\n   * @default 2\n   */\n  static get RATE_30() {\n    return 2;\n  }\n  /**\n   * fps 20 基準値を取得します\n   * @const RATE_20\n   * @returns {number} fps 20 基準値を返します\n   * @default 3\n   */\n  static get RATE_20() {\n    return 3;\n  }\n  /**\n   * fps 15 基準値を取得します\n   * @const RATE_15\n   * @returns {number} fps 15 基準値を返します\n   * @default 4\n   */\n  static get RATE_15() {\n    return 4;\n  }\n  /**\n   * fps 12 基準値を取得します\n   * @const RATE_12\n   * @returns {number} fps 12 基準値を返します\n   * @default 5\n   */\n  static get RATE_12() {\n    return 5;\n  }\n  /**\n   * fps 10 基準値を取得します\n   * @const RATE_10\n   * @returns {number} fps 10 基準値を返します\n   * @default 6\n   */\n  static get RATE_10() {\n    return 6;\n  }\n  /**\n   * fps 6 基準値を取得します\n   * @const RATE_6\n   * @returns {number} fps 6 基準値を返します\n   * @default 10\n   */\n  static get RATE_6() {\n    return 10;\n  }\n  /**\n   * fps 5 基準値を取得します\n   * @const RATE_5\n   * @returns {number} fps 6 基準値を返します\n   * @default 12\n   */\n  static get RATE_5() {\n    return 12;\n  }\n  // ----------------------------------------\n  // EVENT\n  // ----------------------------------------\n  /**\n   * フレームレート毎に発生するイベント type を取得します\n   * @event UPDATE\n   * @returns {string} event, rateUpdate を返します\n   * @default rateUpdate\n   */\n  static get UPDATE() {\n    return 'rateUpdate';\n  }\n  // ----------------------------------------\n  // METHOD\n  // ----------------------------------------\n  /**\n   * 正規な rate 値かをチェックします\n   * @param {number} rate 対象 rate\n   * @returns {boolean} 正しいと true を返します\n   */\n  validate(rate) {\n    return this.rates().indexOf(rate) !== -1;\n  }\n  /**\n   * fps 基準値を設定します\n   * @throws {Error} 引数 rate が設定可能値以外の時に例外エラーが発生します\n   * @param {number} rate fps 基準値, <br>\n   * this.RATE_30, this.RATE_20, this.RATE_15, this.RATE_12, this.RATE_10, <br>\n   * this.RATE_6, this.RATE_5 の何れかが必須です\n   * @returns {boolean} rate 設定に成功すると true を返します\n   */\n  change(rate) {\n    const result = this.setRate(rate);\n    this.update();\n    return result;\n  }\n  /**\n   * loop(requestAnimationFrame) を開始します\n   * @returns {boolean} start に成功すると true を返します\n   */\n  start() {\n    if (this.started) {\n      // already start\n      return false;\n    }\n    // flag -> true\n    this.turnOver();\n    // cycle\n    this.initCycle();\n    // 強制的に1回目を実行\n    this.fire(this.updateEvents(0, 0));\n\n    return true;\n  }\n  /**\n   * loop(requestAnimationFrame) します\n   * @returns {boolean} Rate.UPDATE event が発生すると true を返します\n   */\n  update() {\n    // 余りが 0 の時にイベントを発火します\n    this.count += 1;\n    const reminder = this.count % this.rate();\n    if (reminder === 0) {\n      this.count = 0;\n      this.fire(this.updateEvents(0, 0));\n\n      return true;\n    }\n\n    return false;\n  }\n}\n"
+    "content": "/**\n * @license inazumatv.com\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/16\n *\n * Copyright (c) 2011-2015 inazumatv.com, inc.\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n */\n\n// event\nimport { default as Events } from '../event/Events';\n\n// tick\nimport { default as Polling } from './Polling';\n\n/**\n * 固定値を使用し fps を決定します\n *\n * 以下のフレームレートが設定可能です\n *\n * - 60: Rate.RATE_60\n * - 30: RATE_30\n * - 20: RATE_20\n * - 15: RATE_15\n * - 12: RATE_12\n * - 10: RATE_10\n * - 6: RATE_6\n * - 5: RATE_5\n *\n * @example\n * // 1sec interval\n * const rate = new Rate(Rate.Rate_60);\n * const update = () => {\n *  // code here, something do\n * };\n * rate.on(Rate.UPDATE, update);\n * rate.start();\n */\nexport default class Rate extends Polling {\n  /**\n   * 固定値フレームレート毎に UPDATE イベントを発生させます\n   * @param {number} [rateValue=Rate.RATE_5] fps, 固定値以外設定できません\n   */\n  constructor(rateValue = Rate.RATE_5) {\n    // 60fps で polling を行う\n    super(1000 / 60);\n    // @type {Events}\n    const events = new Events(Rate.UPDATE, this, this);\n    // 設定可能な rate list\n    const rates = [\n      Rate.RATE_60,\n      Rate.RATE_30,\n      Rate.RATE_20,\n      Rate.RATE_15,\n      Rate.RATE_12,\n      Rate.RATE_10,\n      Rate.RATE_6,\n      Rate.RATE_5,\n    ];\n    /**\n     * Rate 通知 Events instance\n     * @returns {Events} Events instance\n     */\n    this.events = () => events;\n    /**\n     * 許容可能な rate\n     * @return {Array<number>} 許容可能な rate\n     */\n    this.rates = () => rates;\n    /**\n     * rate count, update 毎にカウントアップします<br>\n     * 不正値の時は `Rate.RATE_5` を使用します\n     * @type {number}\n     */\n    this.count = 0;\n    let rate = this.validate(rateValue) ? rateValue : Rate.RATE_5;\n    /**\n     * rate 値\n     * @returns {?number} rate 値\n     */\n    this.rate = () => rate;\n    /**\n     * rate 値を設定します\n     * @param {number} value rate 値\n     * @returns {boolean} rate 設定に成功すると true を返します\n     */\n    this.setRate = (value) => {\n      if (this.validate(value)) {\n        rate = value;\n        return true;\n      }\n      return false;\n    };\n    // init\n    this.setRate(rateValue);\n  }\n  // ----------------------------------------\n  // CONST\n  // ----------------------------------------\n  /**\n   * fps 60 基準値を取得します\n   * @const RATE_60\n   * @returns {number} fps 60 基準値を返します\n   * @default 1\n   */\n  static get RATE_60() {\n    return 1;\n  }  /**\n   * fps 30 基準値を取得します\n   * @const RATE_30\n   * @returns {number} fps 30 基準値を返します\n   * @default 2\n   */\n  static get RATE_30() {\n    return 2;\n  }\n  /**\n   * fps 20 基準値を取得します\n   * @const RATE_20\n   * @returns {number} fps 20 基準値を返します\n   * @default 3\n   */\n  static get RATE_20() {\n    return 3;\n  }\n  /**\n   * fps 15 基準値を取得します\n   * @const RATE_15\n   * @returns {number} fps 15 基準値を返します\n   * @default 4\n   */\n  static get RATE_15() {\n    return 4;\n  }\n  /**\n   * fps 12 基準値を取得します\n   * @const RATE_12\n   * @returns {number} fps 12 基準値を返します\n   * @default 5\n   */\n  static get RATE_12() {\n    return 5;\n  }\n  /**\n   * fps 10 基準値を取得します\n   * @const RATE_10\n   * @returns {number} fps 10 基準値を返します\n   * @default 6\n   */\n  static get RATE_10() {\n    return 6;\n  }\n  /**\n   * fps 6 基準値を取得します\n   * @const RATE_6\n   * @returns {number} fps 6 基準値を返します\n   * @default 10\n   */\n  static get RATE_6() {\n    return 10;\n  }\n  /**\n   * fps 5 基準値を取得します\n   * @const RATE_5\n   * @returns {number} fps 6 基準値を返します\n   * @default 12\n   */\n  static get RATE_5() {\n    return 12;\n  }\n  // ----------------------------------------\n  // EVENT\n  // ----------------------------------------\n  /**\n   * フレームレート毎に発生するイベント type を取得します\n   * @event UPDATE\n   * @returns {string} event, rateUpdate を返します\n   * @default rateUpdate\n   */\n  static get UPDATE() {\n    return 'rateUpdate';\n  }\n  // ----------------------------------------\n  // METHOD\n  // ----------------------------------------\n  /**\n   * 正規な rate 値かをチェックします\n   * @param {number} rate 対象 rate\n   * @returns {boolean} 正しいと true を返します\n   */\n  validate(rate) {\n    return this.rates().indexOf(rate) !== -1;\n  }\n  /**\n   * fps 基準値を設定します\n   * @throws {Error} 引数 rate が設定可能値以外の時に例外エラーが発生します\n   * @param {number} rate fps 基準値, <br>\n   * this.RATE_30, this.RATE_20, this.RATE_15, this.RATE_12, this.RATE_10, <br>\n   * this.RATE_6, this.RATE_5 の何れかが必須です\n   * @returns {boolean} rate 設定に成功すると true を返します\n   */\n  change(rate) {\n    const result = this.setRate(rate);\n    this.update();\n    return result;\n  }\n  /**\n   * loop(requestAnimationFrame) を開始します\n   * @returns {boolean} start に成功すると true を返します\n   */\n  start() {\n    if (this.started) {\n      // already start\n      return false;\n    }\n    // flag -> true\n    this.turnOver();\n    // cycle\n    this.initCycle();\n    // 強制的に1回目を実行\n    this.fire(this.updateEvents(0, 0));\n\n    return true;\n  }\n  /**\n   * loop(requestAnimationFrame) します\n   * @returns {boolean} Rate.UPDATE event が発生すると true を返します\n   */\n  update() {\n    // 余りが 0 の時にイベントを発火します\n    this.count += 1;\n    const reminder = this.count % this.rate();\n    if (reminder === 0) {\n      this.count = 0;\n      this.fire(this.updateEvents(0, 0));\n\n      return true;\n    }\n\n    return false;\n  }\n}\n"
   },
   {
     "__docId__": 305,
@@ -8979,7 +8985,10 @@
     "importPath": "./src/tick/Rate.js",
     "importStyle": "Rate",
     "description": "固定値を使用し fps を決定します\n\n以下のフレームレートが設定可能です\n\n- 60: Rate.RATE_60\n- 30: RATE_30\n- 20: RATE_20\n- 15: RATE_15\n- 12: RATE_12\n- 10: RATE_10\n- 6: RATE_6\n- 5: RATE_5",
-    "lineNumber": 35,
+    "examples": [
+      "// 1sec interval\nconst rate = new Rate(Rate.Rate_60);\nconst update = () => {\n // code here, something do\n};\nrate.on(Rate.UPDATE, update);\nrate.start();"
+    ],
+    "lineNumber": 43,
     "interface": false,
     "extends": [
       "src/tick/Polling.js~Polling"
@@ -8995,7 +9004,7 @@
     "longname": "src/tick/Rate.js~Rate#constructor",
     "access": null,
     "description": "固定値フレームレート毎に UPDATE イベントを発生させます",
-    "lineNumber": 40,
+    "lineNumber": 48,
     "params": [
       {
         "nullable": null,
@@ -9021,8 +9030,8 @@
     "memberof": "src/tick/Rate.js~Rate",
     "longname": "src/tick/Rate.js~Rate#events",
     "access": null,
-    "description": "",
-    "lineNumber": 59,
+    "description": "Rate 通知 Events instance",
+    "lineNumber": 68,
     "unknown": [
       {
         "tagName": "@returns",
@@ -9053,7 +9062,7 @@
     "longname": "src/tick/Rate.js~Rate#rates",
     "access": null,
     "description": "許容可能な rate",
-    "lineNumber": 64,
+    "lineNumber": 73,
     "return": {
       "nullable": null,
       "types": [
@@ -9078,7 +9087,7 @@
     "longname": "src/tick/Rate.js~Rate#count",
     "access": null,
     "description": "rate count, update 毎にカウントアップします<br>\n不正値の時は `Rate.RATE_5` を使用します",
-    "lineNumber": 70,
+    "lineNumber": 79,
     "type": {
       "nullable": null,
       "types": [
@@ -9098,7 +9107,7 @@
     "longname": "src/tick/Rate.js~Rate#rate",
     "access": null,
     "description": "rate 値",
-    "lineNumber": 76,
+    "lineNumber": 85,
     "unknown": [
       {
         "tagName": "@returns",
@@ -9129,7 +9138,7 @@
     "longname": "src/tick/Rate.js~Rate#setRate",
     "access": null,
     "description": "rate 値を設定します",
-    "lineNumber": 82,
+    "lineNumber": 91,
     "unknown": [
       {
         "tagName": "@returns",
@@ -9172,7 +9181,7 @@
     "longname": "src/tick/Rate.js~Rate.RATE_60",
     "access": null,
     "description": "fps 60 基準値を取得します",
-    "lineNumber": 101,
+    "lineNumber": 110,
     "unknown": [
       {
         "tagName": "@const",
@@ -9212,7 +9221,7 @@
     "longname": "src/tick/Rate.js~Rate.RATE_30",
     "access": null,
     "description": "fps 30 基準値を取得します",
-    "lineNumber": 109,
+    "lineNumber": 118,
     "unknown": [
       {
         "tagName": "@const",
@@ -9252,7 +9261,7 @@
     "longname": "src/tick/Rate.js~Rate.RATE_20",
     "access": null,
     "description": "fps 20 基準値を取得します",
-    "lineNumber": 118,
+    "lineNumber": 127,
     "unknown": [
       {
         "tagName": "@const",
@@ -9292,7 +9301,7 @@
     "longname": "src/tick/Rate.js~Rate.RATE_15",
     "access": null,
     "description": "fps 15 基準値を取得します",
-    "lineNumber": 127,
+    "lineNumber": 136,
     "unknown": [
       {
         "tagName": "@const",
@@ -9332,7 +9341,7 @@
     "longname": "src/tick/Rate.js~Rate.RATE_12",
     "access": null,
     "description": "fps 12 基準値を取得します",
-    "lineNumber": 136,
+    "lineNumber": 145,
     "unknown": [
       {
         "tagName": "@const",
@@ -9372,7 +9381,7 @@
     "longname": "src/tick/Rate.js~Rate.RATE_10",
     "access": null,
     "description": "fps 10 基準値を取得します",
-    "lineNumber": 145,
+    "lineNumber": 154,
     "unknown": [
       {
         "tagName": "@const",
@@ -9412,7 +9421,7 @@
     "longname": "src/tick/Rate.js~Rate.RATE_6",
     "access": null,
     "description": "fps 6 基準値を取得します",
-    "lineNumber": 154,
+    "lineNumber": 163,
     "unknown": [
       {
         "tagName": "@const",
@@ -9452,7 +9461,7 @@
     "longname": "src/tick/Rate.js~Rate.RATE_5",
     "access": null,
     "description": "fps 5 基準値を取得します",
-    "lineNumber": 163,
+    "lineNumber": 172,
     "unknown": [
       {
         "tagName": "@const",
@@ -9492,7 +9501,7 @@
     "longname": "src/tick/Rate.js~Rate.UPDATE",
     "access": null,
     "description": "フレームレート毎に発生するイベント type を取得します",
-    "lineNumber": 175,
+    "lineNumber": 184,
     "unknown": [
       {
         "tagName": "@event",
@@ -9532,7 +9541,7 @@
     "longname": "src/tick/Rate.js~Rate#validate",
     "access": null,
     "description": "正規な rate 値かをチェックします",
-    "lineNumber": 186,
+    "lineNumber": 195,
     "unknown": [
       {
         "tagName": "@returns",
@@ -9571,7 +9580,7 @@
     "longname": "src/tick/Rate.js~Rate#change",
     "access": null,
     "description": "fps 基準値を設定します",
-    "lineNumber": 197,
+    "lineNumber": 206,
     "unknown": [
       {
         "tagName": "@returns",
@@ -9618,7 +9627,7 @@
     "longname": "src/tick/Rate.js~Rate#start",
     "access": null,
     "description": "loop(requestAnimationFrame) を開始します",
-    "lineNumber": 206,
+    "lineNumber": 215,
     "unknown": [
       {
         "tagName": "@returns",
@@ -9646,7 +9655,7 @@
     "longname": "src/tick/Rate.js~Rate#update",
     "access": null,
     "description": "loop(requestAnimationFrame) します",
-    "lineNumber": 224,
+    "lineNumber": 233,
     "unknown": [
       {
         "tagName": "@returns",
@@ -9674,7 +9683,7 @@
     "longname": "src/tick/Rate.js~Rate#count",
     "access": null,
     "description": null,
-    "lineNumber": 226,
+    "lineNumber": 235,
     "undocument": true,
     "type": {
       "types": [
@@ -9692,7 +9701,7 @@
     "longname": "src/tick/Rate.js~Rate#count",
     "access": null,
     "description": null,
-    "lineNumber": 229,
+    "lineNumber": 238,
     "undocument": true,
     "type": {
       "types": [

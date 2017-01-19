@@ -25,7 +25,16 @@ import { default as Polling } from './Polling';
 
 /**
  * フレームレート毎に UPDATE イベントを発生させます
- */
+ *
+ * @example
+ * // 2sec. interval
+ * const fps = new Fps(0.5);
+ * const update = () => {
+ *  // code here, something do
+ * };
+ * fps.on(Fps.UPDATE, update);
+ * fps.start();
+ * */
 export default class Fps extends Polling {
   /**
    * 引数の frame rate に合わせ UPDATE イベントを発生させます

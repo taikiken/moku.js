@@ -31,6 +31,14 @@ import { default as Polling } from './Polling';
  * - 6: RATE_6
  * - 5: RATE_5
  *
+ * @example
+ * // 1sec interval
+ * const rate = new Rate(Rate.Rate_60);
+ * const update = () => {
+ *  // code here, something do
+ * };
+ * rate.on(Rate.UPDATE, update);
+ * rate.start();
  */
 export default class Rate extends Polling {
   /**
@@ -54,6 +62,7 @@ export default class Rate extends Polling {
       Rate.RATE_5,
     ];
     /**
+     * Rate 通知 Events instance
      * @returns {Events} Events instance
      */
     this.events = () => events;
