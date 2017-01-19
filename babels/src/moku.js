@@ -43,6 +43,7 @@ import { default as List } from './util/List';
 import { default as Text } from './util/Text';
 import { default as Times } from './util/Times';
 import { default as Vectors } from './util/Vectors';
+import { default as Iro } from './util/Iro';
 
 // css
 import { default as Can } from './css/Can';
@@ -114,6 +115,7 @@ MOKU.util = {
   Times,
   Vectors,
   Hit,
+  Iro,
 };
 
 MOKU.css = {

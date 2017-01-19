@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Mocha</title>
+<link href="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+</head>
+<body>
+<div id="mocha"></div>
+<script src="//cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
+<script src="//cdn.rawgit.com/Automattic/expect.js/0.3.1/index.js"></script>
+<script src="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+<script src="//chaijs.com/chai.js"></script>
+<script src="../libs/moku.js" charset="utf-8"></script>
+<script>
+  // mochaの機能を呼び出します。ここでは、BDDとTDDを使用します。
+  mocha.setup('bdd');
+  mocha.setup('tdd');
+  var assert = chai.assert;
+  // expectの機能を読み込み
+  var expect = chai.expect;
+  // shouldの機能を読み込み
+  chai.Should();
+</script>
+<script>
+(function(window) {
+  'use strict';
+  var MOKU = window.MOKU;
+  var util = MOKU.util;
+  var Iro = util.Iro;
+
+  //  Iro.rgb2hsl
+  describe('#Iro.rgb2hsl', function() {
+    it("Iro.rgb2hsl(255, 255, 255) is {h: 0, s: 0, l: 1}", function() {
+      expect(Iro.rgb2hsl(255, 255, 255)).to.eql({h: 0, s: 0, l: 1});
+    });
+    it("Iro.rgb2hsl(255, 0, 255) is {h: 300 / 360, s: 1, l: 0.5}", function() {
+      expect(Iro.rgb2hsl(255, 0, 255)).to.eql({h: 300 / 360, s: 1, l: 0.5});
+    });
+    it("Iro.rgb2hsl(0, 0, 255) is {h: 240 / 360, s: 1, l: 0.5}", function() {
+      expect(Iro.rgb2hsl(0, 0, 255)).to.eql({h: 240 / 360, s: 1, l: 0.5});
+    });
+    it("Iro.rgb2hsl(0, 0, 255) is {h: 240 / 360, s: 1, l: 0.5}", function() {
+      expect(Iro.rgb2hsl(0, 0, 255)).to.eql({h: 240 / 360, s: 1, l: 0.5});
+    });
+    it("Iro.rgb2hsl(128, 128, 128) is {h: 0, s: 0, l: 0.502}", function() {
+      expect(Iro.rgb2hsl(128, 128, 128)).to.eql({h: 0, s: 0, l: 0.502});
+    });
+  });
+
+  //  Iro.hsl2rgb
+  describe('#Iro.hsl2rgb', function() {
+    it("Iro.rgb2hsl(0, 0, 1) is {r: 255, g: 255, b: 255}", function() {
+      expect(Iro.hsl2rgb(0, 0, 1)).to.eql({r: 255, g: 255, b: 255});
+    });
+    it("Iro.rgb2hsl(300 / 360, 1, 0.5) is {r: 255, g: 0, b: 255}", function() {
+      expect(Iro.hsl2rgb(300 / 360, 1, 0.5)).to.eql({r: 255, g: 0, b: 255});
+    });
+    it("Iro.rgb2hsl(240 / 360, 1, 0.5) is {r: 0, g: 0, b: 255}", function() {
+      expect(Iro.hsl2rgb(240 / 360, 1, 0.5)).to.eql({r: 0, g: 0, b: 255});
+    });
+  });
+
+  //  Iro.rgb2hsv
+  describe('#Iro.rgb2hsv', function() {
+    it("Iro.rgb2hsv(255, 255, 255) is {h: 0, s: 0, v: 1}", function() {
+      expect(Iro.rgb2hsv(255, 255, 255)).to.eql({h: 0, s: 0, v: 1});
+    });
+    it("Iro.rgb2hsv(255, 0, 255) is {h: 300 / 360, s: 1, v: 1}", function() {
+      expect(Iro.rgb2hsv(255, 0, 255)).to.eql({h: 300 / 360, s: 1, v: 1});
+    });
+  });
+  //  Iro.hsv2rgb
+  describe('#Iro.hsv2rgb', function() {
+    it("Iro.hsv2rgb(0, 0, 1) is {r: 255, g: 255, b: 255}", function() {
+      expect(Iro.hsv2rgb(0, 0, 1)).to.eql({r: 255, g: 255, b: 255});
+    });
+    it("Iro.hsv2rgb(300 / 360, 1, ) is {r: 255, g: 0, b: 255}", function() {
+      expect(Iro.hsv2rgb(300 / 360, 1, 1)).to.eql({r: 255, g: 0, b: 255});
+    });
+  });
+  // ------------------------------------
+  //  Iro.shorthand
+  describe('#Iro.shorthand', function() {
+    it("Iro.shorthand('#f00') is #ff0000", function() {
+      expect(Iro.shorthand('#f00')).to.eql('#ff0000');
+    });
+    it("Iro.shorthand('#f0f') is #ff00ff", function() {
+      expect(Iro.shorthand('#f0f')).to.eql('#ff00ff');
+    });
+    it("Iro.shorthand('#722d2d') is #722d2d", function() {
+      expect(Iro.shorthand('#722d2d')).to.eql('#722d2d');
+    });
+  });
+  //  Iro.hex2rgb
+  describe('#Iro.hex2rgb', function() {
+    it("Iro.hex2rgb('#f00') is {r: 255, g: 0, b: 0}", function() {
+      expect(Iro.hex2rgb('#f00')).to.eql({r: 255, g: 0, b: 0});
+    });
+    it("Iro.hex2rgb('#f0f') is {r: 255, g: 0, b: 255}", function() {
+      expect(Iro.hex2rgb('#f0f')).to.eql({r: 255, g: 0, b: 255});
+    });
+    it("Iro.hex2rgb('#722d2d') is {r: 114, g: 45, b: 45}", function() {
+      expect(Iro.hex2rgb('#722d2d')).to.eql({r: 114, g: 45, b: 45});
+    });
+  });
+  //  Iro.int16
+  describe('#Iro.int16', function() {
+    it("Iro.int16(255) is ff", function() {
+      expect(Iro.int16(255)).to.eql('ff');
+    });
+    it("Iro.int16(0) is 00", function() {
+      expect(Iro.int16(0)).to.eql('00');
+    });
+    it("Iro.int16(114) is 72", function() {
+      expect(Iro.int16(114)).to.eql('72');
+    });
+    it("Iro.int16(45) is 2d", function() {
+      expect(Iro.int16(45)).to.eql('2d');
+    });
+  });
+  //  Iro.rgb2hex
+  describe('#Iro.rgb2hex', function() {
+    it("Iro.rgb2hex(255, 0, 0) is #ff0000", function() {
+      expect(Iro.rgb2hex(255, 0, 0)).to.eql('#ff0000');
+    });
+    it("Iro.rgb2hex(255, 0, 255) is #ff00ff", function() {
+      expect(Iro.rgb2hex(255, 0, 255)).to.eql('#ff00ff');
+    });
+    it("Iro.rgb2hex(114, 45, 45) is #722d2d", function() {
+      expect(Iro.rgb2hex(114, 45, 45)).to.eql('#722d2d');
+    });
+  });
+  //  Iro.int2hex
+  describe('#Iro.int2hex', function() {
+    it("Iro.int2hex(16777215) is #ff0000", function() {
+      expect(Iro.int2hex(16777215)).to.eql('#ffffff');
+    });
+    it("Iro.int2hex(0) is #000000", function() {
+      expect(Iro.int2hex(0)).to.eql('#000000');
+    });
+    it("Iro.int2hex(16711680) is #ff0000", function() {
+      expect(Iro.int2hex(16711680)).to.eql('#ff0000');
+    });
+  });
+  //  Iro.hex2int
+  describe('#Iro.hex2int', function() {
+    it("Iro.hex2int(#ff0000) is 16711680", function() {
+      expect(Iro.hex2int('#ff0000')).to.eql(16711680);
+    });
+    it("Iro.hex2int(#ffffff) is 16777215", function() {
+      expect(Iro.hex2int('#ffffff')).to.eql(16777215);
+    });
+  });
+}(window));
+</script>
+<script>
+  mocha.checkLeaks();
+  mocha.globals(['jQuery']);
+  mocha.run();
+</script>
+</body>
+</html>
