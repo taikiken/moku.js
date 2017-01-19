@@ -87,7 +87,7 @@ export default class Iro {
     };
   }// rgb2hsl
   /**
-   * HSL to RGB で `S !== 0` な時の R, G, B 変換 helper です
+   * HSL to RGB で `saturation !== 0` な時の R, G, B 変換 helper です
    * @param {number} point `(2 * l) - q`
    * @param {number} q `l < 0.5 ? l * (1 + s) : (l + s) - (l * s)`
    * @param {number} hue hue

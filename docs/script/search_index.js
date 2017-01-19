@@ -72,6 +72,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "./src/util/iro.js~iro",
+    "class/src/util/Iro.js~Iro.html",
+    "<span>Iro</span> <span class=\"search-result-import-path\">./src/util/Iro.js</span>",
+    "class"
+  ],
+  [
     "./src/util/list.js~list",
     "class/src/util/List.js~List.html",
     "<span>List</span> <span class=\"search-result-import-path\">./src/util/List.js</span>",
@@ -2145,6 +2151,78 @@ window.esdocSearchIndex = [
     "src/util/hit.js~hit.test",
     "class/src/util/Hit.js~Hit.html#static-method-test",
     "src/util/Hit.js~Hit.test",
+    "method"
+  ],
+  [
+    "src/util/iro.js",
+    "file/src/util/Iro.js.html",
+    "src/util/Iro.js",
+    "file"
+  ],
+  [
+    "src/util/iro.js~iro.hex2int",
+    "class/src/util/Iro.js~Iro.html#static-method-hex2int",
+    "src/util/Iro.js~Iro.hex2int",
+    "method"
+  ],
+  [
+    "src/util/iro.js~iro.hex2rgb",
+    "class/src/util/Iro.js~Iro.html#static-method-hex2rgb",
+    "src/util/Iro.js~Iro.hex2rgb",
+    "method"
+  ],
+  [
+    "src/util/iro.js~iro.hsl2rgb",
+    "class/src/util/Iro.js~Iro.html#static-method-hsl2rgb",
+    "src/util/Iro.js~Iro.hsl2rgb",
+    "method"
+  ],
+  [
+    "src/util/iro.js~iro.hsv2rgb",
+    "class/src/util/Iro.js~Iro.html#static-method-hsv2rgb",
+    "src/util/Iro.js~Iro.hsv2rgb",
+    "method"
+  ],
+  [
+    "src/util/iro.js~iro.hue2rgb",
+    "class/src/util/Iro.js~Iro.html#static-method-hue2rgb",
+    "src/util/Iro.js~Iro.hue2rgb",
+    "method"
+  ],
+  [
+    "src/util/iro.js~iro.int16",
+    "class/src/util/Iro.js~Iro.html#static-method-int16",
+    "src/util/Iro.js~Iro.int16",
+    "method"
+  ],
+  [
+    "src/util/iro.js~iro.int2hex",
+    "class/src/util/Iro.js~Iro.html#static-method-int2hex",
+    "src/util/Iro.js~Iro.int2hex",
+    "method"
+  ],
+  [
+    "src/util/iro.js~iro.rgb2hex",
+    "class/src/util/Iro.js~Iro.html#static-method-rgb2hex",
+    "src/util/Iro.js~Iro.rgb2hex",
+    "method"
+  ],
+  [
+    "src/util/iro.js~iro.rgb2hsl",
+    "class/src/util/Iro.js~Iro.html#static-method-rgb2hsl",
+    "src/util/Iro.js~Iro.rgb2hsl",
+    "method"
+  ],
+  [
+    "src/util/iro.js~iro.rgb2hsv",
+    "class/src/util/Iro.js~Iro.html#static-method-rgb2hsv",
+    "src/util/Iro.js~Iro.rgb2hsv",
+    "method"
+  ],
+  [
+    "src/util/iro.js~iro.shorthand",
+    "class/src/util/Iro.js~Iro.html#static-method-shorthand",
+    "src/util/Iro.js~Iro.shorthand",
     "method"
   ],
   [

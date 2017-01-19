@@ -5860,7 +5860,7 @@
     "access": null,
     "description": null,
     "lineNumber": 1,
-    "content": "/*!\n * Copyright (c) inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/06/30 - 17:54\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n * @@version\n * @@buildTime\n */\n// use strict は本来不要でエラーになる\n// 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する\n/* eslint strict: [0, \"global\"] */\n\n'use strict';\n\n// event\nimport { default as EventDispatcher } from './event/EventDispatcher';\nimport { default as Events } from './event/Events';\nimport { default as Rising } from './event/Rising';\nimport { default as Scroll } from './event/Scroll';\nimport { default as Scrolling } from './event/Scrolling';\nimport { default as Touching } from './event/Touching';\nimport { default as Wheel } from './event/Wheel';\n\n// net\nimport { default as Ajax } from './net/Ajax';\nimport { default as Cookie } from './net/Cookie';\nimport { default as Queries } from './net/Queries';\n\n// tick\nimport { default as Cycle } from './tick/Cycle';\nimport { default as Fps } from './tick/Fps';\nimport { default as Polling } from './tick/Polling';\nimport { default as Rate } from './tick/Rate';\n\n// util\nimport { default as Type } from './util/Type';\nimport { default as Hit } from './util/Hit';\nimport { default as List } from './util/List';\nimport { default as Text } from './util/Text';\nimport { default as Times } from './util/Times';\nimport { default as Vectors } from './util/Vectors';\n\n// css\nimport { default as Can } from './css/Can';\nimport { default as Patterns } from './css/Patterns';\nimport { default as Style } from './css/Style';\n\n// dom\nimport { default as Bounding } from './dom/Bounding';\nimport { default as Classes } from './dom/Classes';\nimport { default as Elements } from './dom/Elements';\n\n/**\n * **MOKU**\n * <p>global Object</p>\n * <p>public な Class はここからアクセス可能です</p>\n * @type {Object}\n */\nconst MOKU = {};\n/**\n * version number を取得します\n * @returns {string} version number を返します\n */\nMOKU.version = () => '@@version';\n/**\n * build 日時を取得します\n * @returns {string}  build 日時を返します\n */\nMOKU.build = () => '@@buildTime';\n/**\n * MOKU.event\n * @type {Object} MOKU.event object を返します\n */\nMOKU.event = {\n  EventDispatcher,\n  Events,\n  Rising,\n  Scroll,\n  Wheel,\n  Scrolling,\n  Touching,\n};\n/**\n * MOKU.net\n * @type {Object} MOKU.net object を返します\n */\nMOKU.net = {\n  Ajax,\n  Cookie,\n  Queries,\n};\n/**\n * MOKU.tick\n * @type {Object} MOKU.tick object を返します\n */\nMOKU.tick = {\n  Cycle,\n  Fps,\n  Polling,\n  Rate,\n};\n/**\n * MOKU.util\n * @type {Object} MOKU.util object を返します\n */\nMOKU.util = {\n  Type,\n  List,\n  Text,\n  Times,\n  Vectors,\n  Hit,\n};\n\nMOKU.css = {\n  Patterns,\n  Style,\n  Can,\n};\n\nMOKU.dom = {\n  Bounding,\n  Classes,\n  Elements,\n};\n\n// export\nwindow.MOKU = MOKU;\n"
+    "content": "/*!\n * Copyright (c) inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/06/30 - 17:54\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n * @@version\n * @@buildTime\n */\n// use strict は本来不要でエラーになる\n// 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する\n/* eslint strict: [0, \"global\"] */\n\n'use strict';\n\n// event\nimport { default as EventDispatcher } from './event/EventDispatcher';\nimport { default as Events } from './event/Events';\nimport { default as Rising } from './event/Rising';\nimport { default as Scroll } from './event/Scroll';\nimport { default as Scrolling } from './event/Scrolling';\nimport { default as Touching } from './event/Touching';\nimport { default as Wheel } from './event/Wheel';\n\n// net\nimport { default as Ajax } from './net/Ajax';\nimport { default as Cookie } from './net/Cookie';\nimport { default as Queries } from './net/Queries';\n\n// tick\nimport { default as Cycle } from './tick/Cycle';\nimport { default as Fps } from './tick/Fps';\nimport { default as Polling } from './tick/Polling';\nimport { default as Rate } from './tick/Rate';\n\n// util\nimport { default as Type } from './util/Type';\nimport { default as Hit } from './util/Hit';\nimport { default as List } from './util/List';\nimport { default as Text } from './util/Text';\nimport { default as Times } from './util/Times';\nimport { default as Vectors } from './util/Vectors';\nimport { default as Iro } from './util/Iro';\n\n// css\nimport { default as Can } from './css/Can';\nimport { default as Patterns } from './css/Patterns';\nimport { default as Style } from './css/Style';\n\n// dom\nimport { default as Bounding } from './dom/Bounding';\nimport { default as Classes } from './dom/Classes';\nimport { default as Elements } from './dom/Elements';\n\n/**\n * **MOKU**\n * <p>global Object</p>\n * <p>public な Class はここからアクセス可能です</p>\n * @type {Object}\n */\nconst MOKU = {};\n/**\n * version number を取得します\n * @returns {string} version number を返します\n */\nMOKU.version = () => '@@version';\n/**\n * build 日時を取得します\n * @returns {string}  build 日時を返します\n */\nMOKU.build = () => '@@buildTime';\n/**\n * MOKU.event\n * @type {Object} MOKU.event object を返します\n */\nMOKU.event = {\n  EventDispatcher,\n  Events,\n  Rising,\n  Scroll,\n  Wheel,\n  Scrolling,\n  Touching,\n};\n/**\n * MOKU.net\n * @type {Object} MOKU.net object を返します\n */\nMOKU.net = {\n  Ajax,\n  Cookie,\n  Queries,\n};\n/**\n * MOKU.tick\n * @type {Object} MOKU.tick object を返します\n */\nMOKU.tick = {\n  Cycle,\n  Fps,\n  Polling,\n  Rate,\n};\n/**\n * MOKU.util\n * @type {Object} MOKU.util object を返します\n */\nMOKU.util = {\n  Type,\n  List,\n  Text,\n  Times,\n  Vectors,\n  Hit,\n  Iro,\n};\n\nMOKU.css = {\n  Patterns,\n  Style,\n  Can,\n};\n\nMOKU.dom = {\n  Bounding,\n  Classes,\n  Elements,\n};\n\n// export\nwindow.MOKU = MOKU;\n"
   },
   {
     "__docId__": 203,
@@ -5875,7 +5875,7 @@
     "importPath": "./src/moku.js",
     "importStyle": null,
     "description": "**MOKU**\n<p>global Object</p>\n<p>public な Class はここからアクセス可能です</p>",
-    "lineNumber": 63,
+    "lineNumber": 64,
     "type": {
       "nullable": null,
       "types": [
@@ -10087,6 +10087,768 @@
     "kind": "file",
     "static": true,
     "variation": null,
+    "name": "src/util/Iro.js",
+    "memberof": null,
+    "longname": "src/util/Iro.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "/**\n * Copyright (c) 2011-2017 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2017/01/19 - 15:13\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\nconst mathFloor = Math.floor;\nconst mathMax = Math.max;\nconst mathMin = Math.min;\nconst mathInt = self.parseInt;\n\nconst oneSix = 1 / 6;\nconst half = 0.5;\nconst twoThree = 2 / 3;\nconst oneThree = 1 / 3;\n/**\n * 色変換ユーティリティーです\n */\nexport default class Iro {\n  // ----------------------------------------\n  // HSL\n  // ----------------------------------------\n  /**\n   * RGB を HSL 変換します\n   * @see http://stackoverflow.com/questions/2353211/hsl-to-rgb-color-conversion\n   * @see http://www.rapidtables.com/convert/color/rgb-to-hsl.htm\n   * @param {number} red RGB.red 0 ~ 255\n   * @param {number} green RGB.green 0 ~ 255\n   * @param {number} blue RGB.blue 0 ~ 255\n   * @returns {{h: number, s: number, l: number}}\n   * {hue, saturation, luminance} object を返します, それぞれ 0 ~ 1\n   * hue: 0 ~ 360 を 360 で正規化されます\n   */\n  static rgb2hsl(red, green, blue) {\n    const r = red / 255;\n    const g = green / 255;\n    const b = blue / 255;\n    const maxValue = mathMax(r, g, b);\n    const minValue = mathMin(r, g, b);\n    // luminance\n    const l = (maxValue + minValue) * 0.5;\n    // hue\n    let h = 0;\n    // saturation\n    let s = 0;\n    if (maxValue === minValue) {\n      // achromatic: 〘光学〙無色の; 色消しの\n      return {\n        h,\n        s,\n        l,\n      };\n    }\n    // ---\n    const d = maxValue - minValue;\n    s = l > 0.5 ? d / (2 - maxValue - minValue) : d / (maxValue + minValue);\n    switch (maxValue) {\n      case r: {\n        h = ((g - b) / d) + (g < b ? 6 : 0);\n        break;\n      }\n      case g: {\n        h = ((b - r) / d) + 2;\n        break;\n      }\n      case b: {\n        h = ((r - g) / d) + 4;\n        break;\n      }\n      default: {\n        h = 0;\n        break;\n      }\n    }\n    h /= 6;\n    // return value\n    return {\n      h,\n      s,\n      l,\n    };\n  }// rgb2hsl\n  /**\n   * HSL to RGB で `saturation !== 0` な時の R, G, B 変換 helper です\n   * @param {number} point `(2 * l) - q`\n   * @param {number} q `l < 0.5 ? l * (1 + s) : (l + s) - (l * s)`\n   * @param {number} hue hue\n   * @returns {number} 0 ~ 1 な値を返します\n   */\n  static hue2rgb(point, q, hue) {\n    let t = hue;\n    if (t < 0) {\n      t += 1;\n    } else if (t > 1) {\n      t -= 1;\n    }\n    if (t < oneSix) {\n      return point + ((q - point) * 6 * t);\n    } else if (t < half) {\n      return q;\n    } else if (t < twoThree) {\n      return point + ((q - point) * (twoThree - t) * 6);\n    }\n    return point;\n  }\n  /**\n   * HSL to RGB 変換します\n   * @param {number} h hue 0 ~ 1 degree / 360 正規化\n   * @param {number} s saturation 0 ~ 1\n   * @param {number} l luminance 0 ~ 1\n   * @returns {{r: number, g: number, b: number}} r, g, b: 0 ~ 255 object を返します\n   */\n  static hsl2rgb(h, s, l) {\n    let r = l;\n    let g = l;\n    let b = l;\n    if (s !== 0) {\n      const q = l < 0.5 ? l * (1 + s) : (l + s) - (l * s);\n      const point = (2 * l) - q;\n      r = Iro.hue2rgb(point, q, h + oneThree);\n      g = Iro.hue2rgb(point, q, h);\n      b = Iro.hue2rgb(point, q, h - oneThree);\n    }\n    return {\n      r: mathInt(r * 255, 10),\n      g: mathInt(g * 255, 10),\n      b: mathInt(b * 255, 10),\n    };\n  }\n  // ----------------------------------------\n  // HSV\n  // ----------------------------------------\n  /**\n   * RGB to HSV(HSB) 変換\n   * @param {number} r RGB.red 0 ~ 255\n   * @param {number} g RGB.green 0 ~ 255\n   * @param {number} b RGB.blue 0 ~ 255\n   * @returns {{h: number, s: number, v: number}} 各 0 ~ 1\n   */\n  static rgb2hsv(r, g, b) {\n    // 正規化\n    const red = r / 255;\n    const green = g / 255;\n    const blue = b / 255;\n\n    const maxValue = mathMax(red, green, blue);\n    const minValue = mathMin(red, green, blue);\n    const v = maxValue;\n    const d = maxValue - minValue;\n    const s = maxValue === 0 ? 0 : d / maxValue;\n    let h = 0;\n    if (maxValue === minValue) {\n      // achromatic: 〘光学〙無色の; 色消しの\n      return {\n        h,\n        s,\n        v,\n      };\n    }\n    // ---\n    switch (maxValue) {\n      case red: {\n        h = ((green - blue) / d) + (green < blue ? 6 : 0);\n        break;\n      }\n      case green: {\n        h = ((blue - red) / d) + 2;\n        break;\n      }\n      case blue: {\n        h = ((red - green) / d) + 4;\n        break;\n      }\n      default: {\n        h = 0;\n        break;\n      }\n    }\n    h /= 6;\n    return {\n      h,\n      s,\n      v,\n    };\n  }\n  /**\n   * HSV(HSB) to RGB 変換します\n   * @param {number} h hue 0 ~ 1\n   * @param {number} s saturation 0 ~ 1\n   * @param {number} v value(bright) 0 ~ 1\n   * @returns {{r: Number, g: Number, b: Number}} 各 0 ~ 255\n   */\n  static hsv2rgb(h, s, v) {\n    const i = mathFloor(h * 6);\n    const f = (h * 6) - i;\n    const point = v * (1 - s);\n    const q = v * (1 - (f * s));\n    const t = v * (1 - ((1 - f) * s));\n    let r = 0;\n    let g = 0;\n    let b = 0;\n    // ---\n    switch (i % 6) {\n      case 0:\n        r = v;\n        g = t;\n        b = point;\n        break;\n\n      case 1:\n        r = q;\n        g = v;\n        b = point;\n        break;\n\n      case 2:\n        r = point;\n        g = v;\n        b = t;\n        break;\n\n      case 3:\n        r = point;\n        g = q;\n        b = v;\n        break;\n\n      case 4:\n        r = t;\n        g = point;\n        b = v;\n        break;\n\n      case 5:\n        r = v;\n        g = point;\n        b = q;\n        break;\n\n      default:\n        r = 0;\n        g = 0;\n        b = 0;\n        break;\n    }\n    // ---\n    return {\n      r: mathInt(r * 255, 10),\n      g: mathInt(g * 255, 10),\n      b: mathInt(b * 255, 10),\n    };\n  }\n  // ----------------------------------------\n  // HEX\n  // ----------------------------------------\n  /**\n   * CSS shorthand 色指定をフル変換します\n   * @param {string} hex `#f00` な CSS 色形式\n   * @returns {?string} `ff0000` フル変換し返します\n   * @see http://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb\n   */\n  static shorthand(hex) {\n    if (typeof hex !== 'string') {\n      return null;\n    }\n    const pattern = /^#?([a-f\\d])([a-f\\d])([a-f\\d])$/i;\n    const color = hex.replace(pattern, (m, r, g, b) => `${r}${r}${g}${g}${b}${b}`);\n    return color.length === 7 ? color : `#${color}`;\n  }\n  /**\n   * CSS 色指定を RGB 変換します\n   * @param {string} hex CSS 色形式 `#f00` or `#ff0000`\n   * @returns {?{r: number, g: number, b: number}} nullable で返します\n   */\n  static hex2rgb(hex) {\n    const hexString = Iro.shorthand(hex);\n    if (typeof hexString !== 'string') {\n      return null;\n    }\n    // ---\n    const result = /^#?([a-f\\d]{2})([a-f\\d]{2})([a-f\\d]{2})$/i.exec(hexString);\n    return Array.isArray(result) && result.length === 4 ?\n      {\n        r: mathInt(result[1], 16),\n        g: mathInt(result[2], 16),\n        b: mathInt(result[3], 16),\n      } : null;\n  }\n  /**\n   * 0 ~ 255 RGB color number を `00` な 16進形式に変換します\n   * @param {number} colorNumber 変換する RGB color number\n   * @returns {string} 2桁を保証し 16進 変換後文字列を返します\n   */\n  static int16(colorNumber) {\n    const hex = colorNumber.toString(16);\n    return hex.length === 1 ? `0${hex}` : hex;\n  }\n  /**\n   * RGB を CSS形式 hex 変換します\n   * @param {number} r red 0 ~ 255\n   * @param {number} g green 0 ~ 255\n   * @param {number} b blue 0 ~ 255\n   * @returns {string} CSS形式 hex `#ff0000` を返します\n   */\n  static rgb2hex(r, g, b) {\n    return `#${Iro.int16(r)}${Iro.int16(g)}${Iro.int16(b)}`;\n  }\n  /**\n   * 0 ~ 16777215 数値を `#ffffff` な CSS 16進色形式に変換します\n   * @param {number} rgb 0 ~ 16777215 名数値\n   * @returns {string} `#ffffff` な CSS 16進色形式を返します\n   */\n  static int2hex(rgb) {\n    let hex = mathFloor(rgb).toString(16);\n    const length = hex.length;\n    if (length === 6) {\n      return `#${hex}`;\n    }\n    let step = 6 - length;\n    while (step) {\n      hex = `0${hex}`;\n      step -= 1;\n    }\n    return `#${hex}`;\n  }\n  /**\n   * `#ffffff` な CSS 16進色形式を 10進数変換します\n   * @param {string} hex `#f00` or `#ff0000` な CSS 16進色形式\n   * @returns {?number} 10進数へ変換し返します\n   */\n  static hex2int(hex) {\n    const hexString = Iro.shorthand(hex);\n    if (typeof hexString !== 'string') {\n      return null;\n    }\n    return mathInt(hexString.replace('#', ''), 16);\n  }\n}\n"
+  },
+  {
+    "__docId__": 341,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "mathFloor",
+    "memberof": "src/util/Iro.js",
+    "longname": "src/util/Iro.js~mathFloor",
+    "access": null,
+    "export": false,
+    "importPath": "./src/util/Iro.js",
+    "importStyle": null,
+    "description": "Copyright (c) 2011-2017 inazumatv.com, inc.",
+    "lineNumber": 13,
+    "unknown": [
+      {
+        "tagName": "@author",
+        "tagValue": "(at)taikiken / http://inazumatv.com"
+      },
+      {
+        "tagName": "@date",
+        "tagValue": "2017/01/19 - 15:13\n\nDistributed under the terms of the MIT license.\nhttp://www.opensource.org/licenses/mit-license.html\n\nThis notice shall be included in all copies or substantial portions of the Software."
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 342,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "mathMax",
+    "memberof": "src/util/Iro.js",
+    "longname": "src/util/Iro.js~mathMax",
+    "access": null,
+    "export": false,
+    "importPath": "./src/util/Iro.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 14,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 343,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "mathMin",
+    "memberof": "src/util/Iro.js",
+    "longname": "src/util/Iro.js~mathMin",
+    "access": null,
+    "export": false,
+    "importPath": "./src/util/Iro.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 15,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 344,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "mathInt",
+    "memberof": "src/util/Iro.js",
+    "longname": "src/util/Iro.js~mathInt",
+    "access": null,
+    "export": false,
+    "importPath": "./src/util/Iro.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 16,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 345,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "oneSix",
+    "memberof": "src/util/Iro.js",
+    "longname": "src/util/Iro.js~oneSix",
+    "access": null,
+    "export": false,
+    "importPath": "./src/util/Iro.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 18,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 346,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "half",
+    "memberof": "src/util/Iro.js",
+    "longname": "src/util/Iro.js~half",
+    "access": null,
+    "export": false,
+    "importPath": "./src/util/Iro.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 19,
+    "undocument": true,
+    "type": {
+      "types": [
+        "number"
+      ]
+    }
+  },
+  {
+    "__docId__": 347,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "twoThree",
+    "memberof": "src/util/Iro.js",
+    "longname": "src/util/Iro.js~twoThree",
+    "access": null,
+    "export": false,
+    "importPath": "./src/util/Iro.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 20,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 348,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "oneThree",
+    "memberof": "src/util/Iro.js",
+    "longname": "src/util/Iro.js~oneThree",
+    "access": null,
+    "export": false,
+    "importPath": "./src/util/Iro.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 21,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 349,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "Iro",
+    "memberof": "src/util/Iro.js",
+    "longname": "src/util/Iro.js~Iro",
+    "access": null,
+    "export": true,
+    "importPath": "./src/util/Iro.js",
+    "importStyle": "Iro",
+    "description": "色変換ユーティリティーです",
+    "lineNumber": 25,
+    "interface": false
+  },
+  {
+    "__docId__": 350,
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "rgb2hsl",
+    "memberof": "src/util/Iro.js~Iro",
+    "longname": "src/util/Iro.js~Iro.rgb2hsl",
+    "access": null,
+    "description": "RGB を HSL 変換します",
+    "see": [
+      "http://stackoverflow.com/questions/2353211/hsl-to-rgb-color-conversion",
+      "http://www.rapidtables.com/convert/color/rgb-to-hsl.htm"
+    ],
+    "lineNumber": 40,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{{h: number, s: number, l: number}}\n{hue, saturation, luminance} object を返します, それぞれ 0 ~ 1\nhue: 0 ~ 360 を 360 で正規化されます"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "red",
+        "description": "RGB.red 0 ~ 255"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "green",
+        "description": "RGB.green 0 ~ 255"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "blue",
+        "description": "RGB.blue 0 ~ 255"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "{h: number, s: number, l: number}"
+      ],
+      "spread": false,
+      "description": "{hue, saturation, luminance} object を返します, それぞれ 0 ~ 1\nhue: 0 ~ 360 を 360 で正規化されます"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 351,
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "hue2rgb",
+    "memberof": "src/util/Iro.js~Iro",
+    "longname": "src/util/Iro.js~Iro.hue2rgb",
+    "access": null,
+    "description": "HSL to RGB で `saturation !== 0` な時の R, G, B 変換 helper です",
+    "lineNumber": 96,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{number} 0 ~ 1 な値を返します"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "point",
+        "description": "`(2 * l) - q`"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "q",
+        "description": "`l < 0.5 ? l * (1 + s) : (l + s) - (l * s)`"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "hue",
+        "description": "hue"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": "0 ~ 1 な値を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 352,
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "hsl2rgb",
+    "memberof": "src/util/Iro.js~Iro",
+    "longname": "src/util/Iro.js~Iro.hsl2rgb",
+    "access": null,
+    "description": "HSL to RGB 変換します",
+    "lineNumber": 119,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{{r: number, g: number, b: number}} r, g, b: 0 ~ 255 object を返します"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "h",
+        "description": "hue 0 ~ 1 degree / 360 正規化"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "s",
+        "description": "saturation 0 ~ 1"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "l",
+        "description": "luminance 0 ~ 1"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "{r: number, g: number, b: number}"
+      ],
+      "spread": false,
+      "description": "r, g, b: 0 ~ 255 object を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 353,
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "rgb2hsv",
+    "memberof": "src/util/Iro.js~Iro",
+    "longname": "src/util/Iro.js~Iro.rgb2hsv",
+    "access": null,
+    "description": "RGB to HSV(HSB) 変換",
+    "lineNumber": 146,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{{h: number, s: number, v: number}} 各 0 ~ 1"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "r",
+        "description": "RGB.red 0 ~ 255"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "g",
+        "description": "RGB.green 0 ~ 255"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "b",
+        "description": "RGB.blue 0 ~ 255"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "{h: number, s: number, v: number}"
+      ],
+      "spread": false,
+      "description": "各 0 ~ 1"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 354,
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "hsv2rgb",
+    "memberof": "src/util/Iro.js~Iro",
+    "longname": "src/util/Iro.js~Iro.hsv2rgb",
+    "access": null,
+    "description": "HSV(HSB) to RGB 変換します",
+    "lineNumber": 199,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{{r: Number, g: Number, b: Number}} 各 0 ~ 255"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "h",
+        "description": "hue 0 ~ 1"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "s",
+        "description": "saturation 0 ~ 1"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "v",
+        "description": "value(bright) 0 ~ 1"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "{r: Number, g: Number, b: Number}"
+      ],
+      "spread": false,
+      "description": "各 0 ~ 255"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 355,
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "shorthand",
+    "memberof": "src/util/Iro.js~Iro",
+    "longname": "src/util/Iro.js~Iro.shorthand",
+    "access": null,
+    "description": "CSS shorthand 色指定をフル変換します",
+    "see": [
+      "http://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb"
+    ],
+    "lineNumber": 268,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{?string} `ff0000` フル変換し返します"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "hex",
+        "description": "`#f00` な CSS 色形式"
+      }
+    ],
+    "return": {
+      "nullable": true,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": "`ff0000` フル変換し返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 356,
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "hex2rgb",
+    "memberof": "src/util/Iro.js~Iro",
+    "longname": "src/util/Iro.js~Iro.hex2rgb",
+    "access": null,
+    "description": "CSS 色指定を RGB 変換します",
+    "lineNumber": 281,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{?{r: number, g: number, b: number}} nullable で返します"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "hex",
+        "description": "CSS 色形式 `#f00` or `#ff0000`"
+      }
+    ],
+    "return": {
+      "nullable": true,
+      "types": [
+        "{r: number, g: number, b: number}"
+      ],
+      "spread": false,
+      "description": "nullable で返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 357,
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "int16",
+    "memberof": "src/util/Iro.js~Iro",
+    "longname": "src/util/Iro.js~Iro.int16",
+    "access": null,
+    "description": "0 ~ 255 RGB color number を `00` な 16進形式に変換します",
+    "lineNumber": 300,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{string} 2桁を保証し 16進 変換後文字列を返します"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "colorNumber",
+        "description": "変換する RGB color number"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": "2桁を保証し 16進 変換後文字列を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 358,
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "rgb2hex",
+    "memberof": "src/util/Iro.js~Iro",
+    "longname": "src/util/Iro.js~Iro.rgb2hex",
+    "access": null,
+    "description": "RGB を CSS形式 hex 変換します",
+    "lineNumber": 311,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{string} CSS形式 hex `#ff0000` を返します"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "r",
+        "description": "red 0 ~ 255"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "g",
+        "description": "green 0 ~ 255"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "b",
+        "description": "blue 0 ~ 255"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": "CSS形式 hex `#ff0000` を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 359,
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "int2hex",
+    "memberof": "src/util/Iro.js~Iro",
+    "longname": "src/util/Iro.js~Iro.int2hex",
+    "access": null,
+    "description": "0 ~ 16777215 数値を `#ffffff` な CSS 16進色形式に変換します",
+    "lineNumber": 319,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{string} `#ffffff` な CSS 16進色形式を返します"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "rgb",
+        "description": "0 ~ 16777215 名数値"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": "`#ffffff` な CSS 16進色形式を返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 360,
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "hex2int",
+    "memberof": "src/util/Iro.js~Iro",
+    "longname": "src/util/Iro.js~Iro.hex2int",
+    "access": null,
+    "description": "`#ffffff` な CSS 16進色形式を 10進数変換します",
+    "lineNumber": 337,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{?number} 10進数へ変換し返します"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "hex",
+        "description": "`#f00` or `#ff0000` な CSS 16進色形式"
+      }
+    ],
+    "return": {
+      "nullable": true,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": "10進数へ変換し返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 361,
+    "kind": "file",
+    "static": true,
+    "variation": null,
     "name": "src/util/List.js",
     "memberof": null,
     "longname": "src/util/List.js",
@@ -10096,7 +10858,7 @@
     "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/10/26 - 14:57\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\nimport { default as Type } from './Type';\n\n/**\n * Array（配列）Utility\n */\nexport default class List {\n  /**\n   * Array.prototype.fill, polyfill\n   * @param {number} lengthData 配列長\n   * @param {*} value fill する値\n   * @returns {Array.<*>} fill 後の配列を返します\n   * @private\n   */\n  static filling(lengthData, value) {\n    let length = lengthData;\n    const arr = [].slice(0);\n    while (length > 0) {\n      arr.push(value);\n      length -= 1;\n    }\n    return arr;\n  }\n  /**\n   * Array.prototype.fill を行います\n   * @param {number} length 配列長\n   * @param {*} value fill する値\n   * @returns {Array.<*>} fill 後の配列を返しますd\n   */\n  static fill(length, value = 0) {\n    // 関数が使えない時は polyfill 関数を使用します\n    if (!Type.method(Array.prototype.fill)) {\n      return List.filling(length, value);\n    }\n    // native method\n    return new Array(length).fill(value);\n  }\n}\n"
   },
   {
-    "__docId__": 341,
+    "__docId__": 362,
     "kind": "class",
     "static": true,
     "variation": null,
@@ -10112,7 +10874,7 @@
     "interface": false
   },
   {
-    "__docId__": 342,
+    "__docId__": 363,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10161,7 +10923,7 @@
     "generator": false
   },
   {
-    "__docId__": 343,
+    "__docId__": 364,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10210,7 +10972,7 @@
     "generator": false
   },
   {
-    "__docId__": 344,
+    "__docId__": 365,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -10223,7 +10985,7 @@
     "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/11/22 - 13:53\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n/**\n * 文字列操作の utility\n */\nexport default class Text {\n  /**\n   * camel case を hyphenation に変換します\n   * @param {string} str 操作対象文字列\n   * @returns {string} キャメルケースをハイフネーションに変換後文字列を返します\n   */\n  static dash(str) {\n    return str.replace(/([A-Z])/g, '-$1').toLowerCase();\n  }\n  /**\n   * camel case へ変換します\n   * @param {string} str 操作対象文字列\n   * @returns {*|void|string|XML} キャメルケース文字列を返します\n   */\n  static camel(str) {\n    // return str.replace(/^\\s+|\\s+$/g, '');\n    return str.replace(/-([a-z])/g, (g) => {\n      const first = g[1];\n      return first.toUpperCase();\n    });\n  }\n}\n"
   },
   {
-    "__docId__": 345,
+    "__docId__": 366,
     "kind": "class",
     "static": true,
     "variation": null,
@@ -10239,7 +11001,7 @@
     "interface": false
   },
   {
-    "__docId__": 346,
+    "__docId__": 367,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10278,7 +11040,7 @@
     "generator": false
   },
   {
-    "__docId__": 347,
+    "__docId__": 368,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10320,7 +11082,7 @@
     "generator": false
   },
   {
-    "__docId__": 348,
+    "__docId__": 369,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -10333,7 +11095,7 @@
     "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/12/16 - 16:50\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\nconst oneMinute = 1000 * 60;\nconst oneHour = oneMinute * 60;\nconst oneDay = oneHour * 24;\nconst oneWeek = oneDay * 7;\nconst oneMonth = oneDay * 30;\n\n/**\n * 指定時間を計算し Date instance を作成します\n */\nexport default class Times {\n  // /**\n  //  * 1970-1-1 00:00\n  //  * @returns {Date} 1970-1-1 00:00\n  //  */\n  // static standard() {\n  //   return new Date();\n  // }\n  /**\n   * 現在時間 Date instance\n   * @returns {Date} 現在時間 Date instance\n   */\n  static present() {\n    return new Date();\n  }\n  /**\n   * 指定分後の Date instance\n   * @param {number} n 指定分\n   * @returns {Date} 指定分後の Date instance\n   */\n  static minute(n) {\n    return new Date(Date.now() + (n * oneMinute));\n  }\n  /**\n   * 指定時間後の Date instance\n   * @param {number} n 指定時間\n   * @returns {Date} 指定時間後の Date instance\n   */\n  static hour(n) {\n    return new Date(Date.now() + (n * oneHour));\n  }\n  /**\n   * 指定日後の Date instance\n   * @param {number} n 指定日\n   * @returns {Date} 指定日後の Date instance\n   */\n  static day(n) {\n    return new Date(Date.now() + (n * oneDay));\n  }\n  /**\n   * 指定週後の Date instance\n   * @param {number} n 指定週\n   * @returns {Date} 指定週後の Date instance\n   */\n  static week(n) {\n    return new Date(Date.now() + (n * oneWeek));\n  }\n  /**\n   * 指定月後の Date instance\n   * @param {number} n 指定月\n   * @returns {Date} 指定月後の Date instance\n   */\n  static month(n) {\n    return new Date(Date.now() + (n * oneMonth));\n  }\n}\n"
   },
   {
-    "__docId__": 349,
+    "__docId__": 370,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -10363,7 +11125,7 @@
     }
   },
   {
-    "__docId__": 350,
+    "__docId__": 371,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -10384,7 +11146,7 @@
     }
   },
   {
-    "__docId__": 351,
+    "__docId__": 372,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -10405,7 +11167,7 @@
     }
   },
   {
-    "__docId__": 352,
+    "__docId__": 373,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -10426,7 +11188,7 @@
     }
   },
   {
-    "__docId__": 353,
+    "__docId__": 374,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -10447,7 +11209,7 @@
     }
   },
   {
-    "__docId__": 354,
+    "__docId__": 375,
     "kind": "class",
     "static": true,
     "variation": null,
@@ -10463,7 +11225,7 @@
     "interface": false
   },
   {
-    "__docId__": 355,
+    "__docId__": 376,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10491,7 +11253,7 @@
     "generator": false
   },
   {
-    "__docId__": 356,
+    "__docId__": 377,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10530,7 +11292,7 @@
     "generator": false
   },
   {
-    "__docId__": 357,
+    "__docId__": 378,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10569,7 +11331,7 @@
     "generator": false
   },
   {
-    "__docId__": 358,
+    "__docId__": 379,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10608,7 +11370,7 @@
     "generator": false
   },
   {
-    "__docId__": 359,
+    "__docId__": 380,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10647,7 +11409,7 @@
     "generator": false
   },
   {
-    "__docId__": 360,
+    "__docId__": 381,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10686,7 +11448,7 @@
     "generator": false
   },
   {
-    "__docId__": 361,
+    "__docId__": 382,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -10699,7 +11461,7 @@
     "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/12 - 18:24\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n/**\n * 型チェックを行います\n * @static\n */\nexport default class Type {\n  /**\n   * 引数(target)が関数かを調べます\n   * @param {Function|*} target 調査対象\n   * @returns {boolean} 引数(target)が関数かを調べ結果を返します、true: 関数\n   */\n  static method(target) {\n    return typeof target === 'function';\n  }\n  /**\n   * 引数(target)を `!!` で調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)を `!!` で調べ結果を返します\n   */\n  static exist(target) {\n    return !!target;\n  }\n  /**\n   * 引数(target)が number かを調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)が number かを調べ結果を返します、true: number\n   */\n  static number(target) {\n    // [参考] jQuery 2.x, jQuery 2 関数は文字列 \"2\" も true にするので type check を追加した\n    return typeof target === 'number' && !Type.array(target) && ((target - parseFloat(target)) + 1) >= 0;\n  }\n  /**\n   * 引数(target)が int かを `Number.isInteger` を使用し調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)が int かを調べ結果を返します、true: int\n   */\n  static int(target) {\n    return Number.isInteger(target);\n  }\n  /**\n   * 引数(target)が string かを調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)が string かを調べ結果を返します、true: string\n   */\n  static string(target) {\n    return typeof target === 'string';\n  }\n  /**\n   * 引数(target)を `Array.isArray` で配列かを調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)が 配列 かを調べ結果を返します、true: 配列\n   */\n  static array(target) {\n    return Array.isArray(target);\n  }\n  /**\n   * 引数(target)が null かを調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)が null かを調べ結果を返します、true: null\n   */\n  static nil(target) {\n    return target === null;\n  }\n  /**\n   * Object型 引数 `object` は String型 引数 `key` を [key] として所持しているかを調べます\n   * @deprecated instead use Type.has\n   * @param {Object} target 調査対象\n   * @param {string} key Object.key 名称\n   * @returns {boolean} 存在する時は true を返します\n   */\n  static hasKey(target, key) {\n    return Type.has(target, key);\n  }\n  /**\n   * Object型 引数 `object` は String型 引数 `key` を [key] として所持しているかを調べます\n   * @param {Object} target 調査対象\n   * @param {string} key Object.key 名称\n   * @returns {boolean} 存在する時は true を返します\n   */\n  static has(target, key) {\n    return Object.keys(target).indexOf(key) !== -1;\n  }\n  /**\n   * target が undefined かを調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} true: undefined\n   * @since 2016-10-25\n   */\n  static undef(target) {\n    return typeof target === 'undefined';\n  }\n  /**\n   * ファイル名から拡張子を取得します\n   * @deprecated instead use Type.extension\n   * @param {string} fileName 取得したいファイル名称\n   * @returns {string} ファイル名の拡張子を返します\n   */\n  static getExtension(fileName) {\n    return Type.extension(fileName);\n  }\n  /**\n   * ファイル名から拡張子を取得します\n   * @param {string} fileName 取得したいファイル名称\n   * @returns {string} ファイル名の拡張子を返します\n   */\n  static extension(fileName) {\n    if (typeof fileName !== 'string') {\n      return '';\n    }\n    const splits = fileName.split('.');\n    if (splits.length === 1) {\n      return '';\n    }\n    return splits.pop().toLowerCase();\n  }\n  // ----------------------------------------------------------\n  // 画像パスが正規かチェックする\n  /**\n   * 使用可能なbase64 file かを調べます\n   * @param {string} fileName 調査対象ファイル名\n   * @returns {boolean} jpeg / png の時に true を返します\n   */\n  static base64(fileName) {\n    if (!Type.exist(fileName)) {\n      return false;\n    }\n    return fileName.indexOf('data:image/jpeg;base64') !== -1 ||\n      fileName.indexOf('data:image/png;base64') !== -1 ||\n      fileName.indexOf('data:image/jpg;base64') !== -1 ||\n      fileName.indexOf('data:image/gif;base64') !== -1;\n  }\n  /**\n   * 拡張子から画像ファイルかを調べます\n   * @param {string} fileName 調査対象ファイル名\n   * @returns {Boolean} 'jpg', 'png', 'jpeg', 'gif' のいづれかに該当するかの真偽値を返します\n   */\n  static img(fileName) {\n    if (!Type.exist(fileName)) {\n      return false;\n    }\n    // base64\n    if (Type.base64(fileName)) {\n      return true;\n    }\n    // 拡張子チェック\n    return ['jpg', 'png', 'jpeg', 'gif'].indexOf(Type.extension(fileName)) !== -1;\n  }\n}\n"
   },
   {
-    "__docId__": 362,
+    "__docId__": 383,
     "kind": "class",
     "static": true,
     "variation": null,
@@ -10721,7 +11483,7 @@
     "interface": false
   },
   {
-    "__docId__": 363,
+    "__docId__": 384,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10761,7 +11523,7 @@
     "generator": false
   },
   {
-    "__docId__": 364,
+    "__docId__": 385,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10800,7 +11562,7 @@
     "generator": false
   },
   {
-    "__docId__": 365,
+    "__docId__": 386,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10839,7 +11601,7 @@
     "generator": false
   },
   {
-    "__docId__": 366,
+    "__docId__": 387,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10878,7 +11640,7 @@
     "generator": false
   },
   {
-    "__docId__": 367,
+    "__docId__": 388,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10917,7 +11679,7 @@
     "generator": false
   },
   {
-    "__docId__": 368,
+    "__docId__": 389,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10956,7 +11718,7 @@
     "generator": false
   },
   {
-    "__docId__": 369,
+    "__docId__": 390,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10995,7 +11757,7 @@
     "generator": false
   },
   {
-    "__docId__": 370,
+    "__docId__": 391,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -11045,7 +11807,7 @@
     "generator": false
   },
   {
-    "__docId__": 371,
+    "__docId__": 392,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -11094,7 +11856,7 @@
     "generator": false
   },
   {
-    "__docId__": 372,
+    "__docId__": 393,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -11134,7 +11896,7 @@
     "generator": false
   },
   {
-    "__docId__": 373,
+    "__docId__": 394,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -11174,7 +11936,7 @@
     "generator": false
   },
   {
-    "__docId__": 374,
+    "__docId__": 395,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -11213,7 +11975,7 @@
     "generator": false
   },
   {
-    "__docId__": 375,
+    "__docId__": 396,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -11252,7 +12014,7 @@
     "generator": false
   },
   {
-    "__docId__": 376,
+    "__docId__": 397,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -11291,7 +12053,7 @@
     "generator": false
   },
   {
-    "__docId__": 377,
+    "__docId__": 398,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -11304,7 +12066,7 @@
     "content": "/**\n * @license inazumatv.com\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/10/08\n *\n * Copyright (c) 2011-2015 inazumatv.com, inc.\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n * Vectors\n */\n\n/**\n * ある点の座標(x, y)と時間(time)を管理します\n */\nexport default class Vectors {\n  /**\n   * 座標と現在時間を元にインスタンスを作成します\n   * @param {number} [x=0] 座標 x\n   * @param {number} [y=0] 座標 y\n   * @param {number} [time=0] 時間 milli seconds\n   */\n  constructor(x = 0, y = 0, time = 0) {\n    /**\n     * 座標 x\n     * @type {number}\n     */\n    this.x = x;\n    /**\n     * 座標 y\n     * @type {number}\n     */\n    this.y = y;\n    /**\n     * 時間 milli seconds\n     * @type {number}\n     */\n    this.time = time;\n    /**\n     * スクロール中かのフラッグ, true: スクロール中\n     * @type {boolean}\n     */\n    this.scrolling = false;\n  }\n  /**\n   * x, y, time プロパティを全て `0` にします\n   * @returns {Vectors} メソッドチェイン可能なようにインスタンスを返します\n   */\n  reset() {\n    this.x = 0;\n    this.y = 0;\n    this.time = 0;\n\n    return this;\n  }\n  /**\n   * x, y, time を更新します\n   * @param {number} x 座標 x\n   * @param {number} y 座標 y\n   * @param {number} [time=Date.now] 時間 milli seconds\n   * @returns {Vectors} メソッドチェイン可能なようにインスタンスを返します\n   */\n  update(x, y, time = Date.now()) {\n    this.x = x;\n    this.y = y;\n    this.time = time;\n\n    return this;\n  }\n  /**\n   * 引数 vectors 間の距離を測ります\n   * @param {Vectors} vectors 計測したい対象 Vector instance\n   * @returns {number} 距離を返します\n   */\n  distance(vectors) {\n    const distanceX = this.x - vectors.x;\n    const distanceY = this.y - vectors.y;\n    const sqrt = (distanceX * distanceX) + (distanceY * distanceY);\n    return Math.sqrt(sqrt);\n  }\n  /**\n   * 引数 vectors との時間差を計算します\n   * @param {Vectors} vectors 計測したい対象 Vector instance\n   * @returns {number} 時間差(milli seconds) を返します\n   */\n  duration(vectors) {\n    return this.time - vectors.time;\n  }\n  /**\n   * 複製を作成し返します\n   * @returns {Vectors} 複製を返します\n   */\n  clone() {\n    const clone = new Vectors(this.x, this.y, this.time);\n    clone.scrolling = this.scrolling;\n    return clone;\n  }\n  /**\n   * ベクトルの大きさの２乗の平方根を計算します\n   * @returns {number} ベクトルの大きさの２乗の平方根を返します\n   */\n  length() {\n    const x = this.x;\n    const y = this.y;\n    return Math.sqrt((x * x) + (y * y));\n  }\n  /**\n   * ベクトルの値を scalar 値で除算します\n   *\n   * @param {number} scalar 除算母数\n   * @returns {Vectors} 除算後の Vector を返します\n   */\n  divideByScalar(scalar) {\n    const clone = this.clone();\n    if (scalar === 0) {\n      clone.x = 0;\n      clone.y = 0;\n    } else {\n      const x = clone.x;\n      const y = clone.y;\n      const inverse = 1 / scalar;\n      clone.x = x * inverse;\n      clone.y = y * inverse;\n    }\n\n    return clone;\n  }\n  /**\n   * ベクトルの大きさを正規化（大きさを1）した Vector を作成します\n   * @returns {Vectors} ベクトルの大きさを正規化（大きさを1）した Vectors を返します\n   */\n  normalize() {\n    return this.divideByScalar(this.length());\n  }\n  /**\n   * 引数 vectors との X 値を減算します\n   * @param {Vectors} vectors 計測したい対象 Vectors instance\n   * @returns {number} X 値を減算し返します\n   */\n  betweenX(vectors) {\n    return this.x - vectors.x;\n  }\n  /**\n   * 引数 vectors との Y 値を減算します\n   * @param {Vectors} vectors 計測したい対象 Vectors instance\n   * @returns {number} Y 値を減算し返します\n   */\n  betweenY(vectors) {\n    return this.y - vectors.y;\n  }\n  /**\n   * 引数 vectors との time 値を減算します\n   * @param {Vectors} vectors 計測したい対象 Vectors instance\n   * @returns {number} time 値を減算し返します\n   */\n  betweenTime(vectors) {\n    return this.time - vectors.time;\n  }\n  /**\n   * 引数 vectors との x, y, time 値を減算します\n   * @param {Vectors} vectors 計測したい対象 Vectors instance\n   * @returns {Vectors} 引数 vectors との x, y, time 値を減算した clone を返します\n   */\n  between(vectors) {\n    const clone = this.clone();\n    clone.x = clone.betweenX(vectors);\n    clone.y = clone.betweenY(vectors);\n    clone.time = clone.betweenTime(vectors);\n\n    return clone;\n  }\n}\n"
   },
   {
-    "__docId__": 378,
+    "__docId__": 399,
     "kind": "class",
     "static": true,
     "variation": null,
@@ -11320,7 +12082,7 @@
     "interface": false
   },
   {
-    "__docId__": 379,
+    "__docId__": 400,
     "kind": "constructor",
     "static": false,
     "variation": null,
@@ -11371,7 +12133,7 @@
     "generator": false
   },
   {
-    "__docId__": 380,
+    "__docId__": 401,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -11391,7 +12153,7 @@
     }
   },
   {
-    "__docId__": 381,
+    "__docId__": 402,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -11411,7 +12173,7 @@
     }
   },
   {
-    "__docId__": 382,
+    "__docId__": 403,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -11431,7 +12193,7 @@
     }
   },
   {
-    "__docId__": 383,
+    "__docId__": 404,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -11451,7 +12213,7 @@
     }
   },
   {
-    "__docId__": 384,
+    "__docId__": 405,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -11479,7 +12241,7 @@
     "generator": false
   },
   {
-    "__docId__": 385,
+    "__docId__": 406,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -11497,7 +12259,7 @@
     }
   },
   {
-    "__docId__": 386,
+    "__docId__": 407,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -11515,7 +12277,7 @@
     }
   },
   {
-    "__docId__": 387,
+    "__docId__": 408,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -11533,7 +12295,7 @@
     }
   },
   {
-    "__docId__": 388,
+    "__docId__": 409,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -11594,7 +12356,7 @@
     "generator": false
   },
   {
-    "__docId__": 389,
+    "__docId__": 410,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -11612,7 +12374,7 @@
     }
   },
   {
-    "__docId__": 390,
+    "__docId__": 411,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -11630,7 +12392,7 @@
     }
   },
   {
-    "__docId__": 391,
+    "__docId__": 412,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -11648,7 +12410,7 @@
     }
   },
   {
-    "__docId__": 392,
+    "__docId__": 413,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -11687,7 +12449,7 @@
     "generator": false
   },
   {
-    "__docId__": 393,
+    "__docId__": 414,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -11726,7 +12488,7 @@
     "generator": false
   },
   {
-    "__docId__": 394,
+    "__docId__": 415,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -11754,7 +12516,7 @@
     "generator": false
   },
   {
-    "__docId__": 395,
+    "__docId__": 416,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -11782,7 +12544,7 @@
     "generator": false
   },
   {
-    "__docId__": 396,
+    "__docId__": 417,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -11821,7 +12583,7 @@
     "generator": false
   },
   {
-    "__docId__": 397,
+    "__docId__": 418,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -11849,7 +12611,7 @@
     "generator": false
   },
   {
-    "__docId__": 398,
+    "__docId__": 419,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -11888,7 +12650,7 @@
     "generator": false
   },
   {
-    "__docId__": 399,
+    "__docId__": 420,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -11927,7 +12689,7 @@
     "generator": false
   },
   {
-    "__docId__": 400,
+    "__docId__": 421,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -11966,7 +12728,7 @@
     "generator": false
   },
   {
-    "__docId__": 401,
+    "__docId__": 422,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -12005,7 +12767,7 @@
     "generator": false
   },
   {
-    "__docId__": 403,
+    "__docId__": 424,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12018,7 +12780,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 404,
+    "__docId__": 425,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12031,7 +12793,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 405,
+    "__docId__": 426,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12044,7 +12806,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 406,
+    "__docId__": 427,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12057,7 +12819,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 407,
+    "__docId__": 428,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12070,7 +12832,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 408,
+    "__docId__": 429,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12083,7 +12845,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 409,
+    "__docId__": 430,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12096,7 +12858,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 410,
+    "__docId__": 431,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12109,7 +12871,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 411,
+    "__docId__": 432,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12122,7 +12884,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 412,
+    "__docId__": 433,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12135,7 +12897,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 413,
+    "__docId__": 434,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12148,7 +12910,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 414,
+    "__docId__": 435,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12161,7 +12923,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 415,
+    "__docId__": 436,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12174,7 +12936,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 416,
+    "__docId__": 437,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12187,7 +12949,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 417,
+    "__docId__": 438,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12200,7 +12962,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 418,
+    "__docId__": 439,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12213,7 +12975,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 419,
+    "__docId__": 440,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12226,7 +12988,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 420,
+    "__docId__": 441,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12239,7 +13001,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 421,
+    "__docId__": 442,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12252,7 +13014,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 422,
+    "__docId__": 443,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12265,7 +13027,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 423,
+    "__docId__": 444,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12278,7 +13040,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 424,
+    "__docId__": 445,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12291,7 +13053,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 425,
+    "__docId__": 446,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12304,7 +13066,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 426,
+    "__docId__": 447,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12317,7 +13079,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 427,
+    "__docId__": 448,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12330,7 +13092,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 428,
+    "__docId__": 449,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12343,7 +13105,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 429,
+    "__docId__": 450,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12356,7 +13118,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 430,
+    "__docId__": 451,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12369,7 +13131,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 431,
+    "__docId__": 452,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12382,7 +13144,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 432,
+    "__docId__": 453,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12395,7 +13157,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 433,
+    "__docId__": 454,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12408,7 +13170,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 434,
+    "__docId__": 455,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12421,7 +13183,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 435,
+    "__docId__": 456,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12434,7 +13196,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 436,
+    "__docId__": 457,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12447,7 +13209,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 437,
+    "__docId__": 458,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12460,7 +13222,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 438,
+    "__docId__": 459,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12473,7 +13235,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 439,
+    "__docId__": 460,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12486,7 +13248,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 440,
+    "__docId__": 461,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12499,7 +13261,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 441,
+    "__docId__": 462,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12512,7 +13274,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 442,
+    "__docId__": 463,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12525,7 +13287,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 443,
+    "__docId__": 464,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12538,7 +13300,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 444,
+    "__docId__": 465,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12551,7 +13313,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 445,
+    "__docId__": 466,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12564,7 +13326,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 446,
+    "__docId__": 467,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12577,7 +13339,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 447,
+    "__docId__": 468,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12590,7 +13352,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 448,
+    "__docId__": 469,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12603,7 +13365,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 449,
+    "__docId__": 470,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12616,7 +13378,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 451,
+    "__docId__": 472,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12629,7 +13391,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 452,
+    "__docId__": 473,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12642,7 +13404,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 453,
+    "__docId__": 474,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12655,7 +13417,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 454,
+    "__docId__": 475,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12668,7 +13430,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 455,
+    "__docId__": 476,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12681,7 +13443,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 456,
+    "__docId__": 477,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12694,7 +13456,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 457,
+    "__docId__": 478,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12707,7 +13469,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 458,
+    "__docId__": 479,
     "kind": "external",
     "static": true,
     "variation": null,

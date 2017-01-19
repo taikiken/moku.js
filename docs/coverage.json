@@ -1,7 +1,7 @@
 {
   "coverage": "100%",
-  "expectCount": 317,
-  "actualCount": 317,
+  "expectCount": 329,
+  "actualCount": 329,
   "files": {
     "src/event/Rising.js": {
       "expectCount": 11,
@@ -76,6 +76,11 @@
     "src/util/Hit.js": {
       "expectCount": 2,
       "actualCount": 2,
+      "undocumentLines": []
+    },
+    "src/util/Iro.js": {
+      "expectCount": 12,
+      "actualCount": 12,
       "undocumentLines": []
     },
     "src/util/List.js": {
