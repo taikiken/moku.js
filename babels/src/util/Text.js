@@ -34,4 +34,17 @@ export default class Text {
       return first.toUpperCase();
     });
   }
+  /**
+   * 数値に3桁区切りの `,` カンマを挿入します
+   * @param {number} number カンマを挿入する数値
+   * @returns {string} カンマ挿入後の文字列
+   * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString
+   * @see http://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
+   */
+  static comma(number) {
+    if (number.toLocaleString) {
+      return number.toLocaleString('ja-JP');
+    }
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
 }
