@@ -56,7 +56,10 @@ export default class Classes {
    * @returns {boolean} 存在すると true を返します
    */
   static has(element, className) {
-    return Array.from(element.classList).indexOf(className) !== -1;
+    const elementClasses = element.classList ?
+      Array.from(element.classList) :
+      Classes.convert(element);
+    return elementClasses.indexOf(className) !== -1;
   }
   /**
    * Element へ引数 className を追加します

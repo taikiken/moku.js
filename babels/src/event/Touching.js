@@ -359,7 +359,7 @@ export default class Touching extends EventDispatcher {
     // @type {TouchList}
     const touches = event.changedTouches || event.touches;
     // touches が取得できない時は 0 をセットし返します
-    if (!Type.exist(touches)) {
+    if (!Type.exist(touches) || touches.length === 0) {
       return { x: 0, y: 0 };
     }
 

@@ -75,9 +75,11 @@ export default class Freeze {
    */
   static freeze(delay = Freeze.duration()) {
     clearTimeout(timerId);
-
-    Freeze.stop();
-    timerId = setTimeout(Freeze.start, delay);
+    timerId = 0;
+    Freeze.start();
+    if (delay > 0) {
+      timerId = setTimeout(Freeze.stop, delay);
+    }
     return timerId;
   }
   /**
