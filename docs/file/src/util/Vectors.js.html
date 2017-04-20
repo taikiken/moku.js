@@ -92,9 +92,9 @@ export default class Vectors {
    * &#x5EA7;&#x6A19;&#x3068;&#x73FE;&#x5728;&#x6642;&#x9593;&#x3092;&#x5143;&#x306B;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;
    * @param {number} [x=0] &#x5EA7;&#x6A19; x
    * @param {number} [y=0] &#x5EA7;&#x6A19; y
-   * @param {number} [time=0] &#x6642;&#x9593; milli seconds
+   * @param {number} [time=Date.now()] &#x6642;&#x9593; milli seconds
    */
-  constructor(x = 0, y = 0, time = 0) {
+  constructor(x = 0, y = 0, time = Date.now()) {
     /**
      * &#x5EA7;&#x6A19; x
      * @type {number}
@@ -200,11 +200,43 @@ export default class Vectors {
     return clone;
   }
   /**
+   * &#x30D9;&#x30AF;&#x30C8;&#x30EB;&#x306E;&#x5024;&#x3092; scalar &#x5024;&#x3067;&#x4E57;&#x7B97;&#x3057;&#x307E;&#x3059;
+   *
+   * @param {number} scalar &#x4E57;&#x7B97;&#x6BCD;&#x6570;
+   * @returns {Vectors} &#x4E57;&#x7B97;&#x5F8C;&#x306E; Vector &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  multiplyByScalar(scalar) {
+    const clone = this.clone();
+    clone.x *= scalar;
+    clone.y *= scalar;
+    return clone;
+  }
+  /**
+   * &#x73FE;&#x5728;&#x306E; Vectors &#x3092;&#x5143;&#x306B;&#x5F15;&#x6570; `maxValue` &#x4EE5;&#x4E0B;&#x306B;&#x3057;&#x305F; `Vectors` &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+   * @param {number} maxValue &#x6700;&#x9AD8;&#x76EE;&#x6A19;&#x5024;
+   * @returns {Vectors} `maxValue` &#x4EE5;&#x4E0B;&#x306B;&#x3057;&#x305F; `Vectors` &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  truncate(maxValue) {
+    const minValue = Math.min(maxValue, this.length());
+    const oldLength = this.length();
+    if (oldLength !== 0 &amp;&amp; minValue !== oldLength) {
+      return this.multiplyByScalar(minValue / oldLength);
+    }
+    return this.clone();
+  }
+  /**
    * &#x30D9;&#x30AF;&#x30C8;&#x30EB;&#x306E;&#x5927;&#x304D;&#x3055;&#x3092;&#x6B63;&#x898F;&#x5316;&#xFF08;&#x5927;&#x304D;&#x3055;&#x3092;1&#xFF09;&#x3057;&#x305F; Vector &#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;
    * @returns {Vectors} &#x30D9;&#x30AF;&#x30C8;&#x30EB;&#x306E;&#x5927;&#x304D;&#x3055;&#x3092;&#x6B63;&#x898F;&#x5316;&#xFF08;&#x5927;&#x304D;&#x3055;&#x3092;1&#xFF09;&#x3057;&#x305F; Vectors &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   normalize() {
     return this.divideByScalar(this.length());
+  }
+  /**
+   * &#x30D9;&#x30AF;&#x30C8;&#x30EB;&#x304C;&#x6B63;&#x898F;&#x5316;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x304B;&#x3092;&#x5224;&#x5B9A;&#x3057;&#x307E;&#x3059;
+   * @returns {boolean} true: &#x6B63;&#x898F;&#x5316;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;
+   */
+  isNormalize() {
+    return this.length() === 1;
   }
   /**
    * &#x5F15;&#x6570; vectors &#x3068;&#x306E; X &#x5024;&#x3092;&#x6E1B;&#x7B97;&#x3057;&#x307E;&#x3059;
@@ -242,6 +274,39 @@ export default class Vectors {
     clone.time = clone.betweenTime(vectors);
 
     return clone;
+  }
+  /**
+   * &#x5F15;&#x6570;&#x30D9;&#x30AF;&#x30C8;&#x30EB;&#x306E;&#x5185;&#x7A4D;&#x3092;&#x8A08;&#x7B97;&#x3057;&#x307E;&#x3059;
+   * @param {Vectors} vectors &#x8A08;&#x6E2C;&#x3057;&#x305F;&#x3044;&#x5BFE;&#x8C61; Vectors instance
+   * @returns {number} &#x5185;&#x7A4D;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  dot(vectors) {
+    return (this.x * vectors.x) + (this.y * vectors.y);
+  }
+  /**
+   * &#x5F15;&#x6570;&#x30D9;&#x30AF;&#x30C8;&#x30EB;&#x306E;&#x5024;(x, y)&#x304C;&#x7B49;&#x3057;&#x3044;&#x304B;&#x3092;&#x5224;&#x5B9A;&#x3057;&#x307E;&#x3059;
+   * @param {Vectors} vectors &#x8A08;&#x6E2C;&#x3057;&#x305F;&#x3044;&#x5BFE;&#x8C61; Vectors instance
+   * @returns {boolean} true: &#x7B49;&#x3057;&#x3044;
+   */
+  equals(vectors) {
+    return (vectors.x === this.x) &amp;&amp; (vectors.y === this.y);
+  }
+  /**
+   * &#x5F15;&#x6570;&#x30D9;&#x30AF;&#x30C8;&#x30EB;&#x3068;&#x306E;&#x89D2;&#x5EA6;&#x3092;&#x8A08;&#x7B97;&#x3057;&#x307E;&#x3059;
+   * @param {Vectors} vectors &#x8A08;&#x6E2C;&#x3057;&#x305F;&#x3044;&#x5BFE;&#x8C61; Vectors instance
+   * @returns {number} &#x89D2;&#x5EA6;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  angle(vectors) {
+    let v1 = this.clone();
+    let v2 = vectors.clone();
+    if (!v1.isNormalize()) {
+      v1 = v1.normalize();
+    }
+    if (!v2.isNormalize()) {
+      v2 = v2.normalize();
+    }
+    // console.log(&apos;angle&apos;, v1, v2, v1.dot(v2), Math.acos(v1.dot(v2)));
+    return Math.acos(v1.dot(v2));
   }
 }
 </code></pre>

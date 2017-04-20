@@ -127,11 +127,11 @@ export default class Cycle extends EventDispatcher {
     if (checkSymbol !== singletonSymbol) {
       throw new Error(&apos;don\&apos;t use new, instead use static factory method.&apos;);
     }
-    super();
     // instance &#x4F5C;&#x6210;&#x6E08;&#x307F;&#x304B;&#x3092;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3057; instance &#x304C; null &#x306E;&#x6642; this &#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
     if (instance !== null) {
       return instance;
     }
+    super();
     // -------------------------------
     // onetime setting
     instance = this;
@@ -139,14 +139,14 @@ export default class Cycle extends EventDispatcher {
     const boundUpdate = this.update.bind(this);
     /**
      * Cycle.UPDATE Events instance
-     * @returns {Events} Cycle.UPDATE Events instance
+     * @type {Events}
      */
-    this.events = () =&gt; events;
+    this.events = events;
     /**
      * bound update requestAnimationFrame callback
-     * @returns {function} bound update
+     * @type {function}
      */
-    this.boundUpdate = () =&gt; boundUpdate;
+    this.boundUpdate = boundUpdate;
     /**
      * requestAnimationFrame ID
      * @type {number}
@@ -216,11 +216,11 @@ export default class Cycle extends EventDispatcher {
    */
   update() {
     // @type {number} - requestAnimationFrame id
-    const id = requestAnimationFrame(this.boundUpdate());
+    const id = requestAnimationFrame(this.boundUpdate);
     this.id = id;
 
     // @type {Events} - events
-    const events = this.events();
+    const events = this.events;
     events.id = id;
     // event fire
     this.dispatch(events);

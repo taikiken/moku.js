@@ -94,6 +94,9 @@
  * - currentTarget: *, current &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x767A;&#x751F;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;
  */
 export default class Events {
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
   /**
    * custom Event Object
    * @param {string} type &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x7A2E;&#x985E;
@@ -116,6 +119,16 @@ export default class Events {
      * @type {*}
      */
     this.currentTarget = currentTarget;
+  }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
+  /**
+   * &#x8907;&#x88FD;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;
+   * @returns {Events} &#x8907;&#x88FD;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  clone() {
+    return new Events(this.type, this.currentTarget, this.target);
   }
 }
 </code></pre>

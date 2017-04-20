@@ -114,9 +114,9 @@ export default class Polling extends EventDispatcher {
     const events = new Events(Polling.UPDATE, this, this);
     /**
      * Cycle instance &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
-     * @returns {Cycle} Cycle instance
+     * @ty[e {Cycle}
      */
-    this.cycle = () =&gt; cycle;
+    this.cycle = cycle;
     /**
      * &#x9593;&#x9694;(ms)
      * @type {number}
@@ -124,14 +124,14 @@ export default class Polling extends EventDispatcher {
     this.interval = interval;
     /**
      * bound update, Cycle.UPDATE event handler
-     * @returns {function} bound update
+     * @returns {function}
      */
-    this.boundUpdate = () =&gt; boundUpdate;
+    this.boundUpdate = boundUpdate;
     /**
-     * Events instance
-     * @returns {Events} Polling.UPDATE Events object
+     * Events instance - Polling.UPDATE Events object
+     * @type {Events}
      */
-    this.events = () =&gt; events;
+    this.events = events;
     /**
      * polling event &#x767A;&#x751F;&#x6642;&#x9593;, event &#x3092;&#x767A;&#x706B;&#x3059;&#x308B;&#x3068; 0 &#x306B;&#x30EA;&#x30BB;&#x30C3;&#x30C8;&#x3055;&#x308C;&#x307E;&#x3059;
      * @type {number}
@@ -184,7 +184,7 @@ export default class Polling extends EventDispatcher {
   updateEvents(begin, present) {
     this.begin = begin;
     // @type {Events} - start event
-    const events = this.events();
+    const events = this.events;
     events.begin = begin;
     events.present = present;
     events.interval = this.interval;
@@ -197,9 +197,9 @@ export default class Polling extends EventDispatcher {
    */
   initCycle() {
     // cycle
-    const cycle = this.cycle();
+    const cycle = this.cycle;
     // bind Cycle.UPDATE
-    cycle.on(Cycle.UPDATE, this.boundUpdate());
+    cycle.on(Cycle.UPDATE, this.boundUpdate);
     // cycle &#x958B;&#x59CB;
     cycle.start();
     return cycle;
@@ -234,7 +234,7 @@ export default class Polling extends EventDispatcher {
       // not start
       return false;
     }
-    this.cycle.off(Cycle.UPDATE, this.boundUpdate());
+    this.cycle.off(Cycle.UPDATE, this.boundUpdate);
     // this[startSymbol] = false;
     this.turnOver();
     return true;

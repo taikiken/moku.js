@@ -1,7 +1,7 @@
 {
   "type": "Program",
   "start": 0,
-  "end": 5005,
+  "end": 5007,
   "loc": {
     "start": {
       "line": 1,
@@ -446,7 +446,7 @@
     {
       "type": "ExportDefaultDeclaration",
       "start": 1260,
-      "end": 5004,
+      "end": 5006,
       "loc": {
         "start": {
           "line": 42,
@@ -460,7 +460,7 @@
       "declaration": {
         "type": "ClassDeclaration",
         "start": 1275,
-        "end": 5004,
+        "end": 5006,
         "loc": {
           "start": {
             "line": 42,
@@ -492,7 +492,7 @@
         "body": {
           "type": "ClassBody",
           "start": 1286,
-          "end": 5004,
+          "end": 5006,
           "loc": {
             "start": {
               "line": 42,
@@ -4003,9 +4003,9 @@
                 },
                 {
                   "type": "Block",
-                  "value": "*\n   * <p>fetch API へ送るオプションを作成します</p>\n   *\n   * 必ず設定します\n   * - method: GET, POST, PUT, DELETE...etc\n   * - cache: 'no-cache'\n   * - credentials: 'same-origin'\n   *\n   * headers, formData は存在すれば option に追加されます\n   *\n   * @param {string} path Ajax request path\n   * @param {string} method GET, POST, PUT, DELETE...etc request method\n   * @param {Headers|Object|null} headers Headers option\n   * @param {FormData|null} formData 送信フォームデータオプション\n   * @returns {Request} fetch API へ送る Request instance を返します\n   *\n   * @see https://developers.google.com/web/updates/2015/03/introduction-to-fetch\n   * @see https://developer.mozilla.org/ja/docs/Web/API/Request\n   ",
+                  "value": "*\n   * <p>fetch API へ送るオプションを作成します</p>\n   *\n   * 必ず設定します\n   * - method: GET, POST, PUT, DELETE...etc\n   * - cache: 'no-cache'\n   * - credentials: 'same-origin'\n   *\n   * headers, formData は存在すれば option に追加されます\n   *\n   * @param {string} path Ajax request path\n   * @param {string} method GET, POST, PUT, DELETE...etc request method\n   * @param {Headers|Object|null} headers Headers option\n   * @param {FormData|null} formData 送信フォームデータオプション\n   * @returns {*|Request} fetch API へ送る Request instance を返します\n   *\n   * @see https://developers.google.com/web/updates/2015/03/introduction-to-fetch\n   * @see https://developer.mozilla.org/ja/docs/Web/API/Request\n   ",
                   "start": 3780,
-                  "end": 4439,
+                  "end": 4441,
                   "loc": {
                     "start": {
                       "line": 139,
@@ -4018,15 +4018,15 @@
                   },
                   "range": [
                     3780,
-                    4439
+                    4441
                   ]
                 }
               ]
             },
             {
               "type": "MethodDefinition",
-              "start": 4442,
-              "end": 5002,
+              "start": 4444,
+              "end": 5004,
               "loc": {
                 "start": {
                   "line": 158,
@@ -4040,8 +4040,8 @@
               "computed": false,
               "key": {
                 "type": "Identifier",
-                "start": 4449,
-                "end": 4455,
+                "start": 4451,
+                "end": 4457,
                 "loc": {
                   "start": {
                     "line": 158,
@@ -4058,8 +4058,8 @@
               "kind": "method",
               "value": {
                 "type": "FunctionExpression",
-                "start": 4455,
-                "end": 5002,
+                "start": 4457,
+                "end": 5004,
                 "loc": {
                   "start": {
                     "line": 158,
@@ -4077,8 +4077,8 @@
                 "params": [
                   {
                     "type": "Identifier",
-                    "start": 4456,
-                    "end": 4460,
+                    "start": 4458,
+                    "end": 4462,
                     "loc": {
                       "start": {
                         "line": 158,
@@ -4093,8 +4093,8 @@
                   },
                   {
                     "type": "Identifier",
-                    "start": 4462,
-                    "end": 4468,
+                    "start": 4464,
+                    "end": 4470,
                     "loc": {
                       "start": {
                         "line": 158,
@@ -4109,8 +4109,8 @@
                   },
                   {
                     "type": "Identifier",
-                    "start": 4470,
-                    "end": 4477,
+                    "start": 4472,
+                    "end": 4479,
                     "loc": {
                       "start": {
                         "line": 158,
@@ -4125,8 +4125,8 @@
                   },
                   {
                     "type": "Identifier",
-                    "start": 4479,
-                    "end": 4487,
+                    "start": 4481,
+                    "end": 4489,
                     "loc": {
                       "start": {
                         "line": 158,
@@ -4142,8 +4142,8 @@
                 ],
                 "body": {
                   "type": "BlockStatement",
-                  "start": 4489,
-                  "end": 5002,
+                  "start": 4491,
+                  "end": 5004,
                   "loc": {
                     "start": {
                       "line": 158,
@@ -4157,8 +4157,8 @@
                   "body": [
                     {
                       "type": "VariableDeclaration",
-                      "start": 4517,
-                      "end": 4709,
+                      "start": 4519,
+                      "end": 4711,
                       "loc": {
                         "start": {
                           "line": 160,
@@ -4172,8 +4172,8 @@
                       "declarations": [
                         {
                           "type": "VariableDeclarator",
-                          "start": 4523,
-                          "end": 4708,
+                          "start": 4525,
+                          "end": 4710,
                           "loc": {
                             "start": {
                               "line": 160,
@@ -4186,8 +4186,8 @@
                           },
                           "id": {
                             "type": "Identifier",
-                            "start": 4523,
-                            "end": 4529,
+                            "start": 4525,
+                            "end": 4531,
                             "loc": {
                               "start": {
                                 "line": 160,
@@ -4203,8 +4203,8 @@
                           },
                           "init": {
                             "type": "CallExpression",
-                            "start": 4532,
-                            "end": 4708,
+                            "start": 4534,
+                            "end": 4710,
                             "loc": {
                               "start": {
                                 "line": 160,
@@ -4217,8 +4217,8 @@
                             },
                             "callee": {
                               "type": "MemberExpression",
-                              "start": 4532,
-                              "end": 4545,
+                              "start": 4534,
+                              "end": 4547,
                               "loc": {
                                 "start": {
                                   "line": 160,
@@ -4231,8 +4231,8 @@
                               },
                               "object": {
                                 "type": "Identifier",
-                                "start": 4532,
-                                "end": 4538,
+                                "start": 4534,
+                                "end": 4540,
                                 "loc": {
                                   "start": {
                                     "line": 160,
@@ -4247,8 +4247,8 @@
                               },
                               "property": {
                                 "type": "Identifier",
-                                "start": 4539,
-                                "end": 4545,
+                                "start": 4541,
+                                "end": 4547,
                                 "loc": {
                                   "start": {
                                     "line": 160,
@@ -4266,8 +4266,8 @@
                             "arguments": [
                               {
                                 "type": "ObjectExpression",
-                                "start": 4546,
-                                "end": 4707,
+                                "start": 4548,
+                                "end": 4709,
                                 "loc": {
                                   "start": {
                                     "line": 160,
@@ -4281,8 +4281,8 @@
                                 "properties": [
                                   {
                                     "type": "Property",
-                                    "start": 4554,
-                                    "end": 4560,
+                                    "start": 4556,
+                                    "end": 4562,
                                     "loc": {
                                       "start": {
                                         "line": 161,
@@ -4298,8 +4298,8 @@
                                     "computed": false,
                                     "key": {
                                       "type": "Identifier",
-                                      "start": 4554,
-                                      "end": 4560,
+                                      "start": 4556,
+                                      "end": 4562,
                                       "loc": {
                                         "start": {
                                           "line": 161,
@@ -4315,8 +4315,8 @@
                                     "kind": "init",
                                     "value": {
                                       "type": "Identifier",
-                                      "start": 4554,
-                                      "end": 4560,
+                                      "start": 4556,
+                                      "end": 4562,
                                       "loc": {
                                         "start": {
                                           "line": 161,
@@ -4332,8 +4332,8 @@
                                   },
                                   {
                                     "type": "Property",
-                                    "start": 4568,
-                                    "end": 4585,
+                                    "start": 4570,
+                                    "end": 4587,
                                     "loc": {
                                       "start": {
                                         "line": 162,
@@ -4349,8 +4349,8 @@
                                     "computed": false,
                                     "key": {
                                       "type": "Identifier",
-                                      "start": 4568,
-                                      "end": 4573,
+                                      "start": 4570,
+                                      "end": 4575,
                                       "loc": {
                                         "start": {
                                           "line": 162,
@@ -4365,8 +4365,8 @@
                                     },
                                     "value": {
                                       "type": "Literal",
-                                      "start": 4575,
-                                      "end": 4585,
+                                      "start": 4577,
+                                      "end": 4587,
                                       "loc": {
                                         "start": {
                                           "line": 162,
@@ -4385,8 +4385,8 @@
                                   },
                                   {
                                     "type": "Property",
-                                    "start": 4674,
-                                    "end": 4700,
+                                    "start": 4676,
+                                    "end": 4702,
                                     "loc": {
                                       "start": {
                                         "line": 164,
@@ -4402,8 +4402,8 @@
                                     "computed": false,
                                     "key": {
                                       "type": "Identifier",
-                                      "start": 4674,
-                                      "end": 4685,
+                                      "start": 4676,
+                                      "end": 4687,
                                       "loc": {
                                         "start": {
                                           "line": 164,
@@ -4419,8 +4419,8 @@
                                     },
                                     "value": {
                                       "type": "Literal",
-                                      "start": 4687,
-                                      "end": 4700,
+                                      "start": 4689,
+                                      "end": 4702,
                                       "loc": {
                                         "start": {
                                           "line": 164,
@@ -4440,8 +4440,8 @@
                                       {
                                         "type": "CommentLine",
                                         "value": " https://developers.google.com/web/updates/2015/03/introduction-to-fetch",
-                                        "start": 4593,
-                                        "end": 4667,
+                                        "start": 4595,
+                                        "end": 4669,
                                         "loc": {
                                           "start": {
                                             "line": 163,
@@ -4453,8 +4453,8 @@
                                           }
                                         },
                                         "range": [
-                                          4593,
-                                          4667
+                                          4595,
+                                          4669
                                         ]
                                       }
                                     ]
@@ -4471,8 +4471,8 @@
                         {
                           "type": "CommentLine",
                           "value": " request option",
-                          "start": 4495,
-                          "end": 4512,
+                          "start": 4497,
+                          "end": 4514,
                           "loc": {
                             "start": {
                               "line": 159,
@@ -4484,8 +4484,8 @@
                             }
                           },
                           "range": [
-                            4495,
-                            4512
+                            4497,
+                            4514
                           ]
                         }
                       ],
@@ -4493,8 +4493,8 @@
                         {
                           "type": "CommentLine",
                           "value": " headers option",
-                          "start": 4715,
-                          "end": 4732,
+                          "start": 4717,
+                          "end": 4734,
                           "loc": {
                             "start": {
                               "line": 167,
@@ -4506,16 +4506,16 @@
                             }
                           },
                           "range": [
-                            4715,
-                            4732
+                            4717,
+                            4734
                           ]
                         }
                       ]
                     },
                     {
                       "type": "IfStatement",
-                      "start": 4737,
-                      "end": 4801,
+                      "start": 4739,
+                      "end": 4803,
                       "loc": {
                         "start": {
                           "line": 168,
@@ -4528,8 +4528,8 @@
                       },
                       "test": {
                         "type": "CallExpression",
-                        "start": 4741,
-                        "end": 4760,
+                        "start": 4743,
+                        "end": 4762,
                         "loc": {
                           "start": {
                             "line": 168,
@@ -4542,8 +4542,8 @@
                         },
                         "callee": {
                           "type": "MemberExpression",
-                          "start": 4741,
-                          "end": 4751,
+                          "start": 4743,
+                          "end": 4753,
                           "loc": {
                             "start": {
                               "line": 168,
@@ -4556,8 +4556,8 @@
                           },
                           "object": {
                             "type": "Identifier",
-                            "start": 4741,
-                            "end": 4745,
+                            "start": 4743,
+                            "end": 4747,
                             "loc": {
                               "start": {
                                 "line": 168,
@@ -4573,8 +4573,8 @@
                           },
                           "property": {
                             "type": "Identifier",
-                            "start": 4746,
-                            "end": 4751,
+                            "start": 4748,
+                            "end": 4753,
                             "loc": {
                               "start": {
                                 "line": 168,
@@ -4593,8 +4593,8 @@
                         "arguments": [
                           {
                             "type": "Identifier",
-                            "start": 4752,
-                            "end": 4759,
+                            "start": 4754,
+                            "end": 4761,
                             "loc": {
                               "start": {
                                 "line": 168,
@@ -4612,8 +4612,8 @@
                       },
                       "consequent": {
                         "type": "BlockStatement",
-                        "start": 4762,
-                        "end": 4801,
+                        "start": 4764,
+                        "end": 4803,
                         "loc": {
                           "start": {
                             "line": 168,
@@ -4627,8 +4627,8 @@
                         "body": [
                           {
                             "type": "ExpressionStatement",
-                            "start": 4770,
-                            "end": 4795,
+                            "start": 4772,
+                            "end": 4797,
                             "loc": {
                               "start": {
                                 "line": 169,
@@ -4641,8 +4641,8 @@
                             },
                             "expression": {
                               "type": "AssignmentExpression",
-                              "start": 4770,
-                              "end": 4794,
+                              "start": 4772,
+                              "end": 4796,
                               "loc": {
                                 "start": {
                                   "line": 169,
@@ -4656,8 +4656,8 @@
                               "operator": "=",
                               "left": {
                                 "type": "MemberExpression",
-                                "start": 4770,
-                                "end": 4784,
+                                "start": 4772,
+                                "end": 4786,
                                 "loc": {
                                   "start": {
                                     "line": 169,
@@ -4670,8 +4670,8 @@
                                 },
                                 "object": {
                                   "type": "Identifier",
-                                  "start": 4770,
-                                  "end": 4776,
+                                  "start": 4772,
+                                  "end": 4778,
                                   "loc": {
                                     "start": {
                                       "line": 169,
@@ -4686,8 +4686,8 @@
                                 },
                                 "property": {
                                   "type": "Identifier",
-                                  "start": 4777,
-                                  "end": 4784,
+                                  "start": 4779,
+                                  "end": 4786,
                                   "loc": {
                                     "start": {
                                       "line": 169,
@@ -4704,8 +4704,8 @@
                               },
                               "right": {
                                 "type": "Identifier",
-                                "start": 4787,
-                                "end": 4794,
+                                "start": 4789,
+                                "end": 4796,
                                 "loc": {
                                   "start": {
                                     "line": 169,
@@ -4728,8 +4728,8 @@
                         {
                           "type": "CommentLine",
                           "value": " headers option",
-                          "start": 4715,
-                          "end": 4732,
+                          "start": 4717,
+                          "end": 4734,
                           "loc": {
                             "start": {
                               "line": 167,
@@ -4741,8 +4741,8 @@
                             }
                           },
                           "range": [
-                            4715,
-                            4732
+                            4717,
+                            4734
                           ]
                         }
                       ],
@@ -4750,8 +4750,8 @@
                         {
                           "type": "CommentLine",
                           "value": " body へ FormData をセット",
-                          "start": 4807,
-                          "end": 4830,
+                          "start": 4809,
+                          "end": 4832,
                           "loc": {
                             "start": {
                               "line": 172,
@@ -4763,16 +4763,16 @@
                             }
                           },
                           "range": [
-                            4807,
-                            4830
+                            4809,
+                            4832
                           ]
                         }
                       ]
                     },
                     {
                       "type": "IfStatement",
-                      "start": 4835,
-                      "end": 4898,
+                      "start": 4837,
+                      "end": 4900,
                       "loc": {
                         "start": {
                           "line": 173,
@@ -4785,8 +4785,8 @@
                       },
                       "test": {
                         "type": "CallExpression",
-                        "start": 4839,
-                        "end": 4859,
+                        "start": 4841,
+                        "end": 4861,
                         "loc": {
                           "start": {
                             "line": 173,
@@ -4799,8 +4799,8 @@
                         },
                         "callee": {
                           "type": "MemberExpression",
-                          "start": 4839,
-                          "end": 4849,
+                          "start": 4841,
+                          "end": 4851,
                           "loc": {
                             "start": {
                               "line": 173,
@@ -4813,8 +4813,8 @@
                           },
                           "object": {
                             "type": "Identifier",
-                            "start": 4839,
-                            "end": 4843,
+                            "start": 4841,
+                            "end": 4845,
                             "loc": {
                               "start": {
                                 "line": 173,
@@ -4830,8 +4830,8 @@
                           },
                           "property": {
                             "type": "Identifier",
-                            "start": 4844,
-                            "end": 4849,
+                            "start": 4846,
+                            "end": 4851,
                             "loc": {
                               "start": {
                                 "line": 173,
@@ -4850,8 +4850,8 @@
                         "arguments": [
                           {
                             "type": "Identifier",
-                            "start": 4850,
-                            "end": 4858,
+                            "start": 4852,
+                            "end": 4860,
                             "loc": {
                               "start": {
                                 "line": 173,
@@ -4869,8 +4869,8 @@
                       },
                       "consequent": {
                         "type": "BlockStatement",
-                        "start": 4861,
-                        "end": 4898,
+                        "start": 4863,
+                        "end": 4900,
                         "loc": {
                           "start": {
                             "line": 173,
@@ -4884,8 +4884,8 @@
                         "body": [
                           {
                             "type": "ExpressionStatement",
-                            "start": 4869,
-                            "end": 4892,
+                            "start": 4871,
+                            "end": 4894,
                             "loc": {
                               "start": {
                                 "line": 174,
@@ -4898,8 +4898,8 @@
                             },
                             "expression": {
                               "type": "AssignmentExpression",
-                              "start": 4869,
-                              "end": 4891,
+                              "start": 4871,
+                              "end": 4893,
                               "loc": {
                                 "start": {
                                   "line": 174,
@@ -4913,8 +4913,8 @@
                               "operator": "=",
                               "left": {
                                 "type": "MemberExpression",
-                                "start": 4869,
-                                "end": 4880,
+                                "start": 4871,
+                                "end": 4882,
                                 "loc": {
                                   "start": {
                                     "line": 174,
@@ -4927,8 +4927,8 @@
                                 },
                                 "object": {
                                   "type": "Identifier",
-                                  "start": 4869,
-                                  "end": 4875,
+                                  "start": 4871,
+                                  "end": 4877,
                                   "loc": {
                                     "start": {
                                       "line": 174,
@@ -4943,8 +4943,8 @@
                                 },
                                 "property": {
                                   "type": "Identifier",
-                                  "start": 4876,
-                                  "end": 4880,
+                                  "start": 4878,
+                                  "end": 4882,
                                   "loc": {
                                     "start": {
                                       "line": 174,
@@ -4961,8 +4961,8 @@
                               },
                               "right": {
                                 "type": "Identifier",
-                                "start": 4883,
-                                "end": 4891,
+                                "start": 4885,
+                                "end": 4893,
                                 "loc": {
                                   "start": {
                                     "line": 174,
@@ -4985,8 +4985,8 @@
                         {
                           "type": "CommentLine",
                           "value": " body へ FormData をセット",
-                          "start": 4807,
-                          "end": 4830,
+                          "start": 4809,
+                          "end": 4832,
                           "loc": {
                             "start": {
                               "line": 172,
@@ -4998,8 +4998,8 @@
                             }
                           },
                           "range": [
-                            4807,
-                            4830
+                            4809,
+                            4832
                           ]
                         }
                       ],
@@ -5007,8 +5007,8 @@
                         {
                           "type": "CommentLine",
                           "value": " https://developer.mozilla.org/ja/docs/Web/API/Request",
-                          "start": 4904,
-                          "end": 4960,
+                          "start": 4906,
+                          "end": 4962,
                           "loc": {
                             "start": {
                               "line": 177,
@@ -5020,16 +5020,16 @@
                             }
                           },
                           "range": [
-                            4904,
-                            4960
+                            4906,
+                            4962
                           ]
                         }
                       ]
                     },
                     {
                       "type": "ReturnStatement",
-                      "start": 4965,
-                      "end": 4998,
+                      "start": 4967,
+                      "end": 5000,
                       "loc": {
                         "start": {
                           "line": 178,
@@ -5042,8 +5042,8 @@
                       },
                       "argument": {
                         "type": "NewExpression",
-                        "start": 4972,
-                        "end": 4997,
+                        "start": 4974,
+                        "end": 4999,
                         "loc": {
                           "start": {
                             "line": 178,
@@ -5056,8 +5056,8 @@
                         },
                         "callee": {
                           "type": "Identifier",
-                          "start": 4976,
-                          "end": 4983,
+                          "start": 4978,
+                          "end": 4985,
                           "loc": {
                             "start": {
                               "line": 178,
@@ -5073,8 +5073,8 @@
                         "arguments": [
                           {
                             "type": "Identifier",
-                            "start": 4984,
-                            "end": 4988,
+                            "start": 4986,
+                            "end": 4990,
                             "loc": {
                               "start": {
                                 "line": 178,
@@ -5089,8 +5089,8 @@
                           },
                           {
                             "type": "Identifier",
-                            "start": 4990,
-                            "end": 4996,
+                            "start": 4992,
+                            "end": 4998,
                             "loc": {
                               "start": {
                                 "line": 178,
@@ -5110,8 +5110,8 @@
                         {
                           "type": "CommentLine",
                           "value": " https://developer.mozilla.org/ja/docs/Web/API/Request",
-                          "start": 4904,
-                          "end": 4960,
+                          "start": 4906,
+                          "end": 4962,
                           "loc": {
                             "start": {
                               "line": 177,
@@ -5123,8 +5123,8 @@
                             }
                           },
                           "range": [
-                            4904,
-                            4960
+                            4906,
+                            4962
                           ]
                         }
                       ]
@@ -5195,9 +5195,9 @@
                 },
                 {
                   "type": "Block",
-                  "value": "*\n   * <p>fetch API へ送るオプションを作成します</p>\n   *\n   * 必ず設定します\n   * - method: GET, POST, PUT, DELETE...etc\n   * - cache: 'no-cache'\n   * - credentials: 'same-origin'\n   *\n   * headers, formData は存在すれば option に追加されます\n   *\n   * @param {string} path Ajax request path\n   * @param {string} method GET, POST, PUT, DELETE...etc request method\n   * @param {Headers|Object|null} headers Headers option\n   * @param {FormData|null} formData 送信フォームデータオプション\n   * @returns {Request} fetch API へ送る Request instance を返します\n   *\n   * @see https://developers.google.com/web/updates/2015/03/introduction-to-fetch\n   * @see https://developer.mozilla.org/ja/docs/Web/API/Request\n   ",
+                  "value": "*\n   * <p>fetch API へ送るオプションを作成します</p>\n   *\n   * 必ず設定します\n   * - method: GET, POST, PUT, DELETE...etc\n   * - cache: 'no-cache'\n   * - credentials: 'same-origin'\n   *\n   * headers, formData は存在すれば option に追加されます\n   *\n   * @param {string} path Ajax request path\n   * @param {string} method GET, POST, PUT, DELETE...etc request method\n   * @param {Headers|Object|null} headers Headers option\n   * @param {FormData|null} formData 送信フォームデータオプション\n   * @returns {*|Request} fetch API へ送る Request instance を返します\n   *\n   * @see https://developers.google.com/web/updates/2015/03/introduction-to-fetch\n   * @see https://developer.mozilla.org/ja/docs/Web/API/Request\n   ",
                   "start": 3780,
-                  "end": 4439,
+                  "end": 4441,
                   "loc": {
                     "start": {
                       "line": 139,
@@ -5210,7 +5210,7 @@
                   },
                   "range": [
                     3780,
-                    4439
+                    4441
                   ]
                 }
               ]

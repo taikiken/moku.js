@@ -113,63 +113,6 @@ import { default as Polling } from &apos;./Polling&apos;;
  * rate.start();
  */
 export default class Rate extends Polling {
-  /**
-   * &#x56FA;&#x5B9A;&#x5024;&#x30D5;&#x30EC;&#x30FC;&#x30E0;&#x30EC;&#x30FC;&#x30C8;&#x6BCE;&#x306B; UPDATE &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x307E;&#x3059;
-   * @param {number} [rateValue=Rate.RATE_5] fps, &#x56FA;&#x5B9A;&#x5024;&#x4EE5;&#x5916;&#x8A2D;&#x5B9A;&#x3067;&#x304D;&#x307E;&#x305B;&#x3093;
-   */
-  constructor(rateValue = Rate.RATE_5) {
-    // 60fps &#x3067; polling &#x3092;&#x884C;&#x3046;
-    super(1000 / 60);
-    // @type {Events}
-    const events = new Events(Rate.UPDATE, this, this);
-    // &#x8A2D;&#x5B9A;&#x53EF;&#x80FD;&#x306A; rate list
-    const rates = [
-      Rate.RATE_60,
-      Rate.RATE_30,
-      Rate.RATE_20,
-      Rate.RATE_15,
-      Rate.RATE_12,
-      Rate.RATE_10,
-      Rate.RATE_6,
-      Rate.RATE_5,
-    ];
-    /**
-     * Rate &#x901A;&#x77E5; Events instance
-     * @returns {Events} Events instance
-     */
-    this.events = () =&gt; events;
-    /**
-     * &#x8A31;&#x5BB9;&#x53EF;&#x80FD;&#x306A; rate
-     * @return {Array&lt;number&gt;} &#x8A31;&#x5BB9;&#x53EF;&#x80FD;&#x306A; rate
-     */
-    this.rates = () =&gt; rates;
-    /**
-     * rate count, update &#x6BCE;&#x306B;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x30A2;&#x30C3;&#x30D7;&#x3057;&#x307E;&#x3059;&lt;br&gt;
-     * &#x4E0D;&#x6B63;&#x5024;&#x306E;&#x6642;&#x306F; `Rate.RATE_5` &#x3092;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;
-     * @type {number}
-     */
-    this.count = 0;
-    let rate = this.validate(rateValue) ? rateValue : Rate.RATE_5;
-    /**
-     * rate &#x5024;
-     * @returns {?number} rate &#x5024;
-     */
-    this.rate = () =&gt; rate;
-    /**
-     * rate &#x5024;&#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
-     * @param {number} value rate &#x5024;
-     * @returns {boolean} rate &#x8A2D;&#x5B9A;&#x306B;&#x6210;&#x529F;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-     */
-    this.setRate = (value) =&gt; {
-      if (this.validate(value)) {
-        rate = value;
-        return true;
-      }
-      return false;
-    };
-    // init
-    this.setRate(rateValue);
-  }
   // ----------------------------------------
   // CONST
   // ----------------------------------------
@@ -257,15 +200,91 @@ export default class Rate extends Polling {
     return &apos;rateUpdate&apos;;
   }
   // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
+  /**
+   * &#x56FA;&#x5B9A;&#x5024;&#x30D5;&#x30EC;&#x30FC;&#x30E0;&#x30EC;&#x30FC;&#x30C8;&#x6BCE;&#x306B; UPDATE &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x307E;&#x3059;
+   * @param {number} [rateValue=Rate.RATE_5] fps, &#x56FA;&#x5B9A;&#x5024;&#x4EE5;&#x5916;&#x8A2D;&#x5B9A;&#x3067;&#x304D;&#x307E;&#x305B;&#x3093;
+   */
+  constructor(rateValue = Rate.RATE_5) {
+    // 60fps &#x3067; polling &#x3092;&#x884C;&#x3046;
+    super(1000 / 60);
+    // @type {Events}
+    const events = new Events(Rate.UPDATE, this, this);
+    // &#x8A2D;&#x5B9A;&#x53EF;&#x80FD;&#x306A; rate list
+    const rates = [
+      Rate.RATE_60,
+      Rate.RATE_30,
+      Rate.RATE_20,
+      Rate.RATE_15,
+      Rate.RATE_12,
+      Rate.RATE_10,
+      Rate.RATE_6,
+      Rate.RATE_5,
+    ];
+    /**
+     * Rate &#x901A;&#x77E5; Events instance
+     * @type {Events}
+     */
+    this.events = events;
+    /**
+     * &#x8A31;&#x5BB9;&#x53EF;&#x80FD;&#x306A; rate
+     * @type {Array&lt;number&gt;}
+     */
+    this.rates = rates;
+    /**
+     * rate count, update &#x6BCE;&#x306B;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x30A2;&#x30C3;&#x30D7;&#x3057;&#x307E;&#x3059;&lt;br&gt;
+     * &#x4E0D;&#x6B63;&#x5024;&#x306E;&#x6642;&#x306F; `Rate.RATE_5` &#x3092;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;
+     * @type {number}
+     */
+    this.count = 0;
+    // let rate = this.validate(rateValue) ? rateValue : Rate.RATE_5;
+    /**
+     * rate &#x5024;
+     * @type {?number}
+     * @default Rate.RATE_5
+     */
+    this.rate = this.validate(rateValue) ? rateValue : Rate.RATE_5;
+    // this.rate = rate;
+    // /**
+    //  * rate &#x5024;&#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
+    //  * @param {number} value rate &#x5024;
+    //  * @returns {boolean} rate &#x8A2D;&#x5B9A;&#x306B;&#x6210;&#x529F;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+    //  */
+    // this.setRate = (value) =&gt; {
+    //   if (this.validate(value)) {
+    //     rate = value;
+    //     return true;
+    //   }
+    //   return false;
+    // };
+    // init
+    this.setRate(rateValue);
+  }
+  // ----------------------------------------
   // METHOD
   // ----------------------------------------
+  /**
+   * rate &#x5024;&#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
+   * - &#x6B63;&#x5E38;&#x5024;: `this.rate` &#x66F4;&#x65B0;, value &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * - &#x4E0D;&#x6B63;&#x5024;: `this.rate` &#x66F4;&#x65B0;&#x3057;&#x307E;&#x305B;&#x3093;, null &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @param {number} value rate &#x5024;
+   * @returns {?number} &#x6B63;&#x3057;&#x3044; rate &#x306F;&#x8A2D;&#x5B9A;&#x5024;&#x3092;&#x4E0D;&#x6B63;&#x306A;&#x6642;&#x306F; null &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  setRate(value) {
+    if (this.validate(value)) {
+      this.rate = value;
+      return value;
+    }
+    return null;
+  }
   /**
    * &#x6B63;&#x898F;&#x306A; rate &#x5024;&#x304B;&#x3092;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3057;&#x307E;&#x3059;
    * @param {number} rate &#x5BFE;&#x8C61; rate
    * @returns {boolean} &#x6B63;&#x3057;&#x3044;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   validate(rate) {
-    return this.rates().indexOf(rate) !== -1;
+    return this.rates.indexOf(rate) !== -1;
   }
   /**
    * fps &#x57FA;&#x6E96;&#x5024;&#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
@@ -278,7 +297,7 @@ export default class Rate extends Polling {
   change(rate) {
     const result = this.setRate(rate);
     this.update();
-    return result;
+    return result !== null;
   }
   /**
    * loop(requestAnimationFrame) &#x3092;&#x958B;&#x59CB;&#x3057;&#x307E;&#x3059;
@@ -295,7 +314,6 @@ export default class Rate extends Polling {
     this.initCycle();
     // &#x5F37;&#x5236;&#x7684;&#x306B;1&#x56DE;&#x76EE;&#x3092;&#x5B9F;&#x884C;
     this.fire(this.updateEvents(0, 0));
-
     return true;
   }
   /**
@@ -305,14 +323,12 @@ export default class Rate extends Polling {
   update() {
     // &#x4F59;&#x308A;&#x304C; 0 &#x306E;&#x6642;&#x306B;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x706B;&#x3057;&#x307E;&#x3059;
     this.count += 1;
-    const reminder = this.count % this.rate();
+    const reminder = this.count % this.rate;
     if (reminder === 0) {
       this.count = 0;
       this.fire(this.updateEvents(0, 0));
-
       return true;
     }
-
     return false;
   }
 }

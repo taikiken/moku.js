@@ -90,13 +90,28 @@ import { default as Text } from &apos;../util/Text&apos;;
 export default class Patterns {
   /**
    * &#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x8ABF;&#x67FB;&#x5BFE;&#x8C61;&#x306E; CSS class &#x30EA;&#x30B9;&#x30C8;
-   * @returns {{
-   *  padding: Array&lt;string&gt;,
-   *  margin: Array&lt;string&gt;,
-   *  border-color: Array&lt;string&gt;,
-   *  border-style: Array&lt;string&gt;,
-   *  border-width: Array&lt;string&gt;
-   * }} &#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x8ABF;&#x67FB;&#x5BFE;&#x8C61;&#x306E; CSS class
+   * ```
+   * {
+   *  padding: [&apos;paddingTop&apos;, &apos;paddingRight&apos;, &apos;paddingBottom&apos;, &apos;paddingLeft&apos;],
+   *  margin: [&apos;marginTop&apos;, &apos;marginRight&apos;, &apos;marginBottom&apos;, &apos;marginLeft&apos;],
+   *  &apos;border-color&apos;: [
+   *    &apos;borderTopColor&apos;,
+   *    &apos;borderRightColor&apos;,
+   *    &apos;borderBottomColor&apos;,
+   *    &apos;borderLeftColor&apos;],
+   *  &apos;border-style&apos;: [
+   *    &apos;borderTopStyle&apos;,
+   *    &apos;borderRightStyle&apos;,
+   *    &apos;borderBottomStyle&apos;,
+   *    &apos;borderLeftStyle&apos;],
+   *  &apos;border-width&apos;: [
+   *    &apos;borderTopWidth&apos;,
+   *    &apos;borderRightWidth&apos;,
+   *    &apos;borderBottomWidth&apos;,
+   *    &apos;borderLeftWidth&apos;],
+   * }
+   * ```
+   * @returns {Object} &#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x8ABF;&#x67FB;&#x5BFE;&#x8C61;&#x306E; CSS class list
    */
   static settings() {
     return {

@@ -413,6 +413,14 @@ export default class Iro {
     }
     return mathInt(hexString.replace(&apos;#&apos;, &apos;&apos;), 16);
   }
+  /**
+   * #FFFFFF &#x306A; CSS 16&#x9032;&#x3092; 0xFFFFFF &#x5909;&#x63DB;&#x3057; 10&#x9032;&#x6570;&#x306B;&#x3057;&#x307E;&#x3059;
+   * @param {string} hex #FFFFFF &#x306A; CSS 16&#x9032;
+   * @return {Number} 10&#x9032;&#x6570;&#x5909;&#x63DB;&#x5F8C;&#x306E;&#x8272;&#x30CA;&#x30F3;&#x30D0;&#x30FC;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  static toInt(hex) {
+    return parseInt(hex.replace(&apos;#&apos;, &apos;0x&apos;), 16);
+  }
 }
 </code></pre>
 

@@ -93,9 +93,9 @@ export default class Classes {
   constructor(element) {
     /**
      * &#x64CD;&#x4F5C;&#x5BFE;&#x8C61; Element
-     * @returns {Element} &#x64CD;&#x4F5C;&#x5BFE;&#x8C61; Element
+     * @type {Element}
      */
-    this.element = () =&gt; element;
+    this.element = element;
   }
   /**
    * className &#x3092;&#x6709;&#x3059;&#x308B;&#x304B;&#x3092;&#x8ABF;&#x3079;&#x307E;&#x3059;
@@ -103,7 +103,7 @@ export default class Classes {
    * @returns {boolean} &#x5B58;&#x5728;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   has(className) {
-    return Classes.has(this.element(), className);
+    return Classes.has(this.element, className);
   }
   /**
    * className &#x3092;&#x8FFD;&#x52A0;&#x3057;&#x307E;&#x3059;
@@ -111,7 +111,7 @@ export default class Classes {
    * @returns {boolean} &#x8FFD;&#x52A0;&#x306B;&#x6210;&#x529F;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   add(className) {
-    return Classes.add(this.element(), className);
+    return Classes.add(this.element, className);
   }
   /**
    * className &#x3092;&#x524A;&#x9664;&#x3057;&#x307E;&#x3059;
@@ -119,7 +119,7 @@ export default class Classes {
    * @returns {boolean} &#x524A;&#x9664;&#x306B;&#x6210;&#x529F;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   remove(className) {
-    return Classes.remove(this.element(), className);
+    return Classes.remove(this.element, className);
   }
   /**
    * Element&#x304C;&#x5F15;&#x6570; className &#x3092;&#x6709;&#x3059;&#x308B;&#x304B;&#x3092;&#x8ABF;&#x3079;&#x307E;&#x3059;
@@ -128,7 +128,10 @@ export default class Classes {
    * @returns {boolean} &#x5B58;&#x5728;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   static has(element, className) {
-    return Array.from(element.classList).indexOf(className) !== -1;
+    const elementClasses = element.classList ?
+      Array.from(element.classList) :
+      Classes.convert(element);
+    return elementClasses.indexOf(className) !== -1;
   }
   /**
    * Element &#x3078;&#x5F15;&#x6570; className &#x3092;&#x8FFD;&#x52A0;&#x3057;&#x307E;&#x3059;

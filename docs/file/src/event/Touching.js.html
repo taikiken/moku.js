@@ -122,36 +122,41 @@ export default class Touching extends EventDispatcher {
      */
     this.threshold = threshold;
     // @type {function}
-    const boundStart = this.onStart.bind(this);
+    // const boundStart = this.onStart.bind(this);
     /**
      * bound onStart
-     * @returns {function} bound onStart
+     * @type {function}
      */
-    this.boundStart = () =&gt; boundStart;
-    const boundMove = this.onMove.bind(this);
+    this.boundStart = this.onStart.bind(this);
+    // this.boundStart = () =&gt; boundStart;
+    // const boundMove = this.onMove.bind(this);
     /**
      * bound onMove
-     * @returns {function} bound onMove
+     * @type {function}
      */
-    this.boundMove = () =&gt; boundMove;
-    const boundEnd = this.onEnd.bind(this);
+    this.boundMove = this.onMove.bind(this);
+    // this.boundMove = () =&gt; boundMove;
+    // const boundEnd = this.onEnd.bind(this);
     /**
      * bound onEnd
-     * @returns {function} bound onEnd
+     * @type {function}
      */
-    this.boundEnd = () =&gt; boundEnd;
-    const boundCancel = this.onCancel.bind(this);
+    this.boundEnd = this.onEnd.bind(this);
+    // this.boundEnd = () =&gt; boundEnd;
+    // const boundCancel = this.onCancel.bind(this);
     /**
      * bound onCancel
-     * @returns {function} onCancel onStart
+     * @type {function}
      */
-    this.boundCancel = () =&gt; boundCancel;
-    const boundBlur = this.onBlur.bind(this);
+    this.boundCancel = this.onCancel.bind(this);
+    // this.boundCancel = () =&gt; boundCancel;
+    // const boundBlur = this.onBlur.bind(this);
     /**
      * bound onBlur
-     * @returns {function} bound onBlur
+     * @type {function}
      */
-    this.boundBlur = () =&gt; boundBlur;
+    this.boundBlur = this.onBlur.bind(this);
+    // this.boundBlur = () =&gt; boundBlur;
     const vectors = {
       start: new Vectors(),
       end: new Vectors(),
@@ -216,8 +221,8 @@ export default class Touching extends EventDispatcher {
    * @returns {void}
    */
   init() {
-    this.element.addEventListener(&apos;touchstart&apos;, this.boundStart(), false);
-    window.addEventListener(&apos;blur&apos;, this.boundBlur(), false);
+    this.element.addEventListener(&apos;touchstart&apos;, this.boundStart, false);
+    window.addEventListener(&apos;blur&apos;, this.boundBlur, false);
   }
   /**
    * touchstart event handler
@@ -237,9 +242,9 @@ export default class Touching extends EventDispatcher {
 
     // &#x30AD;&#x30E3;&#x30F3;&#x30BB;&#x30EB; event &#x76E3;&#x8996;&#x3092;&#x958B;&#x59CB;
     const body = document.body;
-    body.addEventListener(&apos;touchend&apos;, this.boundEnd(), false);
-    body.addEventListener(&apos;touchmove&apos;, this.boundMove(), false);
-    body.addEventListener(&apos;touchcancel&apos;, this.boundCancel(), false);
+    body.addEventListener(&apos;touchend&apos;, this.boundEnd, false);
+    body.addEventListener(&apos;touchmove&apos;, this.boundMove, false);
+    body.addEventListener(&apos;touchcancel&apos;, this.boundCancel, false);
 
     // Touching.START &#x767A;&#x706B;
     this.dispatch(new TouchingEvents(
@@ -378,9 +383,9 @@ export default class Touching extends EventDispatcher {
   dispose() {
     const body = document.body;
 
-    body.removeEventListener(&apos;touchend&apos;, this.boundEnd());
-    body.removeEventListener(&apos;touchmove&apos;, this.boundMove());
-    body.removeEventListener(&apos;touchcancel&apos;, this.boundCancel());
+    body.removeEventListener(&apos;touchend&apos;, this.boundEnd);
+    body.removeEventListener(&apos;touchmove&apos;, this.boundMove);
+    body.removeEventListener(&apos;touchcancel&apos;, this.boundCancel);
     return true;
   }
   /**
@@ -431,7 +436,7 @@ export default class Touching extends EventDispatcher {
     // @type {TouchList}
     const touches = event.changedTouches || event.touches;
     // touches &#x304C;&#x53D6;&#x5F97;&#x3067;&#x304D;&#x306A;&#x3044;&#x6642;&#x306F; 0 &#x3092;&#x30BB;&#x30C3;&#x30C8;&#x3057;&#x8FD4;&#x3057;&#x307E;&#x3059;
-    if (!Type.exist(touches)) {
+    if (!Type.exist(touches) || touches.length === 0) {
       return { x: 0, y: 0 };
     }
 

@@ -121,31 +121,30 @@ export default class Scroll extends EventDispatcher {
     if (checkSymbol !== singletonSymbol) {
       throw new Error(&apos;don\&apos;t use new, instead use static factory method.&apos;);
     }
-
-    super();
-
     // instance &#x4F5C;&#x6210;&#x6E08;&#x307F;&#x304B;&#x3092;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3057; instance &#x304C; null &#x306E;&#x6642; this &#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
     if (instance !== null) {
       return instance;
     }
-
     // onetime setting
+    super();
     instance = this;
 
     // event handler
-    const boundScroll = this.scroll.bind(this);
+    // const boundScroll = this.scroll.bind(this);
     /**
      * bound scroll, window.onscroll event handler
-     * @returns {function} bound scroll
+     * @type {function}
      */
-    this.boundScroll = () =&gt; boundScroll;
+    this.boundScroll = this.scroll.bind(this);
+    // this.boundScroll = () =&gt; boundScroll;
     // @type {Events} - events instance
-    const events = new ScrollEvents(Scroll.SCROLL, this, this);
+    // const events = new ScrollEvents(Scroll.SCROLL, this, this);
     /**
      * ScrollEvents instance, &#x767A;&#x706B;&#x6642;&#x306B;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;
-     * @returns {ScrollEvents} ScrollEvents instance
+     * @type {ScrollEvents}
      */
-    this.events = () =&gt; events;
+    this.events = new ScrollEvents(Scroll.SCROLL, this, this);
+    // this.events = () =&gt; events;
     /**
      * &#x524D;&#x56DE; scroll top &#x4F4D;&#x7F6E;
      * @type {number}
@@ -186,7 +185,7 @@ export default class Scroll extends EventDispatcher {
       return this;
     }
     this.started = true;
-    window.addEventListener(&apos;scroll&apos;, this.boundScroll(), false);
+    window.addEventListener(&apos;scroll&apos;, this.boundScroll, false);
     return this;
   }
   /**
@@ -198,7 +197,7 @@ export default class Scroll extends EventDispatcher {
       return this;
     }
     this.started = false;
-    window.removeEventListener(&apos;scroll&apos;, this.boundScroll());
+    window.removeEventListener(&apos;scroll&apos;, this.boundScroll);
     return this;
   }
   /**
@@ -216,7 +215,7 @@ export default class Scroll extends EventDispatcher {
     const previous = this.previous;
 
     // @type {Events} - events
-    const events = this.events();
+    const events = this.events;
     // @type {Event} - scroll event
     events.original = event;
     // @type {number} - scroll top

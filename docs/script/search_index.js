@@ -882,6 +882,12 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "src/event/events.js~events#clone",
+    "class/src/event/Events.js~Events.html#instance-method-clone",
+    "src/event/Events.js~Events#clone",
+    "method"
+  ],
+  [
     "src/event/events.js~events#constructor",
     "class/src/event/Events.js~Events.html#instance-constructor-constructor",
     "src/event/Events.js~Events#constructor",
@@ -1740,12 +1746,6 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/net/queries.js~queries.amp",
-    "class/src/net/Queries.js~Queries.html#static-method-amp",
-    "src/net/Queries.js~Queries.amp",
-    "method"
-  ],
-  [
     "src/net/queries.js~queries.get",
     "class/src/net/Queries.js~Queries.html#static-method-get",
     "src/net/Queries.js~Queries.get",
@@ -2023,9 +2023,9 @@ window.esdocSearchIndex = [
   ],
   [
     "src/tick/rate.js~rate#setrate",
-    "class/src/tick/Rate.js~Rate.html#instance-member-setRate",
+    "class/src/tick/Rate.js~Rate.html#instance-method-setRate",
     "src/tick/Rate.js~Rate#setRate",
-    "member"
+    "method"
   ],
   [
     "src/tick/rate.js~rate#start",
@@ -2226,6 +2226,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/util/iro.js~iro.toint",
+    "class/src/util/Iro.js~Iro.html#static-method-toInt",
+    "src/util/Iro.js~Iro.toInt",
+    "method"
+  ],
+  [
     "src/util/list.js",
     "file/src/util/List.js.html",
     "src/util/List.js",
@@ -2250,15 +2256,45 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "src/util/text.js~text.amp",
+    "class/src/util/Text.js~Text.html#static-method-amp",
+    "src/util/Text.js~Text.amp",
+    "method"
+  ],
+  [
+    "src/util/text.js~text.and",
+    "class/src/util/Text.js~Text.html#static-method-and",
+    "src/util/Text.js~Text.and",
+    "method"
+  ],
+  [
     "src/util/text.js~text.camel",
     "class/src/util/Text.js~Text.html#static-method-camel",
     "src/util/Text.js~Text.camel",
     "method"
   ],
   [
+    "src/util/text.js~text.comma",
+    "class/src/util/Text.js~Text.html#static-method-comma",
+    "src/util/Text.js~Text.comma",
+    "method"
+  ],
+  [
     "src/util/text.js~text.dash",
     "class/src/util/Text.js~Text.html#static-method-dash",
     "src/util/Text.js~Text.dash",
+    "method"
+  ],
+  [
+    "src/util/text.js~text.remove",
+    "class/src/util/Text.js~Text.html#static-method-remove",
+    "src/util/Text.js~Text.remove",
+    "method"
+  ],
+  [
+    "src/util/text.js~text.replace",
+    "class/src/util/Text.js~Text.html#static-method-replace",
+    "src/util/Text.js~Text.replace",
     "method"
   ],
   [
@@ -2400,6 +2436,12 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "src/util/vectors.js~vectors#angle",
+    "class/src/util/Vectors.js~Vectors.html#instance-method-angle",
+    "src/util/Vectors.js~Vectors#angle",
+    "method"
+  ],
+  [
     "src/util/vectors.js~vectors#between",
     "class/src/util/Vectors.js~Vectors.html#instance-method-between",
     "src/util/Vectors.js~Vectors#between",
@@ -2448,15 +2490,39 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/util/vectors.js~vectors#dot",
+    "class/src/util/Vectors.js~Vectors.html#instance-method-dot",
+    "src/util/Vectors.js~Vectors#dot",
+    "method"
+  ],
+  [
     "src/util/vectors.js~vectors#duration",
     "class/src/util/Vectors.js~Vectors.html#instance-method-duration",
     "src/util/Vectors.js~Vectors#duration",
     "method"
   ],
   [
+    "src/util/vectors.js~vectors#equals",
+    "class/src/util/Vectors.js~Vectors.html#instance-method-equals",
+    "src/util/Vectors.js~Vectors#equals",
+    "method"
+  ],
+  [
+    "src/util/vectors.js~vectors#isnormalize",
+    "class/src/util/Vectors.js~Vectors.html#instance-method-isNormalize",
+    "src/util/Vectors.js~Vectors#isNormalize",
+    "method"
+  ],
+  [
     "src/util/vectors.js~vectors#length",
     "class/src/util/Vectors.js~Vectors.html#instance-method-length",
     "src/util/Vectors.js~Vectors#length",
+    "method"
+  ],
+  [
+    "src/util/vectors.js~vectors#multiplybyscalar",
+    "class/src/util/Vectors.js~Vectors.html#instance-method-multiplyByScalar",
+    "src/util/Vectors.js~Vectors#multiplyByScalar",
     "method"
   ],
   [
@@ -2482,6 +2548,12 @@ window.esdocSearchIndex = [
     "class/src/util/Vectors.js~Vectors.html#instance-member-time",
     "src/util/Vectors.js~Vectors#time",
     "member"
+  ],
+  [
+    "src/util/vectors.js~vectors#truncate",
+    "class/src/util/Vectors.js~Vectors.html#instance-method-truncate",
+    "src/util/Vectors.js~Vectors#truncate",
+    "method"
   ],
   [
     "src/util/vectors.js~vectors#update",

@@ -18,13 +18,28 @@ import { default as Text } from '../util/Text';
 export default class Patterns {
   /**
    * パターン調査対象の CSS class リスト
-   * @returns {{
-   *  padding: Array<string>,
-   *  margin: Array<string>,
-   *  border-color: Array<string>,
-   *  border-style: Array<string>,
-   *  border-width: Array<string>
-   * }} パターン調査対象の CSS class
+   * ```
+   * {
+   *  padding: ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'],
+   *  margin: ['marginTop', 'marginRight', 'marginBottom', 'marginLeft'],
+   *  'border-color': [
+   *    'borderTopColor',
+   *    'borderRightColor',
+   *    'borderBottomColor',
+   *    'borderLeftColor'],
+   *  'border-style': [
+   *    'borderTopStyle',
+   *    'borderRightStyle',
+   *    'borderBottomStyle',
+   *    'borderLeftStyle'],
+   *  'border-width': [
+   *    'borderTopWidth',
+   *    'borderRightWidth',
+   *    'borderBottomWidth',
+   *    'borderLeftWidth'],
+   * }
+   * ```
+   * @returns {Object} パターン調査対象の CSS class list
    */
   static settings() {
     return {

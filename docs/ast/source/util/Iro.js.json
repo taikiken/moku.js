@@ -1,14 +1,14 @@
 {
   "type": "Program",
   "start": 0,
-  "end": 8250,
+  "end": 8467,
   "loc": {
     "start": {
       "line": 1,
       "column": 0
     },
     "end": {
-      "line": 345,
+      "line": 353,
       "column": 0
     }
   },
@@ -821,28 +821,28 @@
     {
       "type": "ExportDefaultDeclaration",
       "start": 561,
-      "end": 8249,
+      "end": 8466,
       "loc": {
         "start": {
           "line": 25,
           "column": 0
         },
         "end": {
-          "line": 344,
+          "line": 352,
           "column": 1
         }
       },
       "declaration": {
         "type": "ClassDeclaration",
         "start": 576,
-        "end": 8249,
+        "end": 8466,
         "loc": {
           "start": {
             "line": 25,
             "column": 15
           },
           "end": {
-            "line": 344,
+            "line": 352,
             "column": 1
           }
         },
@@ -867,14 +867,14 @@
         "body": {
           "type": "ClassBody",
           "start": 586,
-          "end": 8249,
+          "end": 8466,
           "loc": {
             "start": {
               "line": 25,
               "column": 25
             },
             "end": {
-              "line": 344,
+              "line": 352,
               "column": 1
             }
           },
@@ -18229,8 +18229,10 @@
                         ]
                       }
                     }
-                  ]
-                }
+                  ],
+                  "trailingComments": null
+                },
+                "trailingComments": null
               },
               "leadingComments": [
                 {
@@ -18251,6 +18253,305 @@
                   "range": [
                     7916,
                     8059
+                  ]
+                }
+              ],
+              "trailingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\n   * #FFFFFF な CSS 16進を 0xFFFFFF 変換し 10進数にします\n   * @param {string} hex #FFFFFF な CSS 16進\n   * @return {Number} 10進数変換後の色ナンバーを返します\n   ",
+                  "start": 8250,
+                  "end": 8389,
+                  "loc": {
+                    "start": {
+                      "line": 344,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 348,
+                      "column": 5
+                    }
+                  },
+                  "range": [
+                    8250,
+                    8389
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "MethodDefinition",
+              "start": 8392,
+              "end": 8464,
+              "loc": {
+                "start": {
+                  "line": 349,
+                  "column": 2
+                },
+                "end": {
+                  "line": 351,
+                  "column": 3
+                }
+              },
+              "computed": false,
+              "key": {
+                "type": "Identifier",
+                "start": 8399,
+                "end": 8404,
+                "loc": {
+                  "start": {
+                    "line": 349,
+                    "column": 9
+                  },
+                  "end": {
+                    "line": 349,
+                    "column": 14
+                  }
+                },
+                "name": "toInt"
+              },
+              "static": true,
+              "kind": "method",
+              "value": {
+                "type": "FunctionExpression",
+                "start": 8404,
+                "end": 8464,
+                "loc": {
+                  "start": {
+                    "line": 349,
+                    "column": 14
+                  },
+                  "end": {
+                    "line": 351,
+                    "column": 3
+                  }
+                },
+                "id": null,
+                "generator": false,
+                "expression": false,
+                "async": false,
+                "params": [
+                  {
+                    "type": "Identifier",
+                    "start": 8405,
+                    "end": 8408,
+                    "loc": {
+                      "start": {
+                        "line": 349,
+                        "column": 15
+                      },
+                      "end": {
+                        "line": 349,
+                        "column": 18
+                      }
+                    },
+                    "name": "hex"
+                  }
+                ],
+                "body": {
+                  "type": "BlockStatement",
+                  "start": 8410,
+                  "end": 8464,
+                  "loc": {
+                    "start": {
+                      "line": 349,
+                      "column": 20
+                    },
+                    "end": {
+                      "line": 351,
+                      "column": 3
+                    }
+                  },
+                  "body": [
+                    {
+                      "type": "ReturnStatement",
+                      "start": 8416,
+                      "end": 8460,
+                      "loc": {
+                        "start": {
+                          "line": 350,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 350,
+                          "column": 48
+                        }
+                      },
+                      "argument": {
+                        "type": "CallExpression",
+                        "start": 8423,
+                        "end": 8459,
+                        "loc": {
+                          "start": {
+                            "line": 350,
+                            "column": 11
+                          },
+                          "end": {
+                            "line": 350,
+                            "column": 47
+                          }
+                        },
+                        "callee": {
+                          "type": "Identifier",
+                          "start": 8423,
+                          "end": 8431,
+                          "loc": {
+                            "start": {
+                              "line": 350,
+                              "column": 11
+                            },
+                            "end": {
+                              "line": 350,
+                              "column": 19
+                            }
+                          },
+                          "name": "parseInt"
+                        },
+                        "arguments": [
+                          {
+                            "type": "CallExpression",
+                            "start": 8432,
+                            "end": 8454,
+                            "loc": {
+                              "start": {
+                                "line": 350,
+                                "column": 20
+                              },
+                              "end": {
+                                "line": 350,
+                                "column": 42
+                              }
+                            },
+                            "callee": {
+                              "type": "MemberExpression",
+                              "start": 8432,
+                              "end": 8443,
+                              "loc": {
+                                "start": {
+                                  "line": 350,
+                                  "column": 20
+                                },
+                                "end": {
+                                  "line": 350,
+                                  "column": 31
+                                }
+                              },
+                              "object": {
+                                "type": "Identifier",
+                                "start": 8432,
+                                "end": 8435,
+                                "loc": {
+                                  "start": {
+                                    "line": 350,
+                                    "column": 20
+                                  },
+                                  "end": {
+                                    "line": 350,
+                                    "column": 23
+                                  }
+                                },
+                                "name": "hex"
+                              },
+                              "property": {
+                                "type": "Identifier",
+                                "start": 8436,
+                                "end": 8443,
+                                "loc": {
+                                  "start": {
+                                    "line": 350,
+                                    "column": 24
+                                  },
+                                  "end": {
+                                    "line": 350,
+                                    "column": 31
+                                  }
+                                },
+                                "name": "replace"
+                              },
+                              "computed": false
+                            },
+                            "arguments": [
+                              {
+                                "type": "Literal",
+                                "start": 8444,
+                                "end": 8447,
+                                "loc": {
+                                  "start": {
+                                    "line": 350,
+                                    "column": 32
+                                  },
+                                  "end": {
+                                    "line": 350,
+                                    "column": 35
+                                  }
+                                },
+                                "value": "#",
+                                "rawValue": "#",
+                                "raw": "'#'"
+                              },
+                              {
+                                "type": "Literal",
+                                "start": 8449,
+                                "end": 8453,
+                                "loc": {
+                                  "start": {
+                                    "line": 350,
+                                    "column": 37
+                                  },
+                                  "end": {
+                                    "line": 350,
+                                    "column": 41
+                                  }
+                                },
+                                "value": "0x",
+                                "rawValue": "0x",
+                                "raw": "'0x'"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "Literal",
+                            "start": 8456,
+                            "end": 8458,
+                            "loc": {
+                              "start": {
+                                "line": 350,
+                                "column": 44
+                              },
+                              "end": {
+                                "line": 350,
+                                "column": 46
+                              }
+                            },
+                            "value": 16,
+                            "rawValue": 16,
+                            "raw": "16"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\n   * #FFFFFF な CSS 16進を 0xFFFFFF 変換し 10進数にします\n   * @param {string} hex #FFFFFF な CSS 16進\n   * @return {Number} 10進数変換後の色ナンバーを返します\n   ",
+                  "start": 8250,
+                  "end": 8389,
+                  "loc": {
+                    "start": {
+                      "line": 344,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 348,
+                      "column": 5
+                    }
+                  },
+                  "range": [
+                    8250,
+                    8389
                   ]
                 }
               ]

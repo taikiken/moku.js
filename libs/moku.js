@@ -54,7 +54,7 @@
 	 *
 	 * This notice shall be included in all copies or substantial portions of the Software.
 	 * 0.1.0
-	 * 2017-4-20 17:27:24
+	 * 2017-4-20 18:15:54
 	 */
 	// use strict は本来不要でエラーになる
 	// 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -117,7 +117,7 @@
 	MOKU.version = function () {return '0.1.0';}; /**
 	                                                   * build 日時を取得します
 	                                                   * @returns {string}  build 日時を返します
-	                                                   */MOKU.build = function () {return '2017-4-20 17:27:24';};
+	                                                   */MOKU.build = function () {return '2017-4-20 18:15:54';};
 	/**
 	                                                                                                        * MOKU.event
 	                                                                                                        * @type {Object} MOKU.event object を返します
@@ -1311,19 +1311,20 @@
 	                                                                                              * @param {Scrolling} scrolling スクロールトップ監視インスタンス
 	                                                                                              */function Rising(elements) {var scrolling = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _Scrolling2.default();(0, _classCallCheck3.default)(this, Rising); /**
 	                                                                                                                                                                                                                                                                                       * 対象 element を Elements インスタンスに変換します
-	                                                                                                                                                                                                                                                                                       * @return {elements} 対象 element を Elements インスタンスに変換します
-	                                                                                                                                                                                                                                                                                       */var _this = (0, _possibleConstructorReturn3.default)(this, (Rising.__proto__ || (0, _getPrototypeOf2.default)(Rising)).call(this));_this.elements = function () {return elements;}; /**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * スクロールトップ監視インスタンス
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * @return {Scrolling} スクロールトップ監視インスタンス
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                              */_this.scrolling = function () {return scrolling;};var boundScroll = _this.scroll.bind(_this); /**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * bound scroll, Rate.UPDATE event handler
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * @returns {function} bound scroll
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */_this.boundScroll = function () {return boundScroll;};
+	                                                                                                                                                                                                                                                                                       * @type {elements}
+	                                                                                                                                                                                                                                                                                       */var _this = (0, _possibleConstructorReturn3.default)(this, (Rising.__proto__ || (0, _getPrototypeOf2.default)(Rising)).call(this));_this.elements = elements; /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                        * スクロールトップ監視インスタンス
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                        * @type {Scrolling}
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                        */_this.scrolling = scrolling; // const boundScroll = this.scroll.bind(this);
 	    /**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * start 済みフラッグ
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * @type {boolean}
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * @default false
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         */
+	     * bound scroll, Rate.UPDATE event handler
+	     * @type {function}
+	     */_this.boundScroll = _this.scroll.bind(_this); // this.boundScroll = boundScroll;
+	    /**
+	     * start 済みフラッグ
+	     * @type {boolean}
+	     * @default false
+	     */
 	    _this.started = false;return _this;
 	  }
 	  // ----------------------------------------
@@ -1359,8 +1360,8 @@
 	      }
 	      this.started = true;
 	      // scrolling
-	      var scrolling = this.scrolling();
-	      scrolling.on(_Scrolling2.default.UPDATE, this.boundScroll());
+	      var scrolling = this.scrolling;
+	      scrolling.on(_Scrolling2.default.UPDATE, this.boundScroll);
 	      scrolling.start();
 	      return this;
 	    }
@@ -1373,8 +1374,8 @@
 	        return this;
 	      }
 	      this.started = false;
-	      var scrolling = this.scrolling();
-	      scrolling.off(_Scrolling2.default.UPDATE, this.boundScroll());
+	      var scrolling = this.scrolling;
+	      scrolling.off(_Scrolling2.default.UPDATE, this.boundScroll);
 	      return this;
 	    }
 	    /**
@@ -1387,7 +1388,7 @@
 	        return false;
 	      }
 	      // element offset
-	      var offset = this.elements().offset();
+	      var offset = this.elements.offset();
 	      // hit result
 	      var hit = _Hit2.default.test(scrollEvents.height, offset);
 	      // @type {?Elements}
@@ -2465,28 +2466,30 @@
 	var Scrolling = function (_EventDispatcher) {(0, _inherits3.default)(Scrolling, _EventDispatcher); /**
 	                                                                                                    * @param {Rate} [rate=new Rate(Rate.Rate_5)] Rate instance, scroll 監視 fps を設定します
 	                                                                                                    */function Scrolling() {var rate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _Rate2.default(_Rate2.default.RATE_5);(0, _classCallCheck3.default)(this, Scrolling); // @type {function}
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (Scrolling.__proto__ || (0, _getPrototypeOf2.default)(Scrolling)).call(this));var boundScroll = _this.scroll.bind(_this); /**
-	                                                                                                                                                                                          * bound scroll, Rate.UPDATE event handler
-	                                                                                                                                                                                          * @returns {function} bound scroll
-	                                                                                                                                                                                          */_this.boundScroll = function () {return boundScroll;}; // @type {ScrollEvents}
-	    var events = new _ScrollEvents2.default(Scrolling.UPDATE, _this, _this); /**
-	                                                                              * ScrollEvents instance, 発火時に使用します
-	                                                                              * @returns {ScrollEvents} ScrollEvents instance
-	                                                                              */_this.events = function () {return events;}; /**
-	                                                                                                                              * 前回 scroll top 位置
-	                                                                                                                              * @type {number}
-	                                                                                                                              * @default -1
-	                                                                                                                              */_this.previous = -1;
+	    // const boundScroll = this.scroll.bind(this);
 	    /**
-	                                                                                                                                                      * start 済みフラッグ
-	                                                                                                                                                      * @type {boolean}
-	                                                                                                                                                      * @default false
-	                                                                                                                                                      */
-	    _this.started = false;
+	     * bound scroll, Rate.UPDATE event handler
+	     * @type {function}
+	     */var _this = (0, _possibleConstructorReturn3.default)(this, (Scrolling.__proto__ || (0, _getPrototypeOf2.default)(Scrolling)).call(this));_this.boundScroll = _this.scroll.bind(_this); // this.boundScroll = boundScroll;
+	    // @type {ScrollEvents}
+	    // const events = new ScrollEvents(Scrolling.UPDATE, this, this);
 	    /**
-	                            * Rate instance
-	                            * @type {?Rate}
-	                            */
+	     * ScrollEvents instance, 発火時に使用します
+	     * @type {ScrollEvents}
+	     */_this.events = new _ScrollEvents2.default(Scrolling.UPDATE, _this, _this); // this.events = events;
+	    /**
+	     * 前回 scroll top 位置
+	     * @type {number}
+	     * @default -1
+	     */_this.previous = -1; /**
+	                             * start 済みフラッグ
+	                             * @type {boolean}
+	                             * @default false
+	                             */_this.started = false;
+	    /**
+	                                                       * Rate instance
+	                                                       * @type {?Rate}
+	                                                       */
 	    _this.rate = rate;return _this;
 	  }
 	  // ----------------------------------------
@@ -2516,7 +2519,7 @@
 	      this.started = true;
 	      // loop start
 	      var rate = this.rate;
-	      rate.on(_Rate2.default.UPDATE, this.boundScroll());
+	      rate.on(_Rate2.default.UPDATE, this.boundScroll);
 	      rate.start();
 	      return this;
 	    }
@@ -2529,7 +2532,7 @@
 	        return this;
 	      }
 	      this.started = false;
-	      this.rate.off(_Rate2.default.UPDATE, this.boundScroll());
+	      this.rate.off(_Rate2.default.UPDATE, this.boundScroll);
 	      return this;
 	    }
 	    /**
@@ -2562,7 +2565,7 @@
 	      var previous = this.previous;
 
 	      // @type {ScrollEvents} - events
-	      var events = this.events();
+	      var events = this.events;
 
 	      // @type {Event} - Rate Events instance
 	      events.original = event;
@@ -2654,34 +2657,33 @@
 	                                                                                                                      * @param {Symbol} checkSymbol singleton を保証するための private instance
 	                                                                                                                      * @returns {Scroll} singleton instance を返します
 	                                                                                                                      */function Scroll(checkSymbol) {var _ret2;(0, _classCallCheck3.default)(this, Scroll); // checkSymbol と singleton が等価かをチェックします
-	    if (checkSymbol !== singletonSymbol) {throw new Error('don\'t use new, instead use static factory method.');}
-	    // instance 作成済みかをチェックし instance が null の時 this を設定します
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (Scroll.__proto__ || (0, _getPrototypeOf2.default)(Scroll)).call(this));if (instance !== null) {var _ret;
-	      return _ret = instance, (0, _possibleConstructorReturn3.default)(_this, _ret);
-	    }
-
+	    if (checkSymbol !== singletonSymbol) {throw new Error('don\'t use new, instead use static factory method.');} // instance 作成済みかをチェックし instance が null の時 this を設定します
+	    if (instance !== null) {var _ret;return _ret = instance, (0, _possibleConstructorReturn3.default)(_this, _ret);}
 	    // onetime setting
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (Scroll.__proto__ || (0, _getPrototypeOf2.default)(Scroll)).call(this));
 	    instance = _this;
 
 	    // event handler
-	    var boundScroll = _this.scroll.bind(_this);
+	    // const boundScroll = this.scroll.bind(this);
 	    /**
-	                                                 * bound scroll, window.onscroll event handler
-	                                                 * @returns {function} bound scroll
-	                                                 */
-	    _this.boundScroll = function () {return boundScroll;};
+	     * bound scroll, window.onscroll event handler
+	     * @type {function}
+	     */
+	    _this.boundScroll = _this.scroll.bind(_this);
+	    // this.boundScroll = () => boundScroll;
 	    // @type {Events} - events instance
-	    var events = new _ScrollEvents2.default(Scroll.SCROLL, _this, _this);
+	    // const events = new ScrollEvents(Scroll.SCROLL, this, this);
 	    /**
-	                                                                           * ScrollEvents instance, 発火時に使用します
-	                                                                           * @returns {ScrollEvents} ScrollEvents instance
-	                                                                           */
-	    _this.events = function () {return events;};
+	     * ScrollEvents instance, 発火時に使用します
+	     * @type {ScrollEvents}
+	     */
+	    _this.events = new _ScrollEvents2.default(Scroll.SCROLL, _this, _this);
+	    // this.events = () => events;
 	    /**
-	                                                  * 前回 scroll top 位置
-	                                                  * @type {number}
-	                                                  * @default -1
-	                                                  */
+	     * 前回 scroll top 位置
+	     * @type {number}
+	     * @default -1
+	     */
 	    _this.previous = -1;
 	    /**
 	                          * start 済みフラッグ
@@ -2717,7 +2719,7 @@
 	        return this;
 	      }
 	      this.started = true;
-	      window.addEventListener('scroll', this.boundScroll(), false);
+	      window.addEventListener('scroll', this.boundScroll, false);
 	      return this;
 	    }
 	    /**
@@ -2729,7 +2731,7 @@
 	        return this;
 	      }
 	      this.started = false;
-	      window.removeEventListener('scroll', this.boundScroll());
+	      window.removeEventListener('scroll', this.boundScroll);
 	      return this;
 	    }
 	    /**
@@ -2747,7 +2749,7 @@
 	      var previous = this.previous;
 
 	      // @type {Events} - events
-	      var events = this.events();
+	      var events = this.events;
 	      // @type {Event} - scroll event
 	      events.original = event;
 	      // @type {number} - scroll top
@@ -3151,38 +3153,40 @@
 
 	    /**
 	                   * Rate 通知 Events instance
-	                   * @returns {Events} Events instance
+	                   * @type {Events}
 	                   */
-	    _this.events = function () {return events;};
+	    _this.events = events;
 	    /**
-	                                                  * 許容可能な rate
-	                                                  * @return {Array<number>} 許容可能な rate
-	                                                  */
-	    _this.rates = function () {return rates;};
+	                            * 許容可能な rate
+	                            * @type {Array<number>}
+	                            */
+	    _this.rates = rates;
 	    /**
-	                                                * rate count, update 毎にカウントアップします<br>
-	                                                * 不正値の時は `Rate.RATE_5` を使用します
-	                                                * @type {number}
-	                                                */
+	                          * rate count, update 毎にカウントアップします<br>
+	                          * 不正値の時は `Rate.RATE_5` を使用します
+	                          * @type {number}
+	                          */
 	    _this.count = 0;
-	    var rate = _this.validate(rateValue) ? rateValue : Rate.RATE_5;
+	    // let rate = this.validate(rateValue) ? rateValue : Rate.RATE_5;
 	    /**
-	                                                                     * rate 値
-	                                                                     * @returns {?number} rate 値
-	                                                                     */
-	    _this.rate = function () {return rate;};
-	    /**
-	                                              * rate 値を設定します
-	                                              * @param {number} value rate 値
-	                                              * @returns {boolean} rate 設定に成功すると true を返します
-	                                              */
-	    _this.setRate = function (value) {
-	      if (_this.validate(value)) {
-	        rate = value;
-	        return true;
-	      }
-	      return false;
-	    };
+	     * rate 値
+	     * @type {?number}
+	     * @default Rate.RATE_5
+	     */
+	    _this.rate = _this.validate(rateValue) ? rateValue : Rate.RATE_5;
+	    // this.rate = rate;
+	    // /**
+	    //  * rate 値を設定します
+	    //  * @param {number} value rate 値
+	    //  * @returns {boolean} rate 設定に成功すると true を返します
+	    //  */
+	    // this.setRate = (value) => {
+	    //   if (this.validate(value)) {
+	    //     rate = value;
+	    //     return true;
+	    //   }
+	    //   return false;
+	    // };
 	    // init
 	    _this.setRate(rateValue);return _this;
 	  }
@@ -3190,12 +3194,26 @@
 	  // METHOD
 	  // ----------------------------------------
 	  /**
-	   * 正規な rate 値かをチェックします
-	   * @param {number} rate 対象 rate
-	   * @returns {boolean} 正しいと true を返します
-	   */(0, _createClass3.default)(Rate, [{ key: 'validate', value: function validate(
+	   * rate 値を設定します
+	   * - 正常値: `this.rate` 更新, value を返します
+	   * - 不正値: `this.rate` 更新しません, null を返します
+	   * @param {number} value rate 値
+	   * @returns {?number} 正しい rate は設定値を不正な時は null を返します
+	   */(0, _createClass3.default)(Rate, [{ key: 'setRate', value: function setRate(
+	    value) {
+	      if (this.validate(value)) {
+	        this.rate = value;
+	        return value;
+	      }
+	      return null;
+	    }
+	    /**
+	       * 正規な rate 値かをチェックします
+	       * @param {number} rate 対象 rate
+	       * @returns {boolean} 正しいと true を返します
+	       */ }, { key: 'validate', value: function validate(
 	    rate) {
-	      return this.rates().indexOf(rate) !== -1;
+	      return this.rates.indexOf(rate) !== -1;
 	    }
 	    /**
 	       * fps 基準値を設定します
@@ -3208,7 +3226,7 @@
 	    rate) {
 	      var result = this.setRate(rate);
 	      this.update();
-	      return result;
+	      return result !== null;
 	    }
 	    /**
 	       * loop(requestAnimationFrame) を開始します
@@ -3225,7 +3243,6 @@
 	      this.initCycle();
 	      // 強制的に1回目を実行
 	      this.fire(this.updateEvents(0, 0));
-
 	      return true;
 	    }
 	    /**
@@ -3235,7 +3252,7 @@
 	    {
 	      // 余りが 0 の時にイベントを発火します
 	      this.count += 1;
-	      var reminder = this.count % this.rate();
+	      var reminder = this.count % this.rate;
 	      if (reminder === 0) {
 	        this.count = 0;
 	        this.fire(this.updateEvents(0, 0));
@@ -3249,7 +3266,7 @@
 /* 103 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _getPrototypeOf = __webpack_require__(49);var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _possibleConstructorReturn2 = __webpack_require__(53);var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);var _inherits2 = __webpack_require__(90);var _inherits3 = _interopRequireDefault(_inherits2);
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _getPrototypeOf = __webpack_require__(49);var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);var _classCallCheck2 = __webpack_require__(2);var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);var _createClass2 = __webpack_require__(3);var _createClass3 = _interopRequireDefault(_createClass2);var _possibleConstructorReturn2 = __webpack_require__(53);var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);var _inherits2 = __webpack_require__(90);var _inherits3 = _interopRequireDefault(_inherits2);
 
 
 
@@ -3280,24 +3297,11 @@
 	                                                                                                                                                                            * polling.on(Polling.UPDATE, update);
 	                                                                                                                                                                            * polling.start();
 	                                                                                                                                                                            */var
-	Polling = function (_EventDispatcher) {(0, _inherits3.default)(Polling, _EventDispatcher);(0, _createClass3.default)(Polling, null, [{ key: 'UPDATE',
-	    // ----------------------------------------
-	    // EVENT
-	    // ----------------------------------------
-	    /**
-	     * 一定間隔(milliseconds)毎に発生するイベント type を取得します
-	     * @returns {string} event, pollingUpdate を返します
-	     */get: function get()
-	    {
-	      return 'pollingUpdate';
-	    }
-	    // ----------------------------------------
-	    // CONSTRUCTOR
-	    // ----------------------------------------
-	    /**
-	     * 引数の polling に合わせ UPDATE イベントを発生させます
-	     * @param {number} [interval=1000] イベント発生間隔 milliseconds
-	     */ }]);
+	Polling = function (_EventDispatcher) {(0, _inherits3.default)(Polling, _EventDispatcher);
+	  /**
+	                                                                                            * 引数の polling に合わせ UPDATE イベントを発生させます
+	                                                                                            * @param {number} [interval=1000] イベント発生間隔 milliseconds
+	                                                                                            */
 	  function Polling() {var interval = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1000;(0, _classCallCheck3.default)(this, Polling);
 
 	    // @type {Cycle} - Cycle instance
@@ -3306,28 +3310,28 @@
 	    var events = new _Events2.default(Polling.UPDATE, _this, _this);
 	    /**
 	                                                                      * Cycle instance を取得します
-	                                                                      * @returns {Cycle} Cycle instance
+	                                                                      * @ty[e {Cycle}
 	                                                                      */
-	    _this.cycle = function () {return cycle;};
+	    _this.cycle = cycle;
 	    /**
-	                                                * 間隔(ms)
-	                                                * @type {number}
-	                                                */
+	                          * 間隔(ms)
+	                          * @type {number}
+	                          */
 	    _this.interval = interval;
 	    /**
 	                                * bound update, Cycle.UPDATE event handler
-	                                * @returns {function} bound update
+	                                * @returns {function}
 	                                */
-	    _this.boundUpdate = function () {return boundUpdate;};
+	    _this.boundUpdate = boundUpdate;
 	    /**
-	                                                            * Events instance
-	                                                            * @returns {Events} Polling.UPDATE Events object
-	                                                            */
-	    _this.events = function () {return events;};
+	                                      * Events instance - Polling.UPDATE Events object
+	                                      * @type {Events}
+	                                      */
+	    _this.events = events;
 	    /**
-	                                                  * polling event 発生時間, event を発火すると 0 にリセットされます
-	                                                  * @type {number}
-	                                                  */
+	                            * polling event 発生時間, event を発火すると 0 にリセットされます
+	                            * @type {number}
+	                            */
 	    _this.begin = 0;
 	    /**
 	                      * Cycle 監視開始フラッグ
@@ -3336,23 +3340,25 @@
 	    _this.started = false;return _this;
 	  }
 	  // ----------------------------------------
-	  // METHOD
+	  // EVENT
 	  // ----------------------------------------
 	  /**
-	   * 再スタートします
-	   * @returns {boolean} `update` をコールし Polling.UPDATE event が発生すると true を返します
-	   */(0, _createClass3.default)(Polling, [{ key: 'restart', value: function restart()
-	    {
-	      this.begin = Date.now();
-	      return this.change(this.interval);
-	    }
+	   * 一定間隔(milliseconds)毎に発生するイベント type を取得します
+	   * @returns {string} event, pollingUpdate を返します
+	   */(0, _createClass3.default)(Polling, [{ key: 'change',
+
+
+
+	    // ----------------------------------------
+	    // METHOD
+	    // ----------------------------------------
 	    /**
-	       * polling 時間を変更します<br>
-	       * 1. プロパティ polling 変更
-	       * 1. update 実行
-	       * @param {number} interval polling 時間
-	       * @returns {boolean} `update` をコールし Polling.UPDATE event が発生すると true を返します
-	       */ }, { key: 'change', value: function change(
+	     * polling 時間を変更します<br>
+	     * 1. プロパティ polling 変更
+	     * 1. update 実行
+	     * @param {number} interval polling 時間
+	     * @returns {boolean} `update` をコールし Polling.UPDATE event が発生すると true を返します
+	     */value: function change(
 	    interval) {
 	      this.interval = interval;
 	      return this.update();
@@ -3374,7 +3380,7 @@
 	    begin, present) {
 	      this.begin = begin;
 	      // @type {Events} - start event
-	      var events = this.events();
+	      var events = this.events;
 	      events.begin = begin;
 	      events.present = present;
 	      events.interval = this.interval;
@@ -3387,39 +3393,32 @@
 	       */ }, { key: 'initCycle', value: function initCycle()
 	    {
 	      // cycle
-	      var cycle = this.cycle();
+	      var cycle = this.cycle;
 	      // bind Cycle.UPDATE
-	      cycle.on(_Cycle2.default.UPDATE, this.boundUpdate());
-	      // 開始位置
-	      this.begin = Date.now();
+	      cycle.on(_Cycle2.default.UPDATE, this.boundUpdate);
 	      // cycle 開始
 	      cycle.start();
 	      return cycle;
 	    }
 	    /**
 	       * polling を開始します
-	       * @param {boolean} [noFire=false] 1回目のイベントを発火しない
 	       * @returns {boolean} start に成功すると true を返します
 	       */ }, { key: 'start', value: function start()
-	    {var noFire = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+	    {
 	      if (this.started) {
 	        // already start
 	        return false;
 	      }
 	      // flag -> true
+	      // this[startSymbol] = true;
 	      this.turnOver();
 	      // cycle
 	      this.initCycle();
 	      // @type {number} - 開始時間
 	      var present = Date.now();
-	      // 開始時間セット - @since 2017-04-20
-	      this.begin = present;
-	      // @see https://github.com/taikiken/moku.js/issues/30
-	      // @since 2017-04-20 - ticks/Polling 1回目のコールをオプションへ #30
-	      if (!noFire) {
-	        // 強制的に1回目を実行
-	        this.fire(this.updateEvents(present, present));
-	      }
+	      // 強制的に1回目を実行
+	      this.fire(this.updateEvents(present, present));
+
 	      return true;
 	    }
 	    /**
@@ -3431,7 +3430,8 @@
 	        // not start
 	        return false;
 	      }
-	      this.cycle.off(_Cycle2.default.UPDATE, this.boundUpdate());
+	      this.cycle.off(_Cycle2.default.UPDATE, this.boundUpdate);
+	      // this[startSymbol] = false;
 	      this.turnOver();
 	      return true;
 	    }
@@ -3467,7 +3467,7 @@
 	       */ }, { key: 'fire', value: function fire(
 	    events) {
 	      this.dispatch(events);
-	    } }]);return Polling;}(_EventDispatcher3.default); // tick
+	    } }], [{ key: 'UPDATE', get: function get() {return 'pollingUpdate';} }]);return Polling;}(_EventDispatcher3.default); // tick
 	/**
 	 * Copyright (c) 2011-2016 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
@@ -3554,18 +3554,18 @@
 	    var boundUpdate = _this.update.bind(_this);
 	    /**
 	                                                 * Cycle.UPDATE Events instance
-	                                                 * @returns {Events} Cycle.UPDATE Events instance
+	                                                 * @type {Events}
 	                                                 */
-	    _this.events = function () {return events;};
+	    _this.events = events;
 	    /**
-	                                                  * bound update requestAnimationFrame callback
-	                                                  * @returns {function} bound update
-	                                                  */
-	    _this.boundUpdate = function () {return boundUpdate;};
+	                            * bound update requestAnimationFrame callback
+	                            * @type {function}
+	                            */
+	    _this.boundUpdate = boundUpdate;
 	    /**
-	                                                            * requestAnimationFrame ID
-	                                                            * @type {number}
-	                                                            */
+	                                      * requestAnimationFrame ID
+	                                      * @type {number}
+	                                      */
 	    _this.id = 0;
 	    /**
 	                   * start 済みフラッグ
@@ -3631,11 +3631,11 @@
 	     */ }, { key: 'update', value: function update()
 	    {
 	      // @type {number} - requestAnimationFrame id
-	      var id = requestAnimationFrame(this.boundUpdate());
+	      var id = requestAnimationFrame(this.boundUpdate);
 	      this.id = id;
 
 	      // @type {Events} - events
-	      var events = this.events();
+	      var events = this.events;
 	      events.id = id;
 	      // event fire
 	      this.dispatch(events);
@@ -3783,33 +3783,38 @@
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    * @type {number}
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    * @default 10
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    */_this.threshold = threshold; // @type {function}
-	    var boundStart = _this.onStart.bind(_this); /**
-	                                                 * bound onStart
-	                                                 * @returns {function} bound onStart
-	                                                 */_this.boundStart = function () {return boundStart;};var boundMove = _this.onMove.bind(_this);
+	    // const boundStart = this.onStart.bind(this);
 	    /**
-	                                                                                                                                                  * bound onMove
-	                                                                                                                                                  * @returns {function} bound onMove
-	                                                                                                                                                  */
-	    _this.boundMove = function () {return boundMove;};
-	    var boundEnd = _this.onEnd.bind(_this);
+	     * bound onStart
+	     * @type {function}
+	     */_this.boundStart = _this.onStart.bind(_this); // this.boundStart = () => boundStart;
+	    // const boundMove = this.onMove.bind(this);
 	    /**
-	                                             * bound onEnd
-	                                             * @returns {function} bound onEnd
-	                                             */
-	    _this.boundEnd = function () {return boundEnd;};
-	    var boundCancel = _this.onCancel.bind(_this);
+	     * bound onMove
+	     * @type {function}
+	     */_this.boundMove = _this.onMove.bind(_this);
+	    // this.boundMove = () => boundMove;
+	    // const boundEnd = this.onEnd.bind(this);
 	    /**
-	                                                   * bound onCancel
-	                                                   * @returns {function} onCancel onStart
-	                                                   */
-	    _this.boundCancel = function () {return boundCancel;};
-	    var boundBlur = _this.onBlur.bind(_this);
+	     * bound onEnd
+	     * @type {function}
+	     */
+	    _this.boundEnd = _this.onEnd.bind(_this);
+	    // this.boundEnd = () => boundEnd;
+	    // const boundCancel = this.onCancel.bind(this);
 	    /**
-	                                               * bound onBlur
-	                                               * @returns {function} bound onBlur
-	                                               */
-	    _this.boundBlur = function () {return boundBlur;};
+	     * bound onCancel
+	     * @type {function}
+	     */
+	    _this.boundCancel = _this.onCancel.bind(_this);
+	    // this.boundCancel = () => boundCancel;
+	    // const boundBlur = this.onBlur.bind(this);
+	    /**
+	     * bound onBlur
+	     * @type {function}
+	     */
+	    _this.boundBlur = _this.onBlur.bind(_this);
+	    // this.boundBlur = () => boundBlur;
 	    var vectors = {
 	      start: new _Vectors2.default(),
 	      end: new _Vectors2.default(),
@@ -3874,8 +3879,8 @@
 	     * @returns {void}
 	     */value: function init()
 	    {
-	      this.element.addEventListener('touchstart', this.boundStart(), false);
-	      window.addEventListener('blur', this.boundBlur(), false);
+	      this.element.addEventListener('touchstart', this.boundStart, false);
+	      window.addEventListener('blur', this.boundBlur, false);
 	    }
 	    /**
 	       * touchstart event handler
@@ -3895,9 +3900,9 @@
 
 	      // キャンセル event 監視を開始
 	      var body = document.body;
-	      body.addEventListener('touchend', this.boundEnd(), false);
-	      body.addEventListener('touchmove', this.boundMove(), false);
-	      body.addEventListener('touchcancel', this.boundCancel(), false);
+	      body.addEventListener('touchend', this.boundEnd, false);
+	      body.addEventListener('touchmove', this.boundMove, false);
+	      body.addEventListener('touchcancel', this.boundCancel, false);
 
 	      // Touching.START 発火
 	      this.dispatch(new _TouchingEvents2.default(
@@ -4036,9 +4041,9 @@
 	    {
 	      var body = document.body;
 
-	      body.removeEventListener('touchend', this.boundEnd());
-	      body.removeEventListener('touchmove', this.boundMove());
-	      body.removeEventListener('touchcancel', this.boundCancel());
+	      body.removeEventListener('touchend', this.boundEnd);
+	      body.removeEventListener('touchmove', this.boundMove);
+	      body.removeEventListener('touchcancel', this.boundCancel);
 	      return true;
 	    }
 	    /**
@@ -4491,17 +4496,18 @@
 	    instance = _this;
 
 	    // event handler
-	    var boundWheel = _this.mouseWheel.bind(_this);
+	    // const boundWheel = this.mouseWheel.bind(this);
 	    /**
-	                                                    * bound mouseWheel
-	                                                    * @returns {function} window.wheel event handler
-	                                                    */
-	    _this.boundWheel = function () {return boundWheel;};
+	     * bound mouseWheel
+	     * @type {function}
+	     */
+	    _this.boundWheel = _this.mouseWheel.bind(_this);
+	    // this.boundWheel = () => boundWheel;
 	    /**
-	                                                          * 閾値, wheel 移動量が閾値を超えたときにイベントを発生させます
-	                                                          * @type {number}
-	                                                          * @default 200
-	                                                          */
+	     * 閾値, wheel 移動量が閾値を超えたときにイベントを発生させます
+	     * @type {number}
+	     * @default 200
+	     */
 	    _this.threshold = 200;
 	    /**
 	                            * wheelDelta 移動量が閾値を超えるかをチェックするための積算計算変数
@@ -4560,7 +4566,7 @@
 	      }
 	      this.started = true;
 	      // this.unwatch();
-	      window.addEventListener('wheel', this.boundWheel(), false);
+	      window.addEventListener('wheel', this.boundWheel, false);
 	      return this;
 	    }
 	    /**
@@ -4572,7 +4578,7 @@
 	        return this;
 	      }
 	      this.started = false;
-	      window.removeEventListener('wheel', this.boundWheel());
+	      window.removeEventListener('wheel', this.boundWheel);
 	      return this;
 	    }
 	    /**
@@ -5561,12 +5567,12 @@
 	     */ }]);function Fps() {var fps = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 30;(0, _classCallCheck3.default)(this, Fps); // @type {Events} - Events
 	    var _this = (0, _possibleConstructorReturn3.default)(this, (Fps.__proto__ || (0, _getPrototypeOf2.default)(Fps)).call(this, 1000 / fps));var events = new _Events2.default(Fps.UPDATE, _this, _this); /**
 	                                                                                                                                                                                                           * Fps.UPDATE Events instance
-	                                                                                                                                                                                                           * @returns {Events} Fps.UPDATE Events instance
-	                                                                                                                                                                                                           */_this.events = function () {return events;};
+	                                                                                                                                                                                                           * @type {Events}
+	                                                                                                                                                                                                           */_this.events = events;
 	    /**
-	                                                                                                                                                                                                                                                           * frame rate
-	                                                                                                                                                                                                                                                           * @type {number}
-	                                                                                                                                                                                                                                                           */
+	                                                                                                                                                                                                                                     * frame rate
+	                                                                                                                                                                                                                                     * @type {number}
+	                                                                                                                                                                                                                                     */
 	    _this.fps = fps;return _this;
 	  }
 	  // ----------------------------------------

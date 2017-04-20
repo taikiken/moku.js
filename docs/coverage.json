@@ -1,7 +1,7 @@
 {
   "coverage": "100%",
-  "expectCount": 329,
-  "actualCount": 329,
+  "expectCount": 341,
+  "actualCount": 341,
   "files": {
     "src/event/Rising.js": {
       "expectCount": 11,
@@ -59,8 +59,8 @@
       "undocumentLines": []
     },
     "src/event/Events.js": {
-      "expectCount": 5,
-      "actualCount": 5,
+      "expectCount": 6,
+      "actualCount": 6,
       "undocumentLines": []
     },
     "src/tick/Fps.js": {
@@ -79,8 +79,8 @@
       "undocumentLines": []
     },
     "src/util/Iro.js": {
-      "expectCount": 12,
-      "actualCount": 12,
+      "expectCount": 13,
+      "actualCount": 13,
       "undocumentLines": []
     },
     "src/util/List.js": {
@@ -99,8 +99,8 @@
       "undocumentLines": []
     },
     "src/net/Queries.js": {
-      "expectCount": 14,
-      "actualCount": 14,
+      "expectCount": 13,
+      "actualCount": 13,
       "undocumentLines": []
     },
     "src/tick/Rate.js": {
@@ -134,8 +134,8 @@
       "undocumentLines": []
     },
     "src/util/Text.js": {
-      "expectCount": 3,
-      "actualCount": 3,
+      "expectCount": 8,
+      "actualCount": 8,
       "undocumentLines": []
     },
     "src/util/Times.js": {
@@ -154,8 +154,8 @@
       "undocumentLines": []
     },
     "src/util/Vectors.js": {
-      "expectCount": 18,
-      "actualCount": 18,
+      "expectCount": 24,
+      "actualCount": 24,
       "undocumentLines": []
     },
     "src/event/WheelEvents.js": {

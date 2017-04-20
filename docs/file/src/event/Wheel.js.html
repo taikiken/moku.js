@@ -130,12 +130,13 @@ export default class Wheel extends EventDispatcher {
     instance = this;
 
     // event handler
-    const boundWheel = this.mouseWheel.bind(this);
+    // const boundWheel = this.mouseWheel.bind(this);
     /**
      * bound mouseWheel
-     * @returns {function} window.wheel event handler
+     * @type {function}
      */
-    this.boundWheel = () =&gt; boundWheel;
+    this.boundWheel = this.mouseWheel.bind(this);
+    // this.boundWheel = () =&gt; boundWheel;
     /**
      * &#x95BE;&#x5024;, wheel &#x79FB;&#x52D5;&#x91CF;&#x304C;&#x95BE;&#x5024;&#x3092;&#x8D85;&#x3048;&#x305F;&#x3068;&#x304D;&#x306B;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x751F;&#x3055;&#x305B;&#x307E;&#x3059;
      * @type {number}
@@ -199,7 +200,7 @@ export default class Wheel extends EventDispatcher {
     }
     this.started = true;
     // this.unwatch();
-    window.addEventListener(&apos;wheel&apos;, this.boundWheel(), false);
+    window.addEventListener(&apos;wheel&apos;, this.boundWheel, false);
     return this;
   }
   /**
@@ -211,7 +212,7 @@ export default class Wheel extends EventDispatcher {
       return this;
     }
     this.started = false;
-    window.removeEventListener(&apos;wheel&apos;, this.boundWheel());
+    window.removeEventListener(&apos;wheel&apos;, this.boundWheel);
     return this;
   }
   /**

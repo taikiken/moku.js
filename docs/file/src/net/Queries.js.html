@@ -83,6 +83,8 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  */
 
+import { default as Text } from &apos;../util/Text&apos;;
+
 /**
  * URL query &#x3092;&#x30D1;&#x30FC;&#x30B9;&#x3057;&#x307E;&#x3059;
  */
@@ -95,25 +97,25 @@ export default class Queries {
     const [data, keys] = Queries.parse(queryString);
     const naked = Queries.naked(queryString);
     /**
-     * query key &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
-     * @returns {Array&lt;string&gt;} query key array
+     * query key &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059; - query key array
+     * @type {Array&lt;string&gt;}
      */
-    this.keys = () =&gt; keys;
+    this.keys = keys;
     /**
-     * key: value &#x5F62;&#x5F0F;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
-     * @returns {Object} URL query &#x3092; key: value &#x5F62;&#x5F0F;&#x3067;&#x8FD4;&#x3057;&#x307E;&#x3059;
+     * key: value &#x5F62;&#x5F0F;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059; - URL query &#x3092; key: value &#x5F62;&#x5F0F;&#x3067;&#x8FD4;&#x3057;&#x307E;&#x3059;
+     * @type {Object}
      */
-    this.data = () =&gt; data;
+    this.data = data;
     /**
-     * query &#x6587;&#x5B57;&#x5217;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
-     * @returns {string} &#x30D1;&#x30FC;&#x30B9;&#x3059;&#x308B; query &#x6587;&#x5B57;&#x5217;
+     * query &#x6587;&#x5B57;&#x5217;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059; - &#x30D1;&#x30FC;&#x30B9;&#x3059;&#x308B; query &#x6587;&#x5B57;&#x5217;
+     * @type {string}
      */
-    this.queryString = () =&gt; queryString;
+    this.queryString = queryString;
     /**
-     * &#x30D1;&#x30FC;&#x30B9;&#x3057;&#x3084;&#x3059;&#x3044;&#x3088;&#x3046;&#x306B;&#x6B63;&#x898F;&#x5316;&#x3057;&#x305F; query &#x6587;&#x5B57;&#x5217;
-     * @returns {string} `?` &#x4EE5;&#x964D;&#x6587;&#x5B57; + `&amp;amp;` &#x3092; `&amp;` &#x3078;&#x7F6E;&#x63DB;&#x3048;&#x307E;&#x3059;
+     * &#x30D1;&#x30FC;&#x30B9;&#x3057;&#x3084;&#x3059;&#x3044;&#x3088;&#x3046;&#x306B;&#x6B63;&#x898F;&#x5316;&#x3057;&#x305F; query &#x6587;&#x5B57;&#x5217; - `?` &#x4EE5;&#x964D;&#x6587;&#x5B57; + `&amp;amp;` &#x3092; `&amp;` &#x3078;&#x7F6E;&#x63DB;&#x3048;&#x307E;&#x3059;
+     * @type {string}
      */
-    this.naked = () =&gt; naked;
+    this.naked = naked;
   }
   // ----------------------------------------
   // METHOD
@@ -124,7 +126,7 @@ export default class Queries {
    * @returns {boolean} true: &#x5B58;&#x5728;&#x3059;&#x308B;
    */
   has(keyName) {
-    return this.keys().indexOf(keyName) !== -1;
+    return this.keys.indexOf(keyName) !== -1;
   }
   /**
    * key &#x5024;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
@@ -132,34 +134,34 @@ export default class Queries {
    * @returns {string|undefined} &#x898B;&#x3064;&#x304B;&#x308B;&#x3068;&#x6587;&#x5B57;&#x5217;&#x3067;&#x8FD4;&#x3057;&#x307E;&#x3059;, &#x898B;&#x3064;&#x304B;&#x3089;&#x306A;&#x3044;&#x6642;&#x306F; undefined &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   get(keyName) {
-    return this.data()[keyName];
+    return this.data[keyName];
   }
   /**
    * key: value &#x5F62;&#x5F0F;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
    * @returns {Object} URL query &#x3092; key: value &#x5F62;&#x5F0F;&#x3067;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   getAll() {
-    return this.data();
+    return this.data;
   }
   // ----------------------------------------
   // STATIC METHOD
   // ----------------------------------------
+  // /**
+  //  * `&amp;amp;` &#x3092; `&amp;` &#x3078;&#x7F6E;&#x63DB;&#x3048;&#x307E;&#x3059;
+  //  * @param {string} targetText &#x64CD;&#x4F5C;&#x5BFE;&#x8C61;&#x6587;&#x5B57;&#x5217;
+  //  * @returns {string} `&amp;amp;` &#x3092; `&amp;` &#x3078;&#x7F6E;&#x63DB;&#x3048;&#x8FD4;&#x3057;&#x307E;&#x3059;
+  //  */
+  // static amp(targetText) {
+  //   return targetText.split(&apos;&amp;amp;&apos;).join(&apos;&amp;&apos;);
+  // }
   /**
-   * `&amp;amp;` &#x3092; `&amp;` &#x3078;&#x7F6E;&#x63DB;&#x3048;&#x307E;&#x3059;
-   * @param {string} targetText &#x64CD;&#x4F5C;&#x5BFE;&#x8C61;&#x6587;&#x5B57;&#x5217;
-   * @returns {string} `&amp;amp;` &#x3092; `&amp;` &#x3078;&#x7F6E;&#x63DB;&#x3048;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   */
-  static amp(targetText) {
-    return targetText.split(&apos;&amp;amp;&apos;).join(&apos;&amp;&apos;);
-  }
-
-  /**
-   * &#x6587;&#x5B57;&#x5217;&#x5148;&#x982D;&#x306B; `?` &#x304C;&#x3042;&#x308C;&#x3070;&#x305D;&#x308C;&#x4EE5;&#x964D;&#x306E;&#x6587;&#x5B57;&#x5217;&#x3092;&#x8FD4;&#x3057; `Query.amp` &#x3092;&#x5B9F;&#x884C;&#x3057;&#x307E;&#x3059;
+   * &#x6587;&#x5B57;&#x5217;&#x5148;&#x982D;&#x306B; `?` &#x304C;&#x3042;&#x308C;&#x3070;&#x305D;&#x308C;&#x4EE5;&#x964D;&#x306E;&#x6587;&#x5B57;&#x5217;&#x3092;&#x8FD4;&#x3057; {@link Text.and} &#x3092;&#x5B9F;&#x884C;&#x3057; `&amp;amp;` &#x3092; `&amp;` &#x5909;&#x63DB;&#x3057;&#x307E;&#x3059;
    * @param {string} targetText &#x64CD;&#x4F5C;&#x5BFE;&#x8C61;&#x6587;&#x5B57;&#x5217;
    * @returns {string} query &#x3092;&#x6B63;&#x898F;&#x5316;&#x3057;&#x307E;&#x3059;
    */
   static naked(targetText) {
-    const queryString = Queries.amp(targetText);
+    // const queryString = Queries.amp(targetText);
+    const queryString = Text.and(targetText);
     return queryString.substr(0, 1) === &apos;?&apos; ? queryString.substring(1) : targetText;
   }
   /**
@@ -175,10 +177,14 @@ export default class Queries {
     pairs.map((pair) =&gt; {
       let keyName = &apos;&apos;;
       if (pair &amp;&amp; pair.indexOf(&apos;=&apos;) !== -1) {
+        // @type {Array&lt;string&gt;} - `key=value` &#x3092; `=` &#x3067;&#x5206;&#x5272;&#x3059;&#x308B;
         const keyValue = pair.split(&apos;=&apos;);
+        // @type {string} keyName
         const key = keyValue.shift();
+        // data object &#x3078; keyName &#x3092; key &#x306B;&#x5024;&#x3092;&#x30BB;&#x30C3;&#x30C8;&#x3059;&#x308B;
         data[key] = keyValue.shift();
         keyName = key;
+        // key &#x540D;&#x79F0;&#x914D;&#x5217;&#x3078;&#x8FFD;&#x52A0;&#x3059;&#x308B;
         keys.push(key);
       }
       return keyName;

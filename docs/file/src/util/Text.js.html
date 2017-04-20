@@ -106,6 +106,59 @@ export default class Text {
       return first.toUpperCase();
     });
   }
+  /**
+   * &#x6570;&#x5024;&#x306B;3&#x6841;&#x533A;&#x5207;&#x308A;&#x306E; `,` &#x30AB;&#x30F3;&#x30DE;&#x3092;&#x633F;&#x5165;&#x3057;&#x307E;&#x3059;
+   * @param {number} number &#x30AB;&#x30F3;&#x30DE;&#x3092;&#x633F;&#x5165;&#x3059;&#x308B;&#x6570;&#x5024;
+   * @param {string} [locale=js-JP] &#x30ED;&#x30B1;&#x30FC;&#x30EB;
+   * @returns {string} &#x30AB;&#x30F3;&#x30DE;&#x633F;&#x5165;&#x5F8C;&#x306E;&#x6587;&#x5B57;&#x5217;, &#x5C0F;&#x6570;&#x70B9;&#x306A;&#x3057;
+   * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString
+   * @see http://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
+   */
+  static comma(number, locale = &apos;ja-JP&apos;) {
+    let numbered = &apos;&apos;;
+    if (number.toLocaleString) {
+      numbered = number.toLocaleString(locale);
+    } else {
+      numbered = number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, &apos;,&apos;);
+    }
+    // IE 8 `NN.00` &#x306B;&#x3059;&#x308B;&#x306E;&#x3067; `.` &#x4EE5;&#x4E0B;&#x524A;&#x9664;
+    return numbered.split(&apos;.&apos;).shift();
+  }
+  /**
+   * &#x6587;&#x5B57;&#x5217;&#x306E;&#x5358;&#x8A9E;&#x3092;&#x7F6E;&#x304D;&#x63DB;&#x3048;&#x307E;&#x3059;
+   * @param {string} targetText &#x7F6E;&#x63DB;&#x3048;&#x5BFE;&#x8C61;&#x6587;&#x5B57;&#x5217;
+   * @param {string} targetWord &#x7F6E;&#x63DB;&#x3048;&#x5143;&#x5358;&#x8A9E;
+   * @param {string} replaceWord &#x7F6E;&#x63DB;&#x3048;&#x308B;&#x5358;&#x8A9E;
+   * @returns {string} &#x7F6E;&#x63DB;&#x3048;&#x5F8C;&#x306E;&#x6587;&#x5B57;&#x5217;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  static replace(targetText, targetWord, replaceWord) {
+    return targetText.split(targetWord).join(replaceWord);
+  }
+  /**
+   * &#x6587;&#x5B57;&#x5217;&#x304B;&#x3089;&#x5358;&#x8A9E;&#x3092;&#x524A;&#x9664;&#x3057;&#x307E;&#x3059;
+   * @param {string} targetText &#x7F6E;&#x63DB;&#x3048;&#x5BFE;&#x8C61;&#x6587;&#x5B57;&#x5217;
+   * @param {string} targetWord &#x524A;&#x9664;&#x3059;&#x308B;&#x5358;&#x8A9E;
+   * @returns {string} &#x524A;&#x9664;&#x5F8C;&#x306E;&#x6587;&#x5B57;&#x5217;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  static remove(targetText, targetWord) {
+    return Text.replace(targetText, targetWord, &apos;&apos;);
+  }
+  /**
+   * &#x6587;&#x5B57;&#x5217;&#x306E; `&amp;` &#x3092; `&amp;amp;` &#x3078;&#x7F6E;&#x63DB;&#x3048;&#x307E;&#x3059;
+   * @param {string} targetText &#x64CD;&#x4F5C;&#x5BFE;&#x8C61;&#x6587;&#x5B57;&#x5217;
+   * @returns {string} `&amp;amp;` &#x7F6E;&#x63DB;&#x3048;&#x5F8C;&#x306E;&#x6587;&#x5B57;&#x5217;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  static amp(targetText) {
+    return Text.replace(targetText, &apos;&amp;&apos;, &apos;&amp;amp;&apos;);
+  }
+  /**
+   * &#x6587;&#x5B57;&#x5217;&#x306E; `&amp;amp;` &#x3092; `&amp;` &#x3078;&#x7F6E;&#x63DB;&#x3048;&#x307E;&#x3059;
+   * @param {string} targetText &#x64CD;&#x4F5C;&#x5BFE;&#x8C61;&#x6587;&#x5B57;&#x5217;
+   * @returns {string} `&amp;` &#x7F6E;&#x63DB;&#x3048;&#x5F8C;&#x306E;&#x6587;&#x5B57;&#x5217;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  static and(targetText) {
+    return Text.replace(targetText, &apos;&amp;amp;&apos;, &apos;&amp;&apos;);
+  }
 }
 </code></pre>
 

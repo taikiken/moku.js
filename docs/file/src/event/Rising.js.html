@@ -103,20 +103,21 @@ export default class Rising extends EventDispatcher {
     super();
     /**
      * &#x5BFE;&#x8C61; element &#x3092; Elements &#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x306B;&#x5909;&#x63DB;&#x3057;&#x307E;&#x3059;
-     * @return {elements} &#x5BFE;&#x8C61; element &#x3092; Elements &#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x306B;&#x5909;&#x63DB;&#x3057;&#x307E;&#x3059;
+     * @type {elements}
      */
-    this.elements = () =&gt; elements;
+    this.elements = elements;
     /**
      * &#x30B9;&#x30AF;&#x30ED;&#x30FC;&#x30EB;&#x30C8;&#x30C3;&#x30D7;&#x76E3;&#x8996;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;
-     * @return {Scrolling} &#x30B9;&#x30AF;&#x30ED;&#x30FC;&#x30EB;&#x30C8;&#x30C3;&#x30D7;&#x76E3;&#x8996;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;
+     * @type {Scrolling}
      */
-    this.scrolling = () =&gt; scrolling;
-    const boundScroll = this.scroll.bind(this);
+    this.scrolling = scrolling;
+    // const boundScroll = this.scroll.bind(this);
     /**
      * bound scroll, Rate.UPDATE event handler
-     * @returns {function} bound scroll
+     * @type {function}
      */
-    this.boundScroll = () =&gt; boundScroll;
+    this.boundScroll = this.scroll.bind(this);
+    // this.boundScroll = boundScroll;
     /**
      * start &#x6E08;&#x307F;&#x30D5;&#x30E9;&#x30C3;&#x30B0;
      * @type {boolean}
@@ -157,8 +158,8 @@ export default class Rising extends EventDispatcher {
     }
     this.started = true;
     // scrolling
-    const scrolling = this.scrolling();
-    scrolling.on(Scrolling.UPDATE, this.boundScroll());
+    const scrolling = this.scrolling;
+    scrolling.on(Scrolling.UPDATE, this.boundScroll);
     scrolling.start();
     return this;
   }
@@ -171,8 +172,8 @@ export default class Rising extends EventDispatcher {
       return this;
     }
     this.started = false;
-    const scrolling = this.scrolling();
-    scrolling.off(Scrolling.UPDATE, this.boundScroll());
+    const scrolling = this.scrolling;
+    scrolling.off(Scrolling.UPDATE, this.boundScroll);
     return this;
   }
   /**
@@ -185,7 +186,7 @@ export default class Rising extends EventDispatcher {
       return false;
     }
     // element offset
-    const offset = this.elements().offset();
+    const offset = this.elements.offset();
     // hit result
     const hit = Hit.test(scrollEvents.height, offset);
     // @type {?Elements}
