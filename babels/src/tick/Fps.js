@@ -36,6 +36,21 @@ import { default as Polling } from './Polling';
  * fps.start();
  * */
 export default class Fps extends Polling {
+  // ----------------------------------------
+  // EVENT
+  // ----------------------------------------
+  /**
+   * フレームレート毎に発生するイベントを取得します
+   * @event UPDATE
+   * @returns {string} event, fpsUpdate を返します
+   * @default fpsUpdate
+   */
+  static get UPDATE() {
+    return 'fpsUpdate';
+  }
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
   /**
    * 引数の frame rate に合わせ UPDATE イベントを発生させます
    * @param {number} [fps=30] frame rate, default: 30
@@ -54,18 +69,6 @@ export default class Fps extends Polling {
      * @type {number}
      */
     this.fps = fps;
-  }
-  // ----------------------------------------
-  // EVENT
-  // ----------------------------------------
-  /**
-   * フレームレート毎に発生するイベントを取得します
-   * @event UPDATE
-   * @returns {string} event, fpsUpdate を返します
-   * @default fpsUpdate
-   */
-  static get UPDATE() {
-    return 'fpsUpdate';
   }
   // ----------------------------------------
   // METHOD
