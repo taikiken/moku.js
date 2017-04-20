@@ -11,6 +11,8 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  */
 
+import { default as Text } from '../util/Text';
+
 /**
  * URL query をパースします
  */
@@ -23,25 +25,25 @@ export default class Queries {
     const [data, keys] = Queries.parse(queryString);
     const naked = Queries.naked(queryString);
     /**
-     * query key を取得します
-     * @returns {Array<string>} query key array
+     * query key を取得します - query key array
+     * @type {Array<string>}
      */
-    this.keys = () => keys;
+    this.keys = keys;
     /**
-     * key: value 形式を取得します
-     * @returns {Object} URL query を key: value 形式で返します
+     * key: value 形式を取得します - URL query を key: value 形式で返します
+     * @type {Object}
      */
-    this.data = () => data;
+    this.data = data;
     /**
-     * query 文字列を取得します
-     * @returns {string} パースする query 文字列
+     * query 文字列を取得します - パースする query 文字列
+     * @type {string}
      */
-    this.queryString = () => queryString;
+    this.queryString = queryString;
     /**
-     * パースしやすいように正規化した query 文字列
-     * @returns {string} `?` 以降文字 + `&amp;` を `&` へ置換えます
+     * パースしやすいように正規化した query 文字列 - `?` 以降文字 + `&amp;` を `&` へ置換えます
+     * @type {string}
      */
-    this.naked = () => naked;
+    this.naked = naked;
   }
   // ----------------------------------------
   // METHOD
@@ -52,7 +54,7 @@ export default class Queries {
    * @returns {boolean} true: 存在する
    */
   has(keyName) {
-    return this.keys().indexOf(keyName) !== -1;
+    return this.keys.indexOf(keyName) !== -1;
   }
   /**
    * key 値を取得します
@@ -60,34 +62,34 @@ export default class Queries {
    * @returns {string|undefined} 見つかると文字列で返します, 見つからない時は undefined を返します
    */
   get(keyName) {
-    return this.data()[keyName];
+    return this.data[keyName];
   }
   /**
    * key: value 形式を取得します
    * @returns {Object} URL query を key: value 形式で返します
    */
   getAll() {
-    return this.data();
+    return this.data;
   }
   // ----------------------------------------
   // STATIC METHOD
   // ----------------------------------------
+  // /**
+  //  * `&amp;` を `&` へ置換えます
+  //  * @param {string} targetText 操作対象文字列
+  //  * @returns {string} `&amp;` を `&` へ置換え返します
+  //  */
+  // static amp(targetText) {
+  //   return targetText.split('&amp;').join('&');
+  // }
   /**
-   * `&amp;` を `&` へ置換えます
-   * @param {string} targetText 操作対象文字列
-   * @returns {string} `&amp;` を `&` へ置換え返します
-   */
-  static amp(targetText) {
-    return targetText.split('&amp;').join('&');
-  }
-
-  /**
-   * 文字列先頭に `?` があればそれ以降の文字列を返し `Query.amp` を実行します
+   * 文字列先頭に `?` があればそれ以降の文字列を返し {@link Text.and} を実行し `&amp;` を `&` 変換します
    * @param {string} targetText 操作対象文字列
    * @returns {string} query を正規化します
    */
   static naked(targetText) {
-    const queryString = Queries.amp(targetText);
+    // const queryString = Queries.amp(targetText);
+    const queryString = Text.and(targetText);
     return queryString.substr(0, 1) === '?' ? queryString.substring(1) : targetText;
   }
   /**
@@ -103,10 +105,14 @@ export default class Queries {
     pairs.map((pair) => {
       let keyName = '';
       if (pair && pair.indexOf('=') !== -1) {
+        // @type {Array<string>} - `key=value` を `=` で分割する
         const keyValue = pair.split('=');
+        // @type {string} keyName
         const key = keyValue.shift();
+        // data object へ keyName を key に値をセットする
         data[key] = keyValue.shift();
         keyName = key;
+        // key 名称配列へ追加する
         keys.push(key);
       }
       return keyName;

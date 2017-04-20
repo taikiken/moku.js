@@ -88,6 +88,14 @@ export default class Polling extends EventDispatcher {
   // METHOD
   // ----------------------------------------
   /**
+   * 再スタートします
+   * @returns {boolean} `update` をコールし Polling.UPDATE event が発生すると true を返します
+   */
+  restart() {
+    this.begin = Date.now();
+    return this.change(this.interval);
+  }
+  /**
    * polling 時間を変更します<br>
    * 1. プロパティ polling 変更
    * 1. update 実行
@@ -131,6 +139,8 @@ export default class Polling extends EventDispatcher {
     const cycle = this.cycle();
     // bind Cycle.UPDATE
     cycle.on(Cycle.UPDATE, this.boundUpdate());
+    // 開始位置
+    this.begin = Date.now();
     // cycle 開始
     cycle.start();
     return cycle;

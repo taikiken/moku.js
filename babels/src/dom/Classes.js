@@ -21,9 +21,9 @@ export default class Classes {
   constructor(element) {
     /**
      * 操作対象 Element
-     * @returns {Element} 操作対象 Element
+     * @type {Element}
      */
-    this.element = () => element;
+    this.element = element;
   }
   /**
    * className を有するかを調べます
@@ -31,7 +31,7 @@ export default class Classes {
    * @returns {boolean} 存在すると true を返します
    */
   has(className) {
-    return Classes.has(this.element(), className);
+    return Classes.has(this.element, className);
   }
   /**
    * className を追加します
@@ -39,7 +39,7 @@ export default class Classes {
    * @returns {boolean} 追加に成功すると true を返します
    */
   add(className) {
-    return Classes.add(this.element(), className);
+    return Classes.add(this.element, className);
   }
   /**
    * className を削除します
@@ -47,7 +47,7 @@ export default class Classes {
    * @returns {boolean} 削除に成功すると true を返します
    */
   remove(className) {
-    return Classes.remove(this.element(), className);
+    return Classes.remove(this.element, className);
   }
   /**
    * Elementが引数 className を有するかを調べます

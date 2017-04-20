@@ -75,7 +75,7 @@ export default class Freeze {
    */
   static freeze(delay = Freeze.duration()) {
     clearTimeout(timerId);
-    timerId = 0;
+    // timerId = 0;
     Freeze.start();
     if (delay > 0) {
       timerId = setTimeout(Freeze.stop, delay);

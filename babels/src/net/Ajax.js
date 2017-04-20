@@ -150,7 +150,7 @@ export default class Ajax {
    * @param {string} method GET, POST, PUT, DELETE...etc request method
    * @param {Headers|Object|null} headers Headers option
    * @param {FormData|null} formData 送信フォームデータオプション
-   * @returns {Request} fetch API へ送る Request instance を返します
+   * @returns {*|Request} fetch API へ送る Request instance を返します
    *
    * @see https://developers.google.com/web/updates/2015/03/introduction-to-fetch
    * @see https://developer.mozilla.org/ja/docs/Web/API/Request
