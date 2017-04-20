@@ -34,24 +34,24 @@ export default class Elements {
     const bounding = new Bounding(element);
     /**
      * 対象 Element の CSS 操作を行う Style instance
-     * @returns {Style} Style instance
+     * @type {Style}
      */
-    this.style = () => style;
+    this.style = style;
     /**
-     * Element class 操作のために instance を作成します
-     * @returns {Classes} Classes instance
+     * Element class 操作のために instance を作成します - Classes instance
+     * @type {Classes}
      */
-    this.classes = () => classes;
+    this.classes = classes;
     /**
      * 操作対象 Element
-     * @returns {Element} 操作対象 Element
+     * @type {Element}
      */
-    this.element = () => element;
+    this.element = element;
     /**
      * Element class `ClientRect` 取得のために instance を作成します
-     * @returns {Bounding} Element class `ClientRect` 取得のための instance
+     * @type {Bounding}
      */
-    this.bounding = () => bounding;
+    this.bounding = bounding;
   }
   // ----------------------------------------
   // METHOD

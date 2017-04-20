@@ -22,6 +22,9 @@
  * - currentTarget: *, current イベント発生インスタンス
  */
 export default class Events {
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
   /**
    * custom Event Object
    * @param {string} type イベント種類
@@ -44,5 +47,15 @@ export default class Events {
      * @type {*}
      */
     this.currentTarget = currentTarget;
+  }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
+  /**
+   * 複製を作成します
+   * @returns {Events} 複製を返します
+   */
+  clone() {
+    return new Events(this.type, this.currentTarget, this.target);
   }
 }

@@ -20,9 +20,9 @@ export default class Vectors {
    * 座標と現在時間を元にインスタンスを作成します
    * @param {number} [x=0] 座標 x
    * @param {number} [y=0] 座標 y
-   * @param {number} [time=0] 時間 milli seconds
+   * @param {number} [time=Date.now()] 時間 milli seconds
    */
-  constructor(x = 0, y = 0, time = 0) {
+  constructor(x = 0, y = 0, time = Date.now()) {
     /**
      * 座標 x
      * @type {number}
@@ -128,11 +128,43 @@ export default class Vectors {
     return clone;
   }
   /**
+   * ベクトルの値を scalar 値で乗算します
+   *
+   * @param {number} scalar 乗算母数
+   * @returns {Vectors} 乗算後の Vector を返します
+   */
+  multiplyByScalar(scalar) {
+    const clone = this.clone();
+    clone.x *= scalar;
+    clone.y *= scalar;
+    return clone;
+  }
+  /**
+   * 現在の Vectors を元に引数 `maxValue` 以下にした `Vectors` を取得します
+   * @param {number} maxValue 最高目標値
+   * @returns {Vectors} `maxValue` 以下にした `Vectors` を返します
+   */
+  truncate(maxValue) {
+    const minValue = Math.min(maxValue, this.length());
+    const oldLength = this.length();
+    if (oldLength !== 0 && minValue !== oldLength) {
+      return this.multiplyByScalar(minValue / oldLength);
+    }
+    return this.clone();
+  }
+  /**
    * ベクトルの大きさを正規化（大きさを1）した Vector を作成します
    * @returns {Vectors} ベクトルの大きさを正規化（大きさを1）した Vectors を返します
    */
   normalize() {
     return this.divideByScalar(this.length());
+  }
+  /**
+   * ベクトルが正規化されているかを判定します
+   * @returns {boolean} true: 正規化されている
+   */
+  isNormalize() {
+    return this.length() === 1;
   }
   /**
    * 引数 vectors との X 値を減算します
@@ -170,5 +202,38 @@ export default class Vectors {
     clone.time = clone.betweenTime(vectors);
 
     return clone;
+  }
+  /**
+   * 引数ベクトルの内積を計算します
+   * @param {Vectors} vectors 計測したい対象 Vectors instance
+   * @returns {number} 内積を返します
+   */
+  dot(vectors) {
+    return (this.x * vectors.x) + (this.y * vectors.y);
+  }
+  /**
+   * 引数ベクトルの値(x, y)が等しいかを判定します
+   * @param {Vectors} vectors 計測したい対象 Vectors instance
+   * @returns {boolean} true: 等しい
+   */
+  equals(vectors) {
+    return (vectors.x === this.x) && (vectors.y === this.y);
+  }
+  /**
+   * 引数ベクトルとの角度を計算します
+   * @param {Vectors} vectors 計測したい対象 Vectors instance
+   * @returns {number} 角度を返します
+   */
+  angle(vectors) {
+    let v1 = this.clone();
+    let v2 = vectors.clone();
+    if (!v1.isNormalize()) {
+      v1 = v1.normalize();
+    }
+    if (!v2.isNormalize()) {
+      v2 = v2.normalize();
+    }
+    // console.log('angle', v1, v2, v1.dot(v2), Math.acos(v1.dot(v2)));
+    return Math.acos(v1.dot(v2));
   }
 }

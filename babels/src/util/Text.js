@@ -52,4 +52,39 @@ export default class Text {
     // IE 8 `NN.00` にするので `.` 以下削除
     return numbered.split('.').shift();
   }
+  /**
+   * 文字列の単語を置き換えます
+   * @param {string} targetText 置換え対象文字列
+   * @param {string} targetWord 置換え元単語
+   * @param {string} replaceWord 置換える単語
+   * @returns {string} 置換え後の文字列を返します
+   */
+  static replace(targetText, targetWord, replaceWord) {
+    return targetText.split(targetWord).join(replaceWord);
+  }
+  /**
+   * 文字列から単語を削除します
+   * @param {string} targetText 置換え対象文字列
+   * @param {string} targetWord 削除する単語
+   * @returns {string} 削除後の文字列を返します
+   */
+  static remove(targetText, targetWord) {
+    return Text.replace(targetText, targetWord, '');
+  }
+  /**
+   * 文字列の `&` を `&amp;` へ置換えます
+   * @param {string} targetText 操作対象文字列
+   * @returns {string} `&amp;` 置換え後の文字列を返します
+   */
+  static amp(targetText) {
+    return Text.replace(targetText, '&', '&amp;');
+  }
+  /**
+   * 文字列の `&amp;` を `&` へ置換えます
+   * @param {string} targetText 操作対象文字列
+   * @returns {string} `&` 置換え後の文字列を返します
+   */
+  static and(targetText) {
+    return Text.replace(targetText, '&amp;', '&');
+  }
 }

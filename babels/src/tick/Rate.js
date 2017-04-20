@@ -41,63 +41,6 @@ import { default as Polling } from './Polling';
  * rate.start();
  */
 export default class Rate extends Polling {
-  /**
-   * 固定値フレームレート毎に UPDATE イベントを発生させます
-   * @param {number} [rateValue=Rate.RATE_5] fps, 固定値以外設定できません
-   */
-  constructor(rateValue = Rate.RATE_5) {
-    // 60fps で polling を行う
-    super(1000 / 60);
-    // @type {Events}
-    const events = new Events(Rate.UPDATE, this, this);
-    // 設定可能な rate list
-    const rates = [
-      Rate.RATE_60,
-      Rate.RATE_30,
-      Rate.RATE_20,
-      Rate.RATE_15,
-      Rate.RATE_12,
-      Rate.RATE_10,
-      Rate.RATE_6,
-      Rate.RATE_5,
-    ];
-    /**
-     * Rate 通知 Events instance
-     * @returns {Events} Events instance
-     */
-    this.events = () => events;
-    /**
-     * 許容可能な rate
-     * @return {Array<number>} 許容可能な rate
-     */
-    this.rates = () => rates;
-    /**
-     * rate count, update 毎にカウントアップします<br>
-     * 不正値の時は `Rate.RATE_5` を使用します
-     * @type {number}
-     */
-    this.count = 0;
-    let rate = this.validate(rateValue) ? rateValue : Rate.RATE_5;
-    /**
-     * rate 値
-     * @returns {?number} rate 値
-     */
-    this.rate = () => rate;
-    /**
-     * rate 値を設定します
-     * @param {number} value rate 値
-     * @returns {boolean} rate 設定に成功すると true を返します
-     */
-    this.setRate = (value) => {
-      if (this.validate(value)) {
-        rate = value;
-        return true;
-      }
-      return false;
-    };
-    // init
-    this.setRate(rateValue);
-  }
   // ----------------------------------------
   // CONST
   // ----------------------------------------
@@ -185,6 +128,66 @@ export default class Rate extends Polling {
     return 'rateUpdate';
   }
   // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
+  /**
+   * 固定値フレームレート毎に UPDATE イベントを発生させます
+   * @param {number} [rateValue=Rate.RATE_5] fps, 固定値以外設定できません
+   */
+  constructor(rateValue = Rate.RATE_5) {
+    // 60fps で polling を行う
+    super(1000 / 60);
+    // @type {Events}
+    const events = new Events(Rate.UPDATE, this, this);
+    // 設定可能な rate list
+    const rates = [
+      Rate.RATE_60,
+      Rate.RATE_30,
+      Rate.RATE_20,
+      Rate.RATE_15,
+      Rate.RATE_12,
+      Rate.RATE_10,
+      Rate.RATE_6,
+      Rate.RATE_5,
+    ];
+    /**
+     * Rate 通知 Events instance
+     * @returns {Events} Events instance
+     */
+    this.events = () => events;
+    /**
+     * 許容可能な rate
+     * @return {Array<number>} 許容可能な rate
+     */
+    this.rates = () => rates;
+    /**
+     * rate count, update 毎にカウントアップします<br>
+     * 不正値の時は `Rate.RATE_5` を使用します
+     * @type {number}
+     */
+    this.count = 0;
+    let rate = this.validate(rateValue) ? rateValue : Rate.RATE_5;
+    /**
+     * rate 値
+     * @returns {?number} rate 値
+     */
+    this.rate = () => rate;
+    /**
+     * rate 値を設定します
+     * @param {number} value rate 値
+     * @returns {boolean} rate 設定に成功すると true を返します
+     */
+    this.setRate = (value) => {
+      if (this.validate(value)) {
+        rate = value;
+        return true;
+      }
+      return false;
+    };
+    // init
+    this.setRate(rateValue);
+  }
+  // ----------------------------------------
   // METHOD
   // ----------------------------------------
   /**
@@ -237,10 +240,8 @@ export default class Rate extends Polling {
     if (reminder === 0) {
       this.count = 0;
       this.fire(this.updateEvents(0, 0));
-
       return true;
     }
-
     return false;
   }
 }

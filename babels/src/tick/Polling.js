@@ -30,6 +30,19 @@ import { default as Cycle } from './Cycle';
  * polling.start();
  */
 export default class Polling extends EventDispatcher {
+  // ----------------------------------------
+  // EVENT
+  // ----------------------------------------
+  /**
+   * 一定間隔(milliseconds)毎に発生するイベント type を取得します
+   * @returns {string} event, pollingUpdate を返します
+   */
+  static get UPDATE() {
+    return 'pollingUpdate';
+  }
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
   /**
    * 引数の polling に合わせ UPDATE イベントを発生させます
    * @param {number} [interval=1000] イベント発生間隔 milliseconds
@@ -72,18 +85,16 @@ export default class Polling extends EventDispatcher {
     this.started = false;
   }
   // ----------------------------------------
-  // EVENT
-  // ----------------------------------------
-  /**
-   * 一定間隔(milliseconds)毎に発生するイベント type を取得します
-   * @returns {string} event, pollingUpdate を返します
-   */
-  static get UPDATE() {
-    return 'pollingUpdate';
-  }
-  // ----------------------------------------
   // METHOD
   // ----------------------------------------
+  /**
+   * 再スタートします
+   * @returns {boolean} `update` をコールし Polling.UPDATE event が発生すると true を返します
+   */
+  restart() {
+    this.begin = Date.now();
+    return this.change(this.interval);
+  }
   /**
    * polling 時間を変更します<br>
    * 1. プロパティ polling 変更
@@ -128,29 +139,36 @@ export default class Polling extends EventDispatcher {
     const cycle = this.cycle();
     // bind Cycle.UPDATE
     cycle.on(Cycle.UPDATE, this.boundUpdate());
+    // 開始位置
+    this.begin = Date.now();
     // cycle 開始
     cycle.start();
     return cycle;
   }
   /**
    * polling を開始します
+   * @param {boolean} [noFire=false] 1回目のイベントを発火しない
    * @returns {boolean} start に成功すると true を返します
    */
-  start() {
+  start(noFire = false) {
     if (this.started) {
       // already start
       return false;
     }
     // flag -> true
-    // this[startSymbol] = true;
     this.turnOver();
     // cycle
     this.initCycle();
     // @type {number} - 開始時間
     const present = Date.now();
-    // 強制的に1回目を実行
-    this.fire(this.updateEvents(present, present));
-
+    // 開始時間セット - @since 2017-04-20
+    this.begin = present;
+    // @see https://github.com/taikiken/moku.js/issues/30
+    // @since 2017-04-20 - ticks/Polling 1回目のコールをオプションへ #30
+    if (!noFire) {
+      // 強制的に1回目を実行
+      this.fire(this.updateEvents(present, present));
+    }
     return true;
   }
   /**
@@ -163,7 +181,6 @@ export default class Polling extends EventDispatcher {
       return false;
     }
     this.cycle.off(Cycle.UPDATE, this.boundUpdate());
-    // this[startSymbol] = false;
     this.turnOver();
     return true;
   }

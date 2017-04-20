@@ -341,4 +341,12 @@ export default class Iro {
     }
     return mathInt(hexString.replace('#', ''), 16);
   }
+  /**
+   * #FFFFFF な CSS 16進を 0xFFFFFF 変換し 10進数にします
+   * @param {string} hex #FFFFFF な CSS 16進
+   * @return {Number} 10進数変換後の色ナンバーを返します
+   */
+  static toInt(hex) {
+    return parseInt(hex.replace('#', '0x'), 16);
+  }
 }

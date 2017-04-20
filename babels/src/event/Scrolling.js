@@ -24,9 +24,7 @@ import { default as Rate } from '../tick/Rate';
  * */
 export default class Scrolling extends EventDispatcher {
   /**
-   * singleton です
    * @param {Rate} [rate=new Rate(Rate.Rate_5)] Rate instance, scroll 監視 fps を設定します
-   * @returns {Scrolling} singleton instance を返します
    */
   constructor(rate = new Rate(Rate.RATE_5)) {
     super();

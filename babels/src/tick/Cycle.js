@@ -55,11 +55,11 @@ export default class Cycle extends EventDispatcher {
     if (checkSymbol !== singletonSymbol) {
       throw new Error('don\'t use new, instead use static factory method.');
     }
-    super();
     // instance 作成済みかをチェックし instance が null の時 this を設定します
     if (instance !== null) {
       return instance;
     }
+    super();
     // -------------------------------
     // onetime setting
     instance = this;
