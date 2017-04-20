@@ -61,9 +61,9 @@ export default class Fps extends Polling {
     const events = new Events(Fps.UPDATE, this, this);
     /**
      * Fps.UPDATE Events instance
-     * @returns {Events} Fps.UPDATE Events instance
+     * @type {Events}
      */
-    this.events = () => events;
+    this.events = events;
     /**
      * frame rate
      * @type {number}

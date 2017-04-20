@@ -29,19 +29,21 @@ export default class Scrolling extends EventDispatcher {
   constructor(rate = new Rate(Rate.RATE_5)) {
     super();
     // @type {function}
-    const boundScroll = this.scroll.bind(this);
+    // const boundScroll = this.scroll.bind(this);
     /**
      * bound scroll, Rate.UPDATE event handler
-     * @returns {function} bound scroll
+     * @type {function}
      */
-    this.boundScroll = () => boundScroll;
+    this.boundScroll = this.scroll.bind(this);
+    // this.boundScroll = boundScroll;
     // @type {ScrollEvents}
-    const events = new ScrollEvents(Scrolling.UPDATE, this, this);
+    // const events = new ScrollEvents(Scrolling.UPDATE, this, this);
     /**
      * ScrollEvents instance, 発火時に使用します
-     * @returns {ScrollEvents} ScrollEvents instance
+     * @type {ScrollEvents}
      */
-    this.events = () => events;
+    this.events = new ScrollEvents(Scrolling.UPDATE, this, this);
+    // this.events = events;
     /**
      * 前回 scroll top 位置
      * @type {number}
@@ -87,7 +89,7 @@ export default class Scrolling extends EventDispatcher {
     this.started = true;
     // loop start
     const rate = this.rate;
-    rate.on(Rate.UPDATE, this.boundScroll());
+    rate.on(Rate.UPDATE, this.boundScroll);
     rate.start();
     return this;
   }
@@ -100,7 +102,7 @@ export default class Scrolling extends EventDispatcher {
       return this;
     }
     this.started = false;
-    this.rate.off(Rate.UPDATE, this.boundScroll());
+    this.rate.off(Rate.UPDATE, this.boundScroll);
     return this;
   }
   /**
@@ -133,7 +135,7 @@ export default class Scrolling extends EventDispatcher {
     const previous = this.previous;
 
     // @type {ScrollEvents} - events
-    const events = this.events();
+    const events = this.events;
 
     // @type {Event} - Rate Events instance
     events.original = event;

@@ -152,38 +152,40 @@ export default class Rate extends Polling {
     ];
     /**
      * Rate 通知 Events instance
-     * @returns {Events} Events instance
+     * @type {Events}
      */
-    this.events = () => events;
+    this.events = events;
     /**
      * 許容可能な rate
-     * @return {Array<number>} 許容可能な rate
+     * @type {Array<number>}
      */
-    this.rates = () => rates;
+    this.rates = rates;
     /**
      * rate count, update 毎にカウントアップします<br>
      * 不正値の時は `Rate.RATE_5` を使用します
      * @type {number}
      */
     this.count = 0;
-    let rate = this.validate(rateValue) ? rateValue : Rate.RATE_5;
+    // let rate = this.validate(rateValue) ? rateValue : Rate.RATE_5;
     /**
      * rate 値
-     * @returns {?number} rate 値
+     * @type {?number}
+     * @default Rate.RATE_5
      */
-    this.rate = () => rate;
-    /**
-     * rate 値を設定します
-     * @param {number} value rate 値
-     * @returns {boolean} rate 設定に成功すると true を返します
-     */
-    this.setRate = (value) => {
-      if (this.validate(value)) {
-        rate = value;
-        return true;
-      }
-      return false;
-    };
+    this.rate = this.validate(rateValue) ? rateValue : Rate.RATE_5;
+    // this.rate = rate;
+    // /**
+    //  * rate 値を設定します
+    //  * @param {number} value rate 値
+    //  * @returns {boolean} rate 設定に成功すると true を返します
+    //  */
+    // this.setRate = (value) => {
+    //   if (this.validate(value)) {
+    //     rate = value;
+    //     return true;
+    //   }
+    //   return false;
+    // };
     // init
     this.setRate(rateValue);
   }
@@ -191,12 +193,26 @@ export default class Rate extends Polling {
   // METHOD
   // ----------------------------------------
   /**
+   * rate 値を設定します
+   * - 正常値: `this.rate` 更新, value を返します
+   * - 不正値: `this.rate` 更新しません, null を返します
+   * @param {number} value rate 値
+   * @returns {?number} 正しい rate は設定値を不正な時は null を返します
+   */
+  setRate(value) {
+    if (this.validate(value)) {
+      this.rate = value;
+      return value;
+    }
+    return null;
+  }
+  /**
    * 正規な rate 値かをチェックします
    * @param {number} rate 対象 rate
    * @returns {boolean} 正しいと true を返します
    */
   validate(rate) {
-    return this.rates().indexOf(rate) !== -1;
+    return this.rates.indexOf(rate) !== -1;
   }
   /**
    * fps 基準値を設定します
@@ -209,7 +225,7 @@ export default class Rate extends Polling {
   change(rate) {
     const result = this.setRate(rate);
     this.update();
-    return result;
+    return result !== null;
   }
   /**
    * loop(requestAnimationFrame) を開始します
@@ -226,7 +242,6 @@ export default class Rate extends Polling {
     this.initCycle();
     // 強制的に1回目を実行
     this.fire(this.updateEvents(0, 0));
-
     return true;
   }
   /**
@@ -236,7 +251,7 @@ export default class Rate extends Polling {
   update() {
     // 余りが 0 の時にイベントを発火します
     this.count += 1;
-    const reminder = this.count % this.rate();
+    const reminder = this.count % this.rate;
     if (reminder === 0) {
       this.count = 0;
       this.fire(this.updateEvents(0, 0));

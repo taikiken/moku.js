@@ -31,20 +31,21 @@ export default class Rising extends EventDispatcher {
     super();
     /**
      * 対象 element を Elements インスタンスに変換します
-     * @return {elements} 対象 element を Elements インスタンスに変換します
+     * @type {elements}
      */
-    this.elements = () => elements;
+    this.elements = elements;
     /**
      * スクロールトップ監視インスタンス
-     * @return {Scrolling} スクロールトップ監視インスタンス
+     * @type {Scrolling}
      */
-    this.scrolling = () => scrolling;
-    const boundScroll = this.scroll.bind(this);
+    this.scrolling = scrolling;
+    // const boundScroll = this.scroll.bind(this);
     /**
      * bound scroll, Rate.UPDATE event handler
-     * @returns {function} bound scroll
+     * @type {function}
      */
-    this.boundScroll = () => boundScroll;
+    this.boundScroll = this.scroll.bind(this);
+    // this.boundScroll = boundScroll;
     /**
      * start 済みフラッグ
      * @type {boolean}
@@ -85,8 +86,8 @@ export default class Rising extends EventDispatcher {
     }
     this.started = true;
     // scrolling
-    const scrolling = this.scrolling();
-    scrolling.on(Scrolling.UPDATE, this.boundScroll());
+    const scrolling = this.scrolling;
+    scrolling.on(Scrolling.UPDATE, this.boundScroll);
     scrolling.start();
     return this;
   }
@@ -99,8 +100,8 @@ export default class Rising extends EventDispatcher {
       return this;
     }
     this.started = false;
-    const scrolling = this.scrolling();
-    scrolling.off(Scrolling.UPDATE, this.boundScroll());
+    const scrolling = this.scrolling;
+    scrolling.off(Scrolling.UPDATE, this.boundScroll);
     return this;
   }
   /**
@@ -113,7 +114,7 @@ export default class Rising extends EventDispatcher {
       return false;
     }
     // element offset
-    const offset = this.elements().offset();
+    const offset = this.elements.offset();
     // hit result
     const hit = Hit.test(scrollEvents.height, offset);
     // @type {?Elements}

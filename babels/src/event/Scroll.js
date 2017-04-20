@@ -49,31 +49,30 @@ export default class Scroll extends EventDispatcher {
     if (checkSymbol !== singletonSymbol) {
       throw new Error('don\'t use new, instead use static factory method.');
     }
-
-    super();
-
     // instance 作成済みかをチェックし instance が null の時 this を設定します
     if (instance !== null) {
       return instance;
     }
-
     // onetime setting
+    super();
     instance = this;
 
     // event handler
-    const boundScroll = this.scroll.bind(this);
+    // const boundScroll = this.scroll.bind(this);
     /**
      * bound scroll, window.onscroll event handler
-     * @returns {function} bound scroll
+     * @type {function}
      */
-    this.boundScroll = () => boundScroll;
+    this.boundScroll = this.scroll.bind(this);
+    // this.boundScroll = () => boundScroll;
     // @type {Events} - events instance
-    const events = new ScrollEvents(Scroll.SCROLL, this, this);
+    // const events = new ScrollEvents(Scroll.SCROLL, this, this);
     /**
      * ScrollEvents instance, 発火時に使用します
-     * @returns {ScrollEvents} ScrollEvents instance
+     * @type {ScrollEvents}
      */
-    this.events = () => events;
+    this.events = new ScrollEvents(Scroll.SCROLL, this, this);
+    // this.events = () => events;
     /**
      * 前回 scroll top 位置
      * @type {number}
@@ -114,7 +113,7 @@ export default class Scroll extends EventDispatcher {
       return this;
     }
     this.started = true;
-    window.addEventListener('scroll', this.boundScroll(), false);
+    window.addEventListener('scroll', this.boundScroll, false);
     return this;
   }
   /**
@@ -126,7 +125,7 @@ export default class Scroll extends EventDispatcher {
       return this;
     }
     this.started = false;
-    window.removeEventListener('scroll', this.boundScroll());
+    window.removeEventListener('scroll', this.boundScroll);
     return this;
   }
   /**
@@ -144,7 +143,7 @@ export default class Scroll extends EventDispatcher {
     const previous = this.previous;
 
     // @type {Events} - events
-    const events = this.events();
+    const events = this.events;
     // @type {Event} - scroll event
     events.original = event;
     // @type {number} - scroll top

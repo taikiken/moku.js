@@ -67,14 +67,14 @@ export default class Cycle extends EventDispatcher {
     const boundUpdate = this.update.bind(this);
     /**
      * Cycle.UPDATE Events instance
-     * @returns {Events} Cycle.UPDATE Events instance
+     * @type {Events}
      */
-    this.events = () => events;
+    this.events = events;
     /**
      * bound update requestAnimationFrame callback
-     * @returns {function} bound update
+     * @type {function}
      */
-    this.boundUpdate = () => boundUpdate;
+    this.boundUpdate = boundUpdate;
     /**
      * requestAnimationFrame ID
      * @type {number}
@@ -144,11 +144,11 @@ export default class Cycle extends EventDispatcher {
    */
   update() {
     // @type {number} - requestAnimationFrame id
-    const id = requestAnimationFrame(this.boundUpdate());
+    const id = requestAnimationFrame(this.boundUpdate);
     this.id = id;
 
     // @type {Events} - events
-    const events = this.events();
+    const events = this.events;
     events.id = id;
     // event fire
     this.dispatch(events);

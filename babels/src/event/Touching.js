@@ -50,36 +50,41 @@ export default class Touching extends EventDispatcher {
      */
     this.threshold = threshold;
     // @type {function}
-    const boundStart = this.onStart.bind(this);
+    // const boundStart = this.onStart.bind(this);
     /**
      * bound onStart
-     * @returns {function} bound onStart
+     * @type {function}
      */
-    this.boundStart = () => boundStart;
-    const boundMove = this.onMove.bind(this);
+    this.boundStart = this.onStart.bind(this);
+    // this.boundStart = () => boundStart;
+    // const boundMove = this.onMove.bind(this);
     /**
      * bound onMove
-     * @returns {function} bound onMove
+     * @type {function}
      */
-    this.boundMove = () => boundMove;
-    const boundEnd = this.onEnd.bind(this);
+    this.boundMove = this.onMove.bind(this);
+    // this.boundMove = () => boundMove;
+    // const boundEnd = this.onEnd.bind(this);
     /**
      * bound onEnd
-     * @returns {function} bound onEnd
+     * @type {function}
      */
-    this.boundEnd = () => boundEnd;
-    const boundCancel = this.onCancel.bind(this);
+    this.boundEnd = this.onEnd.bind(this);
+    // this.boundEnd = () => boundEnd;
+    // const boundCancel = this.onCancel.bind(this);
     /**
      * bound onCancel
-     * @returns {function} onCancel onStart
+     * @type {function}
      */
-    this.boundCancel = () => boundCancel;
-    const boundBlur = this.onBlur.bind(this);
+    this.boundCancel = this.onCancel.bind(this);
+    // this.boundCancel = () => boundCancel;
+    // const boundBlur = this.onBlur.bind(this);
     /**
      * bound onBlur
-     * @returns {function} bound onBlur
+     * @type {function}
      */
-    this.boundBlur = () => boundBlur;
+    this.boundBlur = this.onBlur.bind(this);
+    // this.boundBlur = () => boundBlur;
     const vectors = {
       start: new Vectors(),
       end: new Vectors(),
@@ -144,8 +149,8 @@ export default class Touching extends EventDispatcher {
    * @returns {void}
    */
   init() {
-    this.element.addEventListener('touchstart', this.boundStart(), false);
-    window.addEventListener('blur', this.boundBlur(), false);
+    this.element.addEventListener('touchstart', this.boundStart, false);
+    window.addEventListener('blur', this.boundBlur, false);
   }
   /**
    * touchstart event handler
@@ -165,9 +170,9 @@ export default class Touching extends EventDispatcher {
 
     // キャンセル event 監視を開始
     const body = document.body;
-    body.addEventListener('touchend', this.boundEnd(), false);
-    body.addEventListener('touchmove', this.boundMove(), false);
-    body.addEventListener('touchcancel', this.boundCancel(), false);
+    body.addEventListener('touchend', this.boundEnd, false);
+    body.addEventListener('touchmove', this.boundMove, false);
+    body.addEventListener('touchcancel', this.boundCancel, false);
 
     // Touching.START 発火
     this.dispatch(new TouchingEvents(
@@ -306,9 +311,9 @@ export default class Touching extends EventDispatcher {
   dispose() {
     const body = document.body;
 
-    body.removeEventListener('touchend', this.boundEnd());
-    body.removeEventListener('touchmove', this.boundMove());
-    body.removeEventListener('touchcancel', this.boundCancel());
+    body.removeEventListener('touchend', this.boundEnd);
+    body.removeEventListener('touchmove', this.boundMove);
+    body.removeEventListener('touchcancel', this.boundCancel);
     return true;
   }
   /**

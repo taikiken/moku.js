@@ -58,12 +58,13 @@ export default class Wheel extends EventDispatcher {
     instance = this;
 
     // event handler
-    const boundWheel = this.mouseWheel.bind(this);
+    // const boundWheel = this.mouseWheel.bind(this);
     /**
      * bound mouseWheel
-     * @returns {function} window.wheel event handler
+     * @type {function}
      */
-    this.boundWheel = () => boundWheel;
+    this.boundWheel = this.mouseWheel.bind(this);
+    // this.boundWheel = () => boundWheel;
     /**
      * 閾値, wheel 移動量が閾値を超えたときにイベントを発生させます
      * @type {number}
@@ -127,7 +128,7 @@ export default class Wheel extends EventDispatcher {
     }
     this.started = true;
     // this.unwatch();
-    window.addEventListener('wheel', this.boundWheel(), false);
+    window.addEventListener('wheel', this.boundWheel, false);
     return this;
   }
   /**
@@ -139,7 +140,7 @@ export default class Wheel extends EventDispatcher {
       return this;
     }
     this.started = false;
-    window.removeEventListener('wheel', this.boundWheel());
+    window.removeEventListener('wheel', this.boundWheel);
     return this;
   }
   /**
