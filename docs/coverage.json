@@ -1,7 +1,7 @@
 {
   "coverage": "100%",
-  "expectCount": 341,
-  "actualCount": 341,
+  "expectCount": 373,
+  "actualCount": 373,
   "files": {
     "src/event/Rising.js": {
       "expectCount": 11,
@@ -9,8 +9,8 @@
       "undocumentLines": []
     },
     "src/net/Ajax.js": {
-      "expectCount": 9,
-      "actualCount": 9,
+      "expectCount": 11,
+      "actualCount": 11,
       "undocumentLines": []
     },
     "src/dom/Bounding.js": {
@@ -24,8 +24,8 @@
       "undocumentLines": []
     },
     "src/css/Can.js": {
-      "expectCount": 3,
-      "actualCount": 3,
+      "expectCount": 6,
+      "actualCount": 6,
       "undocumentLines": []
     },
     "src/dom/Classes.js": {
@@ -34,18 +34,18 @@
       "undocumentLines": []
     },
     "src/net/Cookie.js": {
-      "expectCount": 19,
-      "actualCount": 19,
+      "expectCount": 22,
+      "actualCount": 22,
       "undocumentLines": []
     },
     "src/tick/Cycle.js": {
-      "expectCount": 11,
-      "actualCount": 11,
+      "expectCount": 13,
+      "actualCount": 13,
       "undocumentLines": []
     },
     "src/event/Wheel.js": {
-      "expectCount": 16,
-      "actualCount": 16,
+      "expectCount": 18,
+      "actualCount": 18,
       "undocumentLines": []
     },
     "src/dom/Elements.js": {
@@ -69,8 +69,8 @@
       "undocumentLines": []
     },
     "src/util/Freeze.js": {
-      "expectCount": 7,
-      "actualCount": 7,
+      "expectCount": 9,
+      "actualCount": 9,
       "undocumentLines": []
     },
     "src/util/Hit.js": {
@@ -79,13 +79,18 @@
       "undocumentLines": []
     },
     "src/util/Iro.js": {
-      "expectCount": 13,
-      "actualCount": 13,
+      "expectCount": 21,
+      "actualCount": 21,
       "undocumentLines": []
     },
     "src/util/List.js": {
       "expectCount": 3,
       "actualCount": 3,
+      "undocumentLines": []
+    },
+    "src/moku.js": {
+      "expectCount": 1,
+      "actualCount": 1,
       "undocumentLines": []
     },
     "src/css/Patterns.js": {
@@ -109,8 +114,8 @@
       "undocumentLines": []
     },
     "src/event/Scroll.js": {
-      "expectCount": 14,
-      "actualCount": 14,
+      "expectCount": 16,
+      "actualCount": 16,
       "undocumentLines": []
     },
     "src/event/ScrollEvents.js": {
@@ -124,13 +129,13 @@
       "undocumentLines": []
     },
     "src/event/ScrollingSingle.js": {
-      "expectCount": 2,
-      "actualCount": 2,
+      "expectCount": 3,
+      "actualCount": 3,
       "undocumentLines": []
     },
     "src/css/Style.js": {
-      "expectCount": 12,
-      "actualCount": 12,
+      "expectCount": 13,
+      "actualCount": 13,
       "undocumentLines": []
     },
     "src/util/Text.js": {
@@ -139,8 +144,8 @@
       "undocumentLines": []
     },
     "src/util/Times.js": {
-      "expectCount": 7,
-      "actualCount": 7,
+      "expectCount": 12,
+      "actualCount": 12,
       "undocumentLines": []
     },
     "src/event/TouchingEvents.js": {
