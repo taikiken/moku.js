@@ -11,11 +11,25 @@
  */
 
 // util
-import { default as Type } from '../util/Type';
+import Type from '../util/Type';
 
 // built-in function
 // Safari, IE はサポートしていないのでライブラリを使用すること
+/**
+ * fetch [native code]
+ * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch
+ * @type {fetch}
+ * @private
+ * @static
+ */
 const fetch = self.fetch;
+/**
+ * fetch request instance を作成します
+ * @see https://developer.mozilla.org/ja/docs/Web/API/Request
+ * @type {Request}
+ * @private
+ * @static
+ */
 const Request = self.Request;
 
 /**
@@ -146,7 +160,7 @@ export default class Ajax {
    *
    * headers, formData は存在すれば option に追加されます
    *
-   * @param {string} path Ajax request path
+   * @param {string|USVString|Request} path Ajax request path
    * @param {string} method GET, POST, PUT, DELETE...etc request method
    * @param {Headers|Object|null} headers Headers option
    * @param {FormData|null} formData 送信フォームデータオプション

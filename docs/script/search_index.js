@@ -84,6 +84,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "./src/moku.js~moku",
+    "variable/index.html#static-variable-MOKU",
+    "<span>MOKU</span> <span class=\"search-result-import-path\">./src/moku.js</span>",
+    "variable"
+  ],
+  [
     "./src/css/patterns.js~patterns",
     "class/src/css/Patterns.js~Patterns.html",
     "<span>Patterns</span> <span class=\"search-result-import-path\">./src/css/Patterns.js</span>",
@@ -106,6 +112,18 @@ window.esdocSearchIndex = [
     "class/src/tick/Rate.js~Rate.html",
     "<span>Rate</span> <span class=\"search-result-import-path\">./src/tick/Rate.js</span>",
     "class"
+  ],
+  [
+    "./src/net/cookie.js~regexp",
+    "variable/index.html#static-variable-RegExp",
+    "<span>RegExp</span> <span class=\"search-result-import-path\">./src/net/Cookie.js</span>",
+    "variable"
+  ],
+  [
+    "./src/net/ajax.js~request",
+    "variable/index.html#static-variable-Request",
+    "<span>Request</span> <span class=\"search-result-import-path\">./src/net/Ajax.js</span>",
+    "variable"
   ],
   [
     "./src/event/rising.js~rising",
@@ -190,6 +208,174 @@ window.esdocSearchIndex = [
     "class/src/event/WheelEvents.js~WheelEvents.html",
     "<span>WheelEvents</span> <span class=\"search-result-import-path\">./src/event/WheelEvents.js</span>",
     "class"
+  ],
+  [
+    "./src/css/can.js~check",
+    "variable/index.html#static-variable-check",
+    "<span>check</span> <span class=\"search-result-import-path\">./src/css/Can.js</span>",
+    "variable"
+  ],
+  [
+    "./src/net/cookie.js~decodeuricomponent",
+    "variable/index.html#static-variable-decodeURIComponent",
+    "<span>decodeURIComponent</span> <span class=\"search-result-import-path\">./src/net/Cookie.js</span>",
+    "variable"
+  ],
+  [
+    "./src/util/freeze.js~duration",
+    "variable/index.html#static-variable-duration",
+    "<span>duration</span> <span class=\"search-result-import-path\">./src/util/Freeze.js</span>",
+    "variable"
+  ],
+  [
+    "./src/net/cookie.js~encodeuricomponent",
+    "variable/index.html#static-variable-encodeURIComponent",
+    "<span>encodeURIComponent</span> <span class=\"search-result-import-path\">./src/net/Cookie.js</span>",
+    "variable"
+  ],
+  [
+    "./src/net/ajax.js~fetch",
+    "variable/index.html#static-variable-fetch",
+    "<span>fetch</span> <span class=\"search-result-import-path\">./src/net/Ajax.js</span>",
+    "variable"
+  ],
+  [
+    "./src/util/iro.js~half",
+    "variable/index.html#static-variable-half",
+    "<span>half</span> <span class=\"search-result-import-path\">./src/util/Iro.js</span>",
+    "variable"
+  ],
+  [
+    "./src/event/scroll.js~instance",
+    "variable/index.html#static-variable-instance",
+    "<span>instance</span> <span class=\"search-result-import-path\">./src/event/Scroll.js</span>",
+    "variable"
+  ],
+  [
+    "./src/event/scrollingsingle.js~instance",
+    "variable/index.html#static-variable-instance",
+    "<span>instance</span> <span class=\"search-result-import-path\">./src/event/ScrollingSingle.js</span>",
+    "variable"
+  ],
+  [
+    "./src/event/wheel.js~instance",
+    "variable/index.html#static-variable-instance",
+    "<span>instance</span> <span class=\"search-result-import-path\">./src/event/Wheel.js</span>",
+    "variable"
+  ],
+  [
+    "./src/tick/cycle.js~instance",
+    "variable/index.html#static-variable-instance",
+    "<span>instance</span> <span class=\"search-result-import-path\">./src/tick/Cycle.js</span>",
+    "variable"
+  ],
+  [
+    "./src/util/iro.js~mathfloor",
+    "variable/index.html#static-variable-mathFloor",
+    "<span>mathFloor</span> <span class=\"search-result-import-path\">./src/util/Iro.js</span>",
+    "variable"
+  ],
+  [
+    "./src/util/iro.js~mathint",
+    "variable/index.html#static-variable-mathInt",
+    "<span>mathInt</span> <span class=\"search-result-import-path\">./src/util/Iro.js</span>",
+    "variable"
+  ],
+  [
+    "./src/util/iro.js~mathmax",
+    "variable/index.html#static-variable-mathMax",
+    "<span>mathMax</span> <span class=\"search-result-import-path\">./src/util/Iro.js</span>",
+    "variable"
+  ],
+  [
+    "./src/util/iro.js~mathmin",
+    "variable/index.html#static-variable-mathMin",
+    "<span>mathMin</span> <span class=\"search-result-import-path\">./src/util/Iro.js</span>",
+    "variable"
+  ],
+  [
+    "./src/util/times.js~oneday",
+    "variable/index.html#static-variable-oneDay",
+    "<span>oneDay</span> <span class=\"search-result-import-path\">./src/util/Times.js</span>",
+    "variable"
+  ],
+  [
+    "./src/util/times.js~onehour",
+    "variable/index.html#static-variable-oneHour",
+    "<span>oneHour</span> <span class=\"search-result-import-path\">./src/util/Times.js</span>",
+    "variable"
+  ],
+  [
+    "./src/util/times.js~oneminute",
+    "variable/index.html#static-variable-oneMinute",
+    "<span>oneMinute</span> <span class=\"search-result-import-path\">./src/util/Times.js</span>",
+    "variable"
+  ],
+  [
+    "./src/util/times.js~onemonth",
+    "variable/index.html#static-variable-oneMonth",
+    "<span>oneMonth</span> <span class=\"search-result-import-path\">./src/util/Times.js</span>",
+    "variable"
+  ],
+  [
+    "./src/util/iro.js~onesix",
+    "variable/index.html#static-variable-oneSix",
+    "<span>oneSix</span> <span class=\"search-result-import-path\">./src/util/Iro.js</span>",
+    "variable"
+  ],
+  [
+    "./src/util/iro.js~onethree",
+    "variable/index.html#static-variable-oneThree",
+    "<span>oneThree</span> <span class=\"search-result-import-path\">./src/util/Iro.js</span>",
+    "variable"
+  ],
+  [
+    "./src/util/times.js~oneweek",
+    "variable/index.html#static-variable-oneWeek",
+    "<span>oneWeek</span> <span class=\"search-result-import-path\">./src/util/Times.js</span>",
+    "variable"
+  ],
+  [
+    "./src/event/scroll.js~singletonsymbol",
+    "variable/index.html#static-variable-singletonSymbol",
+    "<span>singletonSymbol</span> <span class=\"search-result-import-path\">./src/event/Scroll.js</span>",
+    "variable"
+  ],
+  [
+    "./src/event/wheel.js~singletonsymbol",
+    "variable/index.html#static-variable-singletonSymbol",
+    "<span>singletonSymbol</span> <span class=\"search-result-import-path\">./src/event/Wheel.js</span>",
+    "variable"
+  ],
+  [
+    "./src/tick/cycle.js~singletonsymbol",
+    "variable/index.html#static-variable-singletonSymbol",
+    "<span>singletonSymbol</span> <span class=\"search-result-import-path\">./src/tick/Cycle.js</span>",
+    "variable"
+  ],
+  [
+    "./src/util/freeze.js~timerid",
+    "variable/index.html#static-variable-timerId",
+    "<span>timerId</span> <span class=\"search-result-import-path\">./src/util/Freeze.js</span>",
+    "variable"
+  ],
+  [
+    "./src/css/can.js~transform",
+    "variable/index.html#static-variable-transform",
+    "<span>transform</span> <span class=\"search-result-import-path\">./src/css/Can.js</span>",
+    "variable"
+  ],
+  [
+    "./src/css/can.js~transition",
+    "variable/index.html#static-variable-transition",
+    "<span>transition</span> <span class=\"search-result-import-path\">./src/css/Can.js</span>",
+    "variable"
+  ],
+  [
+    "./src/util/iro.js~twothree",
+    "variable/index.html#static-variable-twoThree",
+    "<span>twoThree</span> <span class=\"search-result-import-path\">./src/util/Iro.js</span>",
+    "variable"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~array",
@@ -576,6 +762,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/css/style.js~style#css",
+    "class/src/css/Style.js~Style.html#instance-member-css",
+    "src/css/Style.js~Style#css",
+    "member"
+  ],
+  [
     "src/css/style.js~style#current",
     "class/src/css/Style.js~Style.html#instance-method-current",
     "src/css/Style.js~Style#current",
@@ -619,9 +811,9 @@ window.esdocSearchIndex = [
   ],
   [
     "src/css/style.js~style#update",
-    "class/src/css/Style.js~Style.html#instance-member-update",
+    "class/src/css/Style.js~Style.html#instance-method-update",
     "src/css/Style.js~Style#update",
-    "member"
+    "method"
   ],
   [
     "src/css/style.js~style.compute",

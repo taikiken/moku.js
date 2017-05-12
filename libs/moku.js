@@ -1862,38 +1862,51 @@ Style = function () {
   function Style(element) {(0, _classCallCheck3.default)(this, Style);
     /**
                                                                         * 操作対象 Element
-                                                                        * @returns {Element} 操作対象 Element
+                                                                        * @type {Element}
                                                                         */
-    this.element = function () {return element;};
+    this.element = element;
     // @type {string} - オリジナルの element.style.cssText を保持します
     var css = this.current();
     /**
-                               * インスタンス作成時の inline CSS
-                               * @returns {string} インスタンス作成時の inline CSS
+                               * 現在の inline CSS
+                               * @type {string}
                                */
-    this.original = function () {return css;};
+    this.css = css;
     /**
-                                                * インスタンス作成時の inline CSS を上書きします
-                                                * @param {string} style 上書き用 CSS 設定
-                                                * @returns {string} 上書きされた CSS
-                                                */
-    this.update = function (style) {
-      css = style;
-      return style;
-    };
+                     * インスタンス作成時の inline CSS
+                     * @type {string}
+                     */
+    this.original = css;
+    // /**
+    //  * インスタンス作成時の inline CSS を上書きします
+    //  * @param {string} style 上書き用 CSS 設定
+    //  * @returns {string} 上書きされた CSS
+    //  */
+    // this.update = (style) => {
+    //   css = style;
+    //   return style;
+    // };
   }
   // ----------------------------------------
   // STATIC METHOD
   // ----------------------------------------
   /**
-   * element style を取得します, `getComputedStyle` を使用します
-   * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
-   * @param {Object} view Document.defaultView @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
-   * @param {Element} element 操作対象 Element
-   * @param {string} [property] 調査対象 CSS property name, 省略すると `CSSStyleDeclaration` 全セットを返します
-   * @returns {CssStyle|string|undefined} style value を返します
-   */(0, _createClass3.default)(Style, [{ key: 'get',
-
+   * インスタンス作成時の inline CSS を上書きします
+   * @param {string} style 上書き用 CSS 設定
+   * @returns {string} 上書きされた CSS
+   */(0, _createClass3.default)(Style, [{ key: 'update', value: function update(
+    style) {
+      this.css = style;
+      return style;
+    }
+    /**
+       * element style を取得します, [getComputedStyle](https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle) を使用します
+       * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
+       * @param {Object} view Document.defaultView @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
+       * @param {Element} element 操作対象 Element
+       * @param {string} [property] 調査対象 CSS property name, 省略すると `CSSStyleDeclaration` 全セットを返します
+       * @returns {CssStyle|string|undefined} style value を返します
+       */ }, { key: 'get',
 
 
 
@@ -1936,10 +1949,11 @@ Style = function () {
      * @return {string} style value を返します
      */value: function get(
     property) {
-      var element = this.element();
+      var element = this.element;
       var ownerDocument = element.ownerDocument;
       var defaultView = ownerDocument.defaultView;
-      var style = Style.compute(defaultView, element, property);
+      var style = Style(defaultView, element, property);
+      // firefox が css shorthand の取り扱いが違うので再度マッチテストする
       if (style === '' && property && _Patterns2.default.match(property)) {
         style = Style.shortHand(defaultView, element, _Patterns2.default.get(property));
       }
@@ -1953,7 +1967,7 @@ Style = function () {
        */ }, { key: 'set', value: function set(
     property, value) {
       // 存在チェック
-      var element = this.element();
+      var element = this.element;
       if (!_Type2.default.exist(element)) {
         return false;
       }
@@ -1968,7 +1982,7 @@ Style = function () {
        * @return {string} style.cssText を返します
        */ }, { key: 'current', value: function current()
     {
-      var element = this.element();
+      var element = this.element;
       if (_Type2.default.exist(element)) {
         return element.style.cssText;
       }
@@ -1981,8 +1995,8 @@ Style = function () {
        * @return {string} 設定した css を返します
        */ }, { key: 'restore', value: function restore()
     {
-      var css = this.original();
-      this.element().style.cssText = css;
+      var css = this.original;
+      this.element.style.cssText = css;
       return css;
     }
     /**
@@ -2031,6 +2045,15 @@ Object.defineProperty(exports, "__esModule", { value: true });var _classCallChec
 
 /**
                                                                                                                                                                                                                                                                                                                                                                                                                                                 * Element の ClientRect 取得します
+                                                                                                                                                                                                                                                                                                                                                                                                                                                * - bottom: float
+                                                                                                                                                                                                                                                                                                                                                                                                                                                * - height: float
+                                                                                                                                                                                                                                                                                                                                                                                                                                                * - left: float
+                                                                                                                                                                                                                                                                                                                                                                                                                                                * - right: float
+                                                                                                                                                                                                                                                                                                                                                                                                                                                * - top: float
+                                                                                                                                                                                                                                                                                                                                                                                                                                                * - width: float
+                                                                                                                                                                                                                                                                                                                                                                                                                                                * - x: float
+                                                                                                                                                                                                                                                                                                                                                                                                                                                * - y: float
+                                                                                                                                                                                                                                                                                                                                                                                                                                                * @see https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XPCOM/Reference/Interface/nsIDOMClientRect
                                                                                                                                                                                                                                                                                                                                                                                                                                                 */var
 Bounding = function () {
   /**
@@ -3526,6 +3549,8 @@ Object.defineProperty(exports, "__esModule", { value: true });var _classCallChec
 
 /**
                                                                                                                                                                                                                                                                                                                                                                                                                                                 * 確認用関数
+                                                                                                                                                                                                                                                                                                                                                                                                                                                * - transition - @return {boolean}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                * - transform - @return {boolean}
                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @private
                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @static
                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @type {{transition: (()), transform: (())}}
@@ -3550,14 +3575,14 @@ var check = {
 
 
 /**
-        * CSS3 transition
+        * CSS3 transition 可能フラッグ
         * @type {boolean}
         * @private
         * @static
         */
 var _transition = check.transition();
 /**
-                                       * CSS3 transform
+                                       * CSS3 transform 可能フラッグ
                                        * @type {boolean}
                                        * @private
                                        * @static
@@ -3566,6 +3591,14 @@ var _transform = check.transform();
 
 /**
                                      * CSS3 機能使用可能かを調べます
+                                     * @example
+                                     * if (Can.transition()) {
+                                     *  // can CSS3 transition
+                                     * }
+                                     *
+                                     * if (Can.transform()) {
+                                     *  // can CSS3 transform
+                                     * }
                                      */var
 Can = function () {function Can() {(0, _classCallCheck3.default)(this, Can);}(0, _createClass3.default)(Can, null, [{ key: 'transition',
     /**
@@ -3626,22 +3659,19 @@ var _Type = __webpack_require__(12);var _Type2 = _interopRequireDefault(_Type);f
 var Elements = function () {/**
                              * 操作対象 Element を保存します
                              * @param {Element|Node} element 操作対象 Element
-                             */function Elements(element) {(0, _classCallCheck3.default)(this, Elements);var style = new _Style2.default(element);var classes = new _Classes2.default(element);var bounding = new _Bounding2.default(element); /**
-                                                                                                                                                                                                                                                * 対象 Element の CSS 操作を行う Style instance
-                                                                                                                                                                                                                                                * @type {Style}
-                                                                                                                                                                                                                                                */this.style = style; /**
-                                                                                                                                                                                                                                                                       * Element class 操作のために instance を作成します - Classes instance
-                                                                                                                                                                                                                                                                       * @type {Classes}
-                                                                                                                                                                                                                                                                       */this.classes = classes; /**
-                                                                                                                                                                                                                                                                                                  * 操作対象 Element
-                                                                                                                                                                                                                                                                                                  * @type {Element}
-                                                                                                                                                                                                                                                                                                  */
-    this.element = element;
-    /**
-                             * Element class `ClientRect` 取得のために instance を作成します
-                             * @type {Bounding}
-                             */
-    this.bounding = bounding;
+                             */function Elements(element) {(0, _classCallCheck3.default)(this, Elements); /**
+                                                                                                           * 対象 Element の CSS 操作を行う Style instance
+                                                                                                           * @type {Style}
+                                                                                                           */this.style = new _Style2.default(element); /**
+                                                                                                                                                         * Element class 操作のために instance を作成します - Classes instance
+                                                                                                                                                         * @type {Classes}
+                                                                                                                                                         */this.classes = new _Classes2.default(element); /**
+                                                                                                                                                                                                           * 操作対象 Element
+                                                                                                                                                                                                           * @type {Element}
+                                                                                                                                                                                                           */this.element = element; /**
+                                                                                                                                                                                                                                      * Element class `ClientRect` 取得のために instance を作成します
+                                                                                                                                                                                                                                      * @type {Bounding}
+                                                                                                                                                                                                                                      */this.bounding = new _Bounding2.default(element);
   }
   // ----------------------------------------
   // METHOD
@@ -3682,7 +3712,6 @@ var Elements = function () {/**
     selector) {var parentNode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : self.document;
       return parentNode.querySelector(selector);
     }
-
     /**
        * querySelectorAll を使用し Element を探します
        * @param {string} selector 探索 selector
@@ -4504,17 +4533,31 @@ var _Type = __webpack_require__(12);var _Type2 = _interopRequireDefault(_Type);f
 
 // built-in function
 // Safari, IE はサポートしていないのでライブラリを使用すること
-var fetch = self.fetch; /**
-                         * Copyright (c) 2011-2016 inazumatv.com, inc.
-                         * @author (at)taikiken / http://inazumatv.com
-                         * @date 2016/07/01 - 19:41
-                         *
-                         * Distributed under the terms of the MIT license.
-                         * http://www.opensource.org/licenses/mit-license.html
-                         *
-                         * This notice shall be included in all copies or substantial portions of the Software.
-                         *
-                         */ // util
+/**
+ * fetch [native code]
+ * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch
+ * @type {fetch}
+ * @private
+ * @static
+ */
+var fetch = self.fetch;
+/**
+                         * fetch request instance を作成します
+                         * @see https://developer.mozilla.org/ja/docs/Web/API/Request
+                         * @type {Request}
+                         * @private
+                         * @static
+                         */ /**
+                             * Copyright (c) 2011-2016 inazumatv.com, inc.
+                             * @author (at)taikiken / http://inazumatv.com
+                             * @date 2016/07/01 - 19:41
+                             *
+                             * Distributed under the terms of the MIT license.
+                             * http://www.opensource.org/licenses/mit-license.html
+                             *
+                             * This notice shall be included in all copies or substantial portions of the Software.
+                             *
+                             */ // util
 var Request = self.Request; /**
                              * <p>fetch API を使用し Ajax request を行います</p>
                              * <p>Safari, IE はサポートしていないので polyfill ライブラリを使用します<br>
@@ -4635,7 +4678,7 @@ var Request = self.Request; /**
      *
      * headers, formData は存在すれば option に追加されます
      *
-     * @param {string} path Ajax request path
+     * @param {string|USVString|Request} path Ajax request path
      * @param {string} method GET, POST, PUT, DELETE...etc request method
      * @param {Headers|Object|null} headers Headers option
      * @param {FormData|null} formData 送信フォームデータオプション
@@ -4684,8 +4727,22 @@ Object.defineProperty(exports, "__esModule", { value: true });var _classCallChec
                                                                                                                                                                                                                                                                                                                                                                                                                                             *
                                                                                                                                                                                                                                                                                                                                                                                                                                             */
 
+// --------------------------------
+// copy [native code]
+/**
+ * copy [native code] - decodeURIComponent
+ * @type {function}
+ */
 var decodeURIComponent = self.decodeURIComponent;
+/**
+                                                   * copy [native code] - encodeURIComponent
+                                                   * @type {function}
+                                                   */
 var encodeURIComponent = self.encodeURIComponent;
+/**
+                                                   * copy [native code] - RegExp
+                                                   * @type {function}
+                                                   */
 var RegExp = self.RegExp;
 
 /**
@@ -5132,14 +5189,78 @@ Object.defineProperty(exports, "__esModule", { value: true });var _classCallChec
                                                                                                                                                                                                                                                                                                                                                                                                                                             *
                                                                                                                                                                                                                                                                                                                                                                                                                                             */
 
+// --------------------------------
+// copy [native code]
+/**
+ * copy [native code] - Math.floor
+ * @type {function}
+ * @private
+ * @static
+ */
 var mathFloor = Math.floor;
+/**
+                             * copy [native code] - Math.max
+                             * @type {function}
+                             * @private
+                             * @static
+                             */
 var mathMax = Math.max;
+/**
+                         * copy [native code] - Math.min
+                         * @type {function}
+                         * @private
+                         * @static
+                         */
 var mathMin = Math.min;
+/**
+                         * copy [native code] - parseInt
+                         * @type {function}
+                         * @private
+                         * @static
+                         */
 var mathInt = self.parseInt;
 
+// --------------------------------
+// constant for calculate
+/**
+ * 計算定数
+ * ```
+ * 1 / 6
+ * ```
+ * @type {number}
+ * @private
+ * @static
+ */
 var oneSix = 1 / 6;
+/**
+                     * 計算定数
+                     * ```
+                     * 0.5
+                     * ```
+                     * @type {number}
+                     * @private
+                     * @static
+                     */
 var half = 0.5;
+/**
+                 * 計算定数
+                 * ```
+                 * 2 / 3
+                 * ```
+                 * @type {number}
+                 * @private
+                 * @static
+                 */
 var twoThree = 2 / 3;
+/**
+                       * 計算定数
+                       * ```
+                       * 1 / 3
+                       * ```
+                       * @type {number}
+                       * @private
+                       * @static
+                       */
 var oneThree = 1 / 3;
 /**
                        * 色変換ユーティリティーです
@@ -5553,10 +5674,57 @@ Object.defineProperty(exports, "__esModule", { value: true });var _classCallChec
                                                                                                                                                                                                                                                                                                                                                                                                                                             *
                                                                                                                                                                                                                                                                                                                                                                                                                                             */
 
+// --------------------------------
+// constant for calculate
+/**
+ * 計算用定数 - 1 minute
+ * ```
+ * 1000 * 60
+ * ```
+ * @type {number}
+ * @private
+ * @static
+ */
 var oneMinute = 1000 * 60;
+/**
+                            * 計算用定数 - 1 hour
+                            * ```
+                            * 1000 * 60 * 60
+                            * ```
+                            * @type {number}
+                            * @private
+                            * @static
+                            */
 var oneHour = oneMinute * 60;
+/**
+                               * 計算用定数 - 1 day
+                               * ```
+                               * 1000 * 60 * 60 * 24
+                               * ```
+                               * @type {number}
+                               * @private
+                               * @static
+                               */
 var oneDay = oneHour * 24;
+/**
+                            * 計算用定数 - 1 week
+                            * ```
+                            * 1000 * 60 * 60 * 24 * 7
+                            * ```
+                            * @type {number}
+                            * @private
+                            * @static
+                            */
 var oneWeek = oneDay * 7;
+/**
+                           * 計算用定数 - 1 month
+                           * ```
+                           * 1000 * 60 * 60 * 24 * 30
+                           * ```
+                           * @type {number}
+                           * @private
+                           * @static
+                           */
 var oneMonth = oneDay * 30;
 
 /**
@@ -5750,8 +5918,8 @@ WheelEvents = function (_Events) {(0, _inherits3.default)(WheelEvents, _Events);
  * http://www.opensource.org/licenses/mit-license.html
  *
  * This notice shall be included in all copies or substantial portions of the Software.
- * 0.1.0
- * 2017-5-12 16:22:41
+ * 0.2.0
+ * 2017-5-12 17:52:06
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -5811,10 +5979,10 @@ var MOKU = {}; /**
                 */ // dom
 // util
 // tick
-MOKU.version = function () {return '0.1.0';}; /**
+MOKU.version = function () {return '0.2.0';}; /**
                                                    * build 日時を取得します
                                                    * @returns {string}  build 日時を返します
-                                                   */MOKU.build = function () {return '2017-5-12 16:22:41';};
+                                                   */MOKU.build = function () {return '2017-5-12 17:52:06';};
 /**
                                                                                                         * MOKU.event
                                                                                                         * @type {Object} MOKU.event object を返します
@@ -5860,13 +6028,19 @@ MOKU.util = {
   Hit: _Hit2.default,
   Iro: _Iro2.default };
 
-
+/**
+                         * MOKU.util
+                         * @type {Object} MOKU.css object を返します
+                         */
 MOKU.css = {
   Patterns: _Patterns2.default,
   Style: _Style2.default,
   Can: _Can2.default };
 
-
+/**
+                         * MOKU.util
+                         * @type {Object} MOKU.dom object を返します
+                         */
 MOKU.dom = {
   Bounding: _Bounding2.default,
   Classes: _Classes2.default,
@@ -5874,6 +6048,10 @@ MOKU.dom = {
 
 
 // export
+/**
+ * global object `MOKU`
+ * @type {Object}
+ */
 window.MOKU = MOKU;
 
 /***/ }),

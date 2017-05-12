@@ -10,7 +10,7 @@
  *
  */
 
-import { default as Scrolling } from './Scrolling';
+import Scrolling from './Scrolling';
 
 /**
  * singleton instance, nullable

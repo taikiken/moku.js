@@ -11,12 +11,12 @@
  */
 
 // event
-import { default as Scrolling } from './Scrolling';
-import { default as Events } from './Events';
-import { default as EventDispatcher } from './EventDispatcher';
+import Scrolling from './Scrolling';
+import Events from './Events';
+import EventDispatcher from './EventDispatcher';
 
 // hit
-import { default as Hit } from '../util/Hit';
+import Hit from '../util/Hit';
 
 /**
  * Scrolling class を使用しスクロールトップ位置をチェクし対象 element と window の衝突判定を行います

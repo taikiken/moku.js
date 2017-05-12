@@ -29,14 +29,14 @@
 
   var elements = new Elements(document.getElementById('js-target'));
   console.log('elements', elements);
-  console.log('elements.style', elements.style());
-  console.log('elements.classes', elements.classes());
-  console.log('elements.element', elements.element());
-  console.log('elements.bounding', elements.bounding());
+  console.log('elements.style', elements.style);
+  console.log('elements.classes', elements.classes);
+  console.log('elements.element', elements.element);
+  console.log('elements.bounding', elements.bounding);
   //  Classes.has
   describe('#elements.style', function() {
-    it("elements.style() is Object", function() {
-      expect(elements.style()).to.eql(Object);
+    it("elements.style is Object", function() {
+      expect(elements.style).to.eql(Object);
     });
   });
 

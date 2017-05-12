@@ -11,10 +11,10 @@
  */
 
 // event
-import { default as Events } from '../event/Events';
+import Events from '../event/Events';
 
 // tick
-import { default as Polling } from './Polling';
+import Polling from './Polling';
 
 // /**
 //  * private property key, fps を保存するための Symbol

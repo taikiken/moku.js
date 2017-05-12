@@ -5,6 +5,7 @@
   "access": ["public", "protected", "private"],
   "autoPrivate": true,
   "styles": ["./_docs_extension/esdoc_extension.css"],
+  "unexportIdentifier": true,
   "plugins": [
     {
       "name": "esdoc-es7-plugin"

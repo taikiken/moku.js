@@ -10,14 +10,78 @@
  *
  */
 
+// --------------------------------
+// copy [native code]
+/**
+ * copy [native code] - Math.floor
+ * @type {function}
+ * @private
+ * @static
+ */
 const mathFloor = Math.floor;
+/**
+ * copy [native code] - Math.max
+ * @type {function}
+ * @private
+ * @static
+ */
 const mathMax = Math.max;
+/**
+ * copy [native code] - Math.min
+ * @type {function}
+ * @private
+ * @static
+ */
 const mathMin = Math.min;
+/**
+ * copy [native code] - parseInt
+ * @type {function}
+ * @private
+ * @static
+ */
 const mathInt = self.parseInt;
 
+// --------------------------------
+// constant for calculate
+/**
+ * 計算定数
+ * ```
+ * 1 / 6
+ * ```
+ * @type {number}
+ * @private
+ * @static
+ */
 const oneSix = 1 / 6;
+/**
+ * 計算定数
+ * ```
+ * 0.5
+ * ```
+ * @type {number}
+ * @private
+ * @static
+ */
 const half = 0.5;
+/**
+ * 計算定数
+ * ```
+ * 2 / 3
+ * ```
+ * @type {number}
+ * @private
+ * @static
+ */
 const twoThree = 2 / 3;
+/**
+ * 計算定数
+ * ```
+ * 1 / 3
+ * ```
+ * @type {number}
+ * @private
+ * @static
+ */
 const oneThree = 1 / 3;
 /**
  * 色変換ユーティリティーです

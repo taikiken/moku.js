@@ -17,43 +17,43 @@
 'use strict';
 
 // event
-import { default as EventDispatcher } from './event/EventDispatcher';
-import { default as Events } from './event/Events';
-import { default as Rising } from './event/Rising';
-import { default as Scroll } from './event/Scroll';
-import { default as Scrolling } from './event/Scrolling';
-import { default as Touching } from './event/Touching';
-import { default as Wheel } from './event/Wheel';
+import EventDispatcher from './event/EventDispatcher';
+import Events from './event/Events';
+import Rising from './event/Rising';
+import Scroll from './event/Scroll';
+import Scrolling from './event/Scrolling';
+import Touching from './event/Touching';
+import Wheel from './event/Wheel';
 
 // net
-import { default as Ajax } from './net/Ajax';
-import { default as Cookie } from './net/Cookie';
-import { default as Queries } from './net/Queries';
+import Ajax from './net/Ajax';
+import Cookie from './net/Cookie';
+import Queries from './net/Queries';
 
 // tick
-import { default as Cycle } from './tick/Cycle';
-import { default as Fps } from './tick/Fps';
-import { default as Polling } from './tick/Polling';
-import { default as Rate } from './tick/Rate';
+import Cycle from './tick/Cycle';
+import Fps from './tick/Fps';
+import Polling from './tick/Polling';
+import Rate from './tick/Rate';
 
 // util
-import { default as Type } from './util/Type';
-import { default as Hit } from './util/Hit';
-import { default as List } from './util/List';
-import { default as Text } from './util/Text';
-import { default as Times } from './util/Times';
-import { default as Vectors } from './util/Vectors';
-import { default as Iro } from './util/Iro';
+import Type from './util/Type';
+import Hit from './util/Hit';
+import List from './util/List';
+import Text from './util/Text';
+import Times from './util/Times';
+import Vectors from './util/Vectors';
+import Iro from './util/Iro';
 
 // css
-import { default as Can } from './css/Can';
-import { default as Patterns } from './css/Patterns';
-import { default as Style } from './css/Style';
+import Can from './css/Can';
+import Patterns from './css/Patterns';
+import Style from './css/Style';
 
 // dom
-import { default as Bounding } from './dom/Bounding';
-import { default as Classes } from './dom/Classes';
-import { default as Elements } from './dom/Elements';
+import Bounding from './dom/Bounding';
+import Classes from './dom/Classes';
+import Elements from './dom/Elements';
 
 /**
  * **MOKU**
@@ -117,13 +117,19 @@ MOKU.util = {
   Hit,
   Iro,
 };
-
+/**
+ * MOKU.util
+ * @type {Object} MOKU.css object を返します
+ */
 MOKU.css = {
   Patterns,
   Style,
   Can,
 };
-
+/**
+ * MOKU.util
+ * @type {Object} MOKU.dom object を返します
+ */
 MOKU.dom = {
   Bounding,
   Classes,
@@ -131,4 +137,8 @@ MOKU.dom = {
 };
 
 // export
+/**
+ * global object `MOKU`
+ * @type {Object}
+ */
 window.MOKU = MOKU;

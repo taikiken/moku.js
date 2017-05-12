@@ -11,7 +11,7 @@
  */
 
 // util
-import { default as Type } from '../util/Type';
+import Type from '../util/Type';
 
 // /**
 //  * private property key, listeners Object

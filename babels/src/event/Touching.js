@@ -13,12 +13,12 @@
  */
 
 // event
-import { default as EventDispatcher } from './EventDispatcher';
-import { default as TouchingEvents } from './TouchingEvents';
+import EventDispatcher from './EventDispatcher';
+import TouchingEvents from './TouchingEvents';
 
 // util
-import { default as Vectors } from '../util/Vectors';
-import { default as Type } from '../util/Type';
+import Vectors from '../util/Vectors';
+import Type from '../util/Type';
 
 /**
  * Touch event を監視し y方向移動が `threshold` 以内の時に `TOUCH` event を発火します

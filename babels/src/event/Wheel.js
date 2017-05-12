@@ -11,8 +11,8 @@
  */
 
 // event
-import { default as EventDispatcher } from './EventDispatcher';
-import { default as WheelEvents } from './WheelEvents';
+import EventDispatcher from './EventDispatcher';
+import WheelEvents from './WheelEvents';
 
 /**
  * new を許可しないための Symbol

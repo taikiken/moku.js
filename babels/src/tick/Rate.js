@@ -12,10 +12,10 @@
  */
 
 // event
-import { default as Events } from '../event/Events';
+import Events from '../event/Events';
 
 // tick
-import { default as Polling } from './Polling';
+import Polling from './Polling';
 
 /**
  * 固定値を使用し fps を決定します
