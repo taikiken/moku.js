@@ -5919,7 +5919,7 @@ WheelEvents = function (_Events) {(0, _inherits3.default)(WheelEvents, _Events);
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.0
- * 2017-5-12 17:52:06
+ * 2017-5-12 18:14:39
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -5982,7 +5982,7 @@ var MOKU = {}; /**
 MOKU.version = function () {return '0.2.0';}; /**
                                                    * build 日時を取得します
                                                    * @returns {string}  build 日時を返します
-                                                   */MOKU.build = function () {return '2017-5-12 17:52:06';};
+                                                   */MOKU.build = function () {return '2017-5-12 18:14:39';};
 /**
                                                                                                         * MOKU.event
                                                                                                         * @type {Object} MOKU.event object を返します
