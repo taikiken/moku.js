@@ -11,11 +11,11 @@
  */
 
 // event
-import { default as EventDispatcher } from '../event/EventDispatcher';
-import { default as Events } from '../event/Events';
+import EventDispatcher from '../event/EventDispatcher';
+import Events from '../event/Events';
 
 // tick
-import { default as Cycle } from './Cycle';
+import Cycle from './Cycle';
 
 /**
  * 一定間隔毎に UPDATE イベントを発生させます

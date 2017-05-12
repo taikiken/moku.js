@@ -11,14 +11,14 @@
  */
 
 // css
-import { default as Style } from '../css/Style';
+import Style from '../css/Style';
 
 // don
-import { default as Bounding } from './Bounding';
-import { default as Classes } from './Classes';
+import Bounding from './Bounding';
+import Classes from './Classes';
 
 // util
-import { default as Type } from '../util/Type';
+import Type from '../util/Type';
 
 /**
  * HTMLElement の操作を行います
@@ -29,19 +29,16 @@ export default class Elements {
    * @param {Element|Node} element 操作対象 Element
    */
   constructor(element) {
-    const style = new Style(element);
-    const classes = new Classes(element);
-    const bounding = new Bounding(element);
     /**
      * 対象 Element の CSS 操作を行う Style instance
      * @type {Style}
      */
-    this.style = style;
+    this.style = new Style(element);
     /**
      * Element class 操作のために instance を作成します - Classes instance
      * @type {Classes}
      */
-    this.classes = classes;
+    this.classes = new Classes(element);
     /**
      * 操作対象 Element
      * @type {Element}
@@ -51,7 +48,7 @@ export default class Elements {
      * Element class `ClientRect` 取得のために instance を作成します
      * @type {Bounding}
      */
-    this.bounding = bounding;
+    this.bounding = new Bounding(element);
   }
   // ----------------------------------------
   // METHOD
@@ -92,7 +89,6 @@ export default class Elements {
   static select(selector, parentNode = self.document) {
     return parentNode.querySelector(selector);
   }
-
   /**
    * querySelectorAll を使用し Element を探します
    * @param {string} selector 探索 selector

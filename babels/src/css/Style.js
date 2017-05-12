@@ -11,11 +11,11 @@
  */
 
 // util
-import { default as Type } from '../util/Type';
-import { default as Text } from '../util/Text';
+import Type from '../util/Type';
+import Text from '../util/Text';
 
 // css
-import { default as Patterns } from './Patterns';
+import Patterns from './Patterns';
 
 /**
  * Element の style を操作します
@@ -28,31 +28,45 @@ export default class Style {
   constructor(element) {
     /**
      * 操作対象 Element
-     * @returns {Element} 操作対象 Element
+     * @type {Element}
      */
-    this.element = () => element;
+    this.element = element;
     // @type {string} - オリジナルの element.style.cssText を保持します
-    let css = this.current();
+    const css = this.current();
+    /**
+     * 現在の inline CSS
+     * @type {string}
+     */
+    this.css = css;
     /**
      * インスタンス作成時の inline CSS
-     * @returns {string} インスタンス作成時の inline CSS
+     * @type {string}
      */
-    this.original = () => css;
-    /**
-     * インスタンス作成時の inline CSS を上書きします
-     * @param {string} style 上書き用 CSS 設定
-     * @returns {string} 上書きされた CSS
-     */
-    this.update = (style) => {
-      css = style;
-      return style;
-    };
+    this.original = css;
+    // /**
+    //  * インスタンス作成時の inline CSS を上書きします
+    //  * @param {string} style 上書き用 CSS 設定
+    //  * @returns {string} 上書きされた CSS
+    //  */
+    // this.update = (style) => {
+    //   css = style;
+    //   return style;
+    // };
   }
   // ----------------------------------------
   // STATIC METHOD
   // ----------------------------------------
   /**
-   * element style を取得します, `getComputedStyle` を使用します
+   * インスタンス作成時の inline CSS を上書きします
+   * @param {string} style 上書き用 CSS 設定
+   * @returns {string} 上書きされた CSS
+   */
+  update(style) {
+    this.css = style;
+    return style;
+  }
+  /**
+   * element style を取得します, [getComputedStyle](https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle) を使用します
    * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
    * @param {Object} view Document.defaultView @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
    * @param {Element} element 操作対象 Element
@@ -67,7 +81,6 @@ export default class Style {
     }
     return style;
   }
-
   /**
    * CSS 設定値の short hand をパターン {@link Patterns} から探し返します
    * @param {Object} view Document.defaultView @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
@@ -102,10 +115,11 @@ export default class Style {
    * @return {string} style value を返します
    */
   get(property) {
-    const element = this.element();
+    const element = this.element;
     const ownerDocument = element.ownerDocument;
     const defaultView = ownerDocument.defaultView;
-    let style = Style.compute(defaultView, element, property);
+    let style = Style(defaultView, element, property);
+    // firefox が css shorthand の取り扱いが違うので再度マッチテストする
     if (style === '' && property && Patterns.match(property)) {
       style = Style.shortHand(defaultView, element, Patterns.get(property));
     }
@@ -119,7 +133,7 @@ export default class Style {
    */
   set(property, value) {
     // 存在チェック
-    const element = this.element();
+    const element = this.element;
     if (!Type.exist(element)) {
       return false;
     }
@@ -134,7 +148,7 @@ export default class Style {
    * @return {string} style.cssText を返します
    */
   current() {
-    const element = this.element();
+    const element = this.element;
     if (Type.exist(element)) {
       return element.style.cssText;
     }
@@ -147,8 +161,8 @@ export default class Style {
    * @return {string} 設定した css を返します
    */
   restore() {
-    const css = this.original();
-    this.element().style.cssText = css;
+    const css = this.original;
+    this.element.style.cssText = css;
     return css;
   }
   /**

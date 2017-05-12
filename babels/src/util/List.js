@@ -10,7 +10,7 @@
  *
  */
 
-import { default as Type } from './Type';
+import Type from './Type';
 
 /**
  * Array（配列）Utility

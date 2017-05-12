@@ -10,10 +10,57 @@
  *
  */
 
+// --------------------------------
+// constant for calculate
+/**
+ * 計算用定数 - 1 minute
+ * ```
+ * 1000 * 60
+ * ```
+ * @type {number}
+ * @private
+ * @static
+ */
 const oneMinute = 1000 * 60;
+/**
+ * 計算用定数 - 1 hour
+ * ```
+ * 1000 * 60 * 60
+ * ```
+ * @type {number}
+ * @private
+ * @static
+ */
 const oneHour = oneMinute * 60;
+/**
+ * 計算用定数 - 1 day
+ * ```
+ * 1000 * 60 * 60 * 24
+ * ```
+ * @type {number}
+ * @private
+ * @static
+ */
 const oneDay = oneHour * 24;
+/**
+ * 計算用定数 - 1 week
+ * ```
+ * 1000 * 60 * 60 * 24 * 7
+ * ```
+ * @type {number}
+ * @private
+ * @static
+ */
 const oneWeek = oneDay * 7;
+/**
+ * 計算用定数 - 1 month
+ * ```
+ * 1000 * 60 * 60 * 24 * 30
+ * ```
+ * @type {number}
+ * @private
+ * @static
+ */
 const oneMonth = oneDay * 30;
 
 /**

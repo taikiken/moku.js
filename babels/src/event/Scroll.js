@@ -11,11 +11,11 @@
  */
 
 // event
-import { default as EventDispatcher } from './EventDispatcher';
-import { default as ScrollEvents } from './ScrollEvents';
+import EventDispatcher from './EventDispatcher';
+import ScrollEvents from './ScrollEvents';
 
 // util
-import { default as Freeze } from '../util/Freeze';
+import Freeze from '../util/Freeze';
 
 /**
  * new を許可しないための Symbol

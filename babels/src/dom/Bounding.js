@@ -12,6 +12,15 @@
 
 /**
  * Element の ClientRect 取得します
+ * - bottom: float
+ * - height: float
+ * - left: float
+ * - right: float
+ * - top: float
+ * - width: float
+ * - x: float
+ * - y: float
+ * @see https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XPCOM/Reference/Interface/nsIDOMClientRect
  */
 export default class Bounding {
   /**

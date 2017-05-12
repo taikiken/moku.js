@@ -13,10 +13,10 @@
  */
 
 // events
-import { default as Events } from './Events';
+import Events from './Events';
 
 // util
-import { default as Vectors } from '../util/Vectors';
+import Vectors from '../util/Vectors';
 
 /**
  * Touching events object

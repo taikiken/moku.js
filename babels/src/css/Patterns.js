@@ -10,7 +10,7 @@
  *
  */
 
-import { default as Text } from '../util/Text';
+import Text from '../util/Text';
 
 /**
  * CSS short hand pattern を管理します

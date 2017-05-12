@@ -12,12 +12,12 @@
  */
 
 // event
-import { default as Scroll } from './Scroll';
-import { default as EventDispatcher } from './EventDispatcher';
-import { default as ScrollEvents } from './ScrollEvents';
+import Scroll from './Scroll';
+import EventDispatcher from './EventDispatcher';
+import ScrollEvents from './ScrollEvents';
 
 // tick
-import { default as Rate } from '../tick/Rate';
+import Rate from '../tick/Rate';
 
 /**
  * Scroll 位置

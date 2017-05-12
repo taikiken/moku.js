@@ -11,7 +11,7 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  */
 
-import { default as Text } from '../util/Text';
+import Text from '../util/Text';
 
 /**
  * URL query をパースします

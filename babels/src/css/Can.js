@@ -12,6 +12,8 @@
 
 /**
  * 確認用関数
+ * - transition - @return {boolean}
+ * - transform - @return {boolean}
  * @private
  * @static
  * @type {{transition: (()), transform: (())}}
@@ -36,14 +38,14 @@ const check = {
 };
 
 /**
- * CSS3 transition
+ * CSS3 transition 可能フラッグ
  * @type {boolean}
  * @private
  * @static
  */
 const transition = check.transition();
 /**
- * CSS3 transform
+ * CSS3 transform 可能フラッグ
  * @type {boolean}
  * @private
  * @static
@@ -52,6 +54,14 @@ const transform = check.transform();
 
 /**
  * CSS3 機能使用可能かを調べます
+ * @example
+ * if (Can.transition()) {
+ *  // can CSS3 transition
+ * }
+ *
+ * if (Can.transform()) {
+ *  // can CSS3 transform
+ * }
  */
 export default class Can {
   /**

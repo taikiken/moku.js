@@ -12,8 +12,8 @@
  */
 
 // event
-import { default as EventDispatcher } from '../event/EventDispatcher';
-import { default as Events } from '../event/Events';
+import EventDispatcher from '../event/EventDispatcher';
+import Events from '../event/Events';
 
 /**
  * new を許可しないための Symbol

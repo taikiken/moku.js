@@ -10,8 +10,22 @@
  *
  */
 
+// --------------------------------
+// copy [native code]
+/**
+ * copy [native code] - decodeURIComponent
+ * @type {function}
+ */
 const decodeURIComponent = self.decodeURIComponent;
+/**
+ * copy [native code] - encodeURIComponent
+ * @type {function}
+ */
 const encodeURIComponent = self.encodeURIComponent;
+/**
+ * copy [native code] - RegExp
+ * @type {function}
+ */
 const RegExp = self.RegExp;
 
 /**
