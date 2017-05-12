@@ -76,12 +76,14 @@ gulp.task('babels:babel', () => gulp.src(files)
 // webpack [DEV]
 // --------------------------------------
 gulp.task('babels:pack:dev', (callback) => {
-  const config = Object.create(wpk);
-  config.plugins = [
-    new $$.webpack.optimize.DedupePlugin(),
-  ];
+  // const config = Object.create(wpk);
+  const config = Object.assign({}, wpk);
+  // config.plugins = [
+  //   new $$.webpack.optimize.DedupePlugin(),
+  // ];
   config.entry = `${config.entry}/babels/compile/moku.js`;
-  config.output.path = dir.dist.libs;
+  config.output.path = `${wpk.entry}${dir.dist.libs.substr(1)}`;
+  console.log('config', config);
   // webpack
   return $$.webpack(config, (error, stats) => {
     if (error) {
@@ -98,13 +100,14 @@ gulp.task('babels:pack:dev', (callback) => {
 // webpack [BUILD]
 // --------------------------------------
 gulp.task('babels:pack:build', (callback) => {
-  const config = Object.create(wpk);
+  // const config = Object.create(wpk);
+  const config = Object.assign({}, wpk);
   config.plugins = [
-    new $$.webpack.optimize.DedupePlugin(),
+    // new $$.webpack.optimize.DedupePlugin(),
     new $$.webpack.optimize.UglifyJsPlugin({ compress: { warnings: true } }),
   ];
   config.entry = `${config.entry}/babels/compile/moku.js`;
-  config.output.path = dir.dist.libs;
+  config.output.path = `${wpk.entry}${dir.dist.libs.substr(1)}`;
   config.output.filename = 'moku.min.js';
   // webpack
   return $$.webpack(config, (error, stats) => {
