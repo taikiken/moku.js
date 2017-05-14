@@ -1,8 +1,8 @@
-# parser: 'babel-eslint'
-plugins: [
-  'react',
-  'jsx-a11y'
-]
+parser: 'babel-eslint'
+plugins:
+  - 'react'
+  - 'jsx-a11y'
+  - 'flowtype'
 env:
   browser: true
   es6: true

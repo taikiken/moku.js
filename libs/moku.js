@@ -3544,62 +3544,106 @@ Object.defineProperty(exports, "__esModule", { value: true });var _classCallChec
                                                                                                                                                                                                                                                                                                                                                                                                                                             * http://www.opensource.org/licenses/mit-license.html
                                                                                                                                                                                                                                                                                                                                                                                                                                             *
                                                                                                                                                                                                                                                                                                                                                                                                                                             * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                            *
+                                                                                                                                                                                                                                                                                                                                                                                                                                            * 
                                                                                                                                                                                                                                                                                                                                                                                                                                             */
 
-/**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                * 確認用関数
-                                                                                                                                                                                                                                                                                                                                                                                                                                                * - transition - @return {boolean}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                * - transform - @return {boolean}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                * @private
-                                                                                                                                                                                                                                                                                                                                                                                                                                                * @static
-                                                                                                                                                                                                                                                                                                                                                                                                                                                * @type {{transition: (()), transform: (())}}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                */
-var check = {
-  transition: function transition() {
-    var p = document.createElement('p');
-    return typeof p.style.transition !== 'undefined' ||
-    typeof p.style.WebkitTransition !== 'undefined' ||
-    typeof p.style.MozTransition !== 'undefined' ||
-    typeof p.style.msTransition !== 'undefined' ||
-    typeof p.style.OTransition !== 'undefined';
-  },
-  transform: function transform() {
-    var p = document.createElement('p');
-    return typeof p.style.transform !== 'undefined' ||
-    typeof p.style.WebkitTransform !== 'undefined' ||
-    typeof p.style.MozTransform !== 'undefined' ||
-    typeof p.style.msTransform !== 'undefined' ||
-    typeof p.style.OTransform !== 'undefined';
-  } };
 
 
+
+
+
+
+var document = self.document;
 /**
-        * CSS3 transition 可能フラッグ
-        * @type {boolean}
-        * @private
-        * @static
-        */
-var _transition = check.transition();
-/**
-                                       * CSS3 transform 可能フラッグ
-                                       * @type {boolean}
-                                       * @private
-                                       * @static
-                                       */
-var _transform = check.transform();
+                               * CSS detector に使用する virtual CSSStyleDeclaration
+                               * ```
+                               * document.createElement('p').style
+                               * ```
+                               * @type {CSSStyleDeclaration}
+                               * @private
+                               * @static
+                               * @see https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration
+                               * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style
+                               */
+var style = document.createElement('p').style;
 
 /**
-                                     * CSS3 機能使用可能かを調べます
-                                     * @example
-                                     * if (Can.transition()) {
-                                     *  // can CSS3 transition
-                                     * }
-                                     *
-                                     * if (Can.transform()) {
-                                     *  // can CSS3 transform
-                                     * }
-                                     */var
+                                                * vendor prefix list, CSS detector に使用します
+                                                * - '-webkit-',
+                                                * - '-moz-',
+                                                * - '-ms-',
+                                                * - '-o-',
+                                                * - ''
+                                                * @type {[*]}
+                                                * @private
+                                                * @static
+                                                */
+var vendors = [
+'-webkit-',
+'-moz-',
+'-ms-',
+'-o-',
+''];
+
+// /**
+//  * 確認用関数
+//  * - transition - @return {boolean}
+//  * - transform - @return {boolean}
+//  * @private
+//  * @static
+//  * @type {{transition: (()), transform: (())}}
+//  */
+// const check:{transition: Function, transform: Function} = {
+//   transition():boolean {
+//     // const p:HTMLElement = document.createElement('p');
+//     // const style:CSSStyleDeclaration|* = p.style;
+//     // return typeof style.transition !== 'undefined' ||
+//     //   typeof style.WebkitTransition !== 'undefined' ||
+//     //   typeof style.MozTransition !== 'undefined' ||
+//     //   typeof style.msTransition !== 'undefined' ||
+//     //   typeof style.OTransition !== 'undefined';
+//     return vendors.some(prefix => style[`${prefix}transition`] === 'string');
+//   },
+//   transform():boolean {
+//     // const p:HTMLElement = document.createElement('p');
+//     // const style:CSSStyleDeclaration|* = p.style;
+//     // return typeof p.style.transform !== 'undefined' ||
+//     //   typeof p.style.WebkitTransform !== 'undefined' ||
+//     //   typeof p.style.MozTransform !== 'undefined' ||
+//     //   typeof p.style.msTransform !== 'undefined' ||
+//     //   typeof p.style.OTransform !== 'undefined';
+//     return vendors.some(prefix => style[`${prefix}transform`] !== 'undefined');
+//   },
+// };
+
+/**
+ * CSS3 transition 可能フラッグ
+ * @type {boolean}
+ * @private
+ * @static
+ */
+var _transition = vendors.some(function (prefix) {return typeof style[prefix + 'transition'] !== 'undefined';});
+// const transition:boolean = check.transition();
+/**
+ * CSS3 transform 可能フラッグ
+ * @type {boolean}
+ * @private
+ * @static
+ */
+var _transform = vendors.some(function (prefix) {return typeof style[prefix + 'transform'] !== 'undefined';});
+// const transform:boolean = check.transform();
+
+/**
+ * CSS3 機能使用可能かを調べます
+ * @example
+ * if (Can.transition()) {
+ *  // can CSS3 transition
+ * }
+ *
+ * if (Can.transform()) {
+ *  // can CSS3 transform
+ * }
+ */var
 Can = function () {function Can() {(0, _classCallCheck3.default)(this, Can);}(0, _createClass3.default)(Can, null, [{ key: 'transition',
     /**
                                                                                                                                           * CSS3 transition が使用可能かを調べます
@@ -5919,7 +5963,7 @@ WheelEvents = function (_Events) {(0, _inherits3.default)(WheelEvents, _Events);
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.0
- * 2017-5-12 18:14:39
+ * 2017-05-14 21:35:49
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -5982,7 +6026,7 @@ var MOKU = {}; /**
 MOKU.version = function () {return '0.2.0';}; /**
                                                    * build 日時を取得します
                                                    * @returns {string}  build 日時を返します
-                                                   */MOKU.build = function () {return '2017-5-12 18:14:39';};
+                                                   */MOKU.build = function () {return '2017-05-14 21:35:49';};
 /**
                                                                                                         * MOKU.event
                                                                                                         * @type {Object} MOKU.event object を返します
