@@ -34,7 +34,7 @@ export default class Style {
    * @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
    * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
    */
-  static compute(view:Window, element:HTMLElement, property): ?CssStyle {
+  static compute(view:window, element:HTMLElement, property:string): CssStyle {
     const style:CSSStyleDeclaration = view.getComputedStyle(element, null);
     if (Type.exist(property)) {
       const props = property.replace(/([A-Z])/g, '-$1').toLowerCase();
@@ -49,7 +49,7 @@ export default class Style {
    * @param {Array<string>} patterns 調査対象 CSS property name の配列
    * @returns {CssStyle|string|undefined} style value を返します
    */
-  static shortHand(view:Window, element:HTMLElement, patterns:Array<string>): string {
+  static shortHand(view:window, element:HTMLElement, patterns:?Array<string>): string {
     const top:string = Style.compute(view, element, patterns[0]);
     const right:string = Style.compute(view, element, patterns[1]);
     const bottom:string = Style.compute(view, element, patterns[2]);
@@ -80,7 +80,7 @@ export default class Style {
    * 引数 element の初期 style 設定を保存し復元できるようにします
    * @param {?HTMLElement} element 操作対象 Element
    */
-  constructor(element) {
+  constructor(element:HTMLElement) {
     /**
      * 操作対象 Element
      * @type {HTMLElement}
@@ -128,8 +128,8 @@ export default class Style {
   get(property:string): string {
     const element:HTMLElement = this.element;
     const ownerDocument:Document = element.ownerDocument;
-    const defaultView:Window = ownerDocument.defaultView;
-    let style:string = Style.compute(defaultView, element, property);
+    const defaultView:window = ownerDocument.defaultView;
+    let style:?string = Style.compute(defaultView, element, property);
     // firefox が css shorthand の取り扱いが違うので再度マッチテストする
     if (style === '' && property && Patterns.match(property)) {
       style = Style.shortHand(defaultView, element, Patterns.get(property));
