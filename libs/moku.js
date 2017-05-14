@@ -1757,35 +1757,43 @@ Object.defineProperty(exports, "__esModule", { value: true });var _keys = __webp
 
 var _Text = __webpack_require__(23);var _Text2 = _interopRequireDefault(_Text);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
+
+
+
+
+
+
+
+
 /**
                                                                                                                                                                               * CSS short hand pattern を管理します
-                                                                                                                                                                              */var
-Patterns = function () {function Patterns() {(0, _classCallCheck3.default)(this, Patterns);}(0, _createClass3.default)(Patterns, null, [{ key: 'settings',
+                                                                                                                                                                              */ // Patterns.settings return 戻り値型
+var Patterns = function () {function Patterns() {(0, _classCallCheck3.default)(this, Patterns);}(0, _createClass3.default)(Patterns, null, [{ key: 'settings',
     /**
-                                                                                                                                                            * パターン調査対象の CSS class リスト
-                                                                                                                                                            * ```
-                                                                                                                                                            * {
-                                                                                                                                                            *  padding: ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'],
-                                                                                                                                                            *  margin: ['marginTop', 'marginRight', 'marginBottom', 'marginLeft'],
-                                                                                                                                                            *  'border-color': [
-                                                                                                                                                            *    'borderTopColor',
-                                                                                                                                                            *    'borderRightColor',
-                                                                                                                                                            *    'borderBottomColor',
-                                                                                                                                                            *    'borderLeftColor'],
-                                                                                                                                                            *  'border-style': [
-                                                                                                                                                            *    'borderTopStyle',
-                                                                                                                                                            *    'borderRightStyle',
-                                                                                                                                                            *    'borderBottomStyle',
-                                                                                                                                                            *    'borderLeftStyle'],
-                                                                                                                                                            *  'border-width': [
-                                                                                                                                                            *    'borderTopWidth',
-                                                                                                                                                            *    'borderRightWidth',
-                                                                                                                                                            *    'borderBottomWidth',
-                                                                                                                                                            *    'borderLeftWidth'],
-                                                                                                                                                            * }
-                                                                                                                                                            * ```
-                                                                                                                                                            * @returns {Object} パターン調査対象の CSS class list
-                                                                                                                                                            */value: function settings()
+                                                                                                                                                                * パターン調査対象の CSS class リスト
+                                                                                                                                                                * ```
+                                                                                                                                                                * {
+                                                                                                                                                                *  padding: ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'],
+                                                                                                                                                                *  margin: ['marginTop', 'marginRight', 'marginBottom', 'marginLeft'],
+                                                                                                                                                                *  'border-color': [
+                                                                                                                                                                *    'borderTopColor',
+                                                                                                                                                                *    'borderRightColor',
+                                                                                                                                                                *    'borderBottomColor',
+                                                                                                                                                                *    'borderLeftColor'],
+                                                                                                                                                                *  'border-style': [
+                                                                                                                                                                *    'borderTopStyle',
+                                                                                                                                                                *    'borderRightStyle',
+                                                                                                                                                                *    'borderBottomStyle',
+                                                                                                                                                                *    'borderLeftStyle'],
+                                                                                                                                                                *  'border-width': [
+                                                                                                                                                                *    'borderTopWidth',
+                                                                                                                                                                *    'borderRightWidth',
+                                                                                                                                                                *    'borderBottomWidth',
+                                                                                                                                                                *    'borderLeftWidth'],
+                                                                                                                                                                * }
+                                                                                                                                                                * ```
+                                                                                                                                                                * @returns {Object} パターン調査対象の CSS class list
+                                                                                                                                                                */value: function settings()
     {
       return {
         padding: ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'],
@@ -1824,7 +1832,7 @@ Patterns = function () {function Patterns() {(0, _classCallCheck3.default)(this,
                                 * http://www.opensource.org/licenses/mit-license.html
                                 *
                                 * This notice shall be included in all copies or substantial portions of the Software.
-                                *
+                                * 
                                 */exports.default = Patterns;
 
 /***/ }),
@@ -1854,11 +1862,58 @@ var _Patterns = __webpack_require__(45);var _Patterns2 = _interopRequireDefault(
 /**
                                                                                                                                                                                         * Element の style を操作します
                                                                                                                                                                                         */var
-Style = function () {
-  /**
-                      * 引数 element の初期 style 設定を保存し復元できるようにします
-                      * @param {?Element} element 操作対象 Element
-                      */
+Style = function () {(0, _createClass3.default)(Style, null, [{ key: 'compute',
+    // ----------------------------------------
+    // STATIC METHOD
+    // ----------------------------------------
+    /**
+     * element style を取得します, [getComputedStyle](https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle) を使用します
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
+     * @param {Object} view Document.defaultView @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
+     * @param {Element} element 操作対象 Element
+     * @param {string} [property] 調査対象 CSS property name, 省略すると `CSSStyleDeclaration` 全セットを返します
+     * @returns {CssStyle|string|undefined} style value を返します
+     */value: function compute(
+    view, element, property) {
+      var style = view.getComputedStyle(element, null);
+      if (_Type2.default.exist(property)) {
+        var props = property.replace(/([A-Z])/g, '-$1').toLowerCase();
+        return style.getPropertyValue(props);
+      }
+      return style;
+    }
+    /**
+       * CSS 設定値の short hand をパターン {@link Patterns} から探し返します
+       * @param {Object} view Document.defaultView @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
+       * @param {Element} element 操作対象 Element
+       * @param {Array<string>} patterns 調査対象 CSS property name の配列
+       * @returns {CssStyle|string|undefined} style value を返します
+       */ }, { key: 'shortHand', value: function shortHand(
+    view, element, patterns) {
+      var top = Style.compute(view, element, patterns[0]);
+      var right = Style.compute(view, element, patterns[1]);
+      var bottom = Style.compute(view, element, patterns[2]);
+      var left = Style.compute(view, element, patterns[3]);
+      if (top === bottom) {
+        if (right === left) {
+          if (top === right) {
+            return top;
+          }
+          return top + ' ' + right;
+        }
+        return top + ' ' + right + ' ' + bottom + ' ' + left;
+      } else if (right === left) {
+        return top + ' ' + right + ' ' + bottom;
+      }
+      return top + ' ' + right + ' ' + bottom + ' ' + left;
+    }
+    // ----------------------------------------
+    // CONSTRUCTOR
+    // ----------------------------------------
+    /**
+     * 引数 element の初期 style 設定を保存し復元できるようにします
+     * @param {?Element} element 操作対象 Element
+     */ }]);
   function Style(element) {(0, _classCallCheck3.default)(this, Style);
     /**
                                                                         * 操作対象 Element
@@ -1888,7 +1943,7 @@ Style = function () {
     // };
   }
   // ----------------------------------------
-  // STATIC METHOD
+  // METHOD
   // ----------------------------------------
   /**
    * インスタンス作成時の inline CSS を上書きします
@@ -1900,59 +1955,15 @@ Style = function () {
       return style;
     }
     /**
-       * element style を取得します, [getComputedStyle](https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle) を使用します
-       * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
-       * @param {Object} view Document.defaultView @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
-       * @param {Element} element 操作対象 Element
-       * @param {string} [property] 調査対象 CSS property name, 省略すると `CSSStyleDeclaration` 全セットを返します
-       * @returns {CssStyle|string|undefined} style value を返します
-       */ }, { key: 'get',
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // ----------------------------------------
-    // METHOD
-    // ----------------------------------------
-    /**
-     * style value を取得します
-     * @param {string} [property] 調査する style property name
-     * @return {string} style value を返します
-     */value: function get(
+       * style value を取得します
+       * @param {string} [property] 調査する style property name
+       * @return {string} style value を返します
+       */ }, { key: 'get', value: function get(
     property) {
       var element = this.element;
       var ownerDocument = element.ownerDocument;
       var defaultView = ownerDocument.defaultView;
-      var style = Style(defaultView, element, property);
+      var style = Style.compute(defaultView, element, property);
       // firefox が css shorthand の取り扱いが違うので再度マッチテストする
       if (style === '' && property && _Patterns2.default.match(property)) {
         style = Style.shortHand(defaultView, element, _Patterns2.default.get(property));
@@ -2006,13 +2017,7 @@ Style = function () {
     {
       var style = this.current();
       return this.update(style);
-    } }], [{ key: 'compute', value: function compute(view, element, property) {var style = view.getComputedStyle(element, null);if (_Type2.default.exist(property)) {var props = property.replace(/([A-Z])/g, '-$1').toLowerCase();return style.getPropertyValue(props);}return style;} /**
-                                                                                                                                                                                                                                                                                         * CSS 設定値の short hand をパターン {@link Patterns} から探し返します
-                                                                                                                                                                                                                                                                                         * @param {Object} view Document.defaultView @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
-                                                                                                                                                                                                                                                                                         * @param {Element} element 操作対象 Element
-                                                                                                                                                                                                                                                                                         * @param {Array<string>} patterns 調査対象 CSS property name の配列
-                                                                                                                                                                                                                                                                                         * @returns {CssStyle|string|undefined} style value を返します
-                                                                                                                                                                                                                                                                                         */ }, { key: 'shortHand', value: function shortHand(view, element, patterns) {var top = Style.compute(view, element, patterns[0]);var right = Style.compute(view, element, patterns[1]);var bottom = Style.compute(view, element, patterns[2]);var left = Style.compute(view, element, patterns[3]);if (top === bottom) {if (right === left) {if (top === right) {return top;}return top + ' ' + right;}return top + ' ' + right + ' ' + bottom + ' ' + left;} else if (right === left) {return top + ' ' + right + ' ' + bottom;}return top + ' ' + right + ' ' + bottom + ' ' + left;} }]);return Style;}(); // css
+    } }]);return Style;}(); // css
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
@@ -3574,7 +3579,7 @@ var style = document.createElement('p').style;
                                                 * - '-ms-',
                                                 * - '-o-',
                                                 * - ''
-                                                * @type {[*]}
+                                                * @type {[string]}
                                                 * @private
                                                 * @static
                                                 */
@@ -5963,7 +5968,7 @@ WheelEvents = function (_Events) {(0, _inherits3.default)(WheelEvents, _Events);
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.0
- * 2017-05-14 21:35:49
+ * 2017-05-14 22:17:01
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -6026,7 +6031,7 @@ var MOKU = {}; /**
 MOKU.version = function () {return '0.2.0';}; /**
                                                    * build 日時を取得します
                                                    * @returns {string}  build 日時を返します
-                                                   */MOKU.build = function () {return '2017-05-14 21:35:49';};
+                                                   */MOKU.build = function () {return '2017-05-14 22:17:01';};
 /**
                                                                                                         * MOKU.event
                                                                                                         * @type {Object} MOKU.event object を返します

@@ -37,7 +37,7 @@ const style:CSSStyleDeclaration = document.createElement('p').style;
  * - '-ms-',
  * - '-o-',
  * - ''
- * @type {[*]}
+ * @type {[string]}
  * @private
  * @static
  */

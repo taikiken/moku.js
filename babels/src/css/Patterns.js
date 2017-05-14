@@ -7,11 +7,19 @@
  * http://www.opensource.org/licenses/mit-license.html
  *
  * This notice shall be included in all copies or substantial portions of the Software.
- *
+ * @flow
  */
 
 import Text from '../util/Text';
 
+// Patterns.settings return 戻り値型
+type settingsType = {
+  padding: Array<string>,
+  margin: Array<string>,
+  'border-color': Array<string>,
+  'border-style': Array<string>,
+  'border-width': Array<string>,
+};
 /**
  * CSS short hand pattern を管理します
  */
@@ -41,7 +49,7 @@ export default class Patterns {
    * ```
    * @returns {Object} パターン調査対象の CSS class list
    */
-  static settings() {
+  static settings(): settingsType {
     return {
       padding: ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'],
       margin: ['marginTop', 'marginRight', 'marginBottom', 'marginLeft'],
@@ -55,9 +63,9 @@ export default class Patterns {
    * @param {string} str CSS className
    * @returns {boolean} 調査対象の時に true を返します
    */
-  static match(str) {
+  static match(str): boolean {
     // camel case を dash(hyphenation)へ変換します
-    const key = Text.dash(str);
+    const key:string = Text.dash(str);
     // settings パターンキーと合致してるかを調査します
     return Object.keys(Patterns.settings()).indexOf(key) !== -1;
   }
@@ -66,9 +74,9 @@ export default class Patterns {
    * @param {string} str CSS className
    * @returns {Array<string>|undefined} 引数 `str` をキーにした操作対象のリスト
    */
-  static get(str) {
+  static get(str): ?Array<string> {
     // camel case を dash(hyphenation)へ変換します
-    const key = Text.dash(str);
+    const key:string = Text.dash(str);
     return Patterns.settings()[key];
   }
 }
