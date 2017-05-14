@@ -1863,48 +1863,67 @@ var _Patterns = __webpack_require__(45);var _Patterns2 = _interopRequireDefault(
                                                                                                                                                                                         * Element の style を操作します
                                                                                                                                                                                         */var
 Style = function () {(0, _createClass3.default)(Style, null, [{ key: 'compute',
+
+
+
+
+
+
     // ----------------------------------------
     // STATIC METHOD
     // ----------------------------------------
     /**
      * element style を取得します, [getComputedStyle](https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle) を使用します
+     *
+     * @param {object|Window} view Document.defaultView
+     * @param {HTMLElement} element 操作対象 Element
+     * @param {string|undefined} [property]
+     * 調査対象 CSS property name, 省略すると `CSSStyleDeclaration` 全セットを返します
+     * @returns {string} style value を返します
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
      * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
-     * @param {Object} view Document.defaultView @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
-     * @param {Element} element 操作対象 Element
-     * @param {string} [property] 調査対象 CSS property name, 省略すると `CSSStyleDeclaration` 全セットを返します
-     * @returns {CssStyle|string|undefined} style value を返します
      */value: function compute(
     view, element, property) {
       var style = view.getComputedStyle(element, null);
       if (_Type2.default.exist(property)) {
-        var props = property.replace(/([A-Z])/g, '-$1').toLowerCase();
+        var props = String(property).replace(/([A-Z])/g, '-$1').toLowerCase();
         return style.getPropertyValue(props);
       }
-      return style;
+      return '';
     }
     /**
        * CSS 設定値の short hand をパターン {@link Patterns} から探し返します
-       * @param {Object} view Document.defaultView @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
-       * @param {Element} element 操作対象 Element
+       * @param {object|Window} view Document.defaultView @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
+       * @param {HTMLElement} element 操作対象 Element
        * @param {Array<string>} patterns 調査対象 CSS property name の配列
        * @returns {CssStyle|string|undefined} style value を返します
-       */ }, { key: 'shortHand', value: function shortHand(
-    view, element, patterns) {
+       */ // ----------------------------------------
+    // PROPERTY TYPE
+    // ----------------------------------------
+  }, { key: 'shortHand', value: function shortHand(view, element,
+    patterns)
+    {
       var top = Style.compute(view, element, patterns[0]);
       var right = Style.compute(view, element, patterns[1]);
       var bottom = Style.compute(view, element, patterns[2]);
       var left = Style.compute(view, element, patterns[3]);
       if (top === bottom) {
+        // top - bottom: same
         if (right === left) {
+          // right - left: same -- all same
           if (top === right) {
             return top;
           }
+          // top-bottom, left-right
           return top + ' ' + right;
         }
+        // separate 4
         return top + ' ' + right + ' ' + bottom + ' ' + left;
       } else if (right === left) {
+        // top - bottom: different, left- right: same
         return top + ' ' + right + ' ' + bottom;
       }
+      // separate 4
       return top + ' ' + right + ' ' + bottom + ' ' + left;
     }
     // ----------------------------------------
@@ -1912,12 +1931,12 @@ Style = function () {(0, _createClass3.default)(Style, null, [{ key: 'compute',
     // ----------------------------------------
     /**
      * 引数 element の初期 style 設定を保存し復元できるようにします
-     * @param {?Element} element 操作対象 Element
+     * @param {?HTMLElement} element 操作対象 Element
      */ }]);
   function Style(element) {(0, _classCallCheck3.default)(this, Style);
     /**
                                                                         * 操作対象 Element
-                                                                        * @type {Element}
+                                                                        * @type {HTMLElement}
                                                                         */
     this.element = element;
     // @type {string} - オリジナルの element.style.cssText を保持します
@@ -2027,7 +2046,7 @@ Style = function () {(0, _createClass3.default)(Style, null, [{ key: 'compute',
  * http://www.opensource.org/licenses/mit-license.html
  *
  * This notice shall be included in all copies or substantial portions of the Software.
- *
+ * 
  */ // util
 exports.default = Style;
 
@@ -5968,7 +5987,7 @@ WheelEvents = function (_Events) {(0, _inherits3.default)(WheelEvents, _Events);
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.0
- * 2017-05-14 22:17:01
+ * 2017-05-15 02:27:56
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -6031,7 +6050,7 @@ var MOKU = {}; /**
 MOKU.version = function () {return '0.2.0';}; /**
                                                    * build 日時を取得します
                                                    * @returns {string}  build 日時を返します
-                                                   */MOKU.build = function () {return '2017-05-14 22:17:01';};
+                                                   */MOKU.build = function () {return '2017-05-15 02:27:56';};
 /**
                                                                                                         * MOKU.event
                                                                                                         * @type {Object} MOKU.event object を返します

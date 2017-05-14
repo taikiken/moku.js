@@ -74,7 +74,7 @@ export default class Patterns {
    * @param {string} str CSS className
    * @returns {Array<string>|undefined} 引数 `str` をキーにした操作対象のリスト
    */
-  static get(str): ?Array<string> {
+  static get(str): Array<string> | typeof undefined {
     // camel case を dash(hyphenation)へ変換します
     const key:string = Text.dash(str);
     return Patterns.settings()[key];

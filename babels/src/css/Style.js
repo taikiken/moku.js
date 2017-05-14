@@ -22,6 +22,12 @@ import Patterns from './Patterns';
  */
 export default class Style {
   // ----------------------------------------
+  // PROPERTY TYPE
+  // ----------------------------------------
+  element: HTMLElement;
+  css: string;
+  original: string;
+  // ----------------------------------------
   // STATIC METHOD
   // ----------------------------------------
   /**
@@ -29,18 +35,19 @@ export default class Style {
    *
    * @param {object|Window} view Document.defaultView
    * @param {HTMLElement} element 操作対象 Element
-   * @param {string} [property] 調査対象 CSS property name, 省略すると `CSSStyleDeclaration` 全セットを返します
-   * @returns {CssStyle|string|undefined} style value を返します
+   * @param {string|undefined} [property]
+   * 調査対象 CSS property name, 省略すると `CSSStyleDeclaration` 全セットを返します
+   * @returns {string} style value を返します
    * @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
    * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
    */
-  static compute(view:window, element:HTMLElement, property:string): CssStyle {
-    const style:CSSStyleDeclaration = view.getComputedStyle(element, null);
+  static compute(view: window, element: HTMLElement, property: string | typeof undefined): string {
+    const style: CSSStyleDeclaration = view.getComputedStyle(element, null);
     if (Type.exist(property)) {
-      const props = property.replace(/([A-Z])/g, '-$1').toLowerCase();
+      const props: string = String(property).replace(/([A-Z])/g, '-$1').toLowerCase();
       return style.getPropertyValue(props);
     }
-    return style;
+    return '';
   }
   /**
    * CSS 設定値の short hand をパターン {@link Patterns} から探し返します
@@ -49,11 +56,15 @@ export default class Style {
    * @param {Array<string>} patterns 調査対象 CSS property name の配列
    * @returns {CssStyle|string|undefined} style value を返します
    */
-  static shortHand(view:window, element:HTMLElement, patterns:?Array<string>): string {
-    const top:string = Style.compute(view, element, patterns[0]);
-    const right:string = Style.compute(view, element, patterns[1]);
-    const bottom:string = Style.compute(view, element, patterns[2]);
-    const left:string = Style.compute(view, element, patterns[3]);
+  static shortHand(
+    view: window,
+    element: HTMLElement,
+    patterns: Array<string> | typeof undefined
+  ): string {
+    const top: string = Style.compute(view, element, patterns[0]);
+    const right: string = Style.compute(view, element, patterns[1]);
+    const bottom: string = Style.compute(view, element, patterns[2]);
+    const left: string = Style.compute(view, element, patterns[3]);
     if (top === bottom) {
       // top - bottom: same
       if (right === left) {
@@ -80,14 +91,14 @@ export default class Style {
    * 引数 element の初期 style 設定を保存し復元できるようにします
    * @param {?HTMLElement} element 操作対象 Element
    */
-  constructor(element:HTMLElement) {
+  constructor(element: HTMLElement) {
     /**
      * 操作対象 Element
      * @type {HTMLElement}
      */
     this.element = element;
     // @type {string} - オリジナルの element.style.cssText を保持します
-    const css:string = this.current();
+    const css: string = this.current();
     /**
      * 現在の inline CSS
      * @type {string}
@@ -116,7 +127,7 @@ export default class Style {
    * @param {string} style 上書き用 CSS 設定
    * @returns {string} 上書きされた CSS
    */
-  update(style:string): string {
+  update(style: string): string {
     this.css = style;
     return style;
   }
@@ -125,11 +136,11 @@ export default class Style {
    * @param {string} [property] 調査する style property name
    * @return {string} style value を返します
    */
-  get(property:string): string {
-    const element:HTMLElement = this.element;
-    const ownerDocument:Document = element.ownerDocument;
-    const defaultView:window = ownerDocument.defaultView;
-    let style:?string = Style.compute(defaultView, element, property);
+  get(property: string): string {
+    const element: HTMLElement = this.element;
+    const ownerDocument: Document = element.ownerDocument;
+    const defaultView: window = ownerDocument.defaultView;
+    let style: string = Style.compute(defaultView, element, property);
     // firefox が css shorthand の取り扱いが違うので再度マッチテストする
     if (style === '' && property && Patterns.match(property)) {
       style = Style.shortHand(defaultView, element, Patterns.get(property));
@@ -142,14 +153,14 @@ export default class Style {
    * @param {string} value 設定する css value
    * @return {boolean} 変更されると true を返します
    */
-  set(property:string, value:string): boolean {
+  set(property: string, value: string): boolean {
     // 存在チェック
     const element:HTMLElement = this.element;
     if (!Type.exist(element)) {
       return false;
     }
     // 存在する時のみ処理を行います
-    const prop:string = Text.camel(property);
+    const prop: string = Text.camel(property);
     element.style[prop] = value;
 
     return true;
@@ -159,7 +170,7 @@ export default class Style {
    * @return {string} style.cssText を返します
    */
   current(): string {
-    const element:HTMLElement = this.element;
+    const element: HTMLElement = this.element;
     if (Type.exist(element)) {
       return element.style.cssText;
     }
@@ -172,7 +183,7 @@ export default class Style {
    * @return {string} 設定した css を返します
    */
   restore(): string {
-    const css:string = this.original;
+    const css: string = this.original;
     this.element.style.cssText = css;
     return css;
   }
@@ -181,7 +192,7 @@ export default class Style {
    * @returns {string} 設定されている inline style を返します
    */
   save(): string {
-    const style:string = this.current();
+    const style: string = this.current();
     return this.update(style);
   }
 }
