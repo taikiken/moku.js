@@ -1,7 +1,7 @@
 {
   "coverage": "100%",
-  "expectCount": 373,
-  "actualCount": 373,
+  "expectCount": 375,
+  "actualCount": 375,
   "files": {
     "src/event/Rising.js": {
       "expectCount": 11,
@@ -24,8 +24,8 @@
       "undocumentLines": []
     },
     "src/css/Can.js": {
-      "expectCount": 6,
-      "actualCount": 6,
+      "expectCount": 8,
+      "actualCount": 8,
       "undocumentLines": []
     },
     "src/dom/Classes.js": {

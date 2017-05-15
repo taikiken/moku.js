@@ -37,9 +37,11 @@
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">css</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/css/Can.js~Can.html">Can</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/css/Patterns.js~Patterns.html">Patterns</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/css/Style.js~Style.html">Style</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-check">check</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-document">document</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-style">style</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-transform">transform</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-transition">transition</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-vendors">vendors</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">dom</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/dom/Bounding.js~Bounding.html">Bounding</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/dom/Classes.js~Classes.html">Classes</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/dom/Elements.js~Elements.html">Elements</a></span></span></li>
@@ -124,6 +126,66 @@ import Patterns from &apos;./Patterns&apos;;
  * Element &#x306E; style &#x3092;&#x64CD;&#x4F5C;&#x3057;&#x307E;&#x3059;
  */
 export default class Style {
+  // ----------------------------------------
+  // STATIC METHOD
+  // ----------------------------------------
+  /**
+   * element style &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;,
+   * [getComputedStyle](https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle) &#x3092;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
+   * @param {Object|Window} view Document.defaultView
+   * @param {Element} element &#x64CD;&#x4F5C;&#x5BFE;&#x8C61; Element
+   * @param {string} [property=&apos;&apos;] &#x8ABF;&#x67FB;&#x5BFE;&#x8C61; CSS property name, &#x7701;&#x7565;&#x3059;&#x308B;&#x3068; `CSSStyleDeclaration` &#x5168;&#x30BB;&#x30C3;&#x30C8;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {CSSStyleDeclaration|CssStyle|string|undefined} style value &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
+   */
+  static compute(view, element, property = &apos;&apos;) {
+    const style = view.getComputedStyle(element, null);
+    if (Type.exist(property)) {
+      const props = property.replace(/([A-Z])/g, &apos;-$1&apos;).toLowerCase();
+      return style.getPropertyValue(props);
+    }
+    return style;
+  }
+  /**
+   * CSS &#x8A2D;&#x5B9A;&#x5024;&#x306E; short hand &#x3092;&#x30D1;&#x30BF;&#x30FC;&#x30F3; {@link Patterns} &#x304B;&#x3089;&#x63A2;&#x3057;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @param {Object|Window} view Document.defaultView
+   * @param {Element} element &#x64CD;&#x4F5C;&#x5BFE;&#x8C61; Element
+   * @param {Array&lt;string&gt;} patterns &#x8ABF;&#x67FB;&#x5BFE;&#x8C61; CSS property name &#x306E;&#x914D;&#x5217;
+   * @returns {CssStyle|string|undefined} style value &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
+   */
+  static shortHand(view, element, patterns) {
+    const top = Style.compute(view, element, patterns[0]);
+    const right = Style.compute(view, element, patterns[1]);
+    const bottom = Style.compute(view, element, patterns[2]);
+    const left = Style.compute(view, element, patterns[3]);
+    if (!top &amp;&amp; !right &amp;&amp; !bottom &amp;&amp; !left) {
+      return undefined;
+    } else if (top === bottom) {
+      // top - bottom: same
+      if (right === left) {
+        // top - bottom: same
+        if (top === right) {
+          // right - left: same - all same
+          return top;
+        }
+        // top-bottom, left-right
+        return `${top} ${right}`;
+      }
+      // separate 4
+      return `${top} ${right} ${bottom} ${left}`;
+    } else if (right === left) {
+      // top - bottom: different, left- right: same
+      return `${top} ${right} ${bottom}`;
+    }
+    // separate 4
+    return `${top} ${right} ${bottom} ${left}`;
+  }
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
   /**
    * &#x5F15;&#x6570; element &#x306E;&#x521D;&#x671F; style &#x8A2D;&#x5B9A;&#x3092;&#x4FDD;&#x5B58;&#x3057;&#x5FA9;&#x5143;&#x3067;&#x304D;&#x308B;&#x3088;&#x3046;&#x306B;&#x3057;&#x307E;&#x3059;
    * @param {?Element} element &#x64CD;&#x4F5C;&#x5BFE;&#x8C61; Element
@@ -157,10 +219,10 @@ export default class Style {
     // };
   }
   // ----------------------------------------
-  // STATIC METHOD
+  // METHOD
   // ----------------------------------------
   /**
-   * &#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x4F5C;&#x6210;&#x6642;&#x306E; inline CSS &#x3092;&#x4E0A;&#x66F8;&#x304D;&#x3057;&#x307E;&#x3059;
+   * &#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x4F5C;&#x6210;&#x6642;&#x306B;&#x4FDD;&#x5B58;&#x3057;&#x305F; inline CSS &#x3092;&#x4E0A;&#x66F8;&#x304D;&#x3057;&#x307E;&#x3059;
    * @param {string} style &#x4E0A;&#x66F8;&#x304D;&#x7528; CSS &#x8A2D;&#x5B9A;
    * @returns {string} &#x4E0A;&#x66F8;&#x304D;&#x3055;&#x308C;&#x305F; CSS
    */
@@ -169,59 +231,15 @@ export default class Style {
     return style;
   }
   /**
-   * element style &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;, [getComputedStyle](https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle) &#x3092;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;
-   * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
-   * @param {Object} view Document.defaultView @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
-   * @param {Element} element &#x64CD;&#x4F5C;&#x5BFE;&#x8C61; Element
-   * @param {string} [property] &#x8ABF;&#x67FB;&#x5BFE;&#x8C61; CSS property name, &#x7701;&#x7565;&#x3059;&#x308B;&#x3068; `CSSStyleDeclaration` &#x5168;&#x30BB;&#x30C3;&#x30C8;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   * @returns {CssStyle|string|undefined} style value &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   */
-  static compute(view, element, property) {
-    const style = view.getComputedStyle(element, null);
-    if (Type.exist(property)) {
-      const props = property.replace(/([A-Z])/g, &apos;-$1&apos;).toLowerCase();
-      return style.getPropertyValue(props);
-    }
-    return style;
-  }
-  /**
-   * CSS &#x8A2D;&#x5B9A;&#x5024;&#x306E; short hand &#x3092;&#x30D1;&#x30BF;&#x30FC;&#x30F3; {@link Patterns} &#x304B;&#x3089;&#x63A2;&#x3057;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   * @param {Object} view Document.defaultView @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
-   * @param {Element} element &#x64CD;&#x4F5C;&#x5BFE;&#x8C61; Element
-   * @param {Array&lt;string&gt;} patterns &#x8ABF;&#x67FB;&#x5BFE;&#x8C61; CSS property name &#x306E;&#x914D;&#x5217;
-   * @returns {CssStyle|string|undefined} style value &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   */
-  static shortHand(view, element, patterns) {
-    const top = Style.compute(view, element, patterns[0]);
-    const right = Style.compute(view, element, patterns[1]);
-    const bottom = Style.compute(view, element, patterns[2]);
-    const left = Style.compute(view, element, patterns[3]);
-    if (top === bottom) {
-      if (right === left) {
-        if (top === right) {
-          return top;
-        }
-        return `${top} ${right}`;
-      }
-      return `${top} ${right} ${bottom} ${left}`;
-    } else if (right === left) {
-      return `${top} ${right} ${bottom}`;
-    }
-    return `${top} ${right} ${bottom} ${left}`;
-  }
-  // ----------------------------------------
-  // METHOD
-  // ----------------------------------------
-  /**
    * style value &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
-   * @param {string} [property] &#x8ABF;&#x67FB;&#x3059;&#x308B; style property name
+   * @param {string} [property=&apos;&apos;] &#x8ABF;&#x67FB;&#x3059;&#x308B; style property name
    * @return {string} style value &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
-  get(property) {
+  get(property = &apos;&apos;) {
     const element = this.element;
     const ownerDocument = element.ownerDocument;
     const defaultView = ownerDocument.defaultView;
-    let style = Style(defaultView, element, property);
+    let style = Style.compute(defaultView, element, property);
     // firefox &#x304C; css shorthand &#x306E;&#x53D6;&#x308A;&#x6271;&#x3044;&#x304C;&#x9055;&#x3046;&#x306E;&#x3067;&#x518D;&#x5EA6;&#x30DE;&#x30C3;&#x30C1;&#x30C6;&#x30B9;&#x30C8;&#x3059;&#x308B;
     if (style === &apos;&apos; &amp;&amp; property &amp;&amp; Patterns.match(property)) {
       style = Style.shortHand(defaultView, element, Patterns.get(property));

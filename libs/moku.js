@@ -1854,11 +1854,71 @@ var _Patterns = __webpack_require__(45);var _Patterns2 = _interopRequireDefault(
 /**
                                                                                                                                                                                         * Element の style を操作します
                                                                                                                                                                                         */var
-Style = function () {
-  /**
-                      * 引数 element の初期 style 設定を保存し復元できるようにします
-                      * @param {?Element} element 操作対象 Element
-                      */
+Style = function () {(0, _createClass3.default)(Style, null, [{ key: 'compute',
+    // ----------------------------------------
+    // STATIC METHOD
+    // ----------------------------------------
+    /**
+     * element style を取得します,
+     * [getComputedStyle](https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle) を使用します
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
+     * @param {Object|Window} view Document.defaultView
+     * @param {Element} element 操作対象 Element
+     * @param {string} [property=''] 調査対象 CSS property name, 省略すると `CSSStyleDeclaration` 全セットを返します
+     * @returns {CSSStyleDeclaration|CssStyle|string|undefined} style value を返します
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
+     */value: function compute(
+    view, element) {var property = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+      var style = view.getComputedStyle(element, null);
+      if (_Type2.default.exist(property)) {
+        var props = property.replace(/([A-Z])/g, '-$1').toLowerCase();
+        return style.getPropertyValue(props);
+      }
+      return style;
+    }
+    /**
+       * CSS 設定値の short hand をパターン {@link Patterns} から探し返します
+       * @param {Object|Window} view Document.defaultView
+       * @param {Element} element 操作対象 Element
+       * @param {Array<string>} patterns 調査対象 CSS property name の配列
+       * @returns {CssStyle|string|undefined} style value を返します
+       * @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
+       */ }, { key: 'shortHand', value: function shortHand(
+    view, element, patterns) {
+      var top = Style.compute(view, element, patterns[0]);
+      var right = Style.compute(view, element, patterns[1]);
+      var bottom = Style.compute(view, element, patterns[2]);
+      var left = Style.compute(view, element, patterns[3]);
+      if (!top && !right && !bottom && !left) {
+        return undefined;
+      } else if (top === bottom) {
+        // top - bottom: same
+        if (right === left) {
+          // top - bottom: same
+          if (top === right) {
+            // right - left: same - all same
+            return top;
+          }
+          // top-bottom, left-right
+          return top + ' ' + right;
+        }
+        // separate 4
+        return top + ' ' + right + ' ' + bottom + ' ' + left;
+      } else if (right === left) {
+        // top - bottom: different, left- right: same
+        return top + ' ' + right + ' ' + bottom;
+      }
+      // separate 4
+      return top + ' ' + right + ' ' + bottom + ' ' + left;
+    }
+    // ----------------------------------------
+    // CONSTRUCTOR
+    // ----------------------------------------
+    /**
+     * 引数 element の初期 style 設定を保存し復元できるようにします
+     * @param {?Element} element 操作対象 Element
+     */ }]);
   function Style(element) {(0, _classCallCheck3.default)(this, Style);
     /**
                                                                         * 操作対象 Element
@@ -1888,10 +1948,10 @@ Style = function () {
     // };
   }
   // ----------------------------------------
-  // STATIC METHOD
+  // METHOD
   // ----------------------------------------
   /**
-   * インスタンス作成時の inline CSS を上書きします
+   * インスタンス作成時に保存した inline CSS を上書きします
    * @param {string} style 上書き用 CSS 設定
    * @returns {string} 上書きされた CSS
    */(0, _createClass3.default)(Style, [{ key: 'update', value: function update(
@@ -1900,55 +1960,11 @@ Style = function () {
       return style;
     }
     /**
-       * element style を取得します, [getComputedStyle](https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle) を使用します
-       * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
-       * @param {Object} view Document.defaultView @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
-       * @param {Element} element 操作対象 Element
-       * @param {string} [property] 調査対象 CSS property name, 省略すると `CSSStyleDeclaration` 全セットを返します
-       * @returns {CssStyle|string|undefined} style value を返します
-       */ }, { key: 'get',
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // ----------------------------------------
-    // METHOD
-    // ----------------------------------------
-    /**
-     * style value を取得します
-     * @param {string} [property] 調査する style property name
-     * @return {string} style value を返します
-     */value: function get(
-    property) {
+       * style value を取得します
+       * @param {string} [property=''] 調査する style property name
+       * @return {string} style value を返します
+       */ }, { key: 'get', value: function get()
+    {var property = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
       var element = this.element;
       var ownerDocument = element.ownerDocument;
       var defaultView = ownerDocument.defaultView;
@@ -2006,13 +2022,7 @@ Style = function () {
     {
       var style = this.current();
       return this.update(style);
-    } }], [{ key: 'compute', value: function compute(view, element, property) {var style = view.getComputedStyle(element, null);if (_Type2.default.exist(property)) {var props = property.replace(/([A-Z])/g, '-$1').toLowerCase();return style.getPropertyValue(props);}return style;} /**
-                                                                                                                                                                                                                                                                                         * CSS 設定値の short hand をパターン {@link Patterns} から探し返します
-                                                                                                                                                                                                                                                                                         * @param {Object} view Document.defaultView @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
-                                                                                                                                                                                                                                                                                         * @param {Element} element 操作対象 Element
-                                                                                                                                                                                                                                                                                         * @param {Array<string>} patterns 調査対象 CSS property name の配列
-                                                                                                                                                                                                                                                                                         * @returns {CssStyle|string|undefined} style value を返します
-                                                                                                                                                                                                                                                                                         */ }, { key: 'shortHand', value: function shortHand(view, element, patterns) {var top = Style.compute(view, element, patterns[0]);var right = Style.compute(view, element, patterns[1]);var bottom = Style.compute(view, element, patterns[2]);var left = Style.compute(view, element, patterns[3]);if (top === bottom) {if (right === left) {if (top === right) {return top;}return top + ' ' + right;}return top + ' ' + right + ' ' + bottom + ' ' + left;} else if (right === left) {return top + ' ' + right + ' ' + bottom;}return top + ' ' + right + ' ' + bottom + ' ' + left;} }]);return Style;}(); // css
+    } }]);return Style;}(); // css
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
@@ -3548,58 +3558,95 @@ Object.defineProperty(exports, "__esModule", { value: true });var _classCallChec
                                                                                                                                                                                                                                                                                                                                                                                                                                             */
 
 /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                * 確認用関数
-                                                                                                                                                                                                                                                                                                                                                                                                                                                * - transition - @return {boolean}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                * - transform - @return {boolean}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                * [native code] - document
+                                                                                                                                                                                                                                                                                                                                                                                                                                                * @type {HTMLDocument}
                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @private
                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @static
-                                                                                                                                                                                                                                                                                                                                                                                                                                                * @type {{transition: (()), transform: (())}}
                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
-var check = {
-  transition: function transition() {
-    var p = document.createElement('p');
-    return typeof p.style.transition !== 'undefined' ||
-    typeof p.style.WebkitTransition !== 'undefined' ||
-    typeof p.style.MozTransition !== 'undefined' ||
-    typeof p.style.msTransition !== 'undefined' ||
-    typeof p.style.OTransition !== 'undefined';
-  },
-  transform: function transform() {
-    var p = document.createElement('p');
-    return typeof p.style.transform !== 'undefined' ||
-    typeof p.style.WebkitTransform !== 'undefined' ||
-    typeof p.style.MozTransform !== 'undefined' ||
-    typeof p.style.msTransform !== 'undefined' ||
-    typeof p.style.OTransform !== 'undefined';
-  } };
+var document = self.document;
+/**
+                               * CSS detector に使用する virtual CSSStyleDeclaration
+                               * ```
+                               * document.createElement('p').style
+                               * ```
+                               * @type {CSSStyleDeclaration}
+                               * @private
+                               * @static
+                               * @see https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration
+                               * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style
+                               */
+var style = document.createElement('p').style;
+/**
+                                                * vendor prefix list, CSS detector に使用します
+                                                * - '-webkit-',
+                                                * - '-moz-',
+                                                * - '-ms-',
+                                                * - '-o-',
+                                                * - ''
+                                                * @type {[string]}
+                                                * @private
+                                                * @static
+                                                */
+var vendors = [
+'-webkit-',
+'-moz-',
+'-ms-',
+'-o-',
+''];
 
+// /**
+//  * 確認用関数
+//  * - transition - @return {boolean}
+//  * - transform - @return {boolean}
+//  * @private
+//  * @static
+//  * @type {{transition: (()), transform: (())}}
+//  */
+// const check = {
+//   transition() {
+//     const p = document.createElement('p');
+//     return typeof p.style.transition !== 'undefined' ||
+//       typeof p.style.WebkitTransition !== 'undefined' ||
+//       typeof p.style.MozTransition !== 'undefined' ||
+//       typeof p.style.msTransition !== 'undefined' ||
+//       typeof p.style.OTransition !== 'undefined';
+//   },
+//   transform() {
+//     const p = document.createElement('p');
+//     return typeof p.style.transform !== 'undefined' ||
+//       typeof p.style.WebkitTransform !== 'undefined' ||
+//       typeof p.style.MozTransform !== 'undefined' ||
+//       typeof p.style.msTransform !== 'undefined' ||
+//       typeof p.style.OTransform !== 'undefined';
+//   },
+// };
 
 /**
-        * CSS3 transition 可能フラッグ
-        * @type {boolean}
-        * @private
-        * @static
-        */
-var _transition = check.transition();
+ * CSS3 transition 可能フラッグ
+ * @type {boolean}
+ * @private
+ * @static
+ */
+var _transition = vendors.some(function (prefix) {return typeof style[prefix + 'transition'] !== 'undefined';});
 /**
-                                       * CSS3 transform 可能フラッグ
-                                       * @type {boolean}
-                                       * @private
-                                       * @static
-                                       */
-var _transform = check.transform();
+                                                                                                                  * CSS3 transform 可能フラッグ
+                                                                                                                  * @type {boolean}
+                                                                                                                  * @private
+                                                                                                                  * @static
+                                                                                                                  */
+var _transform = vendors.some(function (prefix) {return typeof style[prefix + 'transform'] !== 'undefined';});
 
 /**
-                                     * CSS3 機能使用可能かを調べます
-                                     * @example
-                                     * if (Can.transition()) {
-                                     *  // can CSS3 transition
-                                     * }
-                                     *
-                                     * if (Can.transform()) {
-                                     *  // can CSS3 transform
-                                     * }
-                                     */var
+                                                                                                                * CSS3 機能使用可能かを調べます
+                                                                                                                * @example
+                                                                                                                * if (Can.transition()) {
+                                                                                                                *  // can CSS3 transition
+                                                                                                                * }
+                                                                                                                *
+                                                                                                                * if (Can.transform()) {
+                                                                                                                *  // can CSS3 transform
+                                                                                                                * }
+                                                                                                                */var
 Can = function () {function Can() {(0, _classCallCheck3.default)(this, Can);}(0, _createClass3.default)(Can, null, [{ key: 'transition',
     /**
                                                                                                                                           * CSS3 transition が使用可能かを調べます
@@ -5919,7 +5966,7 @@ WheelEvents = function (_Events) {(0, _inherits3.default)(WheelEvents, _Events);
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.0
- * 2017-5-15 12:26:59
+ * 2017-5-15 13:02:39
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -5982,7 +6029,7 @@ var MOKU = {}; /**
 MOKU.version = function () {return '0.2.0';}; /**
                                                    * build 日時を取得します
                                                    * @returns {string}  build 日時を返します
-                                                   */MOKU.build = function () {return '2017-5-15 12:26:59';};
+                                                   */MOKU.build = function () {return '2017-5-15 13:02:39';};
 /**
                                                                                                         * MOKU.event
                                                                                                         * @type {Object} MOKU.event object を返します

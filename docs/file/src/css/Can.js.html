@@ -37,9 +37,11 @@
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">css</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/css/Can.js~Can.html">Can</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/css/Patterns.js~Patterns.html">Patterns</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/css/Style.js~Style.html">Style</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-check">check</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-document">document</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-style">style</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-transform">transform</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-transition">transition</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-vendors">vendors</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">dom</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/dom/Bounding.js~Bounding.html">Bounding</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/dom/Classes.js~Classes.html">Classes</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/dom/Elements.js~Elements.html">Elements</a></span></span></li>
@@ -114,31 +116,68 @@
  */
 
 /**
- * &#x78BA;&#x8A8D;&#x7528;&#x95A2;&#x6570;
- * - transition - @return {boolean}
- * - transform - @return {boolean}
+ * [native code] - document
+ * @type {HTMLDocument}
  * @private
  * @static
- * @type {{transition: (()), transform: (())}}
  */
-const check = {
-  transition() {
-    const p = document.createElement(&apos;p&apos;);
-    return typeof p.style.transition !== &apos;undefined&apos; ||
-      typeof p.style.WebkitTransition !== &apos;undefined&apos; ||
-      typeof p.style.MozTransition !== &apos;undefined&apos; ||
-      typeof p.style.msTransition !== &apos;undefined&apos; ||
-      typeof p.style.OTransition !== &apos;undefined&apos;;
-  },
-  transform() {
-    const p = document.createElement(&apos;p&apos;);
-    return typeof p.style.transform !== &apos;undefined&apos; ||
-      typeof p.style.WebkitTransform !== &apos;undefined&apos; ||
-      typeof p.style.MozTransform !== &apos;undefined&apos; ||
-      typeof p.style.msTransform !== &apos;undefined&apos; ||
-      typeof p.style.OTransform !== &apos;undefined&apos;;
-  },
-};
+const document = self.document;
+/**
+ * CSS detector &#x306B;&#x4F7F;&#x7528;&#x3059;&#x308B; virtual CSSStyleDeclaration
+ * ```
+ * document.createElement(&apos;p&apos;).style
+ * ```
+ * @type {CSSStyleDeclaration}
+ * @private
+ * @static
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style
+ */
+const style = document.createElement(&apos;p&apos;).style;
+/**
+ * vendor prefix list, CSS detector &#x306B;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;
+ * - &apos;-webkit-&apos;,
+ * - &apos;-moz-&apos;,
+ * - &apos;-ms-&apos;,
+ * - &apos;-o-&apos;,
+ * - &apos;&apos;
+ * @type {[string]}
+ * @private
+ * @static
+ */
+const vendors = [
+  &apos;-webkit-&apos;,
+  &apos;-moz-&apos;,
+  &apos;-ms-&apos;,
+  &apos;-o-&apos;,
+  &apos;&apos;,
+];
+// /**
+//  * &#x78BA;&#x8A8D;&#x7528;&#x95A2;&#x6570;
+//  * - transition - @return {boolean}
+//  * - transform - @return {boolean}
+//  * @private
+//  * @static
+//  * @type {{transition: (()), transform: (())}}
+//  */
+// const check = {
+//   transition() {
+//     const p = document.createElement(&apos;p&apos;);
+//     return typeof p.style.transition !== &apos;undefined&apos; ||
+//       typeof p.style.WebkitTransition !== &apos;undefined&apos; ||
+//       typeof p.style.MozTransition !== &apos;undefined&apos; ||
+//       typeof p.style.msTransition !== &apos;undefined&apos; ||
+//       typeof p.style.OTransition !== &apos;undefined&apos;;
+//   },
+//   transform() {
+//     const p = document.createElement(&apos;p&apos;);
+//     return typeof p.style.transform !== &apos;undefined&apos; ||
+//       typeof p.style.WebkitTransform !== &apos;undefined&apos; ||
+//       typeof p.style.MozTransform !== &apos;undefined&apos; ||
+//       typeof p.style.msTransform !== &apos;undefined&apos; ||
+//       typeof p.style.OTransform !== &apos;undefined&apos;;
+//   },
+// };
 
 /**
  * CSS3 transition &#x53EF;&#x80FD;&#x30D5;&#x30E9;&#x30C3;&#x30B0;
@@ -146,14 +185,14 @@ const check = {
  * @private
  * @static
  */
-const transition = check.transition();
+const transition = vendors.some(prefix =&gt; typeof style[`${prefix}transition`] !== &apos;undefined&apos;);
 /**
  * CSS3 transform &#x53EF;&#x80FD;&#x30D5;&#x30E9;&#x30C3;&#x30B0;
  * @type {boolean}
  * @private
  * @static
  */
-const transform = check.transform();
+const transform = vendors.some(prefix =&gt; typeof style[`${prefix}transform`] !== &apos;undefined&apos;);
 
 /**
  * CSS3 &#x6A5F;&#x80FD;&#x4F7F;&#x7528;&#x53EF;&#x80FD;&#x304B;&#x3092;&#x8ABF;&#x3079;&#x307E;&#x3059;

@@ -210,15 +210,15 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "./src/css/can.js~check",
-    "variable/index.html#static-variable-check",
-    "<span>check</span> <span class=\"search-result-import-path\">./src/css/Can.js</span>",
-    "variable"
-  ],
-  [
     "./src/net/cookie.js~decodeuricomponent",
     "variable/index.html#static-variable-decodeURIComponent",
     "<span>decodeURIComponent</span> <span class=\"search-result-import-path\">./src/net/Cookie.js</span>",
+    "variable"
+  ],
+  [
+    "./src/css/can.js~document",
+    "variable/index.html#static-variable-document",
+    "<span>document</span> <span class=\"search-result-import-path\">./src/css/Can.js</span>",
     "variable"
   ],
   [
@@ -354,6 +354,12 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "./src/css/can.js~style",
+    "variable/index.html#static-variable-style",
+    "<span>style</span> <span class=\"search-result-import-path\">./src/css/Can.js</span>",
+    "variable"
+  ],
+  [
     "./src/util/freeze.js~timerid",
     "variable/index.html#static-variable-timerId",
     "<span>timerId</span> <span class=\"search-result-import-path\">./src/util/Freeze.js</span>",
@@ -375,6 +381,12 @@ window.esdocSearchIndex = [
     "./src/util/iro.js~twothree",
     "variable/index.html#static-variable-twoThree",
     "<span>twoThree</span> <span class=\"search-result-import-path\">./src/util/Iro.js</span>",
+    "variable"
+  ],
+  [
+    "./src/css/can.js~vendors",
+    "variable/index.html#static-variable-vendors",
+    "<span>vendors</span> <span class=\"search-result-import-path\">./src/css/Can.js</span>",
     "variable"
   ],
   [
