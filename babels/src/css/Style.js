@@ -35,19 +35,20 @@ export default class Style {
    *
    * @param {object|Window} view Document.defaultView
    * @param {HTMLElement} element 操作対象 Element
-   * @param {string|undefined} [property]
+   * @param {string|undefined} [property='']
    * 調査対象 CSS property name, 省略すると `CSSStyleDeclaration` 全セットを返します
-   * @returns {string} style value を返します
+   * @returns {string|CSSStyleDeclaration} style value を返します -
+   * 引数 `property` が省略されると `CSSStyleDeclaration` 全セットを返します
    * @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
    * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
    */
-  static compute(view: window, element: HTMLElement, property: string | typeof undefined): string {
+  static compute(view: window, element: HTMLElement, property: string = ''): string | CSSStyleDeclaration {
     const style: CSSStyleDeclaration = view.getComputedStyle(element, null);
     if (Type.exist(property)) {
       const props: string = String(property).replace(/([A-Z])/g, '-$1').toLowerCase();
       return style.getPropertyValue(props);
     }
-    return '';
+    return style;
   }
   /**
    * CSS 設定値の short hand をパターン {@link Patterns} から探し返します
@@ -61,10 +62,10 @@ export default class Style {
     element: HTMLElement,
     patterns: Array<string> | typeof undefined
   ): string {
-    const top: string = Style.compute(view, element, patterns[0]);
-    const right: string = Style.compute(view, element, patterns[1]);
-    const bottom: string = Style.compute(view, element, patterns[2]);
-    const left: string = Style.compute(view, element, patterns[3]);
+    const top: string = String(Style.compute(view, element, patterns[0]));
+    const right: string = String(Style.compute(view, element, patterns[1]));
+    const bottom: string = String(Style.compute(view, element, patterns[2]));
+    const left: string = String(Style.compute(view, element, patterns[3]));
     if (top === bottom) {
       // top - bottom: same
       if (right === left) {
