@@ -1952,7 +1952,7 @@ Style = function () {
       var element = this.element;
       var ownerDocument = element.ownerDocument;
       var defaultView = ownerDocument.defaultView;
-      var style = Style(defaultView, element, property);
+      var style = Style.compute(defaultView, element, property);
       // firefox が css shorthand の取り扱いが違うので再度マッチテストする
       if (style === '' && property && _Patterns2.default.match(property)) {
         style = Style.shortHand(defaultView, element, _Patterns2.default.get(property));
@@ -5919,7 +5919,7 @@ WheelEvents = function (_Events) {(0, _inherits3.default)(WheelEvents, _Events);
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.0
- * 2017-5-12 17:52:06
+ * 2017-5-15 12:26:59
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -5982,7 +5982,7 @@ var MOKU = {}; /**
 MOKU.version = function () {return '0.2.0';}; /**
                                                    * build 日時を取得します
                                                    * @returns {string}  build 日時を返します
-                                                   */MOKU.build = function () {return '2017-5-12 17:52:06';};
+                                                   */MOKU.build = function () {return '2017-5-15 12:26:59';};
 /**
                                                                                                         * MOKU.event
                                                                                                         * @type {Object} MOKU.event object を返します

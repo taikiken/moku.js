@@ -118,7 +118,7 @@ export default class Style {
     const element = this.element;
     const ownerDocument = element.ownerDocument;
     const defaultView = ownerDocument.defaultView;
-    let style = Style(defaultView, element, property);
+    let style = Style.compute(defaultView, element, property);
     // firefox が css shorthand の取り扱いが違うので再度マッチテストする
     if (style === '' && property && Patterns.match(property)) {
       style = Style.shortHand(defaultView, element, Patterns.get(property));
