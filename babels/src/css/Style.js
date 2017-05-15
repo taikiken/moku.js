@@ -21,6 +21,66 @@ import Patterns from './Patterns';
  * Element の style を操作します
  */
 export default class Style {
+  // ----------------------------------------
+  // STATIC METHOD
+  // ----------------------------------------
+  /**
+   * element style を取得します,
+   * [getComputedStyle](https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle) を使用します
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
+   * @param {Object|Window} view Document.defaultView
+   * @param {Element} element 操作対象 Element
+   * @param {string} [property=''] 調査対象 CSS property name, 省略すると `CSSStyleDeclaration` 全セットを返します
+   * @returns {CSSStyleDeclaration|CssStyle|string|undefined} style value を返します
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
+   */
+  static compute(view, element, property = '') {
+    const style = view.getComputedStyle(element, null);
+    if (Type.exist(property)) {
+      const props = property.replace(/([A-Z])/g, '-$1').toLowerCase();
+      return style.getPropertyValue(props);
+    }
+    return style;
+  }
+  /**
+   * CSS 設定値の short hand をパターン {@link Patterns} から探し返します
+   * @param {Object|Window} view Document.defaultView
+   * @param {Element} element 操作対象 Element
+   * @param {Array<string>} patterns 調査対象 CSS property name の配列
+   * @returns {CssStyle|string|undefined} style value を返します
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
+   */
+  static shortHand(view, element, patterns) {
+    const top = Style.compute(view, element, patterns[0]);
+    const right = Style.compute(view, element, patterns[1]);
+    const bottom = Style.compute(view, element, patterns[2]);
+    const left = Style.compute(view, element, patterns[3]);
+    if (!top && !right && !bottom && !left) {
+      return undefined;
+    } else if (top === bottom) {
+      // top - bottom: same
+      if (right === left) {
+        // top - bottom: same
+        if (top === right) {
+          // right - left: same - all same
+          return top;
+        }
+        // top-bottom, left-right
+        return `${top} ${right}`;
+      }
+      // separate 4
+      return `${top} ${right} ${bottom} ${left}`;
+    } else if (right === left) {
+      // top - bottom: different, left- right: same
+      return `${top} ${right} ${bottom}`;
+    }
+    // separate 4
+    return `${top} ${right} ${bottom} ${left}`;
+  }
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
   /**
    * 引数 element の初期 style 設定を保存し復元できるようにします
    * @param {?Element} element 操作対象 Element
@@ -54,10 +114,10 @@ export default class Style {
     // };
   }
   // ----------------------------------------
-  // STATIC METHOD
+  // METHOD
   // ----------------------------------------
   /**
-   * インスタンス作成時の inline CSS を上書きします
+   * インスタンス作成時に保存した inline CSS を上書きします
    * @param {string} style 上書き用 CSS 設定
    * @returns {string} 上書きされた CSS
    */
@@ -66,55 +126,11 @@ export default class Style {
     return style;
   }
   /**
-   * element style を取得します, [getComputedStyle](https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle) を使用します
-   * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
-   * @param {Object} view Document.defaultView @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
-   * @param {Element} element 操作対象 Element
-   * @param {string} [property] 調査対象 CSS property name, 省略すると `CSSStyleDeclaration` 全セットを返します
-   * @returns {CssStyle|string|undefined} style value を返します
-   */
-  static compute(view, element, property) {
-    const style = view.getComputedStyle(element, null);
-    if (Type.exist(property)) {
-      const props = property.replace(/([A-Z])/g, '-$1').toLowerCase();
-      return style.getPropertyValue(props);
-    }
-    return style;
-  }
-  /**
-   * CSS 設定値の short hand をパターン {@link Patterns} から探し返します
-   * @param {Object} view Document.defaultView @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
-   * @param {Element} element 操作対象 Element
-   * @param {Array<string>} patterns 調査対象 CSS property name の配列
-   * @returns {CssStyle|string|undefined} style value を返します
-   */
-  static shortHand(view, element, patterns) {
-    const top = Style.compute(view, element, patterns[0]);
-    const right = Style.compute(view, element, patterns[1]);
-    const bottom = Style.compute(view, element, patterns[2]);
-    const left = Style.compute(view, element, patterns[3]);
-    if (top === bottom) {
-      if (right === left) {
-        if (top === right) {
-          return top;
-        }
-        return `${top} ${right}`;
-      }
-      return `${top} ${right} ${bottom} ${left}`;
-    } else if (right === left) {
-      return `${top} ${right} ${bottom}`;
-    }
-    return `${top} ${right} ${bottom} ${left}`;
-  }
-  // ----------------------------------------
-  // METHOD
-  // ----------------------------------------
-  /**
    * style value を取得します
-   * @param {string} [property] 調査する style property name
+   * @param {string} [property=''] 調査する style property name
    * @return {string} style value を返します
    */
-  get(property) {
+  get(property = '') {
     const element = this.element;
     const ownerDocument = element.ownerDocument;
     const defaultView = ownerDocument.defaultView;
