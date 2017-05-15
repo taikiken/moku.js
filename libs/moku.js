@@ -1757,35 +1757,43 @@ Object.defineProperty(exports, "__esModule", { value: true });var _keys = __webp
 
 var _Text = __webpack_require__(23);var _Text2 = _interopRequireDefault(_Text);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
+
+
+
+
+
+
+
+
 /**
                                                                                                                                                                               * CSS short hand pattern を管理します
-                                                                                                                                                                              */var
-Patterns = function () {function Patterns() {(0, _classCallCheck3.default)(this, Patterns);}(0, _createClass3.default)(Patterns, null, [{ key: 'settings',
+                                                                                                                                                                              */ // Patterns.settings return 戻り値型
+var Patterns = function () {function Patterns() {(0, _classCallCheck3.default)(this, Patterns);}(0, _createClass3.default)(Patterns, null, [{ key: 'settings',
     /**
-                                                                                                                                                            * パターン調査対象の CSS class リスト
-                                                                                                                                                            * ```
-                                                                                                                                                            * {
-                                                                                                                                                            *  padding: ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'],
-                                                                                                                                                            *  margin: ['marginTop', 'marginRight', 'marginBottom', 'marginLeft'],
-                                                                                                                                                            *  'border-color': [
-                                                                                                                                                            *    'borderTopColor',
-                                                                                                                                                            *    'borderRightColor',
-                                                                                                                                                            *    'borderBottomColor',
-                                                                                                                                                            *    'borderLeftColor'],
-                                                                                                                                                            *  'border-style': [
-                                                                                                                                                            *    'borderTopStyle',
-                                                                                                                                                            *    'borderRightStyle',
-                                                                                                                                                            *    'borderBottomStyle',
-                                                                                                                                                            *    'borderLeftStyle'],
-                                                                                                                                                            *  'border-width': [
-                                                                                                                                                            *    'borderTopWidth',
-                                                                                                                                                            *    'borderRightWidth',
-                                                                                                                                                            *    'borderBottomWidth',
-                                                                                                                                                            *    'borderLeftWidth'],
-                                                                                                                                                            * }
-                                                                                                                                                            * ```
-                                                                                                                                                            * @returns {Object} パターン調査対象の CSS class list
-                                                                                                                                                            */value: function settings()
+                                                                                                                                                                * パターン調査対象の CSS class リスト
+                                                                                                                                                                * ```
+                                                                                                                                                                * {
+                                                                                                                                                                *  padding: ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'],
+                                                                                                                                                                *  margin: ['marginTop', 'marginRight', 'marginBottom', 'marginLeft'],
+                                                                                                                                                                *  'border-color': [
+                                                                                                                                                                *    'borderTopColor',
+                                                                                                                                                                *    'borderRightColor',
+                                                                                                                                                                *    'borderBottomColor',
+                                                                                                                                                                *    'borderLeftColor'],
+                                                                                                                                                                *  'border-style': [
+                                                                                                                                                                *    'borderTopStyle',
+                                                                                                                                                                *    'borderRightStyle',
+                                                                                                                                                                *    'borderBottomStyle',
+                                                                                                                                                                *    'borderLeftStyle'],
+                                                                                                                                                                *  'border-width': [
+                                                                                                                                                                *    'borderTopWidth',
+                                                                                                                                                                *    'borderRightWidth',
+                                                                                                                                                                *    'borderBottomWidth',
+                                                                                                                                                                *    'borderLeftWidth'],
+                                                                                                                                                                * }
+                                                                                                                                                                * ```
+                                                                                                                                                                * @returns {Object} パターン調査対象の CSS class list
+                                                                                                                                                                */value: function settings()
     {
       return {
         padding: ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'],
@@ -1824,7 +1832,7 @@ Patterns = function () {function Patterns() {(0, _classCallCheck3.default)(this,
                                 * http://www.opensource.org/licenses/mit-license.html
                                 *
                                 * This notice shall be included in all copies or substantial portions of the Software.
-                                *
+                                * 
                                 */exports.default = Patterns;
 
 /***/ }),
@@ -1854,15 +1862,81 @@ var _Patterns = __webpack_require__(45);var _Patterns2 = _interopRequireDefault(
 /**
                                                                                                                                                                                         * Element の style を操作します
                                                                                                                                                                                         */var
-Style = function () {
-  /**
-                      * 引数 element の初期 style 設定を保存し復元できるようにします
-                      * @param {?Element} element 操作対象 Element
-                      */
+Style = function () {(0, _createClass3.default)(Style, null, [{ key: 'compute',
+
+
+
+
+
+
+    // ----------------------------------------
+    // STATIC METHOD
+    // ----------------------------------------
+    /**
+     * element style を取得します, [getComputedStyle](https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle) を使用します
+     *
+     * @param {object|Window} view Document.defaultView
+     * @param {HTMLElement} element 操作対象 Element
+     * @param {string|undefined} [property]
+     * 調査対象 CSS property name, 省略すると `CSSStyleDeclaration` 全セットを返します
+     * @returns {string} style value を返します
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
+     */value: function compute(
+    view, element, property) {
+      var style = view.getComputedStyle(element, null);
+      if (_Type2.default.exist(property)) {
+        var props = String(property).replace(/([A-Z])/g, '-$1').toLowerCase();
+        return style.getPropertyValue(props);
+      }
+      return '';
+    }
+    /**
+       * CSS 設定値の short hand をパターン {@link Patterns} から探し返します
+       * @param {object|Window} view Document.defaultView @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
+       * @param {HTMLElement} element 操作対象 Element
+       * @param {Array<string>} patterns 調査対象 CSS property name の配列
+       * @returns {CssStyle|string|undefined} style value を返します
+       */ // ----------------------------------------
+    // PROPERTY TYPE
+    // ----------------------------------------
+  }, { key: 'shortHand', value: function shortHand(view, element,
+    patterns)
+    {
+      var top = Style.compute(view, element, patterns[0]);
+      var right = Style.compute(view, element, patterns[1]);
+      var bottom = Style.compute(view, element, patterns[2]);
+      var left = Style.compute(view, element, patterns[3]);
+      if (top === bottom) {
+        // top - bottom: same
+        if (right === left) {
+          // right - left: same -- all same
+          if (top === right) {
+            return top;
+          }
+          // top-bottom, left-right
+          return top + ' ' + right;
+        }
+        // separate 4
+        return top + ' ' + right + ' ' + bottom + ' ' + left;
+      } else if (right === left) {
+        // top - bottom: different, left- right: same
+        return top + ' ' + right + ' ' + bottom;
+      }
+      // separate 4
+      return top + ' ' + right + ' ' + bottom + ' ' + left;
+    }
+    // ----------------------------------------
+    // CONSTRUCTOR
+    // ----------------------------------------
+    /**
+     * 引数 element の初期 style 設定を保存し復元できるようにします
+     * @param {?HTMLElement} element 操作対象 Element
+     */ }]);
   function Style(element) {(0, _classCallCheck3.default)(this, Style);
     /**
                                                                         * 操作対象 Element
-                                                                        * @type {Element}
+                                                                        * @type {HTMLElement}
                                                                         */
     this.element = element;
     // @type {string} - オリジナルの element.style.cssText を保持します
@@ -1888,7 +1962,7 @@ Style = function () {
     // };
   }
   // ----------------------------------------
-  // STATIC METHOD
+  // METHOD
   // ----------------------------------------
   /**
    * インスタンス作成時の inline CSS を上書きします
@@ -1900,54 +1974,10 @@ Style = function () {
       return style;
     }
     /**
-       * element style を取得します, [getComputedStyle](https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle) を使用します
-       * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
-       * @param {Object} view Document.defaultView @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
-       * @param {Element} element 操作対象 Element
-       * @param {string} [property] 調査対象 CSS property name, 省略すると `CSSStyleDeclaration` 全セットを返します
-       * @returns {CssStyle|string|undefined} style value を返します
-       */ }, { key: 'get',
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // ----------------------------------------
-    // METHOD
-    // ----------------------------------------
-    /**
-     * style value を取得します
-     * @param {string} [property] 調査する style property name
-     * @return {string} style value を返します
-     */value: function get(
+       * style value を取得します
+       * @param {string} [property] 調査する style property name
+       * @return {string} style value を返します
+       */ }, { key: 'get', value: function get(
     property) {
       var element = this.element;
       var ownerDocument = element.ownerDocument;
@@ -2006,13 +2036,7 @@ Style = function () {
     {
       var style = this.current();
       return this.update(style);
-    } }], [{ key: 'compute', value: function compute(view, element, property) {var style = view.getComputedStyle(element, null);if (_Type2.default.exist(property)) {var props = property.replace(/([A-Z])/g, '-$1').toLowerCase();return style.getPropertyValue(props);}return style;} /**
-                                                                                                                                                                                                                                                                                         * CSS 設定値の short hand をパターン {@link Patterns} から探し返します
-                                                                                                                                                                                                                                                                                         * @param {Object} view Document.defaultView @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
-                                                                                                                                                                                                                                                                                         * @param {Element} element 操作対象 Element
-                                                                                                                                                                                                                                                                                         * @param {Array<string>} patterns 調査対象 CSS property name の配列
-                                                                                                                                                                                                                                                                                         * @returns {CssStyle|string|undefined} style value を返します
-                                                                                                                                                                                                                                                                                         */ }, { key: 'shortHand', value: function shortHand(view, element, patterns) {var top = Style.compute(view, element, patterns[0]);var right = Style.compute(view, element, patterns[1]);var bottom = Style.compute(view, element, patterns[2]);var left = Style.compute(view, element, patterns[3]);if (top === bottom) {if (right === left) {if (top === right) {return top;}return top + ' ' + right;}return top + ' ' + right + ' ' + bottom + ' ' + left;} else if (right === left) {return top + ' ' + right + ' ' + bottom;}return top + ' ' + right + ' ' + bottom + ' ' + left;} }]);return Style;}(); // css
+    } }]);return Style;}(); // css
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
@@ -2022,7 +2046,7 @@ Style = function () {
  * http://www.opensource.org/licenses/mit-license.html
  *
  * This notice shall be included in all copies or substantial portions of the Software.
- *
+ * 
  */ // util
 exports.default = Style;
 
@@ -3544,62 +3568,106 @@ Object.defineProperty(exports, "__esModule", { value: true });var _classCallChec
                                                                                                                                                                                                                                                                                                                                                                                                                                             * http://www.opensource.org/licenses/mit-license.html
                                                                                                                                                                                                                                                                                                                                                                                                                                             *
                                                                                                                                                                                                                                                                                                                                                                                                                                             * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                            *
+                                                                                                                                                                                                                                                                                                                                                                                                                                            * 
                                                                                                                                                                                                                                                                                                                                                                                                                                             */
 
-/**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                * 確認用関数
-                                                                                                                                                                                                                                                                                                                                                                                                                                                * - transition - @return {boolean}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                * - transform - @return {boolean}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                * @private
-                                                                                                                                                                                                                                                                                                                                                                                                                                                * @static
-                                                                                                                                                                                                                                                                                                                                                                                                                                                * @type {{transition: (()), transform: (())}}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                */
-var check = {
-  transition: function transition() {
-    var p = document.createElement('p');
-    return typeof p.style.transition !== 'undefined' ||
-    typeof p.style.WebkitTransition !== 'undefined' ||
-    typeof p.style.MozTransition !== 'undefined' ||
-    typeof p.style.msTransition !== 'undefined' ||
-    typeof p.style.OTransition !== 'undefined';
-  },
-  transform: function transform() {
-    var p = document.createElement('p');
-    return typeof p.style.transform !== 'undefined' ||
-    typeof p.style.WebkitTransform !== 'undefined' ||
-    typeof p.style.MozTransform !== 'undefined' ||
-    typeof p.style.msTransform !== 'undefined' ||
-    typeof p.style.OTransform !== 'undefined';
-  } };
 
 
+
+
+
+
+var document = self.document;
 /**
-        * CSS3 transition 可能フラッグ
-        * @type {boolean}
-        * @private
-        * @static
-        */
-var _transition = check.transition();
-/**
-                                       * CSS3 transform 可能フラッグ
-                                       * @type {boolean}
-                                       * @private
-                                       * @static
-                                       */
-var _transform = check.transform();
+                               * CSS detector に使用する virtual CSSStyleDeclaration
+                               * ```
+                               * document.createElement('p').style
+                               * ```
+                               * @type {CSSStyleDeclaration}
+                               * @private
+                               * @static
+                               * @see https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration
+                               * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style
+                               */
+var style = document.createElement('p').style;
 
 /**
-                                     * CSS3 機能使用可能かを調べます
-                                     * @example
-                                     * if (Can.transition()) {
-                                     *  // can CSS3 transition
-                                     * }
-                                     *
-                                     * if (Can.transform()) {
-                                     *  // can CSS3 transform
-                                     * }
-                                     */var
+                                                * vendor prefix list, CSS detector に使用します
+                                                * - '-webkit-',
+                                                * - '-moz-',
+                                                * - '-ms-',
+                                                * - '-o-',
+                                                * - ''
+                                                * @type {[string]}
+                                                * @private
+                                                * @static
+                                                */
+var vendors = [
+'-webkit-',
+'-moz-',
+'-ms-',
+'-o-',
+''];
+
+// /**
+//  * 確認用関数
+//  * - transition - @return {boolean}
+//  * - transform - @return {boolean}
+//  * @private
+//  * @static
+//  * @type {{transition: (()), transform: (())}}
+//  */
+// const check:{transition: Function, transform: Function} = {
+//   transition():boolean {
+//     // const p:HTMLElement = document.createElement('p');
+//     // const style:CSSStyleDeclaration|* = p.style;
+//     // return typeof style.transition !== 'undefined' ||
+//     //   typeof style.WebkitTransition !== 'undefined' ||
+//     //   typeof style.MozTransition !== 'undefined' ||
+//     //   typeof style.msTransition !== 'undefined' ||
+//     //   typeof style.OTransition !== 'undefined';
+//     return vendors.some(prefix => style[`${prefix}transition`] === 'string');
+//   },
+//   transform():boolean {
+//     // const p:HTMLElement = document.createElement('p');
+//     // const style:CSSStyleDeclaration|* = p.style;
+//     // return typeof p.style.transform !== 'undefined' ||
+//     //   typeof p.style.WebkitTransform !== 'undefined' ||
+//     //   typeof p.style.MozTransform !== 'undefined' ||
+//     //   typeof p.style.msTransform !== 'undefined' ||
+//     //   typeof p.style.OTransform !== 'undefined';
+//     return vendors.some(prefix => style[`${prefix}transform`] !== 'undefined');
+//   },
+// };
+
+/**
+ * CSS3 transition 可能フラッグ
+ * @type {boolean}
+ * @private
+ * @static
+ */
+var _transition = vendors.some(function (prefix) {return typeof style[prefix + 'transition'] !== 'undefined';});
+// const transition:boolean = check.transition();
+/**
+ * CSS3 transform 可能フラッグ
+ * @type {boolean}
+ * @private
+ * @static
+ */
+var _transform = vendors.some(function (prefix) {return typeof style[prefix + 'transform'] !== 'undefined';});
+// const transform:boolean = check.transform();
+
+/**
+ * CSS3 機能使用可能かを調べます
+ * @example
+ * if (Can.transition()) {
+ *  // can CSS3 transition
+ * }
+ *
+ * if (Can.transform()) {
+ *  // can CSS3 transform
+ * }
+ */var
 Can = function () {function Can() {(0, _classCallCheck3.default)(this, Can);}(0, _createClass3.default)(Can, null, [{ key: 'transition',
     /**
                                                                                                                                           * CSS3 transition が使用可能かを調べます
@@ -5919,7 +5987,7 @@ WheelEvents = function (_Events) {(0, _inherits3.default)(WheelEvents, _Events);
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.0
- * 2017-5-15 12:26:59
+ * 2017-05-15 02:27:56
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -5982,7 +6050,7 @@ var MOKU = {}; /**
 MOKU.version = function () {return '0.2.0';}; /**
                                                    * build 日時を取得します
                                                    * @returns {string}  build 日時を返します
-                                                   */MOKU.build = function () {return '2017-5-15 12:26:59';};
+                                                   */MOKU.build = function () {return '2017-05-15 02:27:56';};
 /**
                                                                                                         * MOKU.event
                                                                                                         * @type {Object} MOKU.event object を返します

@@ -21,9 +21,11 @@
   "homepage": "",
   "dependencies": {
     "babel-core": "^6.24.1",
+    "babel-eslint": "^7.2.3",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-es2016": "^6.24.1",
+    "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-runtime": "^6.23.0",
@@ -32,6 +34,7 @@
     "del": "^2.2.2",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-flowtype": "^2.33.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.9.0",
@@ -51,5 +54,8 @@
     "require-dir": "^0.3.1",
     "run-sequence": "^1.2.2",
     "webpack": "^2.5.1"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.46.0"
   }
 }
