@@ -65,7 +65,7 @@ export default class Elements {
    * @return {ClientRect} プロパティ element の offset 値を返します
    */
   offset() {
-    return this.bounding().offset();
+    return this.bounding.offset();
   }
   // ----------------------------------------
   // STATIC METHOD
