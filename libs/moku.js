@@ -71,30 +71,40 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * Copyright (c) 2011-2016 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @date 2016/07/12 - 19:07
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * custom Event のリスナー関数引数に送られる Event Object
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * EventDispatcher.dispatch する時の引数として使用します
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * 3つのプロパティは必須項目です、イベントにあわせプロパティを追加します
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * - type: string, イベント種類
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * - target: *, イベント発生インスタンス
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * - currentTarget: *, current イベント発生インスタンス
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           */var
-Events = function () {
+ * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/07/12 - 19:07
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
+
+/**
+ * custom Event のリスナー関数引数に送られる Event Object
+ *
+ * EventDispatcher.dispatch する時の引数として使用します
+ *
+ * 3つのプロパティは必須項目です、イベントにあわせプロパティを追加します
+ *
+ * - type: string, イベント種類
+ * - target: *, イベント発生インスタンス
+ * - currentTarget: *, current イベント発生インスタンス
+ */
+var Events = function () {
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
@@ -104,21 +114,26 @@ Events = function () {
    * @param {*} [currentTarget=this] current イベント発生インスタンス
    * @param {*} [target=this] イベント発生インスタンス
    * */
-  function Events(type) {var currentTarget = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this;var target = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this;_classCallCheck(this, Events);
+  function Events(type) {
+    var currentTarget = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this;
+    var target = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this;
+
+    _classCallCheck(this, Events);
+
     /**
-                                                                                                                                                                                                                                            * イベント種類
-                                                                                                                                                                                                                                            * @type {string}
-                                                                                                                                                                                                                                            */
+     * イベント種類
+     * @type {string}
+     */
     this.type = type;
     /**
-                       * target instance
-                       * @type {*}
-                       */
+     * target instance
+     * @type {*}
+     */
     this.target = target;
     /**
-                           * currentTarget instance
-                           * @type {*}
-                           */
+     * currentTarget instance
+     * @type {*}
+     */
     this.currentTarget = currentTarget;
   }
   // ----------------------------------------
@@ -127,30 +142,54 @@ Events = function () {
   /**
    * 複製を作成します
    * @returns {Events} 複製を返します
-   */_createClass(Events, [{ key: "clone", value: function clone()
-    {
+   */
+
+
+  _createClass(Events, [{
+    key: "clone",
+    value: function clone() {
       return new Events(this.type, this.currentTarget, this.target);
-    } }]);return Events;}();exports.default = Events;
+    }
+  }]);
+
+  return Events;
+}();
+
+exports.default = Events;
 
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}(); /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * Copyright (c) 2011-2016 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * @date 2016/06/30 - 20:09
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  */
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Copyright (c) 2011-2016 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @date 2016/06/30 - 20:09
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
 
 // util
-var _Type = __webpack_require__(2);var _Type2 = _interopRequireDefault(_Type);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}
+
+
+var _Type = __webpack_require__(2);
+
+var _Type2 = _interopRequireDefault(_Type);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 // /**
 //  * private property key, listeners Object
@@ -179,23 +218,27 @@ var _Type = __webpack_require__(2);var _Type2 = _interopRequireDefault(_Type);fu
  * ```
  *
  * {@link Events}
- */var
-EventDispatcher = function () {
+ */
+var EventDispatcher = function () {
   /**
-                                * listener property をイニシャライズします
-                                */
-  function EventDispatcher() {_classCallCheck(this, EventDispatcher);
+   * listener property をイニシャライズします
+   */
+  function EventDispatcher() {
+    _classCallCheck(this, EventDispatcher);
+
     // @type {Object}
     var listeners = {};
     /**
-                         * リスナーリストを取得します
-                         * @returns {Object} リスナーリストを返します
-                         */
-    this.listeners = function () {return listeners;};
+     * リスナーリストを取得します
+     * @returns {Object} リスナーリストを返します
+     */
+    this.listeners = function () {
+      return listeners;
+    };
     /**
-                                                       * 全てのリスナーを破棄します
-                                                       * @returns {boolean} 成功・不成功の真偽値を返します
-                                                       */
+     * 全てのリスナーを破棄します
+     * @returns {boolean} 成功・不成功の真偽値を返します
+     */
     this.destroy = function () {
       listeners = Object.create({});
       return true;
@@ -209,8 +252,12 @@ EventDispatcher = function () {
    * @param {string} type event type（種類）
    * @param {Function} listener callback関数
    * @returns {boolean} 成功・不成功の真偽値を返します
-   */_createClass(EventDispatcher, [{ key: 'on', value: function on(
-    type, listener) {
+   */
+
+
+  _createClass(EventDispatcher, [{
+    key: 'on',
+    value: function on(type, listener) {
       if (!_Type2.default.exist(type)) {
         // type が有効値ではないので処理しない
         return false;
@@ -234,13 +281,16 @@ EventDispatcher = function () {
       return true;
     }
     /**
-       * <p>event type からリスナー関数を remove します<br>
-       * 内部処理は一時的に null 設定にします</p>
-       * @param {string} type event type（種類）
-       * @param {Function} listener リスナー関数
-       * @returns {boolean} 成功・不成功の真偽値を返します
-       */ }, { key: 'off', value: function off(
-    type, listener) {
+     * <p>event type からリスナー関数を remove します<br>
+     * 内部処理は一時的に null 設定にします</p>
+     * @param {string} type event type（種類）
+     * @param {Function} listener リスナー関数
+     * @returns {boolean} 成功・不成功の真偽値を返します
+     */
+
+  }, {
+    key: 'off',
+    value: function off(type, listener) {
       if (!_Type2.default.method(listener)) {
         // listener が 関数でないので処理しない
         return false;
@@ -276,18 +326,23 @@ EventDispatcher = function () {
       return true;
     }
     /**
-       * <p>リスナー配列を調べ可能なら空にします<br>
-       * リスナーリストが全て null の時に 空配列にします</p>
-       * @param {string} type event type（種類）
-       * @param {Array<Function>} types event type に登録されている配列（関数）
-       * @returns {boolean} 成功・不成功の真偽値を返します, true: 空にした
-       */ }, { key: 'clean', value: function clean(
-    type, types) {
+     * <p>リスナー配列を調べ可能なら空にします<br>
+     * リスナーリストが全て null の時に 空配列にします</p>
+     * @param {string} type event type（種類）
+     * @param {Array<Function>} types event type に登録されている配列（関数）
+     * @returns {boolean} 成功・不成功の真偽値を返します, true: 空にした
+     */
+
+  }, {
+    key: 'clean',
+    value: function clean(type, types) {
       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
       // Array.some は 戻り値が true の時に走査を止めます
       // types 配列に null 以外があるかを調べます
       // @type {boolean} - listener list に 関数(typeof 'function')が存在すると true になります
-      var hasFunction = types.some(function (listener) {return _Type2.default.method(listener);});
+      var hasFunction = types.some(function (listener) {
+        return _Type2.default.method(listener);
+      });
 
       if (!hasFunction) {
         // null 以外が無いので空にする
@@ -298,12 +353,15 @@ EventDispatcher = function () {
       return !hasFunction;
     }
     /**
-       * event type にリスナー関数が登録されているかを調べます
-       * @param {string} type event type（種類）
-       * @param {Function} listener リスナー関数
-       * @returns {boolean} event type にリスナー関数が登録されているかの真偽値を返します
-       */ }, { key: 'has', value: function has(
-    type, listener) {
+     * event type にリスナー関数が登録されているかを調べます
+     * @param {string} type event type（種類）
+     * @param {Function} listener リスナー関数
+     * @returns {boolean} event type にリスナー関数が登録されているかの真偽値を返します
+     */
+
+  }, {
+    key: 'has',
+    value: function has(type, listener) {
       if (!_Type2.default.method(listener)) {
         // listener が 関数でないので処理しない
         return false;
@@ -322,12 +380,17 @@ EventDispatcher = function () {
       return listeners[type].indexOf(listener) !== -1;
     }
     /**
-       * イベントを発生させリスナー関数を call します
-       * @param {Events|*} events 送信される Event Object.<br>
-       *   type キーにイベント種類が設定されています、dispatch 時に target プロパティを追加し this を設定します
-       * @returns {boolean} 成功・不成功の真偽値を返します
-       */ }, { key: 'dispatch', value: function dispatch(
-    events) {var _this = this;
+     * イベントを発生させリスナー関数を call します
+     * @param {Events|*} events 送信される Event Object.<br>
+     *   type キーにイベント種類が設定されています、dispatch 時に target プロパティを追加し this を設定します
+     * @returns {boolean} 成功・不成功の真偽値を返します
+     */
+
+  }, {
+    key: 'dispatch',
+    value: function dispatch(events) {
+      var _this = this;
+
       // @type {Object} - events.type:string: [listener:Function...]
       var listeners = this.listeners();
       // @type {string} - event type
@@ -347,8 +410,7 @@ EventDispatcher = function () {
       eventObject.target = this;
 
       // callback を実行する
-      listeners[type].
-      map(
+      listeners[type].map(
       // @param listener {Function}
       function (listener) {
         // null が混じっているのでタイプチェックを行い listener 関数を実行します
@@ -358,175 +420,242 @@ EventDispatcher = function () {
         return null;
       });
 
-
       return true;
     }
     /**
-       * **alias on**
-       * <p>event type に リスナー関数を bind します</p>
-       * @deprecated instead use on
-       * @param {string} type event type（種類）
-       * @param {Function} listener callback関数
-       * @returns {boolean} 成功・不成功の真偽値を返します
-       */ }, { key: 'addEventListener', value: function addEventListener(
-    type, listener) {
+     * **alias on**
+     * <p>event type に リスナー関数を bind します</p>
+     * @deprecated instead use on
+     * @param {string} type event type（種類）
+     * @param {Function} listener callback関数
+     * @returns {boolean} 成功・不成功の真偽値を返します
+     */
+
+  }, {
+    key: 'addEventListener',
+    value: function addEventListener(type, listener) {
       return this.on(type, listener);
     }
     /**
-       * **alias off**
-       * <p>event type からリスナー関数を remove します</p>
-       * @deprecated instead use off
-       * @param {string} type event type（種類）
-       * @param {Function} listener リスナー関数
-       * @returns {boolean} 成功・不成功の真偽値を返します
-       */ }, { key: 'removeEventListener', value: function removeEventListener(
-    type, listener) {
+     * **alias off**
+     * <p>event type からリスナー関数を remove します</p>
+     * @deprecated instead use off
+     * @param {string} type event type（種類）
+     * @param {Function} listener リスナー関数
+     * @returns {boolean} 成功・不成功の真偽値を返します
+     */
+
+  }, {
+    key: 'removeEventListener',
+    value: function removeEventListener(type, listener) {
       return this.off(type, listener);
     }
     /**
-       * **alias has**
-       * <p>event type にリスナー関数が登録されているかを調べます</p>
-       * @deprecated instead use has
-       * @param {string} type event type（種類）
-       * @param {Function} listener リスナー関数
-       * @returns {boolean} event type にリスナー関数が登録されているかの真偽値を返します
-       */ }, { key: 'hasEventListener', value: function hasEventListener(
-    type, listener) {
+     * **alias has**
+     * <p>event type にリスナー関数が登録されているかを調べます</p>
+     * @deprecated instead use has
+     * @param {string} type event type（種類）
+     * @param {Function} listener リスナー関数
+     * @returns {boolean} event type にリスナー関数が登録されているかの真偽値を返します
+     */
+
+  }, {
+    key: 'hasEventListener',
+    value: function hasEventListener(type, listener) {
       return this.has(type, listener);
     }
     /**
-       * **alias dispatch**
-       * <p>イベントを発生させリスナー関数を call します</p>
-       * @deprecated instead use dispatch
-       * @param {Events} events typeキー が必須です
-       * @returns {boolean} 成功・不成功の真偽値を返します
-       */ }, { key: 'dispatchEvent', value: function dispatchEvent(
-    events) {
+     * **alias dispatch**
+     * <p>イベントを発生させリスナー関数を call します</p>
+     * @deprecated instead use dispatch
+     * @param {Events} events typeキー が必須です
+     * @returns {boolean} 成功・不成功の真偽値を返します
+     */
+
+  }, {
+    key: 'dispatchEvent',
+    value: function dispatchEvent(events) {
       return this.dispatch(events);
-    } }]);return EventDispatcher;}();exports.default = EventDispatcher;
+    }
+  }]);
+
+  return EventDispatcher;
+}();
+
+exports.default = EventDispatcher;
 
 /***/ }),
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * Copyright (c) 2011-2016 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @date 2016/07/12 - 18:24
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * 型チェックを行います
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * @static
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           */var
-Type = function () {function Type() {_classCallCheck(this, Type);}_createClass(Type, null, [{ key: 'method',
+ * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/07/12 - 18:24
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
+
+/**
+ * 型チェックを行います
+ * @static
+ */
+var Type = function () {
+  function Type() {
+    _classCallCheck(this, Type);
+  }
+
+  _createClass(Type, null, [{
+    key: 'method',
+
     /**
-                                                                                                              * 引数(target)が関数かを調べます
-                                                                                                              * @param {Function|*} target 調査対象
-                                                                                                              * @returns {boolean} 引数(target)が関数かを調べ結果を返します、true: 関数
-                                                                                                              */value: function method(
-    target) {
+     * 引数(target)が関数かを調べます
+     * @param {Function|*} target 調査対象
+     * @returns {boolean} 引数(target)が関数かを調べ結果を返します、true: 関数
+     */
+    value: function method(target) {
       return typeof target === 'function';
     }
     /**
-       * 引数(target)を `!!` で調べます
-       * @param {*} target 調査対象
-       * @returns {boolean} 引数(target)を `!!` で調べ結果を返します
-       */ }, { key: 'exist', value: function exist(
-    target) {
+     * 引数(target)を `!!` で調べます
+     * @param {*} target 調査対象
+     * @returns {boolean} 引数(target)を `!!` で調べ結果を返します
+     */
+
+  }, {
+    key: 'exist',
+    value: function exist(target) {
       return !!target;
     }
     /**
-       * 引数(target)が number かを調べます
-       * @param {*} target 調査対象
-       * @returns {boolean} 引数(target)が number かを調べ結果を返します、true: number
-       */ }, { key: 'number', value: function number(
-    target) {
+     * 引数(target)が number かを調べます
+     * @param {*} target 調査対象
+     * @returns {boolean} 引数(target)が number かを調べ結果を返します、true: number
+     */
+
+  }, {
+    key: 'number',
+    value: function number(target) {
       // [参考] jQuery 2.x, jQuery 2 関数は文字列 "2" も true にするので type check を追加した
       return typeof target === 'number' && !Type.array(target) && target - parseFloat(target) + 1 >= 0;
     }
     /**
-       * 引数(target)が int かを `Number.isInteger` を使用し調べます
-       * @param {*} target 調査対象
-       * @returns {boolean} 引数(target)が int かを調べ結果を返します、true: int
-       */ }, { key: 'int', value: function int(
-    target) {
+     * 引数(target)が int かを `Number.isInteger` を使用し調べます
+     * @param {*} target 調査対象
+     * @returns {boolean} 引数(target)が int かを調べ結果を返します、true: int
+     */
+
+  }, {
+    key: 'int',
+    value: function int(target) {
       return Number.isInteger(target);
     }
     /**
-       * 引数(target)が string かを調べます
-       * @param {*} target 調査対象
-       * @returns {boolean} 引数(target)が string かを調べ結果を返します、true: string
-       */ }, { key: 'string', value: function string(
-    target) {
+     * 引数(target)が string かを調べます
+     * @param {*} target 調査対象
+     * @returns {boolean} 引数(target)が string かを調べ結果を返します、true: string
+     */
+
+  }, {
+    key: 'string',
+    value: function string(target) {
       return typeof target === 'string';
     }
     /**
-       * 引数(target)を `Array.isArray` で配列かを調べます
-       * @param {*} target 調査対象
-       * @returns {boolean} 引数(target)が 配列 かを調べ結果を返します、true: 配列
-       */ }, { key: 'array', value: function array(
-    target) {
+     * 引数(target)を `Array.isArray` で配列かを調べます
+     * @param {*} target 調査対象
+     * @returns {boolean} 引数(target)が 配列 かを調べ結果を返します、true: 配列
+     */
+
+  }, {
+    key: 'array',
+    value: function array(target) {
       return Array.isArray(target);
     }
     /**
-       * 引数(target)が null かを調べます
-       * @param {*} target 調査対象
-       * @returns {boolean} 引数(target)が null かを調べ結果を返します、true: null
-       */ }, { key: 'nil', value: function nil(
-    target) {
+     * 引数(target)が null かを調べます
+     * @param {*} target 調査対象
+     * @returns {boolean} 引数(target)が null かを調べ結果を返します、true: null
+     */
+
+  }, {
+    key: 'nil',
+    value: function nil(target) {
       return target === null;
     }
     /**
-       * Object型 引数 `object` は String型 引数 `key` を [key] として所持しているかを調べます
-       * @deprecated instead use Type.has
-       * @param {Object} target 調査対象
-       * @param {string} key Object.key 名称
-       * @returns {boolean} 存在する時は true を返します
-       */ }, { key: 'hasKey', value: function hasKey(
-    target, key) {
+     * Object型 引数 `object` は String型 引数 `key` を [key] として所持しているかを調べます
+     * @deprecated instead use Type.has
+     * @param {Object} target 調査対象
+     * @param {string} key Object.key 名称
+     * @returns {boolean} 存在する時は true を返します
+     */
+
+  }, {
+    key: 'hasKey',
+    value: function hasKey(target, key) {
       return Type.has(target, key);
     }
     /**
-       * Object型 引数 `object` は String型 引数 `key` を [key] として所持しているかを調べます
-       * @param {Object} target 調査対象
-       * @param {string} key Object.key 名称
-       * @returns {boolean} 存在する時は true を返します
-       */ }, { key: 'has', value: function has(
-    target, key) {
+     * Object型 引数 `object` は String型 引数 `key` を [key] として所持しているかを調べます
+     * @param {Object} target 調査対象
+     * @param {string} key Object.key 名称
+     * @returns {boolean} 存在する時は true を返します
+     */
+
+  }, {
+    key: 'has',
+    value: function has(target, key) {
       return Object.keys(target).indexOf(key) !== -1;
     }
     /**
-       * target が undefined かを調べます
-       * @param {*} target 調査対象
-       * @returns {boolean} true: undefined
-       * @since 2016-10-25
-       */ }, { key: 'undef', value: function undef(
-    target) {
+     * target が undefined かを調べます
+     * @param {*} target 調査対象
+     * @returns {boolean} true: undefined
+     * @since 2016-10-25
+     */
+
+  }, {
+    key: 'undef',
+    value: function undef(target) {
       return typeof target === 'undefined';
     }
     /**
-       * ファイル名から拡張子を取得します
-       * @deprecated instead use Type.extension
-       * @param {string} fileName 取得したいファイル名称
-       * @returns {string} ファイル名の拡張子を返します
-       */ }, { key: 'getExtension', value: function getExtension(
-    fileName) {
+     * ファイル名から拡張子を取得します
+     * @deprecated instead use Type.extension
+     * @param {string} fileName 取得したいファイル名称
+     * @returns {string} ファイル名の拡張子を返します
+     */
+
+  }, {
+    key: 'getExtension',
+    value: function getExtension(fileName) {
       return Type.extension(fileName);
     }
     /**
-       * ファイル名から拡張子を取得します
-       * @param {string} fileName 取得したいファイル名称
-       * @returns {string} ファイル名の拡張子を返します
-       */ }, { key: 'extension', value: function extension(
-    fileName) {
+     * ファイル名から拡張子を取得します
+     * @param {string} fileName 取得したいファイル名称
+     * @returns {string} ファイル名の拡張子を返します
+     */
+
+  }, {
+    key: 'extension',
+    value: function extension(fileName) {
       if (typeof fileName !== 'string') {
         return '';
       }
@@ -542,22 +671,25 @@ Type = function () {function Type() {_classCallCheck(this, Type);}_createClass(T
      * 使用可能なbase64 file かを調べます
      * @param {string} fileName 調査対象ファイル名
      * @returns {boolean} jpeg / png の時に true を返します
-     */ }, { key: 'base64', value: function base64(
-    fileName) {
+     */
+
+  }, {
+    key: 'base64',
+    value: function base64(fileName) {
       if (!Type.exist(fileName)) {
         return false;
       }
-      return fileName.indexOf('data:image/jpeg;base64') !== -1 ||
-      fileName.indexOf('data:image/png;base64') !== -1 ||
-      fileName.indexOf('data:image/jpg;base64') !== -1 ||
-      fileName.indexOf('data:image/gif;base64') !== -1;
+      return fileName.indexOf('data:image/jpeg;base64') !== -1 || fileName.indexOf('data:image/png;base64') !== -1 || fileName.indexOf('data:image/jpg;base64') !== -1 || fileName.indexOf('data:image/gif;base64') !== -1;
     }
     /**
-       * 拡張子から画像ファイルかを調べます
-       * @param {string} fileName 調査対象ファイル名
-       * @returns {Boolean} 'jpg', 'png', 'jpeg', 'gif' のいづれかに該当するかの真偽値を返します
-       */ }, { key: 'img', value: function img(
-    fileName) {
+     * 拡張子から画像ファイルかを調べます
+     * @param {string} fileName 調査対象ファイル名
+     * @returns {Boolean} 'jpg', 'png', 'jpeg', 'gif' のいづれかに該当するかの真偽値を返します
+     */
+
+  }, {
+    key: 'img',
+    value: function img(fileName) {
       if (!Type.exist(fileName)) {
         return false;
       }
@@ -567,43 +699,69 @@ Type = function () {function Type() {_classCallCheck(this, Type);}_createClass(T
       }
       // 拡張子チェック
       return ['jpg', 'png', 'jpeg', 'gif'].indexOf(Type.extension(fileName)) !== -1;
-    } }]);return Type;}();exports.default = Type;
+    }
+  }]);
+
+  return Type;
+}();
+
+exports.default = Type;
 
 /***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * Copyright (c) 2011-2016 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @date 2016/11/22 - 13:53
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * 文字列操作の utility
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           */var
-Text = function () {function Text() {_classCallCheck(this, Text);}_createClass(Text, null, [{ key: 'dash',
+ * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/11/22 - 13:53
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
+
+/**
+ * 文字列操作の utility
+ */
+var Text = function () {
+  function Text() {
+    _classCallCheck(this, Text);
+  }
+
+  _createClass(Text, null, [{
+    key: 'dash',
+
     /**
-                                                                                                            * camel case を hyphenation に変換します
-                                                                                                            * @param {string} str 操作対象文字列
-                                                                                                            * @returns {string} キャメルケースをハイフネーションに変換後文字列を返します
-                                                                                                            */value: function dash(
-    str) {
+     * camel case を hyphenation に変換します
+     * @param {string} str 操作対象文字列
+     * @returns {string} キャメルケースをハイフネーションに変換後文字列を返します
+     */
+    value: function dash(str) {
       return str.replace(/([A-Z])/g, '-$1').toLowerCase();
     }
     /**
-       * camel case へ変換します
-       * @param {string} str 操作対象文字列
-       * @returns {*|void|string|XML} キャメルケース文字列を返します
-       */ }, { key: 'camel', value: function camel(
-    str) {
+     * camel case へ変換します
+     * @param {string} str 操作対象文字列
+     * @returns {*|void|string|XML} キャメルケース文字列を返します
+     */
+
+  }, {
+    key: 'camel',
+    value: function camel(str) {
       // return str.replace(/^\s+|\s+$/g, '');
       return str.replace(/-([a-z])/g, function (g) {
         var first = g[1];
@@ -611,14 +769,19 @@ Text = function () {function Text() {_classCallCheck(this, Text);}_createClass(T
       });
     }
     /**
-       * 数値に3桁区切りの `,` カンマを挿入します
-       * @param {number} number カンマを挿入する数値
-       * @param {string} [locale=js-JP] ロケール
-       * @returns {string} カンマ挿入後の文字列, 小数点なし
-       * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString
-       * @see http://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
-       */ }, { key: 'comma', value: function comma(
-    number) {var locale = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'ja-JP';
+     * 数値に3桁区切りの `,` カンマを挿入します
+     * @param {number} number カンマを挿入する数値
+     * @param {string} [locale=js-JP] ロケール
+     * @returns {string} カンマ挿入後の文字列, 小数点なし
+     * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString
+     * @see http://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
+     */
+
+  }, {
+    key: 'comma',
+    value: function comma(number) {
+      var locale = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'ja-JP';
+
       var numbered = '';
       if (number.toLocaleString) {
         numbered = number.toLocaleString(locale);
@@ -629,75 +792,108 @@ Text = function () {function Text() {_classCallCheck(this, Text);}_createClass(T
       return numbered.split('.').shift();
     }
     /**
-       * 文字列の単語を置き換えます
-       * @param {string} targetText 置換え対象文字列
-       * @param {string} targetWord 置換え元単語
-       * @param {string} replaceWord 置換える単語
-       * @returns {string} 置換え後の文字列を返します
-       */ }, { key: 'replace', value: function replace(
-    targetText, targetWord, replaceWord) {
+     * 文字列の単語を置き換えます
+     * @param {string} targetText 置換え対象文字列
+     * @param {string} targetWord 置換え元単語
+     * @param {string} replaceWord 置換える単語
+     * @returns {string} 置換え後の文字列を返します
+     */
+
+  }, {
+    key: 'replace',
+    value: function replace(targetText, targetWord, replaceWord) {
       return targetText.split(targetWord).join(replaceWord);
     }
     /**
-       * 文字列から単語を削除します
-       * @param {string} targetText 置換え対象文字列
-       * @param {string} targetWord 削除する単語
-       * @returns {string} 削除後の文字列を返します
-       */ }, { key: 'remove', value: function remove(
-    targetText, targetWord) {
+     * 文字列から単語を削除します
+     * @param {string} targetText 置換え対象文字列
+     * @param {string} targetWord 削除する単語
+     * @returns {string} 削除後の文字列を返します
+     */
+
+  }, {
+    key: 'remove',
+    value: function remove(targetText, targetWord) {
       return Text.replace(targetText, targetWord, '');
     }
     /**
-       * 文字列の `&` を `&amp;` へ置換えます
-       * @param {string} targetText 操作対象文字列
-       * @returns {string} `&amp;` 置換え後の文字列を返します
-       */ }, { key: 'amp', value: function amp(
-    targetText) {
+     * 文字列の `&` を `&amp;` へ置換えます
+     * @param {string} targetText 操作対象文字列
+     * @returns {string} `&amp;` 置換え後の文字列を返します
+     */
+
+  }, {
+    key: 'amp',
+    value: function amp(targetText) {
       return Text.replace(targetText, '&', '&amp;');
     }
     /**
-       * 文字列の `&amp;` を `&` へ置換えます
-       * @param {string} targetText 操作対象文字列
-       * @returns {string} `&` 置換え後の文字列を返します
-       */ }, { key: 'and', value: function and(
-    targetText) {
+     * 文字列の `&amp;` を `&` へ置換えます
+     * @param {string} targetText 操作対象文字列
+     * @returns {string} `&` 置換え後の文字列を返します
+     */
+
+  }, {
+    key: 'and',
+    value: function and(targetText) {
       return Text.replace(targetText, '&amp;', '&');
-    } }]);return Text;}();exports.default = Text;
+    }
+  }]);
+
+  return Text;
+}();
+
+exports.default = Text;
 
 /***/ }),
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _EventDispatcher2 = __webpack_require__(1);
+
+var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
+
+var _Events = __webpack_require__(0);
+
+var _Events2 = _interopRequireDefault(_Events);
+
+var _Cycle = __webpack_require__(12);
+
+var _Cycle2 = _interopRequireDefault(_Cycle);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Copyright (c) 2011-2016 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date 2016/07/04 - 16:46
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+// event
 
 
-
-
-
-
-
-
-
-
-var _EventDispatcher2 = __webpack_require__(1);var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
-var _Events = __webpack_require__(0);var _Events2 = _interopRequireDefault(_Events);
-
-
-var _Cycle = __webpack_require__(12);var _Cycle2 = _interopRequireDefault(_Cycle);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    * Copyright (c) 2011-2016 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    * @date 2016/07/04 - 16:46
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    */ // event
 // tick
+
+
 /**
  * 一定間隔毎に UPDATE イベントを発生させます
  *
@@ -709,38 +905,56 @@ var _Cycle = __webpack_require__(12);var _Cycle2 = _interopRequireDefault(_Cycle
  * };
  * polling.on(Polling.UPDATE, update);
  * polling.start();
- */var Polling = function (_EventDispatcher) {_inherits(Polling, _EventDispatcher); /**
-                                                                                     * 引数の polling に合わせ UPDATE イベントを発生させます
-                                                                                     * @param {number} [interval=1000] イベント発生間隔 milliseconds
-                                                                                     */function Polling() {var interval = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1000;_classCallCheck(this, Polling); // @type {Cycle} - Cycle instance
-    var _this = _possibleConstructorReturn(this, (Polling.__proto__ || Object.getPrototypeOf(Polling)).call(this));var cycle = _Cycle2.default.factory();var boundUpdate = _this.update.bind(_this);var events = new _Events2.default(Polling.UPDATE, _this, _this); /**
-                                                                                                                                                                                                                                                                      * Cycle instance を取得します
-                                                                                                                                                                                                                                                                      * @ty[e {Cycle}
-                                                                                                                                                                                                                                                                      */_this.cycle = cycle; /**
-                                                                                                                                                                                                                                                                                              * 間隔(ms)
-                                                                                                                                                                                                                                                                                              * @type {number}
-                                                                                                                                                                                                                                                                                              */
+ */
+var Polling = function (_EventDispatcher) {
+  _inherits(Polling, _EventDispatcher);
+
+  /**
+   * 引数の polling に合わせ UPDATE イベントを発生させます
+   * @param {number} [interval=1000] イベント発生間隔 milliseconds
+   */
+  function Polling() {
+    var interval = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1000;
+
+    _classCallCheck(this, Polling);
+
+    // @type {Cycle} - Cycle instance
+    var _this = _possibleConstructorReturn(this, (Polling.__proto__ || Object.getPrototypeOf(Polling)).call(this));
+
+    var cycle = _Cycle2.default.factory();
+    var boundUpdate = _this.update.bind(_this);
+    var events = new _Events2.default(Polling.UPDATE, _this, _this);
+    /**
+     * Cycle instance を取得します
+     * @ty[e {Cycle}
+     */
+    _this.cycle = cycle;
+    /**
+     * 間隔(ms)
+     * @type {number}
+     */
     _this.interval = interval;
     /**
-                                * bound update, Cycle.UPDATE event handler
-                                * @returns {function}
-                                */
+     * bound update, Cycle.UPDATE event handler
+     * @returns {function}
+     */
     _this.boundUpdate = boundUpdate;
     /**
-                                      * Events instance - Polling.UPDATE Events object
-                                      * @type {Events}
-                                      */
+     * Events instance - Polling.UPDATE Events object
+     * @type {Events}
+     */
     _this.events = events;
     /**
-                            * polling event 発生時間, event を発火すると 0 にリセットされます
-                            * @type {number}
-                            */
+     * polling event 発生時間, event を発火すると 0 にリセットされます
+     * @type {number}
+     */
     _this.begin = 0;
     /**
-                      * Cycle 監視開始フラッグ
-                      * @type {boolean}
-                      */
-    _this.started = false;return _this;
+     * Cycle 監視開始フラッグ
+     * @type {boolean}
+     */
+    _this.started = false;
+    return _this;
   }
   // ----------------------------------------
   // EVENT
@@ -748,9 +962,11 @@ var _Cycle = __webpack_require__(12);var _Cycle2 = _interopRequireDefault(_Cycle
   /**
    * 一定間隔(milliseconds)毎に発生するイベント type を取得します
    * @returns {string} event, pollingUpdate を返します
-   */_createClass(Polling, [{ key: 'change',
+   */
 
 
+  _createClass(Polling, [{
+    key: 'change',
 
     // ----------------------------------------
     // METHOD
@@ -761,26 +977,32 @@ var _Cycle = __webpack_require__(12);var _Cycle2 = _interopRequireDefault(_Cycle
      * 1. update 実行
      * @param {number} interval polling 時間
      * @returns {boolean} `update` をコールし Polling.UPDATE event が発生すると true を返します
-     */value: function change(
-    interval) {
+     */
+    value: function change(interval) {
       this.interval = interval;
       return this.update();
     }
     /**
-       * started flag を反転させ現在の started flag 状態を取得します
-       * @returns {boolean} 現在の started flag 状態を返します
-       */ }, { key: 'turnOver', value: function turnOver()
-    {
+     * started flag を反転させ現在の started flag 状態を取得します
+     * @returns {boolean} 現在の started flag 状態を返します
+     */
+
+  }, {
+    key: 'turnOver',
+    value: function turnOver() {
       this.started = !this.started;
       return this.started;
     }
     /**
-       * events object を発火前に作成します
-       * @param {number} begin 開始時間: 前回の発火時間
-       * @param {number} present 現在時間
-       * @returns {Events} アップデートした Events を返します
-       */ }, { key: 'updateEvents', value: function updateEvents(
-    begin, present) {
+     * events object を発火前に作成します
+     * @param {number} begin 開始時間: 前回の発火時間
+     * @param {number} present 現在時間
+     * @returns {Events} アップデートした Events を返します
+     */
+
+  }, {
+    key: 'updateEvents',
+    value: function updateEvents(begin, present) {
       this.begin = begin;
       // @type {Events} - start event
       var events = this.events;
@@ -790,11 +1012,14 @@ var _Cycle = __webpack_require__(12);var _Cycle2 = _interopRequireDefault(_Cycle
       return events;
     }
     /**
-       * cycle ループを開始します<br>
-       * watch Cycle.UPDATE event
-       * @returns {Cycle} cycle ループを開始しインスタンスを返します
-       */ }, { key: 'initCycle', value: function initCycle()
-    {
+     * cycle ループを開始します<br>
+     * watch Cycle.UPDATE event
+     * @returns {Cycle} cycle ループを開始しインスタンスを返します
+     */
+
+  }, {
+    key: 'initCycle',
+    value: function initCycle() {
       // cycle
       var cycle = this.cycle;
       // bind Cycle.UPDATE
@@ -804,10 +1029,13 @@ var _Cycle = __webpack_require__(12);var _Cycle2 = _interopRequireDefault(_Cycle
       return cycle;
     }
     /**
-       * polling を開始します
-       * @returns {boolean} start に成功すると true を返します
-       */ }, { key: 'start', value: function start()
-    {
+     * polling を開始します
+     * @returns {boolean} start に成功すると true を返します
+     */
+
+  }, {
+    key: 'start',
+    value: function start() {
       if (this.started) {
         // already start
         return false;
@@ -825,10 +1053,13 @@ var _Cycle = __webpack_require__(12);var _Cycle2 = _interopRequireDefault(_Cycle
       return true;
     }
     /**
-       * polling を止めます
-       * @returns {boolean} stop に成功すると true を返します
-       */ }, { key: 'stop', value: function stop()
-    {
+     * polling を止めます
+     * @returns {boolean} stop に成功すると true を返します
+     */
+
+  }, {
+    key: 'stop',
+    value: function stop() {
       if (!this.started) {
         // not start
         return false;
@@ -839,12 +1070,15 @@ var _Cycle = __webpack_require__(12);var _Cycle2 = _interopRequireDefault(_Cycle
       return true;
     }
     /**
-       * Cycle.UPDATE event handler, polling を計測しイベントを発火するかを判断します
-       *
-       * @listens {Cycle.UPDATE} Cycle.UPDATE が発生すると実行されます
-       * @returns {boolean} Polling.UPDATE event が発生すると true を返します
-       */ }, { key: 'update', value: function update()
-    {
+     * Cycle.UPDATE event handler, polling を計測しイベントを発火するかを判断します
+     *
+     * @listens {Cycle.UPDATE} Cycle.UPDATE が発生すると実行されます
+     * @returns {boolean} Polling.UPDATE event が発生すると true を返します
+     */
+
+  }, {
+    key: 'update',
+    value: function update() {
       // 現在時間
       // @type {number}
       var present = Date.now();
@@ -864,70 +1098,104 @@ var _Cycle = __webpack_require__(12);var _Cycle2 = _interopRequireDefault(_Cycle
       return false;
     }
     /**
-       * Polling.UPDATE event を発生します
-       * @param {Events} events Polling.UPDATE event object
-       * @returns {void}
-       */ }, { key: 'fire', value: function fire(
-    events) {
+     * Polling.UPDATE event を発生します
+     * @param {Events} events Polling.UPDATE event object
+     * @returns {void}
+     */
+
+  }, {
+    key: 'fire',
+    value: function fire(events) {
       this.dispatch(events);
-    } }], [{ key: 'UPDATE', get: function get() {return 'pollingUpdate';} }]);return Polling;}(_EventDispatcher3.default);exports.default = Polling;
+    }
+  }], [{
+    key: 'UPDATE',
+    get: function get() {
+      return 'pollingUpdate';
+    }
+  }]);
+
+  return Polling;
+}(_EventDispatcher3.default);
+
+exports.default = Polling;
 
 /***/ }),
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @license inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @date 2016/10/08
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * Copyright (c) 2011-2015 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * Vectors
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * ある点の座標(x, y)と時間(time)を管理します
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           */var
-Vectors = function () {
+ * @license inazumatv.com
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/10/08
+ *
+ * Copyright (c) 2011-2015 inazumatv.com, inc.
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ * Vectors
+ */
+
+/**
+ * ある点の座標(x, y)と時間(time)を管理します
+ */
+var Vectors = function () {
   /**
-                        * 座標と現在時間を元にインスタンスを作成します
-                        * @param {number} [x=0] 座標 x
-                        * @param {number} [y=0] 座標 y
-                        * @param {number} [time=Date.now()] 時間 milli seconds
-                        */
-  function Vectors() {var x = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;var time = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Date.now();_classCallCheck(this, Vectors);
+   * 座標と現在時間を元にインスタンスを作成します
+   * @param {number} [x=0] 座標 x
+   * @param {number} [y=0] 座標 y
+   * @param {number} [time=Date.now()] 時間 milli seconds
+   */
+  function Vectors() {
+    var x = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+    var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+    var time = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Date.now();
+
+    _classCallCheck(this, Vectors);
+
     /**
-                                                                                                                                                                                                                                                                                                             * 座標 x
-                                                                                                                                                                                                                                                                                                             * @type {number}
-                                                                                                                                                                                                                                                                                                             */
+     * 座標 x
+     * @type {number}
+     */
     this.x = x;
     /**
-                 * 座標 y
-                 * @type {number}
-                 */
+     * 座標 y
+     * @type {number}
+     */
     this.y = y;
     /**
-                 * 時間 milli seconds
-                 * @type {number}
-                 */
+     * 時間 milli seconds
+     * @type {number}
+     */
     this.time = time;
     /**
-                       * スクロール中かのフラッグ, true: スクロール中
-                       * @type {boolean}
-                       */
+     * スクロール中かのフラッグ, true: スクロール中
+     * @type {boolean}
+     */
     this.scrolling = false;
   }
   /**
-     * x, y, time プロパティを全て `0` にします
-     * @returns {Vectors} メソッドチェイン可能なようにインスタンスを返します
-     */_createClass(Vectors, [{ key: "reset", value: function reset()
-    {
+   * x, y, time プロパティを全て `0` にします
+   * @returns {Vectors} メソッドチェイン可能なようにインスタンスを返します
+   */
+
+
+  _createClass(Vectors, [{
+    key: "reset",
+    value: function reset() {
       this.x = 0;
       this.y = 0;
       this.time = 0;
@@ -935,13 +1203,18 @@ Vectors = function () {
       return this;
     }
     /**
-       * x, y, time を更新します
-       * @param {number} x 座標 x
-       * @param {number} y 座標 y
-       * @param {number} [time=Date.now] 時間 milli seconds
-       * @returns {Vectors} メソッドチェイン可能なようにインスタンスを返します
-       */ }, { key: "update", value: function update(
-    x, y) {var time = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Date.now();
+     * x, y, time を更新します
+     * @param {number} x 座標 x
+     * @param {number} y 座標 y
+     * @param {number} [time=Date.now] 時間 milli seconds
+     * @returns {Vectors} メソッドチェイン可能なようにインスタンスを返します
+     */
+
+  }, {
+    key: "update",
+    value: function update(x, y) {
+      var time = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Date.now();
+
       this.x = x;
       this.y = y;
       this.time = time;
@@ -949,49 +1222,64 @@ Vectors = function () {
       return this;
     }
     /**
-       * 引数 vectors 間の距離を測ります
-       * @param {Vectors} vectors 計測したい対象 Vector instance
-       * @returns {number} 距離を返します
-       */ }, { key: "distance", value: function distance(
-    vectors) {
+     * 引数 vectors 間の距離を測ります
+     * @param {Vectors} vectors 計測したい対象 Vector instance
+     * @returns {number} 距離を返します
+     */
+
+  }, {
+    key: "distance",
+    value: function distance(vectors) {
       var distanceX = this.x - vectors.x;
       var distanceY = this.y - vectors.y;
       var sqrt = distanceX * distanceX + distanceY * distanceY;
       return Math.sqrt(sqrt);
     }
     /**
-       * 引数 vectors との時間差を計算します
-       * @param {Vectors} vectors 計測したい対象 Vector instance
-       * @returns {number} 時間差(milli seconds) を返します
-       */ }, { key: "duration", value: function duration(
-    vectors) {
+     * 引数 vectors との時間差を計算します
+     * @param {Vectors} vectors 計測したい対象 Vector instance
+     * @returns {number} 時間差(milli seconds) を返します
+     */
+
+  }, {
+    key: "duration",
+    value: function duration(vectors) {
       return this.time - vectors.time;
     }
     /**
-       * 複製を作成し返します
-       * @returns {Vectors} 複製を返します
-       */ }, { key: "clone", value: function clone()
-    {
+     * 複製を作成し返します
+     * @returns {Vectors} 複製を返します
+     */
+
+  }, {
+    key: "clone",
+    value: function clone() {
       var clone = new Vectors(this.x, this.y, this.time);
       clone.scrolling = this.scrolling;
       return clone;
     }
     /**
-       * ベクトルの大きさの２乗の平方根を計算します
-       * @returns {number} ベクトルの大きさの２乗の平方根を返します
-       */ }, { key: "length", value: function length()
-    {
+     * ベクトルの大きさの２乗の平方根を計算します
+     * @returns {number} ベクトルの大きさの２乗の平方根を返します
+     */
+
+  }, {
+    key: "length",
+    value: function length() {
       var x = this.x;
       var y = this.y;
       return Math.sqrt(x * x + y * y);
     }
     /**
-       * ベクトルの値を scalar 値で除算します
-       *
-       * @param {number} scalar 除算母数
-       * @returns {Vectors} 除算後の Vector を返します
-       */ }, { key: "divideByScalar", value: function divideByScalar(
-    scalar) {
+     * ベクトルの値を scalar 値で除算します
+     *
+     * @param {number} scalar 除算母数
+     * @returns {Vectors} 除算後の Vector を返します
+     */
+
+  }, {
+    key: "divideByScalar",
+    value: function divideByScalar(scalar) {
       var clone = this.clone();
       if (scalar === 0) {
         clone.x = 0;
@@ -1007,23 +1295,29 @@ Vectors = function () {
       return clone;
     }
     /**
-       * ベクトルの値を scalar 値で乗算します
-       *
-       * @param {number} scalar 乗算母数
-       * @returns {Vectors} 乗算後の Vector を返します
-       */ }, { key: "multiplyByScalar", value: function multiplyByScalar(
-    scalar) {
+     * ベクトルの値を scalar 値で乗算します
+     *
+     * @param {number} scalar 乗算母数
+     * @returns {Vectors} 乗算後の Vector を返します
+     */
+
+  }, {
+    key: "multiplyByScalar",
+    value: function multiplyByScalar(scalar) {
       var clone = this.clone();
       clone.x *= scalar;
       clone.y *= scalar;
       return clone;
     }
     /**
-       * 現在の Vectors を元に引数 `maxValue` 以下にした `Vectors` を取得します
-       * @param {number} maxValue 最高目標値
-       * @returns {Vectors} `maxValue` 以下にした `Vectors` を返します
-       */ }, { key: "truncate", value: function truncate(
-    maxValue) {
+     * 現在の Vectors を元に引数 `maxValue` 以下にした `Vectors` を取得します
+     * @param {number} maxValue 最高目標値
+     * @returns {Vectors} `maxValue` 以下にした `Vectors` を返します
+     */
+
+  }, {
+    key: "truncate",
+    value: function truncate(maxValue) {
       var minValue = Math.min(maxValue, this.length());
       var oldLength = this.length();
       if (oldLength !== 0 && minValue !== oldLength) {
@@ -1032,49 +1326,67 @@ Vectors = function () {
       return this.clone();
     }
     /**
-       * ベクトルの大きさを正規化（大きさを1）した Vector を作成します
-       * @returns {Vectors} ベクトルの大きさを正規化（大きさを1）した Vectors を返します
-       */ }, { key: "normalize", value: function normalize()
-    {
+     * ベクトルの大きさを正規化（大きさを1）した Vector を作成します
+     * @returns {Vectors} ベクトルの大きさを正規化（大きさを1）した Vectors を返します
+     */
+
+  }, {
+    key: "normalize",
+    value: function normalize() {
       return this.divideByScalar(this.length());
     }
     /**
-       * ベクトルが正規化されているかを判定します
-       * @returns {boolean} true: 正規化されている
-       */ }, { key: "isNormalize", value: function isNormalize()
-    {
+     * ベクトルが正規化されているかを判定します
+     * @returns {boolean} true: 正規化されている
+     */
+
+  }, {
+    key: "isNormalize",
+    value: function isNormalize() {
       return this.length() === 1;
     }
     /**
-       * 引数 vectors との X 値を減算します
-       * @param {Vectors} vectors 計測したい対象 Vectors instance
-       * @returns {number} X 値を減算し返します
-       */ }, { key: "betweenX", value: function betweenX(
-    vectors) {
+     * 引数 vectors との X 値を減算します
+     * @param {Vectors} vectors 計測したい対象 Vectors instance
+     * @returns {number} X 値を減算し返します
+     */
+
+  }, {
+    key: "betweenX",
+    value: function betweenX(vectors) {
       return this.x - vectors.x;
     }
     /**
-       * 引数 vectors との Y 値を減算します
-       * @param {Vectors} vectors 計測したい対象 Vectors instance
-       * @returns {number} Y 値を減算し返します
-       */ }, { key: "betweenY", value: function betweenY(
-    vectors) {
+     * 引数 vectors との Y 値を減算します
+     * @param {Vectors} vectors 計測したい対象 Vectors instance
+     * @returns {number} Y 値を減算し返します
+     */
+
+  }, {
+    key: "betweenY",
+    value: function betweenY(vectors) {
       return this.y - vectors.y;
     }
     /**
-       * 引数 vectors との time 値を減算します
-       * @param {Vectors} vectors 計測したい対象 Vectors instance
-       * @returns {number} time 値を減算し返します
-       */ }, { key: "betweenTime", value: function betweenTime(
-    vectors) {
+     * 引数 vectors との time 値を減算します
+     * @param {Vectors} vectors 計測したい対象 Vectors instance
+     * @returns {number} time 値を減算し返します
+     */
+
+  }, {
+    key: "betweenTime",
+    value: function betweenTime(vectors) {
       return this.time - vectors.time;
     }
     /**
-       * 引数 vectors との x, y, time 値を減算します
-       * @param {Vectors} vectors 計測したい対象 Vectors instance
-       * @returns {Vectors} 引数 vectors との x, y, time 値を減算した clone を返します
-       */ }, { key: "between", value: function between(
-    vectors) {
+     * 引数 vectors との x, y, time 値を減算します
+     * @param {Vectors} vectors 計測したい対象 Vectors instance
+     * @returns {Vectors} 引数 vectors との x, y, time 値を減算した clone を返します
+     */
+
+  }, {
+    key: "between",
+    value: function between(vectors) {
       var clone = this.clone();
       clone.x = clone.betweenX(vectors);
       clone.y = clone.betweenY(vectors);
@@ -1083,27 +1395,36 @@ Vectors = function () {
       return clone;
     }
     /**
-       * 引数ベクトルの内積を計算します
-       * @param {Vectors} vectors 計測したい対象 Vectors instance
-       * @returns {number} 内積を返します
-       */ }, { key: "dot", value: function dot(
-    vectors) {
+     * 引数ベクトルの内積を計算します
+     * @param {Vectors} vectors 計測したい対象 Vectors instance
+     * @returns {number} 内積を返します
+     */
+
+  }, {
+    key: "dot",
+    value: function dot(vectors) {
       return this.x * vectors.x + this.y * vectors.y;
     }
     /**
-       * 引数ベクトルの値(x, y)が等しいかを判定します
-       * @param {Vectors} vectors 計測したい対象 Vectors instance
-       * @returns {boolean} true: 等しい
-       */ }, { key: "equals", value: function equals(
-    vectors) {
+     * 引数ベクトルの値(x, y)が等しいかを判定します
+     * @param {Vectors} vectors 計測したい対象 Vectors instance
+     * @returns {boolean} true: 等しい
+     */
+
+  }, {
+    key: "equals",
+    value: function equals(vectors) {
       return vectors.x === this.x && vectors.y === this.y;
     }
     /**
-       * 引数ベクトルとの角度を計算します
-       * @param {Vectors} vectors 計測したい対象 Vectors instance
-       * @returns {number} 角度を返します
-       */ }, { key: "angle", value: function angle(
-    vectors) {
+     * 引数ベクトルとの角度を計算します
+     * @param {Vectors} vectors 計測したい対象 Vectors instance
+     * @returns {number} 角度を返します
+     */
+
+  }, {
+    key: "angle",
+    value: function angle(vectors) {
       var v1 = this.clone();
       var v2 = vectors.clone();
       if (!v1.isNormalize()) {
@@ -1114,115 +1435,176 @@ Vectors = function () {
       }
       // console.log('angle', v1, v2, v1.dot(v2), Math.acos(v1.dot(v2)));
       return Math.acos(v1.dot(v2));
-    } }]);return Vectors;}();exports.default = Vectors;
+    }
+  }]);
+
+  return Vectors;
+}();
+
+exports.default = Vectors;
 
 /***/ }),
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}(); /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * Copyright (c) 2011-2016 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * @date 2016/11/22 - 13:26
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  */
 
-var _Text = __webpack_require__(3);var _Text2 = _interopRequireDefault(_Text);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Copyright (c) 2011-2016 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @date 2016/11/22 - 13:26
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
+
+var _Text = __webpack_require__(3);
+
+var _Text2 = _interopRequireDefault(_Text);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
-                                                                                                                                                                                                                                                                                                                                   * CSS short hand pattern を管理します
-                                                                                                                                                                                                                                                                                                                                   */var
-Patterns = function () {function Patterns() {_classCallCheck(this, Patterns);}_createClass(Patterns, null, [{ key: 'settings',
+ * CSS short hand pattern を管理します
+ */
+var Patterns = function () {
+  function Patterns() {
+    _classCallCheck(this, Patterns);
+  }
+
+  _createClass(Patterns, null, [{
+    key: 'settings',
+
     /**
-                                                                                                                                * パターン調査対象の CSS class リスト
-                                                                                                                                * ```
-                                                                                                                                * {
-                                                                                                                                *  padding: ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'],
-                                                                                                                                *  margin: ['marginTop', 'marginRight', 'marginBottom', 'marginLeft'],
-                                                                                                                                *  'border-color': [
-                                                                                                                                *    'borderTopColor',
-                                                                                                                                *    'borderRightColor',
-                                                                                                                                *    'borderBottomColor',
-                                                                                                                                *    'borderLeftColor'],
-                                                                                                                                *  'border-style': [
-                                                                                                                                *    'borderTopStyle',
-                                                                                                                                *    'borderRightStyle',
-                                                                                                                                *    'borderBottomStyle',
-                                                                                                                                *    'borderLeftStyle'],
-                                                                                                                                *  'border-width': [
-                                                                                                                                *    'borderTopWidth',
-                                                                                                                                *    'borderRightWidth',
-                                                                                                                                *    'borderBottomWidth',
-                                                                                                                                *    'borderLeftWidth'],
-                                                                                                                                * }
-                                                                                                                                * ```
-                                                                                                                                * @returns {Object} パターン調査対象の CSS class list
-                                                                                                                                */value: function settings()
-    {
+     * パターン調査対象の CSS class リスト
+     * ```
+     * {
+     *  padding: ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'],
+     *  margin: ['marginTop', 'marginRight', 'marginBottom', 'marginLeft'],
+     *  'border-color': [
+     *    'borderTopColor',
+     *    'borderRightColor',
+     *    'borderBottomColor',
+     *    'borderLeftColor'],
+     *  'border-style': [
+     *    'borderTopStyle',
+     *    'borderRightStyle',
+     *    'borderBottomStyle',
+     *    'borderLeftStyle'],
+     *  'border-width': [
+     *    'borderTopWidth',
+     *    'borderRightWidth',
+     *    'borderBottomWidth',
+     *    'borderLeftWidth'],
+     * }
+     * ```
+     * @returns {Object} パターン調査対象の CSS class list
+     */
+    value: function settings() {
       return {
         padding: ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'],
         margin: ['marginTop', 'marginRight', 'marginBottom', 'marginLeft'],
         'border-color': ['borderTopColor', 'borderRightColor', 'borderBottomColor', 'borderLeftColor'],
         'border-style': ['borderTopStyle', 'borderRightStyle', 'borderBottomStyle', 'borderLeftStyle'],
-        'border-width': ['borderTopWidth', 'borderRightWidth', 'borderBottomWidth', 'borderLeftWidth'] };
-
+        'border-width': ['borderTopWidth', 'borderRightWidth', 'borderBottomWidth', 'borderLeftWidth']
+      };
     }
     /**
-       * 引数 `str` が調査対象 className かを判定します
-       * @param {string} str CSS className
-       * @returns {boolean} 調査対象の時に true を返します
-       */ }, { key: 'match', value: function match(
-    str) {
+     * 引数 `str` が調査対象 className かを判定します
+     * @param {string} str CSS className
+     * @returns {boolean} 調査対象の時に true を返します
+     */
+
+  }, {
+    key: 'match',
+    value: function match(str) {
       // camel case を dash(hyphenation)へ変換します
       var key = _Text2.default.dash(str);
       // settings パターンキーと合致してるかを調査します
       return Object.keys(Patterns.settings()).indexOf(key) !== -1;
     }
     /**
-       * 引数 `str` をキーにした操作対象のリストを取得します
-       * @param {string} str CSS className
-       * @returns {Array<string>|undefined} 引数 `str` をキーにした操作対象のリスト
-       */ }, { key: 'get', value: function get(
-    str) {
+     * 引数 `str` をキーにした操作対象のリストを取得します
+     * @param {string} str CSS className
+     * @returns {Array<string>|undefined} 引数 `str` をキーにした操作対象のリスト
+     */
+
+  }, {
+    key: 'get',
+    value: function get(str) {
       // camel case を dash(hyphenation)へ変換します
       var key = _Text2.default.dash(str);
       return Patterns.settings()[key];
-    } }]);return Patterns;}();exports.default = Patterns;
+    }
+  }]);
+
+  return Patterns;
+}();
+
+exports.default = Patterns;
 
 /***/ }),
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}(); /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * Copyright (c) 2011-2016 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * @date 2016/10/06 - 21:52
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  */
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Copyright (c) 2011-2016 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @date 2016/10/06 - 21:52
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
 
 // util
 
 
-
 // css
-var _Type = __webpack_require__(2);var _Type2 = _interopRequireDefault(_Type);var _Text = __webpack_require__(3);var _Text2 = _interopRequireDefault(_Text);var _Patterns = __webpack_require__(6);var _Patterns2 = _interopRequireDefault(_Patterns);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}
+
+
+var _Type = __webpack_require__(2);
+
+var _Type2 = _interopRequireDefault(_Type);
+
+var _Text = __webpack_require__(3);
+
+var _Text2 = _interopRequireDefault(_Text);
+
+var _Patterns = __webpack_require__(6);
+
+var _Patterns2 = _interopRequireDefault(_Patterns);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * Element の style を操作します
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           */var
-Style = function () {_createClass(Style, null, [{ key: 'compute',
+ * Element の style を操作します
+ */
+var Style = function () {
+  _createClass(Style, null, [{
+    key: 'compute',
+
     // ----------------------------------------
     // STATIC METHOD
     // ----------------------------------------
@@ -1236,8 +1618,10 @@ Style = function () {_createClass(Style, null, [{ key: 'compute',
      * @returns {CSSStyleDeclaration|CssStyle|string|undefined} style value を返します
      * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
      * @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
-     */value: function compute(
-    view, element) {var property = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+     */
+    value: function compute(view, element) {
+      var property = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+
       var style = view.getComputedStyle(element, null);
       if (_Type2.default.exist(property)) {
         var props = property.replace(/([A-Z])/g, '-$1').toLowerCase();
@@ -1246,14 +1630,17 @@ Style = function () {_createClass(Style, null, [{ key: 'compute',
       return style;
     }
     /**
-       * CSS 設定値の short hand をパターン {@link Patterns} から探し返します
-       * @param {Object|Window} view Document.defaultView
-       * @param {Element} element 操作対象 Element
-       * @param {Array<string>} patterns 調査対象 CSS property name の配列
-       * @returns {CssStyle|string|undefined} style value を返します
-       * @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
-       */ }, { key: 'shortHand', value: function shortHand(
-    view, element, patterns) {
+     * CSS 設定値の short hand をパターン {@link Patterns} から探し返します
+     * @param {Object|Window} view Document.defaultView
+     * @param {Element} element 操作対象 Element
+     * @param {Array<string>} patterns 調査対象 CSS property name の配列
+     * @returns {CssStyle|string|undefined} style value を返します
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
+     */
+
+  }, {
+    key: 'shortHand',
+    value: function shortHand(view, element, patterns) {
       var top = Style.compute(view, element, patterns[0]);
       var right = Style.compute(view, element, patterns[1]);
       var bottom = Style.compute(view, element, patterns[2]);
@@ -1286,24 +1673,29 @@ Style = function () {_createClass(Style, null, [{ key: 'compute',
     /**
      * 引数 element の初期 style 設定を保存し復元できるようにします
      * @param {?Element} element 操作対象 Element
-     */ }]);
-  function Style(element) {_classCallCheck(this, Style);
+     */
+
+  }]);
+
+  function Style(element) {
+    _classCallCheck(this, Style);
+
     /**
-                                                          * 操作対象 Element
-                                                          * @type {Element}
-                                                          */
+     * 操作対象 Element
+     * @type {Element}
+     */
     this.element = element;
     // @type {string} - オリジナルの element.style.cssText を保持します
     var css = this.current();
     /**
-                               * 現在の inline CSS
-                               * @type {string}
-                               */
+     * 現在の inline CSS
+     * @type {string}
+     */
     this.css = css;
     /**
-                     * インスタンス作成時の inline CSS
-                     * @type {string}
-                     */
+     * インスタンス作成時の inline CSS
+     * @type {string}
+     */
     this.original = css;
     // /**
     //  * インスタンス作成時の inline CSS を上書きします
@@ -1322,17 +1714,26 @@ Style = function () {_createClass(Style, null, [{ key: 'compute',
    * インスタンス作成時に保存した inline CSS を上書きします
    * @param {string} style 上書き用 CSS 設定
    * @returns {string} 上書きされた CSS
-   */_createClass(Style, [{ key: 'update', value: function update(
-    style) {
+   */
+
+
+  _createClass(Style, [{
+    key: 'update',
+    value: function update(style) {
       this.css = style;
       return style;
     }
     /**
-       * style value を取得します
-       * @param {string} [property=''] 調査する style property name
-       * @return {string} style value を返します
-       */ }, { key: 'get', value: function get()
-    {var property = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+     * style value を取得します
+     * @param {string} [property=''] 調査する style property name
+     * @return {string} style value を返します
+     */
+
+  }, {
+    key: 'get',
+    value: function get() {
+      var property = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+
       var element = this.element;
       var ownerDocument = element.ownerDocument;
       var defaultView = ownerDocument.defaultView;
@@ -1344,12 +1745,15 @@ Style = function () {_createClass(Style, null, [{ key: 'compute',
       return style;
     }
     /**
-       * element へ css を設定します、設定済み css を上書きします
-       * @param {string} property 設定する css property name
-       * @param {string} value 設定する css value
-       * @return {boolean} 変更されると true を返します
-       */ }, { key: 'set', value: function set(
-    property, value) {
+     * element へ css を設定します、設定済み css を上書きします
+     * @param {string} property 設定する css property name
+     * @param {string} value 設定する css value
+     * @return {boolean} 変更されると true を返します
+     */
+
+  }, {
+    key: 'set',
+    value: function set(property, value) {
       // 存在チェック
       var element = this.element;
       if (!_Type2.default.exist(element)) {
@@ -1362,10 +1766,13 @@ Style = function () {_createClass(Style, null, [{ key: 'compute',
       return true;
     }
     /**
-       * element の inline style(style.cssText) を取得します
-       * @return {string} style.cssText を返します
-       */ }, { key: 'current', value: function current()
-    {
+     * element の inline style(style.cssText) を取得します
+     * @return {string} style.cssText を返します
+     */
+
+  }, {
+    key: 'current',
+    value: function current() {
       var element = this.element;
       if (_Type2.default.exist(element)) {
         return element.style.cssText;
@@ -1375,196 +1782,265 @@ Style = function () {_createClass(Style, null, [{ key: 'compute',
       return '';
     }
     /**
-       * element の style.cssText をインスタンス作成時点まで戻します
-       * @return {string} 設定した css を返します
-       */ }, { key: 'restore', value: function restore()
-    {
+     * element の style.cssText をインスタンス作成時点まで戻します
+     * @return {string} 設定した css を返します
+     */
+
+  }, {
+    key: 'restore',
+    value: function restore() {
       var css = this.original;
       this.element.style.cssText = css;
       return css;
     }
     /**
-       * `save` 実行時に設定されている inline style を default にします
-       * @returns {string} 設定されている inline style を返します
-       */ }, { key: 'save', value: function save()
-    {
+     * `save` 実行時に設定されている inline style を default にします
+     * @returns {string} 設定されている inline style を返します
+     */
+
+  }, {
+    key: 'save',
+    value: function save() {
       var style = this.current();
       return this.update(style);
-    } }]);return Style;}();exports.default = Style;
+    }
+  }]);
+
+  return Style;
+}();
+
+exports.default = Style;
 
 /***/ }),
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * Copyright (c) 2011-2016 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @date 2016/10/06 - 22:02
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * Element の ClientRect 取得します
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * - bottom: float
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * - height: float
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * - left: float
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * - right: float
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * - top: float
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * - width: float
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * - x: float
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * - y: float
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * @see https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XPCOM/Reference/Interface/nsIDOMClientRect
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           */var
-Bounding = function () {
+ * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/10/06 - 22:02
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
+
+/**
+ * Element の ClientRect 取得します
+ * - bottom: float
+ * - height: float
+ * - left: float
+ * - right: float
+ * - top: float
+ * - width: float
+ * - x: float
+ * - y: float
+ * @see https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XPCOM/Reference/Interface/nsIDOMClientRect
+ */
+var Bounding = function () {
   /**
-                         * 操作対象 Element を保存します
-                         * @param {Element} element 操作対象 Element
-                         */
-  function Bounding(element) {_classCallCheck(this, Bounding);
+   * 操作対象 Element を保存します
+   * @param {Element} element 操作対象 Element
+   */
+  function Bounding(element) {
+    _classCallCheck(this, Bounding);
+
     /**
-                                                                * 操作対象 Element
-                                                                * @type {Element}
-                                                                */
+     * 操作対象 Element
+     * @type {Element}
+     */
     this.element = element;
   }
   /**
-     * `getBoundingClientRect` を使用しプロパティ element の offset 値を取得します
-     * @return {ClientRect} read only ClientRect を返します
-     */_createClass(Bounding, [{ key: "offset", value: function offset()
-    {
+   * `getBoundingClientRect` を使用しプロパティ element の offset 値を取得します
+   * @return {ClientRect} read only ClientRect を返します
+   */
+
+
+  _createClass(Bounding, [{
+    key: "offset",
+    value: function offset() {
       return Bounding.offset(this.element);
     }
     /**
-       * writable な element の offset 値を取得します
-       * @return {{
-       *  top: number,
-       *  right: number,
-       *  bottom: number,
-       *  left: number,
-       *  width: number,
-       *  height: number}} writable な element の offset
-       *  */ }, { key: "clone", value: function clone()
-    {
+     * writable な element の offset 値を取得します
+     * @return {{
+     *  top: number,
+     *  right: number,
+     *  bottom: number,
+     *  left: number,
+     *  width: number,
+     *  height: number}} writable な element の offset
+     *  */
+
+  }, {
+    key: "clone",
+    value: function clone() {
       return Bounding.clone(this.offset());
     }
     /**
-       * `getBoundingClientRect` を使用し引数 element の offset 値を取得します
-       *
-       * ```
-       * {{top: Number, right: Number, left: Number, bottom: Number, width: Number, height: Number}}
-       * ```
-       *
-       * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
-       *
-       * @param {Element} element 調査対象 Element
-       * @return {ClientRect} 引数 element の offset 値を返します
-       */ }], [{ key: "offset", value: function offset(
-    element) {
+     * `getBoundingClientRect` を使用し引数 element の offset 値を取得します
+     *
+     * ```
+     * {{top: Number, right: Number, left: Number, bottom: Number, width: Number, height: Number}}
+     * ```
+     *
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
+     *
+     * @param {Element} element 調査対象 Element
+     * @return {ClientRect} 引数 element の offset 値を返します
+     */
+
+  }], [{
+    key: "offset",
+    value: function offset(element) {
       return element.getBoundingClientRect();
     }
     /**
-       * ClientRect の複製を Object 化し writable にします
-       * @param {ClientRect} offset 複製元 ClientRect
-       * @return {{
-       *  top: number,
-       *  right: number,
-       *  bottom: number,
-       *  left: number,
-       *  width: number,
-       *  height: number}} ClientRect の複製 (Object) を返します
-       */ }, { key: "clone", value: function clone(
-    offset) {
+     * ClientRect の複製を Object 化し writable にします
+     * @param {ClientRect} offset 複製元 ClientRect
+     * @return {{
+     *  top: number,
+     *  right: number,
+     *  bottom: number,
+     *  left: number,
+     *  width: number,
+     *  height: number}} ClientRect の複製 (Object) を返します
+     */
+
+  }, {
+    key: "clone",
+    value: function clone(offset) {
       return {
         top: offset.top,
         right: offset.right,
         bottom: offset.bottom,
         left: offset.left,
         width: offset.width,
-        height: offset.height };
+        height: offset.height
+      };
+    }
+  }]);
 
-    } }]);return Bounding;}();exports.default = Bounding;
+  return Bounding;
+}();
+
+exports.default = Bounding;
 
 /***/ }),
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * Copyright (c) 2011-2016 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @date 2016/11/22 - 11:38
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * Element の CSS class を操作します
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           */var
-Classes = function () {
+ * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/11/22 - 11:38
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
+
+/**
+ * Element の CSS class を操作します
+ */
+var Classes = function () {
   /**
-                        * 操作対象 Element を保持します
-                        * @param {Element} element 操作対象 Element
-                        */
-  function Classes(element) {_classCallCheck(this, Classes);
+   * 操作対象 Element を保持します
+   * @param {Element} element 操作対象 Element
+   */
+  function Classes(element) {
+    _classCallCheck(this, Classes);
+
     /**
-                                                              * 操作対象 Element
-                                                              * @type {Element}
-                                                              */
+     * 操作対象 Element
+     * @type {Element}
+     */
     this.element = element;
   }
   /**
-     * className を有するかを調べます
-     * @param {string} className 調査対象 CSS class name
-     * @returns {boolean} 存在すると true を返します
-     */_createClass(Classes, [{ key: 'has', value: function has(
-    className) {
+   * className を有するかを調べます
+   * @param {string} className 調査対象 CSS class name
+   * @returns {boolean} 存在すると true を返します
+   */
+
+
+  _createClass(Classes, [{
+    key: 'has',
+    value: function has(className) {
       return Classes.has(this.element, className);
     }
     /**
-       * className を追加します
-       * @param {string} className 追加対象 CSS class name
-       * @returns {boolean} 追加に成功すると true を返します
-       */ }, { key: 'add', value: function add(
-    className) {
+     * className を追加します
+     * @param {string} className 追加対象 CSS class name
+     * @returns {boolean} 追加に成功すると true を返します
+     */
+
+  }, {
+    key: 'add',
+    value: function add(className) {
       return Classes.add(this.element, className);
     }
     /**
-       * className を削除します
-       * @param {string} className 削除対象 CSS class name
-       * @returns {boolean} 削除に成功すると true を返します
-       */ }, { key: 'remove', value: function remove(
-    className) {
+     * className を削除します
+     * @param {string} className 削除対象 CSS class name
+     * @returns {boolean} 削除に成功すると true を返します
+     */
+
+  }, {
+    key: 'remove',
+    value: function remove(className) {
       return Classes.remove(this.element, className);
     }
     /**
-       * Elementが引数 className を有するかを調べます
-       * @param {Element} element 操作対象 Element
-       * @param {string} className 調査対象 CSS class name
-       * @returns {boolean} 存在すると true を返します
-       */ }], [{ key: 'has', value: function has(
-    element, className) {
-      var elementClasses = element.classList ?
-      Array.from(element.classList) :
-      Classes.convert(element);
+     * Elementが引数 className を有するかを調べます
+     * @param {Element} element 操作対象 Element
+     * @param {string} className 調査対象 CSS class name
+     * @returns {boolean} 存在すると true を返します
+     */
+
+  }], [{
+    key: 'has',
+    value: function has(element, className) {
+      var elementClasses = element.classList ? Array.from(element.classList) : Classes.convert(element);
       return elementClasses.indexOf(className) !== -1;
     }
     /**
-       * Element へ引数 className を追加します
-       * @param {Element} node 操作対象 Element
-       * @param {string} className 追加対象 CSS class name
-       * @returns {boolean} 追加に成功すると true を返します
-       */ }, { key: 'add', value: function add(
-    node, className) {
+     * Element へ引数 className を追加します
+     * @param {Element} node 操作対象 Element
+     * @param {string} className 追加対象 CSS class name
+     * @returns {boolean} 追加に成功すると true を返します
+     */
+
+  }, {
+    key: 'add',
+    value: function add(node, className) {
       // CSS class の存在チェック
       if (Classes.has(node, className)) {
         return false;
@@ -1572,9 +2048,7 @@ Classes = function () {
       // argument copy
       var element = node;
       // @type {Array<string>} - element class を取得し配列へ変換
-      var elementClasses = element.classList ?
-      Array.from(element.classList) :
-      Classes.convert(element);
+      var elementClasses = element.classList ? Array.from(element.classList) : Classes.convert(element);
       // 置換え配列最後尾に新規 `className` を追加します
       elementClasses.push(className);
       // 配列を ' '（ワンスペース）でつなぎ文字列変換後に設定します
@@ -1582,21 +2056,22 @@ Classes = function () {
       return true;
     }
     /**
-       * Element から引数 className を削除します
-       * @param {Element} node 操作対象 Element
-       * @param {string} className 削除対象 CSS class name
-       * @returns {boolean} 削除に成功すると true を返します
-       */ }, { key: 'remove', value: function remove(
-    node, className) {
+     * Element から引数 className を削除します
+     * @param {Element} node 操作対象 Element
+     * @param {string} className 削除対象 CSS class name
+     * @returns {boolean} 削除に成功すると true を返します
+     */
+
+  }, {
+    key: 'remove',
+    value: function remove(node, className) {
       if (!Classes.has(node, className)) {
         return false;
       }
       // argument copy
       var element = node;
       // @type {Array<string>} - element class を取得し配列へ変換
-      var elementClasses = element.classList ?
-      Array.from(element.classList) :
-      Classes.convert(element);
+      var elementClasses = element.classList ? Array.from(element.classList) : Classes.convert(element);
       // 配列での削除対象 class の位置を取得します
       var index = elementClasses.indexOf(className);
       // 配列位置を元に削除実行します
@@ -1606,14 +2081,15 @@ Classes = function () {
       return true;
     }
     /**
-       * 可哀相な IE のための配列コンバーター, .classList 代用します
-       * @param {Element} element 操作対象 NodeList
-       * @returns {Array} 配列にコンバートして返します
-       */ }, { key: 'convert', value: function convert(
-    element) {
-      var arr = element.classList ?
-      element.classList :
-      element.className.split(' ');
+     * 可哀相な IE のための配列コンバーター, .classList 代用します
+     * @param {Element} element 操作対象 NodeList
+     * @returns {Array} 配列にコンバートして返します
+     */
+
+  }, {
+    key: 'convert',
+    value: function convert(element) {
+      var arr = element.classList ? element.classList : element.className.split(' ');
       var i = 0;
       var limit = arr.length;
       var empty = [];
@@ -1624,70 +2100,112 @@ Classes = function () {
         }
       }
       return empty;
-    } }]);return Classes;}();exports.default = Classes;
+    }
+  }]);
+
+  return Classes;
+}();
+
+exports.default = Classes;
 
 /***/ }),
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _EventDispatcher2 = __webpack_require__(1);
+
+var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
+
+var _ScrollEvents = __webpack_require__(15);
+
+var _ScrollEvents2 = _interopRequireDefault(_ScrollEvents);
+
+var _Freeze = __webpack_require__(33);
+
+var _Freeze2 = _interopRequireDefault(_Freeze);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Copyright (c) 2011-2016 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date 2016/07/26 - 21:05
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+// event
 
 
-
-
-
-
-
-
-
-
-var _EventDispatcher2 = __webpack_require__(1);var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
-var _ScrollEvents = __webpack_require__(15);var _ScrollEvents2 = _interopRequireDefault(_ScrollEvents);
-
-
-var _Freeze = __webpack_require__(33);var _Freeze2 = _interopRequireDefault(_Freeze);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * Copyright (c) 2011-2016 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * @date 2016/07/26 - 21:05
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              */ // event
 // util
+
+
 /**
  * new を許可しないための Symbol
  * @type {Symbol}
  * @private
- */var singletonSymbol = Symbol('Scroll singleton symbol'); /**
-                                                             * singleton instance, nullable
-                                                             * @type {?Scroll}
-                                                             * @private
-                                                             */var instance = null; /**
-                                                                                     * window scroll event を監視し通知を行います
-                                                                                     * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
-                                                                                     *
-                                                                                     * ```
-                                                                                     * const instance = Scroll.factory();
-                                                                                     * ```
-                                                                                     */var Scroll = function (_EventDispatcher) {_inherits(Scroll, _EventDispatcher); /**
-                                                                                                                                                                       * singleton です
-                                                                                                                                                                       * @param {Symbol} checkSymbol singleton を保証するための private instance
-                                                                                                                                                                       * @returns {Scroll} singleton instance を返します
-                                                                                                                                                                       */function Scroll(checkSymbol) {var _ret2;_classCallCheck(this, Scroll); // checkSymbol と singleton が等価かをチェックします
-    if (checkSymbol !== singletonSymbol) {throw new Error('don\'t use new, instead use static factory method.');
+ */
+var singletonSymbol = Symbol('Scroll singleton symbol');
+/**
+ * singleton instance, nullable
+ * @type {?Scroll}
+ * @private
+ */
+var instance = null;
+
+/**
+ * window scroll event を監視し通知を行います
+ * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
+ *
+ * ```
+ * const instance = Scroll.factory();
+ * ```
+ */
+
+var Scroll = function (_EventDispatcher) {
+  _inherits(Scroll, _EventDispatcher);
+
+  /**
+   * singleton です
+   * @param {Symbol} checkSymbol singleton を保証するための private instance
+   * @returns {Scroll} singleton instance を返します
+   */
+  function Scroll(checkSymbol) {
+    var _ret2;
+
+    _classCallCheck(this, Scroll);
+
+    // checkSymbol と singleton が等価かをチェックします
+    if (checkSymbol !== singletonSymbol) {
+      throw new Error('don\'t use new, instead use static factory method.');
     }
     // instance 作成済みかをチェックし instance が null の時 this を設定します
-    if (instance !== null) {var _ret;
+    if (instance !== null) {
+      var _ret;
+
       return _ret = instance, _possibleConstructorReturn(_this, _ret);
     }
     // onetime setting
+
     var _this = _possibleConstructorReturn(this, (Scroll.__proto__ || Object.getPrototypeOf(Scroll)).call(this));
+
     instance = _this;
 
     // event handler
@@ -1713,10 +2231,10 @@ var _Freeze = __webpack_require__(33);var _Freeze2 = _interopRequireDefault(_Fre
      */
     _this.previous = -1;
     /**
-                          * start 済みフラッグ
-                          * @type {boolean}
-                          * @default false
-                          */
+     * start 済みフラッグ
+     * @type {boolean}
+     * @default false
+     */
     _this.started = false;
 
     // 設定済み instance を返します
@@ -1730,9 +2248,11 @@ var _Freeze = __webpack_require__(33);var _Freeze2 = _interopRequireDefault(_Fre
    * @event SCROLL
    * @returns {string} event, scrollScroll を返します
    * @default scrollScroll
-   */_createClass(Scroll, [{ key: 'start',
+   */
 
 
+  _createClass(Scroll, [{
+    key: 'start',
 
     // ----------------------------------------
     // METHOD
@@ -1740,8 +2260,8 @@ var _Freeze = __webpack_require__(33);var _Freeze2 = _interopRequireDefault(_Fre
     /**
      * scroll event を監視します
      * @returns {Scroll} method chain 可能なように instance を返します
-     */value: function start()
-    {
+     */
+    value: function start() {
       if (this.started) {
         return this;
       }
@@ -1750,10 +2270,13 @@ var _Freeze = __webpack_require__(33);var _Freeze2 = _interopRequireDefault(_Fre
       return this;
     }
     /**
-       * scroll event を監視を止めます
-       * @returns {Scroll} method chain 可能なように instance を返します
-       */ }, { key: 'stop', value: function stop()
-    {
+     * scroll event を監視を止めます
+     * @returns {Scroll} method chain 可能なように instance を返します
+     */
+
+  }, {
+    key: 'stop',
+    value: function stop() {
       if (!this.started) {
         return this;
       }
@@ -1762,12 +2285,15 @@ var _Freeze = __webpack_require__(33);var _Freeze2 = _interopRequireDefault(_Fre
       return this;
     }
     /**
-       * window scroll event handler<br>
-       * window scroll event 発生後に scroll top 位置をもたせた Scroll.SCROLL custom event を発火します
-       * @param {?Event} event window scroll event, nullable
-       * @returns {void}
-       */ }, { key: 'scroll', value: function scroll(
-    event) {
+     * window scroll event handler<br>
+     * window scroll event 発生後に scroll top 位置をもたせた Scroll.SCROLL custom event を発火します
+     * @param {?Event} event window scroll event, nullable
+     * @returns {void}
+     */
+
+  }, {
+    key: 'scroll',
+    value: function scroll(event) {
       // @type {number} - scroll top
       var y = Scroll.y();
       // @type {number} - window height
@@ -1802,108 +2328,170 @@ var _Freeze = __webpack_require__(33);var _Freeze2 = _interopRequireDefault(_Fre
      * @param {number} [y=0] scroll top 目標値
      * @param {number} [delay=0] time out 遅延 ms
      * @returns {number} time out id
-     */ }], [{ key: 'jump', value: function jump()
-    {var y = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-      return setTimeout(function () {window.scrollTo(0, y);}, delay);
+     */
+
+  }], [{
+    key: 'jump',
+    value: function jump() {
+      var y = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+      return setTimeout(function () {
+        window.scrollTo(0, y);
+      }, delay);
     }
     /**
-       * {@link Freeze}.freeze を実行し scroll 操作を一定期間不能にします
-       * @returns {number} time out ID
-       */ }, { key: 'freeze', value: function freeze()
-    {
+     * {@link Freeze}.freeze を実行し scroll 操作を一定期間不能にします
+     * @returns {number} time out ID
+     */
+
+  }, {
+    key: 'freeze',
+    value: function freeze() {
       return _Freeze2.default.freeze();
     }
     /**
-       * scroll top 位置
-       * @returns {number} scroll top 位置を返します
-       * @see https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY
-       * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
-       */ }, { key: 'y', value: function y()
-    {
-      return typeof window.pageYOffset !== 'undefined' ?
-      window.pageYOffset :
-      (document.documentElement || document.body.parentNode || document.body).scrollTop;
+     * scroll top 位置
+     * @returns {number} scroll top 位置を返します
+     * @see https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
+     */
+
+  }, {
+    key: 'y',
+    value: function y() {
+      return typeof window.pageYOffset !== 'undefined' ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
     }
     // ----------------------------------------
     /**
      * Scroll instance を singleton を保証し作成します
      * @returns {Scroll} Scroll instance を返します
-     */ }, { key: 'factory', value: function factory()
-    {
+     */
+
+  }, {
+    key: 'factory',
+    value: function factory() {
       if (instance !== null) {
         return instance;
       }
       return new Scroll(singletonSymbol);
-    } }, { key: 'SCROLL', get: function get() {return 'scrollScroll';} }]);return Scroll;}(_EventDispatcher3.default);exports.default = Scroll;
+    }
+  }, {
+    key: 'SCROLL',
+    get: function get() {
+      return 'scrollScroll';
+    }
+  }]);
+
+  return Scroll;
+}(_EventDispatcher3.default);
+
+exports.default = Scroll;
 
 /***/ }),
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _Scroll = __webpack_require__(10);
+
+var _Scroll2 = _interopRequireDefault(_Scroll);
+
+var _EventDispatcher2 = __webpack_require__(1);
+
+var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
+
+var _ScrollEvents = __webpack_require__(15);
+
+var _ScrollEvents2 = _interopRequireDefault(_ScrollEvents);
+
+var _Rate = __webpack_require__(13);
+
+var _Rate2 = _interopRequireDefault(_Rate);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @license inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date 2016/11/04
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Copyright (c) 2011-2015 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+// event
 
 
-
-
-
-
-
-
-
-
-
-var _Scroll = __webpack_require__(10);var _Scroll2 = _interopRequireDefault(_Scroll);
-var _EventDispatcher2 = __webpack_require__(1);var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
-var _ScrollEvents = __webpack_require__(15);var _ScrollEvents2 = _interopRequireDefault(_ScrollEvents);
-
-
-var _Rate = __webpack_require__(13);var _Rate2 = _interopRequireDefault(_Rate);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @license inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @date 2016/11/04
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Copyright (c) 2011-2015 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */ // event
 // tick
+
+
 /**
  * Scroll 位置
- * */var Scrolling = function (_EventDispatcher) {_inherits(Scrolling, _EventDispatcher); /**
-                                                                                           * @param {Rate} [rate=new Rate(Rate.Rate_5)] Rate instance, scroll 監視 fps を設定します
-                                                                                           */function Scrolling() {var rate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _Rate2.default(_Rate2.default.RATE_5);_classCallCheck(this, Scrolling); // @type {function}
+ * */
+var Scrolling = function (_EventDispatcher) {
+  _inherits(Scrolling, _EventDispatcher);
+
+  /**
+   * @param {Rate} [rate=new Rate(Rate.Rate_5)] Rate instance, scroll 監視 fps を設定します
+   */
+  function Scrolling() {
+    var rate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _Rate2.default(_Rate2.default.RATE_5);
+
+    _classCallCheck(this, Scrolling);
+
+    // @type {function}
     // const boundScroll = this.scroll.bind(this);
     /**
      * bound scroll, Rate.UPDATE event handler
      * @type {function}
-     */var _this = _possibleConstructorReturn(this, (Scrolling.__proto__ || Object.getPrototypeOf(Scrolling)).call(this));_this.boundScroll = _this.scroll.bind(_this); // this.boundScroll = boundScroll;
+     */
+    var _this = _possibleConstructorReturn(this, (Scrolling.__proto__ || Object.getPrototypeOf(Scrolling)).call(this));
+
+    _this.boundScroll = _this.scroll.bind(_this);
+    // this.boundScroll = boundScroll;
     // @type {ScrollEvents}
     // const events = new ScrollEvents(Scrolling.UPDATE, this, this);
     /**
      * ScrollEvents instance, 発火時に使用します
      * @type {ScrollEvents}
-     */_this.events = new _ScrollEvents2.default(Scrolling.UPDATE, _this, _this); // this.events = events;
+     */
+    _this.events = new _ScrollEvents2.default(Scrolling.UPDATE, _this, _this);
+    // this.events = events;
     /**
      * 前回 scroll top 位置
      * @type {number}
      * @default -1
-     */_this.previous = -1; /**
-                             * start 済みフラッグ
-                             * @type {boolean}
-                             * @default false
-                             */
+     */
+    _this.previous = -1;
+    /**
+     * start 済みフラッグ
+     * @type {boolean}
+     * @default false
+     */
     _this.started = false;
     /**
-                            * Rate instance
-                            * @type {?Rate}
-                            */
-    _this.rate = rate;return _this;
+     * Rate instance
+     * @type {?Rate}
+     */
+    _this.rate = rate;
+    return _this;
   }
   // ----------------------------------------
   // EVENT
@@ -1913,9 +2501,11 @@ var _Rate = __webpack_require__(13);var _Rate2 = _interopRequireDefault(_Rate);f
    * @event SCROLL
    * @returns {string} event, scrollingScroll を返します
    * @default scrollingScroll
-   */_createClass(Scrolling, [{ key: 'start',
+   */
 
 
+  _createClass(Scrolling, [{
+    key: 'start',
 
     // ----------------------------------------
     // METHOD
@@ -1923,8 +2513,8 @@ var _Rate = __webpack_require__(13);var _Rate2 = _interopRequireDefault(_Rate);f
     /**
      * fps を監視しスクロール位置を知らせます
      * @returns {Scrolling} method chain 可能なように instance を返します
-     */value: function start()
-    {
+     */
+    value: function start() {
       // flag check
       if (this.started) {
         return this;
@@ -1937,10 +2527,13 @@ var _Rate = __webpack_require__(13);var _Rate2 = _interopRequireDefault(_Rate);f
       return this;
     }
     /**
-       * fps 監視を止めます
-       * @returns {Scrolling} method chain 可能なように instance を返します
-       */ }, { key: 'stop', value: function stop()
-    {
+     * fps 監視を止めます
+     * @returns {Scrolling} method chain 可能なように instance を返します
+     */
+
+  }, {
+    key: 'stop',
+    value: function stop() {
       if (!this.started) {
         return this;
       }
@@ -1949,25 +2542,28 @@ var _Rate = __webpack_require__(13);var _Rate2 = _interopRequireDefault(_Rate);f
       return this;
     }
     /**
-       * 指定 rate(fps) 毎にスクロール位置を<br>
-       * scroll top 位置をもたせた Scrolling.UPDATE custom event を発火します
-       *
-       * 下記のプロパティをイベント・インスタンスに追加します
-       *
-       * - original {Events} - Rate Events instance
-       * - y {number} - scroll top
-       * - height {number} - window height
-       * - width {number} - window width
-       * - bottom {number} - window bottom 位置 (y + height)
-       * - previous {number} - 前回の scroll top
-       * - moving {number} - 前回からの移動量, 正: scroll down, 負: scroll up
-       * - wide {boolean} - width が 768 以上の時に true
-       * - changed {boolean} - scroll top が前回と変わっていたら true
-       *
-       * @param {?Event|?Events} event window scroll event, nullable
-       * @returns {void}
-       */ }, { key: 'scroll', value: function scroll(
-    event) {
+     * 指定 rate(fps) 毎にスクロール位置を<br>
+     * scroll top 位置をもたせた Scrolling.UPDATE custom event を発火します
+     *
+     * 下記のプロパティをイベント・インスタンスに追加します
+     *
+     * - original {Events} - Rate Events instance
+     * - y {number} - scroll top
+     * - height {number} - window height
+     * - width {number} - window width
+     * - bottom {number} - window bottom 位置 (y + height)
+     * - previous {number} - 前回の scroll top
+     * - moving {number} - 前回からの移動量, 正: scroll down, 負: scroll up
+     * - wide {boolean} - width が 768 以上の時に true
+     * - changed {boolean} - scroll top が前回と変わっていたら true
+     *
+     * @param {?Event|?Events} event window scroll event, nullable
+     * @returns {void}
+     */
+
+  }, {
+    key: 'scroll',
+    value: function scroll(event) {
       // @type {number} - scroll top
       var y = _Scroll2.default.y();
       // @type {number} - window height
@@ -2005,104 +2601,150 @@ var _Rate = __webpack_require__(13);var _Rate2 = _interopRequireDefault(_Rate);f
       this.previous = y;
     }
     /**
-       * 強制的に Scrolling.SCROLL event を発火させます
-       * @returns {void}
-       */ }, { key: 'fire', value: function fire()
-    {
+     * 強制的に Scrolling.SCROLL event を発火させます
+     * @returns {void}
+     */
+
+  }, {
+    key: 'fire',
+    value: function fire() {
       this.scroll(null);
-    } }], [{ key: 'UPDATE', get: function get() {return 'scrollingUpdate';} }]);return Scrolling;}(_EventDispatcher3.default);exports.default = Scrolling;
+    }
+  }], [{
+    key: 'UPDATE',
+    get: function get() {
+      return 'scrollingUpdate';
+    }
+  }]);
+
+  return Scrolling;
+}(_EventDispatcher3.default);
+
+exports.default = Scrolling;
 
 /***/ }),
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _EventDispatcher2 = __webpack_require__(1);
+
+var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
+
+var _Events = __webpack_require__(0);
+
+var _Events2 = _interopRequireDefault(_Events);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @license inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date 2016/07/03
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Copyright (c) 2011-2015 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+// event
 
 
-
-
-
-
-
-
-
-
-
-var _EventDispatcher2 = __webpack_require__(1);var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
-var _Events = __webpack_require__(0);var _Events2 = _interopRequireDefault(_Events);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * @license inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * @date 2016/07/03
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * Copyright (c) 2011-2015 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */ // event
 /**
  * new を許可しないための Symbol
  * @type {Symbol}
  * @private
- */var singletonSymbol = Symbol('singleton instance'); /**
-                                                        * singleton instance, nullable
-                                                        * @type {?Cycle}
-                                                        * @private
-                                                        * @static
-                                                        */var instance = null; /**
-                                                                                * <p>requestAnimationFrame を使用しループイベントを発生させます</p>
-                                                                                * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
-                                                                                *
-                                                                                * ```
-                                                                                * const loop = Cycle.factory();
-                                                                                * const update = () => {
-                                                                                *  // code here, something do
-                                                                                * };
-                                                                                * loop.on(Cycle.UPDATE, update);
-                                                                                * loop.start();
-                                                                                * ```
-                                                                                *
-                                                                                * <p>requestAnimationFrame は tab が active(focus) な時のみ発生します</p>
-                                                                                */var Cycle = function (_EventDispatcher) {_inherits(Cycle, _EventDispatcher); /**
-                                                                                                                                                                * singleton です
-                                                                                                                                                                * @param {Symbol} checkSymbol singleton を保証するための private instance
-                                                                                                                                                                * @returns {Cycle} singleton instance を返します
-                                                                                                                                                                */function Cycle(checkSymbol) {var _ret2;_classCallCheck(this, Cycle); // checkSymbol と singleton が等価かをチェックします
-    if (checkSymbol !== singletonSymbol) {throw new Error('don\'t use new, instead use static factory method.');
+ */
+var singletonSymbol = Symbol('singleton instance');
+/**
+ * singleton instance, nullable
+ * @type {?Cycle}
+ * @private
+ * @static
+ */
+var instance = null;
+
+/**
+ * <p>requestAnimationFrame を使用しループイベントを発生させます</p>
+ * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
+ *
+ * ```
+ * const loop = Cycle.factory();
+ * const update = () => {
+ *  // code here, something do
+ * };
+ * loop.on(Cycle.UPDATE, update);
+ * loop.start();
+ * ```
+ *
+ * <p>requestAnimationFrame は tab が active(focus) な時のみ発生します</p>
+ */
+
+var Cycle = function (_EventDispatcher) {
+  _inherits(Cycle, _EventDispatcher);
+
+  /**
+   * singleton です
+   * @param {Symbol} checkSymbol singleton を保証するための private instance
+   * @returns {Cycle} singleton instance を返します
+   */
+  function Cycle(checkSymbol) {
+    var _ret2;
+
+    _classCallCheck(this, Cycle);
+
+    // checkSymbol と singleton が等価かをチェックします
+    if (checkSymbol !== singletonSymbol) {
+      throw new Error('don\'t use new, instead use static factory method.');
     }
     // instance 作成済みかをチェックし instance が null の時 this を設定します
-    if (instance !== null) {var _ret;
+    if (instance !== null) {
+      var _ret;
+
       return _ret = instance, _possibleConstructorReturn(_this, _ret);
     }
 
     // -------------------------------
     // onetime setting
-    var _this = _possibleConstructorReturn(this, (Cycle.__proto__ || Object.getPrototypeOf(Cycle)).call(this));instance = _this;
+    var _this = _possibleConstructorReturn(this, (Cycle.__proto__ || Object.getPrototypeOf(Cycle)).call(this));
+
+    instance = _this;
     var events = new _Events2.default(Cycle.UPDATE, _this, _this);
     var boundUpdate = _this.update.bind(_this);
     /**
-                                                 * Cycle.UPDATE Events instance
-                                                 * @type {Events}
-                                                 */
+     * Cycle.UPDATE Events instance
+     * @type {Events}
+     */
     _this.events = events;
     /**
-                            * bound update requestAnimationFrame callback
-                            * @type {function}
-                            */
+     * bound update requestAnimationFrame callback
+     * @type {function}
+     */
     _this.boundUpdate = boundUpdate;
     /**
-                                      * requestAnimationFrame ID
-                                      * @type {number}
-                                      */
+     * requestAnimationFrame ID
+     * @type {number}
+     */
     _this.id = 0;
     /**
-                   * start 済みフラッグ
-                   * @type {boolean}
-                   */
+     * start 済みフラッグ
+     * @type {boolean}
+     */
     _this.started = false;
     // 設定済み instance を返します
     return _ret2 = instance, _possibleConstructorReturn(_this, _ret2);
@@ -2115,9 +2757,11 @@ var _Events = __webpack_require__(0);var _Events2 = _interopRequireDefault(_Even
    * @event UPDATE
    * @returns {string} event, cycleUpdate を返します
    * @default cycleUpdate
-   */_createClass(Cycle, [{ key: 'start',
+   */
 
 
+  _createClass(Cycle, [{
+    key: 'start',
 
     // ----------------------------------------
     // METHOD
@@ -2125,8 +2769,8 @@ var _Events = __webpack_require__(0);var _Events2 = _interopRequireDefault(_Even
     /**
      * loop(requestAnimationFrame) を開始します
      * @returns {boolean} start に成功すると true を返します
-     */value: function start()
-    {
+     */
+    value: function start() {
       if (this.started) {
         // already start
         return false;
@@ -2138,11 +2782,16 @@ var _Events = __webpack_require__(0);var _Events2 = _interopRequireDefault(_Even
       return true;
     }
     /**
-       * loop(cancelAnimationFrame) を止めます
-       * @param {number} [id] requestAnimationFrame id を使い cancelAnimationFrame をします
-       * @returns {boolean} stop に成功すると true を返します
-       */ }, { key: 'stop', value: function stop()
-    {var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.id;
+     * loop(cancelAnimationFrame) を止めます
+     * @param {number} [id] requestAnimationFrame id を使い cancelAnimationFrame をします
+     * @returns {boolean} stop に成功すると true を返します
+     */
+
+  }, {
+    key: 'stop',
+    value: function stop() {
+      var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.id;
+
       if (!this.started) {
         // not start
         return false;
@@ -2160,8 +2809,11 @@ var _Events = __webpack_require__(0);var _Events2 = _interopRequireDefault(_Even
     /**
      * loop(requestAnimationFrame)コールバック関数<br>Cycle.UPDATE event を発火します
      * @returns {number} requestAnimationFrame ID
-     */ }, { key: 'update', value: function update()
-    {
+     */
+
+  }, {
+    key: 'update',
+    value: function update() {
       // @type {number} - requestAnimationFrame id
       var id = requestAnimationFrame(this.boundUpdate);
       this.id = id;
@@ -2179,49 +2831,74 @@ var _Events = __webpack_require__(0);var _Events2 = _interopRequireDefault(_Even
     /**
      * Cycle instance を singleton を保証し作成します
      * @returns {Cycle} Cycle instance を返します
-     */ }], [{ key: 'factory', value: function factory()
-    {
+     */
+
+  }], [{
+    key: 'factory',
+    value: function factory() {
       if (instance === null) {
         return new Cycle(singletonSymbol);
       }
       return instance;
-    } }, { key: 'UPDATE', get: function get() {return 'cycleUpdate';} }]);return Cycle;}(_EventDispatcher3.default);exports.default = Cycle;
+    }
+  }, {
+    key: 'UPDATE',
+    get: function get() {
+      return 'cycleUpdate';
+    }
+  }]);
+
+  return Cycle;
+}(_EventDispatcher3.default);
+
+exports.default = Cycle;
 
 /***/ }),
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _Events = __webpack_require__(0);
+
+var _Events2 = _interopRequireDefault(_Events);
+
+var _Polling2 = __webpack_require__(4);
+
+var _Polling3 = _interopRequireDefault(_Polling2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @license inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date 2016/07/16
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Copyright (c) 2011-2015 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+// event
 
 
-
-
-
-
-
-
-
-
-
-var _Events = __webpack_require__(0);var _Events2 = _interopRequireDefault(_Events);
-
-
-var _Polling2 = __webpack_require__(4);var _Polling3 = _interopRequireDefault(_Polling2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * @license inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * @date 2016/07/16
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * Copyright (c) 2011-2015 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              */ // event
 // tick
+
+
 /**
  * 固定値を使用し fps を決定します
  *
@@ -2244,7 +2921,14 @@ var _Polling2 = __webpack_require__(4);var _Polling3 = _interopRequireDefault(_P
  * };
  * rate.on(Rate.UPDATE, update);
  * rate.start();
- */var Rate = function (_Polling) {_inherits(Rate, _Polling);_createClass(Rate, null, [{ key: 'RATE_60', // ----------------------------------------
+ */
+var Rate = function (_Polling) {
+  _inherits(Rate, _Polling);
+
+  _createClass(Rate, null, [{
+    key: 'RATE_60',
+
+    // ----------------------------------------
     // CONST
     // ----------------------------------------
     /**
@@ -2252,61 +2936,91 @@ var _Polling2 = __webpack_require__(4);var _Polling3 = _interopRequireDefault(_P
      * @const RATE_60
      * @returns {number} fps 60 基準値を返します
      * @default 1
-     */get: function get() {return 1;} /**
-                                       * fps 30 基準値を取得します
-                                       * @const RATE_30
-                                       * @returns {number} fps 30 基準値を返します
-                                       * @default 2
-                                       */ }, { key: 'RATE_30', get: function get() {return 2;} /**
-                                                                                                * fps 20 基準値を取得します
-                                                                                                * @const RATE_20
-                                                                                                * @returns {number} fps 20 基準値を返します
-                                                                                                * @default 3
-                                                                                                */ }, { key: 'RATE_20', get: function get() {return 3;
+     */
+    get: function get() {
+      return 1;
+    } /**
+      * fps 30 基準値を取得します
+      * @const RATE_30
+      * @returns {number} fps 30 基準値を返します
+      * @default 2
+      */
+
+  }, {
+    key: 'RATE_30',
+    get: function get() {
+      return 2;
     }
     /**
-       * fps 15 基準値を取得します
-       * @const RATE_15
-       * @returns {number} fps 15 基準値を返します
-       * @default 4
-       */ }, { key: 'RATE_15', get: function get()
-    {
+     * fps 20 基準値を取得します
+     * @const RATE_20
+     * @returns {number} fps 20 基準値を返します
+     * @default 3
+     */
+
+  }, {
+    key: 'RATE_20',
+    get: function get() {
+      return 3;
+    }
+    /**
+     * fps 15 基準値を取得します
+     * @const RATE_15
+     * @returns {number} fps 15 基準値を返します
+     * @default 4
+     */
+
+  }, {
+    key: 'RATE_15',
+    get: function get() {
       return 4;
     }
     /**
-       * fps 12 基準値を取得します
-       * @const RATE_12
-       * @returns {number} fps 12 基準値を返します
-       * @default 5
-       */ }, { key: 'RATE_12', get: function get()
-    {
+     * fps 12 基準値を取得します
+     * @const RATE_12
+     * @returns {number} fps 12 基準値を返します
+     * @default 5
+     */
+
+  }, {
+    key: 'RATE_12',
+    get: function get() {
       return 5;
     }
     /**
-       * fps 10 基準値を取得します
-       * @const RATE_10
-       * @returns {number} fps 10 基準値を返します
-       * @default 6
-       */ }, { key: 'RATE_10', get: function get()
-    {
+     * fps 10 基準値を取得します
+     * @const RATE_10
+     * @returns {number} fps 10 基準値を返します
+     * @default 6
+     */
+
+  }, {
+    key: 'RATE_10',
+    get: function get() {
       return 6;
     }
     /**
-       * fps 6 基準値を取得します
-       * @const RATE_6
-       * @returns {number} fps 6 基準値を返します
-       * @default 10
-       */ }, { key: 'RATE_6', get: function get()
-    {
+     * fps 6 基準値を取得します
+     * @const RATE_6
+     * @returns {number} fps 6 基準値を返します
+     * @default 10
+     */
+
+  }, {
+    key: 'RATE_6',
+    get: function get() {
       return 10;
     }
     /**
-       * fps 5 基準値を取得します
-       * @const RATE_5
-       * @returns {number} fps 6 基準値を返します
-       * @default 12
-       */ }, { key: 'RATE_5', get: function get()
-    {
+     * fps 5 基準値を取得します
+     * @const RATE_5
+     * @returns {number} fps 6 基準値を返します
+     * @default 12
+     */
+
+  }, {
+    key: 'RATE_5',
+    get: function get() {
       return 12;
     }
     // ----------------------------------------
@@ -2317,8 +3031,11 @@ var _Polling2 = __webpack_require__(4);var _Polling3 = _interopRequireDefault(_P
      * @event UPDATE
      * @returns {string} event, rateUpdate を返します
      * @default rateUpdate
-     */ }, { key: 'UPDATE', get: function get()
-    {
+     */
+
+  }, {
+    key: 'UPDATE',
+    get: function get() {
       return 'rateUpdate';
     }
     // ----------------------------------------
@@ -2327,38 +3044,38 @@ var _Polling2 = __webpack_require__(4);var _Polling3 = _interopRequireDefault(_P
     /**
      * 固定値フレームレート毎に UPDATE イベントを発生させます
      * @param {number} [rateValue=Rate.RATE_5] fps, 固定値以外設定できません
-     */ }]);
-  function Rate() {var rateValue = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Rate.RATE_5;_classCallCheck(this, Rate);
+     */
 
+  }]);
+
+  function Rate() {
+    var rateValue = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Rate.RATE_5;
+
+    _classCallCheck(this, Rate);
 
     // @type {Events}
-    var _this = _possibleConstructorReturn(this, (Rate.__proto__ || Object.getPrototypeOf(Rate)).call(this, 1000 / 60)); // 60fps で polling を行う
-    var events = new _Events2.default(Rate.UPDATE, _this, _this); // 設定可能な rate list
-    var rates = [
-    Rate.RATE_60,
-    Rate.RATE_30,
-    Rate.RATE_20,
-    Rate.RATE_15,
-    Rate.RATE_12,
-    Rate.RATE_10,
-    Rate.RATE_6,
-    Rate.RATE_5];
+    var _this = _possibleConstructorReturn(this, (Rate.__proto__ || Object.getPrototypeOf(Rate)).call(this, 1000 / 60));
+    // 60fps で polling を行う
 
+
+    var events = new _Events2.default(Rate.UPDATE, _this, _this);
+    // 設定可能な rate list
+    var rates = [Rate.RATE_60, Rate.RATE_30, Rate.RATE_20, Rate.RATE_15, Rate.RATE_12, Rate.RATE_10, Rate.RATE_6, Rate.RATE_5];
     /**
-                   * Rate 通知 Events instance
-                   * @type {Events}
-                   */
+     * Rate 通知 Events instance
+     * @type {Events}
+     */
     _this.events = events;
     /**
-                            * 許容可能な rate
-                            * @type {Array<number>}
-                            */
+     * 許容可能な rate
+     * @type {Array<number>}
+     */
     _this.rates = rates;
     /**
-                          * rate count, update 毎にカウントアップします<br>
-                          * 不正値の時は `Rate.RATE_5` を使用します
-                          * @type {number}
-                          */
+     * rate count, update 毎にカウントアップします<br>
+     * 不正値の時は `Rate.RATE_5` を使用します
+     * @type {number}
+     */
     _this.count = 0;
     // let rate = this.validate(rateValue) ? rateValue : Rate.RATE_5;
     /**
@@ -2381,7 +3098,8 @@ var _Polling2 = __webpack_require__(4);var _Polling3 = _interopRequireDefault(_P
     //   return false;
     // };
     // init
-    _this.setRate(rateValue);return _this;
+    _this.setRate(rateValue);
+    return _this;
   }
   // ----------------------------------------
   // METHOD
@@ -2392,8 +3110,12 @@ var _Polling2 = __webpack_require__(4);var _Polling3 = _interopRequireDefault(_P
    * - 不正値: `this.rate` 更新しません, null を返します
    * @param {number} value rate 値
    * @returns {?number} 正しい rate は設定値を不正な時は null を返します
-   */_createClass(Rate, [{ key: 'setRate', value: function setRate(
-    value) {
+   */
+
+
+  _createClass(Rate, [{
+    key: 'setRate',
+    value: function setRate(value) {
       if (this.validate(value)) {
         this.rate = value;
         return value;
@@ -2401,31 +3123,40 @@ var _Polling2 = __webpack_require__(4);var _Polling3 = _interopRequireDefault(_P
       return null;
     }
     /**
-       * 正規な rate 値かをチェックします
-       * @param {number} rate 対象 rate
-       * @returns {boolean} 正しいと true を返します
-       */ }, { key: 'validate', value: function validate(
-    rate) {
+     * 正規な rate 値かをチェックします
+     * @param {number} rate 対象 rate
+     * @returns {boolean} 正しいと true を返します
+     */
+
+  }, {
+    key: 'validate',
+    value: function validate(rate) {
       return this.rates.indexOf(rate) !== -1;
     }
     /**
-       * fps 基準値を設定します
-       * @throws {Error} 引数 rate が設定可能値以外の時に例外エラーが発生します
-       * @param {number} rate fps 基準値, <br>
-       * this.RATE_30, this.RATE_20, this.RATE_15, this.RATE_12, this.RATE_10, <br>
-       * this.RATE_6, this.RATE_5 の何れかが必須です
-       * @returns {boolean} rate 設定に成功すると true を返します
-       */ }, { key: 'change', value: function change(
-    rate) {
+     * fps 基準値を設定します
+     * @throws {Error} 引数 rate が設定可能値以外の時に例外エラーが発生します
+     * @param {number} rate fps 基準値, <br>
+     * this.RATE_30, this.RATE_20, this.RATE_15, this.RATE_12, this.RATE_10, <br>
+     * this.RATE_6, this.RATE_5 の何れかが必須です
+     * @returns {boolean} rate 設定に成功すると true を返します
+     */
+
+  }, {
+    key: 'change',
+    value: function change(rate) {
       var result = this.setRate(rate);
       this.update();
       return result !== null;
     }
     /**
-       * loop(requestAnimationFrame) を開始します
-       * @returns {boolean} start に成功すると true を返します
-       */ }, { key: 'start', value: function start()
-    {
+     * loop(requestAnimationFrame) を開始します
+     * @returns {boolean} start に成功すると true を返します
+     */
+
+  }, {
+    key: 'start',
+    value: function start() {
       if (this.started) {
         // already start
         return false;
@@ -2439,10 +3170,13 @@ var _Polling2 = __webpack_require__(4);var _Polling3 = _interopRequireDefault(_P
       return true;
     }
     /**
-       * loop(requestAnimationFrame) します
-       * @returns {boolean} Rate.UPDATE event が発生すると true を返します
-       */ }, { key: 'update', value: function update()
-    {
+     * loop(requestAnimationFrame) します
+     * @returns {boolean} Rate.UPDATE event が発生すると true を返します
+     */
+
+  }, {
+    key: 'update',
+    value: function update() {
       // 余りが 0 の時にイベントを発火します
       this.count += 1;
       var reminder = this.count % this.rate;
@@ -2452,49 +3186,72 @@ var _Polling2 = __webpack_require__(4);var _Polling3 = _interopRequireDefault(_P
         return true;
       }
       return false;
-    } }]);return Rate;}(_Polling3.default);exports.default = Rate;
+    }
+  }]);
+
+  return Rate;
+}(_Polling3.default);
+
+exports.default = Rate;
 
 /***/ }),
 /* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * Copyright (c) 2011-2016 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @date 2016/11/29 - 22:06
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * 衝突判定を行います
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           */var
-Hit = function () {function Hit() {_classCallCheck(this, Hit);}_createClass(Hit, null, [{ key: "test",
+ * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/11/29 - 22:06
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
+
+/**
+ * 衝突判定を行います
+ */
+var Hit = function () {
+  function Hit() {
+    _classCallCheck(this, Hit);
+  }
+
+  _createClass(Hit, null, [{
+    key: "test",
+
     /**
-                                                                                                        * element と window.top(0) window.bottom(height) のヒットテストを行います
-                                                                                                        * @param {number} height 衝突対象物の高さ window.innerHeight
-                                                                                                        * @param {ClientRect|Object} offset 比較対象物の element ClientRect または同等の Object
-                                                                                                        * @returns {{
-                                                                                                        *  top: boolean,
-                                                                                                        *  bottom: boolean,
-                                                                                                        *  contain: boolean,
-                                                                                                        *  include: boolean
-                                                                                                        * }} hit check object を返します
-                                                                                                        */value: function test(
-    height, offset) {
+     * element と window.top(0) window.bottom(height) のヒットテストを行います
+     * @param {number} height 衝突対象物の高さ window.innerHeight
+     * @param {ClientRect|Object} offset 比較対象物の element ClientRect または同等の Object
+     * @returns {{
+     *  top: boolean,
+     *  bottom: boolean,
+     *  contain: boolean,
+     *  include: boolean
+     * }} hit check object を返します
+     */
+    value: function test(height, offset) {
       // hit test
       var hit = {
         result: false,
         top: false,
         bottom: false,
         contain: false,
-        include: false };
-
+        include: false
+      };
 
       // top
       if (offset.top <= height && offset.top >= 0) {
@@ -2512,145 +3269,179 @@ Hit = function () {function Hit() {_classCallCheck(this, Hit);}_createClass(Hit,
       }
 
       // include check を行います
-      if (
-      offset.top >= 0 && offset.top <= height &&
-      offset.bottom >= 0 && offset.bottom <= height)
-      {
+      if (offset.top >= 0 && offset.top <= height && offset.bottom >= 0 && offset.bottom <= height) {
         hit.include = true;
       }
       // return
       // return hit.top || hit.bottom || hit.contain || hit.include;
       hit.result = hit.top || hit.bottom || hit.contain || hit.include;
       return hit;
-    } }]);return Hit;}();exports.default = Hit;
+    }
+  }]);
+
+  return Hit;
+}();
+
+exports.default = Hit;
 
 /***/ }),
 /* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
+var _Events2 = __webpack_require__(0);
 
+var _Events3 = _interopRequireDefault(_Events2);
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Copyright (c) 2011-2016 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date 2016/11/20 - 10:54
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
+/**
+ * Scroll events 管理クラス
+ */
+var ScrollEvents = function (_Events) {
+  _inherits(ScrollEvents, _Events);
 
+  /**
+   * custom Event Object
+   * @param {string} type イベント種類
+   * @param {*} currentTarget current イベント発生インスタンス
+   * @param {*} [target=undefined] イベント発生インスタンス
+   * */
+  function ScrollEvents(type, currentTarget) {
+    var target = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
 
-var _Events2 = __webpack_require__(0);var _Events3 = _interopRequireDefault(_Events2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * Copyright (c) 2011-2016 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * @date 2016/11/20 - 10:54
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          */ /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * Scroll events 管理クラス
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              */var ScrollEvents = function (_Events) {_inherits(ScrollEvents, _Events); /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * custom Event Object
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * @param {string} type イベント種類
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * @param {*} currentTarget current イベント発生インスタンス
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * @param {*} [target=undefined] イベント発生インスタンス
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * */function ScrollEvents(type, currentTarget) {var target = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;_classCallCheck(this, ScrollEvents); /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * scroll top 前回位置(px)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * @type {number}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           */var _this = _possibleConstructorReturn(this, (ScrollEvents.__proto__ || Object.getPrototypeOf(ScrollEvents)).call(this, type, currentTarget, target));_this.previous = -1; /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * オリジナルイベント(.onscroll)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * @type {?Event}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         */_this.original = null;
+    _classCallCheck(this, ScrollEvents);
+
     /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   * scroll top 現在位置(px)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   * @type {number}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   */
+     * scroll top 前回位置(px)
+     * @type {number}
+     */
+    var _this = _possibleConstructorReturn(this, (ScrollEvents.__proto__ || Object.getPrototypeOf(ScrollEvents)).call(this, type, currentTarget, target));
+
+    _this.previous = -1;
+    /**
+     * オリジナルイベント(.onscroll)
+     * @type {?Event}
+     */
+    _this.original = null;
+    /**
+     * scroll top 現在位置(px)
+     * @type {number}
+     */
     _this.y = 0;
     /**
-                  * window innerHeight
-                  * @type {number}
-                  */
+     * window innerHeight
+     * @type {number}
+     */
     _this.height = 0;
     /**
-                       * window innerWidth
-                       * @type {number}
-                       */
+     * window innerWidth
+     * @type {number}
+     */
     _this.width = 0;
     /**
-                      * window 下端位置(scroll top + window height)
-                      * @type {number}
-                      */
+     * window 下端位置(scroll top + window height)
+     * @type {number}
+     */
     _this.bottom = 0;
     /**
-                       * scroll top 位置が前回と違うかを表すフラッグ, true: 違う
-                       * @type {boolean}
-                       */
+     * scroll top 位置が前回と違うかを表すフラッグ, true: 違う
+     * @type {boolean}
+     */
     _this.changed = false;
     /**
-                            * UP / DOWN と前回からの移動距離(px), 正(+): scroll down
-                            * @type {number}
-                            */
-    _this.moving = 0;return _this;
-  }return ScrollEvents;}(_Events3.default);exports.default = ScrollEvents;
+     * UP / DOWN と前回からの移動距離(px), 正(+): scroll down
+     * @type {number}
+     */
+    _this.moving = 0;
+    return _this;
+  }
+
+  return ScrollEvents;
+}(_Events3.default);
+
+exports.default = ScrollEvents;
 
 /***/ }),
 /* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * Copyright (c) 2011-2016 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @date 2016/11/30 - 16:47
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * [native code] - document
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * @type {HTMLDocument}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * @private
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * @static
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           */
+ * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/11/30 - 16:47
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
+
+/**
+ * [native code] - document
+ * @type {HTMLDocument}
+ * @private
+ * @static
+ */
 var document = self.document;
 /**
-                               * CSS detector に使用する virtual CSSStyleDeclaration
-                               * ```
-                               * document.createElement('p').style
-                               * ```
-                               * @type {CSSStyleDeclaration}
-                               * @private
-                               * @static
-                               * @see https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration
-                               * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style
-                               */
+ * CSS detector に使用する virtual CSSStyleDeclaration
+ * ```
+ * document.createElement('p').style
+ * ```
+ * @type {CSSStyleDeclaration}
+ * @private
+ * @static
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style
+ */
 var style = document.createElement('p').style;
 /**
-                                                * vendor prefix list, CSS detector に使用します
-                                                * - '-webkit-',
-                                                * - '-moz-',
-                                                * - '-ms-',
-                                                * - '-o-',
-                                                * - ''
-                                                * @type {[string]}
-                                                * @private
-                                                * @static
-                                                */
-var vendors = [
-'-webkit-',
-'-moz-',
-'-ms-',
-'-o-',
-''];
-
+ * vendor prefix list, CSS detector に使用します
+ * - '-webkit-',
+ * - '-moz-',
+ * - '-ms-',
+ * - '-o-',
+ * - ''
+ * @type {[string]}
+ * @private
+ * @static
+ */
+var vendors = ['-webkit-', '-moz-', '-ms-', '-o-', ''];
 // /**
 //  * 確認用関数
 //  * - transition - @return {boolean}
@@ -2684,58 +3475,85 @@ var vendors = [
  * @private
  * @static
  */
-var _transition = vendors.some(function (prefix) {return typeof style[prefix + 'transition'] !== 'undefined';});
+var _transition = vendors.some(function (prefix) {
+  return typeof style[prefix + 'transition'] !== 'undefined';
+});
 /**
-                                                                                                                  * CSS3 transform 可能フラッグ
-                                                                                                                  * @type {boolean}
-                                                                                                                  * @private
-                                                                                                                  * @static
-                                                                                                                  */
-var _transform = vendors.some(function (prefix) {return typeof style[prefix + 'transform'] !== 'undefined';});
+ * CSS3 transform 可能フラッグ
+ * @type {boolean}
+ * @private
+ * @static
+ */
+var _transform = vendors.some(function (prefix) {
+  return typeof style[prefix + 'transform'] !== 'undefined';
+});
 
 /**
-                                                                                                                * CSS3 機能使用可能かを調べます
-                                                                                                                * @example
-                                                                                                                * if (Can.transition()) {
-                                                                                                                *  // can CSS3 transition
-                                                                                                                * }
-                                                                                                                *
-                                                                                                                * if (Can.transform()) {
-                                                                                                                *  // can CSS3 transform
-                                                                                                                * }
-                                                                                                                */var
-Can = function () {function Can() {_classCallCheck(this, Can);}_createClass(Can, null, [{ key: 'transition',
+ * CSS3 機能使用可能かを調べます
+ * @example
+ * if (Can.transition()) {
+ *  // can CSS3 transition
+ * }
+ *
+ * if (Can.transform()) {
+ *  // can CSS3 transform
+ * }
+ */
+
+var Can = function () {
+  function Can() {
+    _classCallCheck(this, Can);
+  }
+
+  _createClass(Can, null, [{
+    key: 'transition',
+
     /**
-                                                                                                              * CSS3 transition が使用可能かを調べます
-                                                                                                              * @returns {boolean} true: 使用可能
-                                                                                                              */value: function transition()
-    {
+     * CSS3 transition が使用可能かを調べます
+     * @returns {boolean} true: 使用可能
+     */
+    value: function transition() {
       return _transition;
     }
     /**
-       * CSS3 transform が使用可能かを調べます
-       * @returns {boolean} true: 使用可能
-       */ }, { key: 'transform', value: function transform()
-    {
+     * CSS3 transform が使用可能かを調べます
+     * @returns {boolean} true: 使用可能
+     */
+
+  }, {
+    key: 'transform',
+    value: function transform() {
       return _transform;
-    } }]);return Can;}();exports.default = Can;
+    }
+  }]);
+
+  return Can;
+}();
+
+exports.default = Can;
 
 /***/ }),
 /* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}(); /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * Copyright (c) 2011-2016 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * @date 2016/10/06 - 21:49
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  */
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Copyright (c) 2011-2016 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @date 2016/10/06 - 21:49
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
 
 // css
 
@@ -2743,38 +3561,59 @@ Object.defineProperty(exports, "__esModule", { value: true });var _createClass =
 // don
 
 
-
 // util
-var _Style = __webpack_require__(7);var _Style2 = _interopRequireDefault(_Style);var _Bounding = __webpack_require__(8);var _Bounding2 = _interopRequireDefault(_Bounding);var _Classes = __webpack_require__(9);var _Classes2 = _interopRequireDefault(_Classes);var _Type = __webpack_require__(2);var _Type2 = _interopRequireDefault(_Type);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}
+
+
+var _Style = __webpack_require__(7);
+
+var _Style2 = _interopRequireDefault(_Style);
+
+var _Bounding = __webpack_require__(8);
+
+var _Bounding2 = _interopRequireDefault(_Bounding);
+
+var _Classes = __webpack_require__(9);
+
+var _Classes2 = _interopRequireDefault(_Classes);
+
+var _Type = __webpack_require__(2);
+
+var _Type2 = _interopRequireDefault(_Type);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   * HTMLElement の操作を行います
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   */var
-Elements = function () {
+ * HTMLElement の操作を行います
+ */
+var Elements = function () {
   /**
-                         * 操作対象 Element を保存します
-                         * @param {Element|Node} element 操作対象 Element
-                         */
-  function Elements(element) {_classCallCheck(this, Elements);
+   * 操作対象 Element を保存します
+   * @param {Element|Node} element 操作対象 Element
+   */
+  function Elements(element) {
+    _classCallCheck(this, Elements);
+
     /**
-                                                                * 対象 Element の CSS 操作を行う Style instance
-                                                                * @type {Style}
-                                                                */
+     * 対象 Element の CSS 操作を行う Style instance
+     * @type {Style}
+     */
     this.style = new _Style2.default(element);
     /**
-                                                * Element class 操作のために instance を作成します - Classes instance
-                                                * @type {Classes}
-                                                */
+     * Element class 操作のために instance を作成します - Classes instance
+     * @type {Classes}
+     */
     this.classes = new _Classes2.default(element);
     /**
-                                                    * 操作対象 Element
-                                                    * @type {Element}
-                                                    */
+     * 操作対象 Element
+     * @type {Element}
+     */
     this.element = element;
     /**
-                             * Element class `ClientRect` 取得のために instance を作成します
-                             * @type {Bounding}
-                             */
+     * Element class `ClientRect` 取得のために instance を作成します
+     * @type {Bounding}
+     */
     this.bounding = new _Bounding2.default(element);
   }
   // ----------------------------------------
@@ -2790,8 +3629,12 @@ Elements = function () {
    * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
    *
    * @return {ClientRect} プロパティ element の offset 値を返します
-   */_createClass(Elements, [{ key: 'offset', value: function offset()
-    {
+   */
+
+
+  _createClass(Elements, [{
+    key: 'offset',
+    value: function offset() {
       return this.bounding.offset();
     }
     // ----------------------------------------
@@ -2801,91 +3644,146 @@ Elements = function () {
      * 引数の id attribute value で HTMLElement を `document.getElementById` で取得します
      * @param {string} idName id attribute value
      * @return {?Element} Element を返します, 取得できない時は null を返します
-     */ }], [{ key: 'id', value: function id(
-    idName) {
+     */
+
+  }], [{
+    key: 'id',
+    value: function id(idName) {
       var element = self.document.getElementById(idName);
       // 存在チェックを行います
       return _Type2.default.exist(element) ? element : null;
     }
     /**
-       * querySelector を使用し Element を探します
-       * @param {string} selector 探索 selector
-       * @param {Element|*} [parentNode=document] 親 Node|Element
-       * @return {?Element} Element or null
-       */ }, { key: 'select', value: function select(
-    selector) {var parentNode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : self.document;
+     * querySelector を使用し Element を探します
+     * @param {string} selector 探索 selector
+     * @param {Element|*} [parentNode=document] 親 Node|Element
+     * @return {?Element} Element or null
+     */
+
+  }, {
+    key: 'select',
+    value: function select(selector) {
+      var parentNode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : self.document;
+
       return parentNode.querySelector(selector);
     }
     /**
-       * querySelectorAll を使用し Element を探します
-       * @param {string} selector 探索 selector
-       * @param {Element|*} [parentNode=document] 親 Node|Element
-       * @return {?NodeList} NodeList or null
-       */ }, { key: 'selects', value: function selects(
-    selector) {var parentNode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : self.document;
+     * querySelectorAll を使用し Element を探します
+     * @param {string} selector 探索 selector
+     * @param {Element|*} [parentNode=document] 親 Node|Element
+     * @return {?NodeList} NodeList or null
+     */
+
+  }, {
+    key: 'selects',
+    value: function selects(selector) {
+      var parentNode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : self.document;
+
       var elements = parentNode.querySelectorAll(selector);
       return elements.length > 0 ? elements : null;
-    } }]);return Elements;}();exports.default = Elements;
+    }
+  }]);
+
+  return Elements;
+}();
+
+exports.default = Elements;
 
 /***/ }),
 /* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _Scrolling = __webpack_require__(11);
+
+var _Scrolling2 = _interopRequireDefault(_Scrolling);
+
+var _Events = __webpack_require__(0);
+
+var _Events2 = _interopRequireDefault(_Events);
+
+var _EventDispatcher2 = __webpack_require__(1);
+
+var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
+
+var _Hit = __webpack_require__(14);
+
+var _Hit2 = _interopRequireDefault(_Hit);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Copyright (c) 2011-2016 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date 2016/11/30 - 14:37
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+// event
 
 
-
-
-
-
-
-
-
-
-var _Scrolling = __webpack_require__(11);var _Scrolling2 = _interopRequireDefault(_Scrolling);
-var _Events = __webpack_require__(0);var _Events2 = _interopRequireDefault(_Events);
-var _EventDispatcher2 = __webpack_require__(1);var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
-
-
-var _Hit = __webpack_require__(14);var _Hit2 = _interopRequireDefault(_Hit);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * Copyright (c) 2011-2016 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * @date 2016/11/30 - 14:37
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  */ // event
 // hit
+
+
 /**
  * Scrolling class を使用しスクロールトップ位置をチェクし対象 element と window の衝突判定を行います
- */var Rising = function (_EventDispatcher) {_inherits(Rising, _EventDispatcher); /**
-                                                                                   * elements instance と scrolling instance を保存します
-                                                                                   * @param {Elements} elements 対象 element を Elements インスタンスに変換します
-                                                                                   * @param {Scrolling} scrolling スクロールトップ監視インスタンス
-                                                                                   */function Rising(elements) {var scrolling = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _Scrolling2.default();_classCallCheck(this, Rising); /**
-                                                                                                                                                                                                                                                              * 対象 element を Elements インスタンスに変換します
-                                                                                                                                                                                                                                                              * @type {elements}
-                                                                                                                                                                                                                                                              */var _this = _possibleConstructorReturn(this, (Rising.__proto__ || Object.getPrototypeOf(Rising)).call(this));_this.elements = elements; /**
-                                                                                                                                                                                                                                                                                                                                                                                                         * スクロールトップ監視インスタンス
-                                                                                                                                                                                                                                                                                                                                                                                                         * @type {Scrolling}
-                                                                                                                                                                                                                                                                                                                                                                                                         */_this.scrolling = scrolling; // const boundScroll = this.scroll.bind(this);
+ */
+var Rising = function (_EventDispatcher) {
+  _inherits(Rising, _EventDispatcher);
+
+  /**
+   * elements instance と scrolling instance を保存します
+   * @param {Elements} elements 対象 element を Elements インスタンスに変換します
+   * @param {Scrolling} scrolling スクロールトップ監視インスタンス
+   */
+  function Rising(elements) {
+    var scrolling = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _Scrolling2.default();
+
+    _classCallCheck(this, Rising);
+
+    /**
+     * 対象 element を Elements インスタンスに変換します
+     * @type {elements}
+     */
+    var _this = _possibleConstructorReturn(this, (Rising.__proto__ || Object.getPrototypeOf(Rising)).call(this));
+
+    _this.elements = elements;
+    /**
+     * スクロールトップ監視インスタンス
+     * @type {Scrolling}
+     */
+    _this.scrolling = scrolling;
+    // const boundScroll = this.scroll.bind(this);
     /**
      * bound scroll, Rate.UPDATE event handler
      * @type {function}
-     */_this.boundScroll = _this.scroll.bind(_this);
+     */
+    _this.boundScroll = _this.scroll.bind(_this);
     // this.boundScroll = boundScroll;
     /**
      * start 済みフラッグ
      * @type {boolean}
      * @default false
      */
-    _this.started = false;return _this;
+    _this.started = false;
+    return _this;
   }
   // ----------------------------------------
   // EVENT
@@ -2894,17 +3792,11 @@ var _Hit = __webpack_require__(14);var _Hit2 = _interopRequireDefault(_Hit);func
    * 衝突イベント
    * @event COLLISION
    * @return {string} risingCollision を返します
-   */_createClass(Rising, [{ key: 'start',
+   */
 
 
-
-
-
-
-
-
-
-
+  _createClass(Rising, [{
+    key: 'start',
 
     // ----------------------------------------
     // METHOD
@@ -2912,8 +3804,8 @@ var _Hit = __webpack_require__(14);var _Hit2 = _interopRequireDefault(_Hit);func
     /**
      * fps を監視しスクロール位置を知らせます
      * @returns {Rising} method chain 可能なように instance を返します
-     */value: function start()
-    {
+     */
+    value: function start() {
       // flag check
       if (this.started) {
         return this;
@@ -2926,10 +3818,13 @@ var _Hit = __webpack_require__(14);var _Hit2 = _interopRequireDefault(_Hit);func
       return this;
     }
     /**
-       * fps 監視を止めます
-       * @returns {Rising} method chain 可能なように instance を返します
-       */ }, { key: 'stop', value: function stop()
-    {
+     * fps 監視を止めます
+     * @returns {Rising} method chain 可能なように instance を返します
+     */
+
+  }, {
+    key: 'stop',
+    value: function stop() {
       if (!this.started) {
         return this;
       }
@@ -2939,11 +3834,14 @@ var _Hit = __webpack_require__(14);var _Hit2 = _interopRequireDefault(_Hit);func
       return this;
     }
     /**
-       * Scrolling.UPDATE event handler
-       * @param {ScrollEvents} scrollEvents scroll events object
-       * @return {boolean} 衝突時に true を返します
-       */ }, { key: 'scroll', value: function scroll(
-    scrollEvents) {
+     * Scrolling.UPDATE event handler
+     * @param {ScrollEvents} scrollEvents scroll events object
+     * @return {boolean} 衝突時に true を返します
+     */
+
+  }, {
+    key: 'scroll',
+    value: function scroll(scrollEvents) {
       if (!scrollEvents.changed) {
         return false;
       }
@@ -2965,75 +3863,90 @@ var _Hit = __webpack_require__(14);var _Hit2 = _interopRequireDefault(_Hit);func
       // 発火
       this.dispatch(events);
       return hit.result;
-    } }], [{ key: 'COLLISION', get: function get() {return 'risingCollision';} /**
-                                                                                * 衝突「していない」イベント
-                                                                                * @event ALIEN
-                                                                                * @return {string} risingAlien を返します
-                                                                                */ }, { key: 'ALIEN', get: function get() {return 'risingAlien';} }]);return Rising;}(_EventDispatcher3.default);exports.default = Rising;
+    }
+  }], [{
+    key: 'COLLISION',
+    get: function get() {
+      return 'risingCollision';
+    }
+    /**
+     * 衝突「していない」イベント
+     * @event ALIEN
+     * @return {string} risingAlien を返します
+     */
+
+  }, {
+    key: 'ALIEN',
+    get: function get() {
+      return 'risingAlien';
+    }
+  }]);
+
+  return Rising;
+}(_EventDispatcher3.default);
+
+exports.default = Rising;
 
 /***/ }),
 /* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _EventDispatcher2 = __webpack_require__(1);
+
+var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
+
+var _TouchingEvents = __webpack_require__(30);
+
+var _TouchingEvents2 = _interopRequireDefault(_TouchingEvents);
+
+var _Vectors = __webpack_require__(5);
+
+var _Vectors2 = _interopRequireDefault(_Vectors);
+
+var _Type = __webpack_require__(2);
+
+var _Type2 = _interopRequireDefault(_Type);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @license inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date 2016/10/08
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Copyright (c) 2011-2015 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * f
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+// event
 
 
-
-
-
-
-
-
-
-
-
-
-var _EventDispatcher2 = __webpack_require__(1);var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
-var _TouchingEvents = __webpack_require__(30);var _TouchingEvents2 = _interopRequireDefault(_TouchingEvents);
-
-
-var _Vectors = __webpack_require__(5);var _Vectors2 = _interopRequireDefault(_Vectors);
-var _Type = __webpack_require__(2);var _Type2 = _interopRequireDefault(_Type);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @license inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @date 2016/10/08
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Copyright (c) 2011-2015 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * f
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */ // event
 // util
+
+
 /**
  * Touch event を監視し y方向移動が `threshold` 以内の時に `TOUCH` event を発火します
- */var Touching = function (_EventDispatcher) {_inherits(Touching, _EventDispatcher);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ */
+var Touching = function (_EventDispatcher) {
+  _inherits(Touching, _EventDispatcher);
 
   // ---------------------------------------------------
   //  CONSTRUCTOR
@@ -3043,26 +3956,44 @@ var _Type = __webpack_require__(2);var _Type2 = _interopRequireDefault(_Type);fu
    * @param {Element} element 処理対象 Element
    * @param {boolean} [canceling=false] touchmove 中に `preventDefault` を行う
    * @param {number} [threshold=10] y 方向閾値
-   */ /**
-       * touchmove event type - touchingMove
-       * @constant MOVE
-       * @type {string}
-       */ /**
-           * touchend event type - touchingEnd
-           * @constant END
-           * @type {string}
-           */function Touching(element) {var canceling = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;var threshold = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;_classCallCheck(this, Touching); /**
-                                                                                                                                                                                                                                                            * 処理対象 Element
-                                                                                                                                                                                                                                                            * @type {Element}
-                                                                                                                                                                                                                                                            */var _this = _possibleConstructorReturn(this, (Touching.__proto__ || Object.getPrototypeOf(Touching)).call(this));_this.element = element; /**
-                                                                                                                                                                                                                                                                                                                                                                                                         * touchmove 中に `preventDefault` を行うかのフラッグ
-                                                                                                                                                                                                                                                                                                                                                                                                         * @type {boolean}
-                                                                                                                                                                                                                                                                                                                                                                                                         * @default false
-                                                                                                                                                                                                                                                                                                                                                                                                         */_this.canceling = canceling; /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                         * y 方向閾値, default: 10px
-                                                                                                                                                                                                                                                                                                                                                                                                                                         * @type {number}
-                                                                                                                                                                                                                                                                                                                                                                                                                                         * @default 10
-                                                                                                                                                                                                                                                                                                                                                                                                                                         */_this.threshold = threshold;
+   */
+
+  /**
+   * touchmove event type - touchingMove
+   * @constant MOVE
+   * @type {string}
+   */
+
+  /**
+   * touchend event type - touchingEnd
+   * @constant END
+   * @type {string}
+   */
+  function Touching(element) {
+    var canceling = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    var threshold = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
+
+    _classCallCheck(this, Touching);
+
+    /**
+     * 処理対象 Element
+     * @type {Element}
+     */
+    var _this = _possibleConstructorReturn(this, (Touching.__proto__ || Object.getPrototypeOf(Touching)).call(this));
+
+    _this.element = element;
+    /**
+     * touchmove 中に `preventDefault` を行うかのフラッグ
+     * @type {boolean}
+     * @default false
+     */
+    _this.canceling = canceling;
+    /**
+     * y 方向閾値, default: 10px
+     * @type {number}
+     * @default 10
+     */
+    _this.threshold = threshold;
     // @type {function}
     // const boundStart = this.onStart.bind(this);
     /**
@@ -3102,13 +4033,16 @@ var _Type = __webpack_require__(2);var _Type2 = _interopRequireDefault(_Type);fu
     var vectors = {
       start: new _Vectors2.default(),
       end: new _Vectors2.default(),
-      moving: [].slice(0) };
-
+      moving: [].slice(0)
+    };
     /**
-                              * 位置管理を行う Vectors instance
-                              * @returns {{start: Vectors, end: Vectors, moving: Array.<Vectors>}} vectors object
-                              */
-    _this.vectors = function () {return vectors;};return _this;
+     * 位置管理を行う Vectors instance
+     * @returns {{start: Vectors, end: Vectors, moving: Array.<Vectors>}} vectors object
+     */
+    _this.vectors = function () {
+      return vectors;
+    };
+    return _this;
   }
   // // ---------------------------------------------------
   // //  EVENT
@@ -3161,47 +4095,73 @@ var _Type = __webpack_require__(2);var _Type2 = _interopRequireDefault(_Type);fu
    * element への `touchstart` と<br>
    * window.blur event をそれぞれ bind します
    * @returns {void}
-   */ /**
-       * touch event type - touchingTouch
-       * @constant TOUCH
-       * @type {string}
-       */ /**
-           * touchcancel event type - touchingCancel
-           * @constant CANCEL
-           * @type {string}
-           */ // ---------------------------------------------------
+   */
+
+  /**
+   * touch event type - touchingTouch
+   * @constant TOUCH
+   * @type {string}
+   */
+
+  /**
+   * touchcancel event type - touchingCancel
+   * @constant CANCEL
+   * @type {string}
+   */
+
+  // ---------------------------------------------------
   //  CONSTANT / EVENT
   // ---------------------------------------------------
   /**
    * touchstart event type - touchingStart
    * @constant START
    * @type {string}
-   */_createClass(Touching, [{ key: 'init', value: function init() {this.element.addEventListener('touchstart', this.boundStart, false);window.addEventListener('blur', this.boundBlur, false);} /**
-                                                                                                                                                                                                  * touchstart event handler
-                                                                                                                                                                                                  * @param {Event} event touchstart event
-                                                                                                                                                                                                  * @returns {void}
-                                                                                                                                                                                                  */ }, { key: 'onStart', value: function onStart(event) {// event unbind <- 二重 bind にならないように
-      this.dispose(); // vectors を初期化
-      this.reset(); // 現在 position を保存
-      var vectors = this.vectors();var point = Touching.point(event);vectors.start.update(point.x, point.y);vectors.moving.push(vectors.start); // キャンセル event 監視を開始
-      var body = document.body;body.addEventListener('touchend', this.boundEnd, false);
+   */
+
+
+  _createClass(Touching, [{
+    key: 'init',
+    value: function init() {
+      this.element.addEventListener('touchstart', this.boundStart, false);
+      window.addEventListener('blur', this.boundBlur, false);
+    }
+    /**
+     * touchstart event handler
+     * @param {Event} event touchstart event
+     * @returns {void}
+     */
+
+  }, {
+    key: 'onStart',
+    value: function onStart(event) {
+      // event unbind <- 二重 bind にならないように
+      this.dispose();
+      // vectors を初期化
+      this.reset();
+      // 現在 position を保存
+      var vectors = this.vectors();
+      var point = Touching.point(event);
+      vectors.start.update(point.x, point.y);
+      vectors.moving.push(vectors.start);
+
+      // キャンセル event 監視を開始
+      var body = document.body;
+      body.addEventListener('touchend', this.boundEnd, false);
       body.addEventListener('touchmove', this.boundMove, false);
       body.addEventListener('touchcancel', this.boundCancel, false);
 
       // Touching.START 発火
-      this.dispatch(new _TouchingEvents2.default(
-      Touching.START,
-      this,
-      event,
-      vectors.start));
-
+      this.dispatch(new _TouchingEvents2.default(Touching.START, this, event, vectors.start));
     }
     /**
-       * touchmove event handler
-       * @param {Event} event touchmove event
-       * @returns {void}
-       */ }, { key: 'onMove', value: function onMove(
-    event) {
+     * touchmove event handler
+     * @param {Event} event touchmove event
+     * @returns {void}
+     */
+
+  }, {
+    key: 'onMove',
+    value: function onMove(event) {
       // console.log('Touching.onMove', event);
       var vectors = this.vectors();
       var movingArray = vectors.moving;
@@ -3230,21 +4190,17 @@ var _Type = __webpack_require__(2);var _Type2 = _interopRequireDefault(_Type);fu
       var between = position.between(previous);
 
       // Touching.MOVE 発火
-      this.dispatch(new _TouchingEvents2.default(
-      Touching.MOVE,
-      this,
-      event,
-      position,
-      between,
-      scrolling));
-
+      this.dispatch(new _TouchingEvents2.default(Touching.MOVE, this, event, position, between, scrolling));
     }
     /**
-       * touchend event handler
-       * @param {Event} event touchend event
-       * @returns {void}
-       */ }, { key: 'onEnd', value: function onEnd(
-    event) {
+     * touchend event handler
+     * @param {Event} event touchend event
+     * @returns {void}
+     */
+
+  }, {
+    key: 'onEnd',
+    value: function onEnd(event) {
       // console.log('Touching.onEnd', event);
       var vectors = this.vectors();
 
@@ -3266,63 +4222,57 @@ var _Type = __webpack_require__(2);var _Type2 = _interopRequireDefault(_Type);fu
       var between = position.between(previous);
 
       // Touching.END 発火
-      this.dispatch(new _TouchingEvents2.default(
-      Touching.END,
-      this,
-      event,
-      position,
-      between,
-      scrolling));
-
+      this.dispatch(new _TouchingEvents2.default(Touching.END, this, event, position, between, scrolling));
 
       // Touching.Touch 発火
-      this.dispatch(new _TouchingEvents2.default(
-      Touching.TOUCH,
-      this,
-      event,
-      position,
-      between,
-      scrolling));
+      this.dispatch(new _TouchingEvents2.default(Touching.TOUCH, this, event, position, between, scrolling));
+    }
+    /**
+     * touchcancel event handler<br>
+     * 処理をキャンセルします
+     * @param {Event} event touchend event
+     * @returns {boolean} 正常終了時に true を返します
+     */
 
-    }
-    /**
-       * touchcancel event handler<br>
-       * 処理をキャンセルします
-       * @param {Event} event touchend event
-       * @returns {boolean} 正常終了時に true を返します
-       */ }, { key: 'onCancel', value: function onCancel(
-    event) {
+  }, {
+    key: 'onCancel',
+    value: function onCancel(event) {
       return this.abort(event);
     }
     /**
-       * window.blur event handler<br>
-       * 処理をキャンセルします
-       * @param {Event} event window blur event
-       * @returns {boolean} 正常終了時に true を返します
-       */ }, { key: 'onBlur', value: function onBlur(
-    event) {
+     * window.blur event handler<br>
+     * 処理をキャンセルします
+     * @param {Event} event window blur event
+     * @returns {boolean} 正常終了時に true を返します
+     */
+
+  }, {
+    key: 'onBlur',
+    value: function onBlur(event) {
       return this.abort(event);
     }
     /**
-       * touch event での処理をキャンセルし、設定値を初期値に戻します
-       * @param {Event} event touch / window.onblur Event
-       * @returns {boolean} 正常終了時に true を返します
-       */ }, { key: 'abort', value: function abort(
-    event) {
+     * touch event での処理をキャンセルし、設定値を初期値に戻します
+     * @param {Event} event touch / window.onblur Event
+     * @returns {boolean} 正常終了時に true を返します
+     */
+
+  }, {
+    key: 'abort',
+    value: function abort(event) {
       this.dispose();
       this.reset();
-      this.dispatch(new _TouchingEvents2.default(
-      Touching.CANCEL,
-      this,
-      event));
-
+      this.dispatch(new _TouchingEvents2.default(Touching.CANCEL, this, event));
       return true;
     }
     /**
-       * bind した event を unbind します
-       * @returns {boolean} 正常終了時に true を返します
-       */ }, { key: 'dispose', value: function dispose()
-    {
+     * bind した event を unbind します
+     * @returns {boolean} 正常終了時に true を返します
+     */
+
+  }, {
+    key: 'dispose',
+    value: function dispose() {
       var body = document.body;
 
       body.removeEventListener('touchend', this.boundEnd);
@@ -3331,11 +4281,14 @@ var _Type = __webpack_require__(2);var _Type2 = _interopRequireDefault(_Type);fu
       return true;
     }
     /**
-       * 移動監視に使用した vectors instance を全て reset します
-       * @returns {{start: Vectors, end: Vectors, moving: Array.<Vectors>}}
-       * reset 後の vectors instance を返します
-       */ }, { key: 'reset', value: function reset()
-    {
+     * 移動監視に使用した vectors instance を全て reset します
+     * @returns {{start: Vectors, end: Vectors, moving: Array.<Vectors>}}
+     * reset 後の vectors instance を返します
+     */
+
+  }, {
+    key: 'reset',
+    value: function reset() {
       var vectors = this.vectors();
       vectors.start.reset();
       vectors.end.reset();
@@ -3352,18 +4305,24 @@ var _Type = __webpack_require__(2);var _Type2 = _interopRequireDefault(_Type);fu
      * @param {Vectors} pointB エンドポイント(Vectors)
      * @param {number} threshold 閾値
      * @returns {boolean} true の時は閾値以上なのでスクロール判定になります
-     */ }], [{ key: 'scrolling', value: function scrolling(
-    pointA, pointB, threshold) {
+     */
+
+  }], [{
+    key: 'scrolling',
+    value: function scrolling(pointA, pointB, threshold) {
       var y = pointA.betweenY(pointB);
       // 正数値にし閾値と比較
       return Math.abs(y) >= threshold;
     }
     /**
-       * MouseEvent|TouchEvent から pageX / pageY 座標を取得します
-       * @param {MouseEvent|TouchEvent} event down / move / up event object
-       * @returns {{x: number, y: number}} pageX / pageY 座標を返します
-       */ }, { key: 'point', value: function point(
-    event) {
+     * MouseEvent|TouchEvent から pageX / pageY 座標を取得します
+     * @param {MouseEvent|TouchEvent} event down / move / up event object
+     * @returns {{x: number, y: number}} pageX / pageY 座標を返します
+     */
+
+  }, {
+    key: 'point',
+    value: function point(event) {
       var x = event.pageX;
       var y = event.pageY;
 
@@ -3386,66 +4345,107 @@ var _Type = __webpack_require__(2);var _Type2 = _interopRequireDefault(_Type);fu
       // @type {Touch}
       var touch = touches[0];
       return { x: touch.pageX, y: touch.pageY };
-    } }]);return Touching;}(_EventDispatcher3.default);Touching.START = 'touchingStart';Touching.END = 'touchingEnd';Touching.CANCEL = 'touchingCancel';Touching.MOVE = 'touchingMove';Touching.TOUCH = 'touchingTouch';exports.default = Touching;
+    }
+  }]);
+
+  return Touching;
+}(_EventDispatcher3.default);
+
+Touching.START = 'touchingStart';
+Touching.END = 'touchingEnd';
+Touching.CANCEL = 'touchingCancel';
+Touching.MOVE = 'touchingMove';
+Touching.TOUCH = 'touchingTouch';
+exports.default = Touching;
 
 /***/ }),
 /* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _EventDispatcher2 = __webpack_require__(1);
+
+var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
+
+var _WheelEvents = __webpack_require__(31);
+
+var _WheelEvents2 = _interopRequireDefault(_WheelEvents);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Copyright (c) 2011-2016 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date 2016/07/26 - 19:12
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+// event
 
 
-
-
-
-
-
-
-
-
-var _EventDispatcher2 = __webpack_require__(1);var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
-var _WheelEvents = __webpack_require__(31);var _WheelEvents2 = _interopRequireDefault(_WheelEvents);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * Copyright (c) 2011-2016 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * @date 2016/07/26 - 19:12
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            */ // event
 /**
  * new を許可しないための Symbol
  * @type {Symbol}
  * @private
- */var singletonSymbol = Symbol('Scroll singleton symbol'); /**
-                                                             * singleton instance, nullable
-                                                             * @type {?Wheel}
-                                                             * @private
-                                                             */var instance = null; /**
-                                                                                     * mousewheel event を監視し通知を行います
-                                                                                     * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
-                                                                                     *
-                                                                                     * ```
-                                                                                     * const instance:Wheel = Wheel.factory();
-                                                                                     * ```
-                                                                                     */var Wheel = function (_EventDispatcher) {_inherits(Wheel, _EventDispatcher); /**
-                                                                                                                                                                     * singleton です
-                                                                                                                                                                     * @param {Symbol} checkSymbol singleton を保証するための private instance
-                                                                                                                                                                     * @returns {Wheel} singleton instance を返します
-                                                                                                                                                                     */function Wheel(checkSymbol) {var _ret2;_classCallCheck(this, Wheel); // checkSymbol と singleton が等価かをチェックします
+ */
+var singletonSymbol = Symbol('Scroll singleton symbol');
+/**
+ * singleton instance, nullable
+ * @type {?Wheel}
+ * @private
+ */
+var instance = null;
+
+/**
+ * mousewheel event を監視し通知を行います
+ * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
+ *
+ * ```
+ * const instance:Wheel = Wheel.factory();
+ * ```
+ */
+
+var Wheel = function (_EventDispatcher) {
+  _inherits(Wheel, _EventDispatcher);
+
+  /**
+   * singleton です
+   * @param {Symbol} checkSymbol singleton を保証するための private instance
+   * @returns {Wheel} singleton instance を返します
+   */
+  function Wheel(checkSymbol) {
+    var _ret2;
+
+    _classCallCheck(this, Wheel);
+
+    // checkSymbol と singleton が等価かをチェックします
     if (checkSymbol !== singletonSymbol) {
       throw new Error('don\'t use new, instead use static factory method.');
     }
 
-
-
     // instance 作成済みかをチェックし instance が null の時 this を設定します
-    var _this = _possibleConstructorReturn(this, (Wheel.__proto__ || Object.getPrototypeOf(Wheel)).call(this));if (instance !== null) {var _ret;
+    var _this = _possibleConstructorReturn(this, (Wheel.__proto__ || Object.getPrototypeOf(Wheel)).call(this));
+
+    if (instance !== null) {
+      var _ret;
+
       return _ret = instance, _possibleConstructorReturn(_this, _ret);
     }
 
@@ -3467,24 +4467,26 @@ var _WheelEvents = __webpack_require__(31);var _WheelEvents2 = _interopRequireDe
      */
     _this.threshold = 200;
     /**
-                            * wheelDelta 移動量が閾値を超えるかをチェックするための積算計算変数
-                            * @type {number}
-                            */
+     * wheelDelta 移動量が閾値を超えるかをチェックするための積算計算変数
+     * @type {number}
+     */
     _this.moved = 0;
     /**
-                      * start flag
-                      * @type {boolean}
-                      */
+     * start flag
+     * @type {boolean}
+     */
     _this.started = false;
     var events = {
       up: new _WheelEvents2.default(Wheel.UP, _this),
-      down: new _WheelEvents2.default(Wheel.DOWN, _this) };
-
+      down: new _WheelEvents2.default(Wheel.DOWN, _this)
+    };
     /**
-                                                             * UP / DOWN Events instance
-                                                             * @returns {{up: WheelEvents, down: WheelEvents}} UP / DOWN Events instance
-                                                             */
-    _this.events = function () {return events;};
+     * UP / DOWN Events instance
+     * @returns {{up: WheelEvents, down: WheelEvents}} UP / DOWN Events instance
+     */
+    _this.events = function () {
+      return events;
+    };
 
     // 設定済み instance を返します
     return _ret2 = instance, _possibleConstructorReturn(_this, _ret2);
@@ -3497,18 +4499,11 @@ var _WheelEvents = __webpack_require__(31);var _WheelEvents2 = _interopRequireDe
    * @event UP
    * @returns {string} event, wheelUp を返します
    * @default wheelUp
-   */_createClass(Wheel, [{ key: 'start',
+   */
 
 
-
-
-
-
-
-
-
-
-
+  _createClass(Wheel, [{
+    key: 'start',
 
     // ----------------------------------------
     // METHOD
@@ -3516,8 +4511,8 @@ var _WheelEvents = __webpack_require__(31);var _WheelEvents2 = _interopRequireDe
     /**
      * mousewheel event を監視します
      * @returns {Wheel} method chain 可能なように instance を返します
-     */value: function start()
-    {
+     */
+    value: function start() {
       if (this.started) {
         return this;
       }
@@ -3527,10 +4522,13 @@ var _WheelEvents = __webpack_require__(31);var _WheelEvents2 = _interopRequireDe
       return this;
     }
     /**
-       * mousewheel event を監視を止めます
-       * @returns {Wheel} method chain 可能なように instance を返します
-       */ }, { key: 'stop', value: function stop()
-    {
+     * mousewheel event を監視を止めます
+     * @returns {Wheel} method chain 可能なように instance を返します
+     */
+
+  }, {
+    key: 'stop',
+    value: function stop() {
       if (!this.started) {
         return this;
       }
@@ -3539,27 +4537,33 @@ var _WheelEvents = __webpack_require__(31);var _WheelEvents2 = _interopRequireDe
       return this;
     }
     /**
-       * window mousewheel event handler
-       * <p>delta 値を取得し `this.moving` を実行します</p>
-       *
-       * @listens {WheelEvent} WheelEvent.wheel
-       * @param {WheelEvent} event window wheel event
-       * @returns {number} 前回移動量に delta 値 を加算した値を返します
-       */ }, { key: 'mouseWheel', value: function mouseWheel(
-    event) {
+     * window mousewheel event handler
+     * <p>delta 値を取得し `this.moving` を実行します</p>
+     *
+     * @listens {WheelEvent} WheelEvent.wheel
+     * @param {WheelEvent} event window wheel event
+     * @returns {number} 前回移動量に delta 値 を加算した値を返します
+     */
+
+  }, {
+    key: 'mouseWheel',
+    value: function mouseWheel(event) {
       var wheelDelta = event.deltaY;
       return this.moving(wheelDelta);
     }
     /**
-       * mouse delta から移動量を計算します
-       * @param {number} delta mouse delta 値
-       * @returns {number} 前回移動量に delta 値 を加算した値を返します
-       */ }, { key: 'moving', value: function moving(
-    delta) {
+     * mouse delta から移動量を計算します
+     * @param {number} delta mouse delta 値
+     * @returns {number} 前回移動量に delta 値 を加算した値を返します
+     */
+
+  }, {
+    key: 'moving',
+    value: function moving(delta) {
       /**
-             * 移動量が閾値を超えるかをチェックするための計算変数
-             * @type {number}
-             */
+       * 移動量が閾値を超えるかをチェックするための計算変数
+       * @type {number}
+       */
       this.moved += delta;
       // @type {number}
       var moved = this.moved;
@@ -3588,11 +4592,14 @@ var _WheelEvents = __webpack_require__(31);var _WheelEvents2 = _interopRequireDe
       return moved;
     }
     /**
-       * scroll up イベントを発火します
-       * @param {number} moved 移動量
-       * @returns {number} 加算移動量を返します
-       */ }, { key: 'up', value: function up(
-    moved) {
+     * scroll up イベントを発火します
+     * @param {number} moved 移動量
+     * @returns {number} 加算移動量を返します
+     */
+
+  }, {
+    key: 'up',
+    value: function up(moved) {
       // @type {Events}
       var events = this.events().up;
       events.moved = moved;
@@ -3601,11 +4608,14 @@ var _WheelEvents = __webpack_require__(31);var _WheelEvents2 = _interopRequireDe
       return moved;
     }
     /**
-       * scroll down イベントを発火します
-       * @param {number} moved 移動量
-       * @returns {number} 加算移動量を返します
-       */ }, { key: 'down', value: function down(
-    moved) {
+     * scroll down イベントを発火します
+     * @param {number} moved 移動量
+     * @returns {number} 加算移動量を返します
+     */
+
+  }, {
+    key: 'down',
+    value: function down(moved) {
       // @type {Events}
       var events = this.events().down;
       events.moved = moved;
@@ -3619,38 +4629,73 @@ var _WheelEvents = __webpack_require__(31);var _WheelEvents2 = _interopRequireDe
     /**
      * Wheel instance を singleton を保証し作成します
      * @returns {Wheel} Wheel instance を返します
-     */ }], [{ key: 'factory', value: function factory()
-    {
+     */
+
+  }], [{
+    key: 'factory',
+    value: function factory() {
       if (instance !== null) {
         return instance;
       }
       return new Wheel(singletonSymbol);
-    } }, { key: 'UP', get: function get() {return 'wheelUp';} /**
-                                                               * wheel  で発生するイベントを取得します
-                                                               * @event DOWN
-                                                               * @returns {string} event, wheelUp を返します
-                                                               * @default wheelUp
-                                                               */ }, { key: 'DOWN', get: function get() {return 'wheelDown';} }]);return Wheel;}(_EventDispatcher3.default);exports.default = Wheel;
+    }
+  }, {
+    key: 'UP',
+    get: function get() {
+      return 'wheelUp';
+    }
+    /**
+     * wheel  で発生するイベントを取得します
+     * @event DOWN
+     * @returns {string} event, wheelUp を返します
+     * @default wheelUp
+     */
+
+  }, {
+    key: 'DOWN',
+    get: function get() {
+      return 'wheelDown';
+    }
+  }]);
+
+  return Wheel;
+}(_EventDispatcher3.default);
+
+exports.default = Wheel;
 
 /***/ }),
 /* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}(); /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * Copyright (c) 2011-2016 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * @date 2016/07/01 - 19:41
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  */
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Copyright (c) 2011-2016 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @date 2016/07/01 - 19:41
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
 
 // util
-var _Type = __webpack_require__(2);var _Type2 = _interopRequireDefault(_Type);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}
+
+
+var _Type = __webpack_require__(2);
+
+var _Type2 = _interopRequireDefault(_Type);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 // built-in function
 // Safari, IE はサポートしていないのでライブラリを使用すること
@@ -3663,56 +4708,59 @@ var _Type = __webpack_require__(2);var _Type2 = _interopRequireDefault(_Type);fu
  */
 var fetch = self.fetch;
 /**
-                         * fetch request instance を作成します
-                         * @see https://developer.mozilla.org/ja/docs/Web/API/Request
-                         * @type {Request}
-                         * @private
-                         * @static
-                         */
+ * fetch request instance を作成します
+ * @see https://developer.mozilla.org/ja/docs/Web/API/Request
+ * @type {Request}
+ * @private
+ * @static
+ */
 var Request = self.Request;
 
 /**
-                             * <p>fetch API を使用し Ajax request を行います</p>
-                             * <p>Safari, IE はサポートしていないので polyfill ライブラリを使用します<br>
-                             * また、 fetch は Promise も必要としています。</p>
-                             *
-                             * ```
-                             * $ bower install fetch
-                             *
-                             * $ bower install es6-promise
-                             * ```
-                             *
-                             * @see http://caniuse.com/#feat=fetch
-                             * @see https://github.com/github/fetch
-                             * @see https://github.com/taylorhakes/promise-polyfill
-                             * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch
-                             * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API
-                             * @see https://developer.mozilla.org/ja/docs/Web/API/Request
-                             * @see https://developer.mozilla.org/ja/docs/Web/API/Request/Request
-                             * @see https://developer.mozilla.org/ja/docs/Web/API/Headers
-                             * @see https://developer.mozilla.org/ja/docs/Web/API/Body
-                             */var
-Ajax = function () {
+ * <p>fetch API を使用し Ajax request を行います</p>
+ * <p>Safari, IE はサポートしていないので polyfill ライブラリを使用します<br>
+ * また、 fetch は Promise も必要としています。</p>
+ *
+ * ```
+ * $ bower install fetch
+ *
+ * $ bower install es6-promise
+ * ```
+ *
+ * @see http://caniuse.com/#feat=fetch
+ * @see https://github.com/github/fetch
+ * @see https://github.com/taylorhakes/promise-polyfill
+ * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch
+ * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API
+ * @see https://developer.mozilla.org/ja/docs/Web/API/Request
+ * @see https://developer.mozilla.org/ja/docs/Web/API/Request/Request
+ * @see https://developer.mozilla.org/ja/docs/Web/API/Headers
+ * @see https://developer.mozilla.org/ja/docs/Web/API/Body
+ */
+
+var Ajax = function () {
   /**
-                     * request 可能 / 不可能 flag を true に設定します
-                     * @param {Function} resolve Promise success callback
-                     * @param {Function} reject Promise fail callback
-                     */
-  function Ajax(resolve, reject) {_classCallCheck(this, Ajax);
+   * request 可能 / 不可能 flag を true に設定します
+   * @param {Function} resolve Promise success callback
+   * @param {Function} reject Promise fail callback
+   */
+  function Ajax(resolve, reject) {
+    _classCallCheck(this, Ajax);
+
     /**
-                                                                * request 可能 / 不可能 flag, true: 実行可能
-                                                                * @type {boolean}
-                                                                */
+     * request 可能 / 不可能 flag, true: 実行可能
+     * @type {boolean}
+     */
     this.can = true;
     /**
-                      * Promise success callback
-                      * @type {Function}
-                      */
+     * Promise success callback
+     * @type {Function}
+     */
     this.resolve = resolve;
     /**
-                             * Promise fail callback
-                             * @type {Function}
-                             */
+     * Promise fail callback
+     * @type {Function}
+     */
     this.reject = reject;
   }
   // ----------------------------------------
@@ -3729,8 +4777,17 @@ Ajax = function () {
    * @param {?Headers} [headers=null] Headers option, token などを埋め込むのに使用します
    * @param {?FormData} [formData=null] フォームデータを送信するのに使用します
    * @return {boolean} ajax request を開始したかどうかの真偽値を返します
-   */_createClass(Ajax, [{ key: 'start', value: function start(
-    path, method) {var _this = this;var headers = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;var formData = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+   */
+
+
+  _createClass(Ajax, [{
+    key: 'start',
+    value: function start(path, method) {
+      var _this = this;
+
+      var headers = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      var formData = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+
       // ajax request 開始
       if (!this.can) {
         // flag が off なので処理しない
@@ -3771,18 +4828,24 @@ Ajax = function () {
       return true;
     }
     /**
-       * 実行可否 flag を true にします
-       * @returns {boolean} 現在の this.can property を返します
-       */ }, { key: 'enable', value: function enable()
-    {
+     * 実行可否 flag を true にします
+     * @returns {boolean} 現在の this.can property を返します
+     */
+
+  }, {
+    key: 'enable',
+    value: function enable() {
       this.can = true;
       return this.can;
     }
     /**
-       * 実行可否 flag を false にします
-       * @returns {boolean} 現在の this.can property を返します
-       */ }, { key: 'disable', value: function disable()
-    {
+     * 実行可否 flag を false にします
+     * @returns {boolean} 現在の this.can property を返します
+     */
+
+  }, {
+    key: 'disable',
+    value: function disable() {
       this.can = false;
       return this.can;
     }
@@ -3807,15 +4870,18 @@ Ajax = function () {
      *
      * @see https://developers.google.com/web/updates/2015/03/introduction-to-fetch
      * @see https://developer.mozilla.org/ja/docs/Web/API/Request
-     */ }], [{ key: 'option', value: function option(
-    path, method, headers, formData) {
+     */
+
+  }], [{
+    key: 'option',
+    value: function option(path, method, headers, formData) {
       // request option
       var option = Object.create({
         method: method,
         cache: 'no-cache',
         // https://developers.google.com/web/updates/2015/03/introduction-to-fetch
-        credentials: 'same-origin' });
-
+        credentials: 'same-origin'
+      });
 
       // headers option
       if (_Type2.default.exist(headers)) {
@@ -3829,24 +4895,40 @@ Ajax = function () {
 
       // https://developer.mozilla.org/ja/docs/Web/API/Request
       return new Request(path, option);
-    } }]);return Ajax;}();exports.default = Ajax;
+    }
+  }]);
+
+  return Ajax;
+}();
+
+exports.default = Ajax;
 
 /***/ }),
 /* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * Copyright (c) 2011-2016 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @date 2016/12/16 - 14:45
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/12/16 - 14:45
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
 
 // --------------------------------
 // copy [native code]
@@ -3856,31 +4938,39 @@ Object.defineProperty(exports, "__esModule", { value: true });var _createClass =
  */
 var decodeURIComponent = self.decodeURIComponent;
 /**
-                                                   * copy [native code] - encodeURIComponent
-                                                   * @type {function}
-                                                   */
+ * copy [native code] - encodeURIComponent
+ * @type {function}
+ */
 var encodeURIComponent = self.encodeURIComponent;
 /**
-                                                   * copy [native code] - RegExp
-                                                   * @type {function}
-                                                   */
+ * copy [native code] - RegExp
+ * @type {function}
+ */
 var RegExp = self.RegExp;
 
 /**
-                           * cookie を取得・保存・削除します
-                           */var
-Cookie = function () {
+ * cookie を取得・保存・削除します
+ */
+
+var Cookie = function () {
   /**
-                       * cookie を処理します
-                       *
-                       * インスタンスは key 毎に作成します
-                       * @param {string} keyName cookie key
-                       * @param {?Date} [endValue=null] cookie end Date instance, null の時はプラウザ `quit` で削除されます
-                       * @param {string} [defaultPath='/'] cookie path
-                       * @param {string} [defaultDomain=''] cookie domain
-                       * @param {boolean} [secureSetting=false] true: https 通信のときのみ、クッキーが送信されます
-                       */
-  function Cookie(keyName) {var endValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;var defaultPath = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '/';var defaultDomain = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';var secureSetting = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;_classCallCheck(this, Cookie);
+   * cookie を処理します
+   *
+   * インスタンスは key 毎に作成します
+   * @param {string} keyName cookie key
+   * @param {?Date} [endValue=null] cookie end Date instance, null の時はプラウザ `quit` で削除されます
+   * @param {string} [defaultPath='/'] cookie path
+   * @param {string} [defaultDomain=''] cookie domain
+   * @param {boolean} [secureSetting=false] true: https 通信のときのみ、クッキーが送信されます
+   */
+  function Cookie(keyName) {
+    var endValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+    var defaultPath = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '/';
+    var defaultDomain = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
+    var secureSetting = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
+
+    _classCallCheck(this, Cookie);
+
     var key = keyName;
     var end = endValue;
     var path = defaultPath;
@@ -3888,60 +4978,80 @@ Cookie = function () {
     var secure = secureSetting;
 
     /**
-                                 * cookie key を取得します
-                                 * @returns {string} cookie key を返します
-                                 */
-    this.key = function () {return key;};
+     * cookie key を取得します
+     * @returns {string} cookie key を返します
+     */
+    this.key = function () {
+      return key;
+    };
     /**
-                                           * cookie key を設定します
-                                           * @param {string} setting 設定する key name
-                                           * @returns {string} 設定した key name を返します
-                                           */
-    this.setKey = function (setting) {key = setting;};
+     * cookie key を設定します
+     * @param {string} setting 設定する key name
+     * @returns {string} 設定した key name を返します
+     */
+    this.setKey = function (setting) {
+      key = setting;
+    };
     /**
-                                                        * cookie end を取得します
-                                                        * @returns {?Date} cookie end Date instance
-                                                        */
-    this.end = function () {return end;};
+     * cookie end を取得します
+     * @returns {?Date} cookie end Date instance
+     */
+    this.end = function () {
+      return end;
+    };
     /**
-                                           * cookie end を設定します
-                                           * @param {Date} setting cookie end Date instance
-                                           * @returns {Date} 設定した Date instance を返します
-                                           */
-    this.setEnd = function (setting) {end = setting;};
+     * cookie end を設定します
+     * @param {Date} setting cookie end Date instance
+     * @returns {Date} 設定した Date instance を返します
+     */
+    this.setEnd = function (setting) {
+      end = setting;
+    };
     /**
-                                                        * cookie path を取得します
-                                                        * @returns {string} cookie path を返します
-                                                        */
-    this.path = function () {return path;};
+     * cookie path を取得します
+     * @returns {string} cookie path を返します
+     */
+    this.path = function () {
+      return path;
+    };
     /**
-                                             * cookie path を設定します
-                                             * @param {string} setting 設定する path name
-                                             * @returns {string} 設定した path name を返します
-                                             */
-    this.setPath = function (setting) {path = setting;};
+     * cookie path を設定します
+     * @param {string} setting 設定する path name
+     * @returns {string} 設定した path name を返します
+     */
+    this.setPath = function (setting) {
+      path = setting;
+    };
     /**
-                                                          * cookie domain を取得します
-                                                          * @returns {string} cookie domain を返します
-                                                          */
-    this.domain = function () {return domain;};
+     * cookie domain を取得します
+     * @returns {string} cookie domain を返します
+     */
+    this.domain = function () {
+      return domain;
+    };
     /**
-                                                 * cookie domain を設定します
-                                                 * @param {string} setting 設定する domain name
-                                                 * @returns {string} 設定した domain name を返します
-                                                 */
-    this.setDomain = function (setting) {domain = setting;};
+     * cookie domain を設定します
+     * @param {string} setting 設定する domain name
+     * @returns {string} 設定した domain name を返します
+     */
+    this.setDomain = function (setting) {
+      domain = setting;
+    };
     /**
-                                                              * https 通信のときのみクッキー送信を行うかのフラッグを取得します
-                                                              * @returns {boolean} https 通信のときのみクッキー送信を行うかのフラッグ
-                                                              */
-    this.secure = function () {return secure;};
+     * https 通信のときのみクッキー送信を行うかのフラッグを取得します
+     * @returns {boolean} https 通信のときのみクッキー送信を行うかのフラッグ
+     */
+    this.secure = function () {
+      return secure;
+    };
     /**
-                                                 * https 通信のときのみクッキー送信を行うかのフラッグを設定します
-                                                 * @param {boolean} setting https 通信のときのみクッキー送信を行うかのフラッグ
-                                                 * @returns {boolean} 設定した secure フラッグを返します
-                                                 */
-    this.setSecure = function (setting) {secure = setting;};
+     * https 通信のときのみクッキー送信を行うかのフラッグを設定します
+     * @param {boolean} setting https 通信のときのみクッキー送信を行うかのフラッグ
+     * @returns {boolean} 設定した secure フラッグを返します
+     */
+    this.setSecure = function (setting) {
+      secure = setting;
+    };
   }
   // ----------------------------------------
   // METHOD
@@ -3949,28 +5059,43 @@ Cookie = function () {
   /**
    * cookie value を取得します
    * @returns {string|null} cookie value を返します
-   */_createClass(Cookie, [{ key: 'get', value: function get()
-    {
+   */
+
+
+  _createClass(Cookie, [{
+    key: 'get',
+    value: function get() {
       return Cookie.get(this.key());
     }
 
     /**
-       * cookie value を設定します
-       * @param {string} value cookie value
-       * @param {?Date} [end=null] cookie end Date instance, null の時はプラウザ `quit` で削除されます
-       * @param {string} [path='/'] cookie path
-       * @param {string} [domain=''] cookie domain
-       * @param {boolean} [secure=false] true: https 通信のときのみ、クッキーが送信されます
-       * @returns {string} 設定した cookie 文字列
-       */ }, { key: 'set', value: function set(
-    value) {var end = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.end();var path = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.path();var domain = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : this.domain();var secure = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : this.secure();
+     * cookie value を設定します
+     * @param {string} value cookie value
+     * @param {?Date} [end=null] cookie end Date instance, null の時はプラウザ `quit` で削除されます
+     * @param {string} [path='/'] cookie path
+     * @param {string} [domain=''] cookie domain
+     * @param {boolean} [secure=false] true: https 通信のときのみ、クッキーが送信されます
+     * @returns {string} 設定した cookie 文字列
+     */
+
+  }, {
+    key: 'set',
+    value: function set(value) {
+      var end = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.end();
+      var path = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.path();
+      var domain = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : this.domain();
+      var secure = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : this.secure();
+
       return Cookie.set(this.key(), value, end, path, domain, secure);
     }
     /**
-       * cookie を削除します
-       * @returns {boolean} true: cookie 削除成功
-       */ }, { key: 'remove', value: function remove()
-    {
+     * cookie を削除します
+     * @returns {boolean} true: cookie 削除成功
+     */
+
+  }, {
+    key: 'remove',
+    value: function remove() {
       return Cookie.remove(this.key());
     }
     // ----------------------------------------
@@ -3980,24 +5105,35 @@ Cookie = function () {
      * cookie value を取得します
      * @param {string} key 取得する cookie key 名称
      * @returns {string|null} cookie value
-     */ }], [{ key: 'get', value: function get(
-    key) {
+     */
+
+  }], [{
+    key: 'get',
+    value: function get(key) {
       var cookie = document.cookie;
       var escapeKey = encodeURIComponent(key).replace(/[-.+*]/g, '\\$&');
       var exp = new RegExp('(?:(?:^|.*;)\\s*' + escapeKey + '\\s*\\=\\s*([^;]*).*$)|^.*$');
       return decodeURIComponent(cookie.replace(exp, '$1')) || null;
     }
     /**
-       * cookie value を設定します
-       * @param {string} key cookie key
-       * @param {string} value cookie value
-       * @param {?Date} [end=null] cookie end date Date instance
-       * @param {string} [path=/] cookie path
-       * @param {string} [domain=''] cookie domain
-       * @param {boolean} [secure=false] true: https 通信のときのみ、クッキーが送信されます
-       * @returns {string} 設定した cookie 文字列
-       */ }, { key: 'set', value: function set(
-    key, value) {var end = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;var path = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '/';var domain = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';var secure = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : false;
+     * cookie value を設定します
+     * @param {string} key cookie key
+     * @param {string} value cookie value
+     * @param {?Date} [end=null] cookie end date Date instance
+     * @param {string} [path=/] cookie path
+     * @param {string} [domain=''] cookie domain
+     * @param {boolean} [secure=false] true: https 通信のときのみ、クッキーが送信されます
+     * @returns {string} 設定した cookie 文字列
+     */
+
+  }, {
+    key: 'set',
+    value: function set(key, value) {
+      var end = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      var path = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '/';
+      var domain = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
+      var secure = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : false;
+
       var cookie = encodeURIComponent(key) + '=' + encodeURIComponent(value);
       if (end) {
         cookie += '; expires=' + end.toUTCString();
@@ -4015,13 +5151,16 @@ Cookie = function () {
       return cookie;
     }
     /**
-       * cookie を削除します
-       *
-       * 現在時間より前の時刻を設定します
-       * @param {string} key cookie key
-       * @returns {boolean} true: 削除成功
-       */ }, { key: 'remove', value: function remove(
-    key) {
+     * cookie を削除します
+     *
+     * 現在時間より前の時刻を設定します
+     * @param {string} key cookie key
+     * @returns {boolean} true: 削除成功
+     */
+
+  }, {
+    key: 'remove',
+    value: function remove(key) {
       if (Cookie.has(key)) {
         Cookie.set(key, '', new Date());
         return true;
@@ -4029,64 +5168,95 @@ Cookie = function () {
       return false;
     }
     /**
-       * cookie key が存在するかを調べます
-       * @param {string} key cookie key
-       * @returns {boolean} true: cookie key が存在します
-       */ }, { key: 'has', value: function has(
-    key) {
+     * cookie key が存在するかを調べます
+     * @param {string} key cookie key
+     * @returns {boolean} true: cookie key が存在します
+     */
+
+  }, {
+    key: 'has',
+    value: function has(key) {
       return Cookie.get(key) !== null;
-    } }]);return Cookie;}();exports.default = Cookie;
+    }
+  }]);
+
+  return Cookie;
+}();
+
+exports.default = Cookie;
 
 /***/ }),
 /* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var _slicedToArray = function () {function sliceIterator(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"]) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}return function (arr, i) {if (Array.isArray(arr)) {return arr;} else if (Symbol.iterator in Object(arr)) {return sliceIterator(arr, i);} else {throw new TypeError("Invalid attempt to destructure non-iterable instance");}};}();var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}(); /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * @license inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * @date 2016/12/23
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * Copyright (c) 2011-2015 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          */
 
-var _Text = __webpack_require__(3);var _Text2 = _interopRequireDefault(_Text);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @license inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @date 2016/12/23
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Copyright (c) 2011-2015 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
+
+var _Text = __webpack_require__(3);
+
+var _Text2 = _interopRequireDefault(_Text);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
-                                                                                                                                                                                                                                                                                                                                   * URL query をパースします
-                                                                                                                                                                                                                                                                                                                                   */var
-Queries = function () {
+ * URL query をパースします
+ */
+var Queries = function () {
   /**
-                        * URL query を受取パースします
-                        * @param {string} [queryString=location.search] パースする URL 文字列
-                        */
-  function Queries() {var queryString = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : window.location.search;_classCallCheck(this, Queries);var _Queries$parse =
-    Queries.parse(queryString),_Queries$parse2 = _slicedToArray(_Queries$parse, 2),data = _Queries$parse2[0],keys = _Queries$parse2[1];
+   * URL query を受取パースします
+   * @param {string} [queryString=location.search] パースする URL 文字列
+   */
+  function Queries() {
+    var queryString = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : window.location.search;
+
+    _classCallCheck(this, Queries);
+
+    var _Queries$parse = Queries.parse(queryString),
+        _Queries$parse2 = _slicedToArray(_Queries$parse, 2),
+        data = _Queries$parse2[0],
+        keys = _Queries$parse2[1];
+
     var naked = Queries.naked(queryString);
     /**
-                                             * query key を取得します - query key array
-                                             * @type {Array<string>}
-                                             */
+     * query key を取得します - query key array
+     * @type {Array<string>}
+     */
     this.keys = keys;
     /**
-                       * key: value 形式を取得します - URL query を key: value 形式で返します
-                       * @type {Object}
-                       */
+     * key: value 形式を取得します - URL query を key: value 形式で返します
+     * @type {Object}
+     */
     this.data = data;
     /**
-                       * query 文字列を取得します - パースする query 文字列
-                       * @type {string}
-                       */
+     * query 文字列を取得します - パースする query 文字列
+     * @type {string}
+     */
     this.queryString = queryString;
     /**
-                                     * パースしやすいように正規化した query 文字列 - `?` 以降文字 + `&amp;` を `&` へ置換えます
-                                     * @type {string}
-                                     */
+     * パースしやすいように正規化した query 文字列 - `?` 以降文字 + `&amp;` を `&` へ置換えます
+     * @type {string}
+     */
     this.naked = naked;
   }
   // ----------------------------------------
@@ -4096,23 +5266,33 @@ Queries = function () {
    * key が存在するかを調べます
    * @param {string} keyName 調査対象 key 名称
    * @returns {boolean} true: 存在する
-   */_createClass(Queries, [{ key: 'has', value: function has(
-    keyName) {
+   */
+
+
+  _createClass(Queries, [{
+    key: 'has',
+    value: function has(keyName) {
       return this.keys.indexOf(keyName) !== -1;
     }
     /**
-       * key 値を取得します
-       * @param {string} keyName 調査対象 key 名称
-       * @returns {string|undefined} 見つかると文字列で返します, 見つからない時は undefined を返します
-       */ }, { key: 'get', value: function get(
-    keyName) {
+     * key 値を取得します
+     * @param {string} keyName 調査対象 key 名称
+     * @returns {string|undefined} 見つかると文字列で返します, 見つからない時は undefined を返します
+     */
+
+  }, {
+    key: 'get',
+    value: function get(keyName) {
       return this.data[keyName];
     }
     /**
-       * key: value 形式を取得します
-       * @returns {Object} URL query を key: value 形式で返します
-       */ }, { key: 'getAll', value: function getAll()
-    {
+     * key: value 形式を取得します
+     * @returns {Object} URL query を key: value 形式で返します
+     */
+
+  }, {
+    key: 'getAll',
+    value: function getAll() {
       return this.data;
     }
     // ----------------------------------------
@@ -4130,18 +5310,24 @@ Queries = function () {
      * 文字列先頭に `?` があればそれ以降の文字列を返し {@link Text.and} を実行し `&amp;` を `&` 変換します
      * @param {string} targetText 操作対象文字列
      * @returns {string} query を正規化します
-     */ }], [{ key: 'naked', value: function naked(
-    targetText) {
+     */
+
+  }], [{
+    key: 'naked',
+    value: function naked(targetText) {
       // const queryString = Queries.amp(targetText);
       var queryString = _Text2.default.and(targetText);
       return queryString.substr(0, 1) === '?' ? queryString.substring(1) : targetText;
     }
     /**
-       * query を kye: value 形式にします
-       * @param {string} targetText 操作対象文字列
-       * @returns {[Object, Array]} data, keys を返します
-       */ }, { key: 'parse', value: function parse(
-    targetText) {
+     * query を kye: value 形式にします
+     * @param {string} targetText 操作対象文字列
+     * @returns {[Object, Array]} data, keys を返します
+     */
+
+  }, {
+    key: 'parse',
+    value: function parse(targetText) {
       var query = Queries.naked(targetText);
       var pairs = query.split('&');
       var data = {};
@@ -4165,64 +5351,96 @@ Queries = function () {
       return [data, keys];
     }
     /**
-       * 引数 targetText (query) から引数 keyName 値を取得します
-       * @param {string} keyName key 名称
-       * @param {string} targetText query
-       * @returns {string|undefined} 見つかると文字列で返します, 見つからない時は undefined を返します
-       */ }, { key: 'get', value: function get(
-    keyName) {var targetText = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : window.location.search;var _Queries$parse3 =
-      Queries.parse(targetText),_Queries$parse4 = _slicedToArray(_Queries$parse3, 1),data = _Queries$parse4[0];
+     * 引数 targetText (query) から引数 keyName 値を取得します
+     * @param {string} keyName key 名称
+     * @param {string} targetText query
+     * @returns {string|undefined} 見つかると文字列で返します, 見つからない時は undefined を返します
+     */
+
+  }, {
+    key: 'get',
+    value: function get(keyName) {
+      var targetText = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : window.location.search;
+
+      var _Queries$parse3 = Queries.parse(targetText),
+          _Queries$parse4 = _slicedToArray(_Queries$parse3, 1),
+          data = _Queries$parse4[0];
+
       return data[keyName];
     }
     /**
-       * URL query の key: value 形式を取得します
-       * @param {string} targetText query
-       * @returns {[Object, Array]} URL query を key: value 形式で返します
-       */ }, { key: 'getAll', value: function getAll()
-    {var targetText = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : window.location.search;
+     * URL query の key: value 形式を取得します
+     * @param {string} targetText query
+     * @returns {[Object, Array]} URL query を key: value 形式で返します
+     */
+
+  }, {
+    key: 'getAll',
+    value: function getAll() {
+      var targetText = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : window.location.search;
+
       // const [data] = Queries.parse(targetText);
       return Queries.parse(targetText);
-    } }]);return Queries;}();exports.default = Queries;
+    }
+  }]);
+
+  return Queries;
+}();
+
+exports.default = Queries;
 
 /***/ }),
 /* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _Events = __webpack_require__(0);
+
+var _Events2 = _interopRequireDefault(_Events);
+
+var _Polling2 = __webpack_require__(4);
+
+var _Polling3 = _interopRequireDefault(_Polling2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Copyright (c) 2011-2016 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date 2016/07/04 - 14:19
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+// event
 
 
-
-
-
-
-
-
-
-
-var _Events = __webpack_require__(0);var _Events2 = _interopRequireDefault(_Events);
-
-
-var _Polling2 = __webpack_require__(4);var _Polling3 = _interopRequireDefault(_Polling2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * Copyright (c) 2011-2016 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * @date 2016/07/04 - 14:19
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              */ // event
 // tick
+
+
 // /**
 //  * private property key, fps を保存するための Symbol
 //  * @type {Symbol}
 //  * @private
 //  */
 // const fpsSymbol = Symbol('Singleton Fps Symbol');
+
 /**
  * フレームレート毎に UPDATE イベントを発生させます
  *
@@ -4234,7 +5452,14 @@ var _Polling2 = __webpack_require__(4);var _Polling3 = _interopRequireDefault(_P
  * };
  * fps.on(Fps.UPDATE, update);
  * fps.start();
- * */var Fps = function (_Polling) {_inherits(Fps, _Polling);_createClass(Fps, null, [{ key: 'UPDATE', // ----------------------------------------
+ * */
+var Fps = function (_Polling) {
+  _inherits(Fps, _Polling);
+
+  _createClass(Fps, null, [{
+    key: 'UPDATE',
+
+    // ----------------------------------------
     // EVENT
     // ----------------------------------------
     /**
@@ -4242,24 +5467,40 @@ var _Polling2 = __webpack_require__(4);var _Polling3 = _interopRequireDefault(_P
      * @event UPDATE
      * @returns {string} event, fpsUpdate を返します
      * @default fpsUpdate
-     */get: function get() {return 'fpsUpdate';} // ----------------------------------------
+     */
+    get: function get() {
+      return 'fpsUpdate';
+    }
+    // ----------------------------------------
     // CONSTRUCTOR
     // ----------------------------------------
     /**
      * 引数の frame rate に合わせ UPDATE イベントを発生させます
      * @param {number} [fps=30] frame rate, default: 30
-     */ }]);function Fps() {var fps = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 30;_classCallCheck(this, Fps); // @type {Events} - Events
-    var _this = _possibleConstructorReturn(this, (Fps.__proto__ || Object.getPrototypeOf(Fps)).call(this, 1000 / fps));var events = new _Events2.default(Fps.UPDATE, _this, _this);
+     */
+
+  }]);
+
+  function Fps() {
+    var fps = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 30;
+
+    _classCallCheck(this, Fps);
+
+    // @type {Events} - Events
+    var _this = _possibleConstructorReturn(this, (Fps.__proto__ || Object.getPrototypeOf(Fps)).call(this, 1000 / fps));
+
+    var events = new _Events2.default(Fps.UPDATE, _this, _this);
     /**
-                                                                                                                                                                                     * Fps.UPDATE Events instance
-                                                                                                                                                                                     * @type {Events}
-                                                                                                                                                                                     */
+     * Fps.UPDATE Events instance
+     * @type {Events}
+     */
     _this.events = events;
     /**
-                            * frame rate
-                            * @type {number}
-                            */
-    _this.fps = fps;return _this;
+     * frame rate
+     * @type {number}
+     */
+    _this.fps = fps;
+    return _this;
   }
   // ----------------------------------------
   // METHOD
@@ -4270,33 +5511,53 @@ var _Polling2 = __webpack_require__(4);var _Polling3 = _interopRequireDefault(_P
    * 1. update 実行
    * @param {number} interval fps
    * @returns {boolean} `update` をコールし Polling.UPDATE event が発生すると true を返します
-   */_createClass(Fps, [{ key: 'change', value: function change(
-    interval) {
+   */
+
+
+  _createClass(Fps, [{
+    key: 'change',
+    value: function change(interval) {
       /**
-                * polling 間隔
-                * @type {number}
-                */
+       * polling 間隔
+       * @type {number}
+       */
       this.interval = 1000 / interval;
       this.fps = interval;
       return this.update();
-    } }]);return Fps;}(_Polling3.default);exports.default = Fps;
+    }
+  }]);
+
+  return Fps;
+}(_Polling3.default);
+
+exports.default = Fps;
 
 /***/ }),
 /* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * Copyright (c) 2011-2017 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @date 2017/01/19 - 15:13
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Copyright (c) 2011-2017 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2017/01/19 - 15:13
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
 
 // --------------------------------
 // copy [native code]
@@ -4308,25 +5569,25 @@ Object.defineProperty(exports, "__esModule", { value: true });var _createClass =
  */
 var mathFloor = Math.floor;
 /**
-                             * copy [native code] - Math.max
-                             * @type {function}
-                             * @private
-                             * @static
-                             */
+ * copy [native code] - Math.max
+ * @type {function}
+ * @private
+ * @static
+ */
 var mathMax = Math.max;
 /**
-                         * copy [native code] - Math.min
-                         * @type {function}
-                         * @private
-                         * @static
-                         */
+ * copy [native code] - Math.min
+ * @type {function}
+ * @private
+ * @static
+ */
 var mathMin = Math.min;
 /**
-                         * copy [native code] - parseInt
-                         * @type {function}
-                         * @private
-                         * @static
-                         */
+ * copy [native code] - parseInt
+ * @type {function}
+ * @private
+ * @static
+ */
 var mathInt = self.parseInt;
 
 // --------------------------------
@@ -4342,39 +5603,47 @@ var mathInt = self.parseInt;
  */
 var oneSix = 1 / 6;
 /**
-                     * 計算定数
-                     * ```
-                     * 0.5
-                     * ```
-                     * @type {number}
-                     * @private
-                     * @static
-                     */
+ * 計算定数
+ * ```
+ * 0.5
+ * ```
+ * @type {number}
+ * @private
+ * @static
+ */
 var half = 0.5;
 /**
-                 * 計算定数
-                 * ```
-                 * 2 / 3
-                 * ```
-                 * @type {number}
-                 * @private
-                 * @static
-                 */
+ * 計算定数
+ * ```
+ * 2 / 3
+ * ```
+ * @type {number}
+ * @private
+ * @static
+ */
 var twoThree = 2 / 3;
 /**
-                       * 計算定数
-                       * ```
-                       * 1 / 3
-                       * ```
-                       * @type {number}
-                       * @private
-                       * @static
-                       */
+ * 計算定数
+ * ```
+ * 1 / 3
+ * ```
+ * @type {number}
+ * @private
+ * @static
+ */
 var oneThree = 1 / 3;
 /**
-                       * 色変換ユーティリティーです
-                       */var
-Iro = function () {function Iro() {_classCallCheck(this, Iro);}_createClass(Iro, null, [{ key: 'rgb2hsl',
+ * 色変換ユーティリティーです
+ */
+
+var Iro = function () {
+  function Iro() {
+    _classCallCheck(this, Iro);
+  }
+
+  _createClass(Iro, null, [{
+    key: 'rgb2hsl',
+
     // ----------------------------------------
     // HSL
     // ----------------------------------------
@@ -4388,8 +5657,8 @@ Iro = function () {function Iro() {_classCallCheck(this, Iro);}_createClass(Iro,
      * @returns {{h: number, s: number, l: number}}
      * {hue, saturation, luminance} object を返します, それぞれ 0 ~ 1
      * hue: 0 ~ 360 を 360 で正規化されます
-     */value: function rgb2hsl(
-    red, green, blue) {
+     */
+    value: function rgb2hsl(red, green, blue) {
       var r = red / 255;
       var g = green / 255;
       var b = blue / 255;
@@ -4406,37 +5675,41 @@ Iro = function () {function Iro() {_classCallCheck(this, Iro);}_createClass(Iro,
         return {
           h: h,
           s: s,
-          l: l };
-
+          l: l
+        };
       }
       // ---
       var d = maxValue - minValue;
       s = l > 0.5 ? d / (2 - maxValue - minValue) : d / (maxValue + minValue);
       switch (maxValue) {
-        case r:{
+        case r:
+          {
             h = (g - b) / d + (g < b ? 6 : 0);
             break;
           }
-        case g:{
+        case g:
+          {
             h = (b - r) / d + 2;
             break;
           }
-        case b:{
+        case b:
+          {
             h = (r - g) / d + 4;
             break;
           }
-        default:{
+        default:
+          {
             h = 0;
             break;
-          }}
-
+          }
+      }
       h /= 6;
       // return value
       return {
         h: h,
         s: s,
-        l: l };
-
+        l: l
+      };
     } // rgb2hsl
     /**
      * HSL to RGB で `saturation !== 0` な時の R, G, B 変換 helper です
@@ -4444,8 +5717,11 @@ Iro = function () {function Iro() {_classCallCheck(this, Iro);}_createClass(Iro,
      * @param {number} q `l < 0.5 ? l * (1 + s) : (l + s) - (l * s)`
      * @param {number} hue hue
      * @returns {number} 0 ~ 1 な値を返します
-     */ }, { key: 'hue2rgb', value: function hue2rgb(
-    point, q, hue) {
+     */
+
+  }, {
+    key: 'hue2rgb',
+    value: function hue2rgb(point, q, hue) {
       var t = hue;
       if (t < 0) {
         t += 1;
@@ -4462,13 +5738,16 @@ Iro = function () {function Iro() {_classCallCheck(this, Iro);}_createClass(Iro,
       return point;
     }
     /**
-       * HSL to RGB 変換します
-       * @param {number} h hue 0 ~ 1 degree / 360 正規化
-       * @param {number} s saturation 0 ~ 1
-       * @param {number} l luminance 0 ~ 1
-       * @returns {{r: number, g: number, b: number}} r, g, b: 0 ~ 255 object を返します
-       */ }, { key: 'hsl2rgb', value: function hsl2rgb(
-    h, s, l) {
+     * HSL to RGB 変換します
+     * @param {number} h hue 0 ~ 1 degree / 360 正規化
+     * @param {number} s saturation 0 ~ 1
+     * @param {number} l luminance 0 ~ 1
+     * @returns {{r: number, g: number, b: number}} r, g, b: 0 ~ 255 object を返します
+     */
+
+  }, {
+    key: 'hsl2rgb',
+    value: function hsl2rgb(h, s, l) {
       var r = l;
       var g = l;
       var b = l;
@@ -4482,8 +5761,8 @@ Iro = function () {function Iro() {_classCallCheck(this, Iro);}_createClass(Iro,
       return {
         r: mathInt(r * 255, 10),
         g: mathInt(g * 255, 10),
-        b: mathInt(b * 255, 10) };
-
+        b: mathInt(b * 255, 10)
+      };
     }
     // ----------------------------------------
     // HSV
@@ -4494,8 +5773,11 @@ Iro = function () {function Iro() {_classCallCheck(this, Iro);}_createClass(Iro,
      * @param {number} g RGB.green 0 ~ 255
      * @param {number} b RGB.blue 0 ~ 255
      * @returns {{h: number, s: number, v: number}} 各 0 ~ 1
-     */ }, { key: 'rgb2hsv', value: function rgb2hsv(
-    r, g, b) {
+     */
+
+  }, {
+    key: 'rgb2hsv',
+    value: function rgb2hsv(r, g, b) {
       // 正規化
       var red = r / 255;
       var green = g / 255;
@@ -4512,43 +5794,50 @@ Iro = function () {function Iro() {_classCallCheck(this, Iro);}_createClass(Iro,
         return {
           h: h,
           s: s,
-          v: v };
-
+          v: v
+        };
       }
       // ---
       switch (maxValue) {
-        case red:{
+        case red:
+          {
             h = (green - blue) / d + (green < blue ? 6 : 0);
             break;
           }
-        case green:{
+        case green:
+          {
             h = (blue - red) / d + 2;
             break;
           }
-        case blue:{
+        case blue:
+          {
             h = (red - green) / d + 4;
             break;
           }
-        default:{
+        default:
+          {
             h = 0;
             break;
-          }}
-
+          }
+      }
       h /= 6;
       return {
         h: h,
         s: s,
-        v: v };
-
+        v: v
+      };
     }
     /**
-       * HSV(HSB) to RGB 変換します
-       * @param {number} h hue 0 ~ 1
-       * @param {number} s saturation 0 ~ 1
-       * @param {number} v value(bright) 0 ~ 1
-       * @returns {{r: Number, g: Number, b: Number}} 各 0 ~ 255
-       */ }, { key: 'hsv2rgb', value: function hsv2rgb(
-    h, s, v) {
+     * HSV(HSB) to RGB 変換します
+     * @param {number} h hue 0 ~ 1
+     * @param {number} s saturation 0 ~ 1
+     * @param {number} v value(bright) 0 ~ 1
+     * @returns {{r: Number, g: Number, b: Number}} 各 0 ~ 255
+     */
+
+  }, {
+    key: 'hsv2rgb',
+    value: function hsv2rgb(h, s, v) {
       var i = mathFloor(h * 6);
       var f = h * 6 - i;
       var point = v * (1 - s);
@@ -4599,14 +5888,14 @@ Iro = function () {function Iro() {_classCallCheck(this, Iro);}_createClass(Iro,
           r = 0;
           g = 0;
           b = 0;
-          break;}
-
+          break;
+      }
       // ---
       return {
         r: mathInt(r * 255, 10),
         g: mathInt(g * 255, 10),
-        b: mathInt(b * 255, 10) };
-
+        b: mathInt(b * 255, 10)
+      };
     }
     // ----------------------------------------
     // HEX
@@ -4616,59 +5905,75 @@ Iro = function () {function Iro() {_classCallCheck(this, Iro);}_createClass(Iro,
      * @param {string} hex `#f00` な CSS 色形式
      * @returns {?string} `ff0000` フル変換し返します
      * @see http://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
-     */ }, { key: 'shorthand', value: function shorthand(
-    hex) {
+     */
+
+  }, {
+    key: 'shorthand',
+    value: function shorthand(hex) {
       if (typeof hex !== 'string') {
         return null;
       }
       var pattern = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-      var color = hex.replace(pattern, function (m, r, g, b) {return '' + r + r + g + g + b + b;});
+      var color = hex.replace(pattern, function (m, r, g, b) {
+        return '' + r + r + g + g + b + b;
+      });
       return color.length === 7 ? color : '#' + color;
     }
     /**
-       * CSS 色指定を RGB 変換します
-       * @param {string} hex CSS 色形式 `#f00` or `#ff0000`
-       * @returns {?{r: number, g: number, b: number}} nullable で返します
-       */ }, { key: 'hex2rgb', value: function hex2rgb(
-    hex) {
+     * CSS 色指定を RGB 変換します
+     * @param {string} hex CSS 色形式 `#f00` or `#ff0000`
+     * @returns {?{r: number, g: number, b: number}} nullable で返します
+     */
+
+  }, {
+    key: 'hex2rgb',
+    value: function hex2rgb(hex) {
       var hexString = Iro.shorthand(hex);
       if (typeof hexString !== 'string') {
         return null;
       }
       // ---
       var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hexString);
-      return Array.isArray(result) && result.length === 4 ?
-      {
+      return Array.isArray(result) && result.length === 4 ? {
         r: mathInt(result[1], 16),
         g: mathInt(result[2], 16),
-        b: mathInt(result[3], 16) } :
-      null;
+        b: mathInt(result[3], 16)
+      } : null;
     }
     /**
-       * 0 ~ 255 RGB color number を `00` な 16進形式に変換します
-       * @param {number} colorNumber 変換する RGB color number
-       * @returns {string} 2桁を保証し 16進 変換後文字列を返します
-       */ }, { key: 'int16', value: function int16(
-    colorNumber) {
+     * 0 ~ 255 RGB color number を `00` な 16進形式に変換します
+     * @param {number} colorNumber 変換する RGB color number
+     * @returns {string} 2桁を保証し 16進 変換後文字列を返します
+     */
+
+  }, {
+    key: 'int16',
+    value: function int16(colorNumber) {
       var hex = colorNumber.toString(16);
       return hex.length === 1 ? '0' + hex : hex;
     }
     /**
-       * RGB を CSS形式 hex 変換します
-       * @param {number} r red 0 ~ 255
-       * @param {number} g green 0 ~ 255
-       * @param {number} b blue 0 ~ 255
-       * @returns {string} CSS形式 hex `#ff0000` を返します
-       */ }, { key: 'rgb2hex', value: function rgb2hex(
-    r, g, b) {
+     * RGB を CSS形式 hex 変換します
+     * @param {number} r red 0 ~ 255
+     * @param {number} g green 0 ~ 255
+     * @param {number} b blue 0 ~ 255
+     * @returns {string} CSS形式 hex `#ff0000` を返します
+     */
+
+  }, {
+    key: 'rgb2hex',
+    value: function rgb2hex(r, g, b) {
       return '#' + Iro.int16(r) + Iro.int16(g) + Iro.int16(b);
     }
     /**
-       * 0 ~ 16777215 数値を `#ffffff` な CSS 16進色形式に変換します
-       * @param {number} rgb 0 ~ 16777215 名数値
-       * @returns {string} `#ffffff` な CSS 16進色形式を返します
-       */ }, { key: 'int2hex', value: function int2hex(
-    rgb) {
+     * 0 ~ 16777215 数値を `#ffffff` な CSS 16進色形式に変換します
+     * @param {number} rgb 0 ~ 16777215 名数値
+     * @returns {string} `#ffffff` な CSS 16進色形式を返します
+     */
+
+  }, {
+    key: 'int2hex',
+    value: function int2hex(rgb) {
       var hex = mathFloor(rgb).toString(16);
       var length = hex.length;
       if (length === 6) {
@@ -4682,11 +5987,14 @@ Iro = function () {function Iro() {_classCallCheck(this, Iro);}_createClass(Iro,
       return '#' + hex;
     }
     /**
-       * `#ffffff` な CSS 16進色形式を 10進数変換します
-       * @param {string} hex `#f00` or `#ff0000` な CSS 16進色形式
-       * @returns {?number} 10進数へ変換し返します
-       */ }, { key: 'hex2int', value: function hex2int(
-    hex) {
+     * `#ffffff` な CSS 16進色形式を 10進数変換します
+     * @param {string} hex `#f00` or `#ff0000` な CSS 16進色形式
+     * @returns {?number} 10進数へ変換し返します
+     */
+
+  }, {
+    key: 'hex2int',
+    value: function hex2int(hex) {
       var hexString = Iro.shorthand(hex);
       if (typeof hexString !== 'string') {
         return null;
@@ -4694,45 +6002,73 @@ Iro = function () {function Iro() {_classCallCheck(this, Iro);}_createClass(Iro,
       return mathInt(hexString.replace('#', ''), 16);
     }
     /**
-       * #FFFFFF な CSS 16進を 0xFFFFFF 変換し 10進数にします
-       * @param {string} hex #FFFFFF な CSS 16進
-       * @return {Number} 10進数変換後の色ナンバーを返します
-       */ }, { key: 'toInt', value: function toInt(
-    hex) {
+     * #FFFFFF な CSS 16進を 0xFFFFFF 変換し 10進数にします
+     * @param {string} hex #FFFFFF な CSS 16進
+     * @return {Number} 10進数変換後の色ナンバーを返します
+     */
+
+  }, {
+    key: 'toInt',
+    value: function toInt(hex) {
       return parseInt(hex.replace('#', '0x'), 16);
-    } }]);return Iro;}();exports.default = Iro;
+    }
+  }]);
+
+  return Iro;
+}();
+
+exports.default = Iro;
 
 /***/ }),
 /* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}(); /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * Copyright (c) 2011-2016 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * @date 2016/10/26 - 14:57
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  */
 
-var _Type = __webpack_require__(2);var _Type2 = _interopRequireDefault(_Type);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Copyright (c) 2011-2016 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @date 2016/10/26 - 14:57
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
+
+var _Type = __webpack_require__(2);
+
+var _Type2 = _interopRequireDefault(_Type);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
-                                                                                                                                                                                                                                                                                                                             * Array（配列）Utility
-                                                                                                                                                                                                                                                                                                                             */var
-List = function () {function List() {_classCallCheck(this, List);}_createClass(List, null, [{ key: 'filling',
+ * Array（配列）Utility
+ */
+var List = function () {
+  function List() {
+    _classCallCheck(this, List);
+  }
+
+  _createClass(List, null, [{
+    key: 'filling',
+
     /**
-                                                                                                               * Array.prototype.fill, polyfill
-                                                                                                               * @param {number} lengthData 配列長
-                                                                                                               * @param {*} value fill する値
-                                                                                                               * @returns {Array.<*>} fill 後の配列を返します
-                                                                                                               * @private
-                                                                                                               */value: function filling(
-    lengthData, value) {
+     * Array.prototype.fill, polyfill
+     * @param {number} lengthData 配列長
+     * @param {*} value fill する値
+     * @returns {Array.<*>} fill 後の配列を返します
+     * @private
+     */
+    value: function filling(lengthData, value) {
       var length = lengthData;
       var arr = [].slice(0);
       while (length > 0) {
@@ -4742,36 +6078,57 @@ List = function () {function List() {_classCallCheck(this, List);}_createClass(L
       return arr;
     }
     /**
-       * Array.prototype.fill を行います
-       * @param {number} length 配列長
-       * @param {*} value fill する値
-       * @returns {Array.<*>} fill 後の配列を返しますd
-       */ }, { key: 'fill', value: function fill(
-    length) {var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+     * Array.prototype.fill を行います
+     * @param {number} length 配列長
+     * @param {*} value fill する値
+     * @returns {Array.<*>} fill 後の配列を返しますd
+     */
+
+  }, {
+    key: 'fill',
+    value: function fill(length) {
+      var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
       // 関数が使えない時は polyfill 関数を使用します
       if (!_Type2.default.method(Array.prototype.fill)) {
         return List.filling(length, value);
       }
       // native method
       return new Array(length).fill(value);
-    } }]);return List;}();exports.default = List;
+    }
+  }]);
+
+  return List;
+}();
+
+exports.default = List;
 
 /***/ }),
 /* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * Copyright (c) 2011-2016 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @date 2016/12/16 - 16:50
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/12/16 - 16:50
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
 
 // --------------------------------
 // constant for calculate
@@ -4786,50 +6143,58 @@ Object.defineProperty(exports, "__esModule", { value: true });var _createClass =
  */
 var oneMinute = 1000 * 60;
 /**
-                            * 計算用定数 - 1 hour
-                            * ```
-                            * 1000 * 60 * 60
-                            * ```
-                            * @type {number}
-                            * @private
-                            * @static
-                            */
+ * 計算用定数 - 1 hour
+ * ```
+ * 1000 * 60 * 60
+ * ```
+ * @type {number}
+ * @private
+ * @static
+ */
 var oneHour = oneMinute * 60;
 /**
-                               * 計算用定数 - 1 day
-                               * ```
-                               * 1000 * 60 * 60 * 24
-                               * ```
-                               * @type {number}
-                               * @private
-                               * @static
-                               */
+ * 計算用定数 - 1 day
+ * ```
+ * 1000 * 60 * 60 * 24
+ * ```
+ * @type {number}
+ * @private
+ * @static
+ */
 var oneDay = oneHour * 24;
 /**
-                            * 計算用定数 - 1 week
-                            * ```
-                            * 1000 * 60 * 60 * 24 * 7
-                            * ```
-                            * @type {number}
-                            * @private
-                            * @static
-                            */
+ * 計算用定数 - 1 week
+ * ```
+ * 1000 * 60 * 60 * 24 * 7
+ * ```
+ * @type {number}
+ * @private
+ * @static
+ */
 var oneWeek = oneDay * 7;
 /**
-                           * 計算用定数 - 1 month
-                           * ```
-                           * 1000 * 60 * 60 * 24 * 30
-                           * ```
-                           * @type {number}
-                           * @private
-                           * @static
-                           */
+ * 計算用定数 - 1 month
+ * ```
+ * 1000 * 60 * 60 * 24 * 30
+ * ```
+ * @type {number}
+ * @private
+ * @static
+ */
 var oneMonth = oneDay * 30;
 
 /**
-                             * 指定時間を計算し Date instance を作成します
-                             */var
-Times = function () {function Times() {_classCallCheck(this, Times);}_createClass(Times, null, [{ key: "present",
+ * 指定時間を計算し Date instance を作成します
+ */
+
+var Times = function () {
+  function Times() {
+    _classCallCheck(this, Times);
+  }
+
+  _createClass(Times, null, [{
+    key: "present",
+
     // /**
     //  * 1970-1-1 00:00
     //  * @returns {Date} 1970-1-1 00:00
@@ -4840,50 +6205,71 @@ Times = function () {function Times() {_classCallCheck(this, Times);}_createClas
     /**
      * 現在時間 Date instance
      * @returns {Date} 現在時間 Date instance
-     */value: function present()
-    {
+     */
+    value: function present() {
       return new Date();
     }
     /**
-       * 指定分後の Date instance
-       * @param {number} n 指定分
-       * @returns {Date} 指定分後の Date instance
-       */ }, { key: "minute", value: function minute(
-    n) {
+     * 指定分後の Date instance
+     * @param {number} n 指定分
+     * @returns {Date} 指定分後の Date instance
+     */
+
+  }, {
+    key: "minute",
+    value: function minute(n) {
       return new Date(Date.now() + n * oneMinute);
     }
     /**
-       * 指定時間後の Date instance
-       * @param {number} n 指定時間
-       * @returns {Date} 指定時間後の Date instance
-       */ }, { key: "hour", value: function hour(
-    n) {
+     * 指定時間後の Date instance
+     * @param {number} n 指定時間
+     * @returns {Date} 指定時間後の Date instance
+     */
+
+  }, {
+    key: "hour",
+    value: function hour(n) {
       return new Date(Date.now() + n * oneHour);
     }
     /**
-       * 指定日後の Date instance
-       * @param {number} n 指定日
-       * @returns {Date} 指定日後の Date instance
-       */ }, { key: "day", value: function day(
-    n) {
+     * 指定日後の Date instance
+     * @param {number} n 指定日
+     * @returns {Date} 指定日後の Date instance
+     */
+
+  }, {
+    key: "day",
+    value: function day(n) {
       return new Date(Date.now() + n * oneDay);
     }
     /**
-       * 指定週後の Date instance
-       * @param {number} n 指定週
-       * @returns {Date} 指定週後の Date instance
-       */ }, { key: "week", value: function week(
-    n) {
+     * 指定週後の Date instance
+     * @param {number} n 指定週
+     * @returns {Date} 指定週後の Date instance
+     */
+
+  }, {
+    key: "week",
+    value: function week(n) {
       return new Date(Date.now() + n * oneWeek);
     }
     /**
-       * 指定月後の Date instance
-       * @param {number} n 指定月
-       * @returns {Date} 指定月後の Date instance
-       */ }, { key: "month", value: function month(
-    n) {
+     * 指定月後の Date instance
+     * @param {number} n 指定月
+     * @returns {Date} 指定月後の Date instance
+     */
+
+  }, {
+    key: "month",
+    value: function month(n) {
       return new Date(Date.now() + n * oneMonth);
-    } }]);return Times;}();exports.default = Times;
+    }
+  }]);
+
+  return Times;
+}();
+
+exports.default = Times;
 
 /***/ }),
 /* 28 */
@@ -5597,108 +6983,164 @@ Times = function () {function Times() {_classCallCheck(this, Times);}_createClas
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _Events2 = __webpack_require__(0);
+
+var _Events3 = _interopRequireDefault(_Events2);
+
+var _Vectors = __webpack_require__(5);
+
+var _Vectors2 = _interopRequireDefault(_Vectors);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @license inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date 2016/10/08
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Copyright (c) 2011-2015 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * TouchingEvents
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+// events
 
 
-
-
-
-
-
-
-
-
-
-
-var _Events2 = __webpack_require__(0);var _Events3 = _interopRequireDefault(_Events2);
-
-
-var _Vectors = __webpack_require__(5);var _Vectors2 = _interopRequireDefault(_Vectors);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * @license inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * @date 2016/10/08
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * Copyright (c) 2011-2015 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * TouchingEvents
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  */ // events
 // util
+
+
 /**
  * Touching events object
- */var TouchingEvents = function (_Events) {_inherits(TouchingEvents, _Events); /**
-                                                                                 * Touching events object 各プロパティを設定します
-                                                                                 * @param {string} type event type
-                                                                                 * @param {*} target イベント発生インスタンス
-                                                                                 * @param {Event} origin 発生時のオリジナルイベント
-                                                                                 * @param {Vectors} current 現在の位置
-                                                                                 * @param {Vectors} between 前回位置との差
-                                                                                 * @param {boolean} scrolling scroll したかの真偽値, true: scroll している
-                                                                                 */function TouchingEvents(type, target, origin) {var current = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : new _Vectors2.default();var between = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : new _Vectors2.default();var scrolling = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : false;_classCallCheck(this, TouchingEvents); /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * 発生時のオリジナルイベント
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * @type {Event}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */var _this = _possibleConstructorReturn(this, (TouchingEvents.__proto__ || Object.getPrototypeOf(TouchingEvents)).call(this, type, target)); // super
+ */
+var TouchingEvents = function (_Events) {
+  _inherits(TouchingEvents, _Events);
+
+  /**
+   * Touching events object 各プロパティを設定します
+   * @param {string} type event type
+   * @param {*} target イベント発生インスタンス
+   * @param {Event} origin 発生時のオリジナルイベント
+   * @param {Vectors} current 現在の位置
+   * @param {Vectors} between 前回位置との差
+   * @param {boolean} scrolling scroll したかの真偽値, true: scroll している
+   */
+  function TouchingEvents(type, target, origin) {
+    var current = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : new _Vectors2.default();
+    var between = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : new _Vectors2.default();
+    var scrolling = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : false;
+
+    _classCallCheck(this, TouchingEvents);
+
+    /**
+     * 発生時のオリジナルイベント
+     * @type {Event}
+     */
+    var _this = _possibleConstructorReturn(this, (TouchingEvents.__proto__ || Object.getPrototypeOf(TouchingEvents)).call(this, type, target));
+    // super
+
+
     _this.origin = origin;
     /**
-                            * 現在の位置
-                            * @type {Vectors}
-                            */
+     * 現在の位置
+     * @type {Vectors}
+     */
     _this.current = current;
     /**
-                              * 前回位置との差
-                              * @type {Vectors}
-                              */
+     * 前回位置との差
+     * @type {Vectors}
+     */
     _this.between = between;
     /**
-                              * scroll したかの真偽値
-                              * @type {boolean}
-                              */
-    _this.scrolling = scrolling;return _this;
-  }return TouchingEvents;}(_Events3.default);exports.default = TouchingEvents;
+     * scroll したかの真偽値
+     * @type {boolean}
+     */
+    _this.scrolling = scrolling;
+    return _this;
+  }
+
+  return TouchingEvents;
+}(_Events3.default);
+
+exports.default = TouchingEvents;
 
 /***/ }),
 /* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
+var _Events2 = __webpack_require__(0);
 
+var _Events3 = _interopRequireDefault(_Events2);
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Copyright (c) 2011-2016 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date 2016/11/20 - 12:11
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
+/**
+ * Wheel Events, mouse wheel で発生するイベントを管理します
+ */
+var WheelEvents = function (_Events) {
+  _inherits(WheelEvents, _Events);
 
+  /**
+   * custom Event Object
+   * @param {string} type イベント種類
+   * @param {*} currentTarget current イベント発生インスタンス
+   * @param {*} [target=undefined] イベント発生インスタンス
+   * */
+  function WheelEvents(type, currentTarget) {
+    var target = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
 
-var _Events2 = __webpack_require__(0);var _Events3 = _interopRequireDefault(_Events2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * Copyright (c) 2011-2016 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * @date 2016/11/20 - 12:11
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          */ /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * Wheel Events, mouse wheel で発生するイベントを管理します
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              */var WheelEvents = function (_Events) {_inherits(WheelEvents, _Events); /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * custom Event Object
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * @param {string} type イベント種類
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * @param {*} currentTarget current イベント発生インスタンス
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * @param {*} [target=undefined] イベント発生インスタンス
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * */function WheelEvents(type, currentTarget) {var target = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;_classCallCheck(this, WheelEvents); /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * 移動距離(px)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @type {number}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */var _this = _possibleConstructorReturn(this, (WheelEvents.__proto__ || Object.getPrototypeOf(WheelEvents)).call(this, type, currentTarget, target));_this.moved = 0;return _this;}return WheelEvents;}(_Events3.default);exports.default = WheelEvents;
+    _classCallCheck(this, WheelEvents);
+
+    /**
+     * 移動距離(px)
+     * @type {number}
+     */
+    var _this = _possibleConstructorReturn(this, (WheelEvents.__proto__ || Object.getPrototypeOf(WheelEvents)).call(this, type, currentTarget, target));
+
+    _this.moved = 0;
+    return _this;
+  }
+
+  return WheelEvents;
+}(_Events3.default);
+
+exports.default = WheelEvents;
 
 /***/ }),
 /* 32 */
@@ -5715,7 +7157,7 @@ var _Events2 = __webpack_require__(0);var _Events3 = _interopRequireDefault(_Eve
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.0
- * 2017-5-24 15:17:52
+ * 2017-5-24 15:51:54
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -5724,75 +7166,176 @@ var _Events2 = __webpack_require__(0);var _Events3 = _interopRequireDefault(_Eve
 
 
 // fetch / promise
-Object.defineProperty(exports, "__esModule", { value: true });__webpack_require__(29);
-var _promisePolyfill = __webpack_require__(28);var _promisePolyfill2 = _interopRequireDefault(_promisePolyfill);
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-var _EventDispatcher = __webpack_require__(1);var _EventDispatcher2 = _interopRequireDefault(_EventDispatcher);
-var _Events = __webpack_require__(0);var _Events2 = _interopRequireDefault(_Events);
-var _Rising = __webpack_require__(18);var _Rising2 = _interopRequireDefault(_Rising);
-var _Scroll = __webpack_require__(10);var _Scroll2 = _interopRequireDefault(_Scroll);
-var _Scrolling = __webpack_require__(11);var _Scrolling2 = _interopRequireDefault(_Scrolling);
-var _Touching = __webpack_require__(19);var _Touching2 = _interopRequireDefault(_Touching);
-var _Wheel = __webpack_require__(20);var _Wheel2 = _interopRequireDefault(_Wheel);
+__webpack_require__(29);
 
+var _promisePolyfill = __webpack_require__(28);
 
-var _Ajax = __webpack_require__(21);var _Ajax2 = _interopRequireDefault(_Ajax);
-var _Cookie = __webpack_require__(22);var _Cookie2 = _interopRequireDefault(_Cookie);
-var _Queries = __webpack_require__(23);var _Queries2 = _interopRequireDefault(_Queries);
+var _promisePolyfill2 = _interopRequireDefault(_promisePolyfill);
 
+var _EventDispatcher = __webpack_require__(1);
 
-var _Cycle = __webpack_require__(12);var _Cycle2 = _interopRequireDefault(_Cycle);
-var _Fps = __webpack_require__(24);var _Fps2 = _interopRequireDefault(_Fps);
-var _Polling = __webpack_require__(4);var _Polling2 = _interopRequireDefault(_Polling);
-var _Rate = __webpack_require__(13);var _Rate2 = _interopRequireDefault(_Rate);
+var _EventDispatcher2 = _interopRequireDefault(_EventDispatcher);
 
+var _Events = __webpack_require__(0);
 
-var _Type = __webpack_require__(2);var _Type2 = _interopRequireDefault(_Type);
-var _Hit = __webpack_require__(14);var _Hit2 = _interopRequireDefault(_Hit);
-var _List = __webpack_require__(26);var _List2 = _interopRequireDefault(_List);
-var _Text = __webpack_require__(3);var _Text2 = _interopRequireDefault(_Text);
-var _Times = __webpack_require__(27);var _Times2 = _interopRequireDefault(_Times);
-var _Vectors = __webpack_require__(5);var _Vectors2 = _interopRequireDefault(_Vectors);
-var _Iro = __webpack_require__(25);var _Iro2 = _interopRequireDefault(_Iro);
+var _Events2 = _interopRequireDefault(_Events);
 
+var _Rising = __webpack_require__(18);
 
-var _Can = __webpack_require__(16);var _Can2 = _interopRequireDefault(_Can);
-var _Patterns = __webpack_require__(6);var _Patterns2 = _interopRequireDefault(_Patterns);
-var _Style = __webpack_require__(7);var _Style2 = _interopRequireDefault(_Style);
+var _Rising2 = _interopRequireDefault(_Rising);
 
+var _Scroll = __webpack_require__(10);
 
-var _Bounding = __webpack_require__(8);var _Bounding2 = _interopRequireDefault(_Bounding);
-var _Classes = __webpack_require__(9);var _Classes2 = _interopRequireDefault(_Classes);
-var _Elements = __webpack_require__(17);var _Elements2 = _interopRequireDefault(_Elements);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _Scroll2 = _interopRequireDefault(_Scroll);
+
+var _Scrolling = __webpack_require__(11);
+
+var _Scrolling2 = _interopRequireDefault(_Scrolling);
+
+var _Touching = __webpack_require__(19);
+
+var _Touching2 = _interopRequireDefault(_Touching);
+
+var _Wheel = __webpack_require__(20);
+
+var _Wheel2 = _interopRequireDefault(_Wheel);
+
+var _Ajax = __webpack_require__(21);
+
+var _Ajax2 = _interopRequireDefault(_Ajax);
+
+var _Cookie = __webpack_require__(22);
+
+var _Cookie2 = _interopRequireDefault(_Cookie);
+
+var _Queries = __webpack_require__(23);
+
+var _Queries2 = _interopRequireDefault(_Queries);
+
+var _Cycle = __webpack_require__(12);
+
+var _Cycle2 = _interopRequireDefault(_Cycle);
+
+var _Fps = __webpack_require__(24);
+
+var _Fps2 = _interopRequireDefault(_Fps);
+
+var _Polling = __webpack_require__(4);
+
+var _Polling2 = _interopRequireDefault(_Polling);
+
+var _Rate = __webpack_require__(13);
+
+var _Rate2 = _interopRequireDefault(_Rate);
+
+var _Type = __webpack_require__(2);
+
+var _Type2 = _interopRequireDefault(_Type);
+
+var _Hit = __webpack_require__(14);
+
+var _Hit2 = _interopRequireDefault(_Hit);
+
+var _List = __webpack_require__(26);
+
+var _List2 = _interopRequireDefault(_List);
+
+var _Text = __webpack_require__(3);
+
+var _Text2 = _interopRequireDefault(_Text);
+
+var _Times = __webpack_require__(27);
+
+var _Times2 = _interopRequireDefault(_Times);
+
+var _Vectors = __webpack_require__(5);
+
+var _Vectors2 = _interopRequireDefault(_Vectors);
+
+var _Iro = __webpack_require__(25);
+
+var _Iro2 = _interopRequireDefault(_Iro);
+
+var _Can = __webpack_require__(16);
+
+var _Can2 = _interopRequireDefault(_Can);
+
+var _Patterns = __webpack_require__(6);
+
+var _Patterns2 = _interopRequireDefault(_Patterns);
+
+var _Style = __webpack_require__(7);
+
+var _Style2 = _interopRequireDefault(_Style);
+
+var _Bounding = __webpack_require__(8);
+
+var _Bounding2 = _interopRequireDefault(_Bounding);
+
+var _Classes = __webpack_require__(9);
+
+var _Classes2 = _interopRequireDefault(_Classes);
+
+var _Elements = __webpack_require__(17);
+
+var _Elements2 = _interopRequireDefault(_Elements);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // promise
 // Promise: To add to window
+
+
 // css
+
+
 // net
-if (!window.Promise) {window.Promise = _promisePolyfill2.default;}
+if (!window.Promise) {
+  window.Promise = _promisePolyfill2.default;
+}
 
 /**
-                                                                    * **MOKU**
-                                                                    * <p>global Object</p>
-                                                                    * <p>public な Class はここからアクセス可能です</p>
-                                                                    * @type {Object}
-                                                                    */ // dom
+ * **MOKU**
+ * <p>global Object</p>
+ * <p>public な Class はここからアクセス可能です</p>
+ * @type {Object}
+ */
+
+
+// dom
+
+
 // util
+
+
 // tick
+
+
 // event
-var MOKU = {}; /**
-                * version number を取得します
-                * @returns {string} version number を返します
-                */MOKU.version = function () {return '0.2.0';}; /**
-                                                                     * build 日時を取得します
-                                                                     * @returns {string}  build 日時を返します
-                                                                     */
-MOKU.build = function () {return '2017-5-24 15:17:52';};
+var MOKU = {};
 /**
-                                                   * MOKU.event
-                                                   * @type {Object} MOKU.event object を返します
-                                                   */
+ * version number を取得します
+ * @returns {string} version number を返します
+ */
+MOKU.version = function () {
+  return '0.2.0';
+};
+/**
+ * build 日時を取得します
+ * @returns {string}  build 日時を返します
+ */
+MOKU.build = function () {
+  return '2017-5-24 15:51:54';
+};
+/**
+ * MOKU.event
+ * @type {Object} MOKU.event object を返します
+ */
 MOKU.event = {
   EventDispatcher: _EventDispatcher2.default,
   Events: _Events2.default,
@@ -5800,31 +7343,31 @@ MOKU.event = {
   Scroll: _Scroll2.default,
   Wheel: _Wheel2.default,
   Scrolling: _Scrolling2.default,
-  Touching: _Touching2.default };
-
+  Touching: _Touching2.default
+};
 /**
-                                   * MOKU.net
-                                   * @type {Object} MOKU.net object を返します
-                                   */
+ * MOKU.net
+ * @type {Object} MOKU.net object を返します
+ */
 MOKU.net = {
   Ajax: _Ajax2.default,
   Cookie: _Cookie2.default,
-  Queries: _Queries2.default };
-
+  Queries: _Queries2.default
+};
 /**
-                                 * MOKU.tick
-                                 * @type {Object} MOKU.tick object を返します
-                                 */
+ * MOKU.tick
+ * @type {Object} MOKU.tick object を返します
+ */
 MOKU.tick = {
   Cycle: _Cycle2.default,
   Fps: _Fps2.default,
   Polling: _Polling2.default,
-  Rate: _Rate2.default };
-
+  Rate: _Rate2.default
+};
 /**
-                           * MOKU.util
-                           * @type {Object} MOKU.util object を返します
-                           */
+ * MOKU.util
+ * @type {Object} MOKU.util object を返します
+ */
 MOKU.util = {
   Type: _Type2.default,
   List: _List2.default,
@@ -5832,80 +7375,97 @@ MOKU.util = {
   Times: _Times2.default,
   Vectors: _Vectors2.default,
   Hit: _Hit2.default,
-  Iro: _Iro2.default };
-
+  Iro: _Iro2.default
+};
 /**
-                         * MOKU.util
-                         * @type {Object} MOKU.css object を返します
-                         */
+ * MOKU.util
+ * @type {Object} MOKU.css object を返します
+ */
 MOKU.css = {
   Patterns: _Patterns2.default,
   Style: _Style2.default,
-  Can: _Can2.default };
-
+  Can: _Can2.default
+};
 /**
-                         * MOKU.util
-                         * @type {Object} MOKU.dom object を返します
-                         */
+ * MOKU.util
+ * @type {Object} MOKU.dom object を返します
+ */
 MOKU.dom = {
   Bounding: _Bounding2.default,
   Classes: _Classes2.default,
-  Elements: _Elements2.default };
-
+  Elements: _Elements2.default
+};
 
 // export
 /**
  * global object `MOKU`
  * @type {Object}
  */
-window.MOKU = MOKU;exports.default =
+window.MOKU = MOKU;
 
-MOKU;
+exports.default = MOKU;
 
 /***/ }),
 /* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * Copyright (c) 2011-2016 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @date 2016/11/19 - 22:10
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * scroll freeze timeout id
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * @private
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * @static
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * @type {number}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           */
+ * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/11/19 - 22:10
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
+
+/**
+ * scroll freeze timeout id
+ * @private
+ * @static
+ * @type {number}
+ */
 var timerId = 0;
 
 /**
-                  * scroll を止める時間
-                  * @private
-                  * @static
-                  * @type {number}
-                  * @default 200
-                  */
+ * scroll を止める時間
+ * @private
+ * @static
+ * @type {number}
+ * @default 200
+ */
 var _duration = 200;
 
 /**
-                      * scroll 操作を強制的に不可能にします
-                      */var
-Freeze = function () {function Freeze() {_classCallCheck(this, Freeze);}_createClass(Freeze, null, [{ key: 'start',
+ * scroll 操作を強制的に不可能にします
+ */
+
+var Freeze = function () {
+  function Freeze() {
+    _classCallCheck(this, Freeze);
+  }
+
+  _createClass(Freeze, null, [{
+    key: 'start',
+
     /**
-                                                                                                                     * scroll 動作を受付不能にします
-                                                                                                                     * @returns {void}
-                                                                                                                     */value: function start()
-    {
+     * scroll 動作を受付不能にします
+     * @returns {void}
+     */
+    value: function start() {
       window.addEventListener('touchstart', Freeze.onScroll, false);
       window.addEventListener('touchmove', Freeze.onScroll, false);
       window.addEventListener('touchend', Freeze.onScroll, false);
@@ -5915,10 +7475,13 @@ Freeze = function () {function Freeze() {_classCallCheck(this, Freeze);}_createC
       window.addEventListener('DOMMouseScroll', Freeze.onScroll, false);
     }
     /**
-       * scroll 動作を回復します
-       * @returns {void}
-       */ }, { key: 'stop', value: function stop()
-    {
+     * scroll 動作を回復します
+     * @returns {void}
+     */
+
+  }, {
+    key: 'stop',
+    value: function stop() {
       window.removeEventListener('touchstart', Freeze.onScroll);
       window.removeEventListener('touchmove', Freeze.onScroll);
       window.removeEventListener('touchend', Freeze.onScroll);
@@ -5928,21 +7491,29 @@ Freeze = function () {function Freeze() {_classCallCheck(this, Freeze);}_createC
       window.removeEventListener('DOMMouseScroll', Freeze.onScroll);
     }
     /**
-       * window scroll event handler, バブリング・伝播全てキャンセルします
-       * @param {Event} event window scroll event
-       * @returns {boolean} event をキャンセルするために false を返します
-       */ }, { key: 'onScroll', value: function onScroll(
-    event) {
+     * window scroll event handler, バブリング・伝播全てキャンセルします
+     * @param {Event} event window scroll event
+     * @returns {boolean} event をキャンセルするために false を返します
+     */
+
+  }, {
+    key: 'onScroll',
+    value: function onScroll(event) {
       event.preventDefault();
       event.stopPropagation();
       return false;
     }
     /**
-       * scroll 操作を引数(delay)の間キャンセルします
-       * @param {number} [delay=200] 遅延時間(ms), 200
-       * @returns {number} time out id
-       */ }, { key: 'freeze', value: function freeze()
-    {var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Freeze.duration();
+     * scroll 操作を引数(delay)の間キャンセルします
+     * @param {number} [delay=200] 遅延時間(ms), 200
+     * @returns {number} time out id
+     */
+
+  }, {
+    key: 'freeze',
+    value: function freeze() {
+      var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Freeze.duration();
+
       clearTimeout(timerId);
       // timerId = 0;
       Freeze.start();
@@ -5952,20 +7523,32 @@ Freeze = function () {function Freeze() {_classCallCheck(this, Freeze);}_createC
       return timerId;
     }
     /**
-       * scroll 操作を不能にする時間間隔(ms)を取得します
-       * @returns {number} scroll 操作を不能にする時間間隔(ms)
-       */ }, { key: 'duration', value: function duration()
-    {
+     * scroll 操作を不能にする時間間隔(ms)を取得します
+     * @returns {number} scroll 操作を不能にする時間間隔(ms)
+     */
+
+  }, {
+    key: 'duration',
+    value: function duration() {
       return _duration;
     }
     /**
-       * scroll 操作を不能にする時間間隔(ms)を設定します
-       * @param {number} time scroll 操作を不能にする時間(ms)
-       * @returns {void}
-       */ }, { key: 'setDuration', value: function setDuration(
-    time) {
+     * scroll 操作を不能にする時間間隔(ms)を設定します
+     * @param {number} time scroll 操作を不能にする時間(ms)
+     * @returns {void}
+     */
+
+  }, {
+    key: 'setDuration',
+    value: function setDuration(time) {
       _duration = time;
-    } }]);return Freeze;}();exports.default = Freeze;
+    }
+  }]);
+
+  return Freeze;
+}();
+
+exports.default = Freeze;
 
 /***/ }),
 /* 34 */

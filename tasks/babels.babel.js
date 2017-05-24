@@ -84,7 +84,7 @@ gulp.task('babels:pack:dev', (callback) => {
   // ];
   config.entry = `${config.entry}/babels/compile/moku.js`;
   config.output.path = `${wpk.entry}${dir.dist.libs.substr(1)}`;
-  console.log('config', config);
+  // console.log('config', config);
   // webpack
   return $$.webpack(config, (error, stats) => {
     if (error) {
