@@ -13,41 +13,41 @@
 
 'use strict';
 
-import { module } from './gulp_setting.babel';
+// import module from './gulp_setting.babel';
 
-import { default as requireDir } from 'require-dir';
+import requireDir from 'require-dir';
 
-const gulp = module.gulp;
-/**
- * gulp-load-plugins instance
- * ```
- * import gulpLoadPlugins from 'gulp-load-plugins';
- * const $ = gulpLoadPlugins();
- * ```
- * @type {*}
- */
-const $ = module.$;
-/**
- * @type {{
- *  del: function,
- *  runSequence: function,
- *  browserSync: function,
- *  reload: function,
- * }}
- */
-const $$ = module.$$;
-
-const dir = module.dir;
-
-const wpk = module.wpk;
-
-const AUTO_PREFIX_BROWSERS = module.AUTO_PREFIX_BROWSERS;
-
-const patterns = module.patterns;
-
-const compress = module.compress;
-
-const server = module.server;
+// const gulp = module.gulp;
+// /**
+//  * gulp-load-plugins instance
+//  * ```
+//  * import gulpLoadPlugins from 'gulp-load-plugins';
+//  * const $ = gulpLoadPlugins();
+//  * ```
+//  * @type {*}
+//  */
+// const $ = module.$;
+// /**
+//  * @type {{
+//  *  del: function,
+//  *  runSequence: function,
+//  *  browserSync: function,
+//  *  reload: function,
+//  * }}
+//  */
+// const $$ = module.$$;
+//
+// const dir = module.dir;
+//
+// const wpk = module.wpk;
+//
+// const AUTO_PREFIX_BROWSERS = module.AUTO_PREFIX_BROWSERS;
+//
+// const patterns = module.patterns;
+//
+// const compress = module.compress;
+//
+// const server = module.server;
 
 // --------------------------------------
 //  LOAD TASKS

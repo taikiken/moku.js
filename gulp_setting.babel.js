@@ -187,7 +187,7 @@ server.indexes = true;
 // --------------------------------------
 //  EXPORT
 // --------------------------------------
-export const module = {
+const module = {
   gulp,
   $,
   $$,
@@ -198,3 +198,5 @@ export const module = {
   compress,
   server,
 };
+
+export default module;
