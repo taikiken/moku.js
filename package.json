@@ -1,6 +1,6 @@
 {
   "name": "moku.js",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "EventDispatcher written in ES2016",
   "main": "index.js",
   "scripts": {
@@ -54,16 +54,19 @@
   },
   "babel": {
     "presets": [
-      ["env", {
-        "targets": {
-          "node": "current",
-          "browsers": [
-            "last 2 versions",
-            "safari >= 7",
-            "ie >= 9"
-          ]
+      [
+        "env",
+        {
+          "targets": {
+            "node": "current",
+            "browsers": [
+              "last 2 versions",
+              "safari >= 7",
+              "ie >= 9"
+            ]
+          }
         }
-      }]
+      ]
     ],
     "plugins": [
       "transform-class-properties"
