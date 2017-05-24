@@ -63,7 +63,8 @@ export default class Scroll extends EventDispatcher {
      * bound scroll, window.onscroll event handler
      * @type {function}
      */
-    this.boundScroll = this.scroll.bind(this);
+    // this.boundScroll = this.scroll.bind(this);
+    this.onScroll = this.onScroll.bind(this);
     // this.boundScroll = () => boundScroll;
     // @type {Events} - events instance
     // const events = new ScrollEvents(Scroll.SCROLL, this, this);
@@ -134,7 +135,7 @@ export default class Scroll extends EventDispatcher {
    * @param {?Event} event window scroll event, nullable
    * @returns {void}
    */
-  scroll(event) {
+  onScroll(event) {
     // @type {number} - scroll top
     const y = Scroll.y();
     // @type {number} - window height

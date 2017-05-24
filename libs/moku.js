@@ -2214,7 +2214,8 @@ var Scroll = function (_EventDispatcher) {
      * bound scroll, window.onscroll event handler
      * @type {function}
      */
-    _this.boundScroll = _this.scroll.bind(_this);
+    // this.boundScroll = this.scroll.bind(this);
+    _this.onScroll = _this.onScroll.bind(_this);
     // this.boundScroll = () => boundScroll;
     // @type {Events} - events instance
     // const events = new ScrollEvents(Scroll.SCROLL, this, this);
@@ -2292,8 +2293,8 @@ var Scroll = function (_EventDispatcher) {
      */
 
   }, {
-    key: 'scroll',
-    value: function scroll(event) {
+    key: 'onScroll',
+    value: function onScroll(event) {
       // @type {number} - scroll top
       var y = Scroll.y();
       // @type {number} - window height
@@ -7156,8 +7157,8 @@ exports.default = WheelEvents;
  * http://www.opensource.org/licenses/mit-license.html
  *
  * This notice shall be included in all copies or substantial portions of the Software.
- * 0.2.0
- * 2017-5-24 15:51:54
+ * 0.3.0
+ * 2017-5-24 16:11:42
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -7323,14 +7324,14 @@ var MOKU = {};
  * @returns {string} version number を返します
  */
 MOKU.version = function () {
-  return '0.2.0';
+  return '0.3.0';
 };
 /**
  * build 日時を取得します
  * @returns {string}  build 日時を返します
  */
 MOKU.build = function () {
-  return '2017-5-24 15:51:54';
+  return '2017-5-24 16:11:42';
 };
 /**
  * MOKU.event
