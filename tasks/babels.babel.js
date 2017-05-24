@@ -60,19 +60,20 @@ gulp.task('babels:lint', () => gulp.src(files)
 // babel
 // --------------------------------------
 gulp.task('babels:babel', () => gulp.src(files)
-  .pipe($.babel({
-    presets: [
-      'es2015',
-      'react',
-      'stage-0',
-    ],
-    plugins: ['transform-runtime'],
-  }))
+  // .pipe($.babel({
+  //   presets: [
+  //     'es2015',
+  //     'react',
+  //     'stage-0',
+  //   ],
+  //   plugins: ['transform-runtime'],
+  // }))
+  .pipe($.babel())
   .pipe($.replaceTask({ patterns }))
   .pipe(gulp.dest(dir.babels.compile))
   .pipe($.size({ title: '*** babels:babel ***' }))
 );
-
+console.log('Object.create', Object.create);
 // webpack [DEV]
 // --------------------------------------
 gulp.task('babels:pack:dev', (callback) => {
@@ -125,20 +126,20 @@ gulp.task('babels:pack:build', (callback) => {
 // --------------------------------------
 //  TASK > SEQUENCE
 // --------------------------------------
-gulp.task('babels:dev', (callback) => {
-  return $$.runSequence(
+gulp.task('babels:dev', (callback) => (
+  $$.runSequence(
     'babels:lint',
     'babels:babel',
     'babels:pack:dev',
     callback,
-  );
-});
+  )
+));
 
-gulp.task('babels:build', ['babels:dev'], (callback) => {
-  return $$.runSequence(
+gulp.task('babels:build', ['babels:dev'], (callback) => (
+  $$.runSequence(
     // 'babels:lint',
     'babels:babel',
     'babels:pack:build',
     callback,
-  );
-});
+  )
+));

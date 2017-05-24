@@ -12,4 +12,5 @@ app/assets/js/bundle
 test
 
 # libs
-libs/*
+libs/moku.js
+libs/moku.min.js
