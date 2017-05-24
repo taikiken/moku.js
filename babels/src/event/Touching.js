@@ -24,6 +24,42 @@ import Type from '../util/Type';
  * Touch event を監視し y方向移動が `threshold` 以内の時に `TOUCH` event を発火します
  */
 export default class Touching extends EventDispatcher {
+  // ---------------------------------------------------
+  //  CONSTANT / EVENT
+  // ---------------------------------------------------
+  /**
+   * touchstart event type - touchingStart
+   * @constant START
+   * @type {string}
+   */
+  static START = 'touchingStart';
+  /**
+   * touchend event type - touchingEnd
+   * @constant END
+   * @type {string}
+   */
+  static END = 'touchingEnd';
+  /**
+   * touchcancel event type - touchingCancel
+   * @constant CANCEL
+   * @type {string}
+   */
+  static CANCEL = 'touchingCancel';
+  /**
+   * touchmove event type - touchingMove
+   * @constant MOVE
+   * @type {string}
+   */
+  static MOVE = 'touchingMove';
+  /**
+   * touch event type - touchingTouch
+   * @constant TOUCH
+   * @type {string}
+   */
+  static TOUCH = 'touchingTouch';
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * 処理対象 element などを保存します
    * @param {Element} element 処理対象 Element
@@ -96,49 +132,49 @@ export default class Touching extends EventDispatcher {
      */
     this.vectors = () => vectors;
   }
-  // ---------------------------------------------------
-  //  EVENT
-  // ---------------------------------------------------
-  /**
-   * touchstart event type
-   * @event START
-   * @returns {string} touchingStart を返します
-   */
-  static get START() {
-    return 'touchingStart';
-  }
-  /**
-   * touchend event type
-   * @event END
-   * @returns {string} touchingEnd を返します
-   */
-  static get END() {
-    return 'touchingEnd';
-  }
-  /**
-   * touchend event type
-   * @event CANCEL
-   * @returns {string} touchingCancel を返します
-   */
-  static get CANCEL() {
-    return 'touchingCancel';
-  }
-  /**
-   * touchmove event type
-   * @event MOVE
-   * @returns {string} touchingMove を返します
-   */
-  static get MOVE() {
-    return 'touchingMove';
-  }
-  /**
-   * touch(click) event type
-   * @event TOUCH
-   * @returns {string} touchingTouch を返します
-   */
-  static get TOUCH() {
-    return 'touchingTouch';
-  }
+  // // ---------------------------------------------------
+  // //  EVENT
+  // // ---------------------------------------------------
+  // /**
+  //  * touchstart event type
+  //  * @event START
+  //  * @returns {string} touchingStart を返します
+  //  */
+  // static get START() {
+  //   return 'touchingStart';
+  // }
+  // /**
+  //  * touchend event type
+  //  * @event END
+  //  * @returns {string} touchingEnd を返します
+  //  */
+  // static get END() {
+  //   return 'touchingEnd';
+  // }
+  // /**
+  //  * touchend event type
+  //  * @event CANCEL
+  //  * @returns {string} touchingCancel を返します
+  //  */
+  // static get CANCEL() {
+  //   return 'touchingCancel';
+  // }
+  // /**
+  //  * touchmove event type
+  //  * @event MOVE
+  //  * @returns {string} touchingMove を返します
+  //  */
+  // static get MOVE() {
+  //   return 'touchingMove';
+  // }
+  // /**
+  //  * touch(click) event type
+  //  * @event TOUCH
+  //  * @returns {string} touchingTouch を返します
+  //  */
+  // static get TOUCH() {
+  //   return 'touchingTouch';
+  // }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
@@ -179,7 +215,7 @@ export default class Touching extends EventDispatcher {
       Touching.START,
       this,
       event,
-      vectors.start
+      vectors.start,
     ));
   }
   /**
@@ -258,7 +294,7 @@ export default class Touching extends EventDispatcher {
       event,
       position,
       between,
-      scrolling
+      scrolling,
     ));
 
     // Touching.Touch 発火
@@ -268,7 +304,7 @@ export default class Touching extends EventDispatcher {
       event,
       position,
       between,
-      scrolling
+      scrolling,
     ));
   }
   /**

@@ -58,7 +58,7 @@ export default class EventDispatcher {
      * @returns {boolean} 成功・不成功の真偽値を返します
      */
     this.destroy = () => {
-      listeners = {};
+      listeners = Object.create({});
       return true;
     };
   }
@@ -84,7 +84,7 @@ export default class EventDispatcher {
     // type {Object} - {{eventType: array [listener: Function...]...}}
     const listeners = this.listeners();
 
-    if (!Type.hasKey(listeners, type)) {
+    if (!Type.has(listeners, type)) {
       // listeners.type が存在しない場合は
       // listeners.type をキーに新規配列を作成し
       // listener {function} を配列へ追加（登録）します
@@ -109,7 +109,7 @@ export default class EventDispatcher {
 
     // @type {Object} - events.type:String: [listener:Function...]
     const listeners = this.listeners();
-    if (!Type.hasKey(listeners, type)) {
+    if (!Type.has(listeners, type)) {
       // listener.type が存在しない
       // 処理しない
       return false;
@@ -173,7 +173,7 @@ export default class EventDispatcher {
     // @type {Object} - events.type:String: [listener:Function...]
     const listeners = this.listeners();
 
-    if (!Type.hasKey(listeners, type)) {
+    if (!Type.has(listeners, type)) {
       // listener.type が存在しない
       // 処理しない
       return false;
@@ -194,7 +194,7 @@ export default class EventDispatcher {
     // @type {string} - event type
     const type = events.type;
 
-    if (!Type.hasKey(listeners, type)) {
+    if (!Type.has(listeners, type)) {
       // listener.type が存在しない
       // 処理しない
       return false;
@@ -217,7 +217,7 @@ export default class EventDispatcher {
             return listener.call(this, eventObject);
           }
           return null;
-        }
+        },
       );
 
     return true;

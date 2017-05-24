@@ -16,6 +16,10 @@
 
 'use strict';
 
+// fetch / promise
+import 'whatwg-fetch';
+import Promise from 'promise-polyfill';
+
 // event
 import EventDispatcher from './event/EventDispatcher';
 import Events from './event/Events';
@@ -54,6 +58,12 @@ import Style from './css/Style';
 import Bounding from './dom/Bounding';
 import Classes from './dom/Classes';
 import Elements from './dom/Elements';
+
+// promise
+// Promise: To add to window
+if (!window.Promise) {
+  window.Promise = Promise;
+}
 
 /**
  * **MOKU**
@@ -142,3 +152,5 @@ MOKU.dom = {
  * @type {Object}
  */
 window.MOKU = MOKU;
+
+export default MOKU;

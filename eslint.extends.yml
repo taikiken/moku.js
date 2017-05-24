@@ -11,17 +11,17 @@ rules:
     - 2
     - 2
     - SwitchCase: 1
-  # http://eslint.org/docs/rules/comma-dangle
-  # Object 最後にカンマを(,)付けない, 複数行の時は付ける
-  # bad
-  # { a: 1, }
-  # good
-  # {
-  #   a: 1,
-  # }
-  comma-dangle:
-    - 2
-    - always-multiline
+#  # http://eslint.org/docs/rules/comma-dangle
+#  # Object 最後にカンマを(,)付けない, 複数行の時は付ける
+#  # bad
+#  # { a: 1, }
+#  # good
+#  # {
+#  #   a: 1,
+#  # }
+#  comma-dangle:
+#    - 2
+#    - always-multiline
   # http://eslint.org/docs/rules/require-jsdoc
   # JSDoc 必須
   require-jsdoc:
@@ -42,8 +42,8 @@ rules:
     - allow:
       - warn
       - error
-  # https://www.npmjs.com/package/eslint-plugin-import
-  # `{ default as XXX  }` の書き方がまずい
-  # babel compile は default as がないと動作できない
-  import/no-named-default:
-    - 0
+#  # https://www.npmjs.com/package/eslint-plugin-import
+#  # `{ default as XXX  }` の書き方がまずい
+#  # babel compile は default as がないと動作できない
+#  import/no-named-default:
+#    - 0
