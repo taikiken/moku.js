@@ -197,6 +197,7 @@ const module = {
   patterns,
   compress,
   server,
+  pkg,
 };
 
 export default module;
