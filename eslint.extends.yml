@@ -47,3 +47,11 @@ rules:
 #  # babel compile は default as がないと動作できない
 #  import/no-named-default:
 #    - 0
+  # comment は許可する
+  # http://eslint.org/docs/rules/max-len#ignorecomments
+  max-len:
+   - 1
+   - {
+      "ignoreComments": true,
+      "code": 100,
+     }

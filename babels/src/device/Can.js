@@ -90,6 +90,33 @@ const transition = vendors.some(prefix => typeof style[`${prefix}transition`] !=
 const transform = vendors.some(prefix => typeof style[`${prefix}transform`] !== 'undefined');
 
 /**
+ * addEventListener 第三引数 - { passive: true } : false するためのブラウザテスト・フラッグ
+ * # TouchEvent#Using with addEventListener() and preventDefault()
+ * <pre>
+ * It's important to note that in many cases, both touch and mouse events get sent (in order to let non-touch-specific code still interact with the user). If you use touch events, you should call preventDefault() to keep the mouse event from being sent as well.
+ * The exception to this is Chrome, starting with version 56 (desktop, Chrome for android, and android webview), where the default value for touchstart and touchmove is true and calls to preventDefault() are not needed. To override this behavior, you simply set the passive option to false as shown in the example below. This change prevents the listener from blocking page rendering while a user is scrolling. A demo is available on the Google Developer site.
+ * </pre>
+ * @private
+ * @type {boolean}
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent
+ * @see https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md
+ * @see https://blog.jxck.io/entries/2016-06-09/passive-event-listeners.html
+ * @since 0.3.2
+ */
+let supportsPassive = false;
+try {
+  const opts = Object.defineProperty({}, 'passive', {
+    get() {
+      supportsPassive = true;
+    },
+  });
+  window.addEventListener('test', null, opts);
+} catch (e) {
+  supportsPassive = false;
+  // console.warn('passive test', e);
+}
+
+/**
  * CSS3 機能使用可能かを調べます
  * @example
  * if (Can.transition()) {
@@ -114,5 +141,13 @@ export default class Can {
    */
   static transform() {
     return transform;
+  }
+  /**
+   * addEventListener 第三引数 - { passive: true } が使用できるかを調べます
+   * @returns {boolean} true: 使用可能
+   * @since 0.3.2
+   */
+  static passive() {
+    return supportsPassive;
   }
 }

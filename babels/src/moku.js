@@ -50,7 +50,7 @@ import Vectors from './util/Vectors';
 import Iro from './util/Iro';
 
 // css
-import Can from './css/Can';
+import Can from './device/Can';
 import Patterns from './css/Patterns';
 import Style from './css/Style';
 
