@@ -7238,8 +7238,8 @@ exports.default = WheelEvents;
  * http://www.opensource.org/licenses/mit-license.html
  *
  * This notice shall be included in all copies or substantial portions of the Software.
- * 0.3.1
- * 2017-6-1 20:26:13
+ * 0.3.2
+ * 2017-6-1 20:27:47
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -7405,14 +7405,14 @@ var MOKU = {};
  * @returns {string} version number を返します
  */
 MOKU.version = function () {
-  return '0.3.1';
+  return '0.3.2';
 };
 /**
  * build 日時を取得します
  * @returns {string}  build 日時を返します
  */
 MOKU.build = function () {
-  return '2017-6-1 20:26:13';
+  return '2017-6-1 20:27:47';
 };
 /**
  * MOKU.event
