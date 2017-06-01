@@ -45,9 +45,24 @@ export default class Patterns {
     return {
       padding: ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'],
       margin: ['marginTop', 'marginRight', 'marginBottom', 'marginLeft'],
-      'border-color': ['borderTopColor', 'borderRightColor', 'borderBottomColor', 'borderLeftColor'],
-      'border-style': ['borderTopStyle', 'borderRightStyle', 'borderBottomStyle', 'borderLeftStyle'],
-      'border-width': ['borderTopWidth', 'borderRightWidth', 'borderBottomWidth', 'borderLeftWidth'],
+      'border-color': [
+        'borderTopColor',
+        'borderRightColor',
+        'borderBottomColor',
+        'borderLeftColor',
+      ],
+      'border-style': [
+        'borderTopStyle',
+        'borderRightStyle',
+        'borderBottomStyle',
+        'borderLeftStyle',
+      ],
+      'border-width': [
+        'borderTopWidth',
+        'borderRightWidth',
+        'borderBottomWidth',
+        'borderLeftWidth',
+      ],
     };
   }
   /**

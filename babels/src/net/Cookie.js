@@ -42,7 +42,13 @@ export default class Cookie {
    * @param {string} [defaultDomain=''] cookie domain
    * @param {boolean} [secureSetting=false] true: https 通信のときのみ、クッキーが送信されます
    */
-  constructor(keyName, endValue = null, defaultPath = '/', defaultDomain = '', secureSetting = false) {
+  constructor(
+    keyName,
+    endValue = null,
+    defaultPath = '/',
+    defaultDomain = '',
+    secureSetting = false,
+  ) {
     let key = keyName;
     let end = endValue;
     let path = defaultPath;

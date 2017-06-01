@@ -4,9 +4,11 @@
   "description": "EventDispatcher written in ES2016",
   "main": "index.js",
   "scripts": {
+    "start": "npm run build",
     "esdoc": "cd ./babels && esdoc -c esdoc.json",
     "check": "jscheckstyle --html ./libs/moku.js > ./babels/check/jscheckstyle.html",
-    "build": "gulp babels:build",
+    "build": "NODE_ENV=production gulp babels:build",
+    "dev": "NODE_ENV=development gulp babels:dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

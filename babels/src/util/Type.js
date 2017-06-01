@@ -38,7 +38,9 @@ export default class Type {
    */
   static number(target) {
     // [参考] jQuery 2.x, jQuery 2 関数は文字列 "2" も true にするので type check を追加した
-    return typeof target === 'number' && !Type.array(target) && ((target - parseFloat(target)) + 1) >= 0;
+    return typeof target === 'number' &&
+      !Type.array(target) &&
+      ((target - parseFloat(target)) + 1) >= 0;
   }
   /**
    * 引数(target)が int かを `Number.isInteger` を使用し調べます

@@ -20,6 +20,19 @@ import TouchingEvents from './TouchingEvents';
 import Vectors from '../util/Vectors';
 import Type from '../util/Type';
 
+// device
+import Can from '../device/Can';
+
+// touchevent 3rd argument
+/**
+ * addEventListener 第三引数 - { passive: true } | false
+ * @private
+ * @type {*}
+ * @since 0.3.2
+ */
+const event3rd = Can.passive() ? { passive: true } : false;
+
+
 /**
  * Touch event を監視し y方向移動が `threshold` 以内の時に `TOUCH` event を発火します
  */
@@ -57,13 +70,61 @@ export default class Touching extends EventDispatcher {
    * @type {string}
    */
   static TOUCH = 'touchingTouch';
+  // ----------------------------------------
+  // STATIC METHOD
+  // ----------------------------------------
+  /**
+   * y 方向移動が threshold 以内か判定します
+   * @param {Vectors} pointA スタートポイント(Vectors)
+   * @param {Vectors} pointB エンドポイント(Vectors)
+   * @param {number} threshold 閾値
+   * @returns {boolean} true の時は閾値以上なのでスクロール判定になります
+   */
+  static scrolling(pointA, pointB, threshold) {
+    const y = pointA.betweenY(pointB);
+    // 正数値にし閾値と比較
+    return Math.abs(y) >= threshold;
+  }
+  /**
+   * MouseEvent|TouchEvent から pageX / pageY 座標を取得します
+   * @param {MouseEvent|TouchEvent} event down / move / up event object
+   * @returns {{x: number, y: number}} pageX / pageY 座標を返します
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/changedTouches
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/touches
+   */
+  static point(event) {
+    const x = event.pageX;
+    const y = event.pageY;
+
+    // event.pageX / pageY があればそのまま値を返します
+    // Android で pageX / pageY 存在しても 0, 0 しか返さない端末あり
+    if (Type.number(x) && Type.number(y) && (x !== 0 && y !== 0)) {
+      return { x, y };
+    }
+
+    // event.pageX / pageY がない時は TouchEvent の changedTouches から取得します
+    // touch event
+    // @type {TouchList}
+    const touches = event.changedTouches || event.touches;
+    // touches が取得できない時は 0 をセットし返します
+    if (!Type.exist(touches) || touches.length === 0) {
+      return { x: 0, y: 0 };
+    }
+
+    // changedTouches list の先頭データを取り出し pageX / pageY を取得します
+    // @type {Touch}
+    const touch = touches[0];
+    return { x: touch.pageX, y: touch.pageY };
+  }
   // ---------------------------------------------------
   //  CONSTRUCTOR
   // ---------------------------------------------------
   /**
    * 処理対象 element などを保存します
    * @param {Element} element 処理対象 Element
-   * @param {boolean} [canceling=false] touchmove 中に `preventDefault` を行う
+   * @param {boolean} [canceling=false] touchmove 中に `preventDefault` を行うフラッグ
+   * false の時は {@link Can.passive} を調べ可能なら `{ passive: true }` します - since 0.3.2
    * @param {number} [threshold=10] y 方向閾値
    */
   constructor(element, canceling = false, threshold = 10) {
@@ -86,51 +147,65 @@ export default class Touching extends EventDispatcher {
      */
     this.threshold = threshold;
     // @type {function}
-    // const boundStart = this.onStart.bind(this);
+    // const onStart = this.onStart.bind(this);
     /**
      * bound onStart
      * @type {function}
      */
-    this.boundStart = this.onStart.bind(this);
-    // this.boundStart = () => boundStart;
-    // const boundMove = this.onMove.bind(this);
+    this.onStart = this.onStart.bind(this);
+    // this.onStart = () => onStart;
+    // const onMove = this.onMove.bind(this);
     /**
      * bound onMove
      * @type {function}
      */
-    this.boundMove = this.onMove.bind(this);
-    // this.boundMove = () => boundMove;
-    // const boundEnd = this.onEnd.bind(this);
+    this.onMove = this.onMove.bind(this);
+    // this.onMove = () => onMove;
+    // const onEnd = this.onEnd.bind(this);
     /**
      * bound onEnd
      * @type {function}
      */
-    this.boundEnd = this.onEnd.bind(this);
-    // this.boundEnd = () => boundEnd;
-    // const boundCancel = this.onCancel.bind(this);
+    this.onEnd = this.onEnd.bind(this);
+    // this.onEnd = () => onEnd;
+    // const onCancel = this.onCancel.bind(this);
     /**
      * bound onCancel
      * @type {function}
      */
-    this.boundCancel = this.onCancel.bind(this);
-    // this.boundCancel = () => boundCancel;
-    // const boundBlur = this.onBlur.bind(this);
+    this.onCancel = this.onCancel.bind(this);
+    // this.onCancel = () => onCancel;
+    // const onBlur = this.onBlur.bind(this);
     /**
      * bound onBlur
      * @type {function}
      */
-    this.boundBlur = this.onBlur.bind(this);
-    // this.boundBlur = () => boundBlur;
-    const vectors = {
+    this.onBlur = this.onBlur.bind(this);
+    // this.onBlur = () => onBlur;
+    // const vectors = {
+    //   start: new Vectors(),
+    //   end: new Vectors(),
+    //   moving: [].slice(0),
+    // };
+    /**
+     * 位置管理を行う Vectors instance を含む object
+     * @type {{start: Vectors, end: Vectors, moving: Array.<Vectors>}}
+     */
+    this.vectors = {
       start: new Vectors(),
       end: new Vectors(),
       moving: [].slice(0),
     };
     /**
-     * 位置管理を行う Vectors instance
-     * @returns {{start: Vectors, end: Vectors, moving: Array.<Vectors>}} vectors object
+     * TouchEvent listener 3rd argument, option | useCapture
+     * @type {boolean}
      */
-    this.vectors = () => vectors;
+    this.eventOption = canceling ? false : event3rd;
+    /**
+     * [native code] - document.body
+     * @type {HTMLElement}
+     */
+    this.body = document.body;
   }
   // // ---------------------------------------------------
   // //  EVENT
@@ -185,12 +260,14 @@ export default class Touching extends EventDispatcher {
    * @returns {void}
    */
   init() {
-    this.element.addEventListener('touchstart', this.boundStart, false);
-    window.addEventListener('blur', this.boundBlur, false);
+    this.element.addEventListener('touchstart', this.onStart, this.eventOption);
+    window.addEventListener('blur', this.onBlur, false);
   }
+  // event handlers
+  // ---------------------------------------------------
   /**
    * touchstart event handler
-   * @param {Event} event touchstart event
+   * @param {Event|TouchEvent} event touchstart event
    * @returns {void}
    */
   onStart(event) {
@@ -199,16 +276,17 @@ export default class Touching extends EventDispatcher {
     // vectors を初期化
     this.reset();
     // 現在 position を保存
-    const vectors = this.vectors();
+    const vectors = this.vectors;
     const point = Touching.point(event);
     vectors.start.update(point.x, point.y);
     vectors.moving.push(vectors.start);
 
     // キャンセル event 監視を開始
-    const body = document.body;
-    body.addEventListener('touchend', this.boundEnd, false);
-    body.addEventListener('touchmove', this.boundMove, false);
-    body.addEventListener('touchcancel', this.boundCancel, false);
+    const eventOption = this.eventOption;
+    const body = this.body;
+    body.addEventListener('touchend', this.onEnd, eventOption);
+    body.addEventListener('touchmove', this.onMove, eventOption);
+    body.addEventListener('touchcancel', this.onCancel, eventOption);
 
     // Touching.START 発火
     this.dispatch(new TouchingEvents(
@@ -225,7 +303,7 @@ export default class Touching extends EventDispatcher {
    */
   onMove(event) {
     // console.log('Touching.onMove', event);
-    const vectors = this.vectors();
+    const vectors = this.vectors;
     const movingArray = vectors.moving;
 
     // 現在 position
@@ -268,7 +346,7 @@ export default class Touching extends EventDispatcher {
    */
   onEnd(event) {
     // console.log('Touching.onEnd', event);
-    const vectors = this.vectors();
+    const vectors = this.vectors;
 
     // 現在 position
     const point = Touching.point(event);
@@ -325,6 +403,8 @@ export default class Touching extends EventDispatcher {
   onBlur(event) {
     return this.abort(event);
   }
+  // 処理
+  // ---------------------------------------------------
   /**
    * touch event での処理をキャンセルし、設定値を初期値に戻します
    * @param {Event} event touch / window.onblur Event
@@ -345,68 +425,24 @@ export default class Touching extends EventDispatcher {
    * @returns {boolean} 正常終了時に true を返します
    */
   dispose() {
-    const body = document.body;
+    const body = this.body;
 
-    body.removeEventListener('touchend', this.boundEnd);
-    body.removeEventListener('touchmove', this.boundMove);
-    body.removeEventListener('touchcancel', this.boundCancel);
+    body.removeEventListener('touchend', this.onEnd);
+    body.removeEventListener('touchmove', this.onMove);
+    body.removeEventListener('touchcancel', this.onCancel);
     return true;
   }
   /**
    * 移動監視に使用した vectors instance を全て reset します
    * @returns {{start: Vectors, end: Vectors, moving: Array.<Vectors>}}
-   * reset 後の vectors instance を返します
+   * reset 後の vectors object を返します
    */
   reset() {
-    const vectors = this.vectors();
+    const vectors = this.vectors;
     vectors.start.reset();
     vectors.end.reset();
     vectors.moving = [].slice(0);
 
     return vectors;
-  }
-  // ----------------------------------------
-  // STATIC METHOD
-  // ----------------------------------------
-  /**
-   * y 方向移動が threshold 以内か判定します
-   * @param {Vectors} pointA スタートポイント(Vectors)
-   * @param {Vectors} pointB エンドポイント(Vectors)
-   * @param {number} threshold 閾値
-   * @returns {boolean} true の時は閾値以上なのでスクロール判定になります
-   */
-  static scrolling(pointA, pointB, threshold) {
-    const y = pointA.betweenY(pointB);
-    // 正数値にし閾値と比較
-    return Math.abs(y) >= threshold;
-  }
-  /**
-   * MouseEvent|TouchEvent から pageX / pageY 座標を取得します
-   * @param {MouseEvent|TouchEvent} event down / move / up event object
-   * @returns {{x: number, y: number}} pageX / pageY 座標を返します
-   */
-  static point(event) {
-    const x = event.pageX;
-    const y = event.pageY;
-
-    // event.pageX / pageY があればそのまま値を返します
-    // Android で pageX / pageY 存在しても 0, 0 しか返さない端末あり
-    if (Type.number(x) && Type.number(y) && (x !== 0 && y !== 0)) {
-      return { x, y };
-    }
-
-    // event.pageX / pageY がない時は TouchEvent の changedTouches から取得します
-    // touch event
-    // @type {TouchList}
-    const touches = event.changedTouches || event.touches;
-    // touches が取得できない時は 0 をセットし返します
-    if (!Type.exist(touches) || touches.length === 0) {
-      return { x: 0, y: 0 };
-    }
-
-    // changedTouches list の先頭データを取り出し pageX / pageY を取得します
-    // @type {Touch}
-    const touch = touches[0];
-    return { x: touch.pageX, y: touch.pageY };
   }
 }

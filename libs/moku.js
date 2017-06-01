@@ -866,7 +866,7 @@ var _Events = __webpack_require__(0);
 
 var _Events2 = _interopRequireDefault(_Events);
 
-var _Cycle = __webpack_require__(12);
+var _Cycle = __webpack_require__(13);
 
 var _Cycle2 = _interopRequireDefault(_Cycle);
 
@@ -1043,12 +1043,14 @@ var Polling = function (_EventDispatcher) {
       // flag -> true
       // this[startSymbol] = true;
       this.turnOver();
+      // @type {number} - 開始時間
+      this.begin = Date.now();
       // cycle
       this.initCycle();
-      // @type {number} - 開始時間
-      var present = Date.now();
-      // 強制的に1回目を実行
-      this.fire(this.updateEvents(present, present));
+      // // @type {number} - 開始時間
+      // const present = Date.now();
+      // // 強制的に1回目を実行
+      // this.fire(this.updateEvents(present, present));
 
       return true;
     }
@@ -1829,6 +1831,192 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/11/30 - 16:47
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
+
+/**
+ * [native code] - document
+ * @type {HTMLDocument}
+ * @private
+ * @static
+ */
+var document = self.document;
+/**
+ * CSS detector に使用する virtual CSSStyleDeclaration
+ * ```
+ * document.createElement('p').style
+ * ```
+ * @type {CSSStyleDeclaration}
+ * @private
+ * @static
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style
+ */
+var style = document.createElement('p').style;
+/**
+ * vendor prefix list, CSS detector に使用します
+ * - '-webkit-',
+ * - '-moz-',
+ * - '-ms-',
+ * - '-o-',
+ * - ''
+ * @type {[string]}
+ * @private
+ * @static
+ */
+var vendors = ['-webkit-', '-moz-', '-ms-', '-o-', ''];
+// /**
+//  * 確認用関数
+//  * - transition - @return {boolean}
+//  * - transform - @return {boolean}
+//  * @private
+//  * @static
+//  * @type {{transition: (()), transform: (())}}
+//  */
+// const check = {
+//   transition() {
+//     const p = document.createElement('p');
+//     return typeof p.style.transition !== 'undefined' ||
+//       typeof p.style.WebkitTransition !== 'undefined' ||
+//       typeof p.style.MozTransition !== 'undefined' ||
+//       typeof p.style.msTransition !== 'undefined' ||
+//       typeof p.style.OTransition !== 'undefined';
+//   },
+//   transform() {
+//     const p = document.createElement('p');
+//     return typeof p.style.transform !== 'undefined' ||
+//       typeof p.style.WebkitTransform !== 'undefined' ||
+//       typeof p.style.MozTransform !== 'undefined' ||
+//       typeof p.style.msTransform !== 'undefined' ||
+//       typeof p.style.OTransform !== 'undefined';
+//   },
+// };
+
+/**
+ * CSS3 transition 可能フラッグ
+ * @type {boolean}
+ * @private
+ * @static
+ */
+var _transition = vendors.some(function (prefix) {
+  return typeof style[prefix + 'transition'] !== 'undefined';
+});
+/**
+ * CSS3 transform 可能フラッグ
+ * @type {boolean}
+ * @private
+ * @static
+ */
+var _transform = vendors.some(function (prefix) {
+  return typeof style[prefix + 'transform'] !== 'undefined';
+});
+
+/**
+ * addEventListener 第三引数 - { passive: true } : false するためのブラウザテスト・フラッグ
+ * # TouchEvent#Using with addEventListener() and preventDefault()
+ * <pre>
+ * It's important to note that in many cases, both touch and mouse events get sent (in order to let non-touch-specific code still interact with the user). If you use touch events, you should call preventDefault() to keep the mouse event from being sent as well.
+ * The exception to this is Chrome, starting with version 56 (desktop, Chrome for android, and android webview), where the default value for touchstart and touchmove is true and calls to preventDefault() are not needed. To override this behavior, you simply set the passive option to false as shown in the example below. This change prevents the listener from blocking page rendering while a user is scrolling. A demo is available on the Google Developer site.
+ * </pre>
+ * @private
+ * @type {boolean}
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent
+ * @see https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md
+ * @see https://blog.jxck.io/entries/2016-06-09/passive-event-listeners.html
+ * @since 0.3.2
+ */
+var supportsPassive = false;
+try {
+  var opts = Object.defineProperty({}, 'passive', {
+    get: function get() {
+      supportsPassive = true;
+    }
+  });
+  window.addEventListener('test', null, opts);
+} catch (e) {
+  supportsPassive = false;
+  // console.warn('passive test', e);
+}
+
+/**
+ * CSS3 機能使用可能かを調べます
+ * @example
+ * if (Can.transition()) {
+ *  // can CSS3 transition
+ * }
+ *
+ * if (Can.transform()) {
+ *  // can CSS3 transform
+ * }
+ */
+
+var Can = function () {
+  function Can() {
+    _classCallCheck(this, Can);
+  }
+
+  _createClass(Can, null, [{
+    key: 'transition',
+
+    /**
+     * CSS3 transition が使用可能かを調べます
+     * @returns {boolean} true: 使用可能
+     */
+    value: function transition() {
+      return _transition;
+    }
+    /**
+     * CSS3 transform が使用可能かを調べます
+     * @returns {boolean} true: 使用可能
+     */
+
+  }, {
+    key: 'transform',
+    value: function transform() {
+      return _transform;
+    }
+    /**
+     * addEventListener 第三引数 - { passive: true } が使用できるかを調べます
+     * @returns {boolean} true: 使用可能
+     * @since 0.3.2
+     */
+
+  }, {
+    key: 'passive',
+    value: function passive() {
+      return supportsPassive;
+    }
+  }]);
+
+  return Can;
+}();
+
+exports.default = Can;
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
  * @date 2016/10/06 - 22:02
  *
  * Distributed under the terms of the MIT license.
@@ -1941,7 +2129,7 @@ var Bounding = function () {
 exports.default = Bounding;
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2109,7 +2297,7 @@ var Classes = function () {
 exports.default = Classes;
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2125,7 +2313,7 @@ var _EventDispatcher2 = __webpack_require__(1);
 
 var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
 
-var _ScrollEvents = __webpack_require__(15);
+var _ScrollEvents = __webpack_require__(16);
 
 var _ScrollEvents2 = _interopRequireDefault(_ScrollEvents);
 
@@ -2390,7 +2578,7 @@ var Scroll = function (_EventDispatcher) {
 exports.default = Scroll;
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2402,7 +2590,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _Scroll = __webpack_require__(10);
+var _Scroll = __webpack_require__(11);
 
 var _Scroll2 = _interopRequireDefault(_Scroll);
 
@@ -2410,11 +2598,11 @@ var _EventDispatcher2 = __webpack_require__(1);
 
 var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
 
-var _ScrollEvents = __webpack_require__(15);
+var _ScrollEvents = __webpack_require__(16);
 
 var _ScrollEvents2 = _interopRequireDefault(_ScrollEvents);
 
-var _Rate = __webpack_require__(13);
+var _Rate = __webpack_require__(14);
 
 var _Rate2 = _interopRequireDefault(_Rate);
 
@@ -2624,7 +2812,7 @@ var Scrolling = function (_EventDispatcher) {
 exports.default = Scrolling;
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2855,7 +3043,7 @@ var Cycle = function (_EventDispatcher) {
 exports.default = Cycle;
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3196,7 +3384,7 @@ var Rate = function (_Polling) {
 exports.default = Rate;
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3286,7 +3474,7 @@ var Hit = function () {
 exports.default = Hit;
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3386,154 +3574,6 @@ var ScrollEvents = function (_Events) {
 exports.default = ScrollEvents;
 
 /***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/**
- * Copyright (c) 2011-2016 inazumatv.com, inc.
- * @author (at)taikiken / http://inazumatv.com
- * @date 2016/11/30 - 16:47
- *
- * Distributed under the terms of the MIT license.
- * http://www.opensource.org/licenses/mit-license.html
- *
- * This notice shall be included in all copies or substantial portions of the Software.
- *
- */
-
-/**
- * [native code] - document
- * @type {HTMLDocument}
- * @private
- * @static
- */
-var document = self.document;
-/**
- * CSS detector に使用する virtual CSSStyleDeclaration
- * ```
- * document.createElement('p').style
- * ```
- * @type {CSSStyleDeclaration}
- * @private
- * @static
- * @see https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration
- * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style
- */
-var style = document.createElement('p').style;
-/**
- * vendor prefix list, CSS detector に使用します
- * - '-webkit-',
- * - '-moz-',
- * - '-ms-',
- * - '-o-',
- * - ''
- * @type {[string]}
- * @private
- * @static
- */
-var vendors = ['-webkit-', '-moz-', '-ms-', '-o-', ''];
-// /**
-//  * 確認用関数
-//  * - transition - @return {boolean}
-//  * - transform - @return {boolean}
-//  * @private
-//  * @static
-//  * @type {{transition: (()), transform: (())}}
-//  */
-// const check = {
-//   transition() {
-//     const p = document.createElement('p');
-//     return typeof p.style.transition !== 'undefined' ||
-//       typeof p.style.WebkitTransition !== 'undefined' ||
-//       typeof p.style.MozTransition !== 'undefined' ||
-//       typeof p.style.msTransition !== 'undefined' ||
-//       typeof p.style.OTransition !== 'undefined';
-//   },
-//   transform() {
-//     const p = document.createElement('p');
-//     return typeof p.style.transform !== 'undefined' ||
-//       typeof p.style.WebkitTransform !== 'undefined' ||
-//       typeof p.style.MozTransform !== 'undefined' ||
-//       typeof p.style.msTransform !== 'undefined' ||
-//       typeof p.style.OTransform !== 'undefined';
-//   },
-// };
-
-/**
- * CSS3 transition 可能フラッグ
- * @type {boolean}
- * @private
- * @static
- */
-var _transition = vendors.some(function (prefix) {
-  return typeof style[prefix + 'transition'] !== 'undefined';
-});
-/**
- * CSS3 transform 可能フラッグ
- * @type {boolean}
- * @private
- * @static
- */
-var _transform = vendors.some(function (prefix) {
-  return typeof style[prefix + 'transform'] !== 'undefined';
-});
-
-/**
- * CSS3 機能使用可能かを調べます
- * @example
- * if (Can.transition()) {
- *  // can CSS3 transition
- * }
- *
- * if (Can.transform()) {
- *  // can CSS3 transform
- * }
- */
-
-var Can = function () {
-  function Can() {
-    _classCallCheck(this, Can);
-  }
-
-  _createClass(Can, null, [{
-    key: 'transition',
-
-    /**
-     * CSS3 transition が使用可能かを調べます
-     * @returns {boolean} true: 使用可能
-     */
-    value: function transition() {
-      return _transition;
-    }
-    /**
-     * CSS3 transform が使用可能かを調べます
-     * @returns {boolean} true: 使用可能
-     */
-
-  }, {
-    key: 'transform',
-    value: function transform() {
-      return _transform;
-    }
-  }]);
-
-  return Can;
-}();
-
-exports.default = Can;
-
-/***/ }),
 /* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3569,11 +3609,11 @@ var _Style = __webpack_require__(7);
 
 var _Style2 = _interopRequireDefault(_Style);
 
-var _Bounding = __webpack_require__(8);
+var _Bounding = __webpack_require__(9);
 
 var _Bounding2 = _interopRequireDefault(_Bounding);
 
-var _Classes = __webpack_require__(9);
+var _Classes = __webpack_require__(10);
 
 var _Classes2 = _interopRequireDefault(_Classes);
 
@@ -3703,7 +3743,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _Scrolling = __webpack_require__(11);
+var _Scrolling = __webpack_require__(12);
 
 var _Scrolling2 = _interopRequireDefault(_Scrolling);
 
@@ -3715,7 +3755,7 @@ var _EventDispatcher2 = __webpack_require__(1);
 
 var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
 
-var _Hit = __webpack_require__(14);
+var _Hit = __webpack_require__(15);
 
 var _Hit2 = _interopRequireDefault(_Hit);
 
@@ -3917,6 +3957,10 @@ var _Type = __webpack_require__(2);
 
 var _Type2 = _interopRequireDefault(_Type);
 
+var _Can = __webpack_require__(8);
+
+var _Can2 = _interopRequireDefault(_Can);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3943,33 +3987,124 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // util
 
 
+// device
+
+
+// touchevent 3rd argument
+/**
+ * addEventListener 第三引数 - { passive: true } | false
+ * @private
+ * @type {*}
+ * @since 0.3.2
+ */
+var event3rd = _Can2.default.passive() ? { passive: true } : false;
+
 /**
  * Touch event を監視し y方向移動が `threshold` 以内の時に `TOUCH` event を発火します
  */
+
 var Touching = function (_EventDispatcher) {
   _inherits(Touching, _EventDispatcher);
 
-  // ---------------------------------------------------
-  //  CONSTRUCTOR
-  // ---------------------------------------------------
-  /**
-   * 処理対象 element などを保存します
-   * @param {Element} element 処理対象 Element
-   * @param {boolean} [canceling=false] touchmove 中に `preventDefault` を行う
-   * @param {number} [threshold=10] y 方向閾値
-   */
+  _createClass(Touching, null, [{
+    key: 'scrolling',
 
-  /**
-   * touchmove event type - touchingMove
-   * @constant MOVE
-   * @type {string}
-   */
+    // ----------------------------------------
+    // STATIC METHOD
+    // ----------------------------------------
+    /**
+     * y 方向移動が threshold 以内か判定します
+     * @param {Vectors} pointA スタートポイント(Vectors)
+     * @param {Vectors} pointB エンドポイント(Vectors)
+     * @param {number} threshold 閾値
+     * @returns {boolean} true の時は閾値以上なのでスクロール判定になります
+     */
 
-  /**
-   * touchend event type - touchingEnd
-   * @constant END
-   * @type {string}
-   */
+    /**
+     * touchmove event type - touchingMove
+     * @constant MOVE
+     * @type {string}
+     */
+
+    /**
+     * touchend event type - touchingEnd
+     * @constant END
+     * @type {string}
+     */
+    value: function scrolling(pointA, pointB, threshold) {
+      var y = pointA.betweenY(pointB);
+      // 正数値にし閾値と比較
+      return Math.abs(y) >= threshold;
+    }
+    /**
+     * MouseEvent|TouchEvent から pageX / pageY 座標を取得します
+     * @param {MouseEvent|TouchEvent} event down / move / up event object
+     * @returns {{x: number, y: number}} pageX / pageY 座標を返します
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/changedTouches
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/touches
+     */
+
+    /**
+     * touch event type - touchingTouch
+     * @constant TOUCH
+     * @type {string}
+     */
+
+    /**
+     * touchcancel event type - touchingCancel
+     * @constant CANCEL
+     * @type {string}
+     */
+
+    // ---------------------------------------------------
+    //  CONSTANT / EVENT
+    // ---------------------------------------------------
+    /**
+     * touchstart event type - touchingStart
+     * @constant START
+     * @type {string}
+     */
+
+  }, {
+    key: 'point',
+    value: function point(event) {
+      var x = event.pageX;
+      var y = event.pageY;
+
+      // event.pageX / pageY があればそのまま値を返します
+      // Android で pageX / pageY 存在しても 0, 0 しか返さない端末あり
+      if (_Type2.default.number(x) && _Type2.default.number(y) && x !== 0 && y !== 0) {
+        return { x: x, y: y };
+      }
+
+      // event.pageX / pageY がない時は TouchEvent の changedTouches から取得します
+      // touch event
+      // @type {TouchList}
+      var touches = event.changedTouches || event.touches;
+      // touches が取得できない時は 0 をセットし返します
+      if (!_Type2.default.exist(touches) || touches.length === 0) {
+        return { x: 0, y: 0 };
+      }
+
+      // changedTouches list の先頭データを取り出し pageX / pageY を取得します
+      // @type {Touch}
+      var touch = touches[0];
+      return { x: touch.pageX, y: touch.pageY };
+    }
+    // ---------------------------------------------------
+    //  CONSTRUCTOR
+    // ---------------------------------------------------
+    /**
+     * 処理対象 element などを保存します
+     * @param {Element} element 処理対象 Element
+     * @param {boolean} [canceling=false] touchmove 中に `preventDefault` を行うフラッグ
+     * false の時は {@link Can.passive} を調べ可能なら `{ passive: true }` します - since 0.3.2
+     * @param {number} [threshold=10] y 方向閾値
+     */
+
+  }]);
+
   function Touching(element) {
     var canceling = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     var threshold = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
@@ -3996,53 +4131,65 @@ var Touching = function (_EventDispatcher) {
      */
     _this.threshold = threshold;
     // @type {function}
-    // const boundStart = this.onStart.bind(this);
+    // const onStart = this.onStart.bind(this);
     /**
      * bound onStart
      * @type {function}
      */
-    _this.boundStart = _this.onStart.bind(_this);
-    // this.boundStart = () => boundStart;
-    // const boundMove = this.onMove.bind(this);
+    _this.onStart = _this.onStart.bind(_this);
+    // this.onStart = () => onStart;
+    // const onMove = this.onMove.bind(this);
     /**
      * bound onMove
      * @type {function}
      */
-    _this.boundMove = _this.onMove.bind(_this);
-    // this.boundMove = () => boundMove;
-    // const boundEnd = this.onEnd.bind(this);
+    _this.onMove = _this.onMove.bind(_this);
+    // this.onMove = () => onMove;
+    // const onEnd = this.onEnd.bind(this);
     /**
      * bound onEnd
      * @type {function}
      */
-    _this.boundEnd = _this.onEnd.bind(_this);
-    // this.boundEnd = () => boundEnd;
-    // const boundCancel = this.onCancel.bind(this);
+    _this.onEnd = _this.onEnd.bind(_this);
+    // this.onEnd = () => onEnd;
+    // const onCancel = this.onCancel.bind(this);
     /**
      * bound onCancel
      * @type {function}
      */
-    _this.boundCancel = _this.onCancel.bind(_this);
-    // this.boundCancel = () => boundCancel;
-    // const boundBlur = this.onBlur.bind(this);
+    _this.onCancel = _this.onCancel.bind(_this);
+    // this.onCancel = () => onCancel;
+    // const onBlur = this.onBlur.bind(this);
     /**
      * bound onBlur
      * @type {function}
      */
-    _this.boundBlur = _this.onBlur.bind(_this);
-    // this.boundBlur = () => boundBlur;
-    var vectors = {
+    _this.onBlur = _this.onBlur.bind(_this);
+    // this.onBlur = () => onBlur;
+    // const vectors = {
+    //   start: new Vectors(),
+    //   end: new Vectors(),
+    //   moving: [].slice(0),
+    // };
+    /**
+     * 位置管理を行う Vectors instance を含む object
+     * @type {{start: Vectors, end: Vectors, moving: Array.<Vectors>}}
+     */
+    _this.vectors = {
       start: new _Vectors2.default(),
       end: new _Vectors2.default(),
       moving: [].slice(0)
     };
     /**
-     * 位置管理を行う Vectors instance
-     * @returns {{start: Vectors, end: Vectors, moving: Array.<Vectors>}} vectors object
+     * TouchEvent listener 3rd argument, option | useCapture
+     * @type {boolean}
      */
-    _this.vectors = function () {
-      return vectors;
-    };
+    _this.eventOption = canceling ? false : event3rd;
+    /**
+     * [native code] - document.body
+     * @type {HTMLElement}
+     */
+    _this.body = document.body;
     return _this;
   }
   // // ---------------------------------------------------
@@ -4098,37 +4245,18 @@ var Touching = function (_EventDispatcher) {
    * @returns {void}
    */
 
-  /**
-   * touch event type - touchingTouch
-   * @constant TOUCH
-   * @type {string}
-   */
-
-  /**
-   * touchcancel event type - touchingCancel
-   * @constant CANCEL
-   * @type {string}
-   */
-
-  // ---------------------------------------------------
-  //  CONSTANT / EVENT
-  // ---------------------------------------------------
-  /**
-   * touchstart event type - touchingStart
-   * @constant START
-   * @type {string}
-   */
-
 
   _createClass(Touching, [{
     key: 'init',
     value: function init() {
-      this.element.addEventListener('touchstart', this.boundStart, false);
-      window.addEventListener('blur', this.boundBlur, false);
+      this.element.addEventListener('touchstart', this.onStart, this.eventOption);
+      window.addEventListener('blur', this.onBlur, false);
     }
+    // event handlers
+    // ---------------------------------------------------
     /**
      * touchstart event handler
-     * @param {Event} event touchstart event
+     * @param {Event|TouchEvent} event touchstart event
      * @returns {void}
      */
 
@@ -4140,16 +4268,17 @@ var Touching = function (_EventDispatcher) {
       // vectors を初期化
       this.reset();
       // 現在 position を保存
-      var vectors = this.vectors();
+      var vectors = this.vectors;
       var point = Touching.point(event);
       vectors.start.update(point.x, point.y);
       vectors.moving.push(vectors.start);
 
       // キャンセル event 監視を開始
-      var body = document.body;
-      body.addEventListener('touchend', this.boundEnd, false);
-      body.addEventListener('touchmove', this.boundMove, false);
-      body.addEventListener('touchcancel', this.boundCancel, false);
+      var eventOption = this.eventOption;
+      var body = this.body;
+      body.addEventListener('touchend', this.onEnd, eventOption);
+      body.addEventListener('touchmove', this.onMove, eventOption);
+      body.addEventListener('touchcancel', this.onCancel, eventOption);
 
       // Touching.START 発火
       this.dispatch(new _TouchingEvents2.default(Touching.START, this, event, vectors.start));
@@ -4164,7 +4293,7 @@ var Touching = function (_EventDispatcher) {
     key: 'onMove',
     value: function onMove(event) {
       // console.log('Touching.onMove', event);
-      var vectors = this.vectors();
+      var vectors = this.vectors;
       var movingArray = vectors.moving;
 
       // 現在 position
@@ -4203,7 +4332,7 @@ var Touching = function (_EventDispatcher) {
     key: 'onEnd',
     value: function onEnd(event) {
       // console.log('Touching.onEnd', event);
-      var vectors = this.vectors();
+      var vectors = this.vectors;
 
       // 現在 position
       var point = Touching.point(event);
@@ -4252,6 +4381,8 @@ var Touching = function (_EventDispatcher) {
     value: function onBlur(event) {
       return this.abort(event);
     }
+    // 処理
+    // ---------------------------------------------------
     /**
      * touch event での処理をキャンセルし、設定値を初期値に戻します
      * @param {Event} event touch / window.onblur Event
@@ -4274,78 +4405,28 @@ var Touching = function (_EventDispatcher) {
   }, {
     key: 'dispose',
     value: function dispose() {
-      var body = document.body;
+      var body = this.body;
 
-      body.removeEventListener('touchend', this.boundEnd);
-      body.removeEventListener('touchmove', this.boundMove);
-      body.removeEventListener('touchcancel', this.boundCancel);
+      body.removeEventListener('touchend', this.onEnd);
+      body.removeEventListener('touchmove', this.onMove);
+      body.removeEventListener('touchcancel', this.onCancel);
       return true;
     }
     /**
      * 移動監視に使用した vectors instance を全て reset します
      * @returns {{start: Vectors, end: Vectors, moving: Array.<Vectors>}}
-     * reset 後の vectors instance を返します
+     * reset 後の vectors object を返します
      */
 
   }, {
     key: 'reset',
     value: function reset() {
-      var vectors = this.vectors();
+      var vectors = this.vectors;
       vectors.start.reset();
       vectors.end.reset();
       vectors.moving = [].slice(0);
 
       return vectors;
-    }
-    // ----------------------------------------
-    // STATIC METHOD
-    // ----------------------------------------
-    /**
-     * y 方向移動が threshold 以内か判定します
-     * @param {Vectors} pointA スタートポイント(Vectors)
-     * @param {Vectors} pointB エンドポイント(Vectors)
-     * @param {number} threshold 閾値
-     * @returns {boolean} true の時は閾値以上なのでスクロール判定になります
-     */
-
-  }], [{
-    key: 'scrolling',
-    value: function scrolling(pointA, pointB, threshold) {
-      var y = pointA.betweenY(pointB);
-      // 正数値にし閾値と比較
-      return Math.abs(y) >= threshold;
-    }
-    /**
-     * MouseEvent|TouchEvent から pageX / pageY 座標を取得します
-     * @param {MouseEvent|TouchEvent} event down / move / up event object
-     * @returns {{x: number, y: number}} pageX / pageY 座標を返します
-     */
-
-  }, {
-    key: 'point',
-    value: function point(event) {
-      var x = event.pageX;
-      var y = event.pageY;
-
-      // event.pageX / pageY があればそのまま値を返します
-      // Android で pageX / pageY 存在しても 0, 0 しか返さない端末あり
-      if (_Type2.default.number(x) && _Type2.default.number(y) && x !== 0 && y !== 0) {
-        return { x: x, y: y };
-      }
-
-      // event.pageX / pageY がない時は TouchEvent の changedTouches から取得します
-      // touch event
-      // @type {TouchList}
-      var touches = event.changedTouches || event.touches;
-      // touches が取得できない時は 0 をセットし返します
-      if (!_Type2.default.exist(touches) || touches.length === 0) {
-        return { x: 0, y: 0 };
-      }
-
-      // changedTouches list の先頭データを取り出し pageX / pageY を取得します
-      // @type {Touch}
-      var touch = touches[0];
-      return { x: touch.pageX, y: touch.pageY };
     }
   }]);
 
@@ -7158,7 +7239,7 @@ exports.default = WheelEvents;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.3.1
- * 2017-5-24 20:06:28
+ * 2017-6-1 20:26:13
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -7190,11 +7271,11 @@ var _Rising = __webpack_require__(18);
 
 var _Rising2 = _interopRequireDefault(_Rising);
 
-var _Scroll = __webpack_require__(10);
+var _Scroll = __webpack_require__(11);
 
 var _Scroll2 = _interopRequireDefault(_Scroll);
 
-var _Scrolling = __webpack_require__(11);
+var _Scrolling = __webpack_require__(12);
 
 var _Scrolling2 = _interopRequireDefault(_Scrolling);
 
@@ -7218,7 +7299,7 @@ var _Queries = __webpack_require__(23);
 
 var _Queries2 = _interopRequireDefault(_Queries);
 
-var _Cycle = __webpack_require__(12);
+var _Cycle = __webpack_require__(13);
 
 var _Cycle2 = _interopRequireDefault(_Cycle);
 
@@ -7230,7 +7311,7 @@ var _Polling = __webpack_require__(4);
 
 var _Polling2 = _interopRequireDefault(_Polling);
 
-var _Rate = __webpack_require__(13);
+var _Rate = __webpack_require__(14);
 
 var _Rate2 = _interopRequireDefault(_Rate);
 
@@ -7238,7 +7319,7 @@ var _Type = __webpack_require__(2);
 
 var _Type2 = _interopRequireDefault(_Type);
 
-var _Hit = __webpack_require__(14);
+var _Hit = __webpack_require__(15);
 
 var _Hit2 = _interopRequireDefault(_Hit);
 
@@ -7262,7 +7343,7 @@ var _Iro = __webpack_require__(25);
 
 var _Iro2 = _interopRequireDefault(_Iro);
 
-var _Can = __webpack_require__(16);
+var _Can = __webpack_require__(8);
 
 var _Can2 = _interopRequireDefault(_Can);
 
@@ -7274,11 +7355,11 @@ var _Style = __webpack_require__(7);
 
 var _Style2 = _interopRequireDefault(_Style);
 
-var _Bounding = __webpack_require__(8);
+var _Bounding = __webpack_require__(9);
 
 var _Bounding2 = _interopRequireDefault(_Bounding);
 
-var _Classes = __webpack_require__(9);
+var _Classes = __webpack_require__(10);
 
 var _Classes2 = _interopRequireDefault(_Classes);
 
@@ -7331,7 +7412,7 @@ MOKU.version = function () {
  * @returns {string}  build 日時を返します
  */
 MOKU.build = function () {
-  return '2017-5-24 20:06:28';
+  return '2017-6-1 20:26:13';
 };
 /**
  * MOKU.event
