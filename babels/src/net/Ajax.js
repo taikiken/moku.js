@@ -95,26 +95,25 @@ export default class Ajax {
    * <p>START, COMPLETE, ERROR イベントを発生させます</p>
    *
    * @param {string} path Ajax request path
-   * @param {string} method GET, POST, PUT, DELETE...etc request method
+   * @param {string} [method=GET] GET, POST, PUT, DELETE...etc request method
    * @param {?Headers} [headers=null] Headers option, token などを埋め込むのに使用します
    * @param {?FormData} [formData=null] フォームデータを送信するのに使用します
-   * @return {boolean} ajax request を開始したかどうかの真偽値を返します
+   * @return {Promise} ajax request を開始し fetch Promise 返します
    */
-  start(path, method, headers = null, formData = null) {
+  start(path, method = 'GET', headers = null, formData = null) {
     // ajax request 開始
     if (!this.can) {
-      // flag が off なので処理しない
-      return false;
+      throw new Error(`Ajax request busy: ${this.can}`);
     }
 
     // flag off
     this.disable();
 
     // @type {Request} Request instance
-    const request = Ajax.option(path, method, headers, formData);
+    const request = this.option(path, method, headers, formData);
 
     // fetch start
-    fetch(request)
+    return fetch(request)
     // @param {Object} response - Ajax response
       .then((response) => {
         // may be success
@@ -137,8 +136,6 @@ export default class Ajax {
         // flag true
         this.enable();
       });
-
-    return true;
   }
   /**
    * 実行可否 flag を true にします
