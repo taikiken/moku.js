@@ -54,6 +54,9 @@ const Request = self.Request;
  * @see https://developer.mozilla.org/ja/docs/Web/API/Body
  */
 export default class Ajax {
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
   /**
    * request 可能 / 不可能 flag を true に設定します
    * @param {Function} resolve Promise success callback
@@ -75,6 +78,12 @@ export default class Ajax {
      * @type {Function}
      */
     this.reject = reject;
+    this.props = {
+      method: null,
+      cache: 'no-cache',
+      // https://developers.google.com/web/updates/2015/03/introduction-to-fetch
+      credentials: 'same-origin',
+    };
   }
   // ----------------------------------------
   // METHOD
@@ -147,9 +156,6 @@ export default class Ajax {
     this.can = false;
     return this.can;
   }
-  // ----------------------------------------
-  // STATIC METHOD
-  // ----------------------------------------
   /**
    * <p>fetch API へ送るオプションを作成します</p>
    *
@@ -169,14 +175,16 @@ export default class Ajax {
    * @see https://developers.google.com/web/updates/2015/03/introduction-to-fetch
    * @see https://developer.mozilla.org/ja/docs/Web/API/Request
    */
-  static option(path, method, headers, formData) {
+  option(path, method, headers, formData) {
     // request option
-    const option = Object.create({
-      method,
-      cache: 'no-cache',
-      // https://developers.google.com/web/updates/2015/03/introduction-to-fetch
-      credentials: 'same-origin',
-    });
+    const option = Object.assign({}, this.props);
+    // const option = Object.create({
+    //   method,
+    //   cache: 'no-cache',
+    //   // https://developers.google.com/web/updates/2015/03/introduction-to-fetch
+    //   credentials: 'same-origin',
+    // });
+    option.method = method;
 
     // headers option
     if (Type.exist(headers)) {
