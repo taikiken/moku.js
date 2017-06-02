@@ -1,6 +1,6 @@
 {
   "name": "moku.js",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "EventDispatcher written in ES2016",
   "main": "index.js",
   "scripts": {

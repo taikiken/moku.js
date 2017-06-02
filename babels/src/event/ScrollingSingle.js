@@ -10,7 +10,7 @@
  *
  */
 
-import Scrolling from './Scrolling';
+import Scrolling from '../Scrolling';
 
 /**
  * singleton instance, nullable
@@ -31,10 +31,9 @@ export default class ScrollingSingle {
    * @returns {Scrolling} Scrolling instance を返します
    */
   static factory() {
-    if (instance !== null) {
-      return instance;
+    if (instance === null) {
+      instance = new Scrolling();
     }
-    instance = new Scrolling();
     return instance;
   }
 }

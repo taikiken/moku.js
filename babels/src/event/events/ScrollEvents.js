@@ -16,6 +16,9 @@ import Events from './Events';
  * Scroll events 管理クラス
  */
 export default class ScrollEvents extends Events {
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * custom Event Object
    * @param {string} type イベント種類
@@ -30,7 +33,7 @@ export default class ScrollEvents extends Events {
      */
     this.previous = -1;
     /**
-     * オリジナルイベント(.onscroll)
+     * オリジナルイベント(window.onscroll)
      * @type {?Event}
      */
     this.original = null;
