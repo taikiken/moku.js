@@ -12,10 +12,13 @@
 
 // event
 import EventDispatcher from '../event/EventDispatcher';
-import Events from '../event/Events';
+// import Events from '../event/Events';
 
 // tick
 import Cycle from './Cycle';
+
+// tick/events
+import PollingEvents from './events/PollingEvents';
 
 /**
  * 一定間隔毎に UPDATE イベントを発生させます
@@ -30,36 +33,48 @@ import Cycle from './Cycle';
  * polling.start();
  */
 export default class Polling extends EventDispatcher {
+  // ----------------------------------------
+  // STATIC EVENT
+  // ----------------------------------------
+  /**
+   * 一定間隔(milliseconds)毎に発生するイベント - pollingUpdate
+   * @event UPDATE
+   * @type {string}
+   */
+  static UPDATE = 'pollingUpdate';
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
   /**
    * 引数の polling に合わせ UPDATE イベントを発生させます
    * @param {number} [interval=1000] イベント発生間隔 milliseconds
    */
   constructor(interval = 1000) {
     super();
-    // @type {Cycle} - Cycle instance
-    const cycle = Cycle.factory();
-    const boundUpdate = this.update.bind(this);
-    const events = new Events(Polling.UPDATE, this, this);
+    // // @type {Cycle} - Cycle instance
+    // const cycle = Cycle.factory();
+    // const boundUpdate = this.update.bind(this);
+    // const events = new Events(Polling.UPDATE, this, this);
     /**
      * Cycle instance を取得します
      * @ty[e {Cycle}
      */
-    this.cycle = cycle;
+    this.cycle = Cycle.factory();
     /**
      * 間隔(ms)
      * @type {number}
      */
     this.interval = interval;
     /**
-     * bound update, Cycle.UPDATE event handler
+     * bound onUpdate, Cycle.UPDATE event handler
      * @returns {function}
      */
-    this.boundUpdate = boundUpdate;
+    this.onUpdate = this.onUpdate.bind(this);
     /**
      * Events instance - Polling.UPDATE Events object
      * @type {Events}
      */
-    this.events = events;
+    this.events = new PollingEvents(Polling.UPDATE, this, this);
     /**
      * polling event 発生時間, event を発火すると 0 にリセットされます
      * @type {number}
@@ -71,16 +86,16 @@ export default class Polling extends EventDispatcher {
      */
     this.started = false;
   }
-  // ----------------------------------------
-  // EVENT
-  // ----------------------------------------
-  /**
-   * 一定間隔(milliseconds)毎に発生するイベント type を取得します
-   * @returns {string} event, pollingUpdate を返します
-   */
-  static get UPDATE() {
-    return 'pollingUpdate';
-  }
+  // // ----------------------------------------
+  // // EVENT
+  // // ----------------------------------------
+  // /**
+  //  * 一定間隔(milliseconds)毎に発生するイベント type を取得します
+  //  * @returns {string} event, pollingUpdate を返します
+  //  */
+  // static get UPDATE() {
+  //   return 'pollingUpdate';
+  // }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
@@ -127,7 +142,7 @@ export default class Polling extends EventDispatcher {
     // cycle
     const cycle = this.cycle;
     // bind Cycle.UPDATE
-    cycle.on(Cycle.UPDATE, this.boundUpdate);
+    cycle.on(Cycle.UPDATE, this.onUpdate);
     // cycle 開始
     cycle.start();
     return cycle;
@@ -164,7 +179,7 @@ export default class Polling extends EventDispatcher {
       // not start
       return false;
     }
-    this.cycle.off(Cycle.UPDATE, this.boundUpdate);
+    this.cycle.off(Cycle.UPDATE, this.onUpdate);
     // this[startSymbol] = false;
     this.turnOver();
     return true;
@@ -175,7 +190,7 @@ export default class Polling extends EventDispatcher {
    * @listens {Cycle.UPDATE} Cycle.UPDATE が発生すると実行されます
    * @returns {boolean} Polling.UPDATE event が発生すると true を返します
    */
-  update() {
+  onUpdate() {
     // 現在時間
     // @type {number}
     const present = Date.now();

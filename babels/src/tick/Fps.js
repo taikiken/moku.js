@@ -11,10 +11,13 @@
  */
 
 // event
-import Events from '../event/Events';
+// import Events from '../event/Events';
 
 // tick
 import Polling from './Polling';
+
+// tick/events
+import FpsEvents from './events/FpsEvents';
 
 // /**
 //  * private property key, fps を保存するための Symbol
@@ -24,7 +27,7 @@ import Polling from './Polling';
 // const fpsSymbol = Symbol('Singleton Fps Symbol');
 
 /**
- * フレームレート毎に UPDATE イベントを発生させます
+ * フレームレート毎に `UPDATE` イベントを発生させます
  *
  * @example
  * // 2sec. interval
@@ -40,14 +43,20 @@ export default class Fps extends Polling {
   // EVENT
   // ----------------------------------------
   /**
-   * フレームレート毎に発生するイベントを取得します
+   * フレームレート毎に発生するイベント - fpsUpdate
    * @event UPDATE
-   * @returns {string} event, fpsUpdate を返します
-   * @default fpsUpdate
+   * @type {string}
    */
-  static get UPDATE() {
-    return 'fpsUpdate';
-  }
+  static UPDATE = 'fpsUpdate';
+  // /**
+  //  * フレームレート毎に発生するイベントを取得します
+  //  * @event UPDATE
+  //  * @returns {string} event, fpsUpdate を返します
+  //  * @default fpsUpdate
+  //  */
+  // static get UPDATE() {
+  //   return 'fpsUpdate';
+  // }
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
@@ -58,7 +67,8 @@ export default class Fps extends Polling {
   constructor(fps = 30) {
     super(1000 / fps);
     // @type {Events} - Events
-    const events = new Events(Fps.UPDATE, this, this);
+    const events = new FpsEvents(Fps.UPDATE, this, this);
+    events.fps = fps;
     /**
      * Fps.UPDATE Events instance
      * @type {Events}
@@ -74,11 +84,11 @@ export default class Fps extends Polling {
   // METHOD
   // ----------------------------------------
   /**
-   * polling 時間を変更します<br>
+   * fps を変更します
    * 1. プロパティ polling 変更
-   * 1. update 実行
+   * 1. 継承 method update 実行
    * @param {number} interval fps
-   * @returns {boolean} `update` をコールし Polling.UPDATE event が発生すると true を返します
+   * @returns {boolean} 継承 method `update` をコールし UPDATE event が発生すると true を返します
    */
   change(interval) {
     /**
@@ -87,6 +97,7 @@ export default class Fps extends Polling {
      */
     this.interval = 1000 / interval;
     this.fps = interval;
+    this.events.fps = interval;
     return this.update();
   }
 }

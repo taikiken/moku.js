@@ -63,102 +63,11 @@
 /******/ 	__webpack_require__.p = "assets/js/bundle";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 32);
+/******/ 	return __webpack_require__(__webpack_require__.s = 34);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/**
- * Copyright (c) 2011-2016 inazumatv.com, inc.
- * @author (at)taikiken / http://inazumatv.com
- * @date 2016/07/12 - 19:07
- *
- * Distributed under the terms of the MIT license.
- * http://www.opensource.org/licenses/mit-license.html
- *
- * This notice shall be included in all copies or substantial portions of the Software.
- *
- */
-
-/**
- * custom Event のリスナー関数引数に送られる Event Object
- *
- * EventDispatcher.dispatch する時の引数として使用します
- *
- * 3つのプロパティは必須項目です、イベントにあわせプロパティを追加します
- *
- * - type: string, イベント種類
- * - target: *, イベント発生インスタンス
- * - currentTarget: *, current イベント発生インスタンス
- */
-var Events = function () {
-  // ----------------------------------------
-  // CONSTRUCTOR
-  // ----------------------------------------
-  /**
-   * custom Event Object
-   * @param {string} type イベント種類
-   * @param {*} [currentTarget=this] current イベント発生インスタンス
-   * @param {*} [target=this] イベント発生インスタンス
-   * */
-  function Events(type) {
-    var currentTarget = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this;
-    var target = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this;
-
-    _classCallCheck(this, Events);
-
-    /**
-     * イベント種類
-     * @type {string}
-     */
-    this.type = type;
-    /**
-     * target instance
-     * @type {*}
-     */
-    this.target = target;
-    /**
-     * currentTarget instance
-     * @type {*}
-     */
-    this.currentTarget = currentTarget;
-  }
-  // ----------------------------------------
-  // METHOD
-  // ----------------------------------------
-  /**
-   * 複製を作成します
-   * @returns {Events} 複製を返します
-   */
-
-
-  _createClass(Events, [{
-    key: "clone",
-    value: function clone() {
-      return new Events(this.type, this.currentTarget, this.target);
-    }
-  }]);
-
-  return Events;
-}();
-
-exports.default = Events;
-
-/***/ }),
-/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -226,36 +135,49 @@ var EventDispatcher = function () {
   function EventDispatcher() {
     _classCallCheck(this, EventDispatcher);
 
-    // @type {Object}
-    var listeners = {};
+    // // @type {Object}
+    // let listeners = {};
+    // /**
+    //  * リスナーリストを取得します
+    //  * @returns {Object} リスナーリストを返します
+    //  */
+    // this.listeners = () => listeners;
+    // /**
+    //  * 全てのリスナーを破棄します
+    //  * @returns {boolean} 成功・不成功の真偽値を返します
+    //  */
+    // this.destroy = () => {
+    //   listeners = Object.create({});
+    //   return true;
+    // };
     /**
-     * リスナーリストを取得します
-     * @returns {Object} リスナーリストを返します
+     * リスナーリスト object,
+     * event type {string} を key, 値は Array.<function> になります
+     * @type {Object}
      */
-    this.listeners = function () {
-      return listeners;
-    };
-    /**
-     * 全てのリスナーを破棄します
-     * @returns {boolean} 成功・不成功の真偽値を返します
-     */
-    this.destroy = function () {
-      listeners = Object.create({});
-      return true;
-    };
+    this.listeners = Object.create({});
   }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
   /**
-   * event type に リスナー関数を bind します
-   * @param {string} type event type（種類）
-   * @param {Function} listener callback関数
-   * @returns {boolean} 成功・不成功の真偽値を返します
+   * 全てのリスナーを破棄します
    */
 
 
   _createClass(EventDispatcher, [{
+    key: 'destroy',
+    value: function destroy() {
+      this.listeners = Object.create({});
+    }
+    /**
+     * event type に リスナー関数を bind します
+     * @param {string} type event type（種類）
+     * @param {Function} listener callback関数
+     * @returns {boolean} 成功・不成功の真偽値を返します
+     */
+
+  }, {
     key: 'on',
     value: function on(type, listener) {
       if (!_Type2.default.exist(type)) {
@@ -268,7 +190,7 @@ var EventDispatcher = function () {
       }
 
       // type {Object} - {{eventType: array [listener: Function...]...}}
-      var listeners = this.listeners();
+      var listeners = this.listeners;
 
       if (!_Type2.default.has(listeners, type)) {
         // listeners.type が存在しない場合は
@@ -297,7 +219,7 @@ var EventDispatcher = function () {
       }
 
       // @type {Object} - events.type:String: [listener:Function...]
-      var listeners = this.listeners();
+      var listeners = this.listeners;
       if (!_Type2.default.has(listeners, type)) {
         // listener.type が存在しない
         // 処理しない
@@ -346,7 +268,7 @@ var EventDispatcher = function () {
 
       if (!hasFunction) {
         // null 以外が無いので空にする
-        this.listeners[type] = [];
+        this.listeners[type] = [].slice(0);
       }
 
       // 空配列にしたかを hasFunction flag を反転させることで知らせます
@@ -368,7 +290,7 @@ var EventDispatcher = function () {
       }
 
       // @type {Object} - events.type:String: [listener:Function...]
-      var listeners = this.listeners();
+      var listeners = this.listeners;
 
       if (!_Type2.default.has(listeners, type)) {
         // listener.type が存在しない
@@ -392,7 +314,7 @@ var EventDispatcher = function () {
       var _this = this;
 
       // @type {Object} - events.type:string: [listener:Function...]
-      var listeners = this.listeners();
+      var listeners = this.listeners;
       // @type {string} - event type
       var type = events.type;
 
@@ -483,6 +405,97 @@ var EventDispatcher = function () {
 }();
 
 exports.default = EventDispatcher;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/07/12 - 19:07
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
+
+/**
+ * custom Event のリスナー関数引数に送られる Event Object
+ *
+ * EventDispatcher.dispatch する時の引数として使用します
+ *
+ * 3つのプロパティは必須項目です、イベントにあわせプロパティを追加します
+ *
+ * - type: string, イベント種類
+ * - target: *, イベント発生インスタンス
+ * - currentTarget: *, current イベント発生インスタンス
+ */
+var Events = function () {
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
+  /**
+   * custom Event Object
+   * @param {string} type イベント種類
+   * @param {*} [currentTarget=this] current イベント発生インスタンス
+   * @param {*} [target=this] イベント発生インスタンス
+   * */
+  function Events(type) {
+    var currentTarget = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this;
+    var target = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this;
+
+    _classCallCheck(this, Events);
+
+    /**
+     * イベント種類
+     * @type {string}
+     */
+    this.type = type;
+    /**
+     * target instance
+     * @type {*}
+     */
+    this.target = target;
+    /**
+     * currentTarget instance
+     * @type {*}
+     */
+    this.currentTarget = currentTarget;
+  }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
+  /**
+   * 複製を作成します
+   * @returns {Events} 複製を返します
+   */
+
+
+  _createClass(Events, [{
+    key: "clone",
+    value: function clone() {
+      return new Events(this.type, this.currentTarget, this.target);
+    }
+  }]);
+
+  return Events;
+}();
+
+exports.default = Events;
 
 /***/ }),
 /* 2 */
@@ -858,17 +871,17 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _EventDispatcher2 = __webpack_require__(1);
+var _EventDispatcher2 = __webpack_require__(0);
 
 var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
-
-var _Events = __webpack_require__(0);
-
-var _Events2 = _interopRequireDefault(_Events);
 
 var _Cycle = __webpack_require__(13);
 
 var _Cycle2 = _interopRequireDefault(_Cycle);
+
+var _PollingEvents = __webpack_require__(17);
+
+var _PollingEvents2 = _interopRequireDefault(_PollingEvents);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -890,8 +903,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 // event
 
+// import Events from '../event/Events';
 
 // tick
+
+
+// tick/events
 
 
 /**
@@ -909,6 +926,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Polling = function (_EventDispatcher) {
   _inherits(Polling, _EventDispatcher);
 
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
   /**
    * 引数の polling に合わせ UPDATE イベントを発生させます
    * @param {number} [interval=1000] イベント発生間隔 milliseconds
@@ -918,32 +938,32 @@ var Polling = function (_EventDispatcher) {
 
     _classCallCheck(this, Polling);
 
-    // @type {Cycle} - Cycle instance
-    var _this = _possibleConstructorReturn(this, (Polling.__proto__ || Object.getPrototypeOf(Polling)).call(this));
-
-    var cycle = _Cycle2.default.factory();
-    var boundUpdate = _this.update.bind(_this);
-    var events = new _Events2.default(Polling.UPDATE, _this, _this);
+    // // @type {Cycle} - Cycle instance
+    // const cycle = Cycle.factory();
+    // const boundUpdate = this.update.bind(this);
+    // const events = new Events(Polling.UPDATE, this, this);
     /**
      * Cycle instance を取得します
      * @ty[e {Cycle}
      */
-    _this.cycle = cycle;
+    var _this = _possibleConstructorReturn(this, (Polling.__proto__ || Object.getPrototypeOf(Polling)).call(this));
+
+    _this.cycle = _Cycle2.default.factory();
     /**
      * 間隔(ms)
      * @type {number}
      */
     _this.interval = interval;
     /**
-     * bound update, Cycle.UPDATE event handler
+     * bound onUpdate, Cycle.UPDATE event handler
      * @returns {function}
      */
-    _this.boundUpdate = boundUpdate;
+    _this.onUpdate = _this.onUpdate.bind(_this);
     /**
      * Events instance - Polling.UPDATE Events object
      * @type {Events}
      */
-    _this.events = events;
+    _this.events = new _PollingEvents2.default(Polling.UPDATE, _this, _this);
     /**
      * polling event 発生時間, event を発火すると 0 にリセットされます
      * @type {number}
@@ -956,28 +976,39 @@ var Polling = function (_EventDispatcher) {
     _this.started = false;
     return _this;
   }
+  // // ----------------------------------------
+  // // EVENT
+  // // ----------------------------------------
+  // /**
+  //  * 一定間隔(milliseconds)毎に発生するイベント type を取得します
+  //  * @returns {string} event, pollingUpdate を返します
+  //  */
+  // static get UPDATE() {
+  //   return 'pollingUpdate';
+  // }
   // ----------------------------------------
-  // EVENT
+  // METHOD
   // ----------------------------------------
   /**
-   * 一定間隔(milliseconds)毎に発生するイベント type を取得します
-   * @returns {string} event, pollingUpdate を返します
+   * polling 時間を変更します<br>
+   * 1. プロパティ polling 変更
+   * 1. update 実行
+   * @param {number} interval polling 時間
+   * @returns {boolean} `update` をコールし Polling.UPDATE event が発生すると true を返します
+   */
+
+  // ----------------------------------------
+  // STATIC EVENT
+  // ----------------------------------------
+  /**
+   * 一定間隔(milliseconds)毎に発生するイベント - pollingUpdate
+   * @event UPDATE
+   * @type {string}
    */
 
 
   _createClass(Polling, [{
     key: 'change',
-
-    // ----------------------------------------
-    // METHOD
-    // ----------------------------------------
-    /**
-     * polling 時間を変更します<br>
-     * 1. プロパティ polling 変更
-     * 1. update 実行
-     * @param {number} interval polling 時間
-     * @returns {boolean} `update` をコールし Polling.UPDATE event が発生すると true を返します
-     */
     value: function change(interval) {
       this.interval = interval;
       return this.update();
@@ -1023,7 +1054,7 @@ var Polling = function (_EventDispatcher) {
       // cycle
       var cycle = this.cycle;
       // bind Cycle.UPDATE
-      cycle.on(_Cycle2.default.UPDATE, this.boundUpdate);
+      cycle.on(_Cycle2.default.UPDATE, this.onUpdate);
       // cycle 開始
       cycle.start();
       return cycle;
@@ -1066,7 +1097,7 @@ var Polling = function (_EventDispatcher) {
         // not start
         return false;
       }
-      this.cycle.off(_Cycle2.default.UPDATE, this.boundUpdate);
+      this.cycle.off(_Cycle2.default.UPDATE, this.onUpdate);
       // this[startSymbol] = false;
       this.turnOver();
       return true;
@@ -1079,8 +1110,8 @@ var Polling = function (_EventDispatcher) {
      */
 
   }, {
-    key: 'update',
-    value: function update() {
+    key: 'onUpdate',
+    value: function onUpdate() {
       // 現在時間
       // @type {number}
       var present = Date.now();
@@ -1110,16 +1141,12 @@ var Polling = function (_EventDispatcher) {
     value: function fire(events) {
       this.dispatch(events);
     }
-  }], [{
-    key: 'UPDATE',
-    get: function get() {
-      return 'pollingUpdate';
-    }
   }]);
 
   return Polling;
 }(_EventDispatcher3.default);
 
+Polling.UPDATE = 'pollingUpdate';
 exports.default = Polling;
 
 /***/ }),
@@ -2309,7 +2336,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _EventDispatcher2 = __webpack_require__(1);
+var _EventDispatcher2 = __webpack_require__(0);
 
 var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
 
@@ -2317,7 +2344,7 @@ var _ScrollEvents = __webpack_require__(16);
 
 var _ScrollEvents2 = _interopRequireDefault(_ScrollEvents);
 
-var _Freeze = __webpack_require__(33);
+var _Freeze = __webpack_require__(37);
 
 var _Freeze2 = _interopRequireDefault(_Freeze);
 
@@ -2370,11 +2397,74 @@ var instance = null;
 var Scroll = function (_EventDispatcher) {
   _inherits(Scroll, _EventDispatcher);
 
-  /**
-   * singleton です
-   * @param {Symbol} checkSymbol singleton を保証するための private instance
-   * @returns {Scroll} singleton instance を返します
-   */
+  _createClass(Scroll, null, [{
+    key: 'jump',
+
+    // ----------------------------------------
+    // STATIC METHOD
+    // ----------------------------------------
+    /**
+     * y 位置に scroll top を即座に移動させます
+     * @param {number} [y=0] scroll top 目標値
+     * @param {number} [delay=0] time out 遅延 ms
+     * @returns {number} time out id
+     */
+    value: function jump() {
+      var y = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+      return setTimeout(function () {
+        window.scrollTo(0, y);
+      }, delay);
+    }
+    /**
+     * {@link Freeze}.freeze を実行し scroll 操作を一定期間不能にします
+     * @returns {number} time out ID
+     */
+
+  }, {
+    key: 'freeze',
+    value: function freeze() {
+      return _Freeze2.default.freeze();
+    }
+    /**
+     * scroll top 位置
+     * @returns {number} scroll top 位置を返します
+     * @see https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
+     */
+
+  }, {
+    key: 'y',
+    value: function y() {
+      return typeof window.pageYOffset !== 'undefined' ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+    }
+    // ----------------------------------------
+    /**
+     * Scroll instance を singleton を保証し作成します
+     * @returns {Scroll} Scroll instance を返します
+     */
+
+  }, {
+    key: 'factory',
+    value: function factory() {
+      if (instance === null) {
+        instance = new Scroll(singletonSymbol);
+      }
+      return instance;
+    }
+    // ---------------------------------------------------
+    //  CONSTRUCTOR
+    // ---------------------------------------------------
+    /**
+    /**
+     * singleton です
+     * @param {Symbol} checkSymbol singleton を保証するための private instance
+     * @returns {Scroll} singleton instance を返します
+     */
+
+  }]);
+
   function Scroll(checkSymbol) {
     var _ret2;
 
@@ -2392,17 +2482,17 @@ var Scroll = function (_EventDispatcher) {
     }
     // onetime setting
 
-    var _this = _possibleConstructorReturn(this, (Scroll.__proto__ || Object.getPrototypeOf(Scroll)).call(this));
-
-    instance = _this;
+    // instance = this;
 
     // event handler
     // const boundScroll = this.scroll.bind(this);
     /**
-     * bound scroll, window.onscroll event handler
+     * bound onScroll, window.onscroll event handler
      * @type {function}
      */
     // this.boundScroll = this.scroll.bind(this);
+    var _this = _possibleConstructorReturn(this, (Scroll.__proto__ || Object.getPrototypeOf(Scroll)).call(this));
+
     _this.onScroll = _this.onScroll.bind(_this);
     // this.boundScroll = () => boundScroll;
     // @type {Events} - events instance
@@ -2427,7 +2517,7 @@ var Scroll = function (_EventDispatcher) {
     _this.started = false;
 
     // 設定済み instance を返します
-    return _ret2 = instance, _possibleConstructorReturn(_this, _ret2);
+    return _ret2 = _this, _possibleConstructorReturn(_this, _ret2);
   }
   // ----------------------------------------
   // EVENT
@@ -2509,63 +2599,7 @@ var Scroll = function (_EventDispatcher) {
       this.dispatch(events);
       this.previous = y;
     }
-    // ----------------------------------------
-    // STATIC METHOD
-    // ----------------------------------------
-    /**
-     * y 位置に scroll top を即座に移動させます
-     * @param {number} [y=0] scroll top 目標値
-     * @param {number} [delay=0] time out 遅延 ms
-     * @returns {number} time out id
-     */
-
   }], [{
-    key: 'jump',
-    value: function jump() {
-      var y = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-      var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-
-      return setTimeout(function () {
-        window.scrollTo(0, y);
-      }, delay);
-    }
-    /**
-     * {@link Freeze}.freeze を実行し scroll 操作を一定期間不能にします
-     * @returns {number} time out ID
-     */
-
-  }, {
-    key: 'freeze',
-    value: function freeze() {
-      return _Freeze2.default.freeze();
-    }
-    /**
-     * scroll top 位置
-     * @returns {number} scroll top 位置を返します
-     * @see https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY
-     * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
-     */
-
-  }, {
-    key: 'y',
-    value: function y() {
-      return typeof window.pageYOffset !== 'undefined' ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
-    }
-    // ----------------------------------------
-    /**
-     * Scroll instance を singleton を保証し作成します
-     * @returns {Scroll} Scroll instance を返します
-     */
-
-  }, {
-    key: 'factory',
-    value: function factory() {
-      if (instance !== null) {
-        return instance;
-      }
-      return new Scroll(singletonSymbol);
-    }
-  }, {
     key: 'SCROLL',
     get: function get() {
       return 'scrollScroll';
@@ -2594,7 +2628,7 @@ var _Scroll = __webpack_require__(11);
 
 var _Scroll2 = _interopRequireDefault(_Scroll);
 
-var _EventDispatcher2 = __webpack_require__(1);
+var _EventDispatcher2 = __webpack_require__(0);
 
 var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
 
@@ -2632,11 +2666,21 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 /**
- * Scroll 位置
+ * fps: {@link Rate} new Rate(Rate.RATE_5)` で Scroll 位置を計算します
+ *
+ * @example
+ * // 途中で rate を変更する
+ * const scrolling = new Scrolling();
+ * scrolling
+ *    .start()
+ *    .rate.setRate(Rate.RATE_12);
  * */
 var Scrolling = function (_EventDispatcher) {
   _inherits(Scrolling, _EventDispatcher);
 
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * @param {Rate} [rate=new Rate(Rate.Rate_5)] Rate instance, scroll 監視 fps を設定します
    */
@@ -2646,15 +2690,15 @@ var Scrolling = function (_EventDispatcher) {
     _classCallCheck(this, Scrolling);
 
     // @type {function}
-    // const boundScroll = this.scroll.bind(this);
+    // const onUpdate = this.scroll.bind(this);
     /**
-     * bound scroll, Rate.UPDATE event handler
+     * bound onUpdate, Rate.UPDATE event handler
      * @type {function}
      */
     var _this = _possibleConstructorReturn(this, (Scrolling.__proto__ || Object.getPrototypeOf(Scrolling)).call(this));
 
-    _this.boundScroll = _this.scroll.bind(_this);
-    // this.boundScroll = boundScroll;
+    _this.onUpdate = _this.onUpdate.bind(_this);
+    // this.onUpdate = onUpdate;
     // @type {ScrollEvents}
     // const events = new ScrollEvents(Scrolling.UPDATE, this, this);
     /**
@@ -2685,24 +2729,34 @@ var Scrolling = function (_EventDispatcher) {
   // ----------------------------------------
   // EVENT
   // ----------------------------------------
+  // /**
+  //  * fps で発生するイベントを取得します
+  //  * @event SCROLL
+  //  * @returns {string} event, scrollingScroll を返します
+  //  * @default scrollingScroll
+  //  */
+  // static get UPDATE() {
+  //   return 'scrollingUpdate';
+  // }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
   /**
-   * fps で発生するイベントを取得します
+   * fps を監視しスクロール位置を知らせます
+   * @returns {Scrolling} method chain 可能なように instance を返します
+   */
+
+  // ---------------------------------------------------
+  //  CONSTANT / EVENT
+  // ---------------------------------------------------
+  /**
+   * fps: {@link Rate} で発生するイベント - scrollingScroll
    * @event SCROLL
-   * @returns {string} event, scrollingScroll を返します
-   * @default scrollingScroll
    */
 
 
   _createClass(Scrolling, [{
     key: 'start',
-
-    // ----------------------------------------
-    // METHOD
-    // ----------------------------------------
-    /**
-     * fps を監視しスクロール位置を知らせます
-     * @returns {Scrolling} method chain 可能なように instance を返します
-     */
     value: function start() {
       // flag check
       if (this.started) {
@@ -2711,7 +2765,7 @@ var Scrolling = function (_EventDispatcher) {
       this.started = true;
       // loop start
       var rate = this.rate;
-      rate.on(_Rate2.default.UPDATE, this.boundScroll);
+      rate.on(_Rate2.default.UPDATE, this.onUpdate);
       rate.start();
       return this;
     }
@@ -2727,7 +2781,7 @@ var Scrolling = function (_EventDispatcher) {
         return this;
       }
       this.started = false;
-      this.rate.off(_Rate2.default.UPDATE, this.boundScroll);
+      this.rate.off(_Rate2.default.UPDATE, this.onUpdate);
       return this;
     }
     /**
@@ -2746,13 +2800,12 @@ var Scrolling = function (_EventDispatcher) {
      * - wide {boolean} - width が 768 以上の時に true
      * - changed {boolean} - scroll top が前回と変わっていたら true
      *
-     * @param {?Event|?Events} event window scroll event, nullable
-     * @returns {void}
+     * @param {?Events} event {@link Rate.UPDATE} Events instance
      */
 
   }, {
-    key: 'scroll',
-    value: function scroll(event) {
+    key: 'onUpdate',
+    value: function onUpdate(event) {
       // @type {number} - scroll top
       var y = _Scroll2.default.y();
       // @type {number} - window height
@@ -2791,24 +2844,19 @@ var Scrolling = function (_EventDispatcher) {
     }
     /**
      * 強制的に Scrolling.SCROLL event を発火させます
-     * @returns {void}
      */
 
   }, {
     key: 'fire',
     value: function fire() {
-      this.scroll(null);
-    }
-  }], [{
-    key: 'UPDATE',
-    get: function get() {
-      return 'scrollingUpdate';
+      this.onUpdate(null);
     }
   }]);
 
   return Scrolling;
 }(_EventDispatcher3.default);
 
+Scrolling.UPDATE = 'scrollingUpdate';
 exports.default = Scrolling;
 
 /***/ }),
@@ -2824,13 +2872,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _EventDispatcher2 = __webpack_require__(1);
+var _EventDispatcher2 = __webpack_require__(0);
 
 var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
 
-var _Events = __webpack_require__(0);
+var _CycleEvents = __webpack_require__(35);
 
-var _Events2 = _interopRequireDefault(_Events);
+var _CycleEvents2 = _interopRequireDefault(_CycleEvents);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2853,6 +2901,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 // event
 
+// import Events from '../event/Events';
+
+// tick/events
+
 
 /**
  * new を許可しないための Symbol
@@ -2864,7 +2916,6 @@ var singletonSymbol = Symbol('singleton instance');
  * singleton instance, nullable
  * @type {?Cycle}
  * @private
- * @static
  */
 var instance = null;
 
@@ -2887,11 +2938,42 @@ var instance = null;
 var Cycle = function (_EventDispatcher) {
   _inherits(Cycle, _EventDispatcher);
 
-  /**
-   * singleton です
-   * @param {Symbol} checkSymbol singleton を保証するための private instance
-   * @returns {Cycle} singleton instance を返します
-   */
+  _createClass(Cycle, null, [{
+    key: 'factory',
+
+    // ----------------------------------------
+    // STATIC METHOD
+    // ----------------------------------------
+    /**
+     * Cycle instance を singleton を保証し作成します
+     * @returns {Cycle} Cycle instance を返します
+     */
+    value: function factory() {
+      if (instance === null) {
+        instance = new Cycle(singletonSymbol);
+      }
+      return instance;
+    }
+    // ---------------------------------------------------
+    //  CONSTRUCTOR
+    // ---------------------------------------------------
+    /**
+     * singleton です
+     * @param {Symbol} checkSymbol singleton を保証するための private instance
+     * @returns {Cycle} singleton instance を返します
+     */
+
+    // ---------------------------------------------------
+    //  CONSTANT / EVENT
+    // ---------------------------------------------------
+    /**
+     * requestAnimationFrame 毎に発生するイベント - cycleUpdate
+     * @event UPDATE
+     * @type {string}
+     */
+
+  }]);
+
   function Cycle(checkSymbol) {
     var _ret2;
 
@@ -2910,21 +2992,21 @@ var Cycle = function (_EventDispatcher) {
 
     // -------------------------------
     // onetime setting
-    var _this = _possibleConstructorReturn(this, (Cycle.__proto__ || Object.getPrototypeOf(Cycle)).call(this));
-
-    instance = _this;
-    var events = new _Events2.default(Cycle.UPDATE, _this, _this);
-    var boundUpdate = _this.update.bind(_this);
+    // instance = this;
+    // const events = new Events(Cycle.UPDATE, this, this);
+    // const update = this.update.bind(this);
     /**
      * Cycle.UPDATE Events instance
      * @type {Events}
      */
-    _this.events = events;
+    var _this = _possibleConstructorReturn(this, (Cycle.__proto__ || Object.getPrototypeOf(Cycle)).call(this));
+
+    _this.events = new _CycleEvents2.default(Cycle.UPDATE, _this, _this);
     /**
      * bound update requestAnimationFrame callback
      * @type {function}
      */
-    _this.boundUpdate = boundUpdate;
+    _this.update = _this.update.bind(_this);
     /**
      * requestAnimationFrame ID
      * @type {number}
@@ -2936,29 +3018,31 @@ var Cycle = function (_EventDispatcher) {
      */
     _this.started = false;
     // 設定済み instance を返します
-    return _ret2 = instance, _possibleConstructorReturn(_this, _ret2);
+    return _ret2 = _this, _possibleConstructorReturn(_this, _ret2);
   }
+  // // ----------------------------------------
+  // // EVENT
+  // // ----------------------------------------
+  // /**
+  //  * requestAnimationFrame 毎に発生するイベントを取得します
+  //  * @event UPDATE
+  //  * @returns {string} event, cycleUpdate を返します
+  //  * @default cycleUpdate
+  //  */
+  // static get UPDATE() {
+  //   return 'cycleUpdate';
+  // }
   // ----------------------------------------
-  // EVENT
+  // METHOD
   // ----------------------------------------
   /**
-   * requestAnimationFrame 毎に発生するイベントを取得します
-   * @event UPDATE
-   * @returns {string} event, cycleUpdate を返します
-   * @default cycleUpdate
+   * loop(requestAnimationFrame) を開始します
+   * @returns {boolean} start に成功すると true を返します
    */
 
 
   _createClass(Cycle, [{
     key: 'start',
-
-    // ----------------------------------------
-    // METHOD
-    // ----------------------------------------
-    /**
-     * loop(requestAnimationFrame) を開始します
-     * @returns {boolean} start に成功すると true を返します
-     */
     value: function start() {
       if (this.started) {
         // already start
@@ -3004,7 +3088,7 @@ var Cycle = function (_EventDispatcher) {
     key: 'update',
     value: function update() {
       // @type {number} - requestAnimationFrame id
-      var id = requestAnimationFrame(this.boundUpdate);
+      var id = requestAnimationFrame(this.update);
       this.id = id;
 
       // @type {Events} - events
@@ -3014,32 +3098,12 @@ var Cycle = function (_EventDispatcher) {
       this.dispatch(events);
       return id;
     }
-    // ----------------------------------------
-    // STATIC METHOD
-    // ----------------------------------------
-    /**
-     * Cycle instance を singleton を保証し作成します
-     * @returns {Cycle} Cycle instance を返します
-     */
-
-  }], [{
-    key: 'factory',
-    value: function factory() {
-      if (instance === null) {
-        return new Cycle(singletonSymbol);
-      }
-      return instance;
-    }
-  }, {
-    key: 'UPDATE',
-    get: function get() {
-      return 'cycleUpdate';
-    }
   }]);
 
   return Cycle;
 }(_EventDispatcher3.default);
 
+Cycle.UPDATE = 'cycleUpdate';
 exports.default = Cycle;
 
 /***/ }),
@@ -3055,7 +3119,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _Events = __webpack_require__(0);
+var _Events = __webpack_require__(1);
 
 var _Events2 = _interopRequireDefault(_Events);
 
@@ -3114,129 +3178,42 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Rate = function (_Polling) {
   _inherits(Rate, _Polling);
 
-  _createClass(Rate, null, [{
-    key: 'RATE_60',
+  // /**
+  //  * フレームレート毎に発生するイベント type を取得します
+  //  * @event UPDATE
+  //  * @returns {string} event, rateUpdate を返します
+  //  * @default rateUpdate
+  //  */
+  // static get UPDATE() {
+  //   return 'rateUpdate';
+  // }
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
+  /**
+   * 固定値フレームレート毎に UPDATE イベントを発生させます
+   * @param {number} [rateValue=Rate.RATE_5] fps, 固定値以外設定できません
+   */
 
-    // ----------------------------------------
-    // CONST
-    // ----------------------------------------
-    /**
-     * fps 60 基準値を取得します
-     * @const RATE_60
-     * @returns {number} fps 60 基準値を返します
-     * @default 1
-     */
-    get: function get() {
-      return 1;
-    } /**
-      * fps 30 基準値を取得します
-      * @const RATE_30
-      * @returns {number} fps 30 基準値を返します
-      * @default 2
-      */
+  /**
+   * fps 5 基準値
+   * @type {number}
+   */
 
-  }, {
-    key: 'RATE_30',
-    get: function get() {
-      return 2;
-    }
-    /**
-     * fps 20 基準値を取得します
-     * @const RATE_20
-     * @returns {number} fps 20 基準値を返します
-     * @default 3
-     */
+  /**
+   * fps 10 基準値
+   * @type {number}
+   */
 
-  }, {
-    key: 'RATE_20',
-    get: function get() {
-      return 3;
-    }
-    /**
-     * fps 15 基準値を取得します
-     * @const RATE_15
-     * @returns {number} fps 15 基準値を返します
-     * @default 4
-     */
+  /**
+   * fps 15 基準値
+   * @type {number}
+   */
 
-  }, {
-    key: 'RATE_15',
-    get: function get() {
-      return 4;
-    }
-    /**
-     * fps 12 基準値を取得します
-     * @const RATE_12
-     * @returns {number} fps 12 基準値を返します
-     * @default 5
-     */
-
-  }, {
-    key: 'RATE_12',
-    get: function get() {
-      return 5;
-    }
-    /**
-     * fps 10 基準値を取得します
-     * @const RATE_10
-     * @returns {number} fps 10 基準値を返します
-     * @default 6
-     */
-
-  }, {
-    key: 'RATE_10',
-    get: function get() {
-      return 6;
-    }
-    /**
-     * fps 6 基準値を取得します
-     * @const RATE_6
-     * @returns {number} fps 6 基準値を返します
-     * @default 10
-     */
-
-  }, {
-    key: 'RATE_6',
-    get: function get() {
-      return 10;
-    }
-    /**
-     * fps 5 基準値を取得します
-     * @const RATE_5
-     * @returns {number} fps 6 基準値を返します
-     * @default 12
-     */
-
-  }, {
-    key: 'RATE_5',
-    get: function get() {
-      return 12;
-    }
-    // ----------------------------------------
-    // EVENT
-    // ----------------------------------------
-    /**
-     * フレームレート毎に発生するイベント type を取得します
-     * @event UPDATE
-     * @returns {string} event, rateUpdate を返します
-     * @default rateUpdate
-     */
-
-  }, {
-    key: 'UPDATE',
-    get: function get() {
-      return 'rateUpdate';
-    }
-    // ----------------------------------------
-    // CONSTRUCTOR
-    // ----------------------------------------
-    /**
-     * 固定値フレームレート毎に UPDATE イベントを発生させます
-     * @param {number} [rateValue=Rate.RATE_5] fps, 固定値以外設定できません
-     */
-
-  }]);
-
+  /**
+   * fps 30 基準値
+   * @type {number}
+   */
   function Rate() {
     var rateValue = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Rate.RATE_5;
 
@@ -3301,6 +3278,109 @@ var Rate = function (_Polling) {
    * @returns {?number} 正しい rate は設定値を不正な時は null を返します
    */
 
+  // /**
+  //  * fps 60 基準値を取得します
+  //  * @const RATE_60
+  //  * @returns {number} fps 60 基準値を返します
+  //  * @default 1
+  //  */
+  // static get RATE_60() {
+  //   return 1;
+  // }  /**
+  //  * fps 30 基準値を取得します
+  //  * @const RATE_30
+  //  * @returns {number} fps 30 基準値を返します
+  //  * @default 2
+  //  */
+  // static get RATE_30() {
+  //   return 2;
+  // }
+  // /**
+  //  * fps 20 基準値を取得します
+  //  * @const RATE_20
+  //  * @returns {number} fps 20 基準値を返します
+  //  * @default 3
+  //  */
+  // static get RATE_20() {
+  //   return 3;
+  // }
+  // /**
+  //  * fps 15 基準値を取得します
+  //  * @const RATE_15
+  //  * @returns {number} fps 15 基準値を返します
+  //  * @default 4
+  //  */
+  // static get RATE_15() {
+  //   return 4;
+  // }
+  // /**
+  //  * fps 12 基準値を取得します
+  //  * @const RATE_12
+  //  * @returns {number} fps 12 基準値を返します
+  //  * @default 5
+  //  */
+  // static get RATE_12() {
+  //   return 5;
+  // }
+  // /**
+  //  * fps 10 基準値を取得します
+  //  * @const RATE_10
+  //  * @returns {number} fps 10 基準値を返します
+  //  * @default 6
+  //  */
+  // static get RATE_10() {
+  //   return 6;
+  // }
+  // /**
+  //  * fps 6 基準値を取得します
+  //  * @const RATE_6
+  //  * @returns {number} fps 6 基準値を返します
+  //  * @default 10
+  //  */
+  // static get RATE_6() {
+  //   return 10;
+  // }
+  // /**
+  //  * fps 5 基準値を取得します
+  //  * @const RATE_5
+  //  * @returns {number} fps 6 基準値を返します
+  //  * @default 12
+  //  */
+  // static get RATE_5() {
+  //   return 12;
+  // }
+  // ----------------------------------------
+  // EVENT
+  // ----------------------------------------
+  /**
+   * フレームレート毎に発生するイベント - rateUpdate
+   * @event UPDATE
+   * @type {string}
+   */
+
+  /**
+   * fps 6 基準値
+   * @type {number}
+   */
+
+  /**
+   * fps 12 基準値
+   * @type {number}
+   */
+
+  /**
+   * fps 20 基準値
+   * @type {number}
+   */
+
+  // ----------------------------------------
+  // CONST
+  // ----------------------------------------
+  /**
+   * fps 60 基準値
+   * @type {number}
+   */
+
 
   _createClass(Rate, [{
     key: 'setRate',
@@ -3359,13 +3439,15 @@ var Rate = function (_Polling) {
       return true;
     }
     /**
-     * loop(requestAnimationFrame) します
+     * {@link Polling}.UPDATE event handler
+     *
+     * count property を `+1` 加算後設定 rate で割り算し余りが `0` の時にイベント Rate.UPDATE を発生させます
      * @returns {boolean} Rate.UPDATE event が発生すると true を返します
      */
 
   }, {
-    key: 'update',
-    value: function update() {
+    key: 'onUpdate',
+    value: function onUpdate() {
       // 余りが 0 の時にイベントを発火します
       this.count += 1;
       var reminder = this.count % this.rate;
@@ -3381,6 +3463,15 @@ var Rate = function (_Polling) {
   return Rate;
 }(_Polling3.default);
 
+Rate.RATE_60 = 1;
+Rate.RATE_30 = 2;
+Rate.RATE_20 = 3;
+Rate.RATE_15 = 4;
+Rate.RATE_12 = 5;
+Rate.RATE_10 = 6;
+Rate.RATE_6 = 10;
+Rate.RATE_5 = 12;
+Rate.UPDATE = 'rateUpdate';
 exports.default = Rate;
 
 /***/ }),
@@ -3429,7 +3520,8 @@ var Hit = function () {
      *  top: boolean,
      *  bottom: boolean,
      *  contain: boolean,
-     *  include: boolean
+     *  include: boolean,
+     *  result: boolean
      * }} hit check object を返します
      */
     value: function test(height, offset) {
@@ -3484,7 +3576,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _Events2 = __webpack_require__(0);
+var _Events2 = __webpack_require__(1);
 
 var _Events3 = _interopRequireDefault(_Events2);
 
@@ -3507,11 +3599,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
 /**
- * Scroll events 管理クラス
+ * {@link Scroll} Events
  */
 var ScrollEvents = function (_Events) {
   _inherits(ScrollEvents, _Events);
 
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * custom Event Object
    * @param {string} type イベント種類
@@ -3531,7 +3626,7 @@ var ScrollEvents = function (_Events) {
 
     _this.previous = -1;
     /**
-     * オリジナルイベント(.onscroll)
+     * オリジナルイベント(window.onscroll)
      * @type {?Event}
      */
     _this.original = null;
@@ -3575,6 +3670,85 @@ exports.default = ScrollEvents;
 
 /***/ }),
 /* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _Events2 = __webpack_require__(1);
+
+var _Events3 = _interopRequireDefault(_Events2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Copyright (c) 2011-2017 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date 2017/06/02 - 15:42
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+/**
+ * {@link Polling} Events
+ */
+var PollingEvents = function (_Events) {
+  _inherits(PollingEvents, _Events);
+
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
+   * custom Event Object
+   * @param {string} type イベント種類
+   * @param {*} currentTarget current イベント発生インスタンス
+   * @param {*} [target=undefined] イベント発生インスタンス
+   * */
+  function PollingEvents(type, currentTarget) {
+    var target = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
+
+    _classCallCheck(this, PollingEvents);
+
+    // ---
+    /**
+     * polling event 発生時間
+     * @type {number}
+     */
+    var _this = _possibleConstructorReturn(this, (PollingEvents.__proto__ || Object.getPrototypeOf(PollingEvents)).call(this, type, currentTarget, target));
+
+    _this.begin = 0;
+    /**
+     * 現在時間 - Date.now
+     * @type {number}
+     */
+    _this.present = 0;
+    /**
+     * イベント間隔(ms)
+     * @type {number}
+     */
+    _this.interval = 0;
+    return _this;
+  }
+
+  return PollingEvents;
+}(_Events3.default);
+
+exports.default = PollingEvents;
+
+/***/ }),
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3731,7 +3905,7 @@ var Elements = function () {
 exports.default = Elements;
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3747,13 +3921,13 @@ var _Scrolling = __webpack_require__(12);
 
 var _Scrolling2 = _interopRequireDefault(_Scrolling);
 
-var _Events = __webpack_require__(0);
-
-var _Events2 = _interopRequireDefault(_Events);
-
-var _EventDispatcher2 = __webpack_require__(1);
+var _EventDispatcher2 = __webpack_require__(0);
 
 var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
+
+var _RisingEvents = __webpack_require__(31);
+
+var _RisingEvents2 = _interopRequireDefault(_RisingEvents);
 
 var _Hit = __webpack_require__(15);
 
@@ -3779,20 +3953,34 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 // event
 
+// import Events from './Events';
+
 
 // hit
 
 
 /**
- * Scrolling class を使用しスクロールトップ位置をチェクし対象 element と window の衝突判定を行います
+ * {@link Scrolling} class を使用しスクロールトップ位置をチェクし対象 element と window の衝突判定を {@link Hit.test} で行います
  */
 var Rising = function (_EventDispatcher) {
   _inherits(Rising, _EventDispatcher);
 
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
   /**
    * elements instance と scrolling instance を保存します
    * @param {Elements} elements 対象 element を Elements インスタンスに変換します
    * @param {Scrolling} scrolling スクロールトップ監視インスタンス
+   */
+
+  // ----------------------------------------
+  // STATIC EVENT
+  // ----------------------------------------
+  /**
+   * 衝突イベント - risingCollision
+   * @event COLLISION
+   * @type {string}
    */
   function Rising(elements) {
     var scrolling = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _Scrolling2.default();
@@ -3813,10 +4001,10 @@ var Rising = function (_EventDispatcher) {
     _this.scrolling = scrolling;
     // const boundScroll = this.scroll.bind(this);
     /**
-     * bound scroll, Rate.UPDATE event handler
+     * bound onUpdate, Rate.UPDATE event handler
      * @type {function}
      */
-    _this.boundScroll = _this.scroll.bind(_this);
+    _this.onUpdate = _this.onUpdate.bind(_this);
     // this.boundScroll = boundScroll;
     /**
      * start 済みフラッグ
@@ -3824,28 +4012,49 @@ var Rising = function (_EventDispatcher) {
      * @default false
      */
     _this.started = false;
+    /**
+     * Rising.[COLLISION|ALIEN] event instance
+     * @type {RisingEvents}
+     */
+    _this.events = new _RisingEvents2.default(Rising.COLLISION, _this, _this);
     return _this;
   }
+  // // ----------------------------------------
+  // // EVENT
+  // // ----------------------------------------
+  // /**
+  //  * 衝突イベント
+  //  * @event COLLISION
+  //  * @return {string} risingCollision を返します
+  //  */
+  // static get COLLISION() {
+  //   return 'risingCollision';
+  // }
+  // /**
+  //  * 衝突「していない」イベント
+  //  * @event ALIEN
+  //  * @return {string} risingAlien を返します
+  //  */
+  // static get ALIEN() {
+  //   return 'risingAlien';
+  // }
   // ----------------------------------------
-  // EVENT
+  // METHOD
   // ----------------------------------------
   /**
-   * 衝突イベント
-   * @event COLLISION
-   * @return {string} risingCollision を返します
+   * fps を監視しスクロール位置を知らせます
+   * @returns {Rising} method chain 可能なように instance を返します
+   */
+
+  /**
+   * 衝突「していない」イベント - risingAlien
+   * @event ALIEN
+   * @type {string}
    */
 
 
   _createClass(Rising, [{
     key: 'start',
-
-    // ----------------------------------------
-    // METHOD
-    // ----------------------------------------
-    /**
-     * fps を監視しスクロール位置を知らせます
-     * @returns {Rising} method chain 可能なように instance を返します
-     */
     value: function start() {
       // flag check
       if (this.started) {
@@ -3854,7 +4063,7 @@ var Rising = function (_EventDispatcher) {
       this.started = true;
       // scrolling
       var scrolling = this.scrolling;
-      scrolling.on(_Scrolling2.default.UPDATE, this.boundScroll);
+      scrolling.on(_Scrolling2.default.UPDATE, this.onUpdate);
       scrolling.start();
       return this;
     }
@@ -3870,19 +4079,19 @@ var Rising = function (_EventDispatcher) {
         return this;
       }
       this.started = false;
-      var scrolling = this.scrolling;
-      scrolling.off(_Scrolling2.default.UPDATE, this.boundScroll);
+      // const scrolling = this.scrolling;
+      this.scrolling.off(_Scrolling2.default.UPDATE, this.onUpdate);
       return this;
     }
     /**
-     * Scrolling.UPDATE event handler
+     * Scrolling.UPDATE event handler - {link Hit.test} 衝突判定を行います
      * @param {ScrollEvents} scrollEvents scroll events object
      * @return {boolean} 衝突時に true を返します
      */
 
   }, {
-    key: 'scroll',
-    value: function scroll(scrollEvents) {
+    key: 'onUpdate',
+    value: function onUpdate(scrollEvents) {
       if (!scrollEvents.changed) {
         return false;
       }
@@ -3890,13 +4099,15 @@ var Rising = function (_EventDispatcher) {
       var offset = this.elements.offset();
       // hit result
       var hit = _Hit2.default.test(scrollEvents.height, offset);
-      // @type {?Elements}
-      var events = null;
-      if (hit.result) {
-        events = new _Events2.default(Rising.COLLISION, this, this);
-      } else {
-        events = new _Events2.default(Rising.ALIEN, this, this);
-      }
+      // // @type {?Elements}
+      // let events = null;
+      // if (hit.result) {
+      //   events = new Events(Rising.COLLISION, this, this);
+      // } else {
+      //   events = new Events(Rising.ALIEN, this, this);
+      // }
+      var events = this.events;
+      events.type = hit.result ? Rising.COLLISION : Rising.ALIEN;
       // hit / original / offset を追加します
       events.hit = hit;
       events.original = scrollEvents;
@@ -3905,31 +4116,17 @@ var Rising = function (_EventDispatcher) {
       this.dispatch(events);
       return hit.result;
     }
-  }], [{
-    key: 'COLLISION',
-    get: function get() {
-      return 'risingCollision';
-    }
-    /**
-     * 衝突「していない」イベント
-     * @event ALIEN
-     * @return {string} risingAlien を返します
-     */
-
-  }, {
-    key: 'ALIEN',
-    get: function get() {
-      return 'risingAlien';
-    }
   }]);
 
   return Rising;
 }(_EventDispatcher3.default);
 
+Rising.COLLISION = 'risingCollision';
+Rising.ALIEN = 'risingAlien';
 exports.default = Rising;
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3941,11 +4138,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _EventDispatcher2 = __webpack_require__(1);
+var _EventDispatcher2 = __webpack_require__(0);
 
 var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
 
-var _TouchingEvents = __webpack_require__(30);
+var _TouchingEvents = __webpack_require__(32);
 
 var _TouchingEvents2 = _interopRequireDefault(_TouchingEvents);
 
@@ -4441,7 +4638,7 @@ Touching.TOUCH = 'touchingTouch';
 exports.default = Touching;
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4453,11 +4650,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _EventDispatcher2 = __webpack_require__(1);
+var _EventDispatcher2 = __webpack_require__(0);
 
 var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
 
-var _WheelEvents = __webpack_require__(31);
+var _WheelEvents = __webpack_require__(33);
 
 var _WheelEvents2 = _interopRequireDefault(_WheelEvents);
 
@@ -4507,11 +4704,33 @@ var instance = null;
 var Wheel = function (_EventDispatcher) {
   _inherits(Wheel, _EventDispatcher);
 
-  /**
-   * singleton です
-   * @param {Symbol} checkSymbol singleton を保証するための private instance
-   * @returns {Wheel} singleton instance を返します
-   */
+  _createClass(Wheel, null, [{
+    key: 'factory',
+
+    // ----------------------------------------
+    // STATIC METHOD
+    // ----------------------------------------
+    /**
+     * Wheel instance を singleton を保証し作成します
+     * @returns {Wheel} Wheel instance を返します
+     */
+    value: function factory() {
+      if (instance === null) {
+        instance = new Wheel(singletonSymbol);
+      }
+      return instance;
+    }
+    // ---------------------------------------------------
+    //  CONSTRUCTOR
+    // ---------------------------------------------------
+    /**
+     * singleton です
+     * @param {Symbol} checkSymbol singleton を保証するための private instance
+     * @returns {Wheel} singleton instance を返します
+     */
+
+  }]);
+
   function Wheel(checkSymbol) {
     var _ret2;
 
@@ -4521,10 +4740,7 @@ var Wheel = function (_EventDispatcher) {
     if (checkSymbol !== singletonSymbol) {
       throw new Error('don\'t use new, instead use static factory method.');
     }
-
     // instance 作成済みかをチェックし instance が null の時 this を設定します
-    var _this = _possibleConstructorReturn(this, (Wheel.__proto__ || Object.getPrototypeOf(Wheel)).call(this));
-
     if (instance !== null) {
       var _ret;
 
@@ -4532,16 +4748,18 @@ var Wheel = function (_EventDispatcher) {
     }
 
     // onetime setting
-    instance = _this;
+    // instance = this;
 
     // event handler
-    // const boundWheel = this.mouseWheel.bind(this);
+    // const onMouseWheel = this.onMouseWheel.bind(this);
     /**
-     * bound mouseWheel
+     * bound onMouseWheel
      * @type {function}
      */
-    _this.boundWheel = _this.mouseWheel.bind(_this);
-    // this.boundWheel = () => boundWheel;
+    var _this = _possibleConstructorReturn(this, (Wheel.__proto__ || Object.getPrototypeOf(Wheel)).call(this));
+
+    _this.onMouseWheel = _this.onMouseWheel.bind(_this);
+    // this.onMouseWheel = () => onMouseWheel;
     /**
      * 閾値, wheel 移動量が閾値を超えたときにイベントを発生させます
      * @type {number}
@@ -4558,20 +4776,21 @@ var Wheel = function (_EventDispatcher) {
      * @type {boolean}
      */
     _this.started = false;
-    var events = {
-      up: new _WheelEvents2.default(Wheel.UP, _this),
-      down: new _WheelEvents2.default(Wheel.DOWN, _this)
-    };
+    // const events = {
+    //   up: new WheelEvents(Wheel.UP, this),
+    //   down: new WheelEvents(Wheel.DOWN, this),
+    // };
     /**
      * UP / DOWN Events instance
      * @returns {{up: WheelEvents, down: WheelEvents}} UP / DOWN Events instance
      */
-    _this.events = function () {
-      return events;
+    _this.events = {
+      up: new _WheelEvents2.default(Wheel.UP, _this),
+      down: new _WheelEvents2.default(Wheel.DOWN, _this)
     };
 
     // 設定済み instance を返します
-    return _ret2 = instance, _possibleConstructorReturn(_this, _ret2);
+    return _ret2 = _this, _possibleConstructorReturn(_this, _ret2);
   }
   // ----------------------------------------
   // EVENT
@@ -4600,7 +4819,7 @@ var Wheel = function (_EventDispatcher) {
       }
       this.started = true;
       // this.unwatch();
-      window.addEventListener('wheel', this.boundWheel, false);
+      window.addEventListener('wheel', this.onMouseWheel, false);
       return this;
     }
     /**
@@ -4615,7 +4834,7 @@ var Wheel = function (_EventDispatcher) {
         return this;
       }
       this.started = false;
-      window.removeEventListener('wheel', this.boundWheel);
+      window.removeEventListener('wheel', this.onMouseWheel);
       return this;
     }
     /**
@@ -4628,8 +4847,8 @@ var Wheel = function (_EventDispatcher) {
      */
 
   }, {
-    key: 'mouseWheel',
-    value: function mouseWheel(event) {
+    key: 'onMouseWheel',
+    value: function onMouseWheel(event) {
       var wheelDelta = event.deltaY;
       return this.moving(wheelDelta);
     }
@@ -4683,7 +4902,7 @@ var Wheel = function (_EventDispatcher) {
     key: 'up',
     value: function up(moved) {
       // @type {Events}
-      var events = this.events().up;
+      var events = this.events.up;
       events.moved = moved;
       this.dispatch(events);
 
@@ -4699,29 +4918,13 @@ var Wheel = function (_EventDispatcher) {
     key: 'down',
     value: function down(moved) {
       // @type {Events}
-      var events = this.events().down;
+      var events = this.events.down;
       events.moved = moved;
       this.dispatch(events);
 
       return moved;
     }
-    // ----------------------------------------
-    // STATIC METHOD
-    // ----------------------------------------
-    /**
-     * Wheel instance を singleton を保証し作成します
-     * @returns {Wheel} Wheel instance を返します
-     */
-
   }], [{
-    key: 'factory',
-    value: function factory() {
-      if (instance !== null) {
-        return instance;
-      }
-      return new Wheel(singletonSymbol);
-    }
-  }, {
     key: 'UP',
     get: function get() {
       return 'wheelUp';
@@ -4746,7 +4949,7 @@ var Wheel = function (_EventDispatcher) {
 exports.default = Wheel;
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4986,7 +5189,7 @@ var Ajax = function () {
 exports.default = Ajax;
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5069,7 +5272,6 @@ var Cookie = function () {
     /**
      * cookie key を設定します
      * @param {string} setting 設定する key name
-     * @returns {string} 設定した key name を返します
      */
     this.setKey = function (setting) {
       key = setting;
@@ -5084,7 +5286,6 @@ var Cookie = function () {
     /**
      * cookie end を設定します
      * @param {Date} setting cookie end Date instance
-     * @returns {Date} 設定した Date instance を返します
      */
     this.setEnd = function (setting) {
       end = setting;
@@ -5099,7 +5300,6 @@ var Cookie = function () {
     /**
      * cookie path を設定します
      * @param {string} setting 設定する path name
-     * @returns {string} 設定した path name を返します
      */
     this.setPath = function (setting) {
       path = setting;
@@ -5114,7 +5314,6 @@ var Cookie = function () {
     /**
      * cookie domain を設定します
      * @param {string} setting 設定する domain name
-     * @returns {string} 設定した domain name を返します
      */
     this.setDomain = function (setting) {
       domain = setting;
@@ -5129,7 +5328,6 @@ var Cookie = function () {
     /**
      * https 通信のときのみクッキー送信を行うかのフラッグを設定します
      * @param {boolean} setting https 通信のときのみクッキー送信を行うかのフラッグ
-     * @returns {boolean} 設定した secure フラッグを返します
      */
     this.setSecure = function (setting) {
       secure = setting;
@@ -5268,7 +5466,7 @@ var Cookie = function () {
 exports.default = Cookie;
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5472,7 +5670,7 @@ var Queries = function () {
 exports.default = Queries;
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5484,13 +5682,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _Events = __webpack_require__(0);
-
-var _Events2 = _interopRequireDefault(_Events);
-
 var _Polling2 = __webpack_require__(4);
 
 var _Polling3 = _interopRequireDefault(_Polling2);
+
+var _FpsEvents = __webpack_require__(36);
+
+var _FpsEvents2 = _interopRequireDefault(_FpsEvents);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5511,9 +5709,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
 // event
-
+// import Events from '../event/Events';
 
 // tick
+
+
+// tick/events
 
 
 // /**
@@ -5524,7 +5725,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // const fpsSymbol = Symbol('Singleton Fps Symbol');
 
 /**
- * フレームレート毎に UPDATE イベントを発生させます
+ * フレームレート毎に `UPDATE` イベントを発生させます
  *
  * @example
  * // 2sec. interval
@@ -5538,31 +5739,22 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Fps = function (_Polling) {
   _inherits(Fps, _Polling);
 
-  _createClass(Fps, null, [{
-    key: 'UPDATE',
-
-    // ----------------------------------------
-    // EVENT
-    // ----------------------------------------
-    /**
-     * フレームレート毎に発生するイベントを取得します
-     * @event UPDATE
-     * @returns {string} event, fpsUpdate を返します
-     * @default fpsUpdate
-     */
-    get: function get() {
-      return 'fpsUpdate';
-    }
-    // ----------------------------------------
-    // CONSTRUCTOR
-    // ----------------------------------------
-    /**
-     * 引数の frame rate に合わせ UPDATE イベントを発生させます
-     * @param {number} [fps=30] frame rate, default: 30
-     */
-
-  }]);
-
+  // /**
+  //  * フレームレート毎に発生するイベントを取得します
+  //  * @event UPDATE
+  //  * @returns {string} event, fpsUpdate を返します
+  //  * @default fpsUpdate
+  //  */
+  // static get UPDATE() {
+  //   return 'fpsUpdate';
+  // }
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
+  /**
+   * 引数の frame rate に合わせ UPDATE イベントを発生させます
+   * @param {number} [fps=30] frame rate, default: 30
+   */
   function Fps() {
     var fps = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 30;
 
@@ -5571,7 +5763,8 @@ var Fps = function (_Polling) {
     // @type {Events} - Events
     var _this = _possibleConstructorReturn(this, (Fps.__proto__ || Object.getPrototypeOf(Fps)).call(this, 1000 / fps));
 
-    var events = new _Events2.default(Fps.UPDATE, _this, _this);
+    var events = new _FpsEvents2.default(Fps.UPDATE, _this, _this);
+    events.fps = fps;
     /**
      * Fps.UPDATE Events instance
      * @type {Events}
@@ -5588,11 +5781,20 @@ var Fps = function (_Polling) {
   // METHOD
   // ----------------------------------------
   /**
-   * polling 時間を変更します<br>
+   * fps を変更します
    * 1. プロパティ polling 変更
-   * 1. update 実行
+   * 1. 継承 method update 実行
    * @param {number} interval fps
-   * @returns {boolean} `update` をコールし Polling.UPDATE event が発生すると true を返します
+   * @returns {boolean} 継承 method `update` をコールし UPDATE event が発生すると true を返します
+   */
+
+  // ----------------------------------------
+  // EVENT
+  // ----------------------------------------
+  /**
+   * フレームレート毎に発生するイベント - fpsUpdate
+   * @event UPDATE
+   * @type {string}
    */
 
 
@@ -5605,6 +5807,7 @@ var Fps = function (_Polling) {
        */
       this.interval = 1000 / interval;
       this.fps = interval;
+      this.events.fps = interval;
       return this.update();
     }
   }]);
@@ -5612,10 +5815,11 @@ var Fps = function (_Polling) {
   return Fps;
 }(_Polling3.default);
 
+Fps.UPDATE = 'fpsUpdate';
 exports.default = Fps;
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6102,7 +6306,7 @@ var Iro = function () {
 exports.default = Iro;
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6186,7 +6390,7 @@ var List = function () {
 exports.default = List;
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6354,7 +6558,7 @@ var Times = function () {
 exports.default = Times;
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(setImmediate) {(function (root) {
@@ -6591,10 +6795,10 @@ exports.default = Times;
 
 })(this);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(36).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(40).setImmediate))
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports) {
 
 (function(self) {
@@ -7061,7 +7265,7 @@ exports.default = Times;
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7071,7 +7275,86 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _Events2 = __webpack_require__(0);
+var _Events2 = __webpack_require__(1);
+
+var _Events3 = _interopRequireDefault(_Events2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Copyright (c) 2011-2017 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date 2017/06/02 - 15:02
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+/**
+ * {@link Rising} Events
+ */
+var RisingEvents = function (_Events) {
+  _inherits(RisingEvents, _Events);
+
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
+   * custom Event Object
+   * @param {string} type イベント種類
+   * @param {*} currentTarget current イベント発生インスタンス
+   * @param {*} [target=undefined] イベント発生インスタンス
+   * */
+  function RisingEvents(type, currentTarget) {
+    var target = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
+
+    _classCallCheck(this, RisingEvents);
+
+    // ---
+    /**
+     * 衝突判定, true: 衝突
+     * @type {boolean}
+     */
+    var _this = _possibleConstructorReturn(this, (RisingEvents.__proto__ || Object.getPrototypeOf(RisingEvents)).call(this, type, currentTarget, target));
+
+    _this.hit = false;
+    /**
+     * original event
+     * @type {?Event|*}
+     */
+    _this.original = null;
+    /**
+     * ClientRect
+     * @type {?ClientRect}
+     */
+    _this.offset = null;
+    return _this;
+  }
+
+  return RisingEvents;
+}(_Events3.default);
+
+exports.default = RisingEvents;
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _Events2 = __webpack_require__(1);
 
 var _Events3 = _interopRequireDefault(_Events2);
 
@@ -7106,7 +7389,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 /**
- * Touching events object
+ * {@link Touching} Events
  */
 var TouchingEvents = function (_Events) {
   _inherits(TouchingEvents, _Events);
@@ -7160,7 +7443,7 @@ var TouchingEvents = function (_Events) {
 exports.default = TouchingEvents;
 
 /***/ }),
-/* 31 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7170,7 +7453,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _Events2 = __webpack_require__(0);
+var _Events2 = __webpack_require__(1);
 
 var _Events3 = _interopRequireDefault(_Events2);
 
@@ -7193,7 +7476,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
 /**
- * Wheel Events, mouse wheel で発生するイベントを管理します
+ * {@link Wheel} Events, mouse wheel で発生するイベントを管理します
  */
 var WheelEvents = function (_Events) {
   _inherits(WheelEvents, _Events);
@@ -7225,7 +7508,7 @@ var WheelEvents = function (_Events) {
 exports.default = WheelEvents;
 
 /***/ }),
-/* 32 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7238,8 +7521,8 @@ exports.default = WheelEvents;
  * http://www.opensource.org/licenses/mit-license.html
  *
  * This notice shall be included in all copies or substantial portions of the Software.
- * 0.3.2
- * 2017-6-2 14:03:31
+ * 0.3.3
+ * 2017-6-2 16:51:22
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -7253,21 +7536,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-__webpack_require__(29);
+__webpack_require__(30);
 
-var _promisePolyfill = __webpack_require__(28);
+var _promisePolyfill = __webpack_require__(29);
 
 var _promisePolyfill2 = _interopRequireDefault(_promisePolyfill);
 
-var _EventDispatcher = __webpack_require__(1);
+var _EventDispatcher = __webpack_require__(0);
 
 var _EventDispatcher2 = _interopRequireDefault(_EventDispatcher);
 
-var _Events = __webpack_require__(0);
+var _Events = __webpack_require__(1);
 
 var _Events2 = _interopRequireDefault(_Events);
 
-var _Rising = __webpack_require__(18);
+var _Rising = __webpack_require__(19);
 
 var _Rising2 = _interopRequireDefault(_Rising);
 
@@ -7279,23 +7562,23 @@ var _Scrolling = __webpack_require__(12);
 
 var _Scrolling2 = _interopRequireDefault(_Scrolling);
 
-var _Touching = __webpack_require__(19);
+var _Touching = __webpack_require__(20);
 
 var _Touching2 = _interopRequireDefault(_Touching);
 
-var _Wheel = __webpack_require__(20);
+var _Wheel = __webpack_require__(21);
 
 var _Wheel2 = _interopRequireDefault(_Wheel);
 
-var _Ajax = __webpack_require__(21);
+var _Ajax = __webpack_require__(22);
 
 var _Ajax2 = _interopRequireDefault(_Ajax);
 
-var _Cookie = __webpack_require__(22);
+var _Cookie = __webpack_require__(23);
 
 var _Cookie2 = _interopRequireDefault(_Cookie);
 
-var _Queries = __webpack_require__(23);
+var _Queries = __webpack_require__(24);
 
 var _Queries2 = _interopRequireDefault(_Queries);
 
@@ -7303,7 +7586,7 @@ var _Cycle = __webpack_require__(13);
 
 var _Cycle2 = _interopRequireDefault(_Cycle);
 
-var _Fps = __webpack_require__(24);
+var _Fps = __webpack_require__(25);
 
 var _Fps2 = _interopRequireDefault(_Fps);
 
@@ -7323,7 +7606,7 @@ var _Hit = __webpack_require__(15);
 
 var _Hit2 = _interopRequireDefault(_Hit);
 
-var _List = __webpack_require__(26);
+var _List = __webpack_require__(27);
 
 var _List2 = _interopRequireDefault(_List);
 
@@ -7331,7 +7614,7 @@ var _Text = __webpack_require__(3);
 
 var _Text2 = _interopRequireDefault(_Text);
 
-var _Times = __webpack_require__(27);
+var _Times = __webpack_require__(28);
 
 var _Times2 = _interopRequireDefault(_Times);
 
@@ -7339,7 +7622,7 @@ var _Vectors = __webpack_require__(5);
 
 var _Vectors2 = _interopRequireDefault(_Vectors);
 
-var _Iro = __webpack_require__(25);
+var _Iro = __webpack_require__(26);
 
 var _Iro2 = _interopRequireDefault(_Iro);
 
@@ -7363,7 +7646,7 @@ var _Classes = __webpack_require__(10);
 
 var _Classes2 = _interopRequireDefault(_Classes);
 
-var _Elements = __webpack_require__(17);
+var _Elements = __webpack_require__(18);
 
 var _Elements2 = _interopRequireDefault(_Elements);
 
@@ -7408,14 +7691,14 @@ var MOKU = {};
  * @returns {string} version number を返します
  */
 MOKU.version = function () {
-  return '0.3.2';
+  return '0.3.3';
 };
 /**
  * build 日時を取得します
  * @returns {string}  build 日時を返します
  */
 MOKU.build = function () {
-  return '2017-6-2 14:03:31';
+  return '2017-6-2 16:51:22';
 };
 /**
  * MOKU.event
@@ -7495,7 +7778,145 @@ window.MOKU = MOKU;
 exports.default = MOKU;
 
 /***/ }),
-/* 33 */
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _Events2 = __webpack_require__(1);
+
+var _Events3 = _interopRequireDefault(_Events2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Copyright (c) 2011-2017 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date 2017/06/02 - 15:42
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+/**
+ * requestAnimationFrame を singleton 実行する {@link Cycle} Events
+ */
+var CycleEvents = function (_Events) {
+  _inherits(CycleEvents, _Events);
+
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
+   * custom Event Object
+   * @param {string} type イベント種類
+   * @param {*} currentTarget current イベント発生インスタンス
+   * @param {*} [target=undefined] イベント発生インスタンス
+   * */
+  function CycleEvents(type, currentTarget) {
+    var target = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
+
+    _classCallCheck(this, CycleEvents);
+
+    // ---
+    /**
+     * requestAnimationFrame 戻り値
+     * @type {number}
+     */
+    var _this = _possibleConstructorReturn(this, (CycleEvents.__proto__ || Object.getPrototypeOf(CycleEvents)).call(this, type, currentTarget, target));
+
+    _this.id = -1;
+    return _this;
+  }
+
+  return CycleEvents;
+}(_Events3.default);
+
+exports.default = CycleEvents;
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _PollingEvents2 = __webpack_require__(17);
+
+var _PollingEvents3 = _interopRequireDefault(_PollingEvents2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Copyright (c) 2011-2017 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date 2017/06/02 - 15:42
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+/**
+ * {@link Fps} Events
+ */
+var FpsEvents = function (_PollingEvents) {
+  _inherits(FpsEvents, _PollingEvents);
+
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
+   * custom Event Object
+   * @param {string} type イベント種類
+   * @param {*} currentTarget current イベント発生インスタンス
+   * @param {*} [target=undefined] イベント発生インスタンス
+   * */
+  function FpsEvents(type, currentTarget) {
+    var target = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
+
+    _classCallCheck(this, FpsEvents);
+
+    // ---
+    /**
+     * fps - フレームレート値
+     * @type {number}
+     */
+    var _this = _possibleConstructorReturn(this, (FpsEvents.__proto__ || Object.getPrototypeOf(FpsEvents)).call(this, type, currentTarget, target));
+
+    _this.fps = -1;
+    return _this;
+  }
+
+  return FpsEvents;
+}(_PollingEvents3.default);
+
+exports.default = FpsEvents;
+
+/***/ }),
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7640,7 +8061,7 @@ var Freeze = function () {
 exports.default = Freeze;
 
 /***/ }),
-/* 34 */
+/* 38 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -7830,7 +8251,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 35 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -8020,10 +8441,10 @@ process.umask = function() { return 0; };
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(37), __webpack_require__(34)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(41), __webpack_require__(38)))
 
 /***/ }),
-/* 36 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var apply = Function.prototype.apply;
@@ -8076,13 +8497,13 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(35);
+__webpack_require__(39);
 exports.setImmediate = setImmediate;
 exports.clearImmediate = clearImmediate;
 
 
 /***/ }),
-/* 37 */
+/* 41 */
 /***/ (function(module, exports) {
 
 var g;

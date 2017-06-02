@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/device/Can.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+<link data-ice="userStyle" rel="stylesheet" href="user/css/0-esdoc_extension.css">
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-MOKU">MOKU</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">css</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/css/Patterns.js~Patterns.html">Patterns</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/css/Style.js~Style.html">Style</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">device</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/device/Can.js~Can.html">Can</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-document">document</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-style">style</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-supportsPassive">supportsPassive</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-transform">transform</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-transition">transition</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-vendors">vendors</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">dom</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/dom/Bounding.js~Bounding.html">Bounding</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/dom/Classes.js~Classes.html">Classes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/dom/Elements.js~Elements.html">Elements</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">event</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/EventDispatcher.js~EventDispatcher.html">EventDispatcher</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Events.js~Events.html">Events</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Rising.js~Rising.html">Rising</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scroll.js~Scroll.html">Scroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scrolling.js~Scrolling.html">Scrolling</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/ScrollingSingle.js~ScrollingSingle.html">ScrollingSingle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Touching.js~Touching.html">Touching</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-instance">instance</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-singletonSymbol">singletonSymbol</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-instance">instance</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-event3rd">event3rd</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-instance">instance</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-singletonSymbol">singletonSymbol</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">event/events</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/events/RisingEvents.js~RisingEvents.html">RisingEvents</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/events/ScrollEvents.js~ScrollEvents.html">ScrollEvents</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/events/TouchingEvents.js~TouchingEvents.html">TouchingEvents</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/events/WheelEvents.js~WheelEvents.html">WheelEvents</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">net</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Cookie.js~Cookie.html">Cookie</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/net/Queries.js~Queries.html">Queries</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Request">Request</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fetch">fetch</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RegExp">RegExp</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-decodeURIComponent">decodeURIComponent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-encodeURIComponent">encodeURIComponent</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">tick</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Cycle.js~Cycle.html">Cycle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Fps.js~Fps.html">Fps</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Polling.js~Polling.html">Polling</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/Rate.js~Rate.html">Rate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-instance">instance</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-singletonSymbol">singletonSymbol</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">tick/events</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/events/CycleEvents.js~CycleEvents.html">CycleEvents</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/events/FpsEvents.js~FpsEvents.html">FpsEvents</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/tick/events/PollingEvents.js~PollingEvents.html">PollingEvents</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Freeze.js~Freeze.html">Freeze</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Hit.js~Hit.html">Hit</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Iro.js~Iro.html">Iro</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/List.js~List.html">List</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Text.js~Text.html">Text</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Times.js~Times.html">Times</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Vectors.js~Vectors.html">Vectors</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-duration">duration</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-timerId">timerId</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-half">half</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-mathFloor">mathFloor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-mathInt">mathInt</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-mathMax">mathMax</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-mathMin">mathMin</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-oneSix">oneSix</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-oneThree">oneThree</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-twoThree">twoThree</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-oneDay">oneDay</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-oneHour">oneHour</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-oneMinute">oneMinute</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-oneMonth">oneMonth</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-oneWeek">oneWeek</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/device/Can.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/11/30 - 16:47
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
+
+/**
+ * [native code] - document
+ * @type {HTMLDocument}
+ * @private
+ * @static
+ */
+const document = self.document;
+/**
+ * CSS detector &#x306B;&#x4F7F;&#x7528;&#x3059;&#x308B; virtual CSSStyleDeclaration
+ * ```
+ * document.createElement(&apos;p&apos;).style
+ * ```
+ * @type {CSSStyleDeclaration}
+ * @private
+ * @static
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style
+ */
+const style = document.createElement(&apos;p&apos;).style;
+/**
+ * vendor prefix list, CSS detector &#x306B;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;
+ * - &apos;-webkit-&apos;,
+ * - &apos;-moz-&apos;,
+ * - &apos;-ms-&apos;,
+ * - &apos;-o-&apos;,
+ * - &apos;&apos;
+ * @type {[string]}
+ * @private
+ * @static
+ */
+const vendors = [
+  &apos;-webkit-&apos;,
+  &apos;-moz-&apos;,
+  &apos;-ms-&apos;,
+  &apos;-o-&apos;,
+  &apos;&apos;,
+];
+// /**
+//  * &#x78BA;&#x8A8D;&#x7528;&#x95A2;&#x6570;
+//  * - transition - @return {boolean}
+//  * - transform - @return {boolean}
+//  * @private
+//  * @static
+//  * @type {{transition: (()), transform: (())}}
+//  */
+// const check = {
+//   transition() {
+//     const p = document.createElement(&apos;p&apos;);
+//     return typeof p.style.transition !== &apos;undefined&apos; ||
+//       typeof p.style.WebkitTransition !== &apos;undefined&apos; ||
+//       typeof p.style.MozTransition !== &apos;undefined&apos; ||
+//       typeof p.style.msTransition !== &apos;undefined&apos; ||
+//       typeof p.style.OTransition !== &apos;undefined&apos;;
+//   },
+//   transform() {
+//     const p = document.createElement(&apos;p&apos;);
+//     return typeof p.style.transform !== &apos;undefined&apos; ||
+//       typeof p.style.WebkitTransform !== &apos;undefined&apos; ||
+//       typeof p.style.MozTransform !== &apos;undefined&apos; ||
+//       typeof p.style.msTransform !== &apos;undefined&apos; ||
+//       typeof p.style.OTransform !== &apos;undefined&apos;;
+//   },
+// };
+
+/**
+ * CSS3 transition &#x53EF;&#x80FD;&#x30D5;&#x30E9;&#x30C3;&#x30B0;
+ * @type {boolean}
+ * @private
+ * @static
+ */
+const transition = vendors.some(prefix =&gt; typeof style[`${prefix}transition`] !== &apos;undefined&apos;);
+/**
+ * CSS3 transform &#x53EF;&#x80FD;&#x30D5;&#x30E9;&#x30C3;&#x30B0;
+ * @type {boolean}
+ * @private
+ * @static
+ */
+const transform = vendors.some(prefix =&gt; typeof style[`${prefix}transform`] !== &apos;undefined&apos;);
+
+/**
+ * addEventListener &#x7B2C;&#x4E09;&#x5F15;&#x6570; - { passive: true } : false &#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x30D6;&#x30E9;&#x30A6;&#x30B6;&#x30C6;&#x30B9;&#x30C8;&#x30FB;&#x30D5;&#x30E9;&#x30C3;&#x30B0;
+ * # TouchEvent#Using with addEventListener() and preventDefault()
+ * &lt;pre&gt;
+ * It&apos;s important to note that in many cases, both touch and mouse events get sent (in order to let non-touch-specific code still interact with the user). If you use touch events, you should call preventDefault() to keep the mouse event from being sent as well.
+ * The exception to this is Chrome, starting with version 56 (desktop, Chrome for android, and android webview), where the default value for touchstart and touchmove is true and calls to preventDefault() are not needed. To override this behavior, you simply set the passive option to false as shown in the example below. This change prevents the listener from blocking page rendering while a user is scrolling. A demo is available on the Google Developer site.
+ * &lt;/pre&gt;
+ * @private
+ * @type {boolean}
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent
+ * @see https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md
+ * @see https://blog.jxck.io/entries/2016-06-09/passive-event-listeners.html
+ * @since 0.3.2
+ */
+let supportsPassive = false;
+try {
+  const opts = Object.defineProperty({}, &apos;passive&apos;, {
+    get() {
+      supportsPassive = true;
+    },
+  });
+  window.addEventListener(&apos;test&apos;, null, opts);
+} catch (e) {
+  supportsPassive = false;
+  // console.warn(&apos;passive test&apos;, e);
+}
+
+/**
+ * CSS3 &#x6A5F;&#x80FD;&#x4F7F;&#x7528;&#x53EF;&#x80FD;&#x304B;&#x3092;&#x8ABF;&#x3079;&#x307E;&#x3059;
+ * @example
+ * if (Can.transition()) {
+ *  // can CSS3 transition
+ * }
+ *
+ * if (Can.transform()) {
+ *  // can CSS3 transform
+ * }
+ */
+export default class Can {
+  /**
+   * CSS3 transition &#x304C;&#x4F7F;&#x7528;&#x53EF;&#x80FD;&#x304B;&#x3092;&#x8ABF;&#x3079;&#x307E;&#x3059;
+   * @returns {boolean} true: &#x4F7F;&#x7528;&#x53EF;&#x80FD;
+   */
+  static transition() {
+    return transition;
+  }
+  /**
+   * CSS3 transform &#x304C;&#x4F7F;&#x7528;&#x53EF;&#x80FD;&#x304B;&#x3092;&#x8ABF;&#x3079;&#x307E;&#x3059;
+   * @returns {boolean} true: &#x4F7F;&#x7528;&#x53EF;&#x80FD;
+   */
+  static transform() {
+    return transform;
+  }
+  /**
+   * addEventListener &#x7B2C;&#x4E09;&#x5F15;&#x6570; - { passive: true } &#x304C;&#x4F7F;&#x7528;&#x3067;&#x304D;&#x308B;&#x304B;&#x3092;&#x8ABF;&#x3079;&#x307E;&#x3059;
+   * @returns {boolean} true: &#x4F7F;&#x7528;&#x53EF;&#x80FD;
+   * @since 0.3.2
+   */
+  static passive() {
+    return supportsPassive;
+  }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

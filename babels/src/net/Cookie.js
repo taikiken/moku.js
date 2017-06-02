@@ -63,7 +63,6 @@ export default class Cookie {
     /**
      * cookie key を設定します
      * @param {string} setting 設定する key name
-     * @returns {string} 設定した key name を返します
      */
     this.setKey = (setting) => { key = setting; };
     /**
@@ -74,7 +73,6 @@ export default class Cookie {
     /**
      * cookie end を設定します
      * @param {Date} setting cookie end Date instance
-     * @returns {Date} 設定した Date instance を返します
      */
     this.setEnd = (setting) => { end = setting; };
     /**
@@ -85,7 +83,6 @@ export default class Cookie {
     /**
      * cookie path を設定します
      * @param {string} setting 設定する path name
-     * @returns {string} 設定した path name を返します
      */
     this.setPath = (setting) => { path = setting; };
     /**
@@ -96,7 +93,6 @@ export default class Cookie {
     /**
      * cookie domain を設定します
      * @param {string} setting 設定する domain name
-     * @returns {string} 設定した domain name を返します
      */
     this.setDomain = (setting) => { domain = setting; };
     /**
@@ -107,7 +103,6 @@ export default class Cookie {
     /**
      * https 通信のときのみクッキー送信を行うかのフラッグを設定します
      * @param {boolean} setting https 通信のときのみクッキー送信を行うかのフラッグ
-     * @returns {boolean} 設定した secure フラッグを返します
      */
     this.setSecure = (setting) => { secure = setting; };
   }

@@ -46,25 +46,37 @@ export default class EventDispatcher {
    * listener property をイニシャライズします
    */
   constructor() {
-    // @type {Object}
-    let listeners = {};
+    // // @type {Object}
+    // let listeners = {};
+    // /**
+    //  * リスナーリストを取得します
+    //  * @returns {Object} リスナーリストを返します
+    //  */
+    // this.listeners = () => listeners;
+    // /**
+    //  * 全てのリスナーを破棄します
+    //  * @returns {boolean} 成功・不成功の真偽値を返します
+    //  */
+    // this.destroy = () => {
+    //   listeners = Object.create({});
+    //   return true;
+    // };
     /**
-     * リスナーリストを取得します
-     * @returns {Object} リスナーリストを返します
+     * リスナーリスト object,
+     * event type {string} を key, 値は Array.<function> になります
+     * @type {Object}
      */
-    this.listeners = () => listeners;
-    /**
-     * 全てのリスナーを破棄します
-     * @returns {boolean} 成功・不成功の真偽値を返します
-     */
-    this.destroy = () => {
-      listeners = Object.create({});
-      return true;
-    };
+    this.listeners = Object.create({});
   }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
+  /**
+   * 全てのリスナーを破棄します
+   */
+  destroy() {
+    this.listeners = Object.create({});
+  }
   /**
    * event type に リスナー関数を bind します
    * @param {string} type event type（種類）
@@ -82,7 +94,7 @@ export default class EventDispatcher {
     }
 
     // type {Object} - {{eventType: array [listener: Function...]...}}
-    const listeners = this.listeners();
+    const listeners = this.listeners;
 
     if (!Type.has(listeners, type)) {
       // listeners.type が存在しない場合は
@@ -108,7 +120,7 @@ export default class EventDispatcher {
     }
 
     // @type {Object} - events.type:String: [listener:Function...]
-    const listeners = this.listeners();
+    const listeners = this.listeners;
     if (!Type.has(listeners, type)) {
       // listener.type が存在しない
       // 処理しない
@@ -152,7 +164,7 @@ export default class EventDispatcher {
 
     if (!hasFunction) {
       // null 以外が無いので空にする
-      this.listeners[type] = [];
+      this.listeners[type] = [].slice(0);
     }
 
     // 空配列にしたかを hasFunction flag を反転させることで知らせます
@@ -171,7 +183,7 @@ export default class EventDispatcher {
     }
 
     // @type {Object} - events.type:String: [listener:Function...]
-    const listeners = this.listeners();
+    const listeners = this.listeners;
 
     if (!Type.has(listeners, type)) {
       // listener.type が存在しない
@@ -190,7 +202,7 @@ export default class EventDispatcher {
    */
   dispatch(events) {
     // @type {Object} - events.type:string: [listener:Function...]
-    const listeners = this.listeners();
+    const listeners = this.listeners;
     // @type {string} - event type
     const type = events.type;
 

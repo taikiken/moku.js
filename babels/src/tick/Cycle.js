@@ -13,7 +13,10 @@
 
 // event
 import EventDispatcher from '../event/EventDispatcher';
-import Events from '../event/Events';
+// import Events from '../event/Events';
+
+// tick/events
+import CycleEvents from './events/CycleEvents';
 
 /**
  * new を許可しないための Symbol
@@ -25,7 +28,6 @@ const singletonSymbol = Symbol('singleton instance');
  * singleton instance, nullable
  * @type {?Cycle}
  * @private
- * @static
  */
 let instance = null;
 
@@ -45,6 +47,31 @@ let instance = null;
  * <p>requestAnimationFrame は tab が active(focus) な時のみ発生します</p>
  */
 export default class Cycle extends EventDispatcher {
+  // ---------------------------------------------------
+  //  CONSTANT / EVENT
+  // ---------------------------------------------------
+  /**
+   * requestAnimationFrame 毎に発生するイベント - cycleUpdate
+   * @event UPDATE
+   * @type {string}
+   */
+  static UPDATE = 'cycleUpdate';
+  // ----------------------------------------
+  // STATIC METHOD
+  // ----------------------------------------
+  /**
+   * Cycle instance を singleton を保証し作成します
+   * @returns {Cycle} Cycle instance を返します
+   */
+  static factory() {
+    if (instance === null) {
+      instance = new Cycle(singletonSymbol);
+    }
+    return instance;
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * singleton です
    * @param {Symbol} checkSymbol singleton を保証するための private instance
@@ -62,19 +89,19 @@ export default class Cycle extends EventDispatcher {
     super();
     // -------------------------------
     // onetime setting
-    instance = this;
-    const events = new Events(Cycle.UPDATE, this, this);
-    const boundUpdate = this.update.bind(this);
+    // instance = this;
+    // const events = new Events(Cycle.UPDATE, this, this);
+    // const update = this.update.bind(this);
     /**
      * Cycle.UPDATE Events instance
      * @type {Events}
      */
-    this.events = events;
+    this.events = new CycleEvents(Cycle.UPDATE, this, this);
     /**
      * bound update requestAnimationFrame callback
      * @type {function}
      */
-    this.boundUpdate = boundUpdate;
+    this.update = this.update.bind(this);
     /**
      * requestAnimationFrame ID
      * @type {number}
@@ -86,20 +113,20 @@ export default class Cycle extends EventDispatcher {
      */
     this.started = false;
     // 設定済み instance を返します
-    return instance;
+    return this;
   }
-  // ----------------------------------------
-  // EVENT
-  // ----------------------------------------
-  /**
-   * requestAnimationFrame 毎に発生するイベントを取得します
-   * @event UPDATE
-   * @returns {string} event, cycleUpdate を返します
-   * @default cycleUpdate
-   */
-  static get UPDATE() {
-    return 'cycleUpdate';
-  }
+  // // ----------------------------------------
+  // // EVENT
+  // // ----------------------------------------
+  // /**
+  //  * requestAnimationFrame 毎に発生するイベントを取得します
+  //  * @event UPDATE
+  //  * @returns {string} event, cycleUpdate を返します
+  //  * @default cycleUpdate
+  //  */
+  // static get UPDATE() {
+  //   return 'cycleUpdate';
+  // }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
@@ -144,7 +171,7 @@ export default class Cycle extends EventDispatcher {
    */
   update() {
     // @type {number} - requestAnimationFrame id
-    const id = requestAnimationFrame(this.boundUpdate);
+    const id = requestAnimationFrame(this.update);
     this.id = id;
 
     // @type {Events} - events
@@ -153,18 +180,5 @@ export default class Cycle extends EventDispatcher {
     // event fire
     this.dispatch(events);
     return id;
-  }
-  // ----------------------------------------
-  // STATIC METHOD
-  // ----------------------------------------
-  /**
-   * Cycle instance を singleton を保証し作成します
-   * @returns {Cycle} Cycle instance を返します
-   */
-  static factory() {
-    if (instance === null) {
-      return new Cycle(singletonSymbol);
-    }
-    return instance;
   }
 }

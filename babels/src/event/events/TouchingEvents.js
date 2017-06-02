@@ -13,13 +13,13 @@
  */
 
 // events
-import Events from './Events';
+import Events from '../Events';
 
 // util
-import Vectors from '../util/Vectors';
+import Vectors from '../../util/Vectors';
 
 /**
- * Touching events object
+ * {@link Touching} Events
  */
 export default class TouchingEvents extends Events {
   /**

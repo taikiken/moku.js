@@ -22,7 +22,8 @@ export default class Hit {
    *  top: boolean,
    *  bottom: boolean,
    *  contain: boolean,
-   *  include: boolean
+   *  include: boolean,
+   *  result: boolean
    * }} hit check object を返します
    */
   static test(height, offset) {

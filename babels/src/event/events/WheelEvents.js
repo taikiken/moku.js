@@ -10,10 +10,10 @@
  *
  */
 
-import Events from './Events';
+import Events from '../Events';
 
 /**
- * Wheel Events, mouse wheel で発生するイベントを管理します
+ * {@link Wheel} Events, mouse wheel で発生するイベントを管理します
  */
 export default class WheelEvents extends Events {
   /**

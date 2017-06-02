@@ -12,9 +12,9 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "./src/css/can.js~can",
-    "class/src/css/Can.js~Can.html",
-    "<span>Can</span> <span class=\"search-result-import-path\">./src/css/Can.js</span>",
+    "./src/device/can.js~can",
+    "class/src/device/Can.js~Can.html",
+    "<span>Can</span> <span class=\"search-result-import-path\">./src/device/Can.js</span>",
     "class"
   ],
   [
@@ -33,6 +33,12 @@ window.esdocSearchIndex = [
     "./src/tick/cycle.js~cycle",
     "class/src/tick/Cycle.js~Cycle.html",
     "<span>Cycle</span> <span class=\"search-result-import-path\">./src/tick/Cycle.js</span>",
+    "class"
+  ],
+  [
+    "./src/tick/events/cycleevents.js~cycleevents",
+    "class/src/tick/events/CycleEvents.js~CycleEvents.html",
+    "<span>CycleEvents</span> <span class=\"search-result-import-path\">./src/tick/events/CycleEvents.js</span>",
     "class"
   ],
   [
@@ -57,6 +63,12 @@ window.esdocSearchIndex = [
     "./src/tick/fps.js~fps",
     "class/src/tick/Fps.js~Fps.html",
     "<span>Fps</span> <span class=\"search-result-import-path\">./src/tick/Fps.js</span>",
+    "class"
+  ],
+  [
+    "./src/tick/events/fpsevents.js~fpsevents",
+    "class/src/tick/events/FpsEvents.js~FpsEvents.html",
+    "<span>FpsEvents</span> <span class=\"search-result-import-path\">./src/tick/events/FpsEvents.js</span>",
     "class"
   ],
   [
@@ -102,6 +114,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "./src/tick/events/pollingevents.js~pollingevents",
+    "class/src/tick/events/PollingEvents.js~PollingEvents.html",
+    "<span>PollingEvents</span> <span class=\"search-result-import-path\">./src/tick/events/PollingEvents.js</span>",
+    "class"
+  ],
+  [
     "./src/net/queries.js~queries",
     "class/src/net/Queries.js~Queries.html",
     "<span>Queries</span> <span class=\"search-result-import-path\">./src/net/Queries.js</span>",
@@ -132,15 +150,21 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "./src/event/events/risingevents.js~risingevents",
+    "class/src/event/events/RisingEvents.js~RisingEvents.html",
+    "<span>RisingEvents</span> <span class=\"search-result-import-path\">./src/event/events/RisingEvents.js</span>",
+    "class"
+  ],
+  [
     "./src/event/scroll.js~scroll",
     "class/src/event/Scroll.js~Scroll.html",
     "<span>Scroll</span> <span class=\"search-result-import-path\">./src/event/Scroll.js</span>",
     "class"
   ],
   [
-    "./src/event/scrollevents.js~scrollevents",
-    "class/src/event/ScrollEvents.js~ScrollEvents.html",
-    "<span>ScrollEvents</span> <span class=\"search-result-import-path\">./src/event/ScrollEvents.js</span>",
+    "./src/event/events/scrollevents.js~scrollevents",
+    "class/src/event/events/ScrollEvents.js~ScrollEvents.html",
+    "<span>ScrollEvents</span> <span class=\"search-result-import-path\">./src/event/events/ScrollEvents.js</span>",
     "class"
   ],
   [
@@ -180,9 +204,9 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "./src/event/touchingevents.js~touchingevents",
-    "class/src/event/TouchingEvents.js~TouchingEvents.html",
-    "<span>TouchingEvents</span> <span class=\"search-result-import-path\">./src/event/TouchingEvents.js</span>",
+    "./src/event/events/touchingevents.js~touchingevents",
+    "class/src/event/events/TouchingEvents.js~TouchingEvents.html",
+    "<span>TouchingEvents</span> <span class=\"search-result-import-path\">./src/event/events/TouchingEvents.js</span>",
     "class"
   ],
   [
@@ -204,9 +228,9 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "./src/event/wheelevents.js~wheelevents",
-    "class/src/event/WheelEvents.js~WheelEvents.html",
-    "<span>WheelEvents</span> <span class=\"search-result-import-path\">./src/event/WheelEvents.js</span>",
+    "./src/event/events/wheelevents.js~wheelevents",
+    "class/src/event/events/WheelEvents.js~WheelEvents.html",
+    "<span>WheelEvents</span> <span class=\"search-result-import-path\">./src/event/events/WheelEvents.js</span>",
     "class"
   ],
   [
@@ -216,9 +240,9 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
-    "./src/css/can.js~document",
+    "./src/device/can.js~document",
     "variable/index.html#static-variable-document",
-    "<span>document</span> <span class=\"search-result-import-path\">./src/css/Can.js</span>",
+    "<span>document</span> <span class=\"search-result-import-path\">./src/device/Can.js</span>",
     "variable"
   ],
   [
@@ -231,6 +255,12 @@ window.esdocSearchIndex = [
     "./src/net/cookie.js~encodeuricomponent",
     "variable/index.html#static-variable-encodeURIComponent",
     "<span>encodeURIComponent</span> <span class=\"search-result-import-path\">./src/net/Cookie.js</span>",
+    "variable"
+  ],
+  [
+    "./src/event/touching.js~event3rd",
+    "variable/index.html#static-variable-event3rd",
+    "<span>event3rd</span> <span class=\"search-result-import-path\">./src/event/Touching.js</span>",
     "variable"
   ],
   [
@@ -354,9 +384,15 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
-    "./src/css/can.js~style",
+    "./src/device/can.js~style",
     "variable/index.html#static-variable-style",
-    "<span>style</span> <span class=\"search-result-import-path\">./src/css/Can.js</span>",
+    "<span>style</span> <span class=\"search-result-import-path\">./src/device/Can.js</span>",
+    "variable"
+  ],
+  [
+    "./src/device/can.js~supportspassive",
+    "variable/index.html#static-variable-supportsPassive",
+    "<span>supportsPassive</span> <span class=\"search-result-import-path\">./src/device/Can.js</span>",
     "variable"
   ],
   [
@@ -366,15 +402,15 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
-    "./src/css/can.js~transform",
+    "./src/device/can.js~transform",
     "variable/index.html#static-variable-transform",
-    "<span>transform</span> <span class=\"search-result-import-path\">./src/css/Can.js</span>",
+    "<span>transform</span> <span class=\"search-result-import-path\">./src/device/Can.js</span>",
     "variable"
   ],
   [
-    "./src/css/can.js~transition",
+    "./src/device/can.js~transition",
     "variable/index.html#static-variable-transition",
-    "<span>transition</span> <span class=\"search-result-import-path\">./src/css/Can.js</span>",
+    "<span>transition</span> <span class=\"search-result-import-path\">./src/device/Can.js</span>",
     "variable"
   ],
   [
@@ -384,9 +420,9 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
-    "./src/css/can.js~vendors",
+    "./src/device/can.js~vendors",
     "variable/index.html#static-variable-vendors",
-    "<span>vendors</span> <span class=\"search-result-import-path\">./src/css/Can.js</span>",
+    "<span>vendors</span> <span class=\"search-result-import-path\">./src/device/Can.js</span>",
     "variable"
   ],
   [
@@ -720,24 +756,6 @@ window.esdocSearchIndex = [
     "external"
   ],
   [
-    "src/css/can.js",
-    "file/src/css/Can.js.html",
-    "src/css/Can.js",
-    "file"
-  ],
-  [
-    "src/css/can.js~can.transform",
-    "class/src/css/Can.js~Can.html#static-method-transform",
-    "src/css/Can.js~Can.transform",
-    "method"
-  ],
-  [
-    "src/css/can.js~can.transition",
-    "class/src/css/Can.js~Can.html#static-method-transition",
-    "src/css/Can.js~Can.transition",
-    "method"
-  ],
-  [
     "src/css/patterns.js",
     "file/src/css/Patterns.js.html",
     "src/css/Patterns.js",
@@ -837,6 +855,30 @@ window.esdocSearchIndex = [
     "src/css/style.js~style.shorthand",
     "class/src/css/Style.js~Style.html#static-method-shortHand",
     "src/css/Style.js~Style.shortHand",
+    "method"
+  ],
+  [
+    "src/device/can.js",
+    "file/src/device/Can.js.html",
+    "src/device/Can.js",
+    "file"
+  ],
+  [
+    "src/device/can.js~can.passive",
+    "class/src/device/Can.js~Can.html#static-method-passive",
+    "src/device/Can.js~Can.passive",
+    "method"
+  ],
+  [
+    "src/device/can.js~can.transform",
+    "class/src/device/Can.js~Can.html#static-method-transform",
+    "src/device/Can.js~Can.transform",
+    "method"
+  ],
+  [
+    "src/device/can.js~can.transition",
+    "class/src/device/Can.js~Can.html#static-method-transition",
+    "src/device/Can.js~Can.transition",
     "method"
   ],
   [
@@ -1027,9 +1069,9 @@ window.esdocSearchIndex = [
   ],
   [
     "src/event/eventdispatcher.js~eventdispatcher#destroy",
-    "class/src/event/EventDispatcher.js~EventDispatcher.html#instance-member-destroy",
+    "class/src/event/EventDispatcher.js~EventDispatcher.html#instance-method-destroy",
     "src/event/EventDispatcher.js~EventDispatcher#destroy",
-    "member"
+    "method"
   ],
   [
     "src/event/eventdispatcher.js~eventdispatcher#dispatch",
@@ -1122,12 +1164,6 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/event/rising.js~rising#boundscroll",
-    "class/src/event/Rising.js~Rising.html#instance-member-boundScroll",
-    "src/event/Rising.js~Rising#boundScroll",
-    "member"
-  ],
-  [
     "src/event/rising.js~rising#constructor",
     "class/src/event/Rising.js~Rising.html#instance-constructor-constructor",
     "src/event/Rising.js~Rising#constructor",
@@ -1140,9 +1176,15 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/event/rising.js~rising#scroll",
-    "class/src/event/Rising.js~Rising.html#instance-method-scroll",
-    "src/event/Rising.js~Rising#scroll",
+    "src/event/rising.js~rising#events",
+    "class/src/event/Rising.js~Rising.html#instance-member-events",
+    "src/event/Rising.js~Rising#events",
+    "member"
+  ],
+  [
+    "src/event/rising.js~rising#onupdate",
+    "class/src/event/Rising.js~Rising.html#instance-method-onUpdate",
+    "src/event/Rising.js~Rising#onUpdate",
     "method"
   ],
   [
@@ -1170,28 +1212,10 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/event/rising.js~rising.alien",
-    "class/src/event/Rising.js~Rising.html#static-get-ALIEN",
-    "src/event/Rising.js~Rising.ALIEN",
-    "member"
-  ],
-  [
-    "src/event/rising.js~rising.collision",
-    "class/src/event/Rising.js~Rising.html#static-get-COLLISION",
-    "src/event/Rising.js~Rising.COLLISION",
-    "member"
-  ],
-  [
     "src/event/scroll.js",
     "file/src/event/Scroll.js.html",
     "src/event/Scroll.js",
     "file"
-  ],
-  [
-    "src/event/scroll.js~scroll#boundscroll",
-    "class/src/event/Scroll.js~Scroll.html#instance-member-boundScroll",
-    "src/event/Scroll.js~Scroll#boundScroll",
-    "member"
   ],
   [
     "src/event/scroll.js~scroll#constructor",
@@ -1206,16 +1230,16 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/event/scroll.js~scroll#onscroll",
+    "class/src/event/Scroll.js~Scroll.html#instance-method-onScroll",
+    "src/event/Scroll.js~Scroll#onScroll",
+    "method"
+  ],
+  [
     "src/event/scroll.js~scroll#previous",
     "class/src/event/Scroll.js~Scroll.html#instance-member-previous",
     "src/event/Scroll.js~Scroll#previous",
     "member"
-  ],
-  [
-    "src/event/scroll.js~scroll#scroll",
-    "class/src/event/Scroll.js~Scroll.html#instance-method-scroll",
-    "src/event/Scroll.js~Scroll#scroll",
-    "method"
   ],
   [
     "src/event/scroll.js~scroll#start",
@@ -1266,76 +1290,10 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/event/scrollevents.js",
-    "file/src/event/ScrollEvents.js.html",
-    "src/event/ScrollEvents.js",
-    "file"
-  ],
-  [
-    "src/event/scrollevents.js~scrollevents#bottom",
-    "class/src/event/ScrollEvents.js~ScrollEvents.html#instance-member-bottom",
-    "src/event/ScrollEvents.js~ScrollEvents#bottom",
-    "member"
-  ],
-  [
-    "src/event/scrollevents.js~scrollevents#changed",
-    "class/src/event/ScrollEvents.js~ScrollEvents.html#instance-member-changed",
-    "src/event/ScrollEvents.js~ScrollEvents#changed",
-    "member"
-  ],
-  [
-    "src/event/scrollevents.js~scrollevents#constructor",
-    "class/src/event/ScrollEvents.js~ScrollEvents.html#instance-constructor-constructor",
-    "src/event/ScrollEvents.js~ScrollEvents#constructor",
-    "method"
-  ],
-  [
-    "src/event/scrollevents.js~scrollevents#height",
-    "class/src/event/ScrollEvents.js~ScrollEvents.html#instance-member-height",
-    "src/event/ScrollEvents.js~ScrollEvents#height",
-    "member"
-  ],
-  [
-    "src/event/scrollevents.js~scrollevents#moving",
-    "class/src/event/ScrollEvents.js~ScrollEvents.html#instance-member-moving",
-    "src/event/ScrollEvents.js~ScrollEvents#moving",
-    "member"
-  ],
-  [
-    "src/event/scrollevents.js~scrollevents#original",
-    "class/src/event/ScrollEvents.js~ScrollEvents.html#instance-member-original",
-    "src/event/ScrollEvents.js~ScrollEvents#original",
-    "member"
-  ],
-  [
-    "src/event/scrollevents.js~scrollevents#previous",
-    "class/src/event/ScrollEvents.js~ScrollEvents.html#instance-member-previous",
-    "src/event/ScrollEvents.js~ScrollEvents#previous",
-    "member"
-  ],
-  [
-    "src/event/scrollevents.js~scrollevents#width",
-    "class/src/event/ScrollEvents.js~ScrollEvents.html#instance-member-width",
-    "src/event/ScrollEvents.js~ScrollEvents#width",
-    "member"
-  ],
-  [
-    "src/event/scrollevents.js~scrollevents#y",
-    "class/src/event/ScrollEvents.js~ScrollEvents.html#instance-member-y",
-    "src/event/ScrollEvents.js~ScrollEvents#y",
-    "member"
-  ],
-  [
     "src/event/scrolling.js",
     "file/src/event/Scrolling.js.html",
     "src/event/Scrolling.js",
     "file"
-  ],
-  [
-    "src/event/scrolling.js~scrolling#boundscroll",
-    "class/src/event/Scrolling.js~Scrolling.html#instance-member-boundScroll",
-    "src/event/Scrolling.js~Scrolling#boundScroll",
-    "member"
   ],
   [
     "src/event/scrolling.js~scrolling#constructor",
@@ -1356,6 +1314,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/event/scrolling.js~scrolling#onupdate",
+    "class/src/event/Scrolling.js~Scrolling.html#instance-method-onUpdate",
+    "src/event/Scrolling.js~Scrolling#onUpdate",
+    "method"
+  ],
+  [
     "src/event/scrolling.js~scrolling#previous",
     "class/src/event/Scrolling.js~Scrolling.html#instance-member-previous",
     "src/event/Scrolling.js~Scrolling#previous",
@@ -1366,12 +1330,6 @@ window.esdocSearchIndex = [
     "class/src/event/Scrolling.js~Scrolling.html#instance-member-rate",
     "src/event/Scrolling.js~Scrolling#rate",
     "member"
-  ],
-  [
-    "src/event/scrolling.js~scrolling#scroll",
-    "class/src/event/Scrolling.js~Scrolling.html#instance-method-scroll",
-    "src/event/Scrolling.js~Scrolling#scroll",
-    "method"
   ],
   [
     "src/event/scrolling.js~scrolling#start",
@@ -1390,12 +1348,6 @@ window.esdocSearchIndex = [
     "class/src/event/Scrolling.js~Scrolling.html#instance-method-stop",
     "src/event/Scrolling.js~Scrolling#stop",
     "method"
-  ],
-  [
-    "src/event/scrolling.js~scrolling.update",
-    "class/src/event/Scrolling.js~Scrolling.html#static-get-UPDATE",
-    "src/event/Scrolling.js~Scrolling.UPDATE",
-    "member"
   ],
   [
     "src/event/scrollingsingle.js",
@@ -1422,33 +1374,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/event/touching.js~touching#boundblur",
-    "class/src/event/Touching.js~Touching.html#instance-member-boundBlur",
-    "src/event/Touching.js~Touching#boundBlur",
-    "member"
-  ],
-  [
-    "src/event/touching.js~touching#boundcancel",
-    "class/src/event/Touching.js~Touching.html#instance-member-boundCancel",
-    "src/event/Touching.js~Touching#boundCancel",
-    "member"
-  ],
-  [
-    "src/event/touching.js~touching#boundend",
-    "class/src/event/Touching.js~Touching.html#instance-member-boundEnd",
-    "src/event/Touching.js~Touching#boundEnd",
-    "member"
-  ],
-  [
-    "src/event/touching.js~touching#boundmove",
-    "class/src/event/Touching.js~Touching.html#instance-member-boundMove",
-    "src/event/Touching.js~Touching#boundMove",
-    "member"
-  ],
-  [
-    "src/event/touching.js~touching#boundstart",
-    "class/src/event/Touching.js~Touching.html#instance-member-boundStart",
-    "src/event/Touching.js~Touching#boundStart",
+    "src/event/touching.js~touching#body",
+    "class/src/event/Touching.js~Touching.html#instance-member-body",
+    "src/event/Touching.js~Touching#body",
     "member"
   ],
   [
@@ -1473,6 +1401,12 @@ window.esdocSearchIndex = [
     "src/event/touching.js~touching#element",
     "class/src/event/Touching.js~Touching.html#instance-member-element",
     "src/event/Touching.js~Touching#element",
+    "member"
+  ],
+  [
+    "src/event/touching.js~touching#eventoption",
+    "class/src/event/Touching.js~Touching.html#instance-member-eventOption",
+    "src/event/Touching.js~Touching#eventOption",
     "member"
   ],
   [
@@ -1530,36 +1464,6 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/event/touching.js~touching.cancel",
-    "class/src/event/Touching.js~Touching.html#static-get-CANCEL",
-    "src/event/Touching.js~Touching.CANCEL",
-    "member"
-  ],
-  [
-    "src/event/touching.js~touching.end",
-    "class/src/event/Touching.js~Touching.html#static-get-END",
-    "src/event/Touching.js~Touching.END",
-    "member"
-  ],
-  [
-    "src/event/touching.js~touching.move",
-    "class/src/event/Touching.js~Touching.html#static-get-MOVE",
-    "src/event/Touching.js~Touching.MOVE",
-    "member"
-  ],
-  [
-    "src/event/touching.js~touching.start",
-    "class/src/event/Touching.js~Touching.html#static-get-START",
-    "src/event/Touching.js~Touching.START",
-    "member"
-  ],
-  [
-    "src/event/touching.js~touching.touch",
-    "class/src/event/Touching.js~Touching.html#static-get-TOUCH",
-    "src/event/Touching.js~Touching.TOUCH",
-    "member"
-  ],
-  [
     "src/event/touching.js~touching.point",
     "class/src/event/Touching.js~Touching.html#static-method-point",
     "src/event/Touching.js~Touching.point",
@@ -1572,52 +1476,10 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/event/touchingevents.js",
-    "file/src/event/TouchingEvents.js.html",
-    "src/event/TouchingEvents.js",
-    "file"
-  ],
-  [
-    "src/event/touchingevents.js~touchingevents#between",
-    "class/src/event/TouchingEvents.js~TouchingEvents.html#instance-member-between",
-    "src/event/TouchingEvents.js~TouchingEvents#between",
-    "member"
-  ],
-  [
-    "src/event/touchingevents.js~touchingevents#constructor",
-    "class/src/event/TouchingEvents.js~TouchingEvents.html#instance-constructor-constructor",
-    "src/event/TouchingEvents.js~TouchingEvents#constructor",
-    "method"
-  ],
-  [
-    "src/event/touchingevents.js~touchingevents#current",
-    "class/src/event/TouchingEvents.js~TouchingEvents.html#instance-member-current",
-    "src/event/TouchingEvents.js~TouchingEvents#current",
-    "member"
-  ],
-  [
-    "src/event/touchingevents.js~touchingevents#origin",
-    "class/src/event/TouchingEvents.js~TouchingEvents.html#instance-member-origin",
-    "src/event/TouchingEvents.js~TouchingEvents#origin",
-    "member"
-  ],
-  [
-    "src/event/touchingevents.js~touchingevents#scrolling",
-    "class/src/event/TouchingEvents.js~TouchingEvents.html#instance-member-scrolling",
-    "src/event/TouchingEvents.js~TouchingEvents#scrolling",
-    "member"
-  ],
-  [
     "src/event/wheel.js",
     "file/src/event/Wheel.js.html",
     "src/event/Wheel.js",
     "file"
-  ],
-  [
-    "src/event/wheel.js~wheel#boundwheel",
-    "class/src/event/Wheel.js~Wheel.html#instance-member-boundWheel",
-    "src/event/Wheel.js~Wheel#boundWheel",
-    "member"
   ],
   [
     "src/event/wheel.js~wheel#constructor",
@@ -1638,12 +1500,6 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/event/wheel.js~wheel#mousewheel",
-    "class/src/event/Wheel.js~Wheel.html#instance-method-mouseWheel",
-    "src/event/Wheel.js~Wheel#mouseWheel",
-    "method"
-  ],
-  [
     "src/event/wheel.js~wheel#moved",
     "class/src/event/Wheel.js~Wheel.html#instance-member-moved",
     "src/event/Wheel.js~Wheel#moved",
@@ -1653,6 +1509,12 @@ window.esdocSearchIndex = [
     "src/event/wheel.js~wheel#moving",
     "class/src/event/Wheel.js~Wheel.html#instance-method-moving",
     "src/event/Wheel.js~Wheel#moving",
+    "method"
+  ],
+  [
+    "src/event/wheel.js~wheel#onmousewheel",
+    "class/src/event/Wheel.js~Wheel.html#instance-method-onMouseWheel",
+    "src/event/Wheel.js~Wheel#onMouseWheel",
     "method"
   ],
   [
@@ -1704,21 +1566,147 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/event/wheelevents.js",
-    "file/src/event/WheelEvents.js.html",
-    "src/event/WheelEvents.js",
+    "src/event/events/risingevents.js",
+    "file/src/event/events/RisingEvents.js.html",
+    "src/event/events/RisingEvents.js",
     "file"
   ],
   [
-    "src/event/wheelevents.js~wheelevents#constructor",
-    "class/src/event/WheelEvents.js~WheelEvents.html#instance-constructor-constructor",
-    "src/event/WheelEvents.js~WheelEvents#constructor",
+    "src/event/events/risingevents.js~risingevents#constructor",
+    "class/src/event/events/RisingEvents.js~RisingEvents.html#instance-constructor-constructor",
+    "src/event/events/RisingEvents.js~RisingEvents#constructor",
     "method"
   ],
   [
-    "src/event/wheelevents.js~wheelevents#moved",
-    "class/src/event/WheelEvents.js~WheelEvents.html#instance-member-moved",
-    "src/event/WheelEvents.js~WheelEvents#moved",
+    "src/event/events/risingevents.js~risingevents#hit",
+    "class/src/event/events/RisingEvents.js~RisingEvents.html#instance-member-hit",
+    "src/event/events/RisingEvents.js~RisingEvents#hit",
+    "member"
+  ],
+  [
+    "src/event/events/risingevents.js~risingevents#offset",
+    "class/src/event/events/RisingEvents.js~RisingEvents.html#instance-member-offset",
+    "src/event/events/RisingEvents.js~RisingEvents#offset",
+    "member"
+  ],
+  [
+    "src/event/events/risingevents.js~risingevents#original",
+    "class/src/event/events/RisingEvents.js~RisingEvents.html#instance-member-original",
+    "src/event/events/RisingEvents.js~RisingEvents#original",
+    "member"
+  ],
+  [
+    "src/event/events/scrollevents.js",
+    "file/src/event/events/ScrollEvents.js.html",
+    "src/event/events/ScrollEvents.js",
+    "file"
+  ],
+  [
+    "src/event/events/scrollevents.js~scrollevents#bottom",
+    "class/src/event/events/ScrollEvents.js~ScrollEvents.html#instance-member-bottom",
+    "src/event/events/ScrollEvents.js~ScrollEvents#bottom",
+    "member"
+  ],
+  [
+    "src/event/events/scrollevents.js~scrollevents#changed",
+    "class/src/event/events/ScrollEvents.js~ScrollEvents.html#instance-member-changed",
+    "src/event/events/ScrollEvents.js~ScrollEvents#changed",
+    "member"
+  ],
+  [
+    "src/event/events/scrollevents.js~scrollevents#constructor",
+    "class/src/event/events/ScrollEvents.js~ScrollEvents.html#instance-constructor-constructor",
+    "src/event/events/ScrollEvents.js~ScrollEvents#constructor",
+    "method"
+  ],
+  [
+    "src/event/events/scrollevents.js~scrollevents#height",
+    "class/src/event/events/ScrollEvents.js~ScrollEvents.html#instance-member-height",
+    "src/event/events/ScrollEvents.js~ScrollEvents#height",
+    "member"
+  ],
+  [
+    "src/event/events/scrollevents.js~scrollevents#moving",
+    "class/src/event/events/ScrollEvents.js~ScrollEvents.html#instance-member-moving",
+    "src/event/events/ScrollEvents.js~ScrollEvents#moving",
+    "member"
+  ],
+  [
+    "src/event/events/scrollevents.js~scrollevents#original",
+    "class/src/event/events/ScrollEvents.js~ScrollEvents.html#instance-member-original",
+    "src/event/events/ScrollEvents.js~ScrollEvents#original",
+    "member"
+  ],
+  [
+    "src/event/events/scrollevents.js~scrollevents#previous",
+    "class/src/event/events/ScrollEvents.js~ScrollEvents.html#instance-member-previous",
+    "src/event/events/ScrollEvents.js~ScrollEvents#previous",
+    "member"
+  ],
+  [
+    "src/event/events/scrollevents.js~scrollevents#width",
+    "class/src/event/events/ScrollEvents.js~ScrollEvents.html#instance-member-width",
+    "src/event/events/ScrollEvents.js~ScrollEvents#width",
+    "member"
+  ],
+  [
+    "src/event/events/scrollevents.js~scrollevents#y",
+    "class/src/event/events/ScrollEvents.js~ScrollEvents.html#instance-member-y",
+    "src/event/events/ScrollEvents.js~ScrollEvents#y",
+    "member"
+  ],
+  [
+    "src/event/events/touchingevents.js",
+    "file/src/event/events/TouchingEvents.js.html",
+    "src/event/events/TouchingEvents.js",
+    "file"
+  ],
+  [
+    "src/event/events/touchingevents.js~touchingevents#between",
+    "class/src/event/events/TouchingEvents.js~TouchingEvents.html#instance-member-between",
+    "src/event/events/TouchingEvents.js~TouchingEvents#between",
+    "member"
+  ],
+  [
+    "src/event/events/touchingevents.js~touchingevents#constructor",
+    "class/src/event/events/TouchingEvents.js~TouchingEvents.html#instance-constructor-constructor",
+    "src/event/events/TouchingEvents.js~TouchingEvents#constructor",
+    "method"
+  ],
+  [
+    "src/event/events/touchingevents.js~touchingevents#current",
+    "class/src/event/events/TouchingEvents.js~TouchingEvents.html#instance-member-current",
+    "src/event/events/TouchingEvents.js~TouchingEvents#current",
+    "member"
+  ],
+  [
+    "src/event/events/touchingevents.js~touchingevents#origin",
+    "class/src/event/events/TouchingEvents.js~TouchingEvents.html#instance-member-origin",
+    "src/event/events/TouchingEvents.js~TouchingEvents#origin",
+    "member"
+  ],
+  [
+    "src/event/events/touchingevents.js~touchingevents#scrolling",
+    "class/src/event/events/TouchingEvents.js~TouchingEvents.html#instance-member-scrolling",
+    "src/event/events/TouchingEvents.js~TouchingEvents#scrolling",
+    "member"
+  ],
+  [
+    "src/event/events/wheelevents.js",
+    "file/src/event/events/WheelEvents.js.html",
+    "src/event/events/WheelEvents.js",
+    "file"
+  ],
+  [
+    "src/event/events/wheelevents.js~wheelevents#constructor",
+    "class/src/event/events/WheelEvents.js~WheelEvents.html#instance-constructor-constructor",
+    "src/event/events/WheelEvents.js~WheelEvents#constructor",
+    "method"
+  ],
+  [
+    "src/event/events/wheelevents.js~wheelevents#moved",
+    "class/src/event/events/WheelEvents.js~WheelEvents.html#instance-member-moved",
+    "src/event/events/WheelEvents.js~WheelEvents#moved",
     "member"
   ],
   [
@@ -1980,12 +1968,6 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/tick/cycle.js~cycle#boundupdate",
-    "class/src/tick/Cycle.js~Cycle.html#instance-member-boundUpdate",
-    "src/tick/Cycle.js~Cycle#boundUpdate",
-    "member"
-  ],
-  [
     "src/tick/cycle.js~cycle#constructor",
     "class/src/tick/Cycle.js~Cycle.html#instance-constructor-constructor",
     "src/tick/Cycle.js~Cycle#constructor",
@@ -2026,12 +2008,6 @@ window.esdocSearchIndex = [
     "class/src/tick/Cycle.js~Cycle.html#instance-method-update",
     "src/tick/Cycle.js~Cycle#update",
     "method"
-  ],
-  [
-    "src/tick/cycle.js~cycle.update",
-    "class/src/tick/Cycle.js~Cycle.html#static-get-UPDATE",
-    "src/tick/Cycle.js~Cycle.UPDATE",
-    "member"
   ],
   [
     "src/tick/cycle.js~cycle.factory",
@@ -2076,12 +2052,6 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/tick/fps.js~fps.update",
-    "class/src/tick/Fps.js~Fps.html#static-get-UPDATE",
-    "src/tick/Fps.js~Fps.UPDATE",
-    "member"
-  ],
-  [
     "src/tick/polling.js",
     "file/src/tick/Polling.js.html",
     "src/tick/Polling.js",
@@ -2091,12 +2061,6 @@ window.esdocSearchIndex = [
     "src/tick/polling.js~polling#begin",
     "class/src/tick/Polling.js~Polling.html#instance-member-begin",
     "src/tick/Polling.js~Polling#begin",
-    "member"
-  ],
-  [
-    "src/tick/polling.js~polling#boundupdate",
-    "class/src/tick/Polling.js~Polling.html#instance-member-boundUpdate",
-    "src/tick/Polling.js~Polling#boundUpdate",
     "member"
   ],
   [
@@ -2142,6 +2106,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/tick/polling.js~polling#onupdate",
+    "class/src/tick/Polling.js~Polling.html#instance-method-onUpdate",
+    "src/tick/Polling.js~Polling#onUpdate",
+    "method"
+  ],
+  [
     "src/tick/polling.js~polling#start",
     "class/src/tick/Polling.js~Polling.html#instance-method-start",
     "src/tick/Polling.js~Polling#start",
@@ -2166,22 +2136,10 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/tick/polling.js~polling#update",
-    "class/src/tick/Polling.js~Polling.html#instance-method-update",
-    "src/tick/Polling.js~Polling#update",
-    "method"
-  ],
-  [
     "src/tick/polling.js~polling#updateevents",
     "class/src/tick/Polling.js~Polling.html#instance-method-updateEvents",
     "src/tick/Polling.js~Polling#updateEvents",
     "method"
-  ],
-  [
-    "src/tick/polling.js~polling.update",
-    "class/src/tick/Polling.js~Polling.html#static-get-UPDATE",
-    "src/tick/Polling.js~Polling.UPDATE",
-    "member"
   ],
   [
     "src/tick/rate.js",
@@ -2214,6 +2172,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/tick/rate.js~rate#onupdate",
+    "class/src/tick/Rate.js~Rate.html#instance-method-onUpdate",
+    "src/tick/Rate.js~Rate#onUpdate",
+    "method"
+  ],
+  [
     "src/tick/rate.js~rate#rate",
     "class/src/tick/Rate.js~Rate.html#instance-member-rate",
     "src/tick/Rate.js~Rate#rate",
@@ -2238,69 +2202,75 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/tick/rate.js~rate#update",
-    "class/src/tick/Rate.js~Rate.html#instance-method-update",
-    "src/tick/Rate.js~Rate#update",
-    "method"
-  ],
-  [
     "src/tick/rate.js~rate#validate",
     "class/src/tick/Rate.js~Rate.html#instance-method-validate",
     "src/tick/Rate.js~Rate#validate",
     "method"
   ],
   [
-    "src/tick/rate.js~rate.rate_10",
-    "class/src/tick/Rate.js~Rate.html#static-get-RATE_10",
-    "src/tick/Rate.js~Rate.RATE_10",
+    "src/tick/events/cycleevents.js",
+    "file/src/tick/events/CycleEvents.js.html",
+    "src/tick/events/CycleEvents.js",
+    "file"
+  ],
+  [
+    "src/tick/events/cycleevents.js~cycleevents#constructor",
+    "class/src/tick/events/CycleEvents.js~CycleEvents.html#instance-constructor-constructor",
+    "src/tick/events/CycleEvents.js~CycleEvents#constructor",
+    "method"
+  ],
+  [
+    "src/tick/events/cycleevents.js~cycleevents#id",
+    "class/src/tick/events/CycleEvents.js~CycleEvents.html#instance-member-id",
+    "src/tick/events/CycleEvents.js~CycleEvents#id",
     "member"
   ],
   [
-    "src/tick/rate.js~rate.rate_12",
-    "class/src/tick/Rate.js~Rate.html#static-get-RATE_12",
-    "src/tick/Rate.js~Rate.RATE_12",
+    "src/tick/events/fpsevents.js",
+    "file/src/tick/events/FpsEvents.js.html",
+    "src/tick/events/FpsEvents.js",
+    "file"
+  ],
+  [
+    "src/tick/events/fpsevents.js~fpsevents#constructor",
+    "class/src/tick/events/FpsEvents.js~FpsEvents.html#instance-constructor-constructor",
+    "src/tick/events/FpsEvents.js~FpsEvents#constructor",
+    "method"
+  ],
+  [
+    "src/tick/events/fpsevents.js~fpsevents#fps",
+    "class/src/tick/events/FpsEvents.js~FpsEvents.html#instance-member-fps",
+    "src/tick/events/FpsEvents.js~FpsEvents#fps",
     "member"
   ],
   [
-    "src/tick/rate.js~rate.rate_15",
-    "class/src/tick/Rate.js~Rate.html#static-get-RATE_15",
-    "src/tick/Rate.js~Rate.RATE_15",
+    "src/tick/events/pollingevents.js",
+    "file/src/tick/events/PollingEvents.js.html",
+    "src/tick/events/PollingEvents.js",
+    "file"
+  ],
+  [
+    "src/tick/events/pollingevents.js~pollingevents#begin",
+    "class/src/tick/events/PollingEvents.js~PollingEvents.html#instance-member-begin",
+    "src/tick/events/PollingEvents.js~PollingEvents#begin",
     "member"
   ],
   [
-    "src/tick/rate.js~rate.rate_20",
-    "class/src/tick/Rate.js~Rate.html#static-get-RATE_20",
-    "src/tick/Rate.js~Rate.RATE_20",
+    "src/tick/events/pollingevents.js~pollingevents#constructor",
+    "class/src/tick/events/PollingEvents.js~PollingEvents.html#instance-constructor-constructor",
+    "src/tick/events/PollingEvents.js~PollingEvents#constructor",
+    "method"
+  ],
+  [
+    "src/tick/events/pollingevents.js~pollingevents#interval",
+    "class/src/tick/events/PollingEvents.js~PollingEvents.html#instance-member-interval",
+    "src/tick/events/PollingEvents.js~PollingEvents#interval",
     "member"
   ],
   [
-    "src/tick/rate.js~rate.rate_30",
-    "class/src/tick/Rate.js~Rate.html#static-get-RATE_30",
-    "src/tick/Rate.js~Rate.RATE_30",
-    "member"
-  ],
-  [
-    "src/tick/rate.js~rate.rate_5",
-    "class/src/tick/Rate.js~Rate.html#static-get-RATE_5",
-    "src/tick/Rate.js~Rate.RATE_5",
-    "member"
-  ],
-  [
-    "src/tick/rate.js~rate.rate_6",
-    "class/src/tick/Rate.js~Rate.html#static-get-RATE_6",
-    "src/tick/Rate.js~Rate.RATE_6",
-    "member"
-  ],
-  [
-    "src/tick/rate.js~rate.rate_60",
-    "class/src/tick/Rate.js~Rate.html#static-get-RATE_60",
-    "src/tick/Rate.js~Rate.RATE_60",
-    "member"
-  ],
-  [
-    "src/tick/rate.js~rate.update",
-    "class/src/tick/Rate.js~Rate.html#static-get-UPDATE",
-    "src/tick/Rate.js~Rate.UPDATE",
+    "src/tick/events/pollingevents.js~pollingevents#present",
+    "class/src/tick/events/PollingEvents.js~PollingEvents.html#instance-member-present",
+    "src/tick/events/PollingEvents.js~PollingEvents#present",
     "member"
   ],
   [

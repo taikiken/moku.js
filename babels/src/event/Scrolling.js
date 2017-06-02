@@ -14,28 +14,46 @@
 // event
 import Scroll from './Scroll';
 import EventDispatcher from './EventDispatcher';
-import ScrollEvents from './ScrollEvents';
+import ScrollEvents from './events/ScrollEvents';
 
 // tick
 import Rate from '../tick/Rate';
 
 /**
- * Scroll 位置
+ * fps: {@link Rate} new Rate(Rate.RATE_5)` で Scroll 位置を計算します
+ *
+ * @example
+ * // 途中で rate を変更する
+ * const scrolling = new Scrolling();
+ * scrolling
+ *    .start()
+ *    .rate.setRate(Rate.RATE_12);
  * */
 export default class Scrolling extends EventDispatcher {
+  // ---------------------------------------------------
+  //  CONSTANT / EVENT
+  // ---------------------------------------------------
+  /**
+   * fps: {@link Rate} で発生するイベント - scrollingScroll
+   * @event SCROLL
+   */
+  static UPDATE = 'scrollingUpdate';
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * @param {Rate} [rate=new Rate(Rate.Rate_5)] Rate instance, scroll 監視 fps を設定します
    */
   constructor(rate = new Rate(Rate.RATE_5)) {
     super();
     // @type {function}
-    // const boundScroll = this.scroll.bind(this);
+    // const onUpdate = this.scroll.bind(this);
     /**
-     * bound scroll, Rate.UPDATE event handler
+     * bound onUpdate, Rate.UPDATE event handler
      * @type {function}
      */
-    this.boundScroll = this.scroll.bind(this);
-    // this.boundScroll = boundScroll;
+    this.onUpdate = this.onUpdate.bind(this);
+    // this.onUpdate = onUpdate;
     // @type {ScrollEvents}
     // const events = new ScrollEvents(Scrolling.UPDATE, this, this);
     /**
@@ -65,15 +83,15 @@ export default class Scrolling extends EventDispatcher {
   // ----------------------------------------
   // EVENT
   // ----------------------------------------
-  /**
-   * fps で発生するイベントを取得します
-   * @event SCROLL
-   * @returns {string} event, scrollingScroll を返します
-   * @default scrollingScroll
-   */
-  static get UPDATE() {
-    return 'scrollingUpdate';
-  }
+  // /**
+  //  * fps で発生するイベントを取得します
+  //  * @event SCROLL
+  //  * @returns {string} event, scrollingScroll を返します
+  //  * @default scrollingScroll
+  //  */
+  // static get UPDATE() {
+  //   return 'scrollingUpdate';
+  // }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
@@ -89,7 +107,7 @@ export default class Scrolling extends EventDispatcher {
     this.started = true;
     // loop start
     const rate = this.rate;
-    rate.on(Rate.UPDATE, this.boundScroll);
+    rate.on(Rate.UPDATE, this.onUpdate);
     rate.start();
     return this;
   }
@@ -102,7 +120,7 @@ export default class Scrolling extends EventDispatcher {
       return this;
     }
     this.started = false;
-    this.rate.off(Rate.UPDATE, this.boundScroll);
+    this.rate.off(Rate.UPDATE, this.onUpdate);
     return this;
   }
   /**
@@ -121,10 +139,9 @@ export default class Scrolling extends EventDispatcher {
    * - wide {boolean} - width が 768 以上の時に true
    * - changed {boolean} - scroll top が前回と変わっていたら true
    *
-   * @param {?Event|?Events} event window scroll event, nullable
-   * @returns {void}
+   * @param {?Events} event {@link Rate.UPDATE} Events instance
    */
-  scroll(event) {
+  onUpdate(event) {
     // @type {number} - scroll top
     const y = Scroll.y();
     // @type {number} - window height
@@ -163,9 +180,8 @@ export default class Scrolling extends EventDispatcher {
   }
   /**
    * 強制的に Scrolling.SCROLL event を発火させます
-   * @returns {void}
    */
   fire() {
-    this.scroll(null);
+    this.onUpdate(null);
   }
 }

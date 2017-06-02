@@ -10,10 +10,10 @@
  *
  */
 
-import Events from './Events';
+import Events from '../Events';
 
 /**
- * Scroll events 管理クラス
+ * {@link Scroll} Events
  */
 export default class ScrollEvents extends Events {
   // ---------------------------------------------------
