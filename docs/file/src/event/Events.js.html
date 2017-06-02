@@ -164,10 +164,11 @@ export default class Events {
   // ----------------------------------------
   /**
    * &#x8907;&#x88FD;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;
-   * @returns {Events} &#x8907;&#x88FD;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @returns {Events|*} &#x8907;&#x88FD;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   clone() {
-    return new Events(this.type, this.currentTarget, this.target);
+    // return new Events(this.type, this.currentTarget, this.target);
+    return Object.assign({}, this);
   }
 }
 </code></pre>

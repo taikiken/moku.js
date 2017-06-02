@@ -2270,7 +2270,7 @@
     "access": null,
     "description": null,
     "lineNumber": 1,
-    "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/12 - 19:07\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n/**\n * custom Event のリスナー関数引数に送られる Event Object\n *\n * EventDispatcher.dispatch する時の引数として使用します\n *\n * 3つのプロパティは必須項目です、イベントにあわせプロパティを追加します\n *\n * - type: string, イベント種類\n * - target: *, イベント発生インスタンス\n * - currentTarget: *, current イベント発生インスタンス\n */\nexport default class Events {\n  // ----------------------------------------\n  // CONSTRUCTOR\n  // ----------------------------------------\n  /**\n   * custom Event Object\n   * @param {string} type イベント種類\n   * @param {*} [currentTarget=this] current イベント発生インスタンス\n   * @param {*} [target=this] イベント発生インスタンス\n   * */\n  constructor(type, currentTarget = this, target = this) {\n    /**\n     * イベント種類\n     * @type {string}\n     */\n    this.type = type;\n    /**\n     * target instance\n     * @type {*}\n     */\n    this.target = target;\n    /**\n     * currentTarget instance\n     * @type {*}\n     */\n    this.currentTarget = currentTarget;\n  }\n  // ----------------------------------------\n  // METHOD\n  // ----------------------------------------\n  /**\n   * 複製を作成します\n   * @returns {Events} 複製を返します\n   */\n  clone() {\n    return new Events(this.type, this.currentTarget, this.target);\n  }\n}\n"
+    "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/12 - 19:07\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n/**\n * custom Event のリスナー関数引数に送られる Event Object\n *\n * EventDispatcher.dispatch する時の引数として使用します\n *\n * 3つのプロパティは必須項目です、イベントにあわせプロパティを追加します\n *\n * - type: string, イベント種類\n * - target: *, イベント発生インスタンス\n * - currentTarget: *, current イベント発生インスタンス\n */\nexport default class Events {\n  // ----------------------------------------\n  // CONSTRUCTOR\n  // ----------------------------------------\n  /**\n   * custom Event Object\n   * @param {string} type イベント種類\n   * @param {*} [currentTarget=this] current イベント発生インスタンス\n   * @param {*} [target=this] イベント発生インスタンス\n   * */\n  constructor(type, currentTarget = this, target = this) {\n    /**\n     * イベント種類\n     * @type {string}\n     */\n    this.type = type;\n    /**\n     * target instance\n     * @type {*}\n     */\n    this.target = target;\n    /**\n     * currentTarget instance\n     * @type {*}\n     */\n    this.currentTarget = currentTarget;\n  }\n  // ----------------------------------------\n  // METHOD\n  // ----------------------------------------\n  /**\n   * 複製を作成します\n   * @returns {Events|*} 複製を返します\n   */\n  clone() {\n    // return new Events(this.type, this.currentTarget, this.target);\n    return Object.assign({}, this);\n  }\n}\n"
   },
   {
     "__docId__": 77,
@@ -2411,14 +2411,15 @@
     "unknown": [
       {
         "tagName": "@returns",
-        "tagValue": "{Events} 複製を返します"
+        "tagValue": "{Events|*} 複製を返します"
       }
     ],
     "params": [],
     "return": {
       "nullable": null,
       "types": [
-        "Events"
+        "Events",
+        "*"
       ],
       "spread": false,
       "description": "複製を返します"
