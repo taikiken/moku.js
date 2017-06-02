@@ -12,7 +12,7 @@
 
 // event
 import EventDispatcher from './EventDispatcher';
-import WheelEvents from './WheelEvents';
+import WheelEvents from './events/WheelEvents';
 
 /**
  * new を許可しないための Symbol
@@ -36,6 +36,22 @@ let instance = null;
  * ```
  */
 export default class Wheel extends EventDispatcher {
+  // ----------------------------------------
+  // STATIC METHOD
+  // ----------------------------------------
+  /**
+   * Wheel instance を singleton を保証し作成します
+   * @returns {Wheel} Wheel instance を返します
+   */
+  static factory() {
+    if (instance === null) {
+      instance = new Wheel(singletonSymbol);
+    }
+    return instance;
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * singleton です
    * @param {Symbol} checkSymbol singleton を保証するための private instance
@@ -46,25 +62,22 @@ export default class Wheel extends EventDispatcher {
     if (checkSymbol !== singletonSymbol) {
       throw new Error('don\'t use new, instead use static factory method.');
     }
-
-    super();
-
     // instance 作成済みかをチェックし instance が null の時 this を設定します
     if (instance !== null) {
       return instance;
     }
-
+    super();
     // onetime setting
-    instance = this;
+    // instance = this;
 
     // event handler
-    // const boundWheel = this.mouseWheel.bind(this);
+    // const onMouseWheel = this.onMouseWheel.bind(this);
     /**
-     * bound mouseWheel
+     * bound onMouseWheel
      * @type {function}
      */
-    this.boundWheel = this.mouseWheel.bind(this);
-    // this.boundWheel = () => boundWheel;
+    this.onMouseWheel = this.onMouseWheel.bind(this);
+    // this.onMouseWheel = () => onMouseWheel;
     /**
      * 閾値, wheel 移動量が閾値を超えたときにイベントを発生させます
      * @type {number}
@@ -81,18 +94,21 @@ export default class Wheel extends EventDispatcher {
      * @type {boolean}
      */
     this.started = false;
-    const events = {
-      up: new WheelEvents(Wheel.UP, this),
-      down: new WheelEvents(Wheel.DOWN, this),
-    };
+    // const events = {
+    //   up: new WheelEvents(Wheel.UP, this),
+    //   down: new WheelEvents(Wheel.DOWN, this),
+    // };
     /**
      * UP / DOWN Events instance
      * @returns {{up: WheelEvents, down: WheelEvents}} UP / DOWN Events instance
      */
-    this.events = () => events;
+    this.events = {
+      up: new WheelEvents(Wheel.UP, this),
+      down: new WheelEvents(Wheel.DOWN, this),
+    };
 
     // 設定済み instance を返します
-    return instance;
+    return this;
   }
   // ----------------------------------------
   // EVENT
@@ -128,7 +144,7 @@ export default class Wheel extends EventDispatcher {
     }
     this.started = true;
     // this.unwatch();
-    window.addEventListener('wheel', this.boundWheel, false);
+    window.addEventListener('wheel', this.onMouseWheel, false);
     return this;
   }
   /**
@@ -140,7 +156,7 @@ export default class Wheel extends EventDispatcher {
       return this;
     }
     this.started = false;
-    window.removeEventListener('wheel', this.boundWheel);
+    window.removeEventListener('wheel', this.onMouseWheel);
     return this;
   }
   /**
@@ -151,7 +167,7 @@ export default class Wheel extends EventDispatcher {
    * @param {WheelEvent} event window wheel event
    * @returns {number} 前回移動量に delta 値 を加算した値を返します
    */
-  mouseWheel(event) {
+  onMouseWheel(event) {
     const wheelDelta = event.deltaY;
     return this.moving(wheelDelta);
   }
@@ -199,7 +215,7 @@ export default class Wheel extends EventDispatcher {
    */
   up(moved) {
     // @type {Events}
-    const events = this.events().up;
+    const events = this.events.up;
     events.moved = moved;
     this.dispatch(events);
 
@@ -212,23 +228,10 @@ export default class Wheel extends EventDispatcher {
    */
   down(moved) {
     // @type {Events}
-    const events = this.events().down;
+    const events = this.events.down;
     events.moved = moved;
     this.dispatch(events);
 
     return moved;
-  }
-  // ----------------------------------------
-  // STATIC METHOD
-  // ----------------------------------------
-  /**
-   * Wheel instance を singleton を保証し作成します
-   * @returns {Wheel} Wheel instance を返します
-   */
-  static factory() {
-    if (instance !== null) {
-      return instance;
-    }
-    return new Wheel(singletonSymbol);
   }
 }

@@ -45,88 +45,134 @@ export default class Rate extends Polling {
   // CONST
   // ----------------------------------------
   /**
-   * fps 60 基準値を取得します
-   * @const RATE_60
-   * @returns {number} fps 60 基準値を返します
-   * @default 1
+   * fps 60 基準値
+   * @type {number}
    */
-  static get RATE_60() {
-    return 1;
-  }  /**
-   * fps 30 基準値を取得します
-   * @const RATE_30
-   * @returns {number} fps 30 基準値を返します
-   * @default 2
-   */
-  static get RATE_30() {
-    return 2;
-  }
+  static RATE_60 = 1;
   /**
-   * fps 20 基準値を取得します
-   * @const RATE_20
-   * @returns {number} fps 20 基準値を返します
-   * @default 3
+   * fps 30 基準値
+   * @type {number}
    */
-  static get RATE_20() {
-    return 3;
-  }
+  static RATE_30 = 2;
   /**
-   * fps 15 基準値を取得します
-   * @const RATE_15
-   * @returns {number} fps 15 基準値を返します
-   * @default 4
+   * fps 20 基準値
+   * @type {number}
    */
-  static get RATE_15() {
-    return 4;
-  }
+  static RATE_20 = 3;
   /**
-   * fps 12 基準値を取得します
-   * @const RATE_12
-   * @returns {number} fps 12 基準値を返します
-   * @default 5
+   * fps 15 基準値
+   * @type {number}
    */
-  static get RATE_12() {
-    return 5;
-  }
+  static RATE_15 = 4;
   /**
-   * fps 10 基準値を取得します
-   * @const RATE_10
-   * @returns {number} fps 10 基準値を返します
-   * @default 6
+   * fps 12 基準値
+   * @type {number}
    */
-  static get RATE_10() {
-    return 6;
-  }
+  static RATE_12 = 5;
   /**
-   * fps 6 基準値を取得します
-   * @const RATE_6
-   * @returns {number} fps 6 基準値を返します
-   * @default 10
+   * fps 10 基準値
+   * @type {number}
    */
-  static get RATE_6() {
-    return 10;
-  }
+  static RATE_10 = 6;
   /**
-   * fps 5 基準値を取得します
-   * @const RATE_5
-   * @returns {number} fps 6 基準値を返します
-   * @default 12
+   * fps 6 基準値
+   * @type {number}
    */
-  static get RATE_5() {
-    return 12;
-  }
+  static RATE_6 = 10;
+  /**
+   * fps 5 基準値
+   * @type {number}
+   */
+  static RATE_5 = 12;
+  // /**
+  //  * fps 60 基準値を取得します
+  //  * @const RATE_60
+  //  * @returns {number} fps 60 基準値を返します
+  //  * @default 1
+  //  */
+  // static get RATE_60() {
+  //   return 1;
+  // }  /**
+  //  * fps 30 基準値を取得します
+  //  * @const RATE_30
+  //  * @returns {number} fps 30 基準値を返します
+  //  * @default 2
+  //  */
+  // static get RATE_30() {
+  //   return 2;
+  // }
+  // /**
+  //  * fps 20 基準値を取得します
+  //  * @const RATE_20
+  //  * @returns {number} fps 20 基準値を返します
+  //  * @default 3
+  //  */
+  // static get RATE_20() {
+  //   return 3;
+  // }
+  // /**
+  //  * fps 15 基準値を取得します
+  //  * @const RATE_15
+  //  * @returns {number} fps 15 基準値を返します
+  //  * @default 4
+  //  */
+  // static get RATE_15() {
+  //   return 4;
+  // }
+  // /**
+  //  * fps 12 基準値を取得します
+  //  * @const RATE_12
+  //  * @returns {number} fps 12 基準値を返します
+  //  * @default 5
+  //  */
+  // static get RATE_12() {
+  //   return 5;
+  // }
+  // /**
+  //  * fps 10 基準値を取得します
+  //  * @const RATE_10
+  //  * @returns {number} fps 10 基準値を返します
+  //  * @default 6
+  //  */
+  // static get RATE_10() {
+  //   return 6;
+  // }
+  // /**
+  //  * fps 6 基準値を取得します
+  //  * @const RATE_6
+  //  * @returns {number} fps 6 基準値を返します
+  //  * @default 10
+  //  */
+  // static get RATE_6() {
+  //   return 10;
+  // }
+  // /**
+  //  * fps 5 基準値を取得します
+  //  * @const RATE_5
+  //  * @returns {number} fps 6 基準値を返します
+  //  * @default 12
+  //  */
+  // static get RATE_5() {
+  //   return 12;
+  // }
   // ----------------------------------------
   // EVENT
   // ----------------------------------------
   /**
-   * フレームレート毎に発生するイベント type を取得します
+   * フレームレート毎に発生するイベント - rateUpdate
    * @event UPDATE
-   * @returns {string} event, rateUpdate を返します
-   * @default rateUpdate
+   * @type {string}
    */
-  static get UPDATE() {
-    return 'rateUpdate';
-  }
+  static UPDATE = 'rateUpdate';
+  // /**
+  //  * フレームレート毎に発生するイベント type を取得します
+  //  * @event UPDATE
+  //  * @returns {string} event, rateUpdate を返します
+  //  * @default rateUpdate
+  //  */
+  // static get UPDATE() {
+  //   return 'rateUpdate';
+  // }
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
@@ -245,10 +291,12 @@ export default class Rate extends Polling {
     return true;
   }
   /**
-   * loop(requestAnimationFrame) します
+   * {@link Polling}.UPDATE event handler
+   *
+   * count property を `+1` 加算後設定 rate で割り算し余りが `0` の時にイベント Rate.UPDATE を発生させます
    * @returns {boolean} Rate.UPDATE event が発生すると true を返します
    */
-  update() {
+  onUpdate() {
     // 余りが 0 の時にイベントを発火します
     this.count += 1;
     const reminder = this.count % this.rate;

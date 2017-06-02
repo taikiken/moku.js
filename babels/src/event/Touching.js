@@ -14,7 +14,7 @@
 
 // event
 import EventDispatcher from './EventDispatcher';
-import TouchingEvents from './TouchingEvents';
+import TouchingEvents from './events/TouchingEvents';
 
 // util
 import Vectors from '../util/Vectors';

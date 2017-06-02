@@ -1,13 +1,8 @@
 {
   "coverage": "100%",
-  "expectCount": 375,
-  "actualCount": 375,
+  "expectCount": 366,
+  "actualCount": 366,
   "files": {
-    "src/event/Rising.js": {
-      "expectCount": 11,
-      "actualCount": 11,
-      "undocumentLines": []
-    },
     "src/net/Ajax.js": {
       "expectCount": 11,
       "actualCount": 11,
@@ -18,14 +13,9 @@
       "actualCount": 7,
       "undocumentLines": []
     },
-    "src/event/Touching.js": {
-      "expectCount": 27,
-      "actualCount": 27,
-      "undocumentLines": []
-    },
-    "src/css/Can.js": {
-      "expectCount": 8,
-      "actualCount": 8,
+    "src/device/Can.js": {
+      "expectCount": 10,
+      "actualCount": 10,
       "undocumentLines": []
     },
     "src/dom/Classes.js": {
@@ -39,13 +29,18 @@
       "undocumentLines": []
     },
     "src/tick/Cycle.js": {
-      "expectCount": 13,
-      "actualCount": 13,
+      "expectCount": 11,
+      "actualCount": 11,
+      "undocumentLines": []
+    },
+    "src/tick/events/CycleEvents.js": {
+      "expectCount": 3,
+      "actualCount": 3,
       "undocumentLines": []
     },
     "src/event/Wheel.js": {
-      "expectCount": 18,
-      "actualCount": 18,
+      "expectCount": 17,
+      "actualCount": 17,
       "undocumentLines": []
     },
     "src/dom/Elements.js": {
@@ -64,8 +59,13 @@
       "undocumentLines": []
     },
     "src/tick/Fps.js": {
-      "expectCount": 7,
-      "actualCount": 7,
+      "expectCount": 6,
+      "actualCount": 6,
+      "undocumentLines": []
+    },
+    "src/tick/events/FpsEvents.js": {
+      "expectCount": 3,
+      "actualCount": 3,
       "undocumentLines": []
     },
     "src/util/Freeze.js": {
@@ -99,8 +99,13 @@
       "undocumentLines": []
     },
     "src/tick/Polling.js": {
-      "expectCount": 17,
-      "actualCount": 17,
+      "expectCount": 15,
+      "actualCount": 15,
+      "undocumentLines": []
+    },
+    "src/tick/events/PollingEvents.js": {
+      "expectCount": 5,
+      "actualCount": 5,
       "undocumentLines": []
     },
     "src/net/Queries.js": {
@@ -109,23 +114,33 @@
       "undocumentLines": []
     },
     "src/tick/Rate.js": {
-      "expectCount": 20,
-      "actualCount": 20,
+      "expectCount": 11,
+      "actualCount": 11,
+      "undocumentLines": []
+    },
+    "src/event/Rising.js": {
+      "expectCount": 9,
+      "actualCount": 9,
+      "undocumentLines": []
+    },
+    "src/event/events/RisingEvents.js": {
+      "expectCount": 5,
+      "actualCount": 5,
       "undocumentLines": []
     },
     "src/event/Scroll.js": {
-      "expectCount": 16,
-      "actualCount": 16,
+      "expectCount": 15,
+      "actualCount": 15,
       "undocumentLines": []
     },
-    "src/event/ScrollEvents.js": {
+    "src/event/events/ScrollEvents.js": {
       "expectCount": 10,
       "actualCount": 10,
       "undocumentLines": []
     },
     "src/event/Scrolling.js": {
-      "expectCount": 12,
-      "actualCount": 12,
+      "expectCount": 10,
+      "actualCount": 10,
       "undocumentLines": []
     },
     "src/event/ScrollingSingle.js": {
@@ -148,7 +163,12 @@
       "actualCount": 12,
       "undocumentLines": []
     },
-    "src/event/TouchingEvents.js": {
+    "src/event/Touching.js": {
+      "expectCount": 20,
+      "actualCount": 20,
+      "undocumentLines": []
+    },
+    "src/event/events/TouchingEvents.js": {
       "expectCount": 6,
       "actualCount": 6,
       "undocumentLines": []
@@ -163,7 +183,7 @@
       "actualCount": 24,
       "undocumentLines": []
     },
-    "src/event/WheelEvents.js": {
+    "src/event/events/WheelEvents.js": {
       "expectCount": 3,
       "actualCount": 3,
       "undocumentLines": []

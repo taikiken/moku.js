@@ -1,7 +1,7 @@
 /**
- * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * Copyright (c) 2011-2017 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/11/20 - 12:11
+ * @date 2017/06/02 - 15:02
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -10,12 +10,15 @@
  *
  */
 
-import Events from './Events';
+import Events from '../Events';
 
 /**
- * Wheel Events, mouse wheel で発生するイベントを管理します
+ * {@link Rising} Events
  */
-export default class WheelEvents extends Events {
+export default class RisingEvents extends Events {
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * custom Event Object
    * @param {string} type イベント種類
@@ -24,10 +27,21 @@ export default class WheelEvents extends Events {
    * */
   constructor(type, currentTarget, target = undefined) {
     super(type, currentTarget, target);
+    // ---
     /**
-     * 移動距離(px)
-     * @type {number}
+     * 衝突判定, true: 衝突
+     * @type {boolean}
      */
-    this.moved = 0;
+    this.hit = false;
+    /**
+     * original event
+     * @type {?Event|*}
+     */
+    this.original = null;
+    /**
+     * ClientRect
+     * @type {?ClientRect}
+     */
+    this.offset = null;
   }
 }

@@ -12,7 +12,7 @@
 
 // event
 import EventDispatcher from './EventDispatcher';
-import ScrollEvents from './ScrollEvents';
+import ScrollEvents from './events/ScrollEvents';
 
 // util
 import Freeze from '../util/Freeze';
@@ -39,6 +39,51 @@ let instance = null;
  * ```
  */
 export default class Scroll extends EventDispatcher {
+  // ----------------------------------------
+  // STATIC METHOD
+  // ----------------------------------------
+  /**
+   * y 位置に scroll top を即座に移動させます
+   * @param {number} [y=0] scroll top 目標値
+   * @param {number} [delay=0] time out 遅延 ms
+   * @returns {number} time out id
+   */
+  static jump(y = 0, delay = 0) {
+    return setTimeout(() => { window.scrollTo(0, y); }, delay);
+  }
+  /**
+   * {@link Freeze}.freeze を実行し scroll 操作を一定期間不能にします
+   * @returns {number} time out ID
+   */
+  static freeze() {
+    return Freeze.freeze();
+  }
+  /**
+   * scroll top 位置
+   * @returns {number} scroll top 位置を返します
+   * @see https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
+   */
+  static y() {
+    return (typeof window.pageYOffset !== 'undefined') ?
+      window.pageYOffset :
+      (document.documentElement || document.body.parentNode || document.body).scrollTop;
+  }
+  // ----------------------------------------
+  /**
+   * Scroll instance を singleton を保証し作成します
+   * @returns {Scroll} Scroll instance を返します
+   */
+  static factory() {
+    if (instance === null) {
+      instance = new Scroll(singletonSymbol);
+    }
+    return instance;
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
   /**
    * singleton です
    * @param {Symbol} checkSymbol singleton を保証するための private instance
@@ -55,12 +100,12 @@ export default class Scroll extends EventDispatcher {
     }
     // onetime setting
     super();
-    instance = this;
+    // instance = this;
 
     // event handler
     // const boundScroll = this.scroll.bind(this);
     /**
-     * bound scroll, window.onscroll event handler
+     * bound onScroll, window.onscroll event handler
      * @type {function}
      */
     // this.boundScroll = this.scroll.bind(this);
@@ -88,7 +133,7 @@ export default class Scroll extends EventDispatcher {
     this.started = false;
 
     // 設定済み instance を返します
-    return instance;
+    return this;
   }
   // ----------------------------------------
   // EVENT
@@ -161,46 +206,5 @@ export default class Scroll extends EventDispatcher {
     // event fire
     this.dispatch(events);
     this.previous = y;
-  }
-  // ----------------------------------------
-  // STATIC METHOD
-  // ----------------------------------------
-  /**
-   * y 位置に scroll top を即座に移動させます
-   * @param {number} [y=0] scroll top 目標値
-   * @param {number} [delay=0] time out 遅延 ms
-   * @returns {number} time out id
-   */
-  static jump(y = 0, delay = 0) {
-    return setTimeout(() => { window.scrollTo(0, y); }, delay);
-  }
-  /**
-   * {@link Freeze}.freeze を実行し scroll 操作を一定期間不能にします
-   * @returns {number} time out ID
-   */
-  static freeze() {
-    return Freeze.freeze();
-  }
-  /**
-   * scroll top 位置
-   * @returns {number} scroll top 位置を返します
-   * @see https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY
-   * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
-   */
-  static y() {
-    return (typeof window.pageYOffset !== 'undefined') ?
-      window.pageYOffset :
-      (document.documentElement || document.body.parentNode || document.body).scrollTop;
-  }
-  // ----------------------------------------
-  /**
-   * Scroll instance を singleton を保証し作成します
-   * @returns {Scroll} Scroll instance を返します
-   */
-  static factory() {
-    if (instance !== null) {
-      return instance;
-    }
-    return new Scroll(singletonSymbol);
   }
 }
