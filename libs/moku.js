@@ -7239,7 +7239,7 @@ exports.default = WheelEvents;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.3.2
- * 2017-6-1 20:27:47
+ * 2017-6-2 14:03:31
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -7343,10 +7343,6 @@ var _Iro = __webpack_require__(25);
 
 var _Iro2 = _interopRequireDefault(_Iro);
 
-var _Can = __webpack_require__(8);
-
-var _Can2 = _interopRequireDefault(_Can);
-
 var _Patterns = __webpack_require__(6);
 
 var _Patterns2 = _interopRequireDefault(_Patterns);
@@ -7354,6 +7350,10 @@ var _Patterns2 = _interopRequireDefault(_Patterns);
 var _Style = __webpack_require__(7);
 
 var _Style2 = _interopRequireDefault(_Style);
+
+var _Can = __webpack_require__(8);
+
+var _Can2 = _interopRequireDefault(_Can);
 
 var _Bounding = __webpack_require__(9);
 
@@ -7371,6 +7371,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // promise
 // Promise: To add to window
+
+
+// device
 
 
 // css
@@ -7412,7 +7415,7 @@ MOKU.version = function () {
  * @returns {string}  build 日時を返します
  */
 MOKU.build = function () {
-  return '2017-6-1 20:27:47';
+  return '2017-6-2 14:03:31';
 };
 /**
  * MOKU.event
@@ -7476,6 +7479,10 @@ MOKU.dom = {
   Bounding: _Bounding2.default,
   Classes: _Classes2.default,
   Elements: _Elements2.default
+};
+
+MOKU.device = {
+  Can: _Can2.default
 };
 
 // export

@@ -50,9 +50,11 @@ import Vectors from './util/Vectors';
 import Iro from './util/Iro';
 
 // css
-import Can from './device/Can';
 import Patterns from './css/Patterns';
 import Style from './css/Style';
+
+// device
+import Can from './device/Can';
 
 // dom
 import Bounding from './dom/Bounding';
@@ -144,6 +146,10 @@ MOKU.dom = {
   Bounding,
   Classes,
   Elements,
+};
+
+MOKU.device = {
+  Can,
 };
 
 // export
