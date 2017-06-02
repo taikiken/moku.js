@@ -74,11 +74,11 @@
   //  EventDispatcher.listeners
   describe('#EventDispatcher.listeners', function() {
     it("dispatcher.listeners have abc property", function() {
-      expect(dispatcher.listeners()).to.have.property('abc');
+      expect(dispatcher.listeners).to.have.property('abc');
     });
 
     it("dispatcher.listeners have abc property length 2", function() {
-      expect(dispatcher.listeners().abc.length).to.eql(2);
+      expect(dispatcher.listeners.abc.length).to.eql(2);
     });
 
   });
@@ -86,7 +86,7 @@
   //  EventDispatcher.clean
   describe('#EventDispatcher.clean', function() {
     it("dispatcher.clean('abc', dispatcher.listeners.abc) is false", function() {
-      expect(dispatcher.clean('abc', dispatcher.listeners().abc)).to.eql(false);
+      expect(dispatcher.clean('abc', dispatcher.listeners.abc)).to.eql(false);
     });
   });
 
@@ -110,7 +110,7 @@
   //  EventDispatcher.clean
   describe('#EventDispatcher.clean', function() {
     it("dispatcher.clean('abc', dispatcher.listeners.abc) is true", function() {
-      expect(dispatcher.clean('abc', dispatcher.listeners().abc)).to.eql(true);
+      expect(dispatcher.clean('abc', dispatcher.listeners.abc)).to.eql(true);
     });
   });
 
