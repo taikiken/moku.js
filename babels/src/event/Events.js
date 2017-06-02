@@ -53,9 +53,10 @@ export default class Events {
   // ----------------------------------------
   /**
    * 複製を作成します
-   * @returns {Events} 複製を返します
+   * @returns {Events|*} 複製を返します
    */
   clone() {
-    return new Events(this.type, this.currentTarget, this.target);
+    // return new Events(this.type, this.currentTarget, this.target);
+    return Object.assign({}, this);
   }
 }

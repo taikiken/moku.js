@@ -481,14 +481,15 @@ var Events = function () {
   // ----------------------------------------
   /**
    * 複製を作成します
-   * @returns {Events} 複製を返します
+   * @returns {Events|*} 複製を返します
    */
 
 
   _createClass(Events, [{
     key: "clone",
     value: function clone() {
-      return new Events(this.type, this.currentTarget, this.target);
+      // return new Events(this.type, this.currentTarget, this.target);
+      return Object.assign({}, this);
     }
   }]);
 
@@ -7522,7 +7523,7 @@ exports.default = WheelEvents;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.3.3
- * 2017-6-2 16:51:22
+ * 2017-6-2 17:06:25
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -7698,7 +7699,7 @@ MOKU.version = function () {
  * @returns {string}  build 日時を返します
  */
 MOKU.build = function () {
-  return '2017-6-2 16:51:22';
+  return '2017-6-2 17:06:25';
 };
 /**
  * MOKU.event
