@@ -59,10 +59,10 @@ export default class Ajax {
   // ----------------------------------------
   /**
    * request 可能 / 不可能 flag を true に設定します
-   * @param {Function} resolve Promise success callback
-   * @param {Function} reject Promise fail callback
+   * @param {?function} [resolve=null] Promise success callback
+   * @param {f?unction} [reject=null] Promise fail callback
    */
-  constructor(resolve, reject) {
+  constructor(resolve = null, reject = null) {
     /**
      * request 可能 / 不可能 flag, true: 実行可能
      * @type {boolean}
@@ -78,6 +78,14 @@ export default class Ajax {
      * @type {Function}
      */
     this.reject = reject;
+    /**
+     * `Request` constructor に渡す option
+     * - method: GET|POST|PUT|DELETE...
+     * - cache: no-cache
+     * - credentials: same-origin
+     * @type {{method: ?string, cache: string, credentials: string}}
+     * @see https://developer.mozilla.org/ja/docs/Web/API/Request/Request
+     */
     this.props = {
       method: null,
       cache: 'no-cache',
@@ -92,7 +100,10 @@ export default class Ajax {
    * <p>Ajax request 開始します</p>
    * <p>request 可能 / 不可能 flag が false の時は実行しません<br>
    * true の時は false にしリクエストを開始します</p>
-   * <p>START, COMPLETE, ERROR イベントを発生させます</p>
+   *
+   * resolve, reject 関数確認後実行します
+   *
+   * Promise instance を
    *
    * @param {string} path Ajax request path
    * @param {string} [method=GET] GET, POST, PUT, DELETE...etc request method
@@ -125,14 +136,18 @@ export default class Ajax {
       // @param {Object} - JSON パース済み Object
       .then((json) => {
         // complete event fire
-        this.resolve(json);
+        if (Type.method(this.resolve)) {
+          this.resolve(json);
+        }
         // flag true
         this.enable();
       })
       // @param {Error} - Ajax something error
       .catch((error) => {
         // error event fire
-        this.reject(error);
+        if (Type.method(this.reject)) {
+          this.reject(error);
+        }
         // flag true
         this.enable();
       });
@@ -163,6 +178,20 @@ export default class Ajax {
    *
    * headers, formData は存在すれば option に追加されます
    *
+   * ```
+   * var myRequest = new Request(input, init);
+   * ```
+   * <blockquote>
+   * リクエストに適用するカスタム設定を含むオプションオブジェクト。設定可能なオプションは：
+   *   method：リクエストメソッド、たとえば GET、POST。
+   *   headers：Headers オブジェクトか ByteString を含む、リクエストに追加するヘッダー。
+   *   body： リクエストに追加するボディー：Blob か BufferSource、FormData、URLSearchParams、USVString オブジェクトが使用できる。リクエストが GET か HEAD メソッドを使用している場合、ボディーを持てないことに注意。
+   *   mode：リクエストで使用するモード。たとえば、cors か no-cors、same-origin。既定値は cors。Chrome では、47 以前は no-cors が既定値であり、 same-origin は 47 から使用できるようになった。
+   *   credentials：リクエストで使用するリクエスト credential：omit か same-origin、include が使用できる。 既定値は omit。Chrome では、47 以前は same-origin が既定値であり、include は 47 から使用できるようになった。
+   *   cache：リクエストで使用する cache モード：default か no-store、reload、no-cache、force-cache、only-if-cached が設定できる。
+   *   redirect：使用するリダイレクトモード：follow か error、manual が使用できる。Chrome では、47 以前は既定値が follow であり、manual は 47 から使用できるようになった。
+   *   referrer：no-referrer か client、URL を指定する USVString。既定値は client。
+   * </blockquote>
    * @param {string|USVString|Request} path Ajax request path
    * @param {string} method GET, POST, PUT, DELETE...etc request method
    * @param {Headers|Object|null} headers Headers option
@@ -171,6 +200,7 @@ export default class Ajax {
    *
    * @see https://developers.google.com/web/updates/2015/03/introduction-to-fetch
    * @see https://developer.mozilla.org/ja/docs/Web/API/Request
+   * @see https://developer.mozilla.org/ja/docs/Web/API/Request/Request
    */
   option(path, method, headers, formData) {
     // request option
