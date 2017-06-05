@@ -60,7 +60,7 @@ export default class Ajax {
   /**
    * request 可能 / 不可能 flag を true に設定します
    * @param {?function} [resolve=null] Promise success callback
-   * @param {f?unction} [reject=null] Promise fail callback
+   * @param {?function} [reject=null] Promise fail callback
    */
   constructor(resolve = null, reject = null) {
     /**
