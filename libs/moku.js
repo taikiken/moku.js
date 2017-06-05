@@ -5025,12 +5025,18 @@ var Request = self.Request;
  */
 
 var Ajax = function () {
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
   /**
    * request 可能 / 不可能 flag を true に設定します
-   * @param {Function} resolve Promise success callback
-   * @param {Function} reject Promise fail callback
+   * @param {?function} [resolve=null] Promise success callback
+   * @param {?function} [reject=null] Promise fail callback
    */
-  function Ajax(resolve, reject) {
+  function Ajax() {
+    var resolve = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+    var reject = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
     _classCallCheck(this, Ajax);
 
     /**
@@ -5048,6 +5054,20 @@ var Ajax = function () {
      * @type {Function}
      */
     this.reject = reject;
+    /**
+     * `Request` constructor に渡す option
+     * - method: GET|POST|PUT|DELETE...
+     * - cache: no-cache
+     * - credentials: same-origin
+     * @type {{method: ?string, cache: string, credentials: string}}
+     * @see https://developer.mozilla.org/ja/docs/Web/API/Request/Request
+     */
+    this.props = {
+      method: null,
+      cache: 'no-cache',
+      // https://developers.google.com/web/updates/2015/03/introduction-to-fetch
+      credentials: 'same-origin'
+    };
   }
   // ----------------------------------------
   // METHOD
@@ -5056,19 +5076,24 @@ var Ajax = function () {
    * <p>Ajax request 開始します</p>
    * <p>request 可能 / 不可能 flag が false の時は実行しません<br>
    * true の時は false にしリクエストを開始します</p>
-   * <p>START, COMPLETE, ERROR イベントを発生させます</p>
+   *
+   * resolve, reject 関数確認後実行します
+   *
+   * Promise instance を
    *
    * @param {string} path Ajax request path
-   * @param {string} method GET, POST, PUT, DELETE...etc request method
+   * @param {string} [method=GET] GET, POST, PUT, DELETE...etc request method
    * @param {?Headers} [headers=null] Headers option, token などを埋め込むのに使用します
    * @param {?FormData} [formData=null] フォームデータを送信するのに使用します
-   * @return {boolean} ajax request を開始したかどうかの真偽値を返します
+   * @return {Promise} ajax request を開始し fetch Promise 返します
    */
 
 
   _createClass(Ajax, [{
     key: 'start',
-    value: function start(path, method) {
+    value: function start(path) {
+      var method = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'GET';
+
       var _this = this;
 
       var headers = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
@@ -5076,18 +5101,17 @@ var Ajax = function () {
 
       // ajax request 開始
       if (!this.can) {
-        // flag が off なので処理しない
-        return false;
+        throw new Error('Ajax request busy: ' + this.can);
       }
 
       // flag off
       this.disable();
 
       // @type {Request} Request instance
-      var request = Ajax.option(path, method, headers, formData);
+      var request = this.option(path, method, headers, formData);
 
       // fetch start
-      fetch(request)
+      return fetch(request)
       // @param {Object} response - Ajax response
       .then(function (response) {
         // may be success
@@ -5099,19 +5123,21 @@ var Ajax = function () {
       // @param {Object} - JSON パース済み Object
       .then(function (json) {
         // complete event fire
-        _this.resolve(json);
+        if (_Type2.default.method(_this.resolve)) {
+          _this.resolve(json);
+        }
         // flag true
         _this.enable();
       })
       // @param {Error} - Ajax something error
       .catch(function (error) {
         // error event fire
-        _this.reject(error);
+        if (_Type2.default.method(_this.reject)) {
+          _this.reject(error);
+        }
         // flag true
         _this.enable();
       });
-
-      return true;
     }
     /**
      * 実行可否 flag を true にします
@@ -5135,9 +5161,6 @@ var Ajax = function () {
       this.can = false;
       return this.can;
     }
-    // ----------------------------------------
-    // STATIC METHOD
-    // ----------------------------------------
     /**
      * <p>fetch API へ送るオプションを作成します</p>
      *
@@ -5148,6 +5171,20 @@ var Ajax = function () {
      *
      * headers, formData は存在すれば option に追加されます
      *
+     * ```
+     * var myRequest = new Request(input, init);
+     * ```
+     * <blockquote>
+     * リクエストに適用するカスタム設定を含むオプションオブジェクト。設定可能なオプションは：
+     *   method：リクエストメソッド、たとえば GET、POST。
+     *   headers：Headers オブジェクトか ByteString を含む、リクエストに追加するヘッダー。
+     *   body： リクエストに追加するボディー：Blob か BufferSource、FormData、URLSearchParams、USVString オブジェクトが使用できる。リクエストが GET か HEAD メソッドを使用している場合、ボディーを持てないことに注意。
+     *   mode：リクエストで使用するモード。たとえば、cors か no-cors、same-origin。既定値は cors。Chrome では、47 以前は no-cors が既定値であり、 same-origin は 47 から使用できるようになった。
+     *   credentials：リクエストで使用するリクエスト credential：omit か same-origin、include が使用できる。 既定値は omit。Chrome では、47 以前は same-origin が既定値であり、include は 47 から使用できるようになった。
+     *   cache：リクエストで使用する cache モード：default か no-store、reload、no-cache、force-cache、only-if-cached が設定できる。
+     *   redirect：使用するリダイレクトモード：follow か error、manual が使用できる。Chrome では、47 以前は既定値が follow であり、manual は 47 から使用できるようになった。
+     *   referrer：no-referrer か client、URL を指定する USVString。既定値は client。
+     * </blockquote>
      * @param {string|USVString|Request} path Ajax request path
      * @param {string} method GET, POST, PUT, DELETE...etc request method
      * @param {Headers|Object|null} headers Headers option
@@ -5156,18 +5193,21 @@ var Ajax = function () {
      *
      * @see https://developers.google.com/web/updates/2015/03/introduction-to-fetch
      * @see https://developer.mozilla.org/ja/docs/Web/API/Request
+     * @see https://developer.mozilla.org/ja/docs/Web/API/Request/Request
      */
 
-  }], [{
+  }, {
     key: 'option',
     value: function option(path, method, headers, formData) {
       // request option
-      var option = Object.create({
-        method: method,
-        cache: 'no-cache',
-        // https://developers.google.com/web/updates/2015/03/introduction-to-fetch
-        credentials: 'same-origin'
-      });
+      var option = Object.assign({}, this.props);
+      // const option = Object.create({
+      //   method,
+      //   cache: 'no-cache',
+      //   // https://developers.google.com/web/updates/2015/03/introduction-to-fetch
+      //   credentials: 'same-origin',
+      // });
+      option.method = method;
 
       // headers option
       if (_Type2.default.exist(headers)) {
@@ -7523,7 +7563,7 @@ exports.default = WheelEvents;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.3.3
- * 2017-6-2 17:06:25
+ * 2017-6-5 20:56:54
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -7699,7 +7739,7 @@ MOKU.version = function () {
  * @returns {string}  build 日時を返します
  */
 MOKU.build = function () {
-  return '2017-6-2 17:06:25';
+  return '2017-6-5 20:56:54';
 };
 /**
  * MOKU.event
