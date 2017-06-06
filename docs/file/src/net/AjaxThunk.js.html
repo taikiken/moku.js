@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../">
-  <title data-ice="title">src/css/Style.js | API Document</title>
+  <title data-ice="title">src/net/AjaxThunk.js | API Document</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -109,11 +109,11 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1 data-ice="title">src/css/Style.js</h1>
+<div class="content" data-ice="content"><h1 data-ice="title">src/net/AjaxThunk.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
- * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * Copyright (c) 2011-2017 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/10/06 - 21:52
+ * @date 2017/06/05 - 21:26
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -122,184 +122,83 @@
  *
  */
 
-// util
-import Type from &apos;../util/Type&apos;;
-import Text from &apos;../util/Text&apos;;
-
-// css
-import Patterns from &apos;./Patterns&apos;;
+import Ajax from &apos;./Ajax&apos;;
 
 /**
- * Element &#x306E; style &#x3092;&#x64CD;&#x4F5C;&#x3057;&#x307E;&#x3059;
+ * fetch API &#x3092;&#x4F7F;&#x7528;&#x3057; Ajax request &#x3092;&#x884C;&#x3044;&#x307E;&#x3059;, ref: {@link Ajax}
+ * @example
+ * const ajax = new Ajax();
+ * // async / await 1
+ * async function request() {
+ *  const json = await thunk.start(&apos;https://jsonplaceholder.typicode.com/posts&apos;);
+ *  const pre = document.getElementById(&apos;pre&apos;);
+ *  pre.innerHTML = JSON.stringify(json);
+ * }
+ * request();
+ * // async / await 2
+ * async function request() {
+ *  return await thunk.start(&apos;https://jsonplaceholder.typicode.com/posts&apos;);
+ * }
+ * request()
+ *  .then(json =&gt; {
+ *    const pre = document.getElementById(&apos;pre&apos;);
+ *    pre.innerHTML = JSON.stringify(json);
+ *  });
+ * @see http://caniuse.com/#feat=fetch
+ * @see https://github.com/github/fetch
+ * @see https://github.com/taylorhakes/promise-polyfill
+ * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch
+ * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API
+ * @see https://developer.mozilla.org/ja/docs/Web/API/Request
+ * @see https://developer.mozilla.org/ja/docs/Web/API/Request/Request
+ * @see https://developer.mozilla.org/ja/docs/Web/API/Headers
+ * @see https://developer.mozilla.org/ja/docs/Web/API/Body
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
+ * @see http://getmesh.io/Blog/Make%20AJAX-Requests%20Great%20Again
+ * @since 0.3.4
  */
-export default class Style {
-  // ----------------------------------------
-  // STATIC METHOD
-  // ----------------------------------------
-  /**
-   * element style &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;,
-   * [getComputedStyle](https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle) &#x3092;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;
-   * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
-   * @param {Object|Window} view Document.defaultView
-   * @param {Element} element &#x64CD;&#x4F5C;&#x5BFE;&#x8C61; Element
-   * @param {string} [property=&apos;&apos;] &#x8ABF;&#x67FB;&#x5BFE;&#x8C61; CSS property name, &#x7701;&#x7565;&#x3059;&#x308B;&#x3068; `CSSStyleDeclaration` &#x5168;&#x30BB;&#x30C3;&#x30C8;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   * @returns {CSSStyleDeclaration|CssStyle|string|undefined} style value &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
-   * @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
-   */
-  static compute(view, element, property = &apos;&apos;) {
-    const style = view.getComputedStyle(element, null);
-    if (Type.exist(property)) {
-      const props = property.replace(/([A-Z])/g, &apos;-$1&apos;).toLowerCase();
-      return style.getPropertyValue(props);
-    }
-    return style;
-  }
-  /**
-   * CSS &#x8A2D;&#x5B9A;&#x5024;&#x306E; short hand &#x3092;&#x30D1;&#x30BF;&#x30FC;&#x30F3; {@link Patterns} &#x304B;&#x3089;&#x63A2;&#x3057;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   * @param {Object|Window} view Document.defaultView
-   * @param {Element} element &#x64CD;&#x4F5C;&#x5BFE;&#x8C61; Element
-   * @param {Array&lt;string&gt;} patterns &#x8ABF;&#x67FB;&#x5BFE;&#x8C61; CSS property name &#x306E;&#x914D;&#x5217;
-   * @returns {CssStyle|string|undefined} style value &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   * @see https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
-   */
-  static shortHand(view, element, patterns) {
-    const top = Style.compute(view, element, patterns[0]);
-    const right = Style.compute(view, element, patterns[1]);
-    const bottom = Style.compute(view, element, patterns[2]);
-    const left = Style.compute(view, element, patterns[3]);
-    if (!top &amp;&amp; !right &amp;&amp; !bottom &amp;&amp; !left) {
-      return undefined;
-    } else if (top === bottom) {
-      // top - bottom: same
-      if (right === left) {
-        // top - bottom: same
-        if (top === right) {
-          // right - left: same - all same
-          return top;
-        }
-        // top-bottom, left-right
-        return `${top} ${right}`;
-      }
-      // separate 4
-      return `${top} ${right} ${bottom} ${left}`;
-    } else if (right === left) {
-      // top - bottom: different, left- right: same
-      return `${top} ${right} ${bottom}`;
-    }
-    // separate 4
-    return `${top} ${right} ${bottom} ${left}`;
-  }
-  // ----------------------------------------
-  // CONSTRUCTOR
-  // ----------------------------------------
-  /**
-   * &#x5F15;&#x6570; element &#x306E;&#x521D;&#x671F; style &#x8A2D;&#x5B9A;&#x3092;&#x4FDD;&#x5B58;&#x3057;&#x5FA9;&#x5143;&#x3067;&#x304D;&#x308B;&#x3088;&#x3046;&#x306B;&#x3057;&#x307E;&#x3059;
-   * @param {?Element} element &#x64CD;&#x4F5C;&#x5BFE;&#x8C61; Element
-   */
-  constructor(element) {
-    /**
-     * &#x64CD;&#x4F5C;&#x5BFE;&#x8C61; Element
-     * @type {Element}
-     */
-    this.element = element;
-    // @type {string} - &#x30AA;&#x30EA;&#x30B8;&#x30CA;&#x30EB;&#x306E; element.style.cssText &#x3092;&#x4FDD;&#x6301;&#x3057;&#x307E;&#x3059;
-    const css = this.current();
-    /**
-     * &#x73FE;&#x5728;&#x306E; inline CSS
-     * @type {string}
-     */
-    this.css = css;
-    /**
-     * &#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x4F5C;&#x6210;&#x6642;&#x306E; inline CSS
-     * @type {string}
-     */
-    this.original = css;
-    // /**
-    //  * &#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x4F5C;&#x6210;&#x6642;&#x306E; inline CSS &#x3092;&#x4E0A;&#x66F8;&#x304D;&#x3057;&#x307E;&#x3059;
-    //  * @param {string} style &#x4E0A;&#x66F8;&#x304D;&#x7528; CSS &#x8A2D;&#x5B9A;
-    //  * @returns {string} &#x4E0A;&#x66F8;&#x304D;&#x3055;&#x308C;&#x305F; CSS
-    //  */
-    // this.update = (style) =&gt; {
-    //   css = style;
-    //   return style;
-    // };
-  }
+export default class AjaxThunk extends Ajax {
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
   /**
-   * &#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x4F5C;&#x6210;&#x6642;&#x306B;&#x4FDD;&#x5B58;&#x3057;&#x305F; inline CSS &#x3092;&#x4E0A;&#x66F8;&#x304D;&#x3057;&#x307E;&#x3059;
-   * @param {string} style &#x4E0A;&#x66F8;&#x304D;&#x7528; CSS &#x8A2D;&#x5B9A;
-   * @returns {string} &#x4E0A;&#x66F8;&#x304D;&#x3055;&#x308C;&#x305F; CSS
+   * &lt;p&gt;Ajax request &#x958B;&#x59CB;&#x3057;&#x307E;&#x3059;&lt;/p&gt;
+   * &lt;p&gt;request &#x53EF;&#x80FD; / &#x4E0D;&#x53EF;&#x80FD; flag &#x304C; false &#x306E;&#x6642;&#x306F;&#x5B9F;&#x884C;&#x3057;&#x307E;&#x305B;&#x3093;&lt;br&gt;
+   * true &#x306E;&#x6642;&#x306F; false &#x306B;&#x3057;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3092;&#x958B;&#x59CB;&#x3057;&#x307E;&#x3059;&lt;/p&gt;
+   *
+   * - resolve, reject &#x95A2;&#x6570;&#x78BA;&#x8A8D;&#x5F8C;&#x5B9F;&#x884C;&#x3057;&#x307E;&#x3059;
+   * - Promise instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * - json / error &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   *
+   * @param {string} path Ajax request path
+   * @param {string} [method=GET] GET, POST, PUT, DELETE...etc request method
+   * @param {?Headers} [headers=null] Headers option, token &#x306A;&#x3069;&#x3092;&#x57CB;&#x3081;&#x8FBC;&#x3080;&#x306E;&#x306B;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;
+   * @param {?FormData} [formData=null] &#x30D5;&#x30A9;&#x30FC;&#x30E0;&#x30C7;&#x30FC;&#x30BF;&#x3092;&#x9001;&#x4FE1;&#x3059;&#x308B;&#x306E;&#x306B;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;
+   * @return {Promise} ajax request &#x3092;&#x958B;&#x59CB;&#x3057; fetch Promise &#x8FD4;&#x3057;&#x307E;&#x3059;
    */
-  update(style) {
-    this.css = style;
-    return style;
-  }
-  /**
-   * style value &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
-   * @param {string} [property=&apos;&apos;] &#x8ABF;&#x67FB;&#x3059;&#x308B; style property name
-   * @return {string} style value &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   */
-  get(property = &apos;&apos;) {
-    const element = this.element;
-    const ownerDocument = element.ownerDocument;
-    const defaultView = ownerDocument.defaultView;
-    let style = Style.compute(defaultView, element, property);
-    // firefox &#x304C; css shorthand &#x306E;&#x53D6;&#x308A;&#x6271;&#x3044;&#x304C;&#x9055;&#x3046;&#x306E;&#x3067;&#x518D;&#x5EA6;&#x30DE;&#x30C3;&#x30C1;&#x30C6;&#x30B9;&#x30C8;&#x3059;&#x308B;
-    if (style === &apos;&apos; &amp;&amp; property &amp;&amp; Patterns.match(property)) {
-      style = Style.shortHand(defaultView, element, Patterns.get(property));
-    }
-    return style;
-  }
-  /**
-   * element &#x3078; css &#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;&#x3001;&#x8A2D;&#x5B9A;&#x6E08;&#x307F; css &#x3092;&#x4E0A;&#x66F8;&#x304D;&#x3057;&#x307E;&#x3059;
-   * @param {string} property &#x8A2D;&#x5B9A;&#x3059;&#x308B; css property name
-   * @param {string} value &#x8A2D;&#x5B9A;&#x3059;&#x308B; css value
-   * @return {boolean} &#x5909;&#x66F4;&#x3055;&#x308C;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   */
-  set(property, value) {
-    // &#x5B58;&#x5728;&#x30C1;&#x30A7;&#x30C3;&#x30AF;
-    const element = this.element;
-    if (!Type.exist(element)) {
-      return false;
-    }
-    // &#x5B58;&#x5728;&#x3059;&#x308B;&#x6642;&#x306E;&#x307F;&#x51E6;&#x7406;&#x3092;&#x884C;&#x3044;&#x307E;&#x3059;
-    const prop = Text.camel(property);
-    element.style[prop] = value;
-
-    return true;
-  }
-  /**
-   * element &#x306E; inline style(style.cssText) &#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
-   * @return {string} style.cssText &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   */
-  current() {
-    const element = this.element;
-    if (Type.exist(element)) {
-      return element.style.cssText;
+  start(path, method = &apos;GET&apos;, headers = null, formData = null) {
+    // ajax request &#x958B;&#x59CB;
+    if (!this.can) {
+      throw new Error(`Ajax request busy: ${this.can}`);
     }
 
-    // this.element &#x4E0D;&#x6B63;&#x306E;&#x6642;&#x306F;&#x7A7A;&#x6587;&#x5B57;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-    return &apos;&apos;;
-  }
-  /**
-   * element &#x306E; style.cssText &#x3092;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x4F5C;&#x6210;&#x6642;&#x70B9;&#x307E;&#x3067;&#x623B;&#x3057;&#x307E;&#x3059;
-   * @return {string} &#x8A2D;&#x5B9A;&#x3057;&#x305F; css &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   */
-  restore() {
-    const css = this.original;
-    this.element.style.cssText = css;
-    return css;
-  }
-  /**
-   * `save` &#x5B9F;&#x884C;&#x6642;&#x306B;&#x8A2D;&#x5B9A;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B; inline style &#x3092; default &#x306B;&#x3057;&#x307E;&#x3059;
-   * @returns {string} &#x8A2D;&#x5B9A;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B; inline style &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   */
-  save() {
-    const style = this.current();
-    return this.update(style);
+    // flag off
+    this.disable();
+
+    // @type {Request} Request instance
+    const request = this.option(path, method, headers, formData);
+
+    // fetch start
+    return fetch(request)
+    // @param {Object} response - Ajax response
+      .then((response) =&gt; {
+        // may be success
+        if (response.status !== 200) {
+          throw new Error(`Ajax status error: (${response.status})`);
+        }
+        return response.json();
+      });
   }
 }
 </code></pre>
