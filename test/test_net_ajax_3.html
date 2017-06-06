@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Mocha</title>
+  <link href="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+</head>
+<body>
+<div id="mocha"></div>
+<pre id="pre" style="white-space: pre-wrap;"></pre>
+<script src="//cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
+<script src="//cdn.rawgit.com/Automattic/expect.js/0.3.1/index.js"></script>
+<script src="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+<script src="http://chaijs.com/chai.js"></script>
+<script src="../libs/moku.js" charset="utf-8"></script>
+
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script>
+  // mochaの機能を呼び出します。ここでは、BDDとTDDを使用します。
+  mocha.setup('bdd');
+  mocha.setup('tdd');
+  var assert = chai.assert;
+  // expectの機能を読み込み
+  var expect = chai.expect;
+  // shouldの機能を読み込み
+  chai.Should();
+</script>
+<script type="text/babel">
+  const net = window.MOKU.net;
+  const Ajax = net.Ajax;
+  const AjaxThunk = net.AjaxThunk;
+  const ajax = new Ajax();
+  const thunk = new AjaxThunk();
+
+  async function request() {
+    const json = await thunk.start('https://jsonplaceholder.typicode.com/posts');
+    console.log('json', json);
+    const pre = document.getElementById('pre');
+    pre.innerHTML = JSON.stringify(json);
+  };
+
+  request();
+</script>
+<script>
+  mocha.checkLeaks();
+  mocha.globals(['jQuery']);
+  mocha.run();
+</script>
+</body>
+</html>

@@ -43,6 +43,39 @@ const Request = self.Request;
  * $ bower install es6-promise
  * ```
  *
+ * thunk friendly - ES2017 async / await するために
+ * - fetch Promise を返すように変更
+ * - resolve / reject argument をオプション
+ * - fetch.then から result / error を return
+ *
+ * [caution] resolve / reject を使用しない場合は {@link AjaxThunk} を使用する方が効率的です
+ * @example
+ * const ajax = new Ajax();
+ * // async / await 1
+ * async function request() {
+ *  const json = await thunk.start('https://jsonplaceholder.typicode.com/posts');
+ *  const pre = document.getElementById('pre');
+ *  pre.innerHTML = JSON.stringify(json);
+ * }
+ * request();
+ * // async / await 2
+ * async function request() {
+ *  return await thunk.start('https://jsonplaceholder.typicode.com/posts');
+ * }
+ * request()
+ *  .then(json => {
+ *    const pre = document.getElementById('pre');
+ *    pre.innerHTML = JSON.stringify(json);
+ *  });
+ * // resolve / reject
+ * const resolve = (json) => {
+ *  const pre = document.getElementById('pre');
+ *  pre.innerHTML = JSON.stringify(json);
+ * };
+ * const reject = (error) => {};
+ * const ajax = new Ajax(resolve, reject);
+ * ajax.start('https://jsonplaceholder.typicode.com/posts');
+ *
  * @see http://caniuse.com/#feat=fetch
  * @see https://github.com/github/fetch
  * @see https://github.com/taylorhakes/promise-polyfill
@@ -52,6 +85,10 @@ const Request = self.Request;
  * @see https://developer.mozilla.org/ja/docs/Web/API/Request/Request
  * @see https://developer.mozilla.org/ja/docs/Web/API/Headers
  * @see https://developer.mozilla.org/ja/docs/Web/API/Body
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
+ * @see http://getmesh.io/Blog/Make%20AJAX-Requests%20Great%20Again
+ * @since 0.3.4 - Thunk friendly
  */
 export default class Ajax {
   // ----------------------------------------
@@ -101,9 +138,10 @@ export default class Ajax {
    * <p>request 可能 / 不可能 flag が false の時は実行しません<br>
    * true の時は false にしリクエストを開始します</p>
    *
-   * resolve, reject 関数確認後実行します
-   *
-   * Promise instance を
+   * from v0.3.4
+   * - resolve, reject 関数確認後実行します
+   * - Promise instance を返します
+   * - json / error を返します
    *
    * @param {string} path Ajax request path
    * @param {string} [method=GET] GET, POST, PUT, DELETE...etc request method
@@ -141,6 +179,7 @@ export default class Ajax {
         }
         // flag true
         this.enable();
+        return json;
       })
       // @param {Error} - Ajax something error
       .catch((error) => {
@@ -150,6 +189,7 @@ export default class Ajax {
         }
         // flag true
         this.enable();
+        return error;
       });
   }
   /**

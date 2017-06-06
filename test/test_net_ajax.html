@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Mocha</title>
+  <link href="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+</head>
+<body>
+<div id="mocha"></div>
+<pre id="pre" style="white-space: pre-wrap;"></pre>
+<script src="//cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
+<script src="//cdn.rawgit.com/Automattic/expect.js/0.3.1/index.js"></script>
+<script src="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+<script src="http://chaijs.com/chai.js"></script>
+<script src="../libs/moku.js" charset="utf-8"></script>
+
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script>
+  // mochaの機能を呼び出します。ここでは、BDDとTDDを使用します。
+  mocha.setup('bdd');
+  mocha.setup('tdd');
+  var assert = chai.assert;
+  // expectの機能を読み込み
+  var expect = chai.expect;
+  // shouldの機能を読み込み
+  chai.Should();
+</script>
+<script type="text/babel">
+  const net = window.MOKU.net;
+  const Ajax = net.Ajax;
+  const AjaxThunk = net.AjaxThunk;
+  const ajax = new Ajax();
+  const thunk = new AjaxThunk();
+
+//  const action = () => {
+//    return ajax.start('https://jsonplaceholder.typicode.com/posts');
+//  };
+//
+//  const request = () => {
+//    let response = await ajax.start('https://jsonplaceholder.typicode.com/posts');
+//    console.log('response', response);
+//    let r2 = await thunk.start('https://jsonplaceholder.typicode.com/posts');
+//    console.log('r2', r2);
+//  };
+//  request();
+  //  Ajax
+//  describe('#Ajax', function() {
+//    it("Ajax.start() is exist", function() {
+//      expect(ajax.start('https://jsonplaceholder.typicode.com/posts')).to.exist;
+//    });
+//  });
+  (async() => {
+    try {
+//      let response = await fetch("http://localhost:8080/api/v1/demo/nodes/bd753cc9b07246e0b53cc9b072f6e070/children", {
+//        method: 'GET',
+//        headers: {
+//          'Accept': 'application/json',
+//          'Content-Type': 'application/json',
+//          'Authorization': 'Basic '+btoa('admin:admin')
+//        }
+//      });
+//      let automobiles = await response.json();
+//      let json = await thunk.start("https://jsonplaceholder.typicode.com/posts");
+      let json = await ajax.start("https://jsonplaceholder.typicode.com/posts");
+      const pre = document.getElementById('pre');
+//      mocha.style.cssText = 'font-family: monospace; white-space: pre;';
+      pre.innerHTML = JSON.stringify(json);
+    } catch (e) {
+      console.log("Something went wrong!", e);
+    }
+
+  })();
+
+</script>
+<script>
+  mocha.checkLeaks();
+  mocha.globals(['jQuery']);
+  mocha.run();
+</script>
+</body>
+</html>
