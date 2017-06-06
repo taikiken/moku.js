@@ -5738,7 +5738,7 @@
     "access": null,
     "description": null,
     "lineNumber": 1,
-    "content": "/*!\n * Copyright (c) inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/06/30 - 17:54\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n * @@version\n * @@buildTime\n */\n// use strict は本来不要でエラーになる\n// 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する\n/* eslint strict: [0, \"global\"] */\n\n'use strict';\n\n// fetch / promise\nimport 'whatwg-fetch';\nimport Promise from 'promise-polyfill';\n\n// event\nimport EventDispatcher from './event/EventDispatcher';\nimport Events from './event/Events';\nimport Rising from './event/Rising';\nimport Scroll from './event/Scroll';\nimport Scrolling from './event/Scrolling';\nimport Touching from './event/Touching';\nimport Wheel from './event/Wheel';\n\n// net\nimport Ajax from './net/Ajax';\nimport Cookie from './net/Cookie';\nimport Queries from './net/Queries';\n\n// tick\nimport Cycle from './tick/Cycle';\nimport Fps from './tick/Fps';\nimport Polling from './tick/Polling';\nimport Rate from './tick/Rate';\n\n// util\nimport Type from './util/Type';\nimport Hit from './util/Hit';\nimport List from './util/List';\nimport Text from './util/Text';\nimport Times from './util/Times';\nimport Vectors from './util/Vectors';\nimport Iro from './util/Iro';\n\n// css\nimport Patterns from './css/Patterns';\nimport Style from './css/Style';\n\n// device\nimport Can from './device/Can';\n\n// dom\nimport Bounding from './dom/Bounding';\nimport Classes from './dom/Classes';\nimport Elements from './dom/Elements';\n\n// promise\n// Promise: To add to window\nif (!window.Promise) {\n  window.Promise = Promise;\n}\n\n/**\n * **MOKU**\n * <p>global Object</p>\n * <p>public な Class はここからアクセス可能です</p>\n * @type {Object}\n */\nconst MOKU = {};\n/**\n * version number を取得します\n * @returns {string} version number を返します\n */\nMOKU.version = () => '@@version';\n/**\n * build 日時を取得します\n * @returns {string}  build 日時を返します\n */\nMOKU.build = () => '@@buildTime';\n/**\n * MOKU.event\n * @type {Object} MOKU.event object を返します\n */\nMOKU.event = {\n  EventDispatcher,\n  Events,\n  Rising,\n  Scroll,\n  Wheel,\n  Scrolling,\n  Touching,\n};\n/**\n * MOKU.net\n * @type {Object} MOKU.net object を返します\n */\nMOKU.net = {\n  Ajax,\n  Cookie,\n  Queries,\n};\n/**\n * MOKU.tick\n * @type {Object} MOKU.tick object を返します\n */\nMOKU.tick = {\n  Cycle,\n  Fps,\n  Polling,\n  Rate,\n};\n/**\n * MOKU.util\n * @type {Object} MOKU.util object を返します\n */\nMOKU.util = {\n  Type,\n  List,\n  Text,\n  Times,\n  Vectors,\n  Hit,\n  Iro,\n};\n/**\n * MOKU.util\n * @type {Object} MOKU.css object を返します\n */\nMOKU.css = {\n  Patterns,\n  Style,\n  Can,\n};\n/**\n * MOKU.util\n * @type {Object} MOKU.dom object を返します\n */\nMOKU.dom = {\n  Bounding,\n  Classes,\n  Elements,\n};\n\nMOKU.device = {\n  Can,\n};\n\n// export\n/**\n * global object `MOKU`\n * @type {Object}\n */\nwindow.MOKU = MOKU;\n\nexport default MOKU;\n"
+    "content": "/*!\n * Copyright (c) inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/06/30 - 17:54\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n * @@version\n * @@buildTime\n */\n// use strict は本来不要でエラーになる\n// 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する\n/* eslint strict: [0, \"global\"] */\n\n'use strict';\n\n// fetch / promise\nimport 'whatwg-fetch';\nimport Promise from 'promise-polyfill';\n\n// event\nimport EventDispatcher from './event/EventDispatcher';\nimport Events from './event/Events';\nimport Rising from './event/Rising';\nimport Scroll from './event/Scroll';\nimport Scrolling from './event/Scrolling';\nimport Touching from './event/Touching';\nimport Wheel from './event/Wheel';\n\n// net\nimport Ajax from './net/Ajax';\nimport Cookie from './net/Cookie';\nimport Queries from './net/Queries';\nimport AjaxThunk from './net/AjaxThunk';\n\n// tick\nimport Cycle from './tick/Cycle';\nimport Fps from './tick/Fps';\nimport Polling from './tick/Polling';\nimport Rate from './tick/Rate';\n\n// util\nimport Type from './util/Type';\nimport Hit from './util/Hit';\nimport List from './util/List';\nimport Text from './util/Text';\nimport Times from './util/Times';\nimport Vectors from './util/Vectors';\nimport Iro from './util/Iro';\n\n// css\nimport Patterns from './css/Patterns';\nimport Style from './css/Style';\n\n// device\nimport Can from './device/Can';\n\n// dom\nimport Bounding from './dom/Bounding';\nimport Classes from './dom/Classes';\nimport Elements from './dom/Elements';\n\n// promise\n// Promise: To add to window\nif (!window.Promise) {\n  window.Promise = Promise;\n}\n\n/**\n * **MOKU**\n * <p>global Object</p>\n * <p>public な Class はここからアクセス可能です</p>\n * @type {Object}\n */\nconst MOKU = {};\n/**\n * version number を取得します\n * @returns {string} version number を返します\n */\nMOKU.version = () => '@@version';\n/**\n * build 日時を取得します\n * @returns {string}  build 日時を返します\n */\nMOKU.build = () => '@@buildTime';\n/**\n * MOKU.event\n * @type {Object} MOKU.event object を返します\n */\nMOKU.event = {\n  EventDispatcher,\n  Events,\n  Rising,\n  Scroll,\n  Wheel,\n  Scrolling,\n  Touching,\n};\n/**\n * MOKU.net\n * @type {Object} MOKU.net object を返します\n */\nMOKU.net = {\n  Ajax,\n  Cookie,\n  Queries,\n  AjaxThunk,\n};\n/**\n * MOKU.tick\n * @type {Object} MOKU.tick object を返します\n */\nMOKU.tick = {\n  Cycle,\n  Fps,\n  Polling,\n  Rate,\n};\n/**\n * MOKU.util\n * @type {Object} MOKU.util object を返します\n */\nMOKU.util = {\n  Type,\n  List,\n  Text,\n  Times,\n  Vectors,\n  Hit,\n  Iro,\n};\n/**\n * MOKU.util\n * @type {Object} MOKU.css object を返します\n */\nMOKU.css = {\n  Patterns,\n  Style,\n  Can,\n};\n/**\n * MOKU.util\n * @type {Object} MOKU.dom object を返します\n */\nMOKU.dom = {\n  Bounding,\n  Classes,\n  Elements,\n};\n\nMOKU.device = {\n  Can,\n};\n\n// export\n/**\n * global object `MOKU`\n * @type {Object}\n */\nwindow.MOKU = MOKU;\n\nexport default MOKU;\n"
   },
   {
     "__docId__": 213,
@@ -5753,7 +5753,7 @@
     "importPath": "./src/moku.js",
     "importStyle": "MOKU",
     "description": "**MOKU**\n<p>global Object</p>\n<p>public な Class はここからアクセス可能です</p>",
-    "lineNumber": 76,
+    "lineNumber": 77,
     "type": {
       "nullable": null,
       "types": [
@@ -5774,7 +5774,7 @@
     "access": null,
     "description": null,
     "lineNumber": 1,
-    "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/01 - 19:41\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n// util\nimport Type from '../util/Type';\n\n// built-in function\n// Safari, IE はサポートしていないのでライブラリを使用すること\n/**\n * fetch [native code]\n * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch\n * @type {fetch}\n * @private\n * @static\n */\nconst fetch = self.fetch;\n/**\n * fetch request instance を作成します\n * @see https://developer.mozilla.org/ja/docs/Web/API/Request\n * @type {Request}\n * @private\n * @static\n */\nconst Request = self.Request;\n\n/**\n * <p>fetch API を使用し Ajax request を行います</p>\n * <p>Safari, IE はサポートしていないので polyfill ライブラリを使用します<br>\n * また、 fetch は Promise も必要としています。</p>\n *\n * ```\n * $ bower install fetch\n *\n * $ bower install es6-promise\n * ```\n *\n * @see http://caniuse.com/#feat=fetch\n * @see https://github.com/github/fetch\n * @see https://github.com/taylorhakes/promise-polyfill\n * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch\n * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API\n * @see https://developer.mozilla.org/ja/docs/Web/API/Request\n * @see https://developer.mozilla.org/ja/docs/Web/API/Request/Request\n * @see https://developer.mozilla.org/ja/docs/Web/API/Headers\n * @see https://developer.mozilla.org/ja/docs/Web/API/Body\n */\nexport default class Ajax {\n  /**\n   * request 可能 / 不可能 flag を true に設定します\n   * @param {Function} resolve Promise success callback\n   * @param {Function} reject Promise fail callback\n   */\n  constructor(resolve, reject) {\n    /**\n     * request 可能 / 不可能 flag, true: 実行可能\n     * @type {boolean}\n     */\n    this.can = true;\n    /**\n     * Promise success callback\n     * @type {Function}\n     */\n    this.resolve = resolve;\n    /**\n     * Promise fail callback\n     * @type {Function}\n     */\n    this.reject = reject;\n  }\n  // ----------------------------------------\n  // METHOD\n  // ----------------------------------------\n  /**\n   * <p>Ajax request 開始します</p>\n   * <p>request 可能 / 不可能 flag が false の時は実行しません<br>\n   * true の時は false にしリクエストを開始します</p>\n   * <p>START, COMPLETE, ERROR イベントを発生させます</p>\n   *\n   * @param {string} path Ajax request path\n   * @param {string} method GET, POST, PUT, DELETE...etc request method\n   * @param {?Headers} [headers=null] Headers option, token などを埋め込むのに使用します\n   * @param {?FormData} [formData=null] フォームデータを送信するのに使用します\n   * @return {boolean} ajax request を開始したかどうかの真偽値を返します\n   */\n  start(path, method, headers = null, formData = null) {\n    // ajax request 開始\n    if (!this.can) {\n      // flag が off なので処理しない\n      return false;\n    }\n\n    // flag off\n    this.disable();\n\n    // @type {Request} Request instance\n    const request = Ajax.option(path, method, headers, formData);\n\n    // fetch start\n    fetch(request)\n    // @param {Object} response - Ajax response\n      .then((response) => {\n        // may be success\n        if (response.status !== 200) {\n          throw new Error(`Ajax status error: (${response.status})`);\n        }\n        return response.json();\n      })\n      // @param {Object} - JSON パース済み Object\n      .then((json) => {\n        // complete event fire\n        this.resolve(json);\n        // flag true\n        this.enable();\n      })\n      // @param {Error} - Ajax something error\n      .catch((error) => {\n        // error event fire\n        this.reject(error);\n        // flag true\n        this.enable();\n      });\n\n    return true;\n  }\n  /**\n   * 実行可否 flag を true にします\n   * @returns {boolean} 現在の this.can property を返します\n   */\n  enable() {\n    this.can = true;\n    return this.can;\n  }\n  /**\n   * 実行可否 flag を false にします\n   * @returns {boolean} 現在の this.can property を返します\n   */\n  disable() {\n    this.can = false;\n    return this.can;\n  }\n  // ----------------------------------------\n  // STATIC METHOD\n  // ----------------------------------------\n  /**\n   * <p>fetch API へ送るオプションを作成します</p>\n   *\n   * 必ず設定します\n   * - method: GET, POST, PUT, DELETE...etc\n   * - cache: 'no-cache'\n   * - credentials: 'same-origin'\n   *\n   * headers, formData は存在すれば option に追加されます\n   *\n   * @param {string|USVString|Request} path Ajax request path\n   * @param {string} method GET, POST, PUT, DELETE...etc request method\n   * @param {Headers|Object|null} headers Headers option\n   * @param {FormData|null} formData 送信フォームデータオプション\n   * @returns {*|Request} fetch API へ送る Request instance を返します\n   *\n   * @see https://developers.google.com/web/updates/2015/03/introduction-to-fetch\n   * @see https://developer.mozilla.org/ja/docs/Web/API/Request\n   */\n  static option(path, method, headers, formData) {\n    // request option\n    const option = Object.create({\n      method,\n      cache: 'no-cache',\n      // https://developers.google.com/web/updates/2015/03/introduction-to-fetch\n      credentials: 'same-origin',\n    });\n\n    // headers option\n    if (Type.exist(headers)) {\n      option.headers = headers;\n    }\n\n    // body へ FormData をセット\n    if (Type.exist(formData)) {\n      option.body = formData;\n    }\n\n    // https://developer.mozilla.org/ja/docs/Web/API/Request\n    return new Request(path, option);\n  }\n}\n"
+    "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/01 - 19:41\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n// util\nimport Type from '../util/Type';\n\n// built-in function\n// Safari, IE はサポートしていないのでライブラリを使用すること\n/**\n * fetch [native code]\n * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch\n * @type {fetch}\n * @private\n * @static\n */\nconst fetch = self.fetch;\n/**\n * fetch request instance を作成します\n * @see https://developer.mozilla.org/ja/docs/Web/API/Request\n * @type {Request}\n * @private\n * @static\n */\nconst Request = self.Request;\n\n/**\n * <p>fetch API を使用し Ajax request を行います</p>\n * <p>Safari, IE はサポートしていないので polyfill ライブラリを使用します<br>\n * また、 fetch は Promise も必要としています。</p>\n *\n * ```\n * $ bower install fetch\n *\n * $ bower install es6-promise\n * ```\n *\n * thunk friendly - ES2017 async / await するために\n * - fetch Promise を返すように変更\n * - resolve / reject argument をオプション\n * - fetch.then から result / error を return\n *\n * [caution] resolve / reject を使用しない場合は {@link AjaxThunk} を使用する方が効率的です\n * @example\n * const ajax = new Ajax();\n * // async / await 1\n * async function request() {\n *  const json = await thunk.start('https://jsonplaceholder.typicode.com/posts');\n *  const pre = document.getElementById('pre');\n *  pre.innerHTML = JSON.stringify(json);\n * }\n * request();\n * // async / await 2\n * async function request() {\n *  return await thunk.start('https://jsonplaceholder.typicode.com/posts');\n * }\n * request()\n *  .then(json => {\n *    const pre = document.getElementById('pre');\n *    pre.innerHTML = JSON.stringify(json);\n *  });\n * // resolve / reject\n * const resolve = (json) => {\n *  const pre = document.getElementById('pre');\n *  pre.innerHTML = JSON.stringify(json);\n * };\n * const reject = (error) => {};\n * const ajax = new Ajax(resolve, reject);\n * ajax.start('https://jsonplaceholder.typicode.com/posts');\n *\n * @see http://caniuse.com/#feat=fetch\n * @see https://github.com/github/fetch\n * @see https://github.com/taylorhakes/promise-polyfill\n * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch\n * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API\n * @see https://developer.mozilla.org/ja/docs/Web/API/Request\n * @see https://developer.mozilla.org/ja/docs/Web/API/Request/Request\n * @see https://developer.mozilla.org/ja/docs/Web/API/Headers\n * @see https://developer.mozilla.org/ja/docs/Web/API/Body\n *\n * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function\n * @see http://getmesh.io/Blog/Make%20AJAX-Requests%20Great%20Again\n * @since 0.3.4 - Thunk friendly\n */\nexport default class Ajax {\n  // ----------------------------------------\n  // CONSTRUCTOR\n  // ----------------------------------------\n  /**\n   * request 可能 / 不可能 flag を true に設定します\n   * @param {?function} [resolve=null] Promise success callback\n   * @param {?function} [reject=null] Promise fail callback\n   */\n  constructor(resolve = null, reject = null) {\n    /**\n     * request 可能 / 不可能 flag, true: 実行可能\n     * @type {boolean}\n     */\n    this.can = true;\n    /**\n     * Promise success callback\n     * @type {Function}\n     */\n    this.resolve = resolve;\n    /**\n     * Promise fail callback\n     * @type {Function}\n     */\n    this.reject = reject;\n    /**\n     * `Request` constructor に渡す option\n     * - method: GET|POST|PUT|DELETE...\n     * - cache: no-cache\n     * - credentials: same-origin\n     * @type {{method: ?string, cache: string, credentials: string}}\n     * @see https://developer.mozilla.org/ja/docs/Web/API/Request/Request\n     */\n    this.props = {\n      method: null,\n      cache: 'no-cache',\n      // https://developers.google.com/web/updates/2015/03/introduction-to-fetch\n      credentials: 'same-origin',\n    };\n  }\n  // ----------------------------------------\n  // METHOD\n  // ----------------------------------------\n  /**\n   * <p>Ajax request 開始します</p>\n   * <p>request 可能 / 不可能 flag が false の時は実行しません<br>\n   * true の時は false にしリクエストを開始します</p>\n   *\n   * from v0.3.4\n   * - resolve, reject 関数確認後実行します\n   * - Promise instance を返します\n   * - json / error を返します\n   *\n   * @param {string} path Ajax request path\n   * @param {string} [method=GET] GET, POST, PUT, DELETE...etc request method\n   * @param {?Headers} [headers=null] Headers option, token などを埋め込むのに使用します\n   * @param {?FormData} [formData=null] フォームデータを送信するのに使用します\n   * @return {Promise} ajax request を開始し fetch Promise 返します\n   */\n  start(path, method = 'GET', headers = null, formData = null) {\n    // ajax request 開始\n    if (!this.can) {\n      throw new Error(`Ajax request busy: ${this.can}`);\n    }\n\n    // flag off\n    this.disable();\n\n    // @type {Request} Request instance\n    const request = this.option(path, method, headers, formData);\n\n    // fetch start\n    return fetch(request)\n    // @param {Object} response - Ajax response\n      .then((response) => {\n        // may be success\n        if (response.status !== 200) {\n          throw new Error(`Ajax status error: (${response.status})`);\n        }\n        return response.json();\n      })\n      // @param {Object} - JSON パース済み Object\n      .then((json) => {\n        // complete event fire\n        if (Type.method(this.resolve)) {\n          this.resolve(json);\n        }\n        // flag true\n        this.enable();\n        return json;\n      })\n      // @param {Error} - Ajax something error\n      .catch((error) => {\n        // error event fire\n        if (Type.method(this.reject)) {\n          this.reject(error);\n        }\n        // flag true\n        this.enable();\n        return error;\n      });\n  }\n  /**\n   * 実行可否 flag を true にします\n   * @returns {boolean} 現在の this.can property を返します\n   */\n  enable() {\n    this.can = true;\n    return this.can;\n  }\n  /**\n   * 実行可否 flag を false にします\n   * @returns {boolean} 現在の this.can property を返します\n   */\n  disable() {\n    this.can = false;\n    return this.can;\n  }\n  /**\n   * <p>fetch API へ送るオプションを作成します</p>\n   *\n   * 必ず設定します\n   * - method: GET, POST, PUT, DELETE...etc\n   * - cache: 'no-cache'\n   * - credentials: 'same-origin'\n   *\n   * headers, formData は存在すれば option に追加されます\n   *\n   * ```\n   * var myRequest = new Request(input, init);\n   * ```\n   * <blockquote>\n   * リクエストに適用するカスタム設定を含むオプションオブジェクト。設定可能なオプションは：\n   *   method：リクエストメソッド、たとえば GET、POST。\n   *   headers：Headers オブジェクトか ByteString を含む、リクエストに追加するヘッダー。\n   *   body： リクエストに追加するボディー：Blob か BufferSource、FormData、URLSearchParams、USVString オブジェクトが使用できる。リクエストが GET か HEAD メソッドを使用している場合、ボディーを持てないことに注意。\n   *   mode：リクエストで使用するモード。たとえば、cors か no-cors、same-origin。既定値は cors。Chrome では、47 以前は no-cors が既定値であり、 same-origin は 47 から使用できるようになった。\n   *   credentials：リクエストで使用するリクエスト credential：omit か same-origin、include が使用できる。 既定値は omit。Chrome では、47 以前は same-origin が既定値であり、include は 47 から使用できるようになった。\n   *   cache：リクエストで使用する cache モード：default か no-store、reload、no-cache、force-cache、only-if-cached が設定できる。\n   *   redirect：使用するリダイレクトモード：follow か error、manual が使用できる。Chrome では、47 以前は既定値が follow であり、manual は 47 から使用できるようになった。\n   *   referrer：no-referrer か client、URL を指定する USVString。既定値は client。\n   * </blockquote>\n   * @param {string|USVString|Request} path Ajax request path\n   * @param {string} method GET, POST, PUT, DELETE...etc request method\n   * @param {Headers|Object|null} headers Headers option\n   * @param {FormData|null} formData 送信フォームデータオプション\n   * @returns {*|Request} fetch API へ送る Request instance を返します\n   *\n   * @see https://developers.google.com/web/updates/2015/03/introduction-to-fetch\n   * @see https://developer.mozilla.org/ja/docs/Web/API/Request\n   * @see https://developer.mozilla.org/ja/docs/Web/API/Request/Request\n   */\n  option(path, method, headers, formData) {\n    // request option\n    const option = Object.assign({}, this.props);\n    // const option = Object.create({\n    //   method,\n    //   cache: 'no-cache',\n    //   // https://developers.google.com/web/updates/2015/03/introduction-to-fetch\n    //   credentials: 'same-origin',\n    // });\n    option.method = method;\n\n    // headers option\n    if (Type.exist(headers)) {\n      option.headers = headers;\n    }\n\n    // body へ FormData をセット\n    if (Type.exist(formData)) {\n      option.body = formData;\n    }\n\n    // https://developer.mozilla.org/ja/docs/Web/API/Request\n    return new Request(path, option);\n  }\n}\n"
   },
   {
     "__docId__": 215,
@@ -5852,7 +5852,10 @@
     "export": true,
     "importPath": "./src/net/Ajax.js",
     "importStyle": "Ajax",
-    "description": "<p>fetch API を使用し Ajax request を行います</p>\n<p>Safari, IE はサポートしていないので polyfill ライブラリを使用します<br>\nまた、 fetch は Promise も必要としています。</p>\n\n```\n$ bower install fetch\n\n$ bower install es6-promise\n```",
+    "description": "<p>fetch API を使用し Ajax request を行います</p>\n<p>Safari, IE はサポートしていないので polyfill ライブラリを使用します<br>\nまた、 fetch は Promise も必要としています。</p>\n\n```\n$ bower install fetch\n\n$ bower install es6-promise\n```\n\nthunk friendly - ES2017 async / await するために\n- fetch Promise を返すように変更\n- resolve / reject argument をオプション\n- fetch.then から result / error を return\n\n[caution] resolve / reject を使用しない場合は {@link AjaxThunk} を使用する方が効率的です",
+    "examples": [
+      "const ajax = new Ajax();\n// async / await 1\nasync function request() {\n const json = await thunk.start('https://jsonplaceholder.typicode.com/posts');\n const pre = document.getElementById('pre');\n pre.innerHTML = JSON.stringify(json);\n}\nrequest();\n// async / await 2\nasync function request() {\n return await thunk.start('https://jsonplaceholder.typicode.com/posts');\n}\nrequest()\n .then(json => {\n   const pre = document.getElementById('pre');\n   pre.innerHTML = JSON.stringify(json);\n });\n// resolve / reject\nconst resolve = (json) => {\n const pre = document.getElementById('pre');\n pre.innerHTML = JSON.stringify(json);\n};\nconst reject = (error) => {};\nconst ajax = new Ajax(resolve, reject);\najax.start('https://jsonplaceholder.typicode.com/posts');"
+    ],
     "see": [
       "http://caniuse.com/#feat=fetch",
       "https://github.com/github/fetch",
@@ -5862,9 +5865,12 @@
       "https://developer.mozilla.org/ja/docs/Web/API/Request",
       "https://developer.mozilla.org/ja/docs/Web/API/Request/Request",
       "https://developer.mozilla.org/ja/docs/Web/API/Headers",
-      "https://developer.mozilla.org/ja/docs/Web/API/Body"
+      "https://developer.mozilla.org/ja/docs/Web/API/Body",
+      "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function",
+      "http://getmesh.io/Blog/Make%20AJAX-Requests%20Great%20Again"
     ],
-    "lineNumber": 56,
+    "lineNumber": 93,
+    "since": "0.3.4 - Thunk friendly",
     "interface": false
   },
   {
@@ -5877,25 +5883,29 @@
     "longname": "src/net/Ajax.js~Ajax#constructor",
     "access": null,
     "description": "request 可能 / 不可能 flag を true に設定します",
-    "lineNumber": 62,
+    "lineNumber": 102,
     "params": [
       {
-        "nullable": null,
+        "nullable": true,
         "types": [
-          "Function"
+          "function"
         ],
         "spread": false,
-        "optional": false,
+        "optional": true,
+        "defaultValue": "null",
+        "defaultRaw": null,
         "name": "resolve",
         "description": "Promise success callback"
       },
       {
-        "nullable": null,
+        "nullable": true,
         "types": [
-          "Function"
+          "function"
         ],
         "spread": false,
-        "optional": false,
+        "optional": true,
+        "defaultValue": "null",
+        "defaultRaw": null,
         "name": "reject",
         "description": "Promise fail callback"
       }
@@ -5912,7 +5922,7 @@
     "longname": "src/net/Ajax.js~Ajax#can",
     "access": null,
     "description": "request 可能 / 不可能 flag, true: 実行可能",
-    "lineNumber": 67,
+    "lineNumber": 107,
     "type": {
       "nullable": null,
       "types": [
@@ -5932,7 +5942,7 @@
     "longname": "src/net/Ajax.js~Ajax#resolve",
     "access": null,
     "description": "Promise success callback",
-    "lineNumber": 72,
+    "lineNumber": 112,
     "type": {
       "nullable": null,
       "types": [
@@ -5952,7 +5962,7 @@
     "longname": "src/net/Ajax.js~Ajax#reject",
     "access": null,
     "description": "Promise fail callback",
-    "lineNumber": 77,
+    "lineNumber": 117,
     "type": {
       "nullable": null,
       "types": [
@@ -5964,6 +5974,29 @@
   },
   {
     "__docId__": 222,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "props",
+    "memberof": "src/net/Ajax.js~Ajax",
+    "longname": "src/net/Ajax.js~Ajax#props",
+    "access": null,
+    "description": "`Request` constructor に渡す option\n- method: GET|POST|PUT|DELETE...\n- cache: no-cache\n- credentials: same-origin",
+    "see": [
+      "https://developer.mozilla.org/ja/docs/Web/API/Request/Request"
+    ],
+    "lineNumber": 126,
+    "type": {
+      "nullable": null,
+      "types": [
+        "{method: ?string, cache: string, credentials: string}"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 223,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -5971,8 +6004,8 @@
     "memberof": "src/net/Ajax.js~Ajax",
     "longname": "src/net/Ajax.js~Ajax#start",
     "access": null,
-    "description": "<p>Ajax request 開始します</p>\n<p>request 可能 / 不可能 flag が false の時は実行しません<br>\ntrue の時は false にしリクエストを開始します</p>\n<p>START, COMPLETE, ERROR イベントを発生させます</p>",
-    "lineNumber": 94,
+    "description": "<p>Ajax request 開始します</p>\n<p>request 可能 / 不可能 flag が false の時は実行しません<br>\ntrue の時は false にしリクエストを開始します</p>\n\nfrom v0.3.4\n- resolve, reject 関数確認後実行します\n- Promise instance を返します\n- json / error を返します",
+    "lineNumber": 152,
     "params": [
       {
         "nullable": null,
@@ -5990,7 +6023,9 @@
           "string"
         ],
         "spread": false,
-        "optional": false,
+        "optional": true,
+        "defaultValue": "GET",
+        "defaultRaw": "GET",
         "name": "method",
         "description": "GET, POST, PUT, DELETE...etc request method"
       },
@@ -6022,15 +6057,15 @@
     "return": {
       "nullable": null,
       "types": [
-        "boolean"
+        "Promise"
       ],
       "spread": false,
-      "description": "ajax request を開始したかどうかの真偽値を返します"
+      "description": "ajax request を開始し fetch Promise 返します"
     },
     "generator": false
   },
   {
-    "__docId__": 223,
+    "__docId__": 224,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -6039,7 +6074,7 @@
     "longname": "src/net/Ajax.js~Ajax#enable",
     "access": null,
     "description": "実行可否 flag を true にします",
-    "lineNumber": 138,
+    "lineNumber": 199,
     "unknown": [
       {
         "tagName": "@returns",
@@ -6058,7 +6093,7 @@
     "generator": false
   },
   {
-    "__docId__": 224,
+    "__docId__": 225,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -6067,7 +6102,7 @@
     "longname": "src/net/Ajax.js~Ajax#can",
     "access": null,
     "description": null,
-    "lineNumber": 139,
+    "lineNumber": 200,
     "undocument": true,
     "type": {
       "types": [
@@ -6076,7 +6111,7 @@
     }
   },
   {
-    "__docId__": 225,
+    "__docId__": 226,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -6085,7 +6120,7 @@
     "longname": "src/net/Ajax.js~Ajax#disable",
     "access": null,
     "description": "実行可否 flag を false にします",
-    "lineNumber": 146,
+    "lineNumber": 207,
     "unknown": [
       {
         "tagName": "@returns",
@@ -6104,7 +6139,7 @@
     "generator": false
   },
   {
-    "__docId__": 226,
+    "__docId__": 227,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -6113,7 +6148,7 @@
     "longname": "src/net/Ajax.js~Ajax#can",
     "access": null,
     "description": null,
-    "lineNumber": 147,
+    "lineNumber": 208,
     "undocument": true,
     "type": {
       "types": [
@@ -6122,20 +6157,21 @@
     }
   },
   {
-    "__docId__": 227,
+    "__docId__": 228,
     "kind": "method",
-    "static": true,
+    "static": false,
     "variation": null,
     "name": "option",
     "memberof": "src/net/Ajax.js~Ajax",
-    "longname": "src/net/Ajax.js~Ajax.option",
+    "longname": "src/net/Ajax.js~Ajax#option",
     "access": null,
-    "description": "<p>fetch API へ送るオプションを作成します</p>\n\n必ず設定します\n- method: GET, POST, PUT, DELETE...etc\n- cache: 'no-cache'\n- credentials: 'same-origin'\n\nheaders, formData は存在すれば option に追加されます",
+    "description": "<p>fetch API へ送るオプションを作成します</p>\n\n必ず設定します\n- method: GET, POST, PUT, DELETE...etc\n- cache: 'no-cache'\n- credentials: 'same-origin'\n\nheaders, formData は存在すれば option に追加されます\n\n```\nvar myRequest = new Request(input, init);\n```\n<blockquote>\nリクエストに適用するカスタム設定を含むオプションオブジェクト。設定可能なオプションは：\n  method：リクエストメソッド、たとえば GET、POST。\n  headers：Headers オブジェクトか ByteString を含む、リクエストに追加するヘッダー。\n  body： リクエストに追加するボディー：Blob か BufferSource、FormData、URLSearchParams、USVString オブジェクトが使用できる。リクエストが GET か HEAD メソッドを使用している場合、ボディーを持てないことに注意。\n  mode：リクエストで使用するモード。たとえば、cors か no-cors、same-origin。既定値は cors。Chrome では、47 以前は no-cors が既定値であり、 same-origin は 47 から使用できるようになった。\n  credentials：リクエストで使用するリクエスト credential：omit か same-origin、include が使用できる。 既定値は omit。Chrome では、47 以前は same-origin が既定値であり、include は 47 から使用できるようになった。\n  cache：リクエストで使用する cache モード：default か no-store、reload、no-cache、force-cache、only-if-cached が設定できる。\n  redirect：使用するリダイレクトモード：follow か error、manual が使用できる。Chrome では、47 以前は既定値が follow であり、manual は 47 から使用できるようになった。\n  referrer：no-referrer か client、URL を指定する USVString。既定値は client。\n</blockquote>",
     "see": [
       "https://developers.google.com/web/updates/2015/03/introduction-to-fetch",
-      "https://developer.mozilla.org/ja/docs/Web/API/Request"
+      "https://developer.mozilla.org/ja/docs/Web/API/Request",
+      "https://developer.mozilla.org/ja/docs/Web/API/Request/Request"
     ],
-    "lineNumber": 172,
+    "lineNumber": 245,
     "unknown": [
       {
         "tagName": "@returns",
@@ -6201,7 +6237,125 @@
     "generator": false
   },
   {
-    "__docId__": 228,
+    "__docId__": 229,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/net/AjaxThunk.js",
+    "memberof": null,
+    "longname": "src/net/AjaxThunk.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "/**\n * Copyright (c) 2011-2017 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2017/06/05 - 21:26\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\nimport Ajax from './Ajax';\n\n/**\n * fetch API を使用し Ajax request を行います, ref: {@link Ajax}\n * @example\n * const ajax = new Ajax();\n * // async / await 1\n * async function request() {\n *  const json = await thunk.start('https://jsonplaceholder.typicode.com/posts');\n *  const pre = document.getElementById('pre');\n *  pre.innerHTML = JSON.stringify(json);\n * }\n * request();\n * // async / await 2\n * async function request() {\n *  return await thunk.start('https://jsonplaceholder.typicode.com/posts');\n * }\n * request()\n *  .then(json => {\n *    const pre = document.getElementById('pre');\n *    pre.innerHTML = JSON.stringify(json);\n *  });\n * @see http://caniuse.com/#feat=fetch\n * @see https://github.com/github/fetch\n * @see https://github.com/taylorhakes/promise-polyfill\n * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch\n * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API\n * @see https://developer.mozilla.org/ja/docs/Web/API/Request\n * @see https://developer.mozilla.org/ja/docs/Web/API/Request/Request\n * @see https://developer.mozilla.org/ja/docs/Web/API/Headers\n * @see https://developer.mozilla.org/ja/docs/Web/API/Body\n *\n * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function\n * @see http://getmesh.io/Blog/Make%20AJAX-Requests%20Great%20Again\n * @since 0.3.4\n */\nexport default class AjaxThunk extends Ajax {\n  // ----------------------------------------\n  // METHOD\n  // ----------------------------------------\n  /**\n   * <p>Ajax request 開始します</p>\n   * <p>request 可能 / 不可能 flag が false の時は実行しません<br>\n   * true の時は false にしリクエストを開始します</p>\n   *\n   * - resolve, reject 関数確認後実行します\n   * - Promise instance を返します\n   * - json / error を返します\n   *\n   * @param {string} path Ajax request path\n   * @param {string} [method=GET] GET, POST, PUT, DELETE...etc request method\n   * @param {?Headers} [headers=null] Headers option, token などを埋め込むのに使用します\n   * @param {?FormData} [formData=null] フォームデータを送信するのに使用します\n   * @return {Promise} ajax request を開始し fetch Promise 返します\n   */\n  start(path, method = 'GET', headers = null, formData = null) {\n    // ajax request 開始\n    if (!this.can) {\n      throw new Error(`Ajax request busy: ${this.can}`);\n    }\n\n    // flag off\n    this.disable();\n\n    // @type {Request} Request instance\n    const request = this.option(path, method, headers, formData);\n\n    // fetch start\n    return fetch(request)\n    // @param {Object} response - Ajax response\n      .then((response) => {\n        // may be success\n        if (response.status !== 200) {\n          throw new Error(`Ajax status error: (${response.status})`);\n        }\n        return response.json();\n      });\n  }\n}\n"
+  },
+  {
+    "__docId__": 230,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "AjaxThunk",
+    "memberof": "src/net/AjaxThunk.js",
+    "longname": "src/net/AjaxThunk.js~AjaxThunk",
+    "access": null,
+    "export": true,
+    "importPath": "./src/net/AjaxThunk.js",
+    "importStyle": "AjaxThunk",
+    "description": "fetch API を使用し Ajax request を行います, ref: {@link Ajax}",
+    "examples": [
+      "const ajax = new Ajax();\n// async / await 1\nasync function request() {\n const json = await thunk.start('https://jsonplaceholder.typicode.com/posts');\n const pre = document.getElementById('pre');\n pre.innerHTML = JSON.stringify(json);\n}\nrequest();\n// async / await 2\nasync function request() {\n return await thunk.start('https://jsonplaceholder.typicode.com/posts');\n}\nrequest()\n .then(json => {\n   const pre = document.getElementById('pre');\n   pre.innerHTML = JSON.stringify(json);\n });"
+    ],
+    "see": [
+      "http://caniuse.com/#feat=fetch",
+      "https://github.com/github/fetch",
+      "https://github.com/taylorhakes/promise-polyfill",
+      "https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch",
+      "https://developer.mozilla.org/ja/docs/Web/API/Fetch_API",
+      "https://developer.mozilla.org/ja/docs/Web/API/Request",
+      "https://developer.mozilla.org/ja/docs/Web/API/Request/Request",
+      "https://developer.mozilla.org/ja/docs/Web/API/Headers",
+      "https://developer.mozilla.org/ja/docs/Web/API/Body",
+      "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function",
+      "http://getmesh.io/Blog/Make%20AJAX-Requests%20Great%20Again"
+    ],
+    "lineNumber": 49,
+    "since": "0.3.4",
+    "interface": false,
+    "extends": [
+      "src/net/Ajax.js~Ajax"
+    ]
+  },
+  {
+    "__docId__": 231,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "start",
+    "memberof": "src/net/AjaxThunk.js~AjaxThunk",
+    "longname": "src/net/AjaxThunk.js~AjaxThunk#start",
+    "access": null,
+    "description": "<p>Ajax request 開始します</p>\n<p>request 可能 / 不可能 flag が false の時は実行しません<br>\ntrue の時は false にしリクエストを開始します</p>\n\n- resolve, reject 関数確認後実行します\n- Promise instance を返します\n- json / error を返します",
+    "lineNumber": 68,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "path",
+        "description": "Ajax request path"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "GET",
+        "defaultRaw": "GET",
+        "name": "method",
+        "description": "GET, POST, PUT, DELETE...etc request method"
+      },
+      {
+        "nullable": true,
+        "types": [
+          "Headers"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "null",
+        "defaultRaw": null,
+        "name": "headers",
+        "description": "Headers option, token などを埋め込むのに使用します"
+      },
+      {
+        "nullable": true,
+        "types": [
+          "FormData"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "null",
+        "defaultRaw": null,
+        "name": "formData",
+        "description": "フォームデータを送信するのに使用します"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise"
+      ],
+      "spread": false,
+      "description": "ajax request を開始し fetch Promise 返します"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 232,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -6214,7 +6368,7 @@
     "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/12/16 - 14:45\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n// --------------------------------\n// copy [native code]\n/**\n * copy [native code] - decodeURIComponent\n * @type {function}\n */\nconst decodeURIComponent = self.decodeURIComponent;\n/**\n * copy [native code] - encodeURIComponent\n * @type {function}\n */\nconst encodeURIComponent = self.encodeURIComponent;\n/**\n * copy [native code] - RegExp\n * @type {function}\n */\nconst RegExp = self.RegExp;\n\n/**\n * cookie を取得・保存・削除します\n */\nexport default class Cookie {\n  /**\n   * cookie を処理します\n   *\n   * インスタンスは key 毎に作成します\n   * @param {string} keyName cookie key\n   * @param {?Date} [endValue=null] cookie end Date instance, null の時はプラウザ `quit` で削除されます\n   * @param {string} [defaultPath='/'] cookie path\n   * @param {string} [defaultDomain=''] cookie domain\n   * @param {boolean} [secureSetting=false] true: https 通信のときのみ、クッキーが送信されます\n   */\n  constructor(\n    keyName,\n    endValue = null,\n    defaultPath = '/',\n    defaultDomain = '',\n    secureSetting = false,\n  ) {\n    let key = keyName;\n    let end = endValue;\n    let path = defaultPath;\n    let domain = defaultDomain;\n    let secure = secureSetting;\n\n    /**\n     * cookie key を取得します\n     * @returns {string} cookie key を返します\n     */\n    this.key = () => key;\n    /**\n     * cookie key を設定します\n     * @param {string} setting 設定する key name\n     */\n    this.setKey = (setting) => { key = setting; };\n    /**\n     * cookie end を取得します\n     * @returns {?Date} cookie end Date instance\n     */\n    this.end = () => end;\n    /**\n     * cookie end を設定します\n     * @param {Date} setting cookie end Date instance\n     */\n    this.setEnd = (setting) => { end = setting; };\n    /**\n     * cookie path を取得します\n     * @returns {string} cookie path を返します\n     */\n    this.path = () => path;\n    /**\n     * cookie path を設定します\n     * @param {string} setting 設定する path name\n     */\n    this.setPath = (setting) => { path = setting; };\n    /**\n     * cookie domain を取得します\n     * @returns {string} cookie domain を返します\n     */\n    this.domain = () => domain;\n    /**\n     * cookie domain を設定します\n     * @param {string} setting 設定する domain name\n     */\n    this.setDomain = (setting) => { domain = setting; };\n    /**\n     * https 通信のときのみクッキー送信を行うかのフラッグを取得します\n     * @returns {boolean} https 通信のときのみクッキー送信を行うかのフラッグ\n     */\n    this.secure = () => secure;\n    /**\n     * https 通信のときのみクッキー送信を行うかのフラッグを設定します\n     * @param {boolean} setting https 通信のときのみクッキー送信を行うかのフラッグ\n     */\n    this.setSecure = (setting) => { secure = setting; };\n  }\n  // ----------------------------------------\n  // METHOD\n  // ----------------------------------------\n  /**\n   * cookie value を取得します\n   * @returns {string|null} cookie value を返します\n   */\n  get() {\n    return Cookie.get(this.key());\n  }\n\n  /**\n   * cookie value を設定します\n   * @param {string} value cookie value\n   * @param {?Date} [end=null] cookie end Date instance, null の時はプラウザ `quit` で削除されます\n   * @param {string} [path='/'] cookie path\n   * @param {string} [domain=''] cookie domain\n   * @param {boolean} [secure=false] true: https 通信のときのみ、クッキーが送信されます\n   * @returns {string} 設定した cookie 文字列\n   */\n  set(value, end = this.end(), path = this.path(), domain = this.domain(), secure = this.secure()) {\n    return Cookie.set(this.key(), value, end, path, domain, secure);\n  }\n  /**\n   * cookie を削除します\n   * @returns {boolean} true: cookie 削除成功\n   */\n  remove() {\n    return Cookie.remove(this.key());\n  }\n  // ----------------------------------------\n  // STATIC METHOD\n  // ----------------------------------------\n  /**\n   * cookie value を取得します\n   * @param {string} key 取得する cookie key 名称\n   * @returns {string|null} cookie value\n   */\n  static get(key) {\n    const cookie = document.cookie;\n    const escapeKey = encodeURIComponent(key).replace(/[-.+*]/g, '\\\\$&');\n    const exp = new RegExp(`(?:(?:^|.*;)\\\\s*${escapeKey}\\\\s*\\\\=\\\\s*([^;]*).*$)|^.*$`);\n    return decodeURIComponent(cookie.replace(exp, '$1')) || null;\n  }\n  /**\n   * cookie value を設定します\n   * @param {string} key cookie key\n   * @param {string} value cookie value\n   * @param {?Date} [end=null] cookie end date Date instance\n   * @param {string} [path=/] cookie path\n   * @param {string} [domain=''] cookie domain\n   * @param {boolean} [secure=false] true: https 通信のときのみ、クッキーが送信されます\n   * @returns {string} 設定した cookie 文字列\n   */\n  static set(key, value, end = null, path = '/', domain = '', secure = false) {\n    let cookie = `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;\n    if (end) {\n      cookie += `; expires=${end.toUTCString()}`;\n    }\n    if (path) {\n      cookie += `; path=${path}`;\n    }\n    if (domain) {\n      cookie += `; domain=${domain}`;\n    }\n    if (secure) {\n      cookie += '; secure';\n    }\n    document.cookie = cookie;\n    return cookie;\n  }\n  /**\n   * cookie を削除します\n   *\n   * 現在時間より前の時刻を設定します\n   * @param {string} key cookie key\n   * @returns {boolean} true: 削除成功\n   */\n  static remove(key) {\n    if (Cookie.has(key)) {\n      Cookie.set(key, '', new Date());\n      return true;\n    }\n    return false;\n  }\n  /**\n   * cookie key が存在するかを調べます\n   * @param {string} key cookie key\n   * @returns {boolean} true: cookie key が存在します\n   */\n  static has(key) {\n    return Cookie.get(key) !== null;\n  }\n}\n"
   },
   {
-    "__docId__": 229,
+    "__docId__": 233,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -6237,7 +6391,7 @@
     }
   },
   {
-    "__docId__": 230,
+    "__docId__": 234,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -6260,7 +6414,7 @@
     }
   },
   {
-    "__docId__": 231,
+    "__docId__": 235,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -6283,7 +6437,7 @@
     }
   },
   {
-    "__docId__": 232,
+    "__docId__": 236,
     "kind": "class",
     "static": true,
     "variation": null,
@@ -6299,7 +6453,7 @@
     "interface": false
   },
   {
-    "__docId__": 233,
+    "__docId__": 237,
     "kind": "constructor",
     "static": false,
     "variation": null,
@@ -6372,7 +6526,7 @@
     "generator": false
   },
   {
-    "__docId__": 234,
+    "__docId__": 238,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -6403,7 +6557,7 @@
     }
   },
   {
-    "__docId__": 235,
+    "__docId__": 239,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -6432,7 +6586,7 @@
     }
   },
   {
-    "__docId__": 236,
+    "__docId__": 240,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -6463,7 +6617,7 @@
     }
   },
   {
-    "__docId__": 237,
+    "__docId__": 241,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -6492,7 +6646,7 @@
     }
   },
   {
-    "__docId__": 238,
+    "__docId__": 242,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -6523,7 +6677,7 @@
     }
   },
   {
-    "__docId__": 239,
+    "__docId__": 243,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -6552,7 +6706,7 @@
     }
   },
   {
-    "__docId__": 240,
+    "__docId__": 244,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -6583,7 +6737,7 @@
     }
   },
   {
-    "__docId__": 241,
+    "__docId__": 245,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -6612,7 +6766,7 @@
     }
   },
   {
-    "__docId__": 242,
+    "__docId__": 246,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -6643,7 +6797,7 @@
     }
   },
   {
-    "__docId__": 243,
+    "__docId__": 247,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -6672,7 +6826,7 @@
     }
   },
   {
-    "__docId__": 244,
+    "__docId__": 248,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -6701,7 +6855,7 @@
     "generator": false
   },
   {
-    "__docId__": 245,
+    "__docId__": 249,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -6788,7 +6942,7 @@
     "generator": false
   },
   {
-    "__docId__": 246,
+    "__docId__": 250,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -6816,7 +6970,7 @@
     "generator": false
   },
   {
-    "__docId__": 247,
+    "__docId__": 251,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -6856,7 +7010,7 @@
     "generator": false
   },
   {
-    "__docId__": 248,
+    "__docId__": 252,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -6953,7 +7107,7 @@
     "generator": false
   },
   {
-    "__docId__": 249,
+    "__docId__": 253,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -6992,7 +7146,7 @@
     "generator": false
   },
   {
-    "__docId__": 250,
+    "__docId__": 254,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -7031,7 +7185,7 @@
     "generator": false
   },
   {
-    "__docId__": 251,
+    "__docId__": 255,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -7044,7 +7198,7 @@
     "content": "/**\n * @license inazumatv.com\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/12/23\n *\n * Copyright (c) 2011-2015 inazumatv.com, inc.\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n */\n\nimport Text from '../util/Text';\n\n/**\n * URL query をパースします\n */\nexport default class Queries {\n  /**\n   * URL query を受取パースします\n   * @param {string} [queryString=location.search] パースする URL 文字列\n   */\n  constructor(queryString = window.location.search) {\n    const [data, keys] = Queries.parse(queryString);\n    const naked = Queries.naked(queryString);\n    /**\n     * query key を取得します - query key array\n     * @type {Array<string>}\n     */\n    this.keys = keys;\n    /**\n     * key: value 形式を取得します - URL query を key: value 形式で返します\n     * @type {Object}\n     */\n    this.data = data;\n    /**\n     * query 文字列を取得します - パースする query 文字列\n     * @type {string}\n     */\n    this.queryString = queryString;\n    /**\n     * パースしやすいように正規化した query 文字列 - `?` 以降文字 + `&amp;` を `&` へ置換えます\n     * @type {string}\n     */\n    this.naked = naked;\n  }\n  // ----------------------------------------\n  // METHOD\n  // ----------------------------------------\n  /**\n   * key が存在するかを調べます\n   * @param {string} keyName 調査対象 key 名称\n   * @returns {boolean} true: 存在する\n   */\n  has(keyName) {\n    return this.keys.indexOf(keyName) !== -1;\n  }\n  /**\n   * key 値を取得します\n   * @param {string} keyName 調査対象 key 名称\n   * @returns {string|undefined} 見つかると文字列で返します, 見つからない時は undefined を返します\n   */\n  get(keyName) {\n    return this.data[keyName];\n  }\n  /**\n   * key: value 形式を取得します\n   * @returns {Object} URL query を key: value 形式で返します\n   */\n  getAll() {\n    return this.data;\n  }\n  // ----------------------------------------\n  // STATIC METHOD\n  // ----------------------------------------\n  // /**\n  //  * `&amp;` を `&` へ置換えます\n  //  * @param {string} targetText 操作対象文字列\n  //  * @returns {string} `&amp;` を `&` へ置換え返します\n  //  */\n  // static amp(targetText) {\n  //   return targetText.split('&amp;').join('&');\n  // }\n  /**\n   * 文字列先頭に `?` があればそれ以降の文字列を返し {@link Text.and} を実行し `&amp;` を `&` 変換します\n   * @param {string} targetText 操作対象文字列\n   * @returns {string} query を正規化します\n   */\n  static naked(targetText) {\n    // const queryString = Queries.amp(targetText);\n    const queryString = Text.and(targetText);\n    return queryString.substr(0, 1) === '?' ? queryString.substring(1) : targetText;\n  }\n  /**\n   * query を kye: value 形式にします\n   * @param {string} targetText 操作対象文字列\n   * @returns {[Object, Array]} data, keys を返します\n   */\n  static parse(targetText) {\n    const query = Queries.naked(targetText);\n    const pairs = query.split('&');\n    const data = {};\n    const keys = [];\n    pairs.map((pair) => {\n      let keyName = '';\n      if (pair && pair.indexOf('=') !== -1) {\n        // @type {Array<string>} - `key=value` を `=` で分割する\n        const keyValue = pair.split('=');\n        // @type {string} keyName\n        const key = keyValue.shift();\n        // data object へ keyName を key に値をセットする\n        data[key] = keyValue.shift();\n        keyName = key;\n        // key 名称配列へ追加する\n        keys.push(key);\n      }\n      return keyName;\n    });\n\n    return [data, keys];\n  }\n  /**\n   * 引数 targetText (query) から引数 keyName 値を取得します\n   * @param {string} keyName key 名称\n   * @param {string} targetText query\n   * @returns {string|undefined} 見つかると文字列で返します, 見つからない時は undefined を返します\n   */\n  static get(keyName, targetText = window.location.search) {\n    const [data] = Queries.parse(targetText);\n    return data[keyName];\n  }\n  /**\n   * URL query の key: value 形式を取得します\n   * @param {string} targetText query\n   * @returns {[Object, Array]} URL query を key: value 形式で返します\n   */\n  static getAll(targetText = window.location.search) {\n    // const [data] = Queries.parse(targetText);\n    return Queries.parse(targetText);\n  }\n}\n"
   },
   {
-    "__docId__": 252,
+    "__docId__": 256,
     "kind": "class",
     "static": true,
     "variation": null,
@@ -7060,7 +7214,7 @@
     "interface": false
   },
   {
-    "__docId__": 253,
+    "__docId__": 257,
     "kind": "constructor",
     "static": false,
     "variation": null,
@@ -7087,7 +7241,7 @@
     "generator": false
   },
   {
-    "__docId__": 254,
+    "__docId__": 258,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -7107,7 +7261,7 @@
     }
   },
   {
-    "__docId__": 255,
+    "__docId__": 259,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -7127,7 +7281,7 @@
     }
   },
   {
-    "__docId__": 256,
+    "__docId__": 260,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -7147,7 +7301,7 @@
     }
   },
   {
-    "__docId__": 257,
+    "__docId__": 261,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -7167,7 +7321,7 @@
     }
   },
   {
-    "__docId__": 258,
+    "__docId__": 262,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -7206,7 +7360,7 @@
     "generator": false
   },
   {
-    "__docId__": 259,
+    "__docId__": 263,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -7246,7 +7400,7 @@
     "generator": false
   },
   {
-    "__docId__": 260,
+    "__docId__": 264,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -7274,7 +7428,7 @@
     "generator": false
   },
   {
-    "__docId__": 261,
+    "__docId__": 265,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -7313,7 +7467,7 @@
     "generator": false
   },
   {
-    "__docId__": 262,
+    "__docId__": 266,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -7352,7 +7506,7 @@
     "generator": false
   },
   {
-    "__docId__": 263,
+    "__docId__": 267,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -7402,7 +7556,7 @@
     "generator": false
   },
   {
-    "__docId__": 264,
+    "__docId__": 268,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -7441,7 +7595,7 @@
     "generator": false
   },
   {
-    "__docId__": 265,
+    "__docId__": 269,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -7454,7 +7608,7 @@
     "content": "/**\n * @license inazumatv.com\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/03\n *\n * Copyright (c) 2011-2015 inazumatv.com, inc.\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n */\n\n// event\nimport EventDispatcher from '../event/EventDispatcher';\n// import Events from '../event/Events';\n\n// tick/events\nimport CycleEvents from './events/CycleEvents';\n\n/**\n * new を許可しないための Symbol\n * @type {Symbol}\n * @private\n */\nconst singletonSymbol = Symbol('singleton instance');\n/**\n * singleton instance, nullable\n * @type {?Cycle}\n * @private\n */\nlet instance = null;\n\n/**\n * <p>requestAnimationFrame を使用しループイベントを発生させます</p>\n * <p>singleton なので new ではなく factory を使用し instance を作成します</p>\n *\n * ```\n * const loop = Cycle.factory();\n * const update = () => {\n *  // code here, something do\n * };\n * loop.on(Cycle.UPDATE, update);\n * loop.start();\n * ```\n *\n * <p>requestAnimationFrame は tab が active(focus) な時のみ発生します</p>\n */\nexport default class Cycle extends EventDispatcher {\n  // ---------------------------------------------------\n  //  CONSTANT / EVENT\n  // ---------------------------------------------------\n  /**\n   * requestAnimationFrame 毎に発生するイベント - cycleUpdate\n   * @event UPDATE\n   * @type {string}\n   */\n  static UPDATE = 'cycleUpdate';\n  // ----------------------------------------\n  // STATIC METHOD\n  // ----------------------------------------\n  /**\n   * Cycle instance を singleton を保証し作成します\n   * @returns {Cycle} Cycle instance を返します\n   */\n  static factory() {\n    if (instance === null) {\n      instance = new Cycle(singletonSymbol);\n    }\n    return instance;\n  }\n  // ---------------------------------------------------\n  //  CONSTRUCTOR\n  // ---------------------------------------------------\n  /**\n   * singleton です\n   * @param {Symbol} checkSymbol singleton を保証するための private instance\n   * @returns {Cycle} singleton instance を返します\n   */\n  constructor(checkSymbol) {\n    // checkSymbol と singleton が等価かをチェックします\n    if (checkSymbol !== singletonSymbol) {\n      throw new Error('don\\'t use new, instead use static factory method.');\n    }\n    // instance 作成済みかをチェックし instance が null の時 this を設定します\n    if (instance !== null) {\n      return instance;\n    }\n    super();\n    // -------------------------------\n    // onetime setting\n    // instance = this;\n    // const events = new Events(Cycle.UPDATE, this, this);\n    // const update = this.update.bind(this);\n    /**\n     * Cycle.UPDATE Events instance\n     * @type {Events}\n     */\n    this.events = new CycleEvents(Cycle.UPDATE, this, this);\n    /**\n     * bound update requestAnimationFrame callback\n     * @type {function}\n     */\n    this.update = this.update.bind(this);\n    /**\n     * requestAnimationFrame ID\n     * @type {number}\n     */\n    this.id = 0;\n    /**\n     * start 済みフラッグ\n     * @type {boolean}\n     */\n    this.started = false;\n    // 設定済み instance を返します\n    return this;\n  }\n  // // ----------------------------------------\n  // // EVENT\n  // // ----------------------------------------\n  // /**\n  //  * requestAnimationFrame 毎に発生するイベントを取得します\n  //  * @event UPDATE\n  //  * @returns {string} event, cycleUpdate を返します\n  //  * @default cycleUpdate\n  //  */\n  // static get UPDATE() {\n  //   return 'cycleUpdate';\n  // }\n  // ----------------------------------------\n  // METHOD\n  // ----------------------------------------\n  /**\n   * loop(requestAnimationFrame) を開始します\n   * @returns {boolean} start に成功すると true を返します\n   */\n  start() {\n    if (this.started) {\n      // already start\n      return false;\n    }\n    this.started = true;\n    this.update();\n\n    // @return\n    return true;\n  }\n  /**\n   * loop(cancelAnimationFrame) を止めます\n   * @param {number} [id] requestAnimationFrame id を使い cancelAnimationFrame をします\n   * @returns {boolean} stop に成功すると true を返します\n   */\n  stop(id = this.id) {\n    if (!this.started) {\n      // not start\n      return false;\n    }\n\n    cancelAnimationFrame(id);\n    this.started = false;\n\n    // @return\n    return true;\n  }\n  // ----------------------------------------\n  // PRIVATE METHOD\n  // ----------------------------------------\n  /**\n   * loop(requestAnimationFrame)コールバック関数<br>Cycle.UPDATE event を発火します\n   * @returns {number} requestAnimationFrame ID\n   */\n  update() {\n    // @type {number} - requestAnimationFrame id\n    const id = requestAnimationFrame(this.update);\n    this.id = id;\n\n    // @type {Events} - events\n    const events = this.events;\n    events.id = id;\n    // event fire\n    this.dispatch(events);\n    return id;\n  }\n}\n"
   },
   {
-    "__docId__": 266,
+    "__docId__": 270,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -7477,7 +7631,7 @@
     }
   },
   {
-    "__docId__": 267,
+    "__docId__": 271,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -7500,7 +7654,7 @@
     }
   },
   {
-    "__docId__": 268,
+    "__docId__": 272,
     "kind": "class",
     "static": true,
     "variation": null,
@@ -7519,7 +7673,7 @@
     ]
   },
   {
-    "__docId__": 269,
+    "__docId__": 273,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -7547,7 +7701,7 @@
     "generator": false
   },
   {
-    "__docId__": 270,
+    "__docId__": 274,
     "kind": "constructor",
     "static": false,
     "variation": null,
@@ -7586,7 +7740,7 @@
     "generator": false
   },
   {
-    "__docId__": 271,
+    "__docId__": 275,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -7606,7 +7760,7 @@
     }
   },
   {
-    "__docId__": 272,
+    "__docId__": 276,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -7626,7 +7780,7 @@
     }
   },
   {
-    "__docId__": 273,
+    "__docId__": 277,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -7646,7 +7800,7 @@
     }
   },
   {
-    "__docId__": 274,
+    "__docId__": 278,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -7666,7 +7820,7 @@
     }
   },
   {
-    "__docId__": 275,
+    "__docId__": 279,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -7694,7 +7848,7 @@
     "generator": false
   },
   {
-    "__docId__": 276,
+    "__docId__": 280,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -7712,7 +7866,7 @@
     }
   },
   {
-    "__docId__": 277,
+    "__docId__": 281,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -7751,7 +7905,7 @@
     "generator": false
   },
   {
-    "__docId__": 278,
+    "__docId__": 282,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -7769,7 +7923,7 @@
     }
   },
   {
-    "__docId__": 279,
+    "__docId__": 283,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -7797,7 +7951,7 @@
     "generator": false
   },
   {
-    "__docId__": 280,
+    "__docId__": 284,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -7815,7 +7969,7 @@
     }
   },
   {
-    "__docId__": 281,
+    "__docId__": 285,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -7828,7 +7982,7 @@
     "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/04 - 14:19\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n// event\n// import Events from '../event/Events';\n\n// tick\nimport Polling from './Polling';\n\n// tick/events\nimport FpsEvents from './events/FpsEvents';\n\n// /**\n//  * private property key, fps を保存するための Symbol\n//  * @type {Symbol}\n//  * @private\n//  */\n// const fpsSymbol = Symbol('Singleton Fps Symbol');\n\n/**\n * フレームレート毎に `UPDATE` イベントを発生させます\n *\n * @example\n * // 2sec. interval\n * const fps = new Fps(0.5);\n * const update = () => {\n *  // code here, something do\n * };\n * fps.on(Fps.UPDATE, update);\n * fps.start();\n * */\nexport default class Fps extends Polling {\n  // ----------------------------------------\n  // EVENT\n  // ----------------------------------------\n  /**\n   * フレームレート毎に発生するイベント - fpsUpdate\n   * @event UPDATE\n   * @type {string}\n   */\n  static UPDATE = 'fpsUpdate';\n  // /**\n  //  * フレームレート毎に発生するイベントを取得します\n  //  * @event UPDATE\n  //  * @returns {string} event, fpsUpdate を返します\n  //  * @default fpsUpdate\n  //  */\n  // static get UPDATE() {\n  //   return 'fpsUpdate';\n  // }\n  // ----------------------------------------\n  // CONSTRUCTOR\n  // ----------------------------------------\n  /**\n   * 引数の frame rate に合わせ UPDATE イベントを発生させます\n   * @param {number} [fps=30] frame rate, default: 30\n   */\n  constructor(fps = 30) {\n    super(1000 / fps);\n    // @type {Events} - Events\n    const events = new FpsEvents(Fps.UPDATE, this, this);\n    events.fps = fps;\n    /**\n     * Fps.UPDATE Events instance\n     * @type {Events}\n     */\n    this.events = events;\n    /**\n     * frame rate\n     * @type {number}\n     */\n    this.fps = fps;\n  }\n  // ----------------------------------------\n  // METHOD\n  // ----------------------------------------\n  /**\n   * fps を変更します\n   * 1. プロパティ polling 変更\n   * 1. 継承 method update 実行\n   * @param {number} interval fps\n   * @returns {boolean} 継承 method `update` をコールし UPDATE event が発生すると true を返します\n   */\n  change(interval) {\n    /**\n     * polling 間隔\n     * @type {number}\n     */\n    this.interval = 1000 / interval;\n    this.fps = interval;\n    this.events.fps = interval;\n    return this.update();\n  }\n}\n"
   },
   {
-    "__docId__": 282,
+    "__docId__": 286,
     "kind": "class",
     "static": true,
     "variation": null,
@@ -7850,7 +8004,7 @@
     ]
   },
   {
-    "__docId__": 283,
+    "__docId__": 287,
     "kind": "constructor",
     "static": false,
     "variation": null,
@@ -7877,7 +8031,7 @@
     "generator": false
   },
   {
-    "__docId__": 284,
+    "__docId__": 288,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -7897,7 +8051,7 @@
     }
   },
   {
-    "__docId__": 285,
+    "__docId__": 289,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -7917,7 +8071,7 @@
     }
   },
   {
-    "__docId__": 286,
+    "__docId__": 290,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -7956,7 +8110,7 @@
     "generator": false
   },
   {
-    "__docId__": 287,
+    "__docId__": 291,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -7976,7 +8130,7 @@
     }
   },
   {
-    "__docId__": 288,
+    "__docId__": 292,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -7994,7 +8148,7 @@
     }
   },
   {
-    "__docId__": 289,
+    "__docId__": 293,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -8007,7 +8161,7 @@
     "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/04 - 16:46\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n// event\nimport EventDispatcher from '../event/EventDispatcher';\n// import Events from '../event/Events';\n\n// tick\nimport Cycle from './Cycle';\n\n// tick/events\nimport PollingEvents from './events/PollingEvents';\n\n/**\n * 一定間隔毎に UPDATE イベントを発生させます\n *\n * @example\n * // 3sec. interval\n * const polling = new Polling(1000 * 3);\n * const update = () => {\n *  // code here, something do\n * };\n * polling.on(Polling.UPDATE, update);\n * polling.start();\n */\nexport default class Polling extends EventDispatcher {\n  // ----------------------------------------\n  // STATIC EVENT\n  // ----------------------------------------\n  /**\n   * 一定間隔(milliseconds)毎に発生するイベント - pollingUpdate\n   * @event UPDATE\n   * @type {string}\n   */\n  static UPDATE = 'pollingUpdate';\n  // ----------------------------------------\n  // CONSTRUCTOR\n  // ----------------------------------------\n  /**\n   * 引数の polling に合わせ UPDATE イベントを発生させます\n   * @param {number} [interval=1000] イベント発生間隔 milliseconds\n   */\n  constructor(interval = 1000) {\n    super();\n    // // @type {Cycle} - Cycle instance\n    // const cycle = Cycle.factory();\n    // const boundUpdate = this.update.bind(this);\n    // const events = new Events(Polling.UPDATE, this, this);\n    /**\n     * Cycle instance を取得します\n     * @ty[e {Cycle}\n     */\n    this.cycle = Cycle.factory();\n    /**\n     * 間隔(ms)\n     * @type {number}\n     */\n    this.interval = interval;\n    /**\n     * bound onUpdate, Cycle.UPDATE event handler\n     * @returns {function}\n     */\n    this.onUpdate = this.onUpdate.bind(this);\n    /**\n     * Events instance - Polling.UPDATE Events object\n     * @type {Events}\n     */\n    this.events = new PollingEvents(Polling.UPDATE, this, this);\n    /**\n     * polling event 発生時間, event を発火すると 0 にリセットされます\n     * @type {number}\n     */\n    this.begin = 0;\n    /**\n     * Cycle 監視開始フラッグ\n     * @type {boolean}\n     */\n    this.started = false;\n  }\n  // // ----------------------------------------\n  // // EVENT\n  // // ----------------------------------------\n  // /**\n  //  * 一定間隔(milliseconds)毎に発生するイベント type を取得します\n  //  * @returns {string} event, pollingUpdate を返します\n  //  */\n  // static get UPDATE() {\n  //   return 'pollingUpdate';\n  // }\n  // ----------------------------------------\n  // METHOD\n  // ----------------------------------------\n  /**\n   * polling 時間を変更します<br>\n   * 1. プロパティ polling 変更\n   * 1. update 実行\n   * @param {number} interval polling 時間\n   * @returns {boolean} `update` をコールし Polling.UPDATE event が発生すると true を返します\n   */\n  change(interval) {\n    this.interval = interval;\n    return this.update();\n  }\n  /**\n   * started flag を反転させ現在の started flag 状態を取得します\n   * @returns {boolean} 現在の started flag 状態を返します\n   */\n  turnOver() {\n    this.started = !this.started;\n    return this.started;\n  }\n  /**\n   * events object を発火前に作成します\n   * @param {number} begin 開始時間: 前回の発火時間\n   * @param {number} present 現在時間\n   * @returns {Events} アップデートした Events を返します\n   */\n  updateEvents(begin, present) {\n    this.begin = begin;\n    // @type {Events} - start event\n    const events = this.events;\n    events.begin = begin;\n    events.present = present;\n    events.interval = this.interval;\n    return events;\n  }\n  /**\n   * cycle ループを開始します<br>\n   * watch Cycle.UPDATE event\n   * @returns {Cycle} cycle ループを開始しインスタンスを返します\n   */\n  initCycle() {\n    // cycle\n    const cycle = this.cycle;\n    // bind Cycle.UPDATE\n    cycle.on(Cycle.UPDATE, this.onUpdate);\n    // cycle 開始\n    cycle.start();\n    return cycle;\n  }\n  /**\n   * polling を開始します\n   * @returns {boolean} start に成功すると true を返します\n   */\n  start() {\n    if (this.started) {\n      // already start\n      return false;\n    }\n    // flag -> true\n    // this[startSymbol] = true;\n    this.turnOver();\n    // @type {number} - 開始時間\n    this.begin = Date.now();\n    // cycle\n    this.initCycle();\n    // // @type {number} - 開始時間\n    // const present = Date.now();\n    // // 強制的に1回目を実行\n    // this.fire(this.updateEvents(present, present));\n\n    return true;\n  }\n  /**\n   * polling を止めます\n   * @returns {boolean} stop に成功すると true を返します\n   */\n  stop() {\n    if (!this.started) {\n      // not start\n      return false;\n    }\n    this.cycle.off(Cycle.UPDATE, this.onUpdate);\n    // this[startSymbol] = false;\n    this.turnOver();\n    return true;\n  }\n  /**\n   * Cycle.UPDATE event handler, polling を計測しイベントを発火するかを判断します\n   *\n   * @listens {Cycle.UPDATE} Cycle.UPDATE が発生すると実行されます\n   * @returns {boolean} Polling.UPDATE event が発生すると true を返します\n   */\n  onUpdate() {\n    // 現在時間\n    // @type {number}\n    const present = Date.now();\n    // @type {number} - interval 間隔\n    const interval = this.interval;\n    // @type {number} - 開始時間\n    const begin = this.begin;\n    // 現在時間 が interval より大きくなったか\n    if ((present - begin) >= interval) {\n      // event 発火\n      this.fire(this.updateEvents(begin, present));\n      // 開始時間を update\n      this.begin = present;\n      // event 発生\n      return true;\n    }\n    return false;\n  }\n  /**\n   * Polling.UPDATE event を発生します\n   * @param {Events} events Polling.UPDATE event object\n   * @returns {void}\n   */\n  fire(events) {\n    this.dispatch(events);\n  }\n}\n"
   },
   {
-    "__docId__": 290,
+    "__docId__": 294,
     "kind": "class",
     "static": true,
     "variation": null,
@@ -8029,7 +8183,7 @@
     ]
   },
   {
-    "__docId__": 291,
+    "__docId__": 295,
     "kind": "constructor",
     "static": false,
     "variation": null,
@@ -8056,7 +8210,7 @@
     "generator": false
   },
   {
-    "__docId__": 292,
+    "__docId__": 296,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -8073,7 +8227,7 @@
     }
   },
   {
-    "__docId__": 293,
+    "__docId__": 297,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -8093,7 +8247,7 @@
     }
   },
   {
-    "__docId__": 294,
+    "__docId__": 298,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -8124,7 +8278,7 @@
     }
   },
   {
-    "__docId__": 295,
+    "__docId__": 299,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -8144,7 +8298,7 @@
     }
   },
   {
-    "__docId__": 296,
+    "__docId__": 300,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -8164,7 +8318,7 @@
     }
   },
   {
-    "__docId__": 297,
+    "__docId__": 301,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -8184,7 +8338,7 @@
     }
   },
   {
-    "__docId__": 298,
+    "__docId__": 302,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -8223,7 +8377,7 @@
     "generator": false
   },
   {
-    "__docId__": 299,
+    "__docId__": 303,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -8241,7 +8395,7 @@
     }
   },
   {
-    "__docId__": 300,
+    "__docId__": 304,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -8269,7 +8423,7 @@
     "generator": false
   },
   {
-    "__docId__": 301,
+    "__docId__": 305,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -8287,7 +8441,7 @@
     }
   },
   {
-    "__docId__": 302,
+    "__docId__": 306,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -8336,7 +8490,7 @@
     "generator": false
   },
   {
-    "__docId__": 303,
+    "__docId__": 307,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -8354,7 +8508,7 @@
     }
   },
   {
-    "__docId__": 304,
+    "__docId__": 308,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -8382,7 +8536,7 @@
     "generator": false
   },
   {
-    "__docId__": 305,
+    "__docId__": 309,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -8410,7 +8564,7 @@
     "generator": false
   },
   {
-    "__docId__": 306,
+    "__docId__": 310,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -8428,7 +8582,7 @@
     }
   },
   {
-    "__docId__": 307,
+    "__docId__": 311,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -8456,7 +8610,7 @@
     "generator": false
   },
   {
-    "__docId__": 308,
+    "__docId__": 312,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -8492,7 +8646,7 @@
     "generator": false
   },
   {
-    "__docId__": 309,
+    "__docId__": 313,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -8510,7 +8664,7 @@
     }
   },
   {
-    "__docId__": 310,
+    "__docId__": 314,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -8549,7 +8703,7 @@
     "generator": false
   },
   {
-    "__docId__": 311,
+    "__docId__": 315,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -8562,7 +8716,7 @@
     "content": "/**\n * @license inazumatv.com\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/16\n *\n * Copyright (c) 2011-2015 inazumatv.com, inc.\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n */\n\n// event\nimport Events from '../event/Events';\n\n// tick\nimport Polling from './Polling';\n\n/**\n * 固定値を使用し fps を決定します\n *\n * 以下のフレームレートが設定可能です\n *\n * - 60: Rate.RATE_60\n * - 30: RATE_30\n * - 20: RATE_20\n * - 15: RATE_15\n * - 12: RATE_12\n * - 10: RATE_10\n * - 6: RATE_6\n * - 5: RATE_5\n *\n * @example\n * // 1sec interval\n * const rate = new Rate(Rate.Rate_60);\n * const update = () => {\n *  // code here, something do\n * };\n * rate.on(Rate.UPDATE, update);\n * rate.start();\n */\nexport default class Rate extends Polling {\n  // ----------------------------------------\n  // CONST\n  // ----------------------------------------\n  /**\n   * fps 60 基準値\n   * @type {number}\n   */\n  static RATE_60 = 1;\n  /**\n   * fps 30 基準値\n   * @type {number}\n   */\n  static RATE_30 = 2;\n  /**\n   * fps 20 基準値\n   * @type {number}\n   */\n  static RATE_20 = 3;\n  /**\n   * fps 15 基準値\n   * @type {number}\n   */\n  static RATE_15 = 4;\n  /**\n   * fps 12 基準値\n   * @type {number}\n   */\n  static RATE_12 = 5;\n  /**\n   * fps 10 基準値\n   * @type {number}\n   */\n  static RATE_10 = 6;\n  /**\n   * fps 6 基準値\n   * @type {number}\n   */\n  static RATE_6 = 10;\n  /**\n   * fps 5 基準値\n   * @type {number}\n   */\n  static RATE_5 = 12;\n  // /**\n  //  * fps 60 基準値を取得します\n  //  * @const RATE_60\n  //  * @returns {number} fps 60 基準値を返します\n  //  * @default 1\n  //  */\n  // static get RATE_60() {\n  //   return 1;\n  // }  /**\n  //  * fps 30 基準値を取得します\n  //  * @const RATE_30\n  //  * @returns {number} fps 30 基準値を返します\n  //  * @default 2\n  //  */\n  // static get RATE_30() {\n  //   return 2;\n  // }\n  // /**\n  //  * fps 20 基準値を取得します\n  //  * @const RATE_20\n  //  * @returns {number} fps 20 基準値を返します\n  //  * @default 3\n  //  */\n  // static get RATE_20() {\n  //   return 3;\n  // }\n  // /**\n  //  * fps 15 基準値を取得します\n  //  * @const RATE_15\n  //  * @returns {number} fps 15 基準値を返します\n  //  * @default 4\n  //  */\n  // static get RATE_15() {\n  //   return 4;\n  // }\n  // /**\n  //  * fps 12 基準値を取得します\n  //  * @const RATE_12\n  //  * @returns {number} fps 12 基準値を返します\n  //  * @default 5\n  //  */\n  // static get RATE_12() {\n  //   return 5;\n  // }\n  // /**\n  //  * fps 10 基準値を取得します\n  //  * @const RATE_10\n  //  * @returns {number} fps 10 基準値を返します\n  //  * @default 6\n  //  */\n  // static get RATE_10() {\n  //   return 6;\n  // }\n  // /**\n  //  * fps 6 基準値を取得します\n  //  * @const RATE_6\n  //  * @returns {number} fps 6 基準値を返します\n  //  * @default 10\n  //  */\n  // static get RATE_6() {\n  //   return 10;\n  // }\n  // /**\n  //  * fps 5 基準値を取得します\n  //  * @const RATE_5\n  //  * @returns {number} fps 6 基準値を返します\n  //  * @default 12\n  //  */\n  // static get RATE_5() {\n  //   return 12;\n  // }\n  // ----------------------------------------\n  // EVENT\n  // ----------------------------------------\n  /**\n   * フレームレート毎に発生するイベント - rateUpdate\n   * @event UPDATE\n   * @type {string}\n   */\n  static UPDATE = 'rateUpdate';\n  // /**\n  //  * フレームレート毎に発生するイベント type を取得します\n  //  * @event UPDATE\n  //  * @returns {string} event, rateUpdate を返します\n  //  * @default rateUpdate\n  //  */\n  // static get UPDATE() {\n  //   return 'rateUpdate';\n  // }\n  // ----------------------------------------\n  // CONSTRUCTOR\n  // ----------------------------------------\n  /**\n   * 固定値フレームレート毎に UPDATE イベントを発生させます\n   * @param {number} [rateValue=Rate.RATE_5] fps, 固定値以外設定できません\n   */\n  constructor(rateValue = Rate.RATE_5) {\n    // 60fps で polling を行う\n    super(1000 / 60);\n    // @type {Events}\n    const events = new Events(Rate.UPDATE, this, this);\n    // 設定可能な rate list\n    const rates = [\n      Rate.RATE_60,\n      Rate.RATE_30,\n      Rate.RATE_20,\n      Rate.RATE_15,\n      Rate.RATE_12,\n      Rate.RATE_10,\n      Rate.RATE_6,\n      Rate.RATE_5,\n    ];\n    /**\n     * Rate 通知 Events instance\n     * @type {Events}\n     */\n    this.events = events;\n    /**\n     * 許容可能な rate\n     * @type {Array<number>}\n     */\n    this.rates = rates;\n    /**\n     * rate count, update 毎にカウントアップします<br>\n     * 不正値の時は `Rate.RATE_5` を使用します\n     * @type {number}\n     */\n    this.count = 0;\n    // let rate = this.validate(rateValue) ? rateValue : Rate.RATE_5;\n    /**\n     * rate 値\n     * @type {?number}\n     * @default Rate.RATE_5\n     */\n    this.rate = this.validate(rateValue) ? rateValue : Rate.RATE_5;\n    // this.rate = rate;\n    // /**\n    //  * rate 値を設定します\n    //  * @param {number} value rate 値\n    //  * @returns {boolean} rate 設定に成功すると true を返します\n    //  */\n    // this.setRate = (value) => {\n    //   if (this.validate(value)) {\n    //     rate = value;\n    //     return true;\n    //   }\n    //   return false;\n    // };\n    // init\n    this.setRate(rateValue);\n  }\n  // ----------------------------------------\n  // METHOD\n  // ----------------------------------------\n  /**\n   * rate 値を設定します\n   * - 正常値: `this.rate` 更新, value を返します\n   * - 不正値: `this.rate` 更新しません, null を返します\n   * @param {number} value rate 値\n   * @returns {?number} 正しい rate は設定値を不正な時は null を返します\n   */\n  setRate(value) {\n    if (this.validate(value)) {\n      this.rate = value;\n      return value;\n    }\n    return null;\n  }\n  /**\n   * 正規な rate 値かをチェックします\n   * @param {number} rate 対象 rate\n   * @returns {boolean} 正しいと true を返します\n   */\n  validate(rate) {\n    return this.rates.indexOf(rate) !== -1;\n  }\n  /**\n   * fps 基準値を設定します\n   * @throws {Error} 引数 rate が設定可能値以外の時に例外エラーが発生します\n   * @param {number} rate fps 基準値, <br>\n   * this.RATE_30, this.RATE_20, this.RATE_15, this.RATE_12, this.RATE_10, <br>\n   * this.RATE_6, this.RATE_5 の何れかが必須です\n   * @returns {boolean} rate 設定に成功すると true を返します\n   */\n  change(rate) {\n    const result = this.setRate(rate);\n    this.update();\n    return result !== null;\n  }\n  /**\n   * loop(requestAnimationFrame) を開始します\n   * @returns {boolean} start に成功すると true を返します\n   */\n  start() {\n    if (this.started) {\n      // already start\n      return false;\n    }\n    // flag -> true\n    this.turnOver();\n    // cycle\n    this.initCycle();\n    // 強制的に1回目を実行\n    this.fire(this.updateEvents(0, 0));\n    return true;\n  }\n  /**\n   * {@link Polling}.UPDATE event handler\n   *\n   * count property を `+1` 加算後設定 rate で割り算し余りが `0` の時にイベント Rate.UPDATE を発生させます\n   * @returns {boolean} Rate.UPDATE event が発生すると true を返します\n   */\n  onUpdate() {\n    // 余りが 0 の時にイベントを発火します\n    this.count += 1;\n    const reminder = this.count % this.rate;\n    if (reminder === 0) {\n      this.count = 0;\n      this.fire(this.updateEvents(0, 0));\n      return true;\n    }\n    return false;\n  }\n}\n"
   },
   {
-    "__docId__": 312,
+    "__docId__": 316,
     "kind": "class",
     "static": true,
     "variation": null,
@@ -8584,7 +8738,7 @@
     ]
   },
   {
-    "__docId__": 313,
+    "__docId__": 317,
     "kind": "constructor",
     "static": false,
     "variation": null,
@@ -8611,7 +8765,7 @@
     "generator": false
   },
   {
-    "__docId__": 314,
+    "__docId__": 318,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -8631,7 +8785,7 @@
     }
   },
   {
-    "__docId__": 315,
+    "__docId__": 319,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -8651,7 +8805,7 @@
     }
   },
   {
-    "__docId__": 316,
+    "__docId__": 320,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -8671,7 +8825,7 @@
     }
   },
   {
-    "__docId__": 317,
+    "__docId__": 321,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -8697,7 +8851,7 @@
     }
   },
   {
-    "__docId__": 318,
+    "__docId__": 322,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -8736,7 +8890,7 @@
     "generator": false
   },
   {
-    "__docId__": 319,
+    "__docId__": 323,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -8754,7 +8908,7 @@
     }
   },
   {
-    "__docId__": 320,
+    "__docId__": 324,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -8793,7 +8947,7 @@
     "generator": false
   },
   {
-    "__docId__": 321,
+    "__docId__": 325,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -8840,7 +8994,7 @@
     "generator": false
   },
   {
-    "__docId__": 322,
+    "__docId__": 326,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -8868,7 +9022,7 @@
     "generator": false
   },
   {
-    "__docId__": 323,
+    "__docId__": 327,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -8896,7 +9050,7 @@
     "generator": false
   },
   {
-    "__docId__": 324,
+    "__docId__": 328,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -8914,7 +9068,7 @@
     }
   },
   {
-    "__docId__": 325,
+    "__docId__": 329,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -8932,7 +9086,7 @@
     }
   },
   {
-    "__docId__": 326,
+    "__docId__": 330,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -8945,7 +9099,7 @@
     "content": "/**\n * Copyright (c) 2011-2017 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2017/06/02 - 15:42\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\nimport Events from '../../event/Events';\n\n/**\n * requestAnimationFrame を singleton 実行する {@link Cycle} Events\n */\nexport default class CycleEvents extends Events {\n  // ---------------------------------------------------\n  //  CONSTRUCTOR\n  // ---------------------------------------------------\n  /**\n   * custom Event Object\n   * @param {string} type イベント種類\n   * @param {*} currentTarget current イベント発生インスタンス\n   * @param {*} [target=undefined] イベント発生インスタンス\n   * */\n  constructor(type, currentTarget, target = undefined) {\n    super(type, currentTarget, target);\n    // ---\n    /**\n     * requestAnimationFrame 戻り値\n     * @type {number}\n     */\n    this.id = -1;\n  }\n}\n"
   },
   {
-    "__docId__": 327,
+    "__docId__": 331,
     "kind": "class",
     "static": true,
     "variation": null,
@@ -8964,7 +9118,7 @@
     ]
   },
   {
-    "__docId__": 328,
+    "__docId__": 332,
     "kind": "constructor",
     "static": false,
     "variation": null,
@@ -9011,7 +9165,7 @@
     "generator": false
   },
   {
-    "__docId__": 329,
+    "__docId__": 333,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -9031,7 +9185,7 @@
     }
   },
   {
-    "__docId__": 330,
+    "__docId__": 334,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -9044,7 +9198,7 @@
     "content": "/**\n * Copyright (c) 2011-2017 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2017/06/02 - 15:42\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\nimport PollingEvents from './PollingEvents';\n\n/**\n * {@link Fps} Events\n */\nexport default class FpsEvents extends PollingEvents {\n  // ---------------------------------------------------\n  //  CONSTRUCTOR\n  // ---------------------------------------------------\n  /**\n   * custom Event Object\n   * @param {string} type イベント種類\n   * @param {*} currentTarget current イベント発生インスタンス\n   * @param {*} [target=undefined] イベント発生インスタンス\n   * */\n  constructor(type, currentTarget, target = undefined) {\n    super(type, currentTarget, target);\n    // ---\n    /**\n     * fps - フレームレート値\n     * @type {number}\n     */\n    this.fps = -1;\n  }\n}\n"
   },
   {
-    "__docId__": 331,
+    "__docId__": 335,
     "kind": "class",
     "static": true,
     "variation": null,
@@ -9063,7 +9217,7 @@
     ]
   },
   {
-    "__docId__": 332,
+    "__docId__": 336,
     "kind": "constructor",
     "static": false,
     "variation": null,
@@ -9110,7 +9264,7 @@
     "generator": false
   },
   {
-    "__docId__": 333,
+    "__docId__": 337,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -9130,7 +9284,7 @@
     }
   },
   {
-    "__docId__": 334,
+    "__docId__": 338,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -9143,7 +9297,7 @@
     "content": "/**\n * Copyright (c) 2011-2017 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2017/06/02 - 15:42\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\nimport Events from '../../event/Events';\n\n/**\n * {@link Polling} Events\n */\nexport default class PollingEvents extends Events {\n  // ---------------------------------------------------\n  //  CONSTRUCTOR\n  // ---------------------------------------------------\n  /**\n   * custom Event Object\n   * @param {string} type イベント種類\n   * @param {*} currentTarget current イベント発生インスタンス\n   * @param {*} [target=undefined] イベント発生インスタンス\n   * */\n  constructor(type, currentTarget, target = undefined) {\n    super(type, currentTarget, target);\n    // ---\n    /**\n     * polling event 発生時間\n     * @type {number}\n     */\n    this.begin = 0;\n    /**\n     * 現在時間 - Date.now\n     * @type {number}\n     */\n    this.present = 0;\n    /**\n     * イベント間隔(ms)\n     * @type {number}\n     */\n    this.interval = 0;\n  }\n}\n"
   },
   {
-    "__docId__": 335,
+    "__docId__": 339,
     "kind": "class",
     "static": true,
     "variation": null,
@@ -9162,7 +9316,7 @@
     ]
   },
   {
-    "__docId__": 336,
+    "__docId__": 340,
     "kind": "constructor",
     "static": false,
     "variation": null,
@@ -9209,7 +9363,7 @@
     "generator": false
   },
   {
-    "__docId__": 337,
+    "__docId__": 341,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -9229,7 +9383,7 @@
     }
   },
   {
-    "__docId__": 338,
+    "__docId__": 342,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -9249,7 +9403,7 @@
     }
   },
   {
-    "__docId__": 339,
+    "__docId__": 343,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -9269,7 +9423,7 @@
     }
   },
   {
-    "__docId__": 340,
+    "__docId__": 344,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -9282,7 +9436,7 @@
     "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/11/19 - 22:10\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n\n/**\n * scroll freeze timeout id\n * @private\n * @static\n * @type {number}\n */\nlet timerId = 0;\n\n/**\n * scroll を止める時間\n * @private\n * @static\n * @type {number}\n * @default 200\n */\nlet duration = 200;\n\n/**\n * scroll 操作を強制的に不可能にします\n */\nexport default class Freeze {\n  /**\n   * scroll 動作を受付不能にします\n   * @returns {void}\n   */\n  static start() {\n    window.addEventListener('touchstart', Freeze.onScroll, false);\n    window.addEventListener('touchmove', Freeze.onScroll, false);\n    window.addEventListener('touchend', Freeze.onScroll, false);\n    window.addEventListener('scroll', Freeze.onScroll, false);\n    document.addEventListener('wheel', Freeze.onScroll, false);\n    document.addEventListener('mousewheel', Freeze.onScroll, false);\n    window.addEventListener('DOMMouseScroll', Freeze.onScroll, false);\n  }\n  /**\n   * scroll 動作を回復します\n   * @returns {void}\n   */\n  static stop() {\n    window.removeEventListener('touchstart', Freeze.onScroll);\n    window.removeEventListener('touchmove', Freeze.onScroll);\n    window.removeEventListener('touchend', Freeze.onScroll);\n    window.removeEventListener('scroll', Freeze.onScroll);\n    document.removeEventListener('wheel', Freeze.onScroll);\n    document.removeEventListener('mousewheel', Freeze.onScroll);\n    window.removeEventListener('DOMMouseScroll', Freeze.onScroll);\n  }\n  /**\n   * window scroll event handler, バブリング・伝播全てキャンセルします\n   * @param {Event} event window scroll event\n   * @returns {boolean} event をキャンセルするために false を返します\n   */\n  static onScroll(event) {\n    event.preventDefault();\n    event.stopPropagation();\n    return false;\n  }\n  /**\n   * scroll 操作を引数(delay)の間キャンセルします\n   * @param {number} [delay=200] 遅延時間(ms), 200\n   * @returns {number} time out id\n   */\n  static freeze(delay = Freeze.duration()) {\n    clearTimeout(timerId);\n    // timerId = 0;\n    Freeze.start();\n    if (delay > 0) {\n      timerId = setTimeout(Freeze.stop, delay);\n    }\n    return timerId;\n  }\n  /**\n   * scroll 操作を不能にする時間間隔(ms)を取得します\n   * @returns {number} scroll 操作を不能にする時間間隔(ms)\n   */\n  static duration() {\n    return duration;\n  }\n  /**\n   * scroll 操作を不能にする時間間隔(ms)を設定します\n   * @param {number} time scroll 操作を不能にする時間(ms)\n   * @returns {void}\n   */\n  static setDuration(time) {\n    duration = time;\n  }\n}\n"
   },
   {
-    "__docId__": 341,
+    "__docId__": 345,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -9311,7 +9465,7 @@
     }
   },
   {
-    "__docId__": 342,
+    "__docId__": 346,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -9344,7 +9498,7 @@
     }
   },
   {
-    "__docId__": 343,
+    "__docId__": 347,
     "kind": "class",
     "static": true,
     "variation": null,
@@ -9360,7 +9514,7 @@
     "interface": false
   },
   {
-    "__docId__": 344,
+    "__docId__": 348,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -9388,7 +9542,7 @@
     "generator": false
   },
   {
-    "__docId__": 345,
+    "__docId__": 349,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -9416,7 +9570,7 @@
     "generator": false
   },
   {
-    "__docId__": 346,
+    "__docId__": 350,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -9455,7 +9609,7 @@
     "generator": false
   },
   {
-    "__docId__": 347,
+    "__docId__": 351,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -9496,7 +9650,7 @@
     "generator": false
   },
   {
-    "__docId__": 348,
+    "__docId__": 352,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -9524,7 +9678,7 @@
     "generator": false
   },
   {
-    "__docId__": 349,
+    "__docId__": 353,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -9563,7 +9717,7 @@
     "generator": false
   },
   {
-    "__docId__": 350,
+    "__docId__": 354,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -9576,7 +9730,7 @@
     "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/11/29 - 22:06\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n/**\n * 衝突判定を行います\n */\nexport default class Hit {\n  /**\n   * element と window.top(0) window.bottom(height) のヒットテストを行います\n   * @param {number} height 衝突対象物の高さ window.innerHeight\n   * @param {ClientRect|Object} offset 比較対象物の element ClientRect または同等の Object\n   * @returns {{\n   *  top: boolean,\n   *  bottom: boolean,\n   *  contain: boolean,\n   *  include: boolean,\n   *  result: boolean\n   * }} hit check object を返します\n   */\n  static test(height, offset) {\n    // hit test\n    const hit = {\n      result: false,\n      top: false,\n      bottom: false,\n      contain: false,\n      include: false,\n    };\n\n    // top\n    if (offset.top <= height && offset.top >= 0) {\n      hit.top = true;\n    }\n\n    // bottom\n    if (offset.bottom <= height && offset.bottom >= 0) {\n      hit.bottom = true;\n    }\n\n    // contain check を行います\n    if (offset.top <= 0 && offset.bottom >= height) {\n      hit.contain = true;\n    }\n\n    // include check を行います\n    if (\n      (offset.top >= 0 && offset.top <= height) &&\n      (offset.bottom >= 0 && offset.bottom <= height)\n    ) {\n      hit.include = true;\n    }\n    // return\n    // return hit.top || hit.bottom || hit.contain || hit.include;\n    hit.result = hit.top || hit.bottom || hit.contain || hit.include;\n    return hit;\n  }\n}\n"
   },
   {
-    "__docId__": 351,
+    "__docId__": 355,
     "kind": "class",
     "static": true,
     "variation": null,
@@ -9592,7 +9746,7 @@
     "interface": false
   },
   {
-    "__docId__": 352,
+    "__docId__": 356,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -9642,7 +9796,7 @@
     "generator": false
   },
   {
-    "__docId__": 353,
+    "__docId__": 357,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -9655,7 +9809,7 @@
     "content": "/**\n * Copyright (c) 2011-2017 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2017/01/19 - 15:13\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n// --------------------------------\n// copy [native code]\n/**\n * copy [native code] - Math.floor\n * @type {function}\n * @private\n * @static\n */\nconst mathFloor = Math.floor;\n/**\n * copy [native code] - Math.max\n * @type {function}\n * @private\n * @static\n */\nconst mathMax = Math.max;\n/**\n * copy [native code] - Math.min\n * @type {function}\n * @private\n * @static\n */\nconst mathMin = Math.min;\n/**\n * copy [native code] - parseInt\n * @type {function}\n * @private\n * @static\n */\nconst mathInt = self.parseInt;\n\n// --------------------------------\n// constant for calculate\n/**\n * 計算定数\n * ```\n * 1 / 6\n * ```\n * @type {number}\n * @private\n * @static\n */\nconst oneSix = 1 / 6;\n/**\n * 計算定数\n * ```\n * 0.5\n * ```\n * @type {number}\n * @private\n * @static\n */\nconst half = 0.5;\n/**\n * 計算定数\n * ```\n * 2 / 3\n * ```\n * @type {number}\n * @private\n * @static\n */\nconst twoThree = 2 / 3;\n/**\n * 計算定数\n * ```\n * 1 / 3\n * ```\n * @type {number}\n * @private\n * @static\n */\nconst oneThree = 1 / 3;\n/**\n * 色変換ユーティリティーです\n */\nexport default class Iro {\n  // ----------------------------------------\n  // HSL\n  // ----------------------------------------\n  /**\n   * RGB を HSL 変換します\n   * @see http://stackoverflow.com/questions/2353211/hsl-to-rgb-color-conversion\n   * @see http://www.rapidtables.com/convert/color/rgb-to-hsl.htm\n   * @param {number} red RGB.red 0 ~ 255\n   * @param {number} green RGB.green 0 ~ 255\n   * @param {number} blue RGB.blue 0 ~ 255\n   * @returns {{h: number, s: number, l: number}}\n   * {hue, saturation, luminance} object を返します, それぞれ 0 ~ 1\n   * hue: 0 ~ 360 を 360 で正規化されます\n   */\n  static rgb2hsl(red, green, blue) {\n    const r = red / 255;\n    const g = green / 255;\n    const b = blue / 255;\n    const maxValue = mathMax(r, g, b);\n    const minValue = mathMin(r, g, b);\n    // luminance\n    const l = (maxValue + minValue) * 0.5;\n    // hue\n    let h = 0;\n    // saturation\n    let s = 0;\n    if (maxValue === minValue) {\n      // achromatic: 〘光学〙無色の; 色消しの\n      return {\n        h,\n        s,\n        l,\n      };\n    }\n    // ---\n    const d = maxValue - minValue;\n    s = l > 0.5 ? d / (2 - maxValue - minValue) : d / (maxValue + minValue);\n    switch (maxValue) {\n      case r: {\n        h = ((g - b) / d) + (g < b ? 6 : 0);\n        break;\n      }\n      case g: {\n        h = ((b - r) / d) + 2;\n        break;\n      }\n      case b: {\n        h = ((r - g) / d) + 4;\n        break;\n      }\n      default: {\n        h = 0;\n        break;\n      }\n    }\n    h /= 6;\n    // return value\n    return {\n      h,\n      s,\n      l,\n    };\n  }// rgb2hsl\n  /**\n   * HSL to RGB で `saturation !== 0` な時の R, G, B 変換 helper です\n   * @param {number} point `(2 * l) - q`\n   * @param {number} q `l < 0.5 ? l * (1 + s) : (l + s) - (l * s)`\n   * @param {number} hue hue\n   * @returns {number} 0 ~ 1 な値を返します\n   */\n  static hue2rgb(point, q, hue) {\n    let t = hue;\n    if (t < 0) {\n      t += 1;\n    } else if (t > 1) {\n      t -= 1;\n    }\n    if (t < oneSix) {\n      return point + ((q - point) * 6 * t);\n    } else if (t < half) {\n      return q;\n    } else if (t < twoThree) {\n      return point + ((q - point) * (twoThree - t) * 6);\n    }\n    return point;\n  }\n  /**\n   * HSL to RGB 変換します\n   * @param {number} h hue 0 ~ 1 degree / 360 正規化\n   * @param {number} s saturation 0 ~ 1\n   * @param {number} l luminance 0 ~ 1\n   * @returns {{r: number, g: number, b: number}} r, g, b: 0 ~ 255 object を返します\n   */\n  static hsl2rgb(h, s, l) {\n    let r = l;\n    let g = l;\n    let b = l;\n    if (s !== 0) {\n      const q = l < 0.5 ? l * (1 + s) : (l + s) - (l * s);\n      const point = (2 * l) - q;\n      r = Iro.hue2rgb(point, q, h + oneThree);\n      g = Iro.hue2rgb(point, q, h);\n      b = Iro.hue2rgb(point, q, h - oneThree);\n    }\n    return {\n      r: mathInt(r * 255, 10),\n      g: mathInt(g * 255, 10),\n      b: mathInt(b * 255, 10),\n    };\n  }\n  // ----------------------------------------\n  // HSV\n  // ----------------------------------------\n  /**\n   * RGB to HSV(HSB) 変換\n   * @param {number} r RGB.red 0 ~ 255\n   * @param {number} g RGB.green 0 ~ 255\n   * @param {number} b RGB.blue 0 ~ 255\n   * @returns {{h: number, s: number, v: number}} 各 0 ~ 1\n   */\n  static rgb2hsv(r, g, b) {\n    // 正規化\n    const red = r / 255;\n    const green = g / 255;\n    const blue = b / 255;\n\n    const maxValue = mathMax(red, green, blue);\n    const minValue = mathMin(red, green, blue);\n    const v = maxValue;\n    const d = maxValue - minValue;\n    const s = maxValue === 0 ? 0 : d / maxValue;\n    let h = 0;\n    if (maxValue === minValue) {\n      // achromatic: 〘光学〙無色の; 色消しの\n      return {\n        h,\n        s,\n        v,\n      };\n    }\n    // ---\n    switch (maxValue) {\n      case red: {\n        h = ((green - blue) / d) + (green < blue ? 6 : 0);\n        break;\n      }\n      case green: {\n        h = ((blue - red) / d) + 2;\n        break;\n      }\n      case blue: {\n        h = ((red - green) / d) + 4;\n        break;\n      }\n      default: {\n        h = 0;\n        break;\n      }\n    }\n    h /= 6;\n    return {\n      h,\n      s,\n      v,\n    };\n  }\n  /**\n   * HSV(HSB) to RGB 変換します\n   * @param {number} h hue 0 ~ 1\n   * @param {number} s saturation 0 ~ 1\n   * @param {number} v value(bright) 0 ~ 1\n   * @returns {{r: Number, g: Number, b: Number}} 各 0 ~ 255\n   */\n  static hsv2rgb(h, s, v) {\n    const i = mathFloor(h * 6);\n    const f = (h * 6) - i;\n    const point = v * (1 - s);\n    const q = v * (1 - (f * s));\n    const t = v * (1 - ((1 - f) * s));\n    let r = 0;\n    let g = 0;\n    let b = 0;\n    // ---\n    switch (i % 6) {\n      case 0:\n        r = v;\n        g = t;\n        b = point;\n        break;\n\n      case 1:\n        r = q;\n        g = v;\n        b = point;\n        break;\n\n      case 2:\n        r = point;\n        g = v;\n        b = t;\n        break;\n\n      case 3:\n        r = point;\n        g = q;\n        b = v;\n        break;\n\n      case 4:\n        r = t;\n        g = point;\n        b = v;\n        break;\n\n      case 5:\n        r = v;\n        g = point;\n        b = q;\n        break;\n\n      default:\n        r = 0;\n        g = 0;\n        b = 0;\n        break;\n    }\n    // ---\n    return {\n      r: mathInt(r * 255, 10),\n      g: mathInt(g * 255, 10),\n      b: mathInt(b * 255, 10),\n    };\n  }\n  // ----------------------------------------\n  // HEX\n  // ----------------------------------------\n  /**\n   * CSS shorthand 色指定をフル変換します\n   * @param {string} hex `#f00` な CSS 色形式\n   * @returns {?string} `ff0000` フル変換し返します\n   * @see http://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb\n   */\n  static shorthand(hex) {\n    if (typeof hex !== 'string') {\n      return null;\n    }\n    const pattern = /^#?([a-f\\d])([a-f\\d])([a-f\\d])$/i;\n    const color = hex.replace(pattern, (m, r, g, b) => `${r}${r}${g}${g}${b}${b}`);\n    return color.length === 7 ? color : `#${color}`;\n  }\n  /**\n   * CSS 色指定を RGB 変換します\n   * @param {string} hex CSS 色形式 `#f00` or `#ff0000`\n   * @returns {?{r: number, g: number, b: number}} nullable で返します\n   */\n  static hex2rgb(hex) {\n    const hexString = Iro.shorthand(hex);\n    if (typeof hexString !== 'string') {\n      return null;\n    }\n    // ---\n    const result = /^#?([a-f\\d]{2})([a-f\\d]{2})([a-f\\d]{2})$/i.exec(hexString);\n    return Array.isArray(result) && result.length === 4 ?\n    {\n      r: mathInt(result[1], 16),\n      g: mathInt(result[2], 16),\n      b: mathInt(result[3], 16),\n    } : null;\n  }\n  /**\n   * 0 ~ 255 RGB color number を `00` な 16進形式に変換します\n   * @param {number} colorNumber 変換する RGB color number\n   * @returns {string} 2桁を保証し 16進 変換後文字列を返します\n   */\n  static int16(colorNumber) {\n    const hex = colorNumber.toString(16);\n    return hex.length === 1 ? `0${hex}` : hex;\n  }\n  /**\n   * RGB を CSS形式 hex 変換します\n   * @param {number} r red 0 ~ 255\n   * @param {number} g green 0 ~ 255\n   * @param {number} b blue 0 ~ 255\n   * @returns {string} CSS形式 hex `#ff0000` を返します\n   */\n  static rgb2hex(r, g, b) {\n    return `#${Iro.int16(r)}${Iro.int16(g)}${Iro.int16(b)}`;\n  }\n  /**\n   * 0 ~ 16777215 数値を `#ffffff` な CSS 16進色形式に変換します\n   * @param {number} rgb 0 ~ 16777215 名数値\n   * @returns {string} `#ffffff` な CSS 16進色形式を返します\n   */\n  static int2hex(rgb) {\n    let hex = mathFloor(rgb).toString(16);\n    const length = hex.length;\n    if (length === 6) {\n      return `#${hex}`;\n    }\n    let step = 6 - length;\n    while (step) {\n      hex = `0${hex}`;\n      step -= 1;\n    }\n    return `#${hex}`;\n  }\n  /**\n   * `#ffffff` な CSS 16進色形式を 10進数変換します\n   * @param {string} hex `#f00` or `#ff0000` な CSS 16進色形式\n   * @returns {?number} 10進数へ変換し返します\n   */\n  static hex2int(hex) {\n    const hexString = Iro.shorthand(hex);\n    if (typeof hexString !== 'string') {\n      return null;\n    }\n    return mathInt(hexString.replace('#', ''), 16);\n  }\n  /**\n   * #FFFFFF な CSS 16進を 0xFFFFFF 変換し 10進数にします\n   * @param {string} hex #FFFFFF な CSS 16進\n   * @return {Number} 10進数変換後の色ナンバーを返します\n   */\n  static toInt(hex) {\n    return parseInt(hex.replace('#', '0x'), 16);\n  }\n}\n"
   },
   {
-    "__docId__": 354,
+    "__docId__": 358,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -9684,7 +9838,7 @@
     }
   },
   {
-    "__docId__": 355,
+    "__docId__": 359,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -9713,7 +9867,7 @@
     }
   },
   {
-    "__docId__": 356,
+    "__docId__": 360,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -9742,7 +9896,7 @@
     }
   },
   {
-    "__docId__": 357,
+    "__docId__": 361,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -9771,7 +9925,7 @@
     }
   },
   {
-    "__docId__": 358,
+    "__docId__": 362,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -9800,7 +9954,7 @@
     }
   },
   {
-    "__docId__": 359,
+    "__docId__": 363,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -9829,7 +9983,7 @@
     }
   },
   {
-    "__docId__": 360,
+    "__docId__": 364,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -9858,7 +10012,7 @@
     }
   },
   {
-    "__docId__": 361,
+    "__docId__": 365,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -9887,7 +10041,7 @@
     }
   },
   {
-    "__docId__": 362,
+    "__docId__": 366,
     "kind": "class",
     "static": true,
     "variation": null,
@@ -9903,7 +10057,7 @@
     "interface": false
   },
   {
-    "__docId__": 363,
+    "__docId__": 367,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -9966,7 +10120,7 @@
     "generator": false
   },
   {
-    "__docId__": 364,
+    "__docId__": 368,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10025,7 +10179,7 @@
     "generator": false
   },
   {
-    "__docId__": 365,
+    "__docId__": 369,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10084,7 +10238,7 @@
     "generator": false
   },
   {
-    "__docId__": 366,
+    "__docId__": 370,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10143,7 +10297,7 @@
     "generator": false
   },
   {
-    "__docId__": 367,
+    "__docId__": 371,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10202,7 +10356,7 @@
     "generator": false
   },
   {
-    "__docId__": 368,
+    "__docId__": 372,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10244,7 +10398,7 @@
     "generator": false
   },
   {
-    "__docId__": 369,
+    "__docId__": 373,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10283,7 +10437,7 @@
     "generator": false
   },
   {
-    "__docId__": 370,
+    "__docId__": 374,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10322,7 +10476,7 @@
     "generator": false
   },
   {
-    "__docId__": 371,
+    "__docId__": 375,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10381,7 +10535,7 @@
     "generator": false
   },
   {
-    "__docId__": 372,
+    "__docId__": 376,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10420,7 +10574,7 @@
     "generator": false
   },
   {
-    "__docId__": 373,
+    "__docId__": 377,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10459,7 +10613,7 @@
     "generator": false
   },
   {
-    "__docId__": 374,
+    "__docId__": 378,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10492,7 +10646,7 @@
     "generator": false
   },
   {
-    "__docId__": 375,
+    "__docId__": 379,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -10505,7 +10659,7 @@
     "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/10/26 - 14:57\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\nimport Type from './Type';\n\n/**\n * Array（配列）Utility\n */\nexport default class List {\n  /**\n   * Array.prototype.fill, polyfill\n   * @param {number} lengthData 配列長\n   * @param {*} value fill する値\n   * @returns {Array.<*>} fill 後の配列を返します\n   * @private\n   */\n  static filling(lengthData, value) {\n    let length = lengthData;\n    const arr = [].slice(0);\n    while (length > 0) {\n      arr.push(value);\n      length -= 1;\n    }\n    return arr;\n  }\n  /**\n   * Array.prototype.fill を行います\n   * @param {number} length 配列長\n   * @param {*} value fill する値\n   * @returns {Array.<*>} fill 後の配列を返しますd\n   */\n  static fill(length, value = 0) {\n    // 関数が使えない時は polyfill 関数を使用します\n    if (!Type.method(Array.prototype.fill)) {\n      return List.filling(length, value);\n    }\n    // native method\n    return new Array(length).fill(value);\n  }\n}\n"
   },
   {
-    "__docId__": 376,
+    "__docId__": 380,
     "kind": "class",
     "static": true,
     "variation": null,
@@ -10521,7 +10675,7 @@
     "interface": false
   },
   {
-    "__docId__": 377,
+    "__docId__": 381,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10570,7 +10724,7 @@
     "generator": false
   },
   {
-    "__docId__": 378,
+    "__docId__": 382,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10619,7 +10773,7 @@
     "generator": false
   },
   {
-    "__docId__": 379,
+    "__docId__": 383,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -10632,7 +10786,7 @@
     "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/11/22 - 13:53\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n/**\n * 文字列操作の utility\n */\nexport default class Text {\n  /**\n   * camel case を hyphenation に変換します\n   * @param {string} str 操作対象文字列\n   * @returns {string} キャメルケースをハイフネーションに変換後文字列を返します\n   */\n  static dash(str) {\n    return str.replace(/([A-Z])/g, '-$1').toLowerCase();\n  }\n  /**\n   * camel case へ変換します\n   * @param {string} str 操作対象文字列\n   * @returns {*|void|string|XML} キャメルケース文字列を返します\n   */\n  static camel(str) {\n    // return str.replace(/^\\s+|\\s+$/g, '');\n    return str.replace(/-([a-z])/g, (g) => {\n      const first = g[1];\n      return first.toUpperCase();\n    });\n  }\n  /**\n   * 数値に3桁区切りの `,` カンマを挿入します\n   * @param {number} number カンマを挿入する数値\n   * @param {string} [locale=js-JP] ロケール\n   * @returns {string} カンマ挿入後の文字列, 小数点なし\n   * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString\n   * @see http://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript\n   */\n  static comma(number, locale = 'ja-JP') {\n    let numbered = '';\n    if (number.toLocaleString) {\n      numbered = number.toLocaleString(locale);\n    } else {\n      numbered = number.toString().replace(/\\B(?=(\\d{3})+(?!\\d))/g, ',');\n    }\n    // IE 8 `NN.00` にするので `.` 以下削除\n    return numbered.split('.').shift();\n  }\n  /**\n   * 文字列の単語を置き換えます\n   * @param {string} targetText 置換え対象文字列\n   * @param {string} targetWord 置換え元単語\n   * @param {string} replaceWord 置換える単語\n   * @returns {string} 置換え後の文字列を返します\n   */\n  static replace(targetText, targetWord, replaceWord) {\n    return targetText.split(targetWord).join(replaceWord);\n  }\n  /**\n   * 文字列から単語を削除します\n   * @param {string} targetText 置換え対象文字列\n   * @param {string} targetWord 削除する単語\n   * @returns {string} 削除後の文字列を返します\n   */\n  static remove(targetText, targetWord) {\n    return Text.replace(targetText, targetWord, '');\n  }\n  /**\n   * 文字列の `&` を `&amp;` へ置換えます\n   * @param {string} targetText 操作対象文字列\n   * @returns {string} `&amp;` 置換え後の文字列を返します\n   */\n  static amp(targetText) {\n    return Text.replace(targetText, '&', '&amp;');\n  }\n  /**\n   * 文字列の `&amp;` を `&` へ置換えます\n   * @param {string} targetText 操作対象文字列\n   * @returns {string} `&` 置換え後の文字列を返します\n   */\n  static and(targetText) {\n    return Text.replace(targetText, '&amp;', '&');\n  }\n}\n"
   },
   {
-    "__docId__": 380,
+    "__docId__": 384,
     "kind": "class",
     "static": true,
     "variation": null,
@@ -10648,7 +10802,7 @@
     "interface": false
   },
   {
-    "__docId__": 381,
+    "__docId__": 385,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10687,7 +10841,7 @@
     "generator": false
   },
   {
-    "__docId__": 382,
+    "__docId__": 386,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10729,7 +10883,7 @@
     "generator": false
   },
   {
-    "__docId__": 383,
+    "__docId__": 387,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10784,7 +10938,7 @@
     "generator": false
   },
   {
-    "__docId__": 384,
+    "__docId__": 388,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10843,7 +10997,7 @@
     "generator": false
   },
   {
-    "__docId__": 385,
+    "__docId__": 389,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10892,7 +11046,7 @@
     "generator": false
   },
   {
-    "__docId__": 386,
+    "__docId__": 390,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10931,7 +11085,7 @@
     "generator": false
   },
   {
-    "__docId__": 387,
+    "__docId__": 391,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -10970,7 +11124,7 @@
     "generator": false
   },
   {
-    "__docId__": 388,
+    "__docId__": 392,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -10983,7 +11137,7 @@
     "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/12/16 - 16:50\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n// --------------------------------\n// constant for calculate\n/**\n * 計算用定数 - 1 minute\n * ```\n * 1000 * 60\n * ```\n * @type {number}\n * @private\n * @static\n */\nconst oneMinute = 1000 * 60;\n/**\n * 計算用定数 - 1 hour\n * ```\n * 1000 * 60 * 60\n * ```\n * @type {number}\n * @private\n * @static\n */\nconst oneHour = oneMinute * 60;\n/**\n * 計算用定数 - 1 day\n * ```\n * 1000 * 60 * 60 * 24\n * ```\n * @type {number}\n * @private\n * @static\n */\nconst oneDay = oneHour * 24;\n/**\n * 計算用定数 - 1 week\n * ```\n * 1000 * 60 * 60 * 24 * 7\n * ```\n * @type {number}\n * @private\n * @static\n */\nconst oneWeek = oneDay * 7;\n/**\n * 計算用定数 - 1 month\n * ```\n * 1000 * 60 * 60 * 24 * 30\n * ```\n * @type {number}\n * @private\n * @static\n */\nconst oneMonth = oneDay * 30;\n\n/**\n * 指定時間を計算し Date instance を作成します\n */\nexport default class Times {\n  // /**\n  //  * 1970-1-1 00:00\n  //  * @returns {Date} 1970-1-1 00:00\n  //  */\n  // static standard() {\n  //   return new Date();\n  // }\n  /**\n   * 現在時間 Date instance\n   * @returns {Date} 現在時間 Date instance\n   */\n  static present() {\n    return new Date();\n  }\n  /**\n   * 指定分後の Date instance\n   * @param {number} n 指定分\n   * @returns {Date} 指定分後の Date instance\n   */\n  static minute(n) {\n    return new Date(Date.now() + (n * oneMinute));\n  }\n  /**\n   * 指定時間後の Date instance\n   * @param {number} n 指定時間\n   * @returns {Date} 指定時間後の Date instance\n   */\n  static hour(n) {\n    return new Date(Date.now() + (n * oneHour));\n  }\n  /**\n   * 指定日後の Date instance\n   * @param {number} n 指定日\n   * @returns {Date} 指定日後の Date instance\n   */\n  static day(n) {\n    return new Date(Date.now() + (n * oneDay));\n  }\n  /**\n   * 指定週後の Date instance\n   * @param {number} n 指定週\n   * @returns {Date} 指定週後の Date instance\n   */\n  static week(n) {\n    return new Date(Date.now() + (n * oneWeek));\n  }\n  /**\n   * 指定月後の Date instance\n   * @param {number} n 指定月\n   * @returns {Date} 指定月後の Date instance\n   */\n  static month(n) {\n    return new Date(Date.now() + (n * oneMonth));\n  }\n}\n"
   },
   {
-    "__docId__": 389,
+    "__docId__": 393,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -11012,7 +11166,7 @@
     }
   },
   {
-    "__docId__": 390,
+    "__docId__": 394,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -11041,7 +11195,7 @@
     }
   },
   {
-    "__docId__": 391,
+    "__docId__": 395,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -11070,7 +11224,7 @@
     }
   },
   {
-    "__docId__": 392,
+    "__docId__": 396,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -11099,7 +11253,7 @@
     }
   },
   {
-    "__docId__": 393,
+    "__docId__": 397,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -11128,7 +11282,7 @@
     }
   },
   {
-    "__docId__": 394,
+    "__docId__": 398,
     "kind": "class",
     "static": true,
     "variation": null,
@@ -11144,7 +11298,7 @@
     "interface": false
   },
   {
-    "__docId__": 395,
+    "__docId__": 399,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -11172,7 +11326,7 @@
     "generator": false
   },
   {
-    "__docId__": 396,
+    "__docId__": 400,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -11211,7 +11365,7 @@
     "generator": false
   },
   {
-    "__docId__": 397,
+    "__docId__": 401,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -11250,7 +11404,7 @@
     "generator": false
   },
   {
-    "__docId__": 398,
+    "__docId__": 402,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -11289,7 +11443,7 @@
     "generator": false
   },
   {
-    "__docId__": 399,
+    "__docId__": 403,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -11328,7 +11482,7 @@
     "generator": false
   },
   {
-    "__docId__": 400,
+    "__docId__": 404,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -11367,7 +11521,7 @@
     "generator": false
   },
   {
-    "__docId__": 401,
+    "__docId__": 405,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -11380,7 +11534,7 @@
     "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/12 - 18:24\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n/**\n * 型チェックを行います\n * @static\n */\nexport default class Type {\n  /**\n   * 引数(target)が関数かを調べます\n   * @param {Function|*} target 調査対象\n   * @returns {boolean} 引数(target)が関数かを調べ結果を返します、true: 関数\n   */\n  static method(target) {\n    return typeof target === 'function';\n  }\n  /**\n   * 引数(target)を `!!` で調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)を `!!` で調べ結果を返します\n   */\n  static exist(target) {\n    return !!target;\n  }\n  /**\n   * 引数(target)が number かを調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)が number かを調べ結果を返します、true: number\n   */\n  static number(target) {\n    // [参考] jQuery 2.x, jQuery 2 関数は文字列 \"2\" も true にするので type check を追加した\n    return typeof target === 'number' &&\n      !Type.array(target) &&\n      ((target - parseFloat(target)) + 1) >= 0;\n  }\n  /**\n   * 引数(target)が int かを `Number.isInteger` を使用し調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)が int かを調べ結果を返します、true: int\n   */\n  static int(target) {\n    return Number.isInteger(target);\n  }\n  /**\n   * 引数(target)が string かを調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)が string かを調べ結果を返します、true: string\n   */\n  static string(target) {\n    return typeof target === 'string';\n  }\n  /**\n   * 引数(target)を `Array.isArray` で配列かを調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)が 配列 かを調べ結果を返します、true: 配列\n   */\n  static array(target) {\n    return Array.isArray(target);\n  }\n  /**\n   * 引数(target)が null かを調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)が null かを調べ結果を返します、true: null\n   */\n  static nil(target) {\n    return target === null;\n  }\n  /**\n   * Object型 引数 `object` は String型 引数 `key` を [key] として所持しているかを調べます\n   * @deprecated instead use Type.has\n   * @param {Object} target 調査対象\n   * @param {string} key Object.key 名称\n   * @returns {boolean} 存在する時は true を返します\n   */\n  static hasKey(target, key) {\n    return Type.has(target, key);\n  }\n  /**\n   * Object型 引数 `object` は String型 引数 `key` を [key] として所持しているかを調べます\n   * @param {Object} target 調査対象\n   * @param {string} key Object.key 名称\n   * @returns {boolean} 存在する時は true を返します\n   */\n  static has(target, key) {\n    return Object.keys(target).indexOf(key) !== -1;\n  }\n  /**\n   * target が undefined かを調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} true: undefined\n   * @since 2016-10-25\n   */\n  static undef(target) {\n    return typeof target === 'undefined';\n  }\n  /**\n   * ファイル名から拡張子を取得します\n   * @deprecated instead use Type.extension\n   * @param {string} fileName 取得したいファイル名称\n   * @returns {string} ファイル名の拡張子を返します\n   */\n  static getExtension(fileName) {\n    return Type.extension(fileName);\n  }\n  /**\n   * ファイル名から拡張子を取得します\n   * @param {string} fileName 取得したいファイル名称\n   * @returns {string} ファイル名の拡張子を返します\n   */\n  static extension(fileName) {\n    if (typeof fileName !== 'string') {\n      return '';\n    }\n    const splits = fileName.split('.');\n    if (splits.length === 1) {\n      return '';\n    }\n    return splits.pop().toLowerCase();\n  }\n  // ----------------------------------------------------------\n  // 画像パスが正規かチェックする\n  /**\n   * 使用可能なbase64 file かを調べます\n   * @param {string} fileName 調査対象ファイル名\n   * @returns {boolean} jpeg / png の時に true を返します\n   */\n  static base64(fileName) {\n    if (!Type.exist(fileName)) {\n      return false;\n    }\n    return fileName.indexOf('data:image/jpeg;base64') !== -1 ||\n      fileName.indexOf('data:image/png;base64') !== -1 ||\n      fileName.indexOf('data:image/jpg;base64') !== -1 ||\n      fileName.indexOf('data:image/gif;base64') !== -1;\n  }\n  /**\n   * 拡張子から画像ファイルかを調べます\n   * @param {string} fileName 調査対象ファイル名\n   * @returns {Boolean} 'jpg', 'png', 'jpeg', 'gif' のいづれかに該当するかの真偽値を返します\n   */\n  static img(fileName) {\n    if (!Type.exist(fileName)) {\n      return false;\n    }\n    // base64\n    if (Type.base64(fileName)) {\n      return true;\n    }\n    // 拡張子チェック\n    return ['jpg', 'png', 'jpeg', 'gif'].indexOf(Type.extension(fileName)) !== -1;\n  }\n}\n"
   },
   {
-    "__docId__": 402,
+    "__docId__": 406,
     "kind": "class",
     "static": true,
     "variation": null,
@@ -11402,7 +11556,7 @@
     "interface": false
   },
   {
-    "__docId__": 403,
+    "__docId__": 407,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -11442,7 +11596,7 @@
     "generator": false
   },
   {
-    "__docId__": 404,
+    "__docId__": 408,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -11481,7 +11635,7 @@
     "generator": false
   },
   {
-    "__docId__": 405,
+    "__docId__": 409,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -11520,7 +11674,7 @@
     "generator": false
   },
   {
-    "__docId__": 406,
+    "__docId__": 410,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -11559,7 +11713,7 @@
     "generator": false
   },
   {
-    "__docId__": 407,
+    "__docId__": 411,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -11598,7 +11752,7 @@
     "generator": false
   },
   {
-    "__docId__": 408,
+    "__docId__": 412,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -11637,7 +11791,7 @@
     "generator": false
   },
   {
-    "__docId__": 409,
+    "__docId__": 413,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -11676,7 +11830,7 @@
     "generator": false
   },
   {
-    "__docId__": 410,
+    "__docId__": 414,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -11726,7 +11880,7 @@
     "generator": false
   },
   {
-    "__docId__": 411,
+    "__docId__": 415,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -11775,7 +11929,7 @@
     "generator": false
   },
   {
-    "__docId__": 412,
+    "__docId__": 416,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -11815,7 +11969,7 @@
     "generator": false
   },
   {
-    "__docId__": 413,
+    "__docId__": 417,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -11855,7 +12009,7 @@
     "generator": false
   },
   {
-    "__docId__": 414,
+    "__docId__": 418,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -11894,7 +12048,7 @@
     "generator": false
   },
   {
-    "__docId__": 415,
+    "__docId__": 419,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -11933,7 +12087,7 @@
     "generator": false
   },
   {
-    "__docId__": 416,
+    "__docId__": 420,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -11972,7 +12126,7 @@
     "generator": false
   },
   {
-    "__docId__": 417,
+    "__docId__": 421,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -11985,7 +12139,7 @@
     "content": "/**\n * @license inazumatv.com\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/10/08\n *\n * Copyright (c) 2011-2015 inazumatv.com, inc.\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n * Vectors\n */\n\n/**\n * ある点の座標(x, y)と時間(time)を管理します\n */\nexport default class Vectors {\n  /**\n   * 座標と現在時間を元にインスタンスを作成します\n   * @param {number} [x=0] 座標 x\n   * @param {number} [y=0] 座標 y\n   * @param {number} [time=Date.now()] 時間 milli seconds\n   */\n  constructor(x = 0, y = 0, time = Date.now()) {\n    /**\n     * 座標 x\n     * @type {number}\n     */\n    this.x = x;\n    /**\n     * 座標 y\n     * @type {number}\n     */\n    this.y = y;\n    /**\n     * 時間 milli seconds\n     * @type {number}\n     */\n    this.time = time;\n    /**\n     * スクロール中かのフラッグ, true: スクロール中\n     * @type {boolean}\n     */\n    this.scrolling = false;\n  }\n  /**\n   * x, y, time プロパティを全て `0` にします\n   * @returns {Vectors} メソッドチェイン可能なようにインスタンスを返します\n   */\n  reset() {\n    this.x = 0;\n    this.y = 0;\n    this.time = 0;\n\n    return this;\n  }\n  /**\n   * x, y, time を更新します\n   * @param {number} x 座標 x\n   * @param {number} y 座標 y\n   * @param {number} [time=Date.now] 時間 milli seconds\n   * @returns {Vectors} メソッドチェイン可能なようにインスタンスを返します\n   */\n  update(x, y, time = Date.now()) {\n    this.x = x;\n    this.y = y;\n    this.time = time;\n\n    return this;\n  }\n  /**\n   * 引数 vectors 間の距離を測ります\n   * @param {Vectors} vectors 計測したい対象 Vector instance\n   * @returns {number} 距離を返します\n   */\n  distance(vectors) {\n    const distanceX = this.x - vectors.x;\n    const distanceY = this.y - vectors.y;\n    const sqrt = (distanceX * distanceX) + (distanceY * distanceY);\n    return Math.sqrt(sqrt);\n  }\n  /**\n   * 引数 vectors との時間差を計算します\n   * @param {Vectors} vectors 計測したい対象 Vector instance\n   * @returns {number} 時間差(milli seconds) を返します\n   */\n  duration(vectors) {\n    return this.time - vectors.time;\n  }\n  /**\n   * 複製を作成し返します\n   * @returns {Vectors} 複製を返します\n   */\n  clone() {\n    const clone = new Vectors(this.x, this.y, this.time);\n    clone.scrolling = this.scrolling;\n    return clone;\n  }\n  /**\n   * ベクトルの大きさの２乗の平方根を計算します\n   * @returns {number} ベクトルの大きさの２乗の平方根を返します\n   */\n  length() {\n    const x = this.x;\n    const y = this.y;\n    return Math.sqrt((x * x) + (y * y));\n  }\n  /**\n   * ベクトルの値を scalar 値で除算します\n   *\n   * @param {number} scalar 除算母数\n   * @returns {Vectors} 除算後の Vector を返します\n   */\n  divideByScalar(scalar) {\n    const clone = this.clone();\n    if (scalar === 0) {\n      clone.x = 0;\n      clone.y = 0;\n    } else {\n      const x = clone.x;\n      const y = clone.y;\n      const inverse = 1 / scalar;\n      clone.x = x * inverse;\n      clone.y = y * inverse;\n    }\n\n    return clone;\n  }\n  /**\n   * ベクトルの値を scalar 値で乗算します\n   *\n   * @param {number} scalar 乗算母数\n   * @returns {Vectors} 乗算後の Vector を返します\n   */\n  multiplyByScalar(scalar) {\n    const clone = this.clone();\n    clone.x *= scalar;\n    clone.y *= scalar;\n    return clone;\n  }\n  /**\n   * 現在の Vectors を元に引数 `maxValue` 以下にした `Vectors` を取得します\n   * @param {number} maxValue 最高目標値\n   * @returns {Vectors} `maxValue` 以下にした `Vectors` を返します\n   */\n  truncate(maxValue) {\n    const minValue = Math.min(maxValue, this.length());\n    const oldLength = this.length();\n    if (oldLength !== 0 && minValue !== oldLength) {\n      return this.multiplyByScalar(minValue / oldLength);\n    }\n    return this.clone();\n  }\n  /**\n   * ベクトルの大きさを正規化（大きさを1）した Vector を作成します\n   * @returns {Vectors} ベクトルの大きさを正規化（大きさを1）した Vectors を返します\n   */\n  normalize() {\n    return this.divideByScalar(this.length());\n  }\n  /**\n   * ベクトルが正規化されているかを判定します\n   * @returns {boolean} true: 正規化されている\n   */\n  isNormalize() {\n    return this.length() === 1;\n  }\n  /**\n   * 引数 vectors との X 値を減算します\n   * @param {Vectors} vectors 計測したい対象 Vectors instance\n   * @returns {number} X 値を減算し返します\n   */\n  betweenX(vectors) {\n    return this.x - vectors.x;\n  }\n  /**\n   * 引数 vectors との Y 値を減算します\n   * @param {Vectors} vectors 計測したい対象 Vectors instance\n   * @returns {number} Y 値を減算し返します\n   */\n  betweenY(vectors) {\n    return this.y - vectors.y;\n  }\n  /**\n   * 引数 vectors との time 値を減算します\n   * @param {Vectors} vectors 計測したい対象 Vectors instance\n   * @returns {number} time 値を減算し返します\n   */\n  betweenTime(vectors) {\n    return this.time - vectors.time;\n  }\n  /**\n   * 引数 vectors との x, y, time 値を減算します\n   * @param {Vectors} vectors 計測したい対象 Vectors instance\n   * @returns {Vectors} 引数 vectors との x, y, time 値を減算した clone を返します\n   */\n  between(vectors) {\n    const clone = this.clone();\n    clone.x = clone.betweenX(vectors);\n    clone.y = clone.betweenY(vectors);\n    clone.time = clone.betweenTime(vectors);\n\n    return clone;\n  }\n  /**\n   * 引数ベクトルの内積を計算します\n   * @param {Vectors} vectors 計測したい対象 Vectors instance\n   * @returns {number} 内積を返します\n   */\n  dot(vectors) {\n    return (this.x * vectors.x) + (this.y * vectors.y);\n  }\n  /**\n   * 引数ベクトルの値(x, y)が等しいかを判定します\n   * @param {Vectors} vectors 計測したい対象 Vectors instance\n   * @returns {boolean} true: 等しい\n   */\n  equals(vectors) {\n    return (vectors.x === this.x) && (vectors.y === this.y);\n  }\n  /**\n   * 引数ベクトルとの角度を計算します\n   * @param {Vectors} vectors 計測したい対象 Vectors instance\n   * @returns {number} 角度を返します\n   */\n  angle(vectors) {\n    let v1 = this.clone();\n    let v2 = vectors.clone();\n    if (!v1.isNormalize()) {\n      v1 = v1.normalize();\n    }\n    if (!v2.isNormalize()) {\n      v2 = v2.normalize();\n    }\n    // console.log('angle', v1, v2, v1.dot(v2), Math.acos(v1.dot(v2)));\n    return Math.acos(v1.dot(v2));\n  }\n}\n"
   },
   {
-    "__docId__": 418,
+    "__docId__": 422,
     "kind": "class",
     "static": true,
     "variation": null,
@@ -12001,7 +12155,7 @@
     "interface": false
   },
   {
-    "__docId__": 419,
+    "__docId__": 423,
     "kind": "constructor",
     "static": false,
     "variation": null,
@@ -12052,7 +12206,7 @@
     "generator": false
   },
   {
-    "__docId__": 420,
+    "__docId__": 424,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -12072,7 +12226,7 @@
     }
   },
   {
-    "__docId__": 421,
+    "__docId__": 425,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -12092,7 +12246,7 @@
     }
   },
   {
-    "__docId__": 422,
+    "__docId__": 426,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -12112,7 +12266,7 @@
     }
   },
   {
-    "__docId__": 423,
+    "__docId__": 427,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -12132,7 +12286,7 @@
     }
   },
   {
-    "__docId__": 424,
+    "__docId__": 428,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -12160,7 +12314,7 @@
     "generator": false
   },
   {
-    "__docId__": 425,
+    "__docId__": 429,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -12178,7 +12332,7 @@
     }
   },
   {
-    "__docId__": 426,
+    "__docId__": 430,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -12196,7 +12350,7 @@
     }
   },
   {
-    "__docId__": 427,
+    "__docId__": 431,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -12214,7 +12368,7 @@
     }
   },
   {
-    "__docId__": 428,
+    "__docId__": 432,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -12275,7 +12429,7 @@
     "generator": false
   },
   {
-    "__docId__": 429,
+    "__docId__": 433,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -12293,7 +12447,7 @@
     }
   },
   {
-    "__docId__": 430,
+    "__docId__": 434,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -12311,7 +12465,7 @@
     }
   },
   {
-    "__docId__": 431,
+    "__docId__": 435,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -12329,7 +12483,7 @@
     }
   },
   {
-    "__docId__": 432,
+    "__docId__": 436,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -12368,7 +12522,7 @@
     "generator": false
   },
   {
-    "__docId__": 433,
+    "__docId__": 437,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -12407,7 +12561,7 @@
     "generator": false
   },
   {
-    "__docId__": 434,
+    "__docId__": 438,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -12435,7 +12589,7 @@
     "generator": false
   },
   {
-    "__docId__": 435,
+    "__docId__": 439,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -12463,7 +12617,7 @@
     "generator": false
   },
   {
-    "__docId__": 436,
+    "__docId__": 440,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -12502,7 +12656,7 @@
     "generator": false
   },
   {
-    "__docId__": 437,
+    "__docId__": 441,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -12541,7 +12695,7 @@
     "generator": false
   },
   {
-    "__docId__": 438,
+    "__docId__": 442,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -12580,7 +12734,7 @@
     "generator": false
   },
   {
-    "__docId__": 439,
+    "__docId__": 443,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -12608,7 +12762,7 @@
     "generator": false
   },
   {
-    "__docId__": 440,
+    "__docId__": 444,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -12636,7 +12790,7 @@
     "generator": false
   },
   {
-    "__docId__": 441,
+    "__docId__": 445,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -12675,7 +12829,7 @@
     "generator": false
   },
   {
-    "__docId__": 442,
+    "__docId__": 446,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -12714,7 +12868,7 @@
     "generator": false
   },
   {
-    "__docId__": 443,
+    "__docId__": 447,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -12753,7 +12907,7 @@
     "generator": false
   },
   {
-    "__docId__": 444,
+    "__docId__": 448,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -12792,7 +12946,7 @@
     "generator": false
   },
   {
-    "__docId__": 445,
+    "__docId__": 449,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -12831,7 +12985,7 @@
     "generator": false
   },
   {
-    "__docId__": 446,
+    "__docId__": 450,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -12870,7 +13024,7 @@
     "generator": false
   },
   {
-    "__docId__": 447,
+    "__docId__": 451,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -12909,7 +13063,7 @@
     "generator": false
   },
   {
-    "__docId__": 449,
+    "__docId__": 453,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12922,7 +13076,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 450,
+    "__docId__": 454,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12935,7 +13089,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 451,
+    "__docId__": 455,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12948,7 +13102,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 452,
+    "__docId__": 456,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12961,7 +13115,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 453,
+    "__docId__": 457,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12974,7 +13128,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 454,
+    "__docId__": 458,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -12987,7 +13141,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 455,
+    "__docId__": 459,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13000,7 +13154,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 456,
+    "__docId__": 460,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13013,7 +13167,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 457,
+    "__docId__": 461,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13026,7 +13180,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 458,
+    "__docId__": 462,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13039,7 +13193,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 459,
+    "__docId__": 463,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13052,7 +13206,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 460,
+    "__docId__": 464,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13065,7 +13219,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 461,
+    "__docId__": 465,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13078,7 +13232,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 462,
+    "__docId__": 466,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13091,7 +13245,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 463,
+    "__docId__": 467,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13104,7 +13258,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 464,
+    "__docId__": 468,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13117,7 +13271,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 465,
+    "__docId__": 469,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13130,7 +13284,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 466,
+    "__docId__": 470,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13143,7 +13297,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 467,
+    "__docId__": 471,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13156,7 +13310,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 468,
+    "__docId__": 472,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13169,7 +13323,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 469,
+    "__docId__": 473,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13182,7 +13336,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 470,
+    "__docId__": 474,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13195,7 +13349,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 471,
+    "__docId__": 475,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13208,7 +13362,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 472,
+    "__docId__": 476,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13221,7 +13375,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 473,
+    "__docId__": 477,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13234,7 +13388,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 474,
+    "__docId__": 478,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13247,7 +13401,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 475,
+    "__docId__": 479,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13260,7 +13414,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 476,
+    "__docId__": 480,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13273,7 +13427,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 477,
+    "__docId__": 481,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13286,7 +13440,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 478,
+    "__docId__": 482,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13299,7 +13453,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 479,
+    "__docId__": 483,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13312,7 +13466,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 480,
+    "__docId__": 484,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13325,7 +13479,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 481,
+    "__docId__": 485,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13338,7 +13492,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 482,
+    "__docId__": 486,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13351,7 +13505,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 483,
+    "__docId__": 487,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13364,7 +13518,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 484,
+    "__docId__": 488,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13377,7 +13531,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 485,
+    "__docId__": 489,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13390,7 +13544,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 486,
+    "__docId__": 490,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13403,7 +13557,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 487,
+    "__docId__": 491,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13416,7 +13570,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 488,
+    "__docId__": 492,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13429,7 +13583,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 489,
+    "__docId__": 493,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13442,7 +13596,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 490,
+    "__docId__": 494,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13455,7 +13609,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 491,
+    "__docId__": 495,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13468,7 +13622,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 492,
+    "__docId__": 496,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13481,7 +13635,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 493,
+    "__docId__": 497,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13494,7 +13648,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 494,
+    "__docId__": 498,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13507,7 +13661,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 495,
+    "__docId__": 499,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13520,7 +13674,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 497,
+    "__docId__": 501,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13533,7 +13687,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 498,
+    "__docId__": 502,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13546,7 +13700,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 499,
+    "__docId__": 503,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13559,7 +13713,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 500,
+    "__docId__": 504,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13572,7 +13726,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 501,
+    "__docId__": 505,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13585,7 +13739,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 502,
+    "__docId__": 506,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13598,7 +13752,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 503,
+    "__docId__": 507,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -13611,7 +13765,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 504,
+    "__docId__": 508,
     "kind": "external",
     "static": true,
     "variation": null,

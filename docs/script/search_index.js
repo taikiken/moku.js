@@ -6,6 +6,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "./src/net/ajaxthunk.js~ajaxthunk",
+    "class/src/net/AjaxThunk.js~AjaxThunk.html",
+    "<span>AjaxThunk</span> <span class=\"search-result-import-path\">./src/net/AjaxThunk.js</span>",
+    "class"
+  ],
+  [
     "./src/dom/bounding.js~bounding",
     "class/src/dom/Bounding.js~Bounding.html",
     "<span>Bounding</span> <span class=\"search-result-import-path\">./src/dom/Bounding.js</span>",
@@ -1746,6 +1752,18 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/net/ajax.js~ajax#option",
+    "class/src/net/Ajax.js~Ajax.html#instance-method-option",
+    "src/net/Ajax.js~Ajax#option",
+    "method"
+  ],
+  [
+    "src/net/ajax.js~ajax#props",
+    "class/src/net/Ajax.js~Ajax.html#instance-member-props",
+    "src/net/Ajax.js~Ajax#props",
+    "member"
+  ],
+  [
     "src/net/ajax.js~ajax#reject",
     "class/src/net/Ajax.js~Ajax.html#instance-member-reject",
     "src/net/Ajax.js~Ajax#reject",
@@ -1764,9 +1782,15 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/net/ajax.js~ajax.option",
-    "class/src/net/Ajax.js~Ajax.html#static-method-option",
-    "src/net/Ajax.js~Ajax.option",
+    "src/net/ajaxthunk.js",
+    "file/src/net/AjaxThunk.js.html",
+    "src/net/AjaxThunk.js",
+    "file"
+  ],
+  [
+    "src/net/ajaxthunk.js~ajaxthunk#start",
+    "class/src/net/AjaxThunk.js~AjaxThunk.html#instance-method-start",
+    "src/net/AjaxThunk.js~AjaxThunk#start",
     "method"
   ],
   [

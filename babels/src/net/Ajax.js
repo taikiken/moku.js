@@ -43,6 +43,39 @@ const Request = self.Request;
  * $ bower install es6-promise
  * ```
  *
+ * thunk friendly - ES2017 async / await するために
+ * - fetch Promise を返すように変更
+ * - resolve / reject argument をオプション
+ * - fetch.then から result / error を return
+ *
+ * [caution] resolve / reject を使用しない場合は {@link AjaxThunk} を使用する方が効率的です
+ * @example
+ * const ajax = new Ajax();
+ * // async / await 1
+ * async function request() {
+ *  const json = await thunk.start('https://jsonplaceholder.typicode.com/posts');
+ *  const pre = document.getElementById('pre');
+ *  pre.innerHTML = JSON.stringify(json);
+ * }
+ * request();
+ * // async / await 2
+ * async function request() {
+ *  return await thunk.start('https://jsonplaceholder.typicode.com/posts');
+ * }
+ * request()
+ *  .then(json => {
+ *    const pre = document.getElementById('pre');
+ *    pre.innerHTML = JSON.stringify(json);
+ *  });
+ * // resolve / reject
+ * const resolve = (json) => {
+ *  const pre = document.getElementById('pre');
+ *  pre.innerHTML = JSON.stringify(json);
+ * };
+ * const reject = (error) => {};
+ * const ajax = new Ajax(resolve, reject);
+ * ajax.start('https://jsonplaceholder.typicode.com/posts');
+ *
  * @see http://caniuse.com/#feat=fetch
  * @see https://github.com/github/fetch
  * @see https://github.com/taylorhakes/promise-polyfill
@@ -52,14 +85,21 @@ const Request = self.Request;
  * @see https://developer.mozilla.org/ja/docs/Web/API/Request/Request
  * @see https://developer.mozilla.org/ja/docs/Web/API/Headers
  * @see https://developer.mozilla.org/ja/docs/Web/API/Body
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
+ * @see http://getmesh.io/Blog/Make%20AJAX-Requests%20Great%20Again
+ * @since 0.3.4 - Thunk friendly
  */
 export default class Ajax {
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
   /**
    * request 可能 / 不可能 flag を true に設定します
-   * @param {Function} resolve Promise success callback
-   * @param {Function} reject Promise fail callback
+   * @param {?function} [resolve=null] Promise success callback
+   * @param {?function} [reject=null] Promise fail callback
    */
-  constructor(resolve, reject) {
+  constructor(resolve = null, reject = null) {
     /**
      * request 可能 / 不可能 flag, true: 実行可能
      * @type {boolean}
@@ -75,6 +115,20 @@ export default class Ajax {
      * @type {Function}
      */
     this.reject = reject;
+    /**
+     * `Request` constructor に渡す option
+     * - method: GET|POST|PUT|DELETE...
+     * - cache: no-cache
+     * - credentials: same-origin
+     * @type {{method: ?string, cache: string, credentials: string}}
+     * @see https://developer.mozilla.org/ja/docs/Web/API/Request/Request
+     */
+    this.props = {
+      method: null,
+      cache: 'no-cache',
+      // https://developers.google.com/web/updates/2015/03/introduction-to-fetch
+      credentials: 'same-origin',
+    };
   }
   // ----------------------------------------
   // METHOD
@@ -83,29 +137,32 @@ export default class Ajax {
    * <p>Ajax request 開始します</p>
    * <p>request 可能 / 不可能 flag が false の時は実行しません<br>
    * true の時は false にしリクエストを開始します</p>
-   * <p>START, COMPLETE, ERROR イベントを発生させます</p>
+   *
+   * from v0.3.4
+   * - resolve, reject 関数確認後実行します
+   * - Promise instance を返します
+   * - json / error を返します
    *
    * @param {string} path Ajax request path
-   * @param {string} method GET, POST, PUT, DELETE...etc request method
+   * @param {string} [method=GET] GET, POST, PUT, DELETE...etc request method
    * @param {?Headers} [headers=null] Headers option, token などを埋め込むのに使用します
    * @param {?FormData} [formData=null] フォームデータを送信するのに使用します
-   * @return {boolean} ajax request を開始したかどうかの真偽値を返します
+   * @return {Promise} ajax request を開始し fetch Promise 返します
    */
-  start(path, method, headers = null, formData = null) {
+  start(path, method = 'GET', headers = null, formData = null) {
     // ajax request 開始
     if (!this.can) {
-      // flag が off なので処理しない
-      return false;
+      throw new Error(`Ajax request busy: ${this.can}`);
     }
 
     // flag off
     this.disable();
 
     // @type {Request} Request instance
-    const request = Ajax.option(path, method, headers, formData);
+    const request = this.option(path, method, headers, formData);
 
     // fetch start
-    fetch(request)
+    return fetch(request)
     // @param {Object} response - Ajax response
       .then((response) => {
         // may be success
@@ -117,19 +174,23 @@ export default class Ajax {
       // @param {Object} - JSON パース済み Object
       .then((json) => {
         // complete event fire
-        this.resolve(json);
+        if (Type.method(this.resolve)) {
+          this.resolve(json);
+        }
         // flag true
         this.enable();
+        return json;
       })
       // @param {Error} - Ajax something error
       .catch((error) => {
         // error event fire
-        this.reject(error);
+        if (Type.method(this.reject)) {
+          this.reject(error);
+        }
         // flag true
         this.enable();
+        return error;
       });
-
-    return true;
   }
   /**
    * 実行可否 flag を true にします
@@ -147,9 +208,6 @@ export default class Ajax {
     this.can = false;
     return this.can;
   }
-  // ----------------------------------------
-  // STATIC METHOD
-  // ----------------------------------------
   /**
    * <p>fetch API へ送るオプションを作成します</p>
    *
@@ -160,6 +218,20 @@ export default class Ajax {
    *
    * headers, formData は存在すれば option に追加されます
    *
+   * ```
+   * var myRequest = new Request(input, init);
+   * ```
+   * <blockquote>
+   * リクエストに適用するカスタム設定を含むオプションオブジェクト。設定可能なオプションは：
+   *   method：リクエストメソッド、たとえば GET、POST。
+   *   headers：Headers オブジェクトか ByteString を含む、リクエストに追加するヘッダー。
+   *   body： リクエストに追加するボディー：Blob か BufferSource、FormData、URLSearchParams、USVString オブジェクトが使用できる。リクエストが GET か HEAD メソッドを使用している場合、ボディーを持てないことに注意。
+   *   mode：リクエストで使用するモード。たとえば、cors か no-cors、same-origin。既定値は cors。Chrome では、47 以前は no-cors が既定値であり、 same-origin は 47 から使用できるようになった。
+   *   credentials：リクエストで使用するリクエスト credential：omit か same-origin、include が使用できる。 既定値は omit。Chrome では、47 以前は same-origin が既定値であり、include は 47 から使用できるようになった。
+   *   cache：リクエストで使用する cache モード：default か no-store、reload、no-cache、force-cache、only-if-cached が設定できる。
+   *   redirect：使用するリダイレクトモード：follow か error、manual が使用できる。Chrome では、47 以前は既定値が follow であり、manual は 47 から使用できるようになった。
+   *   referrer：no-referrer か client、URL を指定する USVString。既定値は client。
+   * </blockquote>
    * @param {string|USVString|Request} path Ajax request path
    * @param {string} method GET, POST, PUT, DELETE...etc request method
    * @param {Headers|Object|null} headers Headers option
@@ -168,15 +240,18 @@ export default class Ajax {
    *
    * @see https://developers.google.com/web/updates/2015/03/introduction-to-fetch
    * @see https://developer.mozilla.org/ja/docs/Web/API/Request
+   * @see https://developer.mozilla.org/ja/docs/Web/API/Request/Request
    */
-  static option(path, method, headers, formData) {
+  option(path, method, headers, formData) {
     // request option
-    const option = Object.create({
-      method,
-      cache: 'no-cache',
-      // https://developers.google.com/web/updates/2015/03/introduction-to-fetch
-      credentials: 'same-origin',
-    });
+    const option = Object.assign({}, this.props);
+    // const option = Object.create({
+    //   method,
+    //   cache: 'no-cache',
+    //   // https://developers.google.com/web/updates/2015/03/introduction-to-fetch
+    //   credentials: 'same-origin',
+    // });
+    option.method = method;
 
     // headers option
     if (Type.exist(headers)) {

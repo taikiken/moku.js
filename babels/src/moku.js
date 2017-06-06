@@ -33,6 +33,7 @@ import Wheel from './event/Wheel';
 import Ajax from './net/Ajax';
 import Cookie from './net/Cookie';
 import Queries from './net/Queries';
+import AjaxThunk from './net/AjaxThunk';
 
 // tick
 import Cycle from './tick/Cycle';
@@ -105,6 +106,7 @@ MOKU.net = {
   Ajax,
   Cookie,
   Queries,
+  AjaxThunk,
 };
 /**
  * MOKU.tick

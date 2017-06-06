@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../">
-  <title data-ice="title">Bounding | API Document</title>
+  <title data-ice="title">AjaxThunk | API Document</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -110,23 +110,23 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Bounding from &apos;<span><a href="file/src/dom/Bounding.js.html#lineNumber25">./src/dom/Bounding.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import AjaxThunk from &apos;<span><a href="file/src/net/AjaxThunk.js.html#lineNumber49">./src/net/AjaxThunk.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
-  
-  <span data-ice="source">| <span><a href="file/src/dom/Bounding.js.html#lineNumber25">source</a></span></span>
+  <span data-ice="since">| since 0.3.4</span>
+  <span data-ice="source">| <span><a href="file/src/net/AjaxThunk.js.html#lineNumber49">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
-  <h1 data-ice="name">Bounding</h1>
+  <h1 data-ice="name">AjaxThunk</h1>
 
   
 
   
   
-  
+  <div class="flat-list" data-ice="extendsChain"><h4>Extends:</h4><div><span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span> &#x2192; AjaxThunk</div></div>
   
   
   
@@ -136,160 +136,55 @@
 
   
   
-  <div class="description" data-ice="description"><p>Element &#x306E; ClientRect &#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;</p>
-<ul>
-<li>bottom: float</li>
-<li>height: float</li>
-<li>left: float</li>
-<li>right: float</li>
-<li>top: float</li>
-<li>width: float</li>
-<li>x: float</li>
-<li>y: float</li>
-</ul>
+  <div class="description" data-ice="description"><p>fetch API &#x3092;&#x4F7F;&#x7528;&#x3057; Ajax request &#x3092;&#x884C;&#x3044;&#x307E;&#x3059;, ref: <span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></p>
 </div>
 
-  <div data-ice="see"><h4>See:</h4><ul><li><span><a href="https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XPCOM/Reference/Interface/nsIDOMClientRect">https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XPCOM/Reference/Interface/nsIDOMClientRect</a></span></li></ul></div>
+  <div data-ice="see"><h4>See:</h4><ul><li><span><a href="http://caniuse.com/#feat=fetch">http://caniuse.com/#feat=fetch</a></span></li>
+<li><span><a href="https://github.com/github/fetch">https://github.com/github/fetch</a></span></li>
+<li><span><a href="https://github.com/taylorhakes/promise-polyfill">https://github.com/taylorhakes/promise-polyfill</a></span></li>
+<li><span><a href="https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch">https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch</a></span></li>
+<li><span><a href="https://developer.mozilla.org/ja/docs/Web/API/Fetch_API">https://developer.mozilla.org/ja/docs/Web/API/Fetch_API</a></span></li>
+<li><span><a href="https://developer.mozilla.org/ja/docs/Web/API/Request">https://developer.mozilla.org/ja/docs/Web/API/Request</a></span></li>
+<li><span><a href="https://developer.mozilla.org/ja/docs/Web/API/Request/Request">https://developer.mozilla.org/ja/docs/Web/API/Request/Request</a></span></li>
+<li><span><a href="https://developer.mozilla.org/ja/docs/Web/API/Headers">https://developer.mozilla.org/ja/docs/Web/API/Headers</a></span></li>
+<li><span><a href="https://developer.mozilla.org/ja/docs/Web/API/Body">https://developer.mozilla.org/ja/docs/Web/API/Body</a></span></li>
+<li><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function</a></span></li>
+<li><span><a href="http://getmesh.io/Blog/Make%20AJAX-Requests%20Great%20Again">http://getmesh.io/Blog/Make%20AJAX-Requests%20Great%20Again</a></span></li></ul></div>
+
+  <div data-ice="exampleDocs">
+    <h4>Example:</h4>
+    
+  <div class="example-doc" data-ice="exampleDoc">
+      
+      <pre class="prettyprint source-code"><code data-ice="exampleCode">const ajax = new Ajax();
+// async / await 1
+async function request() {
+ const json = await thunk.start(&apos;https://jsonplaceholder.typicode.com/posts&apos;);
+ const pre = document.getElementById(&apos;pre&apos;);
+ pre.innerHTML = JSON.stringify(json);
+}
+request();
+// async / await 2
+async function request() {
+ return await thunk.start(&apos;https://jsonplaceholder.typicode.com/posts&apos;);
+}
+request()
+ .then(json =&gt; {
+   const pre = document.getElementById(&apos;pre&apos;);
+   pre.innerHTML = JSON.stringify(json);
+ });</code></pre>
+    </div>
+</div>
 
   
 
   
-
-  
 </div>
 
 
-<div data-ice="staticMethodSummary"><h2>Static Method Summary</h2><table class="summary" data-ice="summary">
-  <thead><tr><td data-ice="title" colspan="3">Static Public Methods</td></tr></thead>
-  <tbody>
-  
-  <tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      <span data-ice="static">static</span>
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-           <span data-ice="name"><span><a href="class/src/dom/Bounding.js~Bounding.html#static-method-clone">clone</a></span></span><span data-ice="signature">(offset: <span>ClientRect</span>): <span>{
- top: number,
- right: number,
- bottom: number,
- left: number,
- width: number,
- height: number}</span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>ClientRect &#x306E;&#x8907;&#x88FD;&#x3092; Object &#x5316;&#x3057; writable &#x306B;&#x3057;&#x307E;&#x3059;</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      <span data-ice="static">static</span>
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-           <span data-ice="name"><span><a href="class/src/dom/Bounding.js~Bounding.html#static-method-offset">offset</a></span></span><span data-ice="signature">(element: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span>): <span>ClientRect</span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p><code>getBoundingClientRect</code> &#x3092;&#x4F7F;&#x7528;&#x3057;&#x5F15;&#x6570; element &#x306E; offset &#x5024;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-</tbody>
-</table>
-</div>
-<div data-ice="constructorSummary"><h2>Constructor Summary</h2><table class="summary" data-ice="summary">
-  <thead><tr><td data-ice="title" colspan="3">Public Constructor</td></tr></thead>
-  <tbody>
-  
-  <tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-           <span data-ice="name"><span><a href="class/src/dom/Bounding.js~Bounding.html#instance-constructor-constructor">constructor</a></span></span><span data-ice="signature">(element: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span>)</span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>&#x64CD;&#x4F5C;&#x5BFE;&#x8C61; Element &#x3092;&#x4FDD;&#x5B58;&#x3057;&#x307E;&#x3059;</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-</tbody>
-</table>
-</div>
-<div data-ice="memberSummary"><h2>Member Summary</h2><table class="summary" data-ice="summary">
-  <thead><tr><td data-ice="title" colspan="3">Public Members</td></tr></thead>
-  <tbody>
-  
-  <tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-           <span data-ice="name"><span><a href="class/src/dom/Bounding.js~Bounding.html#instance-member-element">element</a></span></span><span data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>&#x64CD;&#x4F5C;&#x5BFE;&#x8C61; Element</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-</tbody>
-</table>
-</div>
+
+
+
 <div data-ice="methodSummary"><h2>Method Summary</h2><table class="summary" data-ice="summary">
   <thead><tr><td data-ice="title" colspan="3">Public Methods</td></tr></thead>
   <tbody>
@@ -305,19 +200,50 @@
     <td>
       <div>
         <p>
-           <span data-ice="name"><span><a href="class/src/dom/Bounding.js~Bounding.html#instance-method-clone">clone</a></span></span><span data-ice="signature">(): <span>{
- top: number,
- right: number,
- bottom: number,
- left: number,
- width: number,
- height: number}</span></span>
+           <span data-ice="name"><span><a href="class/src/net/AjaxThunk.js~AjaxThunk.html#instance-method-start">start</a></span></span><span data-ice="signature">(path: <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span>, method: <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span>, headers: <span>Headers</span>, formData: <span>FormData</span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>writable &#x306A; element &#x306E; offset &#x5024;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;</p>
+        <div data-ice="description"><p></p><p>Ajax request &#x958B;&#x59CB;&#x3057;&#x307E;&#x3059;</p>
+<p>request &#x53EF;&#x80FD; / &#x4E0D;&#x53EF;&#x80FD; flag &#x304C; false &#x306E;&#x6642;&#x306F;&#x5B9F;&#x884C;&#x3057;&#x307E;&#x305B;&#x3093;<br>
+true &#x306E;&#x6642;&#x306F; false &#x306B;&#x3057;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3092;&#x958B;&#x59CB;&#x3057;&#x307E;&#x3059;</p>
+<p></p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+<div class="inherited-summary" data-ice="inheritedSummary"><h2>Inherited Summary</h2><table class="summary" data-ice="summary">
+  <thead><tr><td data-ice="title" colspan="3"><span class="toggle closed"></span> From class <span><a href="class/src/net/Ajax.js~Ajax.html">Ajax</a></span></td></tr></thead>
+  <tbody>
+  
+  <tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html#instance-member-can">can</a></span></span><span data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>request &#x53EF;&#x80FD; / &#x4E0D;&#x53EF;&#x80FD; flag, true: &#x5B9F;&#x884C;&#x53EF;&#x80FD;</p>
 </div>
       </div>
     </td>
@@ -337,13 +263,176 @@
     <td>
       <div>
         <p>
-           <span data-ice="name"><span><a href="class/src/dom/Bounding.js~Bounding.html#instance-method-offset">offset</a></span></span><span data-ice="signature">(): <span>ClientRect</span></span>
+           <span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html#instance-member-props">props</a></span></span><span data-ice="signature">: {method: ?<span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span>, cache: <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span>, credentials: <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span>}</span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p><code>getBoundingClientRect</code> &#x3092;&#x4F7F;&#x7528;&#x3057;&#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3; element &#x306E; offset &#x5024;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;</p>
+        <div data-ice="description"><p><code>Request</code> constructor &#x306B;&#x6E21;&#x3059; option</p>
+<ul>
+<li>method: GET|POST|PUT|DELETE...</li>
+</ul>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html#instance-member-reject">reject</a></span></span><span data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Promise fail callback</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html#instance-member-resolve">resolve</a></span></span><span data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Promise success callback</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html#instance-method-disable">disable</a></span></span><span data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>&#x5B9F;&#x884C;&#x53EF;&#x5426; flag &#x3092; false &#x306B;&#x3057;&#x307E;&#x3059;</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html#instance-method-enable">enable</a></span></span><span data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>&#x5B9F;&#x884C;&#x53EF;&#x5426; flag &#x3092; true &#x306B;&#x3057;&#x307E;&#x3059;</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html#instance-method-option">option</a></span></span><span data-ice="signature">(path: <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span> | <span>USVString</span> | <span><a href="variable/index.html#static-variable-Request">Request</a></span>, method: <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span>, headers: <span>Headers</span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null">null</a></span>, formData: <span>FormData</span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null">null</a></span>): <span>*</span> | <span><a href="variable/index.html#static-variable-Request">Request</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p></p><p>fetch API &#x3078;&#x9001;&#x308B;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;</p>
+<p></p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="class/src/net/Ajax.js~Ajax.html#instance-method-start">start</a></span></span><span data-ice="signature">(path: <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span>, method: <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span>, headers: <span>Headers</span>, formData: <span>FormData</span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p></p><p>Ajax request &#x958B;&#x59CB;&#x3057;&#x307E;&#x3059;</p>
+<p>request &#x53EF;&#x80FD; / &#x4E0D;&#x53EF;&#x80FD; flag &#x304C; false &#x306E;&#x6642;&#x306F;&#x5B9F;&#x884C;&#x3057;&#x307E;&#x305B;&#x3093;<br>
+true &#x306E;&#x6642;&#x306F; false &#x306B;&#x3057;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3092;&#x958B;&#x59CB;&#x3057;&#x307E;&#x3059;</p>
+<p></p>
 </div>
       </div>
     </td>
@@ -359,363 +448,93 @@
 
 
 
-<div data-ice="staticMethodDetails"><h2 data-ice="title">Static Public Methods</h2>
 
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="static-method-clone">
-    <span class="access" data-ice="access">public</span>
-    <span data-ice="static">static</span>
-    
-    
-    
-    <span data-ice="name">clone</span><span data-ice="signature">(offset: <span>ClientRect</span>): <span>{
- top: number,
- right: number,
- bottom: number,
- left: number,
- width: number,
- height: number}</span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/dom/Bounding.js.html#lineNumber83">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>ClientRect &#x306E;&#x8907;&#x88FD;&#x3092; Object &#x5316;&#x3057; writable &#x306B;&#x3057;&#x307E;&#x3059;</p>
-</div>
-
-  
-
-  <div data-ice="properties"><div data-ice="properties">
-  <h4 data-ice="title">Params:</h4>
-  <table class="params">
-    <thead>
-    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-    
-    <tr data-ice="property" data-depth="0">
-      <td data-ice="name" data-depth="0">offset</td>
-      <td data-ice="type"><span>ClientRect</span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>&#x8907;&#x88FD;&#x5143; ClientRect</p>
-</td>
-    </tr>
-</tbody>
-  </table>
-</div>
-</div>
-
-  <div class="return-params" data-ice="returnParams">
-    <h4>Return:</h4>
-    <table>
-      <tr>
-        <td class="return-type" data-ice="returnType"><span>{
- top: number,
- right: number,
- bottom: number,
- left: number,
- width: number,
- height: number}</span></td>
-        <td class="return-desc" data-ice="returnDescription"><p>ClientRect &#x306E;&#x8907;&#x88FD; (Object) &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;</p>
-</td>
-      </tr>
-    </table>
-    <div data-ice="returnProperties">
-</div>
-  </div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="static-method-offset">
-    <span class="access" data-ice="access">public</span>
-    <span data-ice="static">static</span>
-    
-    
-    
-    <span data-ice="name">offset</span><span data-ice="signature">(element: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span>): <span>ClientRect</span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/dom/Bounding.js.html#lineNumber69">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p><code>getBoundingClientRect</code> &#x3092;&#x4F7F;&#x7528;&#x3057;&#x5F15;&#x6570; element &#x306E; offset &#x5024;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;</p>
-<pre><code><code class="source-code prettyprint">{{top: Number, right: Number, left: Number, bottom: Number, width: Number, height: Number}}</code>
-</code></pre></div>
-
-  
-
-  <div data-ice="properties"><div data-ice="properties">
-  <h4 data-ice="title">Params:</h4>
-  <table class="params">
-    <thead>
-    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-    
-    <tr data-ice="property" data-depth="0">
-      <td data-ice="name" data-depth="0">element</td>
-      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>&#x8ABF;&#x67FB;&#x5BFE;&#x8C61; Element</p>
-</td>
-    </tr>
-</tbody>
-  </table>
-</div>
-</div>
-
-  <div class="return-params" data-ice="returnParams">
-    <h4>Return:</h4>
-    <table>
-      <tr>
-        <td class="return-type" data-ice="returnType"><span>ClientRect</span></td>
-        <td class="return-desc" data-ice="returnDescription"><p>&#x5F15;&#x6570; element &#x306E; offset &#x5024;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;</p>
-</td>
-      </tr>
-    </table>
-    <div data-ice="returnProperties">
-</div>
-  </div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  <div data-ice="see"><h4>See:</h4><ul><li><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect">https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect</a></span></li></ul></div>
-  
-</div>
-</div>
-<div data-ice="constructorDetails"><h2 data-ice="title">Public Constructors</h2>
-
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-constructor-constructor">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    <span data-ice="name">constructor</span><span data-ice="signature">(element: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span>)</span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/dom/Bounding.js.html#lineNumber30">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>&#x64CD;&#x4F5C;&#x5BFE;&#x8C61; Element &#x3092;&#x4FDD;&#x5B58;&#x3057;&#x307E;&#x3059;</p>
-</div>
-
-  
-
-  <div data-ice="properties"><div data-ice="properties">
-  <h4 data-ice="title">Params:</h4>
-  <table class="params">
-    <thead>
-    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-    
-    <tr data-ice="property" data-depth="0">
-      <td data-ice="name" data-depth="0">element</td>
-      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>&#x64CD;&#x4F5C;&#x5BFE;&#x8C61; Element</p>
-</td>
-    </tr>
-</tbody>
-  </table>
-</div>
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-</div>
-<div data-ice="memberDetails"><h2 data-ice="title">Public Members</h2>
-
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-element">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    <span data-ice="name">element</span><span data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/dom/Bounding.js.html#lineNumber35">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>&#x64CD;&#x4F5C;&#x5BFE;&#x8C61; Element</p>
-</div>
-
-  
-
-  <div data-ice="properties">
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-</div>
 <div data-ice="methodDetails"><h2 data-ice="title">Public Methods</h2>
 
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-clone">
+  <h3 data-ice="anchor" id="instance-method-start">
     <span class="access" data-ice="access">public</span>
     
     
     
     
-    <span data-ice="name">clone</span><span data-ice="signature">(): <span>{
- top: number,
- right: number,
- bottom: number,
- left: number,
- width: number,
- height: number}</span></span>
+    <span data-ice="name">start</span><span data-ice="signature">(path: <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span>, method: <span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span>, headers: <span>Headers</span>, formData: <span>FormData</span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/dom/Bounding.js.html#lineNumber54">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/net/AjaxThunk.js.html#lineNumber68">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>writable &#x306A; element &#x306E; offset &#x5024;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;</p>
+  <div data-ice="description"><p></p><p>Ajax request &#x958B;&#x59CB;&#x3057;&#x307E;&#x3059;</p>
+<p>request &#x53EF;&#x80FD; / &#x4E0D;&#x53EF;&#x80FD; flag &#x304C; false &#x306E;&#x6642;&#x306F;&#x5B9F;&#x884C;&#x3057;&#x307E;&#x305B;&#x3093;<br>
+true &#x306E;&#x6642;&#x306F; false &#x306B;&#x3057;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3092;&#x958B;&#x59CB;&#x3057;&#x307E;&#x3059;</p>
+
+<p></p>
+<ul>
+<li>resolve, reject &#x95A2;&#x6570;&#x78BA;&#x8A8D;&#x5F8C;&#x5B9F;&#x884C;&#x3057;&#x307E;&#x3059;</li>
+<li>Promise instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;</li>
+<li>json / error &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;</li>
+</ul>
 </div>
 
-  
+  <div data-ice="override"><h4>Override:</h4><span><a href="class/src/net/Ajax.js~Ajax.html#instance-method-start">Ajax#start</a></span></div>
 
-  <div data-ice="properties">
-</div>
-
-  <div class="return-params" data-ice="returnParams">
-    <h4>Return:</h4>
-    <table>
-      <tr>
-        <td class="return-type" data-ice="returnType"><span>{
- top: number,
- right: number,
- bottom: number,
- left: number,
- width: number,
- height: number}</span></td>
-        <td class="return-desc" data-ice="returnDescription"><p>writable &#x306A; element &#x306E; offset</p>
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">path</td>
+      <td data-ice="type"><span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>Ajax request path</p>
 </td>
-      </tr>
-    </table>
-    <div data-ice="returnProperties">
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">method</td>
+      <td data-ice="type"><span><a href="class/src/util/Type.js~Type.html#static-method-string">string</a></span></td>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: GET</li></ul></td>
+      <td data-ice="description"><p>GET, POST, PUT, DELETE...etc request method</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">headers</td>
+      <td data-ice="type"><span>Headers</span></td>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: null</li>
+<li>nullable: true</li></ul></td>
+      <td data-ice="description"><p>Headers option, token &#x306A;&#x3069;&#x3092;&#x57CB;&#x3081;&#x8FBC;&#x3080;&#x306E;&#x306B;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">formData</td>
+      <td data-ice="type"><span>FormData</span></td>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: null</li>
+<li>nullable: true</li></ul></td>
+      <td data-ice="description"><p>&#x30D5;&#x30A9;&#x30FC;&#x30E0;&#x30C7;&#x30FC;&#x30BF;&#x3092;&#x9001;&#x4FE1;&#x3059;&#x308B;&#x306E;&#x306B;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;</p>
+</td>
+    </tr>
+</tbody>
+  </table>
 </div>
-  </div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-offset">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    <span data-ice="name">offset</span><span data-ice="signature">(): <span>ClientRect</span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/dom/Bounding.js.html#lineNumber41">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p><code>getBoundingClientRect</code> &#x3092;&#x4F7F;&#x7528;&#x3057;&#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3; element &#x306E; offset &#x5024;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;</p>
-</div>
-
-  
-
-  <div data-ice="properties">
 </div>
 
   <div class="return-params" data-ice="returnParams">
     <h4>Return:</h4>
     <table>
       <tr>
-        <td class="return-type" data-ice="returnType"><span>ClientRect</span></td>
-        <td class="return-desc" data-ice="returnDescription"><p>read only ClientRect &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;</p>
+        <td class="return-type" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span></td>
+        <td class="return-desc" data-ice="returnDescription"><p>ajax request &#x3092;&#x958B;&#x59CB;&#x3057; fetch Promise &#x8FD4;&#x3057;&#x307E;&#x3059;</p>
 </td>
       </tr>
     </table>
