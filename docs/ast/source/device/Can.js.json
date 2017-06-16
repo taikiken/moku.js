@@ -1,14 +1,14 @@
 {
   "type": "Program",
   "start": 0,
-  "end": 4363,
+  "end": 4364,
   "loc": {
     "start": {
       "line": 1,
       "column": 0
     },
     "end": {
-      "line": 154,
+      "line": 155,
       "column": 0
     }
   },
@@ -2319,66 +2319,66 @@
       "trailingComments": [
         {
           "type": "Block",
-          "value": "*\n * addEventListener 第三引数 - { passive: true } : false するためのブラウザテスト・フラッグ\n * # TouchEvent#Using with addEventListener() and preventDefault()\n * <pre>\n * It's important to note that in many cases, both touch and mouse events get sent (in order to let non-touch-specific code still interact with the user). If you use touch events, you should call preventDefault() to keep the mouse event from being sent as well.\n * The exception to this is Chrome, starting with version 56 (desktop, Chrome for android, and android webview), where the default value for touchstart and touchmove is true and calls to preventDefault() are not needed. To override this behavior, you simply set the passive option to false as shown in the example below. This change prevents the listener from blocking page rendering while a user is scrolling. A demo is available on the Google Developer site.\n * </pre>\n * @private\n * @type {boolean}\n * @see https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent\n * @see https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md\n * @see https://blog.jxck.io/entries/2016-06-09/passive-event-listeners.html\n * @since 0.3.2\n ",
+          "value": "*\n * addEventListener 第三引数 - { passive: true } : false するためのブラウザテスト・フラッグ\n *\n * TouchEvent#Using with addEventListener() and preventDefault()\n * <pre>\n * It's important to note that in many cases, both touch and mouse events get sent (in order to let non-touch-specific code still interact with the user). If you use touch events, you should call preventDefault() to keep the mouse event from being sent as well.\n * The exception to this is Chrome, starting with version 56 (desktop, Chrome for android, and android webview), where the default value for touchstart and touchmove is true and calls to preventDefault() are not needed. To override this behavior, you simply set the passive option to false as shown in the example below. This change prevents the listener from blocking page rendering while a user is scrolling. A demo is available on the Google Developer site.\n * </pre>\n * @private\n * @type {boolean}\n * @see https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent\n * @see https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md\n * @see https://blog.jxck.io/entries/2016-06-09/passive-event-listeners.html\n * @since 0.3.2\n ",
           "start": 2304,
-          "end": 3463,
+          "end": 3464,
           "loc": {
             "start": {
               "line": 92,
               "column": 0
             },
             "end": {
-              "line": 105,
+              "line": 106,
               "column": 3
             }
           },
           "range": [
             2304,
-            3463
+            3464
           ]
         }
       ]
     },
     {
       "type": "VariableDeclaration",
-      "start": 3464,
-      "end": 3492,
+      "start": 3465,
+      "end": 3493,
       "loc": {
         "start": {
-          "line": 106,
+          "line": 107,
           "column": 0
         },
         "end": {
-          "line": 106,
+          "line": 107,
           "column": 28
         }
       },
       "declarations": [
         {
           "type": "VariableDeclarator",
-          "start": 3468,
-          "end": 3491,
+          "start": 3469,
+          "end": 3492,
           "loc": {
             "start": {
-              "line": 106,
+              "line": 107,
               "column": 4
             },
             "end": {
-              "line": 106,
+              "line": 107,
               "column": 27
             }
           },
           "id": {
             "type": "Identifier",
-            "start": 3468,
-            "end": 3483,
+            "start": 3469,
+            "end": 3484,
             "loc": {
               "start": {
-                "line": 106,
+                "line": 107,
                 "column": 4
               },
               "end": {
-                "line": 106,
+                "line": 107,
                 "column": 19
               }
             },
@@ -2387,15 +2387,15 @@
           },
           "init": {
             "type": "Literal",
-            "start": 3486,
-            "end": 3491,
+            "start": 3487,
+            "end": 3492,
             "loc": {
               "start": {
-                "line": 106,
+                "line": 107,
                 "column": 22
               },
               "end": {
-                "line": 106,
+                "line": 107,
                 "column": 27
               }
             },
@@ -2410,95 +2410,95 @@
       "leadingComments": [
         {
           "type": "Block",
-          "value": "*\n * addEventListener 第三引数 - { passive: true } : false するためのブラウザテスト・フラッグ\n * # TouchEvent#Using with addEventListener() and preventDefault()\n * <pre>\n * It's important to note that in many cases, both touch and mouse events get sent (in order to let non-touch-specific code still interact with the user). If you use touch events, you should call preventDefault() to keep the mouse event from being sent as well.\n * The exception to this is Chrome, starting with version 56 (desktop, Chrome for android, and android webview), where the default value for touchstart and touchmove is true and calls to preventDefault() are not needed. To override this behavior, you simply set the passive option to false as shown in the example below. This change prevents the listener from blocking page rendering while a user is scrolling. A demo is available on the Google Developer site.\n * </pre>\n * @private\n * @type {boolean}\n * @see https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent\n * @see https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md\n * @see https://blog.jxck.io/entries/2016-06-09/passive-event-listeners.html\n * @since 0.3.2\n ",
+          "value": "*\n * addEventListener 第三引数 - { passive: true } : false するためのブラウザテスト・フラッグ\n *\n * TouchEvent#Using with addEventListener() and preventDefault()\n * <pre>\n * It's important to note that in many cases, both touch and mouse events get sent (in order to let non-touch-specific code still interact with the user). If you use touch events, you should call preventDefault() to keep the mouse event from being sent as well.\n * The exception to this is Chrome, starting with version 56 (desktop, Chrome for android, and android webview), where the default value for touchstart and touchmove is true and calls to preventDefault() are not needed. To override this behavior, you simply set the passive option to false as shown in the example below. This change prevents the listener from blocking page rendering while a user is scrolling. A demo is available on the Google Developer site.\n * </pre>\n * @private\n * @type {boolean}\n * @see https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent\n * @see https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md\n * @see https://blog.jxck.io/entries/2016-06-09/passive-event-listeners.html\n * @since 0.3.2\n ",
           "start": 2304,
-          "end": 3463,
+          "end": 3464,
           "loc": {
             "start": {
               "line": 92,
               "column": 0
             },
             "end": {
-              "line": 105,
+              "line": 106,
               "column": 3
             }
           },
           "range": [
             2304,
-            3463
+            3464
           ]
         }
       ]
     },
     {
       "type": "TryStatement",
-      "start": 3493,
-      "end": 3735,
+      "start": 3494,
+      "end": 3736,
       "loc": {
         "start": {
-          "line": 107,
+          "line": 108,
           "column": 0
         },
         "end": {
-          "line": 117,
+          "line": 118,
           "column": 1
         }
       },
       "block": {
         "type": "BlockStatement",
-        "start": 3497,
-        "end": 3656,
+        "start": 3498,
+        "end": 3657,
         "loc": {
           "start": {
-            "line": 107,
+            "line": 108,
             "column": 4
           },
           "end": {
-            "line": 114,
+            "line": 115,
             "column": 1
           }
         },
         "body": [
           {
             "type": "VariableDeclaration",
-            "start": 3501,
-            "end": 3607,
+            "start": 3502,
+            "end": 3608,
             "loc": {
               "start": {
-                "line": 108,
+                "line": 109,
                 "column": 2
               },
               "end": {
-                "line": 112,
+                "line": 113,
                 "column": 5
               }
             },
             "declarations": [
               {
                 "type": "VariableDeclarator",
-                "start": 3507,
-                "end": 3606,
+                "start": 3508,
+                "end": 3607,
                 "loc": {
                   "start": {
-                    "line": 108,
+                    "line": 109,
                     "column": 8
                   },
                   "end": {
-                    "line": 112,
+                    "line": 113,
                     "column": 4
                   }
                 },
                 "id": {
                   "type": "Identifier",
-                  "start": 3507,
-                  "end": 3511,
+                  "start": 3508,
+                  "end": 3512,
                   "loc": {
                     "start": {
-                      "line": 108,
+                      "line": 109,
                       "column": 8
                     },
                     "end": {
-                      "line": 108,
+                      "line": 109,
                       "column": 12
                     }
                   },
@@ -2506,43 +2506,43 @@
                 },
                 "init": {
                   "type": "CallExpression",
-                  "start": 3514,
-                  "end": 3606,
+                  "start": 3515,
+                  "end": 3607,
                   "loc": {
                     "start": {
-                      "line": 108,
+                      "line": 109,
                       "column": 15
                     },
                     "end": {
-                      "line": 112,
+                      "line": 113,
                       "column": 4
                     }
                   },
                   "callee": {
                     "type": "MemberExpression",
-                    "start": 3514,
-                    "end": 3535,
+                    "start": 3515,
+                    "end": 3536,
                     "loc": {
                       "start": {
-                        "line": 108,
+                        "line": 109,
                         "column": 15
                       },
                       "end": {
-                        "line": 108,
+                        "line": 109,
                         "column": 36
                       }
                     },
                     "object": {
                       "type": "Identifier",
-                      "start": 3514,
-                      "end": 3520,
+                      "start": 3515,
+                      "end": 3521,
                       "loc": {
                         "start": {
-                          "line": 108,
+                          "line": 109,
                           "column": 15
                         },
                         "end": {
-                          "line": 108,
+                          "line": 109,
                           "column": 21
                         }
                       },
@@ -2550,15 +2550,15 @@
                     },
                     "property": {
                       "type": "Identifier",
-                      "start": 3521,
-                      "end": 3535,
+                      "start": 3522,
+                      "end": 3536,
                       "loc": {
                         "start": {
-                          "line": 108,
+                          "line": 109,
                           "column": 22
                         },
                         "end": {
-                          "line": 108,
+                          "line": 109,
                           "column": 36
                         }
                       },
@@ -2569,15 +2569,15 @@
                   "arguments": [
                     {
                       "type": "ObjectExpression",
-                      "start": 3536,
-                      "end": 3538,
+                      "start": 3537,
+                      "end": 3539,
                       "loc": {
                         "start": {
-                          "line": 108,
+                          "line": 109,
                           "column": 37
                         },
                         "end": {
-                          "line": 108,
+                          "line": 109,
                           "column": 39
                         }
                       },
@@ -2585,15 +2585,15 @@
                     },
                     {
                       "type": "Literal",
-                      "start": 3540,
-                      "end": 3549,
+                      "start": 3541,
+                      "end": 3550,
                       "loc": {
                         "start": {
-                          "line": 108,
+                          "line": 109,
                           "column": 41
                         },
                         "end": {
-                          "line": 108,
+                          "line": 109,
                           "column": 50
                         }
                       },
@@ -2603,30 +2603,30 @@
                     },
                     {
                       "type": "ObjectExpression",
-                      "start": 3551,
-                      "end": 3605,
+                      "start": 3552,
+                      "end": 3606,
                       "loc": {
                         "start": {
-                          "line": 108,
+                          "line": 109,
                           "column": 52
                         },
                         "end": {
-                          "line": 112,
+                          "line": 113,
                           "column": 3
                         }
                       },
                       "properties": [
                         {
                           "type": "Property",
-                          "start": 3557,
-                          "end": 3600,
+                          "start": 3558,
+                          "end": 3601,
                           "loc": {
                             "start": {
-                              "line": 109,
+                              "line": 110,
                               "column": 4
                             },
                             "end": {
-                              "line": 111,
+                              "line": 112,
                               "column": 5
                             }
                           },
@@ -2635,15 +2635,15 @@
                           "computed": false,
                           "key": {
                             "type": "Identifier",
-                            "start": 3557,
-                            "end": 3560,
+                            "start": 3558,
+                            "end": 3561,
                             "loc": {
                               "start": {
-                                "line": 109,
+                                "line": 110,
                                 "column": 4
                               },
                               "end": {
-                                "line": 109,
+                                "line": 110,
                                 "column": 7
                               }
                             },
@@ -2652,15 +2652,15 @@
                           "kind": "init",
                           "value": {
                             "type": "FunctionExpression",
-                            "start": 3560,
-                            "end": 3600,
+                            "start": 3561,
+                            "end": 3601,
                             "loc": {
                               "start": {
-                                "line": 109,
+                                "line": 110,
                                 "column": 7
                               },
                               "end": {
-                                "line": 111,
+                                "line": 112,
                                 "column": 5
                               }
                             },
@@ -2671,59 +2671,59 @@
                             "params": [],
                             "body": {
                               "type": "BlockStatement",
-                              "start": 3563,
-                              "end": 3600,
+                              "start": 3564,
+                              "end": 3601,
                               "loc": {
                                 "start": {
-                                  "line": 109,
+                                  "line": 110,
                                   "column": 10
                                 },
                                 "end": {
-                                  "line": 111,
+                                  "line": 112,
                                   "column": 5
                                 }
                               },
                               "body": [
                                 {
                                   "type": "ExpressionStatement",
-                                  "start": 3571,
-                                  "end": 3594,
+                                  "start": 3572,
+                                  "end": 3595,
                                   "loc": {
                                     "start": {
-                                      "line": 110,
+                                      "line": 111,
                                       "column": 6
                                     },
                                     "end": {
-                                      "line": 110,
+                                      "line": 111,
                                       "column": 29
                                     }
                                   },
                                   "expression": {
                                     "type": "AssignmentExpression",
-                                    "start": 3571,
-                                    "end": 3593,
+                                    "start": 3572,
+                                    "end": 3594,
                                     "loc": {
                                       "start": {
-                                        "line": 110,
+                                        "line": 111,
                                         "column": 6
                                       },
                                       "end": {
-                                        "line": 110,
+                                        "line": 111,
                                         "column": 28
                                       }
                                     },
                                     "operator": "=",
                                     "left": {
                                       "type": "Identifier",
-                                      "start": 3571,
-                                      "end": 3586,
+                                      "start": 3572,
+                                      "end": 3587,
                                       "loc": {
                                         "start": {
-                                          "line": 110,
+                                          "line": 111,
                                           "column": 6
                                         },
                                         "end": {
-                                          "line": 110,
+                                          "line": 111,
                                           "column": 21
                                         }
                                       },
@@ -2731,15 +2731,15 @@
                                     },
                                     "right": {
                                       "type": "Literal",
-                                      "start": 3589,
-                                      "end": 3593,
+                                      "start": 3590,
+                                      "end": 3594,
                                       "loc": {
                                         "start": {
-                                          "line": 110,
+                                          "line": 111,
                                           "column": 24
                                         },
                                         "end": {
-                                          "line": 110,
+                                          "line": 111,
                                           "column": 28
                                         }
                                       },
@@ -2763,57 +2763,57 @@
           },
           {
             "type": "ExpressionStatement",
-            "start": 3610,
-            "end": 3654,
+            "start": 3611,
+            "end": 3655,
             "loc": {
               "start": {
-                "line": 113,
+                "line": 114,
                 "column": 2
               },
               "end": {
-                "line": 113,
+                "line": 114,
                 "column": 46
               }
             },
             "expression": {
               "type": "CallExpression",
-              "start": 3610,
-              "end": 3653,
+              "start": 3611,
+              "end": 3654,
               "loc": {
                 "start": {
-                  "line": 113,
+                  "line": 114,
                   "column": 2
                 },
                 "end": {
-                  "line": 113,
+                  "line": 114,
                   "column": 45
                 }
               },
               "callee": {
                 "type": "MemberExpression",
-                "start": 3610,
-                "end": 3633,
+                "start": 3611,
+                "end": 3634,
                 "loc": {
                   "start": {
-                    "line": 113,
+                    "line": 114,
                     "column": 2
                   },
                   "end": {
-                    "line": 113,
+                    "line": 114,
                     "column": 25
                   }
                 },
                 "object": {
                   "type": "Identifier",
-                  "start": 3610,
-                  "end": 3616,
+                  "start": 3611,
+                  "end": 3617,
                   "loc": {
                     "start": {
-                      "line": 113,
+                      "line": 114,
                       "column": 2
                     },
                     "end": {
-                      "line": 113,
+                      "line": 114,
                       "column": 8
                     }
                   },
@@ -2821,15 +2821,15 @@
                 },
                 "property": {
                   "type": "Identifier",
-                  "start": 3617,
-                  "end": 3633,
+                  "start": 3618,
+                  "end": 3634,
                   "loc": {
                     "start": {
-                      "line": 113,
+                      "line": 114,
                       "column": 9
                     },
                     "end": {
-                      "line": 113,
+                      "line": 114,
                       "column": 25
                     }
                   },
@@ -2840,15 +2840,15 @@
               "arguments": [
                 {
                   "type": "Literal",
-                  "start": 3634,
-                  "end": 3640,
+                  "start": 3635,
+                  "end": 3641,
                   "loc": {
                     "start": {
-                      "line": 113,
+                      "line": 114,
                       "column": 26
                     },
                     "end": {
-                      "line": 113,
+                      "line": 114,
                       "column": 32
                     }
                   },
@@ -2858,15 +2858,15 @@
                 },
                 {
                   "type": "Literal",
-                  "start": 3642,
-                  "end": 3646,
+                  "start": 3643,
+                  "end": 3647,
                   "loc": {
                     "start": {
-                      "line": 113,
+                      "line": 114,
                       "column": 34
                     },
                     "end": {
-                      "line": 113,
+                      "line": 114,
                       "column": 38
                     }
                   },
@@ -2876,15 +2876,15 @@
                 },
                 {
                   "type": "Identifier",
-                  "start": 3648,
-                  "end": 3652,
+                  "start": 3649,
+                  "end": 3653,
                   "loc": {
                     "start": {
-                      "line": 113,
+                      "line": 114,
                       "column": 40
                     },
                     "end": {
-                      "line": 113,
+                      "line": 114,
                       "column": 44
                     }
                   },
@@ -2897,29 +2897,29 @@
       },
       "handler": {
         "type": "CatchClause",
-        "start": 3657,
-        "end": 3735,
+        "start": 3658,
+        "end": 3736,
         "loc": {
           "start": {
-            "line": 114,
+            "line": 115,
             "column": 2
           },
           "end": {
-            "line": 117,
+            "line": 118,
             "column": 1
           }
         },
         "param": {
           "type": "Identifier",
-          "start": 3664,
-          "end": 3665,
+          "start": 3665,
+          "end": 3666,
           "loc": {
             "start": {
-              "line": 114,
+              "line": 115,
               "column": 9
             },
             "end": {
-              "line": 114,
+              "line": 115,
               "column": 10
             }
           },
@@ -2927,59 +2927,59 @@
         },
         "body": {
           "type": "BlockStatement",
-          "start": 3667,
-          "end": 3735,
+          "start": 3668,
+          "end": 3736,
           "loc": {
             "start": {
-              "line": 114,
+              "line": 115,
               "column": 12
             },
             "end": {
-              "line": 117,
+              "line": 118,
               "column": 1
             }
           },
           "body": [
             {
               "type": "ExpressionStatement",
-              "start": 3671,
-              "end": 3695,
+              "start": 3672,
+              "end": 3696,
               "loc": {
                 "start": {
-                  "line": 115,
+                  "line": 116,
                   "column": 2
                 },
                 "end": {
-                  "line": 115,
+                  "line": 116,
                   "column": 26
                 }
               },
               "expression": {
                 "type": "AssignmentExpression",
-                "start": 3671,
-                "end": 3694,
+                "start": 3672,
+                "end": 3695,
                 "loc": {
                   "start": {
-                    "line": 115,
+                    "line": 116,
                     "column": 2
                   },
                   "end": {
-                    "line": 115,
+                    "line": 116,
                     "column": 25
                   }
                 },
                 "operator": "=",
                 "left": {
                   "type": "Identifier",
-                  "start": 3671,
-                  "end": 3686,
+                  "start": 3672,
+                  "end": 3687,
                   "loc": {
                     "start": {
-                      "line": 115,
+                      "line": 116,
                       "column": 2
                     },
                     "end": {
-                      "line": 115,
+                      "line": 116,
                       "column": 17
                     }
                   },
@@ -2987,15 +2987,15 @@
                 },
                 "right": {
                   "type": "Literal",
-                  "start": 3689,
-                  "end": 3694,
+                  "start": 3690,
+                  "end": 3695,
                   "loc": {
                     "start": {
-                      "line": 115,
+                      "line": 116,
                       "column": 20
                     },
                     "end": {
-                      "line": 115,
+                      "line": 116,
                       "column": 25
                     }
                   },
@@ -3008,21 +3008,21 @@
                 {
                   "type": "CommentLine",
                   "value": " console.warn('passive test', e);",
-                  "start": 3698,
-                  "end": 3733,
+                  "start": 3699,
+                  "end": 3734,
                   "loc": {
                     "start": {
-                      "line": 116,
+                      "line": 117,
                       "column": 2
                     },
                     "end": {
-                      "line": 116,
+                      "line": 117,
                       "column": 37
                     }
                   },
                   "range": [
-                    3698,
-                    3733
+                    3699,
+                    3734
                   ]
                 }
               ]
@@ -3038,64 +3038,64 @@
         {
           "type": "Block",
           "value": "*\n * CSS3 機能使用可能かを調べます\n * @example\n * if (Can.transition()) {\n *  // can CSS3 transition\n * }\n *\n * if (Can.transform()) {\n *  // can CSS3 transform\n * }\n ",
-          "start": 3737,
-          "end": 3896,
+          "start": 3738,
+          "end": 3897,
           "loc": {
             "start": {
-              "line": 119,
+              "line": 120,
               "column": 0
             },
             "end": {
-              "line": 129,
+              "line": 130,
               "column": 3
             }
           },
           "range": [
-            3737,
-            3896
+            3738,
+            3897
           ]
         }
       ]
     },
     {
       "type": "ExportDefaultDeclaration",
-      "start": 3897,
-      "end": 4362,
+      "start": 3898,
+      "end": 4363,
       "loc": {
         "start": {
-          "line": 130,
+          "line": 131,
           "column": 0
         },
         "end": {
-          "line": 153,
+          "line": 154,
           "column": 1
         }
       },
       "declaration": {
         "type": "ClassDeclaration",
-        "start": 3912,
-        "end": 4362,
+        "start": 3913,
+        "end": 4363,
         "loc": {
           "start": {
-            "line": 130,
+            "line": 131,
             "column": 15
           },
           "end": {
-            "line": 153,
+            "line": 154,
             "column": 1
           }
         },
         "id": {
           "type": "Identifier",
-          "start": 3918,
-          "end": 3921,
+          "start": 3919,
+          "end": 3922,
           "loc": {
             "start": {
-              "line": 130,
+              "line": 131,
               "column": 21
             },
             "end": {
-              "line": 130,
+              "line": 131,
               "column": 24
             }
           },
@@ -3105,45 +3105,45 @@
         "superClass": null,
         "body": {
           "type": "ClassBody",
-          "start": 3922,
-          "end": 4362,
+          "start": 3923,
+          "end": 4363,
           "loc": {
             "start": {
-              "line": 130,
+              "line": 131,
               "column": 25
             },
             "end": {
-              "line": 153,
+              "line": 154,
               "column": 1
             }
           },
           "body": [
             {
               "type": "MethodDefinition",
-              "start": 4006,
-              "end": 4054,
+              "start": 4007,
+              "end": 4055,
               "loc": {
                 "start": {
-                  "line": 135,
+                  "line": 136,
                   "column": 2
                 },
                 "end": {
-                  "line": 137,
+                  "line": 138,
                   "column": 3
                 }
               },
               "computed": false,
               "key": {
                 "type": "Identifier",
-                "start": 4013,
-                "end": 4023,
+                "start": 4014,
+                "end": 4024,
                 "loc": {
                   "start": {
-                    "line": 135,
+                    "line": 136,
                     "column": 9
                   },
                   "end": {
-                    "line": 135,
+                    "line": 136,
                     "column": 19
                   }
                 },
@@ -3153,15 +3153,15 @@
               "kind": "method",
               "value": {
                 "type": "FunctionExpression",
-                "start": 4023,
-                "end": 4054,
+                "start": 4024,
+                "end": 4055,
                 "loc": {
                   "start": {
-                    "line": 135,
+                    "line": 136,
                     "column": 19
                   },
                   "end": {
-                    "line": 137,
+                    "line": 138,
                     "column": 3
                   }
                 },
@@ -3172,44 +3172,44 @@
                 "params": [],
                 "body": {
                   "type": "BlockStatement",
-                  "start": 4026,
-                  "end": 4054,
+                  "start": 4027,
+                  "end": 4055,
                   "loc": {
                     "start": {
-                      "line": 135,
+                      "line": 136,
                       "column": 22
                     },
                     "end": {
-                      "line": 137,
+                      "line": 138,
                       "column": 3
                     }
                   },
                   "body": [
                     {
                       "type": "ReturnStatement",
-                      "start": 4032,
-                      "end": 4050,
+                      "start": 4033,
+                      "end": 4051,
                       "loc": {
                         "start": {
-                          "line": 136,
+                          "line": 137,
                           "column": 4
                         },
                         "end": {
-                          "line": 136,
+                          "line": 137,
                           "column": 22
                         }
                       },
                       "argument": {
                         "type": "Identifier",
-                        "start": 4039,
-                        "end": 4049,
+                        "start": 4040,
+                        "end": 4050,
                         "loc": {
                           "start": {
-                            "line": 136,
+                            "line": 137,
                             "column": 11
                           },
                           "end": {
-                            "line": 136,
+                            "line": 137,
                             "column": 21
                           }
                         },
@@ -3225,21 +3225,21 @@
                 {
                   "type": "Block",
                   "value": "*\n   * CSS3 transition が使用可能かを調べます\n   * @returns {boolean} true: 使用可能\n   ",
-                  "start": 3926,
-                  "end": 4003,
+                  "start": 3927,
+                  "end": 4004,
                   "loc": {
                     "start": {
-                      "line": 131,
+                      "line": 132,
                       "column": 2
                     },
                     "end": {
-                      "line": 134,
+                      "line": 135,
                       "column": 5
                     }
                   },
                   "range": [
-                    3926,
-                    4003
+                    3927,
+                    4004
                   ]
                 }
               ],
@@ -3247,51 +3247,51 @@
                 {
                   "type": "Block",
                   "value": "*\n   * CSS3 transform が使用可能かを調べます\n   * @returns {boolean} true: 使用可能\n   ",
-                  "start": 4057,
-                  "end": 4133,
+                  "start": 4058,
+                  "end": 4134,
                   "loc": {
                     "start": {
-                      "line": 138,
+                      "line": 139,
                       "column": 2
                     },
                     "end": {
-                      "line": 141,
+                      "line": 142,
                       "column": 5
                     }
                   },
                   "range": [
-                    4057,
-                    4133
+                    4058,
+                    4134
                   ]
                 }
               ]
             },
             {
               "type": "MethodDefinition",
-              "start": 4136,
-              "end": 4182,
+              "start": 4137,
+              "end": 4183,
               "loc": {
                 "start": {
-                  "line": 142,
+                  "line": 143,
                   "column": 2
                 },
                 "end": {
-                  "line": 144,
+                  "line": 145,
                   "column": 3
                 }
               },
               "computed": false,
               "key": {
                 "type": "Identifier",
-                "start": 4143,
-                "end": 4152,
+                "start": 4144,
+                "end": 4153,
                 "loc": {
                   "start": {
-                    "line": 142,
+                    "line": 143,
                     "column": 9
                   },
                   "end": {
-                    "line": 142,
+                    "line": 143,
                     "column": 18
                   }
                 },
@@ -3301,15 +3301,15 @@
               "kind": "method",
               "value": {
                 "type": "FunctionExpression",
-                "start": 4152,
-                "end": 4182,
+                "start": 4153,
+                "end": 4183,
                 "loc": {
                   "start": {
-                    "line": 142,
+                    "line": 143,
                     "column": 18
                   },
                   "end": {
-                    "line": 144,
+                    "line": 145,
                     "column": 3
                   }
                 },
@@ -3320,44 +3320,44 @@
                 "params": [],
                 "body": {
                   "type": "BlockStatement",
-                  "start": 4155,
-                  "end": 4182,
+                  "start": 4156,
+                  "end": 4183,
                   "loc": {
                     "start": {
-                      "line": 142,
+                      "line": 143,
                       "column": 21
                     },
                     "end": {
-                      "line": 144,
+                      "line": 145,
                       "column": 3
                     }
                   },
                   "body": [
                     {
                       "type": "ReturnStatement",
-                      "start": 4161,
-                      "end": 4178,
+                      "start": 4162,
+                      "end": 4179,
                       "loc": {
                         "start": {
-                          "line": 143,
+                          "line": 144,
                           "column": 4
                         },
                         "end": {
-                          "line": 143,
+                          "line": 144,
                           "column": 21
                         }
                       },
                       "argument": {
                         "type": "Identifier",
-                        "start": 4168,
-                        "end": 4177,
+                        "start": 4169,
+                        "end": 4178,
                         "loc": {
                           "start": {
-                            "line": 143,
+                            "line": 144,
                             "column": 11
                           },
                           "end": {
-                            "line": 143,
+                            "line": 144,
                             "column": 20
                           }
                         },
@@ -3373,21 +3373,21 @@
                 {
                   "type": "Block",
                   "value": "*\n   * CSS3 transform が使用可能かを調べます\n   * @returns {boolean} true: 使用可能\n   ",
-                  "start": 4057,
-                  "end": 4133,
+                  "start": 4058,
+                  "end": 4134,
                   "loc": {
                     "start": {
-                      "line": 138,
+                      "line": 139,
                       "column": 2
                     },
                     "end": {
-                      "line": 141,
+                      "line": 142,
                       "column": 5
                     }
                   },
                   "range": [
-                    4057,
-                    4133
+                    4058,
+                    4134
                   ]
                 }
               ],
@@ -3395,51 +3395,51 @@
                 {
                   "type": "Block",
                   "value": "*\n   * addEventListener 第三引数 - { passive: true } が使用できるかを調べます\n   * @returns {boolean} true: 使用可能\n   * @since 0.3.2\n   ",
-                  "start": 4185,
-                  "end": 4307,
+                  "start": 4186,
+                  "end": 4308,
                   "loc": {
                     "start": {
-                      "line": 145,
+                      "line": 146,
                       "column": 2
                     },
                     "end": {
-                      "line": 149,
+                      "line": 150,
                       "column": 5
                     }
                   },
                   "range": [
-                    4185,
-                    4307
+                    4186,
+                    4308
                   ]
                 }
               ]
             },
             {
               "type": "MethodDefinition",
-              "start": 4310,
-              "end": 4360,
+              "start": 4311,
+              "end": 4361,
               "loc": {
                 "start": {
-                  "line": 150,
+                  "line": 151,
                   "column": 2
                 },
                 "end": {
-                  "line": 152,
+                  "line": 153,
                   "column": 3
                 }
               },
               "computed": false,
               "key": {
                 "type": "Identifier",
-                "start": 4317,
-                "end": 4324,
+                "start": 4318,
+                "end": 4325,
                 "loc": {
                   "start": {
-                    "line": 150,
+                    "line": 151,
                     "column": 9
                   },
                   "end": {
-                    "line": 150,
+                    "line": 151,
                     "column": 16
                   }
                 },
@@ -3449,15 +3449,15 @@
               "kind": "method",
               "value": {
                 "type": "FunctionExpression",
-                "start": 4324,
-                "end": 4360,
+                "start": 4325,
+                "end": 4361,
                 "loc": {
                   "start": {
-                    "line": 150,
+                    "line": 151,
                     "column": 16
                   },
                   "end": {
-                    "line": 152,
+                    "line": 153,
                     "column": 3
                   }
                 },
@@ -3468,44 +3468,44 @@
                 "params": [],
                 "body": {
                   "type": "BlockStatement",
-                  "start": 4327,
-                  "end": 4360,
+                  "start": 4328,
+                  "end": 4361,
                   "loc": {
                     "start": {
-                      "line": 150,
+                      "line": 151,
                       "column": 19
                     },
                     "end": {
-                      "line": 152,
+                      "line": 153,
                       "column": 3
                     }
                   },
                   "body": [
                     {
                       "type": "ReturnStatement",
-                      "start": 4333,
-                      "end": 4356,
+                      "start": 4334,
+                      "end": 4357,
                       "loc": {
                         "start": {
-                          "line": 151,
+                          "line": 152,
                           "column": 4
                         },
                         "end": {
-                          "line": 151,
+                          "line": 152,
                           "column": 27
                         }
                       },
                       "argument": {
                         "type": "Identifier",
-                        "start": 4340,
-                        "end": 4355,
+                        "start": 4341,
+                        "end": 4356,
                         "loc": {
                           "start": {
-                            "line": 151,
+                            "line": 152,
                             "column": 11
                           },
                           "end": {
-                            "line": 151,
+                            "line": 152,
                             "column": 26
                           }
                         },
@@ -3519,21 +3519,21 @@
                 {
                   "type": "Block",
                   "value": "*\n   * addEventListener 第三引数 - { passive: true } が使用できるかを調べます\n   * @returns {boolean} true: 使用可能\n   * @since 0.3.2\n   ",
-                  "start": 4185,
-                  "end": 4307,
+                  "start": 4186,
+                  "end": 4308,
                   "loc": {
                     "start": {
-                      "line": 145,
+                      "line": 146,
                       "column": 2
                     },
                     "end": {
-                      "line": 149,
+                      "line": 150,
                       "column": 5
                     }
                   },
                   "range": [
-                    4185,
-                    4307
+                    4186,
+                    4308
                   ]
                 }
               ]
@@ -3544,41 +3544,41 @@
           {
             "type": "CommentLine",
             "value": " console.warn('passive test', e);",
-            "start": 3698,
-            "end": 3733,
+            "start": 3699,
+            "end": 3734,
             "loc": {
               "start": {
-                "line": 116,
+                "line": 117,
                 "column": 2
               },
               "end": {
-                "line": 116,
+                "line": 117,
                 "column": 37
               }
             },
             "range": [
-              3698,
-              3733
+              3699,
+              3734
             ]
           },
           {
             "type": "Block",
             "value": "*\n * CSS3 機能使用可能かを調べます\n * @example\n * if (Can.transition()) {\n *  // can CSS3 transition\n * }\n *\n * if (Can.transform()) {\n *  // can CSS3 transform\n * }\n ",
-            "start": 3737,
-            "end": 3896,
+            "start": 3738,
+            "end": 3897,
             "loc": {
               "start": {
-                "line": 119,
+                "line": 120,
                 "column": 0
               },
               "end": {
-                "line": 129,
+                "line": 130,
                 "column": 3
               }
             },
             "range": [
-              3737,
-              3896
+              3738,
+              3897
             ]
           }
         ],
@@ -3588,41 +3588,41 @@
         {
           "type": "CommentLine",
           "value": " console.warn('passive test', e);",
-          "start": 3698,
-          "end": 3733,
+          "start": 3699,
+          "end": 3734,
           "loc": {
             "start": {
-              "line": 116,
+              "line": 117,
               "column": 2
             },
             "end": {
-              "line": 116,
+              "line": 117,
               "column": 37
             }
           },
           "range": [
-            3698,
-            3733
+            3699,
+            3734
           ]
         },
         {
           "type": "Block",
           "value": "*\n * CSS3 機能使用可能かを調べます\n * @example\n * if (Can.transition()) {\n *  // can CSS3 transition\n * }\n *\n * if (Can.transform()) {\n *  // can CSS3 transform\n * }\n ",
-          "start": 3737,
-          "end": 3896,
+          "start": 3738,
+          "end": 3897,
           "loc": {
             "start": {
-              "line": 119,
+              "line": 120,
               "column": 0
             },
             "end": {
-              "line": 129,
+              "line": 130,
               "column": 3
             }
           },
           "range": [
-            3737,
-            3896
+            3738,
+            3897
           ]
         }
       ]

@@ -168,7 +168,7 @@ export default class Classes {
    * @returns {boolean} &#x5B58;&#x5728;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   static has(element, className) {
-    const elementClasses = element.classList ?
+    const elementClasses = element.classList &amp;&amp; Array.from ?
       Array.from(element.classList) :
       Classes.convert(element);
     return elementClasses.indexOf(className) !== -1;
@@ -187,7 +187,7 @@ export default class Classes {
     // argument copy
     const element = node;
     // @type {Array&lt;string&gt;} - element class &#x3092;&#x53D6;&#x5F97;&#x3057;&#x914D;&#x5217;&#x3078;&#x5909;&#x63DB;
-    const elementClasses = element.classList ?
+    const elementClasses = element.classList &amp;&amp; Array.from ?
       Array.from(element.classList) :
       Classes.convert(element);
     // &#x7F6E;&#x63DB;&#x3048;&#x914D;&#x5217;&#x6700;&#x5F8C;&#x5C3E;&#x306B;&#x65B0;&#x898F; `className` &#x3092;&#x8FFD;&#x52A0;&#x3057;&#x307E;&#x3059;
@@ -209,7 +209,7 @@ export default class Classes {
     // argument copy
     const element = node;
     // @type {Array&lt;string&gt;} - element class &#x3092;&#x53D6;&#x5F97;&#x3057;&#x914D;&#x5217;&#x3078;&#x5909;&#x63DB;
-    const elementClasses = element.classList ?
+    const elementClasses = element.classList &amp;&amp; Array.from ?
       Array.from(element.classList) :
       Classes.convert(element);
     // &#x914D;&#x5217;&#x3067;&#x306E;&#x524A;&#x9664;&#x5BFE;&#x8C61; class &#x306E;&#x4F4D;&#x7F6E;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
@@ -221,7 +221,7 @@ export default class Classes {
     return true;
   }
   /**
-   * &#x53EF;&#x54C0;&#x76F8;&#x306A; IE &#x306E;&#x305F;&#x3081;&#x306E;&#x914D;&#x5217;&#x30B3;&#x30F3;&#x30D0;&#x30FC;&#x30BF;&#x30FC;, .classList &#x4EE3;&#x7528;&#x3057;&#x307E;&#x3059;
+   * &#x53EF;&#x54C0;&#x76F8;&#x306A; IE &#x306E;&#x305F;&#x3081;&#x306E;&#x914D;&#x5217;&#x30B3;&#x30F3;&#x30D0;&#x30FC;&#x30BF;&#x30FC;, `.classList` &#x4EE3;&#x7528;&#x3057;&#x307E;&#x3059;
    * @param {Element} element &#x64CD;&#x4F5C;&#x5BFE;&#x8C61; NodeList
    * @returns {Array} &#x914D;&#x5217;&#x306B;&#x30B3;&#x30F3;&#x30D0;&#x30FC;&#x30C8;&#x3057;&#x3066;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */

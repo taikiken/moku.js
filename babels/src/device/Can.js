@@ -91,7 +91,8 @@ const transform = vendors.some(prefix => typeof style[`${prefix}transform`] !== 
 
 /**
  * addEventListener 第三引数 - { passive: true } : false するためのブラウザテスト・フラッグ
- * # TouchEvent#Using with addEventListener() and preventDefault()
+ *
+ * TouchEvent#Using with addEventListener() and preventDefault()
  * <pre>
  * It's important to note that in many cases, both touch and mouse events get sent (in order to let non-touch-specific code still interact with the user). If you use touch events, you should call preventDefault() to keep the mouse event from being sent as well.
  * The exception to this is Chrome, starting with version 56 (desktop, Chrome for android, and android webview), where the default value for touchstart and touchmove is true and calls to preventDefault() are not needed. To override this behavior, you simply set the passive option to false as shown in the example below. This change prevents the listener from blocking page rendering while a user is scrolling. A demo is available on the Google Developer site.
