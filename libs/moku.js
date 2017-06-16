@@ -2244,7 +2244,7 @@ var Classes = function () {
   }], [{
     key: 'has',
     value: function has(element, className) {
-      var elementClasses = element.classList ? Array.from(element.classList) : Classes.convert(element);
+      var elementClasses = element.classList && Array.from ? Array.from(element.classList) : Classes.convert(element);
       return elementClasses.indexOf(className) !== -1;
     }
     /**
@@ -2264,7 +2264,7 @@ var Classes = function () {
       // argument copy
       var element = node;
       // @type {Array<string>} - element class を取得し配列へ変換
-      var elementClasses = element.classList ? Array.from(element.classList) : Classes.convert(element);
+      var elementClasses = element.classList && Array.from ? Array.from(element.classList) : Classes.convert(element);
       // 置換え配列最後尾に新規 `className` を追加します
       elementClasses.push(className);
       // 配列を ' '（ワンスペース）でつなぎ文字列変換後に設定します
@@ -2287,7 +2287,7 @@ var Classes = function () {
       // argument copy
       var element = node;
       // @type {Array<string>} - element class を取得し配列へ変換
-      var elementClasses = element.classList ? Array.from(element.classList) : Classes.convert(element);
+      var elementClasses = element.classList && Array.from ? Array.from(element.classList) : Classes.convert(element);
       // 配列での削除対象 class の位置を取得します
       var index = elementClasses.indexOf(className);
       // 配列位置を元に削除実行します
@@ -2297,7 +2297,7 @@ var Classes = function () {
       return true;
     }
     /**
-     * 可哀相な IE のための配列コンバーター, .classList 代用します
+     * 可哀相な IE のための配列コンバーター, `.classList` 代用します
      * @param {Element} element 操作対象 NodeList
      * @returns {Array} 配列にコンバートして返します
      */
@@ -7735,8 +7735,8 @@ exports.default = WheelEvents;
  * http://www.opensource.org/licenses/mit-license.html
  *
  * This notice shall be included in all copies or substantial portions of the Software.
- * 0.3.4
- * 2017-6-6 16:19:44
+ * 0.3.5
+ * 2017-6-16 13:45:33
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -7909,14 +7909,14 @@ var MOKU = {};
  * @returns {string} version number を返します
  */
 MOKU.version = function () {
-  return '0.3.4';
+  return '0.3.5';
 };
 /**
  * build 日時を取得します
  * @returns {string}  build 日時を返します
  */
 MOKU.build = function () {
-  return '2017-6-6 16:19:44';
+  return '2017-6-16 13:45:33';
 };
 /**
  * MOKU.event

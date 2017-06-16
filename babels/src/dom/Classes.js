@@ -56,7 +56,7 @@ export default class Classes {
    * @returns {boolean} 存在すると true を返します
    */
   static has(element, className) {
-    const elementClasses = element.classList ?
+    const elementClasses = element.classList && Array.from ?
       Array.from(element.classList) :
       Classes.convert(element);
     return elementClasses.indexOf(className) !== -1;
@@ -75,7 +75,7 @@ export default class Classes {
     // argument copy
     const element = node;
     // @type {Array<string>} - element class を取得し配列へ変換
-    const elementClasses = element.classList ?
+    const elementClasses = element.classList && Array.from ?
       Array.from(element.classList) :
       Classes.convert(element);
     // 置換え配列最後尾に新規 `className` を追加します
@@ -97,7 +97,7 @@ export default class Classes {
     // argument copy
     const element = node;
     // @type {Array<string>} - element class を取得し配列へ変換
-    const elementClasses = element.classList ?
+    const elementClasses = element.classList && Array.from ?
       Array.from(element.classList) :
       Classes.convert(element);
     // 配列での削除対象 class の位置を取得します
@@ -109,7 +109,7 @@ export default class Classes {
     return true;
   }
   /**
-   * 可哀相な IE のための配列コンバーター, .classList 代用します
+   * 可哀相な IE のための配列コンバーター, `.classList` 代用します
    * @param {Element} element 操作対象 NodeList
    * @returns {Array} 配列にコンバートして返します
    */
