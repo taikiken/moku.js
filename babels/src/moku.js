@@ -19,6 +19,8 @@
 // fetch / promise
 import 'whatwg-fetch';
 import Promise from 'promise-polyfill';
+// for IE
+import 'babel-polyfill';
 
 // event
 import EventDispatcher from './event/EventDispatcher';
