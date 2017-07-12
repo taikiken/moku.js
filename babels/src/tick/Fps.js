@@ -98,6 +98,7 @@ export default class Fps extends Polling {
     this.interval = 1000 / interval;
     this.fps = interval;
     this.events.fps = interval;
-    return this.update();
+    // return this.update();
+    return this.start();
   }
 }

@@ -101,17 +101,18 @@ export default class Cycle extends EventDispatcher {
      * bound update requestAnimationFrame callback
      * @type {function}
      */
-    this.update = this.update.bind(this);
+    this.onUpdate = this.onUpdate.bind(this);
     /**
      * requestAnimationFrame ID
      * @type {number}
      */
     this.id = 0;
-    /**
-     * start 済みフラッグ
-     * @type {boolean}
-     */
-    this.started = false;
+    // /**
+    //  * start 済みフラッグ
+    //  * @type {boolean}
+    //  */
+    // this.started = false;
+    this.start(checkSymbol);
     // 設定済み instance を返します
     return this;
   }
@@ -132,35 +133,39 @@ export default class Cycle extends EventDispatcher {
   // ----------------------------------------
   /**
    * loop(requestAnimationFrame) を開始します
-   * @returns {boolean} start に成功すると true を返します
+   * @param {Symbol} checkSymbol inner method 保証する inner Symbol
    */
-  start() {
-    if (this.started) {
-      // already start
-      return false;
+  start(checkSymbol) {
+    // checkSymbol と singleton が等価かをチェックします
+    if (checkSymbol !== singletonSymbol) {
+      throw new Error('start is private method, dont call this.');
     }
-    this.started = true;
+    // if (this.started) {
+    //   // already start
+    //   return false;
+    // }
+    // this.started = true;
     this.update();
-
-    // @return
-    return true;
+    //
+    // // @return
+    // return true;
   }
   /**
    * loop(cancelAnimationFrame) を止めます
    * @param {number} [id] requestAnimationFrame id を使い cancelAnimationFrame をします
-   * @returns {boolean} stop に成功すると true を返します
    */
   stop(id = this.id) {
-    if (!this.started) {
-      // not start
-      return false;
-    }
-
+    // if (!this.started) {
+    //   // not start
+    //   return false;
+    // }
+    //
+    // cancelAnimationFrame(id);
+    // this.started = false;
+    //
+    // // @return
+    // return true;
     cancelAnimationFrame(id);
-    this.started = false;
-
-    // @return
-    return true;
   }
   // ----------------------------------------
   // PRIVATE METHOD
@@ -169,9 +174,9 @@ export default class Cycle extends EventDispatcher {
    * loop(requestAnimationFrame)コールバック関数<br>Cycle.UPDATE event を発火します
    * @returns {number} requestAnimationFrame ID
    */
-  update() {
+  onUpdate() {
     // @type {number} - requestAnimationFrame id
-    const id = requestAnimationFrame(this.update);
+    const id = requestAnimationFrame(this.onUpdate);
     this.id = id;
 
     // @type {Events} - events

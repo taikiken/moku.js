@@ -84,6 +84,26 @@ export default class Rate extends Polling {
    * @type {number}
    */
   static RATE_5 = 12;
+  /**
+   * fps 4 基準値
+   * @type {number}
+   */
+  static RATE_4 = 15;
+  /**
+   * fps 3 基準値
+   * @type {number}
+   */
+  static RATE_3 = 20;
+  /**
+   * fps 2 基準値
+   * @type {number}
+   */
+  static RATE_2 = 30;
+  /**
+   * fps 1 基準値
+   * @type {number}
+   */
+  static RATE_1 = 60;
   // /**
   //  * fps 60 基準値を取得します
   //  * @const RATE_60
@@ -195,6 +215,10 @@ export default class Rate extends Polling {
       Rate.RATE_10,
       Rate.RATE_6,
       Rate.RATE_5,
+      Rate.RATE_4,
+      Rate.RATE_3,
+      Rate.RATE_2,
+      Rate.RATE_1,
     ];
     /**
      * Rate 通知 Events instance
@@ -233,7 +257,7 @@ export default class Rate extends Polling {
     //   return false;
     // };
     // init
-    this.setRate(rateValue);
+    // this.setRate(rateValue);
   }
   // ----------------------------------------
   // METHOD
@@ -269,27 +293,29 @@ export default class Rate extends Polling {
    * @returns {boolean} rate 設定に成功すると true を返します
    */
   change(rate) {
-    const result = this.setRate(rate);
-    this.update();
-    return result !== null;
+    // const result = this.setRate(rate);
+    // this.update();
+    // return result !== null;
+    this.setRate(rate);
+    return this.start();
   }
-  /**
-   * loop(requestAnimationFrame) を開始します
-   * @returns {boolean} start に成功すると true を返します
-   */
-  start() {
-    if (this.started) {
-      // already start
-      return false;
-    }
-    // flag -> true
-    this.turnOver();
-    // cycle
-    this.initCycle();
-    // 強制的に1回目を実行
-    this.fire(this.updateEvents(0, 0));
-    return true;
-  }
+  // /**
+  //  * loop(requestAnimationFrame) を開始します
+  //  * @returns {boolean} start に成功すると true を返します
+  //  */
+  // start() {
+  //   if (this.started) {
+  //     // already start
+  //     return false;
+  //   }
+  //   // flag -> true
+  //   this.turnOver();
+  //   // cycle
+  //   this.initCycle();
+  //   // 強制的に1回目を実行
+  //   this.fire(this.updateEvents(0, 0));
+  //   return true;
+  // }
   /**
    * {@link Polling}.UPDATE event handler
    *

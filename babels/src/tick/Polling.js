@@ -80,11 +80,11 @@ export default class Polling extends EventDispatcher {
      * @type {number}
      */
     this.begin = 0;
-    /**
-     * Cycle 監視開始フラッグ
-     * @type {boolean}
-     */
-    this.started = false;
+    // /**
+    //  * Cycle 監視開始フラッグ
+    //  * @type {boolean}
+    //  */
+    // this.started = false;
   }
   // // ----------------------------------------
   // // EVENT
@@ -108,16 +108,17 @@ export default class Polling extends EventDispatcher {
    */
   change(interval) {
     this.interval = interval;
-    return this.update();
+    // return this.update();
+    return this.start();
   }
-  /**
-   * started flag を反転させ現在の started flag 状態を取得します
-   * @returns {boolean} 現在の started flag 状態を返します
-   */
-  turnOver() {
-    this.started = !this.started;
-    return this.started;
-  }
+  // /**
+  //  * started flag を反転させ現在の started flag 状態を取得します
+  //  * @returns {boolean} 現在の started flag 状態を返します
+  //  */
+  // turnOver() {
+  //   this.started = !this.started;
+  //   return this.started;
+  // }
   /**
    * events object を発火前に作成します
    * @param {number} begin 開始時間: 前回の発火時間
@@ -133,40 +134,42 @@ export default class Polling extends EventDispatcher {
     events.interval = this.interval;
     return events;
   }
-  /**
-   * cycle ループを開始します<br>
-   * watch Cycle.UPDATE event
-   * @returns {Cycle} cycle ループを開始しインスタンスを返します
-   */
-  initCycle() {
-    // cycle
-    const cycle = this.cycle;
-    // bind Cycle.UPDATE
-    cycle.on(Cycle.UPDATE, this.onUpdate);
-    // cycle 開始
-    cycle.start();
-    return cycle;
-  }
+  // /**
+  //  * cycle ループを開始します<br>
+  //  * watch Cycle.UPDATE event
+  //  * @returns {Cycle} cycle ループを開始しインスタンスを返します
+  //  */
+  // initCycle() {
+  //   // cycle
+  //   const cycle = this.cycle;
+  //   // bind Cycle.UPDATE
+  //   cycle.on(Cycle.UPDATE, this.onUpdate);
+  //   // cycle 開始
+  //   cycle.start();
+  //   return cycle;
+  // }
   /**
    * polling を開始します
    * @returns {boolean} start に成功すると true を返します
    */
   start() {
-    if (this.started) {
-      // already start
-      return false;
-    }
-    // flag -> true
-    // this[startSymbol] = true;
-    this.turnOver();
+    this.stop();
+    // if (this.started) {
+    //   // already start
+    //   return false;
+    // }
+    // // flag -> true
+    // // this[startSymbol] = true;
+    // this.turnOver();
     // @type {number} - 開始時間
     this.begin = Date.now();
     // cycle
-    this.initCycle();
+    // this.initCycle();
     // // @type {number} - 開始時間
     // const present = Date.now();
     // // 強制的に1回目を実行
     // this.fire(this.updateEvents(present, present));
+    this.cycle.on(Cycle.UPDATE, this.onUpdate);
 
     return true;
   }
@@ -175,13 +178,13 @@ export default class Polling extends EventDispatcher {
    * @returns {boolean} stop に成功すると true を返します
    */
   stop() {
-    if (!this.started) {
-      // not start
-      return false;
-    }
+    // if (!this.started) {
+    //   // not start
+    //   return false;
+    // }
     this.cycle.off(Cycle.UPDATE, this.onUpdate);
-    // this[startSymbol] = false;
-    this.turnOver();
+    // // this[startSymbol] = false;
+    // this.turnOver();
     return true;
   }
   /**

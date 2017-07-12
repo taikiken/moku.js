@@ -3000,11 +3000,11 @@ var Polling = function (_EventDispatcher) {
      * @type {number}
      */
     _this.begin = 0;
-    /**
-     * Cycle 監視開始フラッグ
-     * @type {boolean}
-     */
-    _this.started = false;
+    // /**
+    //  * Cycle 監視開始フラッグ
+    //  * @type {boolean}
+    //  */
+    // this.started = false;
     return _this;
   }
   // // ----------------------------------------
@@ -3042,19 +3042,17 @@ var Polling = function (_EventDispatcher) {
     key: 'change',
     value: function change(interval) {
       this.interval = interval;
-      return this.update();
+      // return this.update();
+      return this.start();
     }
-    /**
-     * started flag を反転させ現在の started flag 状態を取得します
-     * @returns {boolean} 現在の started flag 状態を返します
-     */
-
-  }, {
-    key: 'turnOver',
-    value: function turnOver() {
-      this.started = !this.started;
-      return this.started;
-    }
+    // /**
+    //  * started flag を反転させ現在の started flag 状態を取得します
+    //  * @returns {boolean} 現在の started flag 状態を返します
+    //  */
+    // turnOver() {
+    //   this.started = !this.started;
+    //   return this.started;
+    // }
     /**
      * events object を発火前に作成します
      * @param {number} begin 開始時間: 前回の発火時間
@@ -3073,23 +3071,20 @@ var Polling = function (_EventDispatcher) {
       events.interval = this.interval;
       return events;
     }
-    /**
-     * cycle ループを開始します<br>
-     * watch Cycle.UPDATE event
-     * @returns {Cycle} cycle ループを開始しインスタンスを返します
-     */
-
-  }, {
-    key: 'initCycle',
-    value: function initCycle() {
-      // cycle
-      var cycle = this.cycle;
-      // bind Cycle.UPDATE
-      cycle.on(_Cycle2.default.UPDATE, this.onUpdate);
-      // cycle 開始
-      cycle.start();
-      return cycle;
-    }
+    // /**
+    //  * cycle ループを開始します<br>
+    //  * watch Cycle.UPDATE event
+    //  * @returns {Cycle} cycle ループを開始しインスタンスを返します
+    //  */
+    // initCycle() {
+    //   // cycle
+    //   const cycle = this.cycle;
+    //   // bind Cycle.UPDATE
+    //   cycle.on(Cycle.UPDATE, this.onUpdate);
+    //   // cycle 開始
+    //   cycle.start();
+    //   return cycle;
+    // }
     /**
      * polling を開始します
      * @returns {boolean} start に成功すると true を返します
@@ -3098,21 +3093,23 @@ var Polling = function (_EventDispatcher) {
   }, {
     key: 'start',
     value: function start() {
-      if (this.started) {
-        // already start
-        return false;
-      }
-      // flag -> true
-      // this[startSymbol] = true;
-      this.turnOver();
+      this.stop();
+      // if (this.started) {
+      //   // already start
+      //   return false;
+      // }
+      // // flag -> true
+      // // this[startSymbol] = true;
+      // this.turnOver();
       // @type {number} - 開始時間
       this.begin = Date.now();
       // cycle
-      this.initCycle();
+      // this.initCycle();
       // // @type {number} - 開始時間
       // const present = Date.now();
       // // 強制的に1回目を実行
       // this.fire(this.updateEvents(present, present));
+      this.cycle.on(_Cycle2.default.UPDATE, this.onUpdate);
 
       return true;
     }
@@ -3124,13 +3121,13 @@ var Polling = function (_EventDispatcher) {
   }, {
     key: 'stop',
     value: function stop() {
-      if (!this.started) {
-        // not start
-        return false;
-      }
+      // if (!this.started) {
+      //   // not start
+      //   return false;
+      // }
       this.cycle.off(_Cycle2.default.UPDATE, this.onUpdate);
-      // this[startSymbol] = false;
-      this.turnOver();
+      // // this[startSymbol] = false;
+      // this.turnOver();
       return true;
     }
     /**
@@ -4838,6 +4835,16 @@ var Rate = function (_Polling) {
    */
 
   /**
+   * fps 1 基準値
+   * @type {number}
+   */
+
+  /**
+   * fps 3 基準値
+   * @type {number}
+   */
+
+  /**
    * fps 5 基準値
    * @type {number}
    */
@@ -4868,7 +4875,7 @@ var Rate = function (_Polling) {
 
     var events = new _Events2.default(Rate.UPDATE, _this, _this);
     // 設定可能な rate list
-    var rates = [Rate.RATE_60, Rate.RATE_30, Rate.RATE_20, Rate.RATE_15, Rate.RATE_12, Rate.RATE_10, Rate.RATE_6, Rate.RATE_5];
+    var rates = [Rate.RATE_60, Rate.RATE_30, Rate.RATE_20, Rate.RATE_15, Rate.RATE_12, Rate.RATE_10, Rate.RATE_6, Rate.RATE_5, Rate.RATE_4, Rate.RATE_3, Rate.RATE_2, Rate.RATE_1];
     /**
      * Rate 通知 Events instance
      * @type {Events}
@@ -4906,7 +4913,7 @@ var Rate = function (_Polling) {
     //   return false;
     // };
     // init
-    _this.setRate(rateValue);
+    // this.setRate(rateValue);
     return _this;
   }
   // ----------------------------------------
@@ -5001,6 +5008,16 @@ var Rate = function (_Polling) {
    */
 
   /**
+   * fps 2 基準値
+   * @type {number}
+   */
+
+  /**
+   * fps 4 基準値
+   * @type {number}
+   */
+
+  /**
    * fps 6 基準値
    * @type {number}
    */
@@ -5056,30 +5073,29 @@ var Rate = function (_Polling) {
   }, {
     key: 'change',
     value: function change(rate) {
-      var result = this.setRate(rate);
-      this.update();
-      return result !== null;
+      // const result = this.setRate(rate);
+      // this.update();
+      // return result !== null;
+      this.setRate(rate);
+      return this.start();
     }
-    /**
-     * loop(requestAnimationFrame) を開始します
-     * @returns {boolean} start に成功すると true を返します
-     */
-
-  }, {
-    key: 'start',
-    value: function start() {
-      if (this.started) {
-        // already start
-        return false;
-      }
-      // flag -> true
-      this.turnOver();
-      // cycle
-      this.initCycle();
-      // 強制的に1回目を実行
-      this.fire(this.updateEvents(0, 0));
-      return true;
-    }
+    // /**
+    //  * loop(requestAnimationFrame) を開始します
+    //  * @returns {boolean} start に成功すると true を返します
+    //  */
+    // start() {
+    //   if (this.started) {
+    //     // already start
+    //     return false;
+    //   }
+    //   // flag -> true
+    //   this.turnOver();
+    //   // cycle
+    //   this.initCycle();
+    //   // 強制的に1回目を実行
+    //   this.fire(this.updateEvents(0, 0));
+    //   return true;
+    // }
     /**
      * {@link Polling}.UPDATE event handler
      *
@@ -5113,6 +5129,10 @@ Rate.RATE_12 = 5;
 Rate.RATE_10 = 6;
 Rate.RATE_6 = 10;
 Rate.RATE_5 = 12;
+Rate.RATE_4 = 15;
+Rate.RATE_3 = 20;
+Rate.RATE_2 = 30;
+Rate.RATE_1 = 60;
 Rate.UPDATE = 'rateUpdate';
 exports.default = Rate;
 
@@ -5263,17 +5283,18 @@ var Cycle = function (_EventDispatcher) {
      * bound update requestAnimationFrame callback
      * @type {function}
      */
-    _this.update = _this.update.bind(_this);
+    _this.onUpdate = _this.onUpdate.bind(_this);
     /**
      * requestAnimationFrame ID
      * @type {number}
      */
     _this.id = 0;
-    /**
-     * start 済みフラッグ
-     * @type {boolean}
-     */
-    _this.started = false;
+    // /**
+    //  * start 済みフラッグ
+    //  * @type {boolean}
+    //  */
+    // this.started = false;
+    _this.start(checkSymbol);
     // 設定済み instance を返します
     return _ret2 = _this, _possibleConstructorReturn(_this, _ret2);
   }
@@ -5294,27 +5315,30 @@ var Cycle = function (_EventDispatcher) {
   // ----------------------------------------
   /**
    * loop(requestAnimationFrame) を開始します
-   * @returns {boolean} start に成功すると true を返します
+   * @param {Symbol} checkSymbol inner method 保証する inner Symbol
    */
 
 
   _createClass(Cycle, [{
     key: 'start',
-    value: function start() {
-      if (this.started) {
-        // already start
-        return false;
+    value: function start(checkSymbol) {
+      // checkSymbol と singleton が等価かをチェックします
+      if (checkSymbol !== singletonSymbol) {
+        throw new Error('start is private method, dont call this.');
       }
-      this.started = true;
+      // if (this.started) {
+      //   // already start
+      //   return false;
+      // }
+      // this.started = true;
       this.update();
-
-      // @return
-      return true;
+      //
+      // // @return
+      // return true;
     }
     /**
      * loop(cancelAnimationFrame) を止めます
      * @param {number} [id] requestAnimationFrame id を使い cancelAnimationFrame をします
-     * @returns {boolean} stop に成功すると true を返します
      */
 
   }, {
@@ -5322,16 +5346,17 @@ var Cycle = function (_EventDispatcher) {
     value: function stop() {
       var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.id;
 
-      if (!this.started) {
-        // not start
-        return false;
-      }
-
+      // if (!this.started) {
+      //   // not start
+      //   return false;
+      // }
+      //
+      // cancelAnimationFrame(id);
+      // this.started = false;
+      //
+      // // @return
+      // return true;
       cancelAnimationFrame(id);
-      this.started = false;
-
-      // @return
-      return true;
     }
     // ----------------------------------------
     // PRIVATE METHOD
@@ -5342,10 +5367,10 @@ var Cycle = function (_EventDispatcher) {
      */
 
   }, {
-    key: 'update',
-    value: function update() {
+    key: 'onUpdate',
+    value: function onUpdate() {
       // @type {number} - requestAnimationFrame id
-      var id = requestAnimationFrame(this.update);
+      var id = requestAnimationFrame(this.onUpdate);
       this.id = id;
 
       // @type {Events} - events
@@ -6720,7 +6745,7 @@ exports.default = Classes;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.3.7
- * 2017-7-4 18:47:36
+ * 2017-7-12 16:52:34
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -7076,7 +7101,7 @@ MOKU.version = function () {
  * @returns {string}  build 日時を返します
  */
 MOKU.build = function () {
-  return '2017-7-4 18:47:36';
+  return '2017-7-12 16:52:34';
 };
 /**
  * MOKU.event
@@ -13729,7 +13754,8 @@ var Fps = function (_Polling) {
       this.interval = 1000 / interval;
       this.fps = interval;
       this.events.fps = interval;
-      return this.update();
+      // return this.update();
+      return this.start();
     }
   }]);
 
