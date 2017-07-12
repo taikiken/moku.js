@@ -89,11 +89,11 @@ export default class Wheel extends EventDispatcher {
      * @type {number}
      */
     this.moved = 0;
-    /**
-     * start flag
-     * @type {boolean}
-     */
-    this.started = false;
+    // /**
+    //  * start flag
+    //  * @type {boolean}
+    //  */
+    // this.started = false;
     // const events = {
     //   up: new WheelEvents(Wheel.UP, this),
     //   down: new WheelEvents(Wheel.DOWN, this),
@@ -139,11 +139,12 @@ export default class Wheel extends EventDispatcher {
    * @returns {Wheel} method chain 可能なように instance を返します
    */
   start() {
-    if (this.started) {
-      return this;
-    }
-    this.started = true;
+    // if (this.started) {
+    //   return this;
+    // }
+    // this.started = true;
     // this.unwatch();
+    this.stop();
     window.addEventListener('wheel', this.onMouseWheel, false);
     return this;
   }
@@ -152,10 +153,10 @@ export default class Wheel extends EventDispatcher {
    * @returns {Wheel} method chain 可能なように instance を返します
    */
   stop() {
-    if (!this.started) {
-      return this;
-    }
-    this.started = false;
+    // if (!this.started) {
+    //   return this;
+    // }
+    // this.started = false;
     window.removeEventListener('wheel', this.onMouseWheel);
     return this;
   }

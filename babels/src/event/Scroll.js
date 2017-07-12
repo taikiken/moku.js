@@ -125,12 +125,12 @@ export default class Scroll extends EventDispatcher {
      * @default -1
      */
     this.previous = -1;
-    /**
-     * start 済みフラッグ
-     * @type {boolean}
-     * @default false
-     */
-    this.started = false;
+    // /**
+    //  * start 済みフラッグ
+    //  * @type {boolean}
+    //  * @default false
+    //  */
+    // this.started = false;
 
     // 設定済み instance を返します
     return this;
@@ -155,11 +155,12 @@ export default class Scroll extends EventDispatcher {
    * @returns {Scroll} method chain 可能なように instance を返します
    */
   start() {
-    if (this.started) {
-      return this;
-    }
-    this.started = true;
-    window.addEventListener('scroll', this.boundScroll, false);
+    // if (this.started) {
+    //   return this;
+    // }
+    // this.started = true;
+    this.stop();
+    window.addEventListener('scroll', this.onScroll, false);
     return this;
   }
   /**
@@ -167,11 +168,11 @@ export default class Scroll extends EventDispatcher {
    * @returns {Scroll} method chain 可能なように instance を返します
    */
   stop() {
-    if (!this.started) {
-      return this;
-    }
-    this.started = false;
-    window.removeEventListener('scroll', this.boundScroll);
+    // if (!this.started) {
+    //   return this;
+    // }
+    // this.started = false;
+    window.removeEventListener('scroll', this.onScroll);
     return this;
   }
   /**

@@ -3000,11 +3000,11 @@ var Polling = function (_EventDispatcher) {
      * @type {number}
      */
     _this.begin = 0;
-    /**
-     * Cycle 監視開始フラッグ
-     * @type {boolean}
-     */
-    _this.started = false;
+    // /**
+    //  * Cycle 監視開始フラッグ
+    //  * @type {boolean}
+    //  */
+    // this.started = false;
     return _this;
   }
   // // ----------------------------------------
@@ -3042,19 +3042,17 @@ var Polling = function (_EventDispatcher) {
     key: 'change',
     value: function change(interval) {
       this.interval = interval;
-      return this.update();
+      // return this.update();
+      return this.start();
     }
-    /**
-     * started flag を反転させ現在の started flag 状態を取得します
-     * @returns {boolean} 現在の started flag 状態を返します
-     */
-
-  }, {
-    key: 'turnOver',
-    value: function turnOver() {
-      this.started = !this.started;
-      return this.started;
-    }
+    // /**
+    //  * started flag を反転させ現在の started flag 状態を取得します
+    //  * @returns {boolean} 現在の started flag 状態を返します
+    //  */
+    // turnOver() {
+    //   this.started = !this.started;
+    //   return this.started;
+    // }
     /**
      * events object を発火前に作成します
      * @param {number} begin 開始時間: 前回の発火時間
@@ -3073,23 +3071,20 @@ var Polling = function (_EventDispatcher) {
       events.interval = this.interval;
       return events;
     }
-    /**
-     * cycle ループを開始します<br>
-     * watch Cycle.UPDATE event
-     * @returns {Cycle} cycle ループを開始しインスタンスを返します
-     */
-
-  }, {
-    key: 'initCycle',
-    value: function initCycle() {
-      // cycle
-      var cycle = this.cycle;
-      // bind Cycle.UPDATE
-      cycle.on(_Cycle2.default.UPDATE, this.onUpdate);
-      // cycle 開始
-      cycle.start();
-      return cycle;
-    }
+    // /**
+    //  * cycle ループを開始します<br>
+    //  * watch Cycle.UPDATE event
+    //  * @returns {Cycle} cycle ループを開始しインスタンスを返します
+    //  */
+    // initCycle() {
+    //   // cycle
+    //   const cycle = this.cycle;
+    //   // bind Cycle.UPDATE
+    //   cycle.on(Cycle.UPDATE, this.onUpdate);
+    //   // cycle 開始
+    //   cycle.start();
+    //   return cycle;
+    // }
     /**
      * polling を開始します
      * @returns {boolean} start に成功すると true を返します
@@ -3098,21 +3093,23 @@ var Polling = function (_EventDispatcher) {
   }, {
     key: 'start',
     value: function start() {
-      if (this.started) {
-        // already start
-        return false;
-      }
-      // flag -> true
-      // this[startSymbol] = true;
-      this.turnOver();
+      this.stop();
+      // if (this.started) {
+      //   // already start
+      //   return false;
+      // }
+      // // flag -> true
+      // // this[startSymbol] = true;
+      // this.turnOver();
       // @type {number} - 開始時間
       this.begin = Date.now();
       // cycle
-      this.initCycle();
+      // this.initCycle();
       // // @type {number} - 開始時間
       // const present = Date.now();
       // // 強制的に1回目を実行
       // this.fire(this.updateEvents(present, present));
+      this.cycle.on(_Cycle2.default.UPDATE, this.onUpdate);
 
       return true;
     }
@@ -3124,13 +3121,13 @@ var Polling = function (_EventDispatcher) {
   }, {
     key: 'stop',
     value: function stop() {
-      if (!this.started) {
-        // not start
-        return false;
-      }
+      // if (!this.started) {
+      //   // not start
+      //   return false;
+      // }
       this.cycle.off(_Cycle2.default.UPDATE, this.onUpdate);
-      // this[startSymbol] = false;
-      this.turnOver();
+      // // this[startSymbol] = false;
+      // this.turnOver();
       return true;
     }
     /**
@@ -4211,17 +4208,24 @@ var Scrolling = function (_EventDispatcher) {
      * @default -1
      */
     _this.previous = -1;
-    /**
-     * start 済みフラッグ
-     * @type {boolean}
-     * @default false
-     */
-    _this.started = false;
+    // /**
+    //  * start 済みフラッグ
+    //  * @type {boolean}
+    //  * @default false
+    //  */
+    // this.started = false;
     /**
      * Rate instance
      * @type {?Rate}
      */
     _this.rate = rate;
+    /**
+     * scrolling 監視開始 flag
+     * @type {boolean}
+     * @since 0.3.8
+     */
+    _this.watching = false;
+    _this.onNativeEvent = _this.onNativeEvent.bind(_this);
     return _this;
   }
   // ----------------------------------------
@@ -4240,8 +4244,9 @@ var Scrolling = function (_EventDispatcher) {
   // METHOD
   // ----------------------------------------
   /**
-   * fps を監視しスクロール位置を知らせます
-   * @returns {Scrolling} method chain 可能なように instance を返します
+   * window.onscroll / window.onresize event handler,
+   * `this.watching` flag を確認し `watch` を call します
+   * @since 0.3.8
    */
 
   // ---------------------------------------------------
@@ -4254,32 +4259,74 @@ var Scrolling = function (_EventDispatcher) {
 
 
   _createClass(Scrolling, [{
+    key: 'onNativeEvent',
+    value: function onNativeEvent() {
+      if (!this.watching) {
+        this.watch();
+      }
+    }
+    /**
+     * window.onscroll / window.onresize 監視を開始します
+     * @returns {Scrolling} method chain 可能なように instance を返します
+     */
+
+  }, {
     key: 'start',
     value: function start() {
-      // flag check
-      if (this.started) {
-        return this;
-      }
-      this.started = true;
-      // loop start
-      var rate = this.rate;
-      rate.on(_Rate2.default.UPDATE, this.onUpdate);
-      rate.start();
+      window.addEventListener('scroll', this.onNativeEvent, false);
+      window.addEventListener('resize', this.onNativeEvent, false);
       return this;
     }
     /**
-     * fps 監視を止めます
+     * window.onscroll / window.onresize 監視を停止します
      * @returns {Scrolling} method chain 可能なように instance を返します
      */
 
   }, {
     key: 'stop',
     value: function stop() {
-      if (!this.started) {
-        return this;
-      }
-      this.started = false;
+      window.removeEventListener('scroll', this.onNativeEvent);
+      window.removeEventListener('resize', this.onNativeEvent);
+      return this;
+    }
+    /**
+     * fps を監視しスクロール位置を知らせます
+     * @returns {Scrolling} method chain 可能なように instance を返します
+     * @since 0.3.8
+     */
+
+  }, {
+    key: 'watch',
+    value: function watch() {
+      // // flag check
+      // if (this.started) {
+      //   return this;
+      // }
+      // this.started = true;
+      // loop start
+      // const rate = this.rate;
+      // rate.on(Rate.UPDATE, this.onUpdate);
+      this.unwatch();
+      this.watching = true;
+      this.rate.on(_Rate2.default.UPDATE, this.onUpdate);
+      // rate.start();
+      return this;
+    }
+    /**
+     * fps 監視を止めます
+     * @returns {Scrolling} method chain 可能なように instance を返します
+     * @since 0.3.8
+     */
+
+  }, {
+    key: 'unwatch',
+    value: function unwatch() {
+      // if (!this.started) {
+      //   return this;
+      // }
+      // this.started = false;
       this.rate.off(_Rate2.default.UPDATE, this.onUpdate);
+      this.watching = false;
       return this;
     }
     /**
@@ -4306,12 +4353,18 @@ var Scrolling = function (_EventDispatcher) {
     value: function onUpdate(event) {
       // @type {number} - scroll top
       var y = _Scroll2.default.y();
+      // @type {number} - previous scroll top
+      var previous = this.previous;
+      // @type {boolean} - 移動したかを表します,
+      var changed = event === null || previous !== y;
+      // 移動量 0 の時は rate 監視を停止する
+      if (!changed) {
+        this.unwatch();
+      }
       // @type {number} - window height
       var height = window.innerHeight;
       // @type {number} - window width
       var width = window.innerWidth;
-      // @type {number} - previous scroll top
-      var previous = this.previous;
 
       // @type {ScrollEvents} - events
       var events = this.events;
@@ -4328,7 +4381,7 @@ var Scrolling = function (_EventDispatcher) {
       events.bottom = y + height;
       // @type {boolean} - 移動したかを表します,
       // event が null の時は強制発火なので移動量 0 （scroll top 位置に変更がない）でも changed を true にします
-      events.changed = event === null || previous !== y;
+      events.changed = changed;
       // @type {number} - 前回の y 位置
       events.previous = previous;
       // @type {number} - 移動量 +: down, -: up
@@ -4543,12 +4596,12 @@ var Scroll = function (_EventDispatcher) {
      * @default -1
      */
     _this.previous = -1;
-    /**
-     * start 済みフラッグ
-     * @type {boolean}
-     * @default false
-     */
-    _this.started = false;
+    // /**
+    //  * start 済みフラッグ
+    //  * @type {boolean}
+    //  * @default false
+    //  */
+    // this.started = false;
 
     // 設定済み instance を返します
     return _ret2 = _this, _possibleConstructorReturn(_this, _ret2);
@@ -4575,11 +4628,12 @@ var Scroll = function (_EventDispatcher) {
      * @returns {Scroll} method chain 可能なように instance を返します
      */
     value: function start() {
-      if (this.started) {
-        return this;
-      }
-      this.started = true;
-      window.addEventListener('scroll', this.boundScroll, false);
+      // if (this.started) {
+      //   return this;
+      // }
+      // this.started = true;
+      this.stop();
+      window.addEventListener('scroll', this.onScroll, false);
       return this;
     }
     /**
@@ -4590,11 +4644,11 @@ var Scroll = function (_EventDispatcher) {
   }, {
     key: 'stop',
     value: function stop() {
-      if (!this.started) {
-        return this;
-      }
-      this.started = false;
-      window.removeEventListener('scroll', this.boundScroll);
+      // if (!this.started) {
+      //   return this;
+      // }
+      // this.started = false;
+      window.removeEventListener('scroll', this.onScroll);
       return this;
     }
     /**
@@ -4838,6 +4892,16 @@ var Rate = function (_Polling) {
    */
 
   /**
+   * fps 1 基準値
+   * @type {number}
+   */
+
+  /**
+   * fps 3 基準値
+   * @type {number}
+   */
+
+  /**
    * fps 5 基準値
    * @type {number}
    */
@@ -4868,7 +4932,7 @@ var Rate = function (_Polling) {
 
     var events = new _Events2.default(Rate.UPDATE, _this, _this);
     // 設定可能な rate list
-    var rates = [Rate.RATE_60, Rate.RATE_30, Rate.RATE_20, Rate.RATE_15, Rate.RATE_12, Rate.RATE_10, Rate.RATE_6, Rate.RATE_5];
+    var rates = [Rate.RATE_60, Rate.RATE_30, Rate.RATE_20, Rate.RATE_15, Rate.RATE_12, Rate.RATE_10, Rate.RATE_6, Rate.RATE_5, Rate.RATE_4, Rate.RATE_3, Rate.RATE_2, Rate.RATE_1];
     /**
      * Rate 通知 Events instance
      * @type {Events}
@@ -4906,7 +4970,7 @@ var Rate = function (_Polling) {
     //   return false;
     // };
     // init
-    _this.setRate(rateValue);
+    // this.setRate(rateValue);
     return _this;
   }
   // ----------------------------------------
@@ -5001,6 +5065,16 @@ var Rate = function (_Polling) {
    */
 
   /**
+   * fps 2 基準値
+   * @type {number}
+   */
+
+  /**
+   * fps 4 基準値
+   * @type {number}
+   */
+
+  /**
    * fps 6 基準値
    * @type {number}
    */
@@ -5056,30 +5130,29 @@ var Rate = function (_Polling) {
   }, {
     key: 'change',
     value: function change(rate) {
-      var result = this.setRate(rate);
-      this.update();
-      return result !== null;
+      // const result = this.setRate(rate);
+      // this.update();
+      // return result !== null;
+      this.setRate(rate);
+      return this.start();
     }
-    /**
-     * loop(requestAnimationFrame) を開始します
-     * @returns {boolean} start に成功すると true を返します
-     */
-
-  }, {
-    key: 'start',
-    value: function start() {
-      if (this.started) {
-        // already start
-        return false;
-      }
-      // flag -> true
-      this.turnOver();
-      // cycle
-      this.initCycle();
-      // 強制的に1回目を実行
-      this.fire(this.updateEvents(0, 0));
-      return true;
-    }
+    // /**
+    //  * loop(requestAnimationFrame) を開始します
+    //  * @returns {boolean} start に成功すると true を返します
+    //  */
+    // start() {
+    //   if (this.started) {
+    //     // already start
+    //     return false;
+    //   }
+    //   // flag -> true
+    //   this.turnOver();
+    //   // cycle
+    //   this.initCycle();
+    //   // 強制的に1回目を実行
+    //   this.fire(this.updateEvents(0, 0));
+    //   return true;
+    // }
     /**
      * {@link Polling}.UPDATE event handler
      *
@@ -5113,6 +5186,10 @@ Rate.RATE_12 = 5;
 Rate.RATE_10 = 6;
 Rate.RATE_6 = 10;
 Rate.RATE_5 = 12;
+Rate.RATE_4 = 15;
+Rate.RATE_3 = 20;
+Rate.RATE_2 = 30;
+Rate.RATE_1 = 60;
 Rate.UPDATE = 'rateUpdate';
 exports.default = Rate;
 
@@ -5263,17 +5340,18 @@ var Cycle = function (_EventDispatcher) {
      * bound update requestAnimationFrame callback
      * @type {function}
      */
-    _this.update = _this.update.bind(_this);
+    _this.onUpdate = _this.onUpdate.bind(_this);
     /**
      * requestAnimationFrame ID
      * @type {number}
      */
     _this.id = 0;
-    /**
-     * start 済みフラッグ
-     * @type {boolean}
-     */
-    _this.started = false;
+    // /**
+    //  * start 済みフラッグ
+    //  * @type {boolean}
+    //  */
+    // this.started = false;
+    _this.start(checkSymbol);
     // 設定済み instance を返します
     return _ret2 = _this, _possibleConstructorReturn(_this, _ret2);
   }
@@ -5294,27 +5372,30 @@ var Cycle = function (_EventDispatcher) {
   // ----------------------------------------
   /**
    * loop(requestAnimationFrame) を開始します
-   * @returns {boolean} start に成功すると true を返します
+   * @param {Symbol} checkSymbol inner method 保証する inner Symbol
    */
 
 
   _createClass(Cycle, [{
     key: 'start',
-    value: function start() {
-      if (this.started) {
-        // already start
-        return false;
+    value: function start(checkSymbol) {
+      // checkSymbol と singleton が等価かをチェックします
+      if (checkSymbol !== singletonSymbol) {
+        throw new Error('start is private method, dont call this.');
       }
-      this.started = true;
+      // if (this.started) {
+      //   // already start
+      //   return false;
+      // }
+      // this.started = true;
       this.update();
-
-      // @return
-      return true;
+      //
+      // // @return
+      // return true;
     }
     /**
      * loop(cancelAnimationFrame) を止めます
      * @param {number} [id] requestAnimationFrame id を使い cancelAnimationFrame をします
-     * @returns {boolean} stop に成功すると true を返します
      */
 
   }, {
@@ -5322,16 +5403,17 @@ var Cycle = function (_EventDispatcher) {
     value: function stop() {
       var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.id;
 
-      if (!this.started) {
-        // not start
-        return false;
-      }
-
+      // if (!this.started) {
+      //   // not start
+      //   return false;
+      // }
+      //
+      // cancelAnimationFrame(id);
+      // this.started = false;
+      //
+      // // @return
+      // return true;
       cancelAnimationFrame(id);
-      this.started = false;
-
-      // @return
-      return true;
     }
     // ----------------------------------------
     // PRIVATE METHOD
@@ -5342,10 +5424,10 @@ var Cycle = function (_EventDispatcher) {
      */
 
   }, {
-    key: 'update',
-    value: function update() {
+    key: 'onUpdate',
+    value: function onUpdate() {
       // @type {number} - requestAnimationFrame id
-      var id = requestAnimationFrame(this.update);
+      var id = requestAnimationFrame(this.onUpdate);
       this.id = id;
 
       // @type {Events} - events
@@ -5833,14 +5915,81 @@ var Request = self.Request;
  */
 
 var Ajax = function () {
-  // ----------------------------------------
-  // CONSTRUCTOR
-  // ----------------------------------------
-  /**
-   * request 可能 / 不可能 flag を true に設定します
-   * @param {?function} [resolve=null] Promise success callback
-   * @param {?function} [reject=null] Promise fail callback
-   */
+  _createClass(Ajax, [{
+    key: 'option',
+
+    // ----------------------------------------
+    // STATIC METHOD
+    // ----------------------------------------
+    /**
+     * <p>fetch API へ送るオプションを作成します</p>
+     *
+     * 必ず設定します
+     * - method: GET, POST, PUT, DELETE...etc
+     * - cache: 'no-cache'
+     * - credentials: 'same-origin'
+     *
+     * headers, formData は存在すれば option に追加されます
+     *
+     * ```
+     * var myRequest = new Request(input, init);
+     * ```
+     * <blockquote>
+     * リクエストに適用するカスタム設定を含むオプションオブジェクト。設定可能なオプションは：
+     *   method：リクエストメソッド、たとえば GET、POST。
+     *   headers：Headers オブジェクトか ByteString を含む、リクエストに追加するヘッダー。
+     *   body： リクエストに追加するボディー：Blob か BufferSource、FormData、URLSearchParams、USVString オブジェクトが使用できる。リクエストが GET か HEAD メソッドを使用している場合、ボディーを持てないことに注意。
+     *   mode：リクエストで使用するモード。たとえば、cors か no-cors、same-origin。既定値は cors。Chrome では、47 以前は no-cors が既定値であり、 same-origin は 47 から使用できるようになった。
+     *   credentials：リクエストで使用するリクエスト credential：omit か same-origin、include が使用できる。 既定値は omit。Chrome では、47 以前は same-origin が既定値であり、include は 47 から使用できるようになった。
+     *   cache：リクエストで使用する cache モード：default か no-store、reload、no-cache、force-cache、only-if-cached が設定できる。
+     *   redirect：使用するリダイレクトモード：follow か error、manual が使用できる。Chrome では、47 以前は既定値が follow であり、manual は 47 から使用できるようになった。
+     *   referrer：no-referrer か client、URL を指定する USVString。既定値は client。
+     * </blockquote>
+     * @param {string|USVString|Request} path Ajax request path
+     * @param {string} method GET, POST, PUT, DELETE...etc request method
+     * @param {Headers|Object|null} headers Headers option
+     * @param {FormData|null} formData 送信フォームデータオプション
+     * @returns {*|Request} fetch API へ送る Request instance を返します
+     *
+     * @see https://developers.google.com/web/updates/2015/03/introduction-to-fetch
+     * @see https://developer.mozilla.org/ja/docs/Web/API/Request
+     * @see https://developer.mozilla.org/ja/docs/Web/API/Request/Request
+     */
+    value: function option(path, method, headers, formData) {
+      // request option
+      var option = Object.assign({}, this.props);
+      // const option = Object.create({
+      //   method,
+      //   cache: 'no-cache',
+      //   // https://developers.google.com/web/updates/2015/03/introduction-to-fetch
+      //   credentials: 'same-origin',
+      // });
+      option.method = method;
+
+      // headers option
+      if (_Type2.default.exist(headers)) {
+        option.headers = headers;
+      }
+
+      // body へ FormData をセット
+      if (_Type2.default.exist(formData)) {
+        option.body = formData;
+      }
+
+      // https://developer.mozilla.org/ja/docs/Web/API/Request
+      return new Request(path, option);
+    }
+    // ----------------------------------------
+    // CONSTRUCTOR
+    // ----------------------------------------
+    /**
+     * request 可能 / 不可能 flag を true に設定します
+     * @param {?function} [resolve=null] Promise success callback
+     * @param {?function} [reject=null] Promise fail callback
+     */
+
+  }]);
+
   function Ajax() {
     var resolve = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
     var reject = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
@@ -5971,67 +6120,6 @@ var Ajax = function () {
     value: function disable() {
       this.can = false;
       return this.can;
-    }
-    /**
-     * <p>fetch API へ送るオプションを作成します</p>
-     *
-     * 必ず設定します
-     * - method: GET, POST, PUT, DELETE...etc
-     * - cache: 'no-cache'
-     * - credentials: 'same-origin'
-     *
-     * headers, formData は存在すれば option に追加されます
-     *
-     * ```
-     * var myRequest = new Request(input, init);
-     * ```
-     * <blockquote>
-     * リクエストに適用するカスタム設定を含むオプションオブジェクト。設定可能なオプションは：
-     *   method：リクエストメソッド、たとえば GET、POST。
-     *   headers：Headers オブジェクトか ByteString を含む、リクエストに追加するヘッダー。
-     *   body： リクエストに追加するボディー：Blob か BufferSource、FormData、URLSearchParams、USVString オブジェクトが使用できる。リクエストが GET か HEAD メソッドを使用している場合、ボディーを持てないことに注意。
-     *   mode：リクエストで使用するモード。たとえば、cors か no-cors、same-origin。既定値は cors。Chrome では、47 以前は no-cors が既定値であり、 same-origin は 47 から使用できるようになった。
-     *   credentials：リクエストで使用するリクエスト credential：omit か same-origin、include が使用できる。 既定値は omit。Chrome では、47 以前は same-origin が既定値であり、include は 47 から使用できるようになった。
-     *   cache：リクエストで使用する cache モード：default か no-store、reload、no-cache、force-cache、only-if-cached が設定できる。
-     *   redirect：使用するリダイレクトモード：follow か error、manual が使用できる。Chrome では、47 以前は既定値が follow であり、manual は 47 から使用できるようになった。
-     *   referrer：no-referrer か client、URL を指定する USVString。既定値は client。
-     * </blockquote>
-     * @param {string|USVString|Request} path Ajax request path
-     * @param {string} method GET, POST, PUT, DELETE...etc request method
-     * @param {Headers|Object|null} headers Headers option
-     * @param {FormData|null} formData 送信フォームデータオプション
-     * @returns {*|Request} fetch API へ送る Request instance を返します
-     *
-     * @see https://developers.google.com/web/updates/2015/03/introduction-to-fetch
-     * @see https://developer.mozilla.org/ja/docs/Web/API/Request
-     * @see https://developer.mozilla.org/ja/docs/Web/API/Request/Request
-     */
-
-  }, {
-    key: 'option',
-    value: function option(path, method, headers, formData) {
-      // request option
-      var option = Object.assign({}, this.props);
-      // const option = Object.create({
-      //   method,
-      //   cache: 'no-cache',
-      //   // https://developers.google.com/web/updates/2015/03/introduction-to-fetch
-      //   credentials: 'same-origin',
-      // });
-      option.method = method;
-
-      // headers option
-      if (_Type2.default.exist(headers)) {
-        option.headers = headers;
-      }
-
-      // body へ FormData をセット
-      if (_Type2.default.exist(formData)) {
-        option.body = formData;
-      }
-
-      // https://developer.mozilla.org/ja/docs/Web/API/Request
-      return new Request(path, option);
     }
   }]);
 
@@ -6719,8 +6807,8 @@ exports.default = Classes;
  * http://www.opensource.org/licenses/mit-license.html
  *
  * This notice shall be included in all copies or substantial portions of the Software.
- * 0.3.7
- * 2017-7-4 18:47:36
+ * 0.3.8
+ * 2017-7-12 17:52:59
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -7069,14 +7157,14 @@ var MOKU = {};
  * @returns {string} version number を返します
  */
 MOKU.version = function () {
-  return '0.3.7';
+  return '0.3.8';
 };
 /**
  * build 日時を取得します
  * @returns {string}  build 日時を返します
  */
 MOKU.build = function () {
-  return '2017-7-4 18:47:36';
+  return '2017-7-12 17:52:59';
 };
 /**
  * MOKU.event
@@ -11577,12 +11665,12 @@ var Rising = function (_EventDispatcher) {
      */
     _this.onUpdate = _this.onUpdate.bind(_this);
     // this.boundScroll = boundScroll;
-    /**
-     * start 済みフラッグ
-     * @type {boolean}
-     * @default false
-     */
-    _this.started = false;
+    // /**
+    //  * start 済みフラッグ
+    //  * @type {boolean}
+    //  * @default false
+    //  */
+    // this.started = false;
     /**
      * Rising.[COLLISION|ALIEN] event instance
      * @type {RisingEvents}
@@ -11613,7 +11701,7 @@ var Rising = function (_EventDispatcher) {
   // METHOD
   // ----------------------------------------
   /**
-   * fps を監視しスクロール位置を知らせます
+   * scroll を監視します
    * @returns {Rising} method chain 可能なように instance を返します
    */
 
@@ -11627,29 +11715,31 @@ var Rising = function (_EventDispatcher) {
   _createClass(Rising, [{
     key: 'start',
     value: function start() {
-      // flag check
-      if (this.started) {
-        return this;
-      }
-      this.started = true;
-      // scrolling
-      var scrolling = this.scrolling;
-      scrolling.on(_Scrolling2.default.UPDATE, this.onUpdate);
-      scrolling.start();
+      // // flag check
+      // if (this.started) {
+      //   return this;
+      // }
+      // this.started = true;
+      // // scrolling
+      // const scrolling = this.scrolling;
+      // scrolling.on(Scrolling.UPDATE, this.onUpdate);
+      // scrolling.start();
+      this.stop();
+      this.scrolling.on(_Scrolling2.default.UPDATE, this.onUpdate);
       return this;
     }
     /**
-     * fps 監視を止めます
+     * scroll 監視を止めます
      * @returns {Rising} method chain 可能なように instance を返します
      */
 
   }, {
     key: 'stop',
     value: function stop() {
-      if (!this.started) {
-        return this;
-      }
-      this.started = false;
+      // if (!this.started) {
+      //   return this;
+      // }
+      // this.started = false;
       // const scrolling = this.scrolling;
       this.scrolling.off(_Scrolling2.default.UPDATE, this.onUpdate);
       return this;
@@ -11723,27 +11813,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  *
  */
 
-/**
- * scroll freeze timeout id
- * @private
- * @static
- * @type {number}
- */
-var timerId = 0;
-
-/**
- * scroll を止める時間
- * @private
- * @static
- * @type {number}
- * @default 200
- */
-var _duration = 200;
+// /**
+//  * scroll freeze timeout id
+//  * @private
+//  * @static
+//  * @type {number}
+//  */
+// let timerId = 0;
+//
+// /**
+//  * scroll を止める時間
+//  * @private
+//  * @static
+//  * @type {number}
+//  * @default 200
+//  */
+// let duration = 200;
 
 /**
  * scroll 操作を強制的に不可能にします
  */
-
 var Freeze = function () {
   function Freeze() {
     _classCallCheck(this, Freeze);
@@ -11755,6 +11844,11 @@ var Freeze = function () {
     /**
      * scroll 動作を受付不能にします
      * @returns {void}
+     */
+
+    /**
+     * scroll freeze timeout id
+     * @type {number}
      */
     value: function start() {
       window.addEventListener('touchstart', Freeze.onScroll, false);
@@ -11768,6 +11862,12 @@ var Freeze = function () {
     /**
      * scroll 動作を回復します
      * @returns {void}
+     */
+
+    /**
+     * scroll を止める時間
+     * @type {number}
+     * @default 200
      */
 
   }, {
@@ -11803,42 +11903,39 @@ var Freeze = function () {
   }, {
     key: 'freeze',
     value: function freeze() {
-      var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Freeze.duration();
+      var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Freeze.delay;
 
-      clearTimeout(timerId);
+      clearTimeout(Freeze.timerId);
       // timerId = 0;
       Freeze.start();
       if (delay > 0) {
-        timerId = setTimeout(Freeze.stop, delay);
+        Freeze.timerId = setTimeout(Freeze.stop, delay);
       }
-      return timerId;
+      return Freeze.timerId;
     }
-    /**
-     * scroll 操作を不能にする時間間隔(ms)を取得します
-     * @returns {number} scroll 操作を不能にする時間間隔(ms)
-     */
+    // /**
+    //  * scroll 操作を不能にする時間間隔(ms)を取得します
+    //  * @returns {number} scroll 操作を不能にする時間間隔(ms)
+    //  */
+    // static duration() {
+    //   return Freeze.delay;
+    // }
+    // /**
+    //  * scroll 操作を不能にする時間間隔(ms)を設定します
+    //  * @param {number} time scroll 操作を不能にする時間(ms)
+    //  * @returns {void}
+    //  */
+    // static setDuration(time) {
+    //   Freeze.delay = time;
+    // }
 
-  }, {
-    key: 'duration',
-    value: function duration() {
-      return _duration;
-    }
-    /**
-     * scroll 操作を不能にする時間間隔(ms)を設定します
-     * @param {number} time scroll 操作を不能にする時間(ms)
-     * @returns {void}
-     */
-
-  }, {
-    key: 'setDuration',
-    value: function setDuration(time) {
-      _duration = time;
-    }
   }]);
 
   return Freeze;
 }();
 
+Freeze.timerId = 0;
+Freeze.delay = 200;
 exports.default = Freeze;
 
 /***/ }),
@@ -12734,11 +12831,11 @@ var Wheel = function (_EventDispatcher) {
      * @type {number}
      */
     _this.moved = 0;
-    /**
-     * start flag
-     * @type {boolean}
-     */
-    _this.started = false;
+    // /**
+    //  * start flag
+    //  * @type {boolean}
+    //  */
+    // this.started = false;
     // const events = {
     //   up: new WheelEvents(Wheel.UP, this),
     //   down: new WheelEvents(Wheel.DOWN, this),
@@ -12777,11 +12874,12 @@ var Wheel = function (_EventDispatcher) {
      * @returns {Wheel} method chain 可能なように instance を返します
      */
     value: function start() {
-      if (this.started) {
-        return this;
-      }
-      this.started = true;
+      // if (this.started) {
+      //   return this;
+      // }
+      // this.started = true;
       // this.unwatch();
+      this.stop();
       window.addEventListener('wheel', this.onMouseWheel, false);
       return this;
     }
@@ -12793,10 +12891,10 @@ var Wheel = function (_EventDispatcher) {
   }, {
     key: 'stop',
     value: function stop() {
-      if (!this.started) {
-        return this;
-      }
-      this.started = false;
+      // if (!this.started) {
+      //   return this;
+      // }
+      // this.started = false;
       window.removeEventListener('wheel', this.onMouseWheel);
       return this;
     }
@@ -13729,7 +13827,8 @@ var Fps = function (_Polling) {
       this.interval = 1000 / interval;
       this.fps = interval;
       this.events.fps = interval;
-      return this.update();
+      // return this.update();
+      return this.start();
     }
   }]);
 
