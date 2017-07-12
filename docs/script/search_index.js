@@ -108,6 +108,12 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "./src/util/nodelists.js~nodelists",
+    "class/src/util/NodeLists.js~NodeLists.html",
+    "<span>NodeLists</span> <span class=\"search-result-import-path\">./src/util/NodeLists.js</span>",
+    "class"
+  ],
+  [
     "./src/css/patterns.js~patterns",
     "class/src/css/Patterns.js~Patterns.html",
     "<span>Patterns</span> <span class=\"search-result-import-path\">./src/css/Patterns.js</span>",
@@ -249,12 +255,6 @@ window.esdocSearchIndex = [
     "./src/device/can.js~document",
     "variable/index.html#static-variable-document",
     "<span>document</span> <span class=\"search-result-import-path\">./src/device/Can.js</span>",
-    "variable"
-  ],
-  [
-    "./src/util/freeze.js~duration",
-    "variable/index.html#static-variable-duration",
-    "<span>duration</span> <span class=\"search-result-import-path\">./src/util/Freeze.js</span>",
     "variable"
   ],
   [
@@ -402,12 +402,6 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
-    "./src/util/freeze.js~timerid",
-    "variable/index.html#static-variable-timerId",
-    "<span>timerId</span> <span class=\"search-result-import-path\">./src/util/Freeze.js</span>",
-    "variable"
-  ],
-  [
     "./src/device/can.js~transform",
     "variable/index.html#static-variable-transform",
     "<span>transform</span> <span class=\"search-result-import-path\">./src/device/Can.js</span>",
@@ -433,331 +427,331 @@ window.esdocSearchIndex = [
   ],
   [
     "builtinexternal/ecmascriptexternal.js~array",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
     "BuiltinExternal/ECMAScriptExternal.js~Array",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~arraybuffer",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
     "BuiltinExternal/ECMAScriptExternal.js~ArrayBuffer",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~boolean",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
     "BuiltinExternal/ECMAScriptExternal.js~Boolean",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~dataview",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
     "BuiltinExternal/ECMAScriptExternal.js~DataView",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~date",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
     "BuiltinExternal/ECMAScriptExternal.js~Date",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~error",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
     "BuiltinExternal/ECMAScriptExternal.js~Error",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~evalerror",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
     "BuiltinExternal/ECMAScriptExternal.js~EvalError",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~float32array",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
     "BuiltinExternal/ECMAScriptExternal.js~Float32Array",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~float64array",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
     "BuiltinExternal/ECMAScriptExternal.js~Float64Array",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~function",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
     "BuiltinExternal/ECMAScriptExternal.js~Function",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~generator",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
     "BuiltinExternal/ECMAScriptExternal.js~Generator",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~generatorfunction",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
     "BuiltinExternal/ECMAScriptExternal.js~GeneratorFunction",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~infinity",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
     "BuiltinExternal/ECMAScriptExternal.js~Infinity",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~int16array",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
     "BuiltinExternal/ECMAScriptExternal.js~Int16Array",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~int32array",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
     "BuiltinExternal/ECMAScriptExternal.js~Int32Array",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~int8array",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
     "BuiltinExternal/ECMAScriptExternal.js~Int8Array",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~internalerror",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
     "BuiltinExternal/ECMAScriptExternal.js~InternalError",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~json",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
     "BuiltinExternal/ECMAScriptExternal.js~JSON",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~map",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
     "BuiltinExternal/ECMAScriptExternal.js~Map",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~nan",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
     "BuiltinExternal/ECMAScriptExternal.js~NaN",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~number",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
     "BuiltinExternal/ECMAScriptExternal.js~Number",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~object",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
     "BuiltinExternal/ECMAScriptExternal.js~Object",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~promise",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
     "BuiltinExternal/ECMAScriptExternal.js~Promise",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~proxy",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
     "BuiltinExternal/ECMAScriptExternal.js~Proxy",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~rangeerror",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
     "BuiltinExternal/ECMAScriptExternal.js~RangeError",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~referenceerror",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
     "BuiltinExternal/ECMAScriptExternal.js~ReferenceError",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~reflect",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
     "BuiltinExternal/ECMAScriptExternal.js~Reflect",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~regexp",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
     "BuiltinExternal/ECMAScriptExternal.js~RegExp",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~set",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
     "BuiltinExternal/ECMAScriptExternal.js~Set",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~string",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
     "BuiltinExternal/ECMAScriptExternal.js~String",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~symbol",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
     "BuiltinExternal/ECMAScriptExternal.js~Symbol",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~syntaxerror",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
     "BuiltinExternal/ECMAScriptExternal.js~SyntaxError",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~typeerror",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
     "BuiltinExternal/ECMAScriptExternal.js~TypeError",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~urierror",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
     "BuiltinExternal/ECMAScriptExternal.js~URIError",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~uint16array",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
     "BuiltinExternal/ECMAScriptExternal.js~Uint16Array",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~uint32array",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
     "BuiltinExternal/ECMAScriptExternal.js~Uint32Array",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~uint8array",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
     "BuiltinExternal/ECMAScriptExternal.js~Uint8Array",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~uint8clampedarray",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
     "BuiltinExternal/ECMAScriptExternal.js~Uint8ClampedArray",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~weakmap",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
     "BuiltinExternal/ECMAScriptExternal.js~WeakMap",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~weakset",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
     "BuiltinExternal/ECMAScriptExternal.js~WeakSet",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~boolean",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
     "BuiltinExternal/ECMAScriptExternal.js~boolean",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~function",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
     "BuiltinExternal/ECMAScriptExternal.js~function",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~null",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
     "BuiltinExternal/ECMAScriptExternal.js~null",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~number",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
     "BuiltinExternal/ECMAScriptExternal.js~number",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~object",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
     "BuiltinExternal/ECMAScriptExternal.js~object",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~string",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
     "BuiltinExternal/ECMAScriptExternal.js~string",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~undefined",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
     "BuiltinExternal/ECMAScriptExternal.js~undefined",
     "external"
   ],
   [
     "builtinexternal/webapiexternal.js~audiocontext",
-    "external/index.html",
+    "https://developer.mozilla.org/en/docs/Web/API/AudioContext",
     "BuiltinExternal/WebAPIExternal.js~AudioContext",
     "external"
   ],
   [
     "builtinexternal/webapiexternal.js~canvasrenderingcontext2d",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D",
     "BuiltinExternal/WebAPIExternal.js~CanvasRenderingContext2D",
     "external"
   ],
   [
     "builtinexternal/webapiexternal.js~documentfragment",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment",
     "BuiltinExternal/WebAPIExternal.js~DocumentFragment",
     "external"
   ],
   [
     "builtinexternal/webapiexternal.js~element",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/API/Element",
     "BuiltinExternal/WebAPIExternal.js~Element",
     "external"
   ],
   [
     "builtinexternal/webapiexternal.js~event",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/API/Event",
     "BuiltinExternal/WebAPIExternal.js~Event",
     "external"
   ],
   [
     "builtinexternal/webapiexternal.js~node",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/API/Node",
     "BuiltinExternal/WebAPIExternal.js~Node",
     "external"
   ],
   [
     "builtinexternal/webapiexternal.js~nodelist",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/API/NodeList",
     "BuiltinExternal/WebAPIExternal.js~NodeList",
     "external"
   ],
   [
     "builtinexternal/webapiexternal.js~xmlhttprequest",
-    "external/index.html",
+    "https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest",
     "BuiltinExternal/WebAPIExternal.js~XMLHttpRequest",
     "external"
   ],
@@ -1206,16 +1200,22 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/event/rising.js~rising#started",
-    "class/src/event/Rising.js~Rising.html#instance-member-started",
-    "src/event/Rising.js~Rising#started",
-    "member"
-  ],
-  [
     "src/event/rising.js~rising#stop",
     "class/src/event/Rising.js~Rising.html#instance-method-stop",
     "src/event/Rising.js~Rising#stop",
     "method"
+  ],
+  [
+    "src/event/rising.js~rising.alien",
+    "class/src/event/Rising.js~Rising.html#static-member-ALIEN",
+    "src/event/Rising.js~Rising.ALIEN",
+    "member"
+  ],
+  [
+    "src/event/rising.js~rising.collision",
+    "class/src/event/Rising.js~Rising.html#static-member-COLLISION",
+    "src/event/Rising.js~Rising.COLLISION",
+    "member"
   ],
   [
     "src/event/scroll.js",
@@ -1252,12 +1252,6 @@ window.esdocSearchIndex = [
     "class/src/event/Scroll.js~Scroll.html#instance-method-start",
     "src/event/Scroll.js~Scroll#start",
     "method"
-  ],
-  [
-    "src/event/scroll.js~scroll#started",
-    "class/src/event/Scroll.js~Scroll.html#instance-member-started",
-    "src/event/Scroll.js~Scroll#started",
-    "member"
   ],
   [
     "src/event/scroll.js~scroll#stop",
@@ -1320,6 +1314,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/event/scrolling.js~scrolling#onnativeevent",
+    "class/src/event/Scrolling.js~Scrolling.html#instance-method-onNativeEvent",
+    "src/event/Scrolling.js~Scrolling#onNativeEvent",
+    "method"
+  ],
+  [
     "src/event/scrolling.js~scrolling#onupdate",
     "class/src/event/Scrolling.js~Scrolling.html#instance-method-onUpdate",
     "src/event/Scrolling.js~Scrolling#onUpdate",
@@ -1344,16 +1344,34 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/event/scrolling.js~scrolling#started",
-    "class/src/event/Scrolling.js~Scrolling.html#instance-member-started",
-    "src/event/Scrolling.js~Scrolling#started",
-    "member"
-  ],
-  [
     "src/event/scrolling.js~scrolling#stop",
     "class/src/event/Scrolling.js~Scrolling.html#instance-method-stop",
     "src/event/Scrolling.js~Scrolling#stop",
     "method"
+  ],
+  [
+    "src/event/scrolling.js~scrolling#unwatch",
+    "class/src/event/Scrolling.js~Scrolling.html#instance-method-unwatch",
+    "src/event/Scrolling.js~Scrolling#unwatch",
+    "method"
+  ],
+  [
+    "src/event/scrolling.js~scrolling#watch",
+    "class/src/event/Scrolling.js~Scrolling.html#instance-method-watch",
+    "src/event/Scrolling.js~Scrolling#watch",
+    "method"
+  ],
+  [
+    "src/event/scrolling.js~scrolling#watching",
+    "class/src/event/Scrolling.js~Scrolling.html#instance-member-watching",
+    "src/event/Scrolling.js~Scrolling#watching",
+    "member"
+  ],
+  [
+    "src/event/scrolling.js~scrolling.update",
+    "class/src/event/Scrolling.js~Scrolling.html#static-member-UPDATE",
+    "src/event/Scrolling.js~Scrolling.UPDATE",
+    "member"
   ],
   [
     "src/event/scrollingsingle.js",
@@ -1470,6 +1488,36 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/event/touching.js~touching.cancel",
+    "class/src/event/Touching.js~Touching.html#static-member-CANCEL",
+    "src/event/Touching.js~Touching.CANCEL",
+    "member"
+  ],
+  [
+    "src/event/touching.js~touching.end",
+    "class/src/event/Touching.js~Touching.html#static-member-END",
+    "src/event/Touching.js~Touching.END",
+    "member"
+  ],
+  [
+    "src/event/touching.js~touching.move",
+    "class/src/event/Touching.js~Touching.html#static-member-MOVE",
+    "src/event/Touching.js~Touching.MOVE",
+    "member"
+  ],
+  [
+    "src/event/touching.js~touching.start",
+    "class/src/event/Touching.js~Touching.html#static-member-START",
+    "src/event/Touching.js~Touching.START",
+    "member"
+  ],
+  [
+    "src/event/touching.js~touching.touch",
+    "class/src/event/Touching.js~Touching.html#static-member-TOUCH",
+    "src/event/Touching.js~Touching.TOUCH",
+    "member"
+  ],
+  [
     "src/event/touching.js~touching.point",
     "class/src/event/Touching.js~Touching.html#static-method-point",
     "src/event/Touching.js~Touching.point",
@@ -1528,12 +1576,6 @@ window.esdocSearchIndex = [
     "class/src/event/Wheel.js~Wheel.html#instance-method-start",
     "src/event/Wheel.js~Wheel#start",
     "method"
-  ],
-  [
-    "src/event/wheel.js~wheel#started",
-    "class/src/event/Wheel.js~Wheel.html#instance-member-started",
-    "src/event/Wheel.js~Wheel#started",
-    "member"
   ],
   [
     "src/event/wheel.js~wheel#stop",
@@ -2010,16 +2052,16 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/tick/cycle.js~cycle#onupdate",
+    "class/src/tick/Cycle.js~Cycle.html#instance-method-onUpdate",
+    "src/tick/Cycle.js~Cycle#onUpdate",
+    "method"
+  ],
+  [
     "src/tick/cycle.js~cycle#start",
     "class/src/tick/Cycle.js~Cycle.html#instance-method-start",
     "src/tick/Cycle.js~Cycle#start",
     "method"
-  ],
-  [
-    "src/tick/cycle.js~cycle#started",
-    "class/src/tick/Cycle.js~Cycle.html#instance-member-started",
-    "src/tick/Cycle.js~Cycle#started",
-    "member"
   ],
   [
     "src/tick/cycle.js~cycle#stop",
@@ -2028,10 +2070,10 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/tick/cycle.js~cycle#update",
-    "class/src/tick/Cycle.js~Cycle.html#instance-method-update",
-    "src/tick/Cycle.js~Cycle#update",
-    "method"
+    "src/tick/cycle.js~cycle.update",
+    "class/src/tick/Cycle.js~Cycle.html#static-member-UPDATE",
+    "src/tick/Cycle.js~Cycle.UPDATE",
+    "member"
   ],
   [
     "src/tick/cycle.js~cycle.factory",
@@ -2073,6 +2115,12 @@ window.esdocSearchIndex = [
     "src/tick/fps.js~fps#interval",
     "class/src/tick/Fps.js~Fps.html#instance-member-interval",
     "src/tick/Fps.js~Fps#interval",
+    "member"
+  ],
+  [
+    "src/tick/fps.js~fps.update",
+    "class/src/tick/Fps.js~Fps.html#static-member-UPDATE",
+    "src/tick/Fps.js~Fps.UPDATE",
     "member"
   ],
   [
@@ -2118,12 +2166,6 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/tick/polling.js~polling#initcycle",
-    "class/src/tick/Polling.js~Polling.html#instance-method-initCycle",
-    "src/tick/Polling.js~Polling#initCycle",
-    "method"
-  ],
-  [
     "src/tick/polling.js~polling#interval",
     "class/src/tick/Polling.js~Polling.html#instance-member-interval",
     "src/tick/Polling.js~Polling#interval",
@@ -2142,21 +2184,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/tick/polling.js~polling#started",
-    "class/src/tick/Polling.js~Polling.html#instance-member-started",
-    "src/tick/Polling.js~Polling#started",
-    "member"
-  ],
-  [
     "src/tick/polling.js~polling#stop",
     "class/src/tick/Polling.js~Polling.html#instance-method-stop",
     "src/tick/Polling.js~Polling#stop",
-    "method"
-  ],
-  [
-    "src/tick/polling.js~polling#turnover",
-    "class/src/tick/Polling.js~Polling.html#instance-method-turnOver",
-    "src/tick/Polling.js~Polling#turnOver",
     "method"
   ],
   [
@@ -2164,6 +2194,12 @@ window.esdocSearchIndex = [
     "class/src/tick/Polling.js~Polling.html#instance-method-updateEvents",
     "src/tick/Polling.js~Polling#updateEvents",
     "method"
+  ],
+  [
+    "src/tick/polling.js~polling.update",
+    "class/src/tick/Polling.js~Polling.html#static-member-UPDATE",
+    "src/tick/Polling.js~Polling.UPDATE",
+    "member"
   ],
   [
     "src/tick/rate.js",
@@ -2220,16 +2256,88 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/tick/rate.js~rate#start",
-    "class/src/tick/Rate.js~Rate.html#instance-method-start",
-    "src/tick/Rate.js~Rate#start",
-    "method"
-  ],
-  [
     "src/tick/rate.js~rate#validate",
     "class/src/tick/Rate.js~Rate.html#instance-method-validate",
     "src/tick/Rate.js~Rate#validate",
     "method"
+  ],
+  [
+    "src/tick/rate.js~rate.rate_1",
+    "class/src/tick/Rate.js~Rate.html#static-member-RATE_1",
+    "src/tick/Rate.js~Rate.RATE_1",
+    "member"
+  ],
+  [
+    "src/tick/rate.js~rate.rate_10",
+    "class/src/tick/Rate.js~Rate.html#static-member-RATE_10",
+    "src/tick/Rate.js~Rate.RATE_10",
+    "member"
+  ],
+  [
+    "src/tick/rate.js~rate.rate_12",
+    "class/src/tick/Rate.js~Rate.html#static-member-RATE_12",
+    "src/tick/Rate.js~Rate.RATE_12",
+    "member"
+  ],
+  [
+    "src/tick/rate.js~rate.rate_15",
+    "class/src/tick/Rate.js~Rate.html#static-member-RATE_15",
+    "src/tick/Rate.js~Rate.RATE_15",
+    "member"
+  ],
+  [
+    "src/tick/rate.js~rate.rate_2",
+    "class/src/tick/Rate.js~Rate.html#static-member-RATE_2",
+    "src/tick/Rate.js~Rate.RATE_2",
+    "member"
+  ],
+  [
+    "src/tick/rate.js~rate.rate_20",
+    "class/src/tick/Rate.js~Rate.html#static-member-RATE_20",
+    "src/tick/Rate.js~Rate.RATE_20",
+    "member"
+  ],
+  [
+    "src/tick/rate.js~rate.rate_3",
+    "class/src/tick/Rate.js~Rate.html#static-member-RATE_3",
+    "src/tick/Rate.js~Rate.RATE_3",
+    "member"
+  ],
+  [
+    "src/tick/rate.js~rate.rate_30",
+    "class/src/tick/Rate.js~Rate.html#static-member-RATE_30",
+    "src/tick/Rate.js~Rate.RATE_30",
+    "member"
+  ],
+  [
+    "src/tick/rate.js~rate.rate_4",
+    "class/src/tick/Rate.js~Rate.html#static-member-RATE_4",
+    "src/tick/Rate.js~Rate.RATE_4",
+    "member"
+  ],
+  [
+    "src/tick/rate.js~rate.rate_5",
+    "class/src/tick/Rate.js~Rate.html#static-member-RATE_5",
+    "src/tick/Rate.js~Rate.RATE_5",
+    "member"
+  ],
+  [
+    "src/tick/rate.js~rate.rate_6",
+    "class/src/tick/Rate.js~Rate.html#static-member-RATE_6",
+    "src/tick/Rate.js~Rate.RATE_6",
+    "member"
+  ],
+  [
+    "src/tick/rate.js~rate.rate_60",
+    "class/src/tick/Rate.js~Rate.html#static-member-RATE_60",
+    "src/tick/Rate.js~Rate.RATE_60",
+    "member"
+  ],
+  [
+    "src/tick/rate.js~rate.update",
+    "class/src/tick/Rate.js~Rate.html#static-member-UPDATE",
+    "src/tick/Rate.js~Rate.UPDATE",
+    "member"
   ],
   [
     "src/tick/events/cycleevents.js",
@@ -2304,10 +2412,10 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/util/freeze.js~freeze.duration",
-    "class/src/util/Freeze.js~Freeze.html#static-method-duration",
-    "src/util/Freeze.js~Freeze.duration",
-    "method"
+    "src/util/freeze.js~freeze.delay",
+    "class/src/util/Freeze.js~Freeze.html#static-member-delay",
+    "src/util/Freeze.js~Freeze.delay",
+    "member"
   ],
   [
     "src/util/freeze.js~freeze.freeze",
@@ -2322,12 +2430,6 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/util/freeze.js~freeze.setduration",
-    "class/src/util/Freeze.js~Freeze.html#static-method-setDuration",
-    "src/util/Freeze.js~Freeze.setDuration",
-    "method"
-  ],
-  [
     "src/util/freeze.js~freeze.start",
     "class/src/util/Freeze.js~Freeze.html#static-method-start",
     "src/util/Freeze.js~Freeze.start",
@@ -2338,6 +2440,12 @@ window.esdocSearchIndex = [
     "class/src/util/Freeze.js~Freeze.html#static-method-stop",
     "src/util/Freeze.js~Freeze.stop",
     "method"
+  ],
+  [
+    "src/util/freeze.js~freeze.timerid",
+    "class/src/util/Freeze.js~Freeze.html#static-member-timerId",
+    "src/util/Freeze.js~Freeze.timerId",
+    "member"
   ],
   [
     "src/util/hit.js",
@@ -2445,6 +2553,24 @@ window.esdocSearchIndex = [
     "src/util/list.js~list.filling",
     "class/src/util/List.js~List.html#static-method-filling",
     "src/util/List.js~List.filling",
+    "method"
+  ],
+  [
+    "src/util/nodelists.js",
+    "file/src/util/NodeLists.js.html",
+    "src/util/NodeLists.js",
+    "file"
+  ],
+  [
+    "src/util/nodelists.js~nodelists.from",
+    "class/src/util/NodeLists.js~NodeLists.html#static-method-from",
+    "src/util/NodeLists.js~NodeLists.from",
+    "method"
+  ],
+  [
+    "src/util/nodelists.js~nodelists.get",
+    "class/src/util/NodeLists.js~NodeLists.html#static-method-get",
+    "src/util/NodeLists.js~NodeLists.get",
     "method"
   ],
   [

@@ -86,12 +86,11 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Hit.js~Hit.html">Hit</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Iro.js~Iro.html">Iro</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/List.js~List.html">List</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/NodeLists.js~NodeLists.html">NodeLists</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Text.js~Text.html">Text</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Times.js~Times.html">Times</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Vectors.js~Vectors.html">Vectors</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-duration">duration</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-timerId">timerId</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-half">half</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-mathFloor">mathFloor</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-mathInt">mathInt</a></span></span></li>
@@ -192,11 +191,11 @@ export default class Polling extends EventDispatcher {
      * @type {number}
      */
     this.begin = 0;
-    /**
-     * Cycle &#x76E3;&#x8996;&#x958B;&#x59CB;&#x30D5;&#x30E9;&#x30C3;&#x30B0;
-     * @type {boolean}
-     */
-    this.started = false;
+    // /**
+    //  * Cycle &#x76E3;&#x8996;&#x958B;&#x59CB;&#x30D5;&#x30E9;&#x30C3;&#x30B0;
+    //  * @type {boolean}
+    //  */
+    // this.started = false;
   }
   // // ----------------------------------------
   // // EVENT
@@ -220,16 +219,17 @@ export default class Polling extends EventDispatcher {
    */
   change(interval) {
     this.interval = interval;
-    return this.update();
+    // return this.update();
+    return this.start();
   }
-  /**
-   * started flag &#x3092;&#x53CD;&#x8EE2;&#x3055;&#x305B;&#x73FE;&#x5728;&#x306E; started flag &#x72B6;&#x614B;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
-   * @returns {boolean} &#x73FE;&#x5728;&#x306E; started flag &#x72B6;&#x614B;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   */
-  turnOver() {
-    this.started = !this.started;
-    return this.started;
-  }
+  // /**
+  //  * started flag &#x3092;&#x53CD;&#x8EE2;&#x3055;&#x305B;&#x73FE;&#x5728;&#x306E; started flag &#x72B6;&#x614B;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
+  //  * @returns {boolean} &#x73FE;&#x5728;&#x306E; started flag &#x72B6;&#x614B;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+  //  */
+  // turnOver() {
+  //   this.started = !this.started;
+  //   return this.started;
+  // }
   /**
    * events object &#x3092;&#x767A;&#x706B;&#x524D;&#x306B;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;
    * @param {number} begin &#x958B;&#x59CB;&#x6642;&#x9593;: &#x524D;&#x56DE;&#x306E;&#x767A;&#x706B;&#x6642;&#x9593;
@@ -245,40 +245,42 @@ export default class Polling extends EventDispatcher {
     events.interval = this.interval;
     return events;
   }
-  /**
-   * cycle &#x30EB;&#x30FC;&#x30D7;&#x3092;&#x958B;&#x59CB;&#x3057;&#x307E;&#x3059;&lt;br&gt;
-   * watch Cycle.UPDATE event
-   * @returns {Cycle} cycle &#x30EB;&#x30FC;&#x30D7;&#x3092;&#x958B;&#x59CB;&#x3057;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   */
-  initCycle() {
-    // cycle
-    const cycle = this.cycle;
-    // bind Cycle.UPDATE
-    cycle.on(Cycle.UPDATE, this.onUpdate);
-    // cycle &#x958B;&#x59CB;
-    cycle.start();
-    return cycle;
-  }
+  // /**
+  //  * cycle &#x30EB;&#x30FC;&#x30D7;&#x3092;&#x958B;&#x59CB;&#x3057;&#x307E;&#x3059;&lt;br&gt;
+  //  * watch Cycle.UPDATE event
+  //  * @returns {Cycle} cycle &#x30EB;&#x30FC;&#x30D7;&#x3092;&#x958B;&#x59CB;&#x3057;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+  //  */
+  // initCycle() {
+  //   // cycle
+  //   const cycle = this.cycle;
+  //   // bind Cycle.UPDATE
+  //   cycle.on(Cycle.UPDATE, this.onUpdate);
+  //   // cycle &#x958B;&#x59CB;
+  //   cycle.start();
+  //   return cycle;
+  // }
   /**
    * polling &#x3092;&#x958B;&#x59CB;&#x3057;&#x307E;&#x3059;
    * @returns {boolean} start &#x306B;&#x6210;&#x529F;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   start() {
-    if (this.started) {
-      // already start
-      return false;
-    }
-    // flag -&gt; true
-    // this[startSymbol] = true;
-    this.turnOver();
+    this.stop();
+    // if (this.started) {
+    //   // already start
+    //   return false;
+    // }
+    // // flag -&gt; true
+    // // this[startSymbol] = true;
+    // this.turnOver();
     // @type {number} - &#x958B;&#x59CB;&#x6642;&#x9593;
     this.begin = Date.now();
     // cycle
-    this.initCycle();
+    // this.initCycle();
     // // @type {number} - &#x958B;&#x59CB;&#x6642;&#x9593;
     // const present = Date.now();
     // // &#x5F37;&#x5236;&#x7684;&#x306B;1&#x56DE;&#x76EE;&#x3092;&#x5B9F;&#x884C;
     // this.fire(this.updateEvents(present, present));
+    this.cycle.on(Cycle.UPDATE, this.onUpdate);
 
     return true;
   }
@@ -287,13 +289,13 @@ export default class Polling extends EventDispatcher {
    * @returns {boolean} stop &#x306B;&#x6210;&#x529F;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   stop() {
-    if (!this.started) {
-      // not start
-      return false;
-    }
+    // if (!this.started) {
+    //   // not start
+    //   return false;
+    // }
     this.cycle.off(Cycle.UPDATE, this.onUpdate);
-    // this[startSymbol] = false;
-    this.turnOver();
+    // // this[startSymbol] = false;
+    // this.turnOver();
     return true;
   }
   /**
@@ -335,7 +337,7 @@ export default class Polling extends EventDispatcher {
 </div>
 
 <footer class="footer">
-  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.5.2)</span><img src="./image/esdoc-logo-mini-black.png"></a>
 </footer>
 
 <script src="script/search_index.js"></script>

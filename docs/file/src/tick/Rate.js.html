@@ -86,12 +86,11 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Hit.js~Hit.html">Hit</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Iro.js~Iro.html">Iro</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/List.js~List.html">List</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/NodeLists.js~NodeLists.html">NodeLists</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Text.js~Text.html">Text</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Times.js~Times.html">Times</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Vectors.js~Vectors.html">Vectors</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-duration">duration</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-timerId">timerId</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-half">half</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-mathFloor">mathFloor</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-mathInt">mathInt</a></span></span></li>
@@ -196,6 +195,26 @@ export default class Rate extends Polling {
    * @type {number}
    */
   static RATE_5 = 12;
+  /**
+   * fps 4 &#x57FA;&#x6E96;&#x5024;
+   * @type {number}
+   */
+  static RATE_4 = 15;
+  /**
+   * fps 3 &#x57FA;&#x6E96;&#x5024;
+   * @type {number}
+   */
+  static RATE_3 = 20;
+  /**
+   * fps 2 &#x57FA;&#x6E96;&#x5024;
+   * @type {number}
+   */
+  static RATE_2 = 30;
+  /**
+   * fps 1 &#x57FA;&#x6E96;&#x5024;
+   * @type {number}
+   */
+  static RATE_1 = 60;
   // /**
   //  * fps 60 &#x57FA;&#x6E96;&#x5024;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
   //  * @const RATE_60
@@ -307,6 +326,10 @@ export default class Rate extends Polling {
       Rate.RATE_10,
       Rate.RATE_6,
       Rate.RATE_5,
+      Rate.RATE_4,
+      Rate.RATE_3,
+      Rate.RATE_2,
+      Rate.RATE_1,
     ];
     /**
      * Rate &#x901A;&#x77E5; Events instance
@@ -345,7 +368,7 @@ export default class Rate extends Polling {
     //   return false;
     // };
     // init
-    this.setRate(rateValue);
+    // this.setRate(rateValue);
   }
   // ----------------------------------------
   // METHOD
@@ -381,27 +404,29 @@ export default class Rate extends Polling {
    * @returns {boolean} rate &#x8A2D;&#x5B9A;&#x306B;&#x6210;&#x529F;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   change(rate) {
-    const result = this.setRate(rate);
-    this.update();
-    return result !== null;
+    // const result = this.setRate(rate);
+    // this.update();
+    // return result !== null;
+    this.setRate(rate);
+    return this.start();
   }
-  /**
-   * loop(requestAnimationFrame) &#x3092;&#x958B;&#x59CB;&#x3057;&#x307E;&#x3059;
-   * @returns {boolean} start &#x306B;&#x6210;&#x529F;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   */
-  start() {
-    if (this.started) {
-      // already start
-      return false;
-    }
-    // flag -&gt; true
-    this.turnOver();
-    // cycle
-    this.initCycle();
-    // &#x5F37;&#x5236;&#x7684;&#x306B;1&#x56DE;&#x76EE;&#x3092;&#x5B9F;&#x884C;
-    this.fire(this.updateEvents(0, 0));
-    return true;
-  }
+  // /**
+  //  * loop(requestAnimationFrame) &#x3092;&#x958B;&#x59CB;&#x3057;&#x307E;&#x3059;
+  //  * @returns {boolean} start &#x306B;&#x6210;&#x529F;&#x3059;&#x308B;&#x3068; true &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+  //  */
+  // start() {
+  //   if (this.started) {
+  //     // already start
+  //     return false;
+  //   }
+  //   // flag -&gt; true
+  //   this.turnOver();
+  //   // cycle
+  //   this.initCycle();
+  //   // &#x5F37;&#x5236;&#x7684;&#x306B;1&#x56DE;&#x76EE;&#x3092;&#x5B9F;&#x884C;
+  //   this.fire(this.updateEvents(0, 0));
+  //   return true;
+  // }
   /**
    * {@link Polling}.UPDATE event handler
    *
@@ -425,7 +450,7 @@ export default class Rate extends Polling {
 </div>
 
 <footer class="footer">
-  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.5.2)</span><img src="./image/esdoc-logo-mini-black.png"></a>
 </footer>
 
 <script src="script/search_index.js"></script>

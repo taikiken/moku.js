@@ -86,12 +86,11 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Hit.js~Hit.html">Hit</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Iro.js~Iro.html">Iro</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/List.js~List.html">List</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/NodeLists.js~NodeLists.html">NodeLists</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Text.js~Text.html">Text</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Times.js~Times.html">Times</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Vectors.js~Vectors.html">Vectors</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-duration">duration</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-timerId">timerId</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-half">half</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-mathFloor">mathFloor</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-mathInt">mathInt</a></span></span></li>
@@ -180,17 +179,24 @@ export default class Scrolling extends EventDispatcher {
      * @default -1
      */
     this.previous = -1;
-    /**
-     * start &#x6E08;&#x307F;&#x30D5;&#x30E9;&#x30C3;&#x30B0;
-     * @type {boolean}
-     * @default false
-     */
-    this.started = false;
+    // /**
+    //  * start &#x6E08;&#x307F;&#x30D5;&#x30E9;&#x30C3;&#x30B0;
+    //  * @type {boolean}
+    //  * @default false
+    //  */
+    // this.started = false;
     /**
      * Rate instance
      * @type {?Rate}
      */
     this.rate = rate;
+    /**
+     * scrolling &#x76E3;&#x8996;&#x958B;&#x59CB; flag
+     * @type {boolean}
+     * @since 0.3.8
+     */
+    this.watching = false;
+    this.onNativeEvent = this.onNativeEvent.bind(this);
   }
   // ----------------------------------------
   // EVENT
@@ -208,31 +214,65 @@ export default class Scrolling extends EventDispatcher {
   // METHOD
   // ----------------------------------------
   /**
-   * fps &#x3092;&#x76E3;&#x8996;&#x3057;&#x30B9;&#x30AF;&#x30ED;&#x30FC;&#x30EB;&#x4F4D;&#x7F6E;&#x3092;&#x77E5;&#x3089;&#x305B;&#x307E;&#x3059;
+   * window.onscroll / window.onresize event handler,
+   * `this.watching` flag &#x3092;&#x78BA;&#x8A8D;&#x3057; `watch` &#x3092; call &#x3057;&#x307E;&#x3059;
+   * @since 0.3.8
+   */
+  onNativeEvent() {
+    if (!this.watching) {
+      this.watch();
+    }
+  }
+  /**
+   * window.onscroll / window.onresize &#x76E3;&#x8996;&#x3092;&#x958B;&#x59CB;&#x3057;&#x307E;&#x3059;
    * @returns {Scrolling} method chain &#x53EF;&#x80FD;&#x306A;&#x3088;&#x3046;&#x306B; instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    */
   start() {
-    // flag check
-    if (this.started) {
-      return this;
-    }
-    this.started = true;
+    window.addEventListener(&apos;scroll&apos;, this.onNativeEvent, false);
+    window.addEventListener(&apos;resize&apos;, this.onNativeEvent, false);
+    return this;
+  }
+  /**
+   * window.onscroll / window.onresize &#x76E3;&#x8996;&#x3092;&#x505C;&#x6B62;&#x3057;&#x307E;&#x3059;
+   * @returns {Scrolling} method chain &#x53EF;&#x80FD;&#x306A;&#x3088;&#x3046;&#x306B; instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   */
+  stop() {
+    window.removeEventListener(&apos;scroll&apos;, this.onNativeEvent);
+    window.removeEventListener(&apos;resize&apos;, this.onNativeEvent);
+    return this;
+  }
+  /**
+   * fps &#x3092;&#x76E3;&#x8996;&#x3057;&#x30B9;&#x30AF;&#x30ED;&#x30FC;&#x30EB;&#x4F4D;&#x7F6E;&#x3092;&#x77E5;&#x3089;&#x305B;&#x307E;&#x3059;
+   * @returns {Scrolling} method chain &#x53EF;&#x80FD;&#x306A;&#x3088;&#x3046;&#x306B; instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @since 0.3.8
+   */
+  watch() {
+    // // flag check
+    // if (this.started) {
+    //   return this;
+    // }
+    // this.started = true;
     // loop start
-    const rate = this.rate;
-    rate.on(Rate.UPDATE, this.onUpdate);
-    rate.start();
+    // const rate = this.rate;
+    // rate.on(Rate.UPDATE, this.onUpdate);
+    this.unwatch();
+    this.watching = true;
+    this.rate.on(Rate.UPDATE, this.onUpdate);
+    // rate.start();
     return this;
   }
   /**
    * fps &#x76E3;&#x8996;&#x3092;&#x6B62;&#x3081;&#x307E;&#x3059;
    * @returns {Scrolling} method chain &#x53EF;&#x80FD;&#x306A;&#x3088;&#x3046;&#x306B; instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   * @since 0.3.8
    */
-  stop() {
-    if (!this.started) {
-      return this;
-    }
-    this.started = false;
+  unwatch() {
+    // if (!this.started) {
+    //   return this;
+    // }
+    // this.started = false;
     this.rate.off(Rate.UPDATE, this.onUpdate);
+    this.watching = false;
     return this;
   }
   /**
@@ -256,12 +296,18 @@ export default class Scrolling extends EventDispatcher {
   onUpdate(event) {
     // @type {number} - scroll top
     const y = Scroll.y();
+    // @type {number} - previous scroll top
+    const previous = this.previous;
+    // @type {boolean} - &#x79FB;&#x52D5;&#x3057;&#x305F;&#x304B;&#x3092;&#x8868;&#x3057;&#x307E;&#x3059;,
+    const changed = event === null || previous !== y;
+    // &#x79FB;&#x52D5;&#x91CF; 0 &#x306E;&#x6642;&#x306F; rate &#x76E3;&#x8996;&#x3092;&#x505C;&#x6B62;&#x3059;&#x308B;
+    if (!changed) {
+      this.unwatch();
+    }
     // @type {number} - window height
     const height = window.innerHeight;
     // @type {number} - window width
     const width = window.innerWidth;
-    // @type {number} - previous scroll top
-    const previous = this.previous;
 
     // @type {ScrollEvents} - events
     const events = this.events;
@@ -278,7 +324,7 @@ export default class Scrolling extends EventDispatcher {
     events.bottom = y + height;
     // @type {boolean} - &#x79FB;&#x52D5;&#x3057;&#x305F;&#x304B;&#x3092;&#x8868;&#x3057;&#x307E;&#x3059;,
     // event &#x304C; null &#x306E;&#x6642;&#x306F;&#x5F37;&#x5236;&#x767A;&#x706B;&#x306A;&#x306E;&#x3067;&#x79FB;&#x52D5;&#x91CF; 0 &#xFF08;scroll top &#x4F4D;&#x7F6E;&#x306B;&#x5909;&#x66F4;&#x304C;&#x306A;&#x3044;&#xFF09;&#x3067;&#x3082; changed &#x3092; true &#x306B;&#x3057;&#x307E;&#x3059;
-    events.changed = event === null || previous !== y;
+    events.changed = changed;
     // @type {number} - &#x524D;&#x56DE;&#x306E; y &#x4F4D;&#x7F6E;
     events.previous = previous;
     // @type {number} - &#x79FB;&#x52D5;&#x91CF; +: down, -: up
@@ -302,7 +348,7 @@ export default class Scrolling extends EventDispatcher {
 </div>
 
 <footer class="footer">
-  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.5.2)</span><img src="./image/esdoc-logo-mini-black.png"></a>
 </footer>
 
 <script src="script/search_index.js"></script>

@@ -86,12 +86,11 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Hit.js~Hit.html">Hit</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Iro.js~Iro.html">Iro</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/List.js~List.html">List</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/NodeLists.js~NodeLists.html">NodeLists</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Text.js~Text.html">Text</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Times.js~Times.html">Times</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Type.js~Type.html">Type</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/util/Vectors.js~Vectors.html">Vectors</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-duration">duration</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-timerId">timerId</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-half">half</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-mathFloor">mathFloor</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-mathInt">mathInt</a></span></span></li>
@@ -203,6 +202,67 @@ const Request = self.Request;
  * @since 0.3.4 - Thunk friendly
  */
 export default class Ajax {
+  // ----------------------------------------
+  // STATIC METHOD
+  // ----------------------------------------
+  /**
+   * &lt;p&gt;fetch API &#x3078;&#x9001;&#x308B;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&lt;/p&gt;
+   *
+   * &#x5FC5;&#x305A;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
+   * - method: GET, POST, PUT, DELETE...etc
+   * - cache: &apos;no-cache&apos;
+   * - credentials: &apos;same-origin&apos;
+   *
+   * headers, formData &#x306F;&#x5B58;&#x5728;&#x3059;&#x308C;&#x3070; option &#x306B;&#x8FFD;&#x52A0;&#x3055;&#x308C;&#x307E;&#x3059;
+   *
+   * ```
+   * var myRequest = new Request(input, init);
+   * ```
+   * &lt;blockquote&gt;
+   * &#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x306B;&#x9069;&#x7528;&#x3059;&#x308B;&#x30AB;&#x30B9;&#x30BF;&#x30E0;&#x8A2D;&#x5B9A;&#x3092;&#x542B;&#x3080;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3002;&#x8A2D;&#x5B9A;&#x53EF;&#x80FD;&#x306A;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x306F;&#xFF1A;
+   *   method&#xFF1A;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x30E1;&#x30BD;&#x30C3;&#x30C9;&#x3001;&#x305F;&#x3068;&#x3048;&#x3070; GET&#x3001;POST&#x3002;
+   *   headers&#xFF1A;Headers &#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x304B; ByteString &#x3092;&#x542B;&#x3080;&#x3001;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x306B;&#x8FFD;&#x52A0;&#x3059;&#x308B;&#x30D8;&#x30C3;&#x30C0;&#x30FC;&#x3002;
+   *   body&#xFF1A; &#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x306B;&#x8FFD;&#x52A0;&#x3059;&#x308B;&#x30DC;&#x30C7;&#x30A3;&#x30FC;&#xFF1A;Blob &#x304B; BufferSource&#x3001;FormData&#x3001;URLSearchParams&#x3001;USVString &#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x304C;&#x4F7F;&#x7528;&#x3067;&#x304D;&#x308B;&#x3002;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x304C; GET &#x304B; HEAD &#x30E1;&#x30BD;&#x30C3;&#x30C9;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x3044;&#x308B;&#x5834;&#x5408;&#x3001;&#x30DC;&#x30C7;&#x30A3;&#x30FC;&#x3092;&#x6301;&#x3066;&#x306A;&#x3044;&#x3053;&#x3068;&#x306B;&#x6CE8;&#x610F;&#x3002;
+   *   mode&#xFF1A;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3067;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x30E2;&#x30FC;&#x30C9;&#x3002;&#x305F;&#x3068;&#x3048;&#x3070;&#x3001;cors &#x304B; no-cors&#x3001;same-origin&#x3002;&#x65E2;&#x5B9A;&#x5024;&#x306F; cors&#x3002;Chrome &#x3067;&#x306F;&#x3001;47 &#x4EE5;&#x524D;&#x306F; no-cors &#x304C;&#x65E2;&#x5B9A;&#x5024;&#x3067;&#x3042;&#x308A;&#x3001; same-origin &#x306F; 47 &#x304B;&#x3089;&#x4F7F;&#x7528;&#x3067;&#x304D;&#x308B;&#x3088;&#x3046;&#x306B;&#x306A;&#x3063;&#x305F;&#x3002;
+   *   credentials&#xFF1A;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3067;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8; credential&#xFF1A;omit &#x304B; same-origin&#x3001;include &#x304C;&#x4F7F;&#x7528;&#x3067;&#x304D;&#x308B;&#x3002; &#x65E2;&#x5B9A;&#x5024;&#x306F; omit&#x3002;Chrome &#x3067;&#x306F;&#x3001;47 &#x4EE5;&#x524D;&#x306F; same-origin &#x304C;&#x65E2;&#x5B9A;&#x5024;&#x3067;&#x3042;&#x308A;&#x3001;include &#x306F; 47 &#x304B;&#x3089;&#x4F7F;&#x7528;&#x3067;&#x304D;&#x308B;&#x3088;&#x3046;&#x306B;&#x306A;&#x3063;&#x305F;&#x3002;
+   *   cache&#xFF1A;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3067;&#x4F7F;&#x7528;&#x3059;&#x308B; cache &#x30E2;&#x30FC;&#x30C9;&#xFF1A;default &#x304B; no-store&#x3001;reload&#x3001;no-cache&#x3001;force-cache&#x3001;only-if-cached &#x304C;&#x8A2D;&#x5B9A;&#x3067;&#x304D;&#x308B;&#x3002;
+   *   redirect&#xFF1A;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x30EA;&#x30C0;&#x30A4;&#x30EC;&#x30AF;&#x30C8;&#x30E2;&#x30FC;&#x30C9;&#xFF1A;follow &#x304B; error&#x3001;manual &#x304C;&#x4F7F;&#x7528;&#x3067;&#x304D;&#x308B;&#x3002;Chrome &#x3067;&#x306F;&#x3001;47 &#x4EE5;&#x524D;&#x306F;&#x65E2;&#x5B9A;&#x5024;&#x304C; follow &#x3067;&#x3042;&#x308A;&#x3001;manual &#x306F; 47 &#x304B;&#x3089;&#x4F7F;&#x7528;&#x3067;&#x304D;&#x308B;&#x3088;&#x3046;&#x306B;&#x306A;&#x3063;&#x305F;&#x3002;
+   *   referrer&#xFF1A;no-referrer &#x304B; client&#x3001;URL &#x3092;&#x6307;&#x5B9A;&#x3059;&#x308B; USVString&#x3002;&#x65E2;&#x5B9A;&#x5024;&#x306F; client&#x3002;
+   * &lt;/blockquote&gt;
+   * @param {string|USVString|Request} path Ajax request path
+   * @param {string} method GET, POST, PUT, DELETE...etc request method
+   * @param {Headers|Object|null} headers Headers option
+   * @param {FormData|null} formData &#x9001;&#x4FE1;&#x30D5;&#x30A9;&#x30FC;&#x30E0;&#x30C7;&#x30FC;&#x30BF;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;
+   * @returns {*|Request} fetch API &#x3078;&#x9001;&#x308B; Request instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
+   *
+   * @see https://developers.google.com/web/updates/2015/03/introduction-to-fetch
+   * @see https://developer.mozilla.org/ja/docs/Web/API/Request
+   * @see https://developer.mozilla.org/ja/docs/Web/API/Request/Request
+   */
+  option(path, method, headers, formData) {
+    // request option
+    const option = Object.assign({}, this.props);
+    // const option = Object.create({
+    //   method,
+    //   cache: &apos;no-cache&apos;,
+    //   // https://developers.google.com/web/updates/2015/03/introduction-to-fetch
+    //   credentials: &apos;same-origin&apos;,
+    // });
+    option.method = method;
+
+    // headers option
+    if (Type.exist(headers)) {
+      option.headers = headers;
+    }
+
+    // body &#x3078; FormData &#x3092;&#x30BB;&#x30C3;&#x30C8;
+    if (Type.exist(formData)) {
+      option.body = formData;
+    }
+
+    // https://developer.mozilla.org/ja/docs/Web/API/Request
+    return new Request(path, option);
+  }
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
@@ -320,71 +380,13 @@ export default class Ajax {
     this.can = false;
     return this.can;
   }
-  /**
-   * &lt;p&gt;fetch API &#x3078;&#x9001;&#x308B;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&lt;/p&gt;
-   *
-   * &#x5FC5;&#x305A;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;
-   * - method: GET, POST, PUT, DELETE...etc
-   * - cache: &apos;no-cache&apos;
-   * - credentials: &apos;same-origin&apos;
-   *
-   * headers, formData &#x306F;&#x5B58;&#x5728;&#x3059;&#x308C;&#x3070; option &#x306B;&#x8FFD;&#x52A0;&#x3055;&#x308C;&#x307E;&#x3059;
-   *
-   * ```
-   * var myRequest = new Request(input, init);
-   * ```
-   * &lt;blockquote&gt;
-   * &#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x306B;&#x9069;&#x7528;&#x3059;&#x308B;&#x30AB;&#x30B9;&#x30BF;&#x30E0;&#x8A2D;&#x5B9A;&#x3092;&#x542B;&#x3080;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3002;&#x8A2D;&#x5B9A;&#x53EF;&#x80FD;&#x306A;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x306F;&#xFF1A;
-   *   method&#xFF1A;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x30E1;&#x30BD;&#x30C3;&#x30C9;&#x3001;&#x305F;&#x3068;&#x3048;&#x3070; GET&#x3001;POST&#x3002;
-   *   headers&#xFF1A;Headers &#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x304B; ByteString &#x3092;&#x542B;&#x3080;&#x3001;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x306B;&#x8FFD;&#x52A0;&#x3059;&#x308B;&#x30D8;&#x30C3;&#x30C0;&#x30FC;&#x3002;
-   *   body&#xFF1A; &#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x306B;&#x8FFD;&#x52A0;&#x3059;&#x308B;&#x30DC;&#x30C7;&#x30A3;&#x30FC;&#xFF1A;Blob &#x304B; BufferSource&#x3001;FormData&#x3001;URLSearchParams&#x3001;USVString &#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x304C;&#x4F7F;&#x7528;&#x3067;&#x304D;&#x308B;&#x3002;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x304C; GET &#x304B; HEAD &#x30E1;&#x30BD;&#x30C3;&#x30C9;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x3044;&#x308B;&#x5834;&#x5408;&#x3001;&#x30DC;&#x30C7;&#x30A3;&#x30FC;&#x3092;&#x6301;&#x3066;&#x306A;&#x3044;&#x3053;&#x3068;&#x306B;&#x6CE8;&#x610F;&#x3002;
-   *   mode&#xFF1A;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3067;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x30E2;&#x30FC;&#x30C9;&#x3002;&#x305F;&#x3068;&#x3048;&#x3070;&#x3001;cors &#x304B; no-cors&#x3001;same-origin&#x3002;&#x65E2;&#x5B9A;&#x5024;&#x306F; cors&#x3002;Chrome &#x3067;&#x306F;&#x3001;47 &#x4EE5;&#x524D;&#x306F; no-cors &#x304C;&#x65E2;&#x5B9A;&#x5024;&#x3067;&#x3042;&#x308A;&#x3001; same-origin &#x306F; 47 &#x304B;&#x3089;&#x4F7F;&#x7528;&#x3067;&#x304D;&#x308B;&#x3088;&#x3046;&#x306B;&#x306A;&#x3063;&#x305F;&#x3002;
-   *   credentials&#xFF1A;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3067;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8; credential&#xFF1A;omit &#x304B; same-origin&#x3001;include &#x304C;&#x4F7F;&#x7528;&#x3067;&#x304D;&#x308B;&#x3002; &#x65E2;&#x5B9A;&#x5024;&#x306F; omit&#x3002;Chrome &#x3067;&#x306F;&#x3001;47 &#x4EE5;&#x524D;&#x306F; same-origin &#x304C;&#x65E2;&#x5B9A;&#x5024;&#x3067;&#x3042;&#x308A;&#x3001;include &#x306F; 47 &#x304B;&#x3089;&#x4F7F;&#x7528;&#x3067;&#x304D;&#x308B;&#x3088;&#x3046;&#x306B;&#x306A;&#x3063;&#x305F;&#x3002;
-   *   cache&#xFF1A;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3067;&#x4F7F;&#x7528;&#x3059;&#x308B; cache &#x30E2;&#x30FC;&#x30C9;&#xFF1A;default &#x304B; no-store&#x3001;reload&#x3001;no-cache&#x3001;force-cache&#x3001;only-if-cached &#x304C;&#x8A2D;&#x5B9A;&#x3067;&#x304D;&#x308B;&#x3002;
-   *   redirect&#xFF1A;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x30EA;&#x30C0;&#x30A4;&#x30EC;&#x30AF;&#x30C8;&#x30E2;&#x30FC;&#x30C9;&#xFF1A;follow &#x304B; error&#x3001;manual &#x304C;&#x4F7F;&#x7528;&#x3067;&#x304D;&#x308B;&#x3002;Chrome &#x3067;&#x306F;&#x3001;47 &#x4EE5;&#x524D;&#x306F;&#x65E2;&#x5B9A;&#x5024;&#x304C; follow &#x3067;&#x3042;&#x308A;&#x3001;manual &#x306F; 47 &#x304B;&#x3089;&#x4F7F;&#x7528;&#x3067;&#x304D;&#x308B;&#x3088;&#x3046;&#x306B;&#x306A;&#x3063;&#x305F;&#x3002;
-   *   referrer&#xFF1A;no-referrer &#x304B; client&#x3001;URL &#x3092;&#x6307;&#x5B9A;&#x3059;&#x308B; USVString&#x3002;&#x65E2;&#x5B9A;&#x5024;&#x306F; client&#x3002;
-   * &lt;/blockquote&gt;
-   * @param {string|USVString|Request} path Ajax request path
-   * @param {string} method GET, POST, PUT, DELETE...etc request method
-   * @param {Headers|Object|null} headers Headers option
-   * @param {FormData|null} formData &#x9001;&#x4FE1;&#x30D5;&#x30A9;&#x30FC;&#x30E0;&#x30C7;&#x30FC;&#x30BF;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;
-   * @returns {*|Request} fetch API &#x3078;&#x9001;&#x308B; Request instance &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-   *
-   * @see https://developers.google.com/web/updates/2015/03/introduction-to-fetch
-   * @see https://developer.mozilla.org/ja/docs/Web/API/Request
-   * @see https://developer.mozilla.org/ja/docs/Web/API/Request/Request
-   */
-  option(path, method, headers, formData) {
-    // request option
-    const option = Object.assign({}, this.props);
-    // const option = Object.create({
-    //   method,
-    //   cache: &apos;no-cache&apos;,
-    //   // https://developers.google.com/web/updates/2015/03/introduction-to-fetch
-    //   credentials: &apos;same-origin&apos;,
-    // });
-    option.method = method;
-
-    // headers option
-    if (Type.exist(headers)) {
-      option.headers = headers;
-    }
-
-    // body &#x3078; FormData &#x3092;&#x30BB;&#x30C3;&#x30C8;
-    if (Type.exist(formData)) {
-      option.body = formData;
-    }
-
-    // https://developer.mozilla.org/ja/docs/Web/API/Request
-    return new Request(path, option);
-  }
 }
 </code></pre>
 
 </div>
 
 <footer class="footer">
-  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.5.2)</span><img src="./image/esdoc-logo-mini-black.png"></a>
 </footer>
 
 <script src="script/search_index.js"></script>

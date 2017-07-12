@@ -1,50 +1,50 @@
 {
-  "type": "Program",
+  "type": "File",
   "start": 0,
-  "end": 2389,
+  "end": 2417,
   "loc": {
     "start": {
       "line": 1,
       "column": 0
     },
     "end": {
-      "line": 104,
+      "line": 105,
       "column": 0
     }
   },
-  "sourceType": "module",
-  "body": [
-    {
-      "type": "ImportDeclaration",
-      "start": 393,
-      "end": 425,
-      "loc": {
-        "start": {
-          "line": 17,
-          "column": 0
-        },
-        "end": {
-          "line": 17,
-          "column": 32
-        }
+  "program": {
+    "type": "Program",
+    "start": 0,
+    "end": 2417,
+    "loc": {
+      "start": {
+        "line": 1,
+        "column": 0
       },
-      "specifiers": [
-        {
-          "type": "ImportDefaultSpecifier",
-          "start": 400,
-          "end": 407,
-          "loc": {
-            "start": {
-              "line": 17,
-              "column": 7
-            },
-            "end": {
-              "line": 17,
-              "column": 14
-            }
+      "end": {
+        "line": 105,
+        "column": 0
+      }
+    },
+    "sourceType": "module",
+    "body": [
+      {
+        "type": "ImportDeclaration",
+        "start": 393,
+        "end": 425,
+        "loc": {
+          "start": {
+            "line": 17,
+            "column": 0
           },
-          "local": {
-            "type": "Identifier",
+          "end": {
+            "line": 17,
+            "column": 32
+          }
+        },
+        "specifiers": [
+          {
+            "type": "ImportDefaultSpecifier",
             "start": 400,
             "end": 407,
             "loc": {
@@ -57,167 +57,149 @@
                 "column": 14
               }
             },
-            "name": "Polling",
+            "local": {
+              "type": "Identifier",
+              "start": 400,
+              "end": 407,
+              "loc": {
+                "start": {
+                  "line": 17,
+                  "column": 7
+                },
+                "end": {
+                  "line": 17,
+                  "column": 14
+                },
+                "identifierName": "Polling"
+              },
+              "name": "Polling",
+              "leadingComments": null
+            },
             "leadingComments": null
+          }
+        ],
+        "source": {
+          "type": "StringLiteral",
+          "start": 413,
+          "end": 424,
+          "loc": {
+            "start": {
+              "line": 17,
+              "column": 20
+            },
+            "end": {
+              "line": 17,
+              "column": 31
+            }
           },
-          "leadingComments": null
-        }
-      ],
-      "importKind": "value",
-      "source": {
-        "type": "Literal",
-        "start": 413,
-        "end": 424,
+          "extra": {
+            "rawValue": "./Polling",
+            "raw": "'./Polling'"
+          },
+          "value": "./Polling"
+        },
+        "leadingComments": [
+          {
+            "type": "CommentBlock",
+            "value": "*\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/04 - 14:19\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n ",
+            "start": 0,
+            "end": 332,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 11,
+                "column": 3
+              }
+            }
+          },
+          {
+            "type": "CommentLine",
+            "value": " event",
+            "start": 334,
+            "end": 342,
+            "loc": {
+              "start": {
+                "line": 13,
+                "column": 0
+              },
+              "end": {
+                "line": 13,
+                "column": 8
+              }
+            }
+          },
+          {
+            "type": "CommentLine",
+            "value": " import Events from '../event/Events';",
+            "start": 343,
+            "end": 383,
+            "loc": {
+              "start": {
+                "line": 14,
+                "column": 0
+              },
+              "end": {
+                "line": 14,
+                "column": 40
+              }
+            }
+          },
+          {
+            "type": "CommentLine",
+            "value": " tick",
+            "start": 385,
+            "end": 392,
+            "loc": {
+              "start": {
+                "line": 16,
+                "column": 0
+              },
+              "end": {
+                "line": 16,
+                "column": 7
+              }
+            }
+          }
+        ],
+        "trailingComments": [
+          {
+            "type": "CommentLine",
+            "value": " tick/events",
+            "start": 427,
+            "end": 441,
+            "loc": {
+              "start": {
+                "line": 19,
+                "column": 0
+              },
+              "end": {
+                "line": 19,
+                "column": 14
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "ImportDeclaration",
+        "start": 442,
+        "end": 485,
         "loc": {
           "start": {
-            "line": 17,
-            "column": 20
+            "line": 20,
+            "column": 0
           },
           "end": {
-            "line": 17,
-            "column": 31
+            "line": 20,
+            "column": 43
           }
         },
-        "value": "./Polling",
-        "rawValue": "./Polling",
-        "raw": "'./Polling'"
-      },
-      "leadingComments": [
-        {
-          "type": "Block",
-          "value": "*\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/04 - 14:19\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n ",
-          "start": 0,
-          "end": 332,
-          "loc": {
-            "start": {
-              "line": 1,
-              "column": 0
-            },
-            "end": {
-              "line": 11,
-              "column": 3
-            }
-          },
-          "range": [
-            0,
-            332
-          ]
-        },
-        {
-          "type": "CommentLine",
-          "value": " event",
-          "start": 334,
-          "end": 342,
-          "loc": {
-            "start": {
-              "line": 13,
-              "column": 0
-            },
-            "end": {
-              "line": 13,
-              "column": 8
-            }
-          },
-          "range": [
-            334,
-            342
-          ]
-        },
-        {
-          "type": "CommentLine",
-          "value": " import Events from '../event/Events';",
-          "start": 343,
-          "end": 383,
-          "loc": {
-            "start": {
-              "line": 14,
-              "column": 0
-            },
-            "end": {
-              "line": 14,
-              "column": 40
-            }
-          },
-          "range": [
-            343,
-            383
-          ]
-        },
-        {
-          "type": "CommentLine",
-          "value": " tick",
-          "start": 385,
-          "end": 392,
-          "loc": {
-            "start": {
-              "line": 16,
-              "column": 0
-            },
-            "end": {
-              "line": 16,
-              "column": 7
-            }
-          },
-          "range": [
-            385,
-            392
-          ]
-        }
-      ],
-      "trailingComments": [
-        {
-          "type": "CommentLine",
-          "value": " tick/events",
-          "start": 427,
-          "end": 441,
-          "loc": {
-            "start": {
-              "line": 19,
-              "column": 0
-            },
-            "end": {
-              "line": 19,
-              "column": 14
-            }
-          },
-          "range": [
-            427,
-            441
-          ]
-        }
-      ]
-    },
-    {
-      "type": "ImportDeclaration",
-      "start": 442,
-      "end": 485,
-      "loc": {
-        "start": {
-          "line": 20,
-          "column": 0
-        },
-        "end": {
-          "line": 20,
-          "column": 43
-        }
-      },
-      "specifiers": [
-        {
-          "type": "ImportDefaultSpecifier",
-          "start": 449,
-          "end": 458,
-          "loc": {
-            "start": {
-              "line": 20,
-              "column": 7
-            },
-            "end": {
-              "line": 20,
-              "column": 16
-            }
-          },
-          "local": {
-            "type": "Identifier",
+        "specifiers": [
+          {
+            "type": "ImportDefaultSpecifier",
             "start": 449,
             "end": 458,
             "loc": {
@@ -230,715 +212,623 @@
                 "column": 16
               }
             },
-            "name": "FpsEvents",
+            "local": {
+              "type": "Identifier",
+              "start": 449,
+              "end": 458,
+              "loc": {
+                "start": {
+                  "line": 20,
+                  "column": 7
+                },
+                "end": {
+                  "line": 20,
+                  "column": 16
+                },
+                "identifierName": "FpsEvents"
+              },
+              "name": "FpsEvents",
+              "leadingComments": null
+            },
             "leadingComments": null
-          },
-          "leadingComments": null
-        }
-      ],
-      "importKind": "value",
-      "source": {
-        "type": "Literal",
-        "start": 464,
-        "end": 484,
-        "loc": {
-          "start": {
-            "line": 20,
-            "column": 22
-          },
-          "end": {
-            "line": 20,
-            "column": 42
           }
+        ],
+        "source": {
+          "type": "StringLiteral",
+          "start": 464,
+          "end": 484,
+          "loc": {
+            "start": {
+              "line": 20,
+              "column": 22
+            },
+            "end": {
+              "line": 20,
+              "column": 42
+            }
+          },
+          "extra": {
+            "rawValue": "./events/FpsEvents",
+            "raw": "'./events/FpsEvents'"
+          },
+          "value": "./events/FpsEvents"
         },
-        "value": "./events/FpsEvents",
-        "rawValue": "./events/FpsEvents",
-        "raw": "'./events/FpsEvents'"
+        "leadingComments": [
+          {
+            "type": "CommentLine",
+            "value": " tick/events",
+            "start": 427,
+            "end": 441,
+            "loc": {
+              "start": {
+                "line": 19,
+                "column": 0
+              },
+              "end": {
+                "line": 19,
+                "column": 14
+              }
+            }
+          }
+        ],
+        "trailingComments": [
+          {
+            "type": "CommentLine",
+            "value": " /**",
+            "start": 487,
+            "end": 493,
+            "loc": {
+              "start": {
+                "line": 22,
+                "column": 0
+              },
+              "end": {
+                "line": 22,
+                "column": 6
+              }
+            }
+          },
+          {
+            "type": "CommentLine",
+            "value": "  * private property key, fps を保存するための Symbol",
+            "start": 494,
+            "end": 541,
+            "loc": {
+              "start": {
+                "line": 23,
+                "column": 0
+              },
+              "end": {
+                "line": 23,
+                "column": 47
+              }
+            }
+          },
+          {
+            "type": "CommentLine",
+            "value": "  * @type {Symbol}",
+            "start": 542,
+            "end": 562,
+            "loc": {
+              "start": {
+                "line": 24,
+                "column": 0
+              },
+              "end": {
+                "line": 24,
+                "column": 20
+              }
+            }
+          },
+          {
+            "type": "CommentLine",
+            "value": "  * @private",
+            "start": 563,
+            "end": 577,
+            "loc": {
+              "start": {
+                "line": 25,
+                "column": 0
+              },
+              "end": {
+                "line": 25,
+                "column": 14
+              }
+            }
+          },
+          {
+            "type": "CommentLine",
+            "value": "  */",
+            "start": 578,
+            "end": 584,
+            "loc": {
+              "start": {
+                "line": 26,
+                "column": 0
+              },
+              "end": {
+                "line": 26,
+                "column": 6
+              }
+            }
+          },
+          {
+            "type": "CommentLine",
+            "value": " const fpsSymbol = Symbol('Singleton Fps Symbol');",
+            "start": 585,
+            "end": 637,
+            "loc": {
+              "start": {
+                "line": 27,
+                "column": 0
+              },
+              "end": {
+                "line": 27,
+                "column": 52
+              }
+            }
+          },
+          {
+            "type": "CommentBlock",
+            "value": "*\n * フレームレート毎に `UPDATE` イベントを発生させます\n *\n * @example\n * // 2sec. interval\n * const fps = new Fps(0.5);\n * const update = () => {\n *  // code here, something do\n * };\n * fps.on(Fps.UPDATE, update);\n * fps.start();\n * ",
+            "start": 639,
+            "end": 857,
+            "loc": {
+              "start": {
+                "line": 29,
+                "column": 0
+              },
+              "end": {
+                "line": 40,
+                "column": 5
+              }
+            }
+          }
+        ]
       },
-      "leadingComments": [
-        {
-          "type": "CommentLine",
-          "value": " tick/events",
-          "start": 427,
-          "end": 441,
-          "loc": {
-            "start": {
-              "line": 19,
-              "column": 0
-            },
-            "end": {
-              "line": 19,
-              "column": 14
-            }
-          },
-          "range": [
-            427,
-            441
-          ]
-        }
-      ],
-      "trailingComments": [
-        {
-          "type": "CommentLine",
-          "value": " /**",
-          "start": 487,
-          "end": 493,
-          "loc": {
-            "start": {
-              "line": 22,
-              "column": 0
-            },
-            "end": {
-              "line": 22,
-              "column": 6
-            }
-          },
-          "range": [
-            487,
-            493
-          ]
-        },
-        {
-          "type": "CommentLine",
-          "value": "  * private property key, fps を保存するための Symbol",
-          "start": 494,
-          "end": 541,
-          "loc": {
-            "start": {
-              "line": 23,
-              "column": 0
-            },
-            "end": {
-              "line": 23,
-              "column": 47
-            }
-          },
-          "range": [
-            494,
-            541
-          ]
-        },
-        {
-          "type": "CommentLine",
-          "value": "  * @type {Symbol}",
-          "start": 542,
-          "end": 562,
-          "loc": {
-            "start": {
-              "line": 24,
-              "column": 0
-            },
-            "end": {
-              "line": 24,
-              "column": 20
-            }
-          },
-          "range": [
-            542,
-            562
-          ]
-        },
-        {
-          "type": "CommentLine",
-          "value": "  * @private",
-          "start": 563,
-          "end": 577,
-          "loc": {
-            "start": {
-              "line": 25,
-              "column": 0
-            },
-            "end": {
-              "line": 25,
-              "column": 14
-            }
-          },
-          "range": [
-            563,
-            577
-          ]
-        },
-        {
-          "type": "CommentLine",
-          "value": "  */",
-          "start": 578,
-          "end": 584,
-          "loc": {
-            "start": {
-              "line": 26,
-              "column": 0
-            },
-            "end": {
-              "line": 26,
-              "column": 6
-            }
-          },
-          "range": [
-            578,
-            584
-          ]
-        },
-        {
-          "type": "CommentLine",
-          "value": " const fpsSymbol = Symbol('Singleton Fps Symbol');",
-          "start": 585,
-          "end": 637,
-          "loc": {
-            "start": {
-              "line": 27,
-              "column": 0
-            },
-            "end": {
-              "line": 27,
-              "column": 52
-            }
-          },
-          "range": [
-            585,
-            637
-          ]
-        },
-        {
-          "type": "Block",
-          "value": "*\n * フレームレート毎に `UPDATE` イベントを発生させます\n *\n * @example\n * // 2sec. interval\n * const fps = new Fps(0.5);\n * const update = () => {\n *  // code here, something do\n * };\n * fps.on(Fps.UPDATE, update);\n * fps.start();\n * ",
-          "start": 639,
-          "end": 857,
-          "loc": {
-            "start": {
-              "line": 29,
-              "column": 0
-            },
-            "end": {
-              "line": 40,
-              "column": 5
-            }
-          },
-          "range": [
-            639,
-            857
-          ]
-        }
-      ]
-    },
-    {
-      "type": "ExportDefaultDeclaration",
-      "start": 858,
-      "end": 2388,
-      "loc": {
-        "start": {
-          "line": 41,
-          "column": 0
-        },
-        "end": {
-          "line": 103,
-          "column": 1
-        }
-      },
-      "declaration": {
-        "type": "ClassDeclaration",
-        "start": 873,
-        "end": 2388,
+      {
+        "type": "ExportDefaultDeclaration",
+        "start": 858,
+        "end": 2416,
         "loc": {
           "start": {
             "line": 41,
-            "column": 15
+            "column": 0
           },
           "end": {
-            "line": 103,
+            "line": 104,
             "column": 1
           }
         },
-        "id": {
-          "type": "Identifier",
-          "start": 879,
-          "end": 882,
+        "declaration": {
+          "type": "ClassDeclaration",
+          "start": 873,
+          "end": 2416,
           "loc": {
             "start": {
               "line": 41,
-              "column": 21
+              "column": 15
             },
             "end": {
-              "line": 41,
-              "column": 24
-            }
-          },
-          "name": "Fps",
-          "leadingComments": null
-        },
-        "superClass": {
-          "type": "Identifier",
-          "start": 891,
-          "end": 898,
-          "loc": {
-            "start": {
-              "line": 41,
-              "column": 33
-            },
-            "end": {
-              "line": 41,
-              "column": 40
-            }
-          },
-          "name": "Polling"
-        },
-        "body": {
-          "type": "ClassBody",
-          "start": 899,
-          "end": 2388,
-          "loc": {
-            "start": {
-              "line": 41,
-              "column": 41
-            },
-            "end": {
-              "line": 103,
+              "line": 104,
               "column": 1
             }
           },
-          "body": [
-            {
-              "type": "Identifier",
-              "start": 1092,
-              "end": 1120,
-              "loc": {
-                "start": {
-                  "line": 50,
-                  "column": 2
-                },
-                "end": {
-                  "line": 50,
-                  "column": 30
-                }
+          "id": {
+            "type": "Identifier",
+            "start": 879,
+            "end": 882,
+            "loc": {
+              "start": {
+                "line": 41,
+                "column": 21
               },
-              "computed": false,
-              "key": {
-                "type": "Identifier",
-                "start": 1099,
-                "end": 1105,
-                "loc": {
-                  "start": {
-                    "line": 50,
-                    "column": 9
-                  },
-                  "end": {
-                    "line": 50,
-                    "column": 15
-                  }
-                },
-                "name": "UPDATE"
+              "end": {
+                "line": 41,
+                "column": 24
               },
-              "static": true,
-              "value": {
-                "type": "Literal",
-                "start": 1108,
-                "end": 1119,
-                "loc": {
-                  "start": {
-                    "line": 50,
-                    "column": 18
-                  },
-                  "end": {
-                    "line": 50,
-                    "column": 29
-                  }
-                },
-                "value": "fpsUpdate",
-                "rawValue": "fpsUpdate",
-                "raw": "'fpsUpdate'"
-              },
-              "leadingComments": [
-                {
-                  "type": "CommentLine",
-                  "value": " ----------------------------------------",
-                  "start": 903,
-                  "end": 946,
-                  "loc": {
-                    "start": {
-                      "line": 42,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 42,
-                      "column": 45
-                    }
-                  },
-                  "range": [
-                    903,
-                    946
-                  ]
-                },
-                {
-                  "type": "CommentLine",
-                  "value": " EVENT",
-                  "start": 949,
-                  "end": 957,
-                  "loc": {
-                    "start": {
-                      "line": 43,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 43,
-                      "column": 10
-                    }
-                  },
-                  "range": [
-                    949,
-                    957
-                  ]
-                },
-                {
-                  "type": "CommentLine",
-                  "value": " ----------------------------------------",
-                  "start": 960,
-                  "end": 1003,
-                  "loc": {
-                    "start": {
-                      "line": 44,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 44,
-                      "column": 45
-                    }
-                  },
-                  "range": [
-                    960,
-                    1003
-                  ]
-                },
-                {
-                  "type": "Block",
-                  "value": "*\n   * フレームレート毎に発生するイベント - fpsUpdate\n   * @event UPDATE\n   * @type {string}\n   ",
-                  "start": 1006,
-                  "end": 1089,
-                  "loc": {
-                    "start": {
-                      "line": 45,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 49,
-                      "column": 5
-                    }
-                  },
-                  "range": [
-                    1006,
-                    1089
-                  ]
-                }
-              ],
-              "trailingComments": [
-                {
-                  "type": "CommentLine",
-                  "value": " /**",
-                  "start": 1123,
-                  "end": 1129,
-                  "loc": {
-                    "start": {
-                      "line": 51,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 51,
-                      "column": 8
-                    }
-                  },
-                  "range": [
-                    1123,
-                    1129
-                  ]
-                },
-                {
-                  "type": "CommentLine",
-                  "value": "  * フレームレート毎に発生するイベントを取得します",
-                  "start": 1132,
-                  "end": 1161,
-                  "loc": {
-                    "start": {
-                      "line": 52,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 52,
-                      "column": 31
-                    }
-                  },
-                  "range": [
-                    1132,
-                    1161
-                  ]
-                },
-                {
-                  "type": "CommentLine",
-                  "value": "  * @event UPDATE",
-                  "start": 1164,
-                  "end": 1183,
-                  "loc": {
-                    "start": {
-                      "line": 53,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 53,
-                      "column": 21
-                    }
-                  },
-                  "range": [
-                    1164,
-                    1183
-                  ]
-                },
-                {
-                  "type": "CommentLine",
-                  "value": "  * @returns {string} event, fpsUpdate を返します",
-                  "start": 1186,
-                  "end": 1232,
-                  "loc": {
-                    "start": {
-                      "line": 54,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 54,
-                      "column": 48
-                    }
-                  },
-                  "range": [
-                    1186,
-                    1232
-                  ]
-                },
-                {
-                  "type": "CommentLine",
-                  "value": "  * @default fpsUpdate",
-                  "start": 1235,
-                  "end": 1259,
-                  "loc": {
-                    "start": {
-                      "line": 55,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 55,
-                      "column": 26
-                    }
-                  },
-                  "range": [
-                    1235,
-                    1259
-                  ]
-                },
-                {
-                  "type": "CommentLine",
-                  "value": "  */",
-                  "start": 1262,
-                  "end": 1268,
-                  "loc": {
-                    "start": {
-                      "line": 56,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 56,
-                      "column": 8
-                    }
-                  },
-                  "range": [
-                    1262,
-                    1268
-                  ]
-                },
-                {
-                  "type": "CommentLine",
-                  "value": " static get UPDATE() {",
-                  "start": 1271,
-                  "end": 1295,
-                  "loc": {
-                    "start": {
-                      "line": 57,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 57,
-                      "column": 26
-                    }
-                  },
-                  "range": [
-                    1271,
-                    1295
-                  ]
-                },
-                {
-                  "type": "CommentLine",
-                  "value": "   return 'fpsUpdate';",
-                  "start": 1298,
-                  "end": 1322,
-                  "loc": {
-                    "start": {
-                      "line": 58,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 58,
-                      "column": 26
-                    }
-                  },
-                  "range": [
-                    1298,
-                    1322
-                  ]
-                },
-                {
-                  "type": "CommentLine",
-                  "value": " }",
-                  "start": 1325,
-                  "end": 1329,
-                  "loc": {
-                    "start": {
-                      "line": 59,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 59,
-                      "column": 6
-                    }
-                  },
-                  "range": [
-                    1325,
-                    1329
-                  ]
-                },
-                {
-                  "type": "CommentLine",
-                  "value": " ----------------------------------------",
-                  "start": 1332,
-                  "end": 1375,
-                  "loc": {
-                    "start": {
-                      "line": 60,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 60,
-                      "column": 45
-                    }
-                  },
-                  "range": [
-                    1332,
-                    1375
-                  ]
-                },
-                {
-                  "type": "CommentLine",
-                  "value": " CONSTRUCTOR",
-                  "start": 1378,
-                  "end": 1392,
-                  "loc": {
-                    "start": {
-                      "line": 61,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 61,
-                      "column": 16
-                    }
-                  },
-                  "range": [
-                    1378,
-                    1392
-                  ]
-                },
-                {
-                  "type": "CommentLine",
-                  "value": " ----------------------------------------",
-                  "start": 1395,
-                  "end": 1438,
-                  "loc": {
-                    "start": {
-                      "line": 62,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 62,
-                      "column": 45
-                    }
-                  },
-                  "range": [
-                    1395,
-                    1438
-                  ]
-                },
-                {
-                  "type": "Block",
-                  "value": "*\n   * 引数の frame rate に合わせ UPDATE イベントを発生させます\n   * @param {number} [fps=30] frame rate, default: 30\n   ",
-                  "start": 1441,
-                  "end": 1548,
-                  "loc": {
-                    "start": {
-                      "line": 63,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 66,
-                      "column": 5
-                    }
-                  },
-                  "range": [
-                    1441,
-                    1548
-                  ]
-                }
-              ]
+              "identifierName": "Fps"
             },
-            {
-              "type": "MethodDefinition",
-              "start": 1551,
-              "end": 1886,
-              "loc": {
-                "start": {
-                  "line": 67,
-                  "column": 2
-                },
-                "end": {
-                  "line": 82,
-                  "column": 3
-                }
+            "name": "Fps",
+            "leadingComments": null
+          },
+          "superClass": {
+            "type": "Identifier",
+            "start": 891,
+            "end": 898,
+            "loc": {
+              "start": {
+                "line": 41,
+                "column": 33
               },
-              "computed": false,
-              "key": {
-                "type": "Identifier",
+              "end": {
+                "line": 41,
+                "column": 40
+              },
+              "identifierName": "Polling"
+            },
+            "name": "Polling"
+          },
+          "body": {
+            "type": "ClassBody",
+            "start": 899,
+            "end": 2416,
+            "loc": {
+              "start": {
+                "line": 41,
+                "column": 41
+              },
+              "end": {
+                "line": 104,
+                "column": 1
+              }
+            },
+            "body": [
+              {
+                "type": "ClassProperty",
+                "start": 1092,
+                "end": 1120,
+                "loc": {
+                  "start": {
+                    "line": 50,
+                    "column": 2
+                  },
+                  "end": {
+                    "line": 50,
+                    "column": 30
+                  }
+                },
+                "computed": false,
+                "key": {
+                  "type": "Identifier",
+                  "start": 1099,
+                  "end": 1105,
+                  "loc": {
+                    "start": {
+                      "line": 50,
+                      "column": 9
+                    },
+                    "end": {
+                      "line": 50,
+                      "column": 15
+                    },
+                    "identifierName": "UPDATE"
+                  },
+                  "name": "UPDATE"
+                },
+                "static": true,
+                "value": {
+                  "type": "StringLiteral",
+                  "start": 1108,
+                  "end": 1119,
+                  "loc": {
+                    "start": {
+                      "line": 50,
+                      "column": 18
+                    },
+                    "end": {
+                      "line": 50,
+                      "column": 29
+                    }
+                  },
+                  "extra": {
+                    "rawValue": "fpsUpdate",
+                    "raw": "'fpsUpdate'"
+                  },
+                  "value": "fpsUpdate"
+                },
+                "leadingComments": [
+                  {
+                    "type": "CommentLine",
+                    "value": " ----------------------------------------",
+                    "start": 903,
+                    "end": 946,
+                    "loc": {
+                      "start": {
+                        "line": 42,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 42,
+                        "column": 45
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentLine",
+                    "value": " EVENT",
+                    "start": 949,
+                    "end": 957,
+                    "loc": {
+                      "start": {
+                        "line": 43,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 43,
+                        "column": 10
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentLine",
+                    "value": " ----------------------------------------",
+                    "start": 960,
+                    "end": 1003,
+                    "loc": {
+                      "start": {
+                        "line": 44,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 44,
+                        "column": 45
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentBlock",
+                    "value": "*\n   * フレームレート毎に発生するイベント - fpsUpdate\n   * @event UPDATE\n   * @type {string}\n   ",
+                    "start": 1006,
+                    "end": 1089,
+                    "loc": {
+                      "start": {
+                        "line": 45,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 49,
+                        "column": 5
+                      }
+                    }
+                  }
+                ],
+                "trailingComments": [
+                  {
+                    "type": "CommentLine",
+                    "value": " /**",
+                    "start": 1123,
+                    "end": 1129,
+                    "loc": {
+                      "start": {
+                        "line": 51,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 51,
+                        "column": 8
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentLine",
+                    "value": "  * フレームレート毎に発生するイベントを取得します",
+                    "start": 1132,
+                    "end": 1161,
+                    "loc": {
+                      "start": {
+                        "line": 52,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 52,
+                        "column": 31
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentLine",
+                    "value": "  * @event UPDATE",
+                    "start": 1164,
+                    "end": 1183,
+                    "loc": {
+                      "start": {
+                        "line": 53,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 53,
+                        "column": 21
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentLine",
+                    "value": "  * @returns {string} event, fpsUpdate を返します",
+                    "start": 1186,
+                    "end": 1232,
+                    "loc": {
+                      "start": {
+                        "line": 54,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 54,
+                        "column": 48
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentLine",
+                    "value": "  * @default fpsUpdate",
+                    "start": 1235,
+                    "end": 1259,
+                    "loc": {
+                      "start": {
+                        "line": 55,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 55,
+                        "column": 26
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentLine",
+                    "value": "  */",
+                    "start": 1262,
+                    "end": 1268,
+                    "loc": {
+                      "start": {
+                        "line": 56,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 56,
+                        "column": 8
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentLine",
+                    "value": " static get UPDATE() {",
+                    "start": 1271,
+                    "end": 1295,
+                    "loc": {
+                      "start": {
+                        "line": 57,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 57,
+                        "column": 26
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentLine",
+                    "value": "   return 'fpsUpdate';",
+                    "start": 1298,
+                    "end": 1322,
+                    "loc": {
+                      "start": {
+                        "line": 58,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 58,
+                        "column": 26
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentLine",
+                    "value": " }",
+                    "start": 1325,
+                    "end": 1329,
+                    "loc": {
+                      "start": {
+                        "line": 59,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 59,
+                        "column": 6
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentLine",
+                    "value": " ----------------------------------------",
+                    "start": 1332,
+                    "end": 1375,
+                    "loc": {
+                      "start": {
+                        "line": 60,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 60,
+                        "column": 45
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentLine",
+                    "value": " CONSTRUCTOR",
+                    "start": 1378,
+                    "end": 1392,
+                    "loc": {
+                      "start": {
+                        "line": 61,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 61,
+                        "column": 16
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentLine",
+                    "value": " ----------------------------------------",
+                    "start": 1395,
+                    "end": 1438,
+                    "loc": {
+                      "start": {
+                        "line": 62,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 62,
+                        "column": 45
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentBlock",
+                    "value": "*\n   * 引数の frame rate に合わせ UPDATE イベントを発生させます\n   * @param {number} [fps=30] frame rate, default: 30\n   ",
+                    "start": 1441,
+                    "end": 1548,
+                    "loc": {
+                      "start": {
+                        "line": 63,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 66,
+                        "column": 5
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "ClassMethod",
                 "start": 1551,
-                "end": 1562,
+                "end": 1886,
                 "loc": {
                   "start": {
                     "line": 67,
                     "column": 2
                   },
                   "end": {
-                    "line": 67,
-                    "column": 13
-                  }
-                },
-                "name": "constructor",
-                "leadingComments": null
-              },
-              "static": false,
-              "kind": "constructor",
-              "value": {
-                "type": "FunctionExpression",
-                "start": 1562,
-                "end": 1886,
-                "loc": {
-                  "start": {
-                    "line": 67,
-                    "column": 13
-                  },
-                  "end": {
                     "line": 82,
                     "column": 3
                   }
                 },
+                "computed": false,
+                "key": {
+                  "type": "Identifier",
+                  "start": 1551,
+                  "end": 1562,
+                  "loc": {
+                    "start": {
+                      "line": 67,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 67,
+                      "column": 13
+                    },
+                    "identifierName": "constructor"
+                  },
+                  "name": "constructor",
+                  "leadingComments": null
+                },
+                "static": false,
+                "kind": "constructor",
                 "id": null,
                 "generator": false,
                 "expression": false,
@@ -958,7 +848,6 @@
                         "column": 22
                       }
                     },
-                    "operator": "=",
                     "left": {
                       "type": "Identifier",
                       "start": 1563,
@@ -971,12 +860,13 @@
                         "end": {
                           "line": 67,
                           "column": 17
-                        }
+                        },
+                        "identifierName": "fps"
                       },
                       "name": "fps"
                     },
                     "right": {
-                      "type": "Literal",
+                      "type": "NumericLiteral",
                       "start": 1569,
                       "end": 1571,
                       "loc": {
@@ -989,9 +879,11 @@
                           "column": 22
                         }
                       },
-                      "value": 30,
-                      "rawValue": 30,
-                      "raw": "30"
+                      "extra": {
+                        "rawValue": 30,
+                        "raw": "30"
+                      },
+                      "value": 30
                     }
                   }
                 ],
@@ -1069,7 +961,7 @@
                               }
                             },
                             "left": {
-                              "type": "Literal",
+                              "type": "NumericLiteral",
                               "start": 1585,
                               "end": 1589,
                               "loc": {
@@ -1082,9 +974,11 @@
                                   "column": 14
                                 }
                               },
-                              "value": 1000,
-                              "rawValue": 1000,
-                              "raw": "1000"
+                              "extra": {
+                                "rawValue": 1000,
+                                "raw": "1000"
+                              },
+                              "value": 1000
                             },
                             "operator": "/",
                             "right": {
@@ -1099,7 +993,8 @@
                                 "end": {
                                   "line": 68,
                                   "column": 20
-                                }
+                                },
+                                "identifierName": "fps"
                               },
                               "name": "fps"
                             }
@@ -1121,11 +1016,7 @@
                               "line": 69,
                               "column": 30
                             }
-                          },
-                          "range": [
-                            1602,
-                            1628
-                          ]
+                          }
                         }
                       ]
                     },
@@ -1170,7 +1061,8 @@
                               "end": {
                                 "line": 70,
                                 "column": 16
-                              }
+                              },
+                              "identifierName": "events"
                             },
                             "name": "events",
                             "leadingComments": null
@@ -1201,7 +1093,8 @@
                                 "end": {
                                   "line": 70,
                                   "column": 32
-                                }
+                                },
+                                "identifierName": "FpsEvents"
                               },
                               "name": "FpsEvents"
                             },
@@ -1232,7 +1125,8 @@
                                     "end": {
                                       "line": 70,
                                       "column": 36
-                                    }
+                                    },
+                                    "identifierName": "Fps"
                                   },
                                   "name": "Fps"
                                 },
@@ -1248,7 +1142,8 @@
                                     "end": {
                                       "line": 70,
                                       "column": 43
-                                    }
+                                    },
+                                    "identifierName": "UPDATE"
                                   },
                                   "name": "UPDATE"
                                 },
@@ -1305,11 +1200,7 @@
                               "line": 69,
                               "column": 30
                             }
-                          },
-                          "range": [
-                            1602,
-                            1628
-                          ]
+                          }
                         }
                       ]
                     },
@@ -1368,7 +1259,8 @@
                               "end": {
                                 "line": 71,
                                 "column": 10
-                              }
+                              },
+                              "identifierName": "events"
                             },
                             "name": "events"
                           },
@@ -1384,7 +1276,8 @@
                               "end": {
                                 "line": 71,
                                 "column": 14
-                              }
+                              },
+                              "identifierName": "fps"
                             },
                             "name": "fps"
                           },
@@ -1402,14 +1295,15 @@
                             "end": {
                               "line": 71,
                               "column": 20
-                            }
+                            },
+                            "identifierName": "fps"
                           },
                           "name": "fps"
                         }
                       },
                       "trailingComments": [
                         {
-                          "type": "Block",
+                          "type": "CommentBlock",
                           "value": "*\n     * Fps.UPDATE Events instance\n     * @type {Events}\n     ",
                           "start": 1713,
                           "end": 1780,
@@ -1422,11 +1316,7 @@
                               "line": 75,
                               "column": 7
                             }
-                          },
-                          "range": [
-                            1713,
-                            1780
-                          ]
+                          }
                         }
                       ]
                     },
@@ -1501,7 +1391,8 @@
                               "end": {
                                 "line": 76,
                                 "column": 15
-                              }
+                              },
+                              "identifierName": "events"
                             },
                             "name": "events"
                           },
@@ -1520,7 +1411,8 @@
                             "end": {
                               "line": 76,
                               "column": 24
-                            }
+                            },
+                            "identifierName": "events"
                           },
                           "name": "events"
                         },
@@ -1528,7 +1420,7 @@
                       },
                       "leadingComments": [
                         {
-                          "type": "Block",
+                          "type": "CommentBlock",
                           "value": "*\n     * Fps.UPDATE Events instance\n     * @type {Events}\n     ",
                           "start": 1713,
                           "end": 1780,
@@ -1541,16 +1433,12 @@
                               "line": 75,
                               "column": 7
                             }
-                          },
-                          "range": [
-                            1713,
-                            1780
-                          ]
+                          }
                         }
                       ],
                       "trailingComments": [
                         {
-                          "type": "Block",
+                          "type": "CommentBlock",
                           "value": "*\n     * frame rate\n     * @type {number}\n     ",
                           "start": 1811,
                           "end": 1862,
@@ -1563,11 +1451,7 @@
                               "line": 80,
                               "column": 7
                             }
-                          },
-                          "range": [
-                            1811,
-                            1862
-                          ]
+                          }
                         }
                       ]
                     },
@@ -1642,7 +1526,8 @@
                               "end": {
                                 "line": 81,
                                 "column": 12
-                              }
+                              },
+                              "identifierName": "fps"
                             },
                             "name": "fps"
                           },
@@ -1661,7 +1546,8 @@
                             "end": {
                               "line": 81,
                               "column": 18
-                            }
+                            },
+                            "identifierName": "fps"
                           },
                           "name": "fps"
                         },
@@ -1669,7 +1555,7 @@
                       },
                       "leadingComments": [
                         {
-                          "type": "Block",
+                          "type": "CommentBlock",
                           "value": "*\n     * frame rate\n     * @type {number}\n     ",
                           "start": 1811,
                           "end": 1862,
@@ -1682,412 +1568,326 @@
                               "line": 80,
                               "column": 7
                             }
-                          },
-                          "range": [
-                            1811,
-                            1862
-                          ]
+                          }
                         }
                       ]
                     }
                   ],
+                  "directives": [],
                   "trailingComments": null
                 },
-                "trailingComments": null
+                "leadingComments": [
+                  {
+                    "type": "CommentLine",
+                    "value": " /**",
+                    "start": 1123,
+                    "end": 1129,
+                    "loc": {
+                      "start": {
+                        "line": 51,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 51,
+                        "column": 8
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentLine",
+                    "value": "  * フレームレート毎に発生するイベントを取得します",
+                    "start": 1132,
+                    "end": 1161,
+                    "loc": {
+                      "start": {
+                        "line": 52,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 52,
+                        "column": 31
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentLine",
+                    "value": "  * @event UPDATE",
+                    "start": 1164,
+                    "end": 1183,
+                    "loc": {
+                      "start": {
+                        "line": 53,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 53,
+                        "column": 21
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentLine",
+                    "value": "  * @returns {string} event, fpsUpdate を返します",
+                    "start": 1186,
+                    "end": 1232,
+                    "loc": {
+                      "start": {
+                        "line": 54,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 54,
+                        "column": 48
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentLine",
+                    "value": "  * @default fpsUpdate",
+                    "start": 1235,
+                    "end": 1259,
+                    "loc": {
+                      "start": {
+                        "line": 55,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 55,
+                        "column": 26
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentLine",
+                    "value": "  */",
+                    "start": 1262,
+                    "end": 1268,
+                    "loc": {
+                      "start": {
+                        "line": 56,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 56,
+                        "column": 8
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentLine",
+                    "value": " static get UPDATE() {",
+                    "start": 1271,
+                    "end": 1295,
+                    "loc": {
+                      "start": {
+                        "line": 57,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 57,
+                        "column": 26
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentLine",
+                    "value": "   return 'fpsUpdate';",
+                    "start": 1298,
+                    "end": 1322,
+                    "loc": {
+                      "start": {
+                        "line": 58,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 58,
+                        "column": 26
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentLine",
+                    "value": " }",
+                    "start": 1325,
+                    "end": 1329,
+                    "loc": {
+                      "start": {
+                        "line": 59,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 59,
+                        "column": 6
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentLine",
+                    "value": " ----------------------------------------",
+                    "start": 1332,
+                    "end": 1375,
+                    "loc": {
+                      "start": {
+                        "line": 60,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 60,
+                        "column": 45
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentLine",
+                    "value": " CONSTRUCTOR",
+                    "start": 1378,
+                    "end": 1392,
+                    "loc": {
+                      "start": {
+                        "line": 61,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 61,
+                        "column": 16
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentLine",
+                    "value": " ----------------------------------------",
+                    "start": 1395,
+                    "end": 1438,
+                    "loc": {
+                      "start": {
+                        "line": 62,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 62,
+                        "column": 45
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentBlock",
+                    "value": "*\n   * 引数の frame rate に合わせ UPDATE イベントを発生させます\n   * @param {number} [fps=30] frame rate, default: 30\n   ",
+                    "start": 1441,
+                    "end": 1548,
+                    "loc": {
+                      "start": {
+                        "line": 63,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 66,
+                        "column": 5
+                      }
+                    }
+                  }
+                ],
+                "trailingComments": [
+                  {
+                    "type": "CommentLine",
+                    "value": " ----------------------------------------",
+                    "start": 1889,
+                    "end": 1932,
+                    "loc": {
+                      "start": {
+                        "line": 83,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 83,
+                        "column": 45
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentLine",
+                    "value": " METHOD",
+                    "start": 1935,
+                    "end": 1944,
+                    "loc": {
+                      "start": {
+                        "line": 84,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 84,
+                        "column": 11
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentLine",
+                    "value": " ----------------------------------------",
+                    "start": 1947,
+                    "end": 1990,
+                    "loc": {
+                      "start": {
+                        "line": 85,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 85,
+                        "column": 45
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentBlock",
+                    "value": "*\n   * fps を変更します\n   * 1. プロパティ polling 変更\n   * 1. 継承 method update 実行\n   * @param {number} interval fps\n   * @returns {boolean} 継承 method `update` をコールし UPDATE event が発生すると true を返します\n   ",
+                    "start": 1993,
+                    "end": 2185,
+                    "loc": {
+                      "start": {
+                        "line": 86,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 92,
+                        "column": 5
+                      }
+                    }
+                  }
+                ]
               },
-              "leadingComments": [
-                {
-                  "type": "CommentLine",
-                  "value": " /**",
-                  "start": 1123,
-                  "end": 1129,
-                  "loc": {
-                    "start": {
-                      "line": 51,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 51,
-                      "column": 8
-                    }
-                  },
-                  "range": [
-                    1123,
-                    1129
-                  ]
-                },
-                {
-                  "type": "CommentLine",
-                  "value": "  * フレームレート毎に発生するイベントを取得します",
-                  "start": 1132,
-                  "end": 1161,
-                  "loc": {
-                    "start": {
-                      "line": 52,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 52,
-                      "column": 31
-                    }
-                  },
-                  "range": [
-                    1132,
-                    1161
-                  ]
-                },
-                {
-                  "type": "CommentLine",
-                  "value": "  * @event UPDATE",
-                  "start": 1164,
-                  "end": 1183,
-                  "loc": {
-                    "start": {
-                      "line": 53,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 53,
-                      "column": 21
-                    }
-                  },
-                  "range": [
-                    1164,
-                    1183
-                  ]
-                },
-                {
-                  "type": "CommentLine",
-                  "value": "  * @returns {string} event, fpsUpdate を返します",
-                  "start": 1186,
-                  "end": 1232,
-                  "loc": {
-                    "start": {
-                      "line": 54,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 54,
-                      "column": 48
-                    }
-                  },
-                  "range": [
-                    1186,
-                    1232
-                  ]
-                },
-                {
-                  "type": "CommentLine",
-                  "value": "  * @default fpsUpdate",
-                  "start": 1235,
-                  "end": 1259,
-                  "loc": {
-                    "start": {
-                      "line": 55,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 55,
-                      "column": 26
-                    }
-                  },
-                  "range": [
-                    1235,
-                    1259
-                  ]
-                },
-                {
-                  "type": "CommentLine",
-                  "value": "  */",
-                  "start": 1262,
-                  "end": 1268,
-                  "loc": {
-                    "start": {
-                      "line": 56,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 56,
-                      "column": 8
-                    }
-                  },
-                  "range": [
-                    1262,
-                    1268
-                  ]
-                },
-                {
-                  "type": "CommentLine",
-                  "value": " static get UPDATE() {",
-                  "start": 1271,
-                  "end": 1295,
-                  "loc": {
-                    "start": {
-                      "line": 57,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 57,
-                      "column": 26
-                    }
-                  },
-                  "range": [
-                    1271,
-                    1295
-                  ]
-                },
-                {
-                  "type": "CommentLine",
-                  "value": "   return 'fpsUpdate';",
-                  "start": 1298,
-                  "end": 1322,
-                  "loc": {
-                    "start": {
-                      "line": 58,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 58,
-                      "column": 26
-                    }
-                  },
-                  "range": [
-                    1298,
-                    1322
-                  ]
-                },
-                {
-                  "type": "CommentLine",
-                  "value": " }",
-                  "start": 1325,
-                  "end": 1329,
-                  "loc": {
-                    "start": {
-                      "line": 59,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 59,
-                      "column": 6
-                    }
-                  },
-                  "range": [
-                    1325,
-                    1329
-                  ]
-                },
-                {
-                  "type": "CommentLine",
-                  "value": " ----------------------------------------",
-                  "start": 1332,
-                  "end": 1375,
-                  "loc": {
-                    "start": {
-                      "line": 60,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 60,
-                      "column": 45
-                    }
-                  },
-                  "range": [
-                    1332,
-                    1375
-                  ]
-                },
-                {
-                  "type": "CommentLine",
-                  "value": " CONSTRUCTOR",
-                  "start": 1378,
-                  "end": 1392,
-                  "loc": {
-                    "start": {
-                      "line": 61,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 61,
-                      "column": 16
-                    }
-                  },
-                  "range": [
-                    1378,
-                    1392
-                  ]
-                },
-                {
-                  "type": "CommentLine",
-                  "value": " ----------------------------------------",
-                  "start": 1395,
-                  "end": 1438,
-                  "loc": {
-                    "start": {
-                      "line": 62,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 62,
-                      "column": 45
-                    }
-                  },
-                  "range": [
-                    1395,
-                    1438
-                  ]
-                },
-                {
-                  "type": "Block",
-                  "value": "*\n   * 引数の frame rate に合わせ UPDATE イベントを発生させます\n   * @param {number} [fps=30] frame rate, default: 30\n   ",
-                  "start": 1441,
-                  "end": 1548,
-                  "loc": {
-                    "start": {
-                      "line": 63,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 66,
-                      "column": 5
-                    }
-                  },
-                  "range": [
-                    1441,
-                    1548
-                  ]
-                }
-              ],
-              "trailingComments": [
-                {
-                  "type": "CommentLine",
-                  "value": " ----------------------------------------",
-                  "start": 1889,
-                  "end": 1932,
-                  "loc": {
-                    "start": {
-                      "line": 83,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 83,
-                      "column": 45
-                    }
-                  },
-                  "range": [
-                    1889,
-                    1932
-                  ]
-                },
-                {
-                  "type": "CommentLine",
-                  "value": " METHOD",
-                  "start": 1935,
-                  "end": 1944,
-                  "loc": {
-                    "start": {
-                      "line": 84,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 84,
-                      "column": 11
-                    }
-                  },
-                  "range": [
-                    1935,
-                    1944
-                  ]
-                },
-                {
-                  "type": "CommentLine",
-                  "value": " ----------------------------------------",
-                  "start": 1947,
-                  "end": 1990,
-                  "loc": {
-                    "start": {
-                      "line": 85,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 85,
-                      "column": 45
-                    }
-                  },
-                  "range": [
-                    1947,
-                    1990
-                  ]
-                },
-                {
-                  "type": "Block",
-                  "value": "*\n   * fps を変更します\n   * 1. プロパティ polling 変更\n   * 1. 継承 method update 実行\n   * @param {number} interval fps\n   * @returns {boolean} 継承 method `update` をコールし UPDATE event が発生すると true を返します\n   ",
-                  "start": 1993,
-                  "end": 2185,
-                  "loc": {
-                    "start": {
-                      "line": 86,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 92,
-                      "column": 5
-                    }
-                  },
-                  "range": [
-                    1993,
-                    2185
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "MethodDefinition",
-              "start": 2188,
-              "end": 2386,
-              "loc": {
-                "start": {
-                  "line": 93,
-                  "column": 2
-                },
-                "end": {
-                  "line": 102,
-                  "column": 3
-                }
-              },
-              "computed": false,
-              "key": {
-                "type": "Identifier",
+              {
+                "type": "ClassMethod",
                 "start": 2188,
-                "end": 2194,
+                "end": 2414,
                 "loc": {
                   "start": {
                     "line": 93,
                     "column": 2
                   },
                   "end": {
-                    "line": 93,
-                    "column": 8
-                  }
-                },
-                "name": "change",
-                "leadingComments": null
-              },
-              "static": false,
-              "kind": "method",
-              "value": {
-                "type": "FunctionExpression",
-                "start": 2194,
-                "end": 2386,
-                "loc": {
-                  "start": {
-                    "line": 93,
-                    "column": 8
-                  },
-                  "end": {
-                    "line": 102,
+                    "line": 103,
                     "column": 3
                   }
                 },
+                "computed": false,
+                "key": {
+                  "type": "Identifier",
+                  "start": 2188,
+                  "end": 2194,
+                  "loc": {
+                    "start": {
+                      "line": 93,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 93,
+                      "column": 8
+                    },
+                    "identifierName": "change"
+                  },
+                  "name": "change",
+                  "leadingComments": null
+                },
+                "static": false,
+                "kind": "method",
                 "id": null,
                 "generator": false,
                 "expression": false,
@@ -2105,7 +1905,8 @@
                       "end": {
                         "line": 93,
                         "column": 17
-                      }
+                      },
+                      "identifierName": "interval"
                     },
                     "name": "interval"
                   }
@@ -2113,14 +1914,14 @@
                 "body": {
                   "type": "BlockStatement",
                   "start": 2205,
-                  "end": 2386,
+                  "end": 2414,
                   "loc": {
                     "start": {
                       "line": 93,
                       "column": 19
                     },
                     "end": {
-                      "line": 102,
+                      "line": 103,
                       "column": 3
                     }
                   },
@@ -2196,7 +1997,8 @@
                               "end": {
                                 "line": 98,
                                 "column": 17
-                              }
+                              },
+                              "identifierName": "interval"
                             },
                             "name": "interval"
                           },
@@ -2218,7 +2020,7 @@
                             }
                           },
                           "left": {
-                            "type": "Literal",
+                            "type": "NumericLiteral",
                             "start": 2283,
                             "end": 2287,
                             "loc": {
@@ -2231,9 +2033,11 @@
                                 "column": 24
                               }
                             },
-                            "value": 1000,
-                            "rawValue": 1000,
-                            "raw": "1000"
+                            "extra": {
+                              "rawValue": 1000,
+                              "raw": "1000"
+                            },
+                            "value": 1000
                           },
                           "operator": "/",
                           "right": {
@@ -2248,7 +2052,8 @@
                               "end": {
                                 "line": 98,
                                 "column": 35
-                              }
+                              },
+                              "identifierName": "interval"
                             },
                             "name": "interval"
                           }
@@ -2257,7 +2062,7 @@
                       },
                       "leadingComments": [
                         {
-                          "type": "Block",
+                          "type": "CommentBlock",
                           "value": "*\n     * polling 間隔\n     * @type {number}\n     ",
                           "start": 2211,
                           "end": 2262,
@@ -2270,11 +2075,7 @@
                               "line": 97,
                               "column": 7
                             }
-                          },
-                          "range": [
-                            2211,
-                            2262
-                          ]
+                          }
                         }
                       ]
                     },
@@ -2348,7 +2149,8 @@
                               "end": {
                                 "line": 99,
                                 "column": 12
-                              }
+                              },
+                              "identifierName": "fps"
                             },
                             "name": "fps"
                           },
@@ -2366,7 +2168,8 @@
                             "end": {
                               "line": 99,
                               "column": 23
-                            }
+                            },
+                            "identifierName": "interval"
                           },
                           "name": "interval"
                         }
@@ -2456,7 +2259,8 @@
                                 "end": {
                                   "line": 100,
                                   "column": 15
-                                }
+                                },
+                                "identifierName": "events"
                               },
                               "name": "events"
                             },
@@ -2474,7 +2278,8 @@
                               "end": {
                                 "line": 100,
                                 "column": 19
-                              }
+                              },
+                              "identifierName": "fps"
                             },
                             "name": "fps"
                           },
@@ -2492,177 +2297,318 @@
                             "end": {
                               "line": 100,
                               "column": 30
-                            }
+                            },
+                            "identifierName": "interval"
                           },
                           "name": "interval"
                         }
-                      }
+                      },
+                      "trailingComments": [
+                        {
+                          "type": "CommentLine",
+                          "value": " return this.update();",
+                          "start": 2361,
+                          "end": 2385,
+                          "loc": {
+                            "start": {
+                              "line": 101,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 101,
+                              "column": 28
+                            }
+                          }
+                        }
+                      ]
                     },
                     {
                       "type": "ReturnStatement",
-                      "start": 2361,
-                      "end": 2382,
+                      "start": 2390,
+                      "end": 2410,
                       "loc": {
                         "start": {
-                          "line": 101,
+                          "line": 102,
                           "column": 4
                         },
                         "end": {
-                          "line": 101,
-                          "column": 25
+                          "line": 102,
+                          "column": 24
                         }
                       },
                       "argument": {
                         "type": "CallExpression",
-                        "start": 2368,
-                        "end": 2381,
+                        "start": 2397,
+                        "end": 2409,
                         "loc": {
                           "start": {
-                            "line": 101,
+                            "line": 102,
                             "column": 11
                           },
                           "end": {
-                            "line": 101,
-                            "column": 24
+                            "line": 102,
+                            "column": 23
                           }
                         },
                         "callee": {
                           "type": "MemberExpression",
-                          "start": 2368,
-                          "end": 2379,
+                          "start": 2397,
+                          "end": 2407,
                           "loc": {
                             "start": {
-                              "line": 101,
+                              "line": 102,
                               "column": 11
                             },
                             "end": {
-                              "line": 101,
-                              "column": 22
+                              "line": 102,
+                              "column": 21
                             }
                           },
                           "object": {
                             "type": "ThisExpression",
-                            "start": 2368,
-                            "end": 2372,
+                            "start": 2397,
+                            "end": 2401,
                             "loc": {
                               "start": {
-                                "line": 101,
+                                "line": 102,
                                 "column": 11
                               },
                               "end": {
-                                "line": 101,
+                                "line": 102,
                                 "column": 15
                               }
-                            }
+                            },
+                            "leadingComments": null
                           },
                           "property": {
                             "type": "Identifier",
-                            "start": 2373,
-                            "end": 2379,
+                            "start": 2402,
+                            "end": 2407,
                             "loc": {
                               "start": {
-                                "line": 101,
+                                "line": 102,
                                 "column": 16
                               },
                               "end": {
-                                "line": 101,
-                                "column": 22
-                              }
+                                "line": 102,
+                                "column": 21
+                              },
+                              "identifierName": "start"
                             },
-                            "name": "update"
+                            "name": "start"
                           },
-                          "computed": false
+                          "computed": false,
+                          "leadingComments": null
                         },
-                        "arguments": []
+                        "arguments": [],
+                        "leadingComments": null
+                      },
+                      "leadingComments": [
+                        {
+                          "type": "CommentLine",
+                          "value": " return this.update();",
+                          "start": 2361,
+                          "end": 2385,
+                          "loc": {
+                            "start": {
+                              "line": 101,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 101,
+                              "column": 28
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "directives": []
+                },
+                "leadingComments": [
+                  {
+                    "type": "CommentLine",
+                    "value": " ----------------------------------------",
+                    "start": 1889,
+                    "end": 1932,
+                    "loc": {
+                      "start": {
+                        "line": 83,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 83,
+                        "column": 45
                       }
                     }
-                  ]
+                  },
+                  {
+                    "type": "CommentLine",
+                    "value": " METHOD",
+                    "start": 1935,
+                    "end": 1944,
+                    "loc": {
+                      "start": {
+                        "line": 84,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 84,
+                        "column": 11
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentLine",
+                    "value": " ----------------------------------------",
+                    "start": 1947,
+                    "end": 1990,
+                    "loc": {
+                      "start": {
+                        "line": 85,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 85,
+                        "column": 45
+                      }
+                    }
+                  },
+                  {
+                    "type": "CommentBlock",
+                    "value": "*\n   * fps を変更します\n   * 1. プロパティ polling 変更\n   * 1. 継承 method update 実行\n   * @param {number} interval fps\n   * @returns {boolean} 継承 method `update` をコールし UPDATE event が発生すると true を返します\n   ",
+                    "start": 1993,
+                    "end": 2185,
+                    "loc": {
+                      "start": {
+                        "line": 86,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 92,
+                        "column": 5
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "leadingComments": [
+            {
+              "type": "CommentLine",
+              "value": " /**",
+              "start": 487,
+              "end": 493,
+              "loc": {
+                "start": {
+                  "line": 22,
+                  "column": 0
+                },
+                "end": {
+                  "line": 22,
+                  "column": 6
                 }
-              },
-              "leadingComments": [
-                {
-                  "type": "CommentLine",
-                  "value": " ----------------------------------------",
-                  "start": 1889,
-                  "end": 1932,
-                  "loc": {
-                    "start": {
-                      "line": 83,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 83,
-                      "column": 45
-                    }
-                  },
-                  "range": [
-                    1889,
-                    1932
-                  ]
+              }
+            },
+            {
+              "type": "CommentLine",
+              "value": "  * private property key, fps を保存するための Symbol",
+              "start": 494,
+              "end": 541,
+              "loc": {
+                "start": {
+                  "line": 23,
+                  "column": 0
                 },
-                {
-                  "type": "CommentLine",
-                  "value": " METHOD",
-                  "start": 1935,
-                  "end": 1944,
-                  "loc": {
-                    "start": {
-                      "line": 84,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 84,
-                      "column": 11
-                    }
-                  },
-                  "range": [
-                    1935,
-                    1944
-                  ]
-                },
-                {
-                  "type": "CommentLine",
-                  "value": " ----------------------------------------",
-                  "start": 1947,
-                  "end": 1990,
-                  "loc": {
-                    "start": {
-                      "line": 85,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 85,
-                      "column": 45
-                    }
-                  },
-                  "range": [
-                    1947,
-                    1990
-                  ]
-                },
-                {
-                  "type": "Block",
-                  "value": "*\n   * fps を変更します\n   * 1. プロパティ polling 変更\n   * 1. 継承 method update 実行\n   * @param {number} interval fps\n   * @returns {boolean} 継承 method `update` をコールし UPDATE event が発生すると true を返します\n   ",
-                  "start": 1993,
-                  "end": 2185,
-                  "loc": {
-                    "start": {
-                      "line": 86,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 92,
-                      "column": 5
-                    }
-                  },
-                  "range": [
-                    1993,
-                    2185
-                  ]
+                "end": {
+                  "line": 23,
+                  "column": 47
                 }
-              ]
+              }
+            },
+            {
+              "type": "CommentLine",
+              "value": "  * @type {Symbol}",
+              "start": 542,
+              "end": 562,
+              "loc": {
+                "start": {
+                  "line": 24,
+                  "column": 0
+                },
+                "end": {
+                  "line": 24,
+                  "column": 20
+                }
+              }
+            },
+            {
+              "type": "CommentLine",
+              "value": "  * @private",
+              "start": 563,
+              "end": 577,
+              "loc": {
+                "start": {
+                  "line": 25,
+                  "column": 0
+                },
+                "end": {
+                  "line": 25,
+                  "column": 14
+                }
+              }
+            },
+            {
+              "type": "CommentLine",
+              "value": "  */",
+              "start": 578,
+              "end": 584,
+              "loc": {
+                "start": {
+                  "line": 26,
+                  "column": 0
+                },
+                "end": {
+                  "line": 26,
+                  "column": 6
+                }
+              }
+            },
+            {
+              "type": "CommentLine",
+              "value": " const fpsSymbol = Symbol('Singleton Fps Symbol');",
+              "start": 585,
+              "end": 637,
+              "loc": {
+                "start": {
+                  "line": 27,
+                  "column": 0
+                },
+                "end": {
+                  "line": 27,
+                  "column": 52
+                }
+              }
+            },
+            {
+              "type": "CommentBlock",
+              "value": "*\n * フレームレート毎に `UPDATE` イベントを発生させます\n *\n * @example\n * // 2sec. interval\n * const fps = new Fps(0.5);\n * const update = () => {\n *  // code here, something do\n * };\n * fps.on(Fps.UPDATE, update);\n * fps.start();\n * ",
+              "start": 639,
+              "end": 857,
+              "loc": {
+                "start": {
+                  "line": 29,
+                  "column": 0
+                },
+                "end": {
+                  "line": 40,
+                  "column": 5
+                }
+              }
             }
-          ]
+          ],
+          "trailingComments": []
         },
         "leadingComments": [
           {
@@ -2679,11 +2625,7 @@
                 "line": 22,
                 "column": 6
               }
-            },
-            "range": [
-              487,
-              493
-            ]
+            }
           },
           {
             "type": "CommentLine",
@@ -2699,11 +2641,7 @@
                 "line": 23,
                 "column": 47
               }
-            },
-            "range": [
-              494,
-              541
-            ]
+            }
           },
           {
             "type": "CommentLine",
@@ -2719,11 +2657,7 @@
                 "line": 24,
                 "column": 20
               }
-            },
-            "range": [
-              542,
-              562
-            ]
+            }
           },
           {
             "type": "CommentLine",
@@ -2739,11 +2673,7 @@
                 "line": 25,
                 "column": 14
               }
-            },
-            "range": [
-              563,
-              577
-            ]
+            }
           },
           {
             "type": "CommentLine",
@@ -2759,11 +2689,7 @@
                 "line": 26,
                 "column": 6
               }
-            },
-            "range": [
-              578,
-              584
-            ]
+            }
           },
           {
             "type": "CommentLine",
@@ -2779,14 +2705,10 @@
                 "line": 27,
                 "column": 52
               }
-            },
-            "range": [
-              585,
-              637
-            ]
+            }
           },
           {
-            "type": "Block",
+            "type": "CommentBlock",
             "value": "*\n * フレームレート毎に `UPDATE` イベントを発生させます\n *\n * @example\n * // 2sec. interval\n * const fps = new Fps(0.5);\n * const update = () => {\n *  // code here, something do\n * };\n * fps.on(Fps.UPDATE, update);\n * fps.start();\n * ",
             "start": 639,
             "end": 857,
@@ -2799,157 +2721,4050 @@
                 "line": 40,
                 "column": 5
               }
-            },
-            "range": [
-              639,
-              857
-            ]
+            }
           }
-        ],
-        "trailingComments": []
-      },
-      "leadingComments": [
-        {
-          "type": "CommentLine",
-          "value": " /**",
-          "start": 487,
-          "end": 493,
-          "loc": {
-            "start": {
-              "line": 22,
-              "column": 0
-            },
-            "end": {
-              "line": 22,
-              "column": 6
-            }
-          },
-          "range": [
-            487,
-            493
-          ]
+        ]
+      }
+    ],
+    "directives": []
+  },
+  "comments": [
+    {
+      "type": "CommentBlock",
+      "value": "*\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/04 - 14:19\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n ",
+      "start": 0,
+      "end": 332,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
         },
-        {
-          "type": "CommentLine",
-          "value": "  * private property key, fps を保存するための Symbol",
-          "start": 494,
-          "end": 541,
-          "loc": {
-            "start": {
-              "line": 23,
-              "column": 0
-            },
-            "end": {
-              "line": 23,
-              "column": 47
-            }
-          },
-          "range": [
-            494,
-            541
-          ]
-        },
-        {
-          "type": "CommentLine",
-          "value": "  * @type {Symbol}",
-          "start": 542,
-          "end": 562,
-          "loc": {
-            "start": {
-              "line": 24,
-              "column": 0
-            },
-            "end": {
-              "line": 24,
-              "column": 20
-            }
-          },
-          "range": [
-            542,
-            562
-          ]
-        },
-        {
-          "type": "CommentLine",
-          "value": "  * @private",
-          "start": 563,
-          "end": 577,
-          "loc": {
-            "start": {
-              "line": 25,
-              "column": 0
-            },
-            "end": {
-              "line": 25,
-              "column": 14
-            }
-          },
-          "range": [
-            563,
-            577
-          ]
-        },
-        {
-          "type": "CommentLine",
-          "value": "  */",
-          "start": 578,
-          "end": 584,
-          "loc": {
-            "start": {
-              "line": 26,
-              "column": 0
-            },
-            "end": {
-              "line": 26,
-              "column": 6
-            }
-          },
-          "range": [
-            578,
-            584
-          ]
-        },
-        {
-          "type": "CommentLine",
-          "value": " const fpsSymbol = Symbol('Singleton Fps Symbol');",
-          "start": 585,
-          "end": 637,
-          "loc": {
-            "start": {
-              "line": 27,
-              "column": 0
-            },
-            "end": {
-              "line": 27,
-              "column": 52
-            }
-          },
-          "range": [
-            585,
-            637
-          ]
-        },
-        {
-          "type": "Block",
-          "value": "*\n * フレームレート毎に `UPDATE` イベントを発生させます\n *\n * @example\n * // 2sec. interval\n * const fps = new Fps(0.5);\n * const update = () => {\n *  // code here, something do\n * };\n * fps.on(Fps.UPDATE, update);\n * fps.start();\n * ",
-          "start": 639,
-          "end": 857,
-          "loc": {
-            "start": {
-              "line": 29,
-              "column": 0
-            },
-            "end": {
-              "line": 40,
-              "column": 5
-            }
-          },
-          "range": [
-            639,
-            857
-          ]
+        "end": {
+          "line": 11,
+          "column": 3
         }
-      ]
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " event",
+      "start": 334,
+      "end": 342,
+      "loc": {
+        "start": {
+          "line": 13,
+          "column": 0
+        },
+        "end": {
+          "line": 13,
+          "column": 8
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " import Events from '../event/Events';",
+      "start": 343,
+      "end": 383,
+      "loc": {
+        "start": {
+          "line": 14,
+          "column": 0
+        },
+        "end": {
+          "line": 14,
+          "column": 40
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " tick",
+      "start": 385,
+      "end": 392,
+      "loc": {
+        "start": {
+          "line": 16,
+          "column": 0
+        },
+        "end": {
+          "line": 16,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " tick/events",
+      "start": 427,
+      "end": 441,
+      "loc": {
+        "start": {
+          "line": 19,
+          "column": 0
+        },
+        "end": {
+          "line": 19,
+          "column": 14
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " /**",
+      "start": 487,
+      "end": 493,
+      "loc": {
+        "start": {
+          "line": 22,
+          "column": 0
+        },
+        "end": {
+          "line": 22,
+          "column": 6
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": "  * private property key, fps を保存するための Symbol",
+      "start": 494,
+      "end": 541,
+      "loc": {
+        "start": {
+          "line": 23,
+          "column": 0
+        },
+        "end": {
+          "line": 23,
+          "column": 47
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": "  * @type {Symbol}",
+      "start": 542,
+      "end": 562,
+      "loc": {
+        "start": {
+          "line": 24,
+          "column": 0
+        },
+        "end": {
+          "line": 24,
+          "column": 20
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": "  * @private",
+      "start": 563,
+      "end": 577,
+      "loc": {
+        "start": {
+          "line": 25,
+          "column": 0
+        },
+        "end": {
+          "line": 25,
+          "column": 14
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": "  */",
+      "start": 578,
+      "end": 584,
+      "loc": {
+        "start": {
+          "line": 26,
+          "column": 0
+        },
+        "end": {
+          "line": 26,
+          "column": 6
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " const fpsSymbol = Symbol('Singleton Fps Symbol');",
+      "start": 585,
+      "end": 637,
+      "loc": {
+        "start": {
+          "line": 27,
+          "column": 0
+        },
+        "end": {
+          "line": 27,
+          "column": 52
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n * フレームレート毎に `UPDATE` イベントを発生させます\n *\n * @example\n * // 2sec. interval\n * const fps = new Fps(0.5);\n * const update = () => {\n *  // code here, something do\n * };\n * fps.on(Fps.UPDATE, update);\n * fps.start();\n * ",
+      "start": 639,
+      "end": 857,
+      "loc": {
+        "start": {
+          "line": 29,
+          "column": 0
+        },
+        "end": {
+          "line": 40,
+          "column": 5
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " ----------------------------------------",
+      "start": 903,
+      "end": 946,
+      "loc": {
+        "start": {
+          "line": 42,
+          "column": 2
+        },
+        "end": {
+          "line": 42,
+          "column": 45
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " EVENT",
+      "start": 949,
+      "end": 957,
+      "loc": {
+        "start": {
+          "line": 43,
+          "column": 2
+        },
+        "end": {
+          "line": 43,
+          "column": 10
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " ----------------------------------------",
+      "start": 960,
+      "end": 1003,
+      "loc": {
+        "start": {
+          "line": 44,
+          "column": 2
+        },
+        "end": {
+          "line": 44,
+          "column": 45
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n   * フレームレート毎に発生するイベント - fpsUpdate\n   * @event UPDATE\n   * @type {string}\n   ",
+      "start": 1006,
+      "end": 1089,
+      "loc": {
+        "start": {
+          "line": 45,
+          "column": 2
+        },
+        "end": {
+          "line": 49,
+          "column": 5
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " /**",
+      "start": 1123,
+      "end": 1129,
+      "loc": {
+        "start": {
+          "line": 51,
+          "column": 2
+        },
+        "end": {
+          "line": 51,
+          "column": 8
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": "  * フレームレート毎に発生するイベントを取得します",
+      "start": 1132,
+      "end": 1161,
+      "loc": {
+        "start": {
+          "line": 52,
+          "column": 2
+        },
+        "end": {
+          "line": 52,
+          "column": 31
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": "  * @event UPDATE",
+      "start": 1164,
+      "end": 1183,
+      "loc": {
+        "start": {
+          "line": 53,
+          "column": 2
+        },
+        "end": {
+          "line": 53,
+          "column": 21
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": "  * @returns {string} event, fpsUpdate を返します",
+      "start": 1186,
+      "end": 1232,
+      "loc": {
+        "start": {
+          "line": 54,
+          "column": 2
+        },
+        "end": {
+          "line": 54,
+          "column": 48
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": "  * @default fpsUpdate",
+      "start": 1235,
+      "end": 1259,
+      "loc": {
+        "start": {
+          "line": 55,
+          "column": 2
+        },
+        "end": {
+          "line": 55,
+          "column": 26
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": "  */",
+      "start": 1262,
+      "end": 1268,
+      "loc": {
+        "start": {
+          "line": 56,
+          "column": 2
+        },
+        "end": {
+          "line": 56,
+          "column": 8
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " static get UPDATE() {",
+      "start": 1271,
+      "end": 1295,
+      "loc": {
+        "start": {
+          "line": 57,
+          "column": 2
+        },
+        "end": {
+          "line": 57,
+          "column": 26
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": "   return 'fpsUpdate';",
+      "start": 1298,
+      "end": 1322,
+      "loc": {
+        "start": {
+          "line": 58,
+          "column": 2
+        },
+        "end": {
+          "line": 58,
+          "column": 26
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " }",
+      "start": 1325,
+      "end": 1329,
+      "loc": {
+        "start": {
+          "line": 59,
+          "column": 2
+        },
+        "end": {
+          "line": 59,
+          "column": 6
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " ----------------------------------------",
+      "start": 1332,
+      "end": 1375,
+      "loc": {
+        "start": {
+          "line": 60,
+          "column": 2
+        },
+        "end": {
+          "line": 60,
+          "column": 45
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " CONSTRUCTOR",
+      "start": 1378,
+      "end": 1392,
+      "loc": {
+        "start": {
+          "line": 61,
+          "column": 2
+        },
+        "end": {
+          "line": 61,
+          "column": 16
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " ----------------------------------------",
+      "start": 1395,
+      "end": 1438,
+      "loc": {
+        "start": {
+          "line": 62,
+          "column": 2
+        },
+        "end": {
+          "line": 62,
+          "column": 45
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n   * 引数の frame rate に合わせ UPDATE イベントを発生させます\n   * @param {number} [fps=30] frame rate, default: 30\n   ",
+      "start": 1441,
+      "end": 1548,
+      "loc": {
+        "start": {
+          "line": 63,
+          "column": 2
+        },
+        "end": {
+          "line": 66,
+          "column": 5
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " @type {Events} - Events",
+      "start": 1602,
+      "end": 1628,
+      "loc": {
+        "start": {
+          "line": 69,
+          "column": 4
+        },
+        "end": {
+          "line": 69,
+          "column": 30
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n     * Fps.UPDATE Events instance\n     * @type {Events}\n     ",
+      "start": 1713,
+      "end": 1780,
+      "loc": {
+        "start": {
+          "line": 72,
+          "column": 4
+        },
+        "end": {
+          "line": 75,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n     * frame rate\n     * @type {number}\n     ",
+      "start": 1811,
+      "end": 1862,
+      "loc": {
+        "start": {
+          "line": 77,
+          "column": 4
+        },
+        "end": {
+          "line": 80,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " ----------------------------------------",
+      "start": 1889,
+      "end": 1932,
+      "loc": {
+        "start": {
+          "line": 83,
+          "column": 2
+        },
+        "end": {
+          "line": 83,
+          "column": 45
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " METHOD",
+      "start": 1935,
+      "end": 1944,
+      "loc": {
+        "start": {
+          "line": 84,
+          "column": 2
+        },
+        "end": {
+          "line": 84,
+          "column": 11
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " ----------------------------------------",
+      "start": 1947,
+      "end": 1990,
+      "loc": {
+        "start": {
+          "line": 85,
+          "column": 2
+        },
+        "end": {
+          "line": 85,
+          "column": 45
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n   * fps を変更します\n   * 1. プロパティ polling 変更\n   * 1. 継承 method update 実行\n   * @param {number} interval fps\n   * @returns {boolean} 継承 method `update` をコールし UPDATE event が発生すると true を返します\n   ",
+      "start": 1993,
+      "end": 2185,
+      "loc": {
+        "start": {
+          "line": 86,
+          "column": 2
+        },
+        "end": {
+          "line": 92,
+          "column": 5
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n     * polling 間隔\n     * @type {number}\n     ",
+      "start": 2211,
+      "end": 2262,
+      "loc": {
+        "start": {
+          "line": 94,
+          "column": 4
+        },
+        "end": {
+          "line": 97,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " return this.update();",
+      "start": 2361,
+      "end": 2385,
+      "loc": {
+        "start": {
+          "line": 101,
+          "column": 4
+        },
+        "end": {
+          "line": 101,
+          "column": 28
+        }
+      }
+    }
+  ],
+  "tokens": [
+    {
+      "type": "CommentBlock",
+      "value": "*\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/07/04 - 14:19\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n ",
+      "start": 0,
+      "end": 332,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 11,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " event",
+      "start": 334,
+      "end": 342,
+      "loc": {
+        "start": {
+          "line": 13,
+          "column": 0
+        },
+        "end": {
+          "line": 13,
+          "column": 8
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " import Events from '../event/Events';",
+      "start": 343,
+      "end": 383,
+      "loc": {
+        "start": {
+          "line": 14,
+          "column": 0
+        },
+        "end": {
+          "line": 14,
+          "column": 40
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " tick",
+      "start": 385,
+      "end": 392,
+      "loc": {
+        "start": {
+          "line": 16,
+          "column": 0
+        },
+        "end": {
+          "line": 16,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "import",
+        "keyword": "import",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "import",
+      "start": 393,
+      "end": 399,
+      "loc": {
+        "start": {
+          "line": 17,
+          "column": 0
+        },
+        "end": {
+          "line": 17,
+          "column": 6
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "Polling",
+      "start": 400,
+      "end": 407,
+      "loc": {
+        "start": {
+          "line": 17,
+          "column": 7
+        },
+        "end": {
+          "line": 17,
+          "column": 14
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "from",
+      "start": 408,
+      "end": 412,
+      "loc": {
+        "start": {
+          "line": 17,
+          "column": 15
+        },
+        "end": {
+          "line": 17,
+          "column": 19
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "string",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "./Polling",
+      "start": 413,
+      "end": 424,
+      "loc": {
+        "start": {
+          "line": 17,
+          "column": 20
+        },
+        "end": {
+          "line": 17,
+          "column": 31
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ";",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 424,
+      "end": 425,
+      "loc": {
+        "start": {
+          "line": 17,
+          "column": 31
+        },
+        "end": {
+          "line": 17,
+          "column": 32
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " tick/events",
+      "start": 427,
+      "end": 441,
+      "loc": {
+        "start": {
+          "line": 19,
+          "column": 0
+        },
+        "end": {
+          "line": 19,
+          "column": 14
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "import",
+        "keyword": "import",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "import",
+      "start": 442,
+      "end": 448,
+      "loc": {
+        "start": {
+          "line": 20,
+          "column": 0
+        },
+        "end": {
+          "line": 20,
+          "column": 6
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "FpsEvents",
+      "start": 449,
+      "end": 458,
+      "loc": {
+        "start": {
+          "line": 20,
+          "column": 7
+        },
+        "end": {
+          "line": 20,
+          "column": 16
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "from",
+      "start": 459,
+      "end": 463,
+      "loc": {
+        "start": {
+          "line": 20,
+          "column": 17
+        },
+        "end": {
+          "line": 20,
+          "column": 21
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "string",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "./events/FpsEvents",
+      "start": 464,
+      "end": 484,
+      "loc": {
+        "start": {
+          "line": 20,
+          "column": 22
+        },
+        "end": {
+          "line": 20,
+          "column": 42
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ";",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 484,
+      "end": 485,
+      "loc": {
+        "start": {
+          "line": 20,
+          "column": 42
+        },
+        "end": {
+          "line": 20,
+          "column": 43
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " /**",
+      "start": 487,
+      "end": 493,
+      "loc": {
+        "start": {
+          "line": 22,
+          "column": 0
+        },
+        "end": {
+          "line": 22,
+          "column": 6
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": "  * private property key, fps を保存するための Symbol",
+      "start": 494,
+      "end": 541,
+      "loc": {
+        "start": {
+          "line": 23,
+          "column": 0
+        },
+        "end": {
+          "line": 23,
+          "column": 47
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": "  * @type {Symbol}",
+      "start": 542,
+      "end": 562,
+      "loc": {
+        "start": {
+          "line": 24,
+          "column": 0
+        },
+        "end": {
+          "line": 24,
+          "column": 20
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": "  * @private",
+      "start": 563,
+      "end": 577,
+      "loc": {
+        "start": {
+          "line": 25,
+          "column": 0
+        },
+        "end": {
+          "line": 25,
+          "column": 14
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": "  */",
+      "start": 578,
+      "end": 584,
+      "loc": {
+        "start": {
+          "line": 26,
+          "column": 0
+        },
+        "end": {
+          "line": 26,
+          "column": 6
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " const fpsSymbol = Symbol('Singleton Fps Symbol');",
+      "start": 585,
+      "end": 637,
+      "loc": {
+        "start": {
+          "line": 27,
+          "column": 0
+        },
+        "end": {
+          "line": 27,
+          "column": 52
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n * フレームレート毎に `UPDATE` イベントを発生させます\n *\n * @example\n * // 2sec. interval\n * const fps = new Fps(0.5);\n * const update = () => {\n *  // code here, something do\n * };\n * fps.on(Fps.UPDATE, update);\n * fps.start();\n * ",
+      "start": 639,
+      "end": 857,
+      "loc": {
+        "start": {
+          "line": 29,
+          "column": 0
+        },
+        "end": {
+          "line": 40,
+          "column": 5
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "export",
+        "keyword": "export",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "export",
+      "start": 858,
+      "end": 864,
+      "loc": {
+        "start": {
+          "line": 41,
+          "column": 0
+        },
+        "end": {
+          "line": 41,
+          "column": 6
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "default",
+        "keyword": "default",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "default",
+      "start": 865,
+      "end": 872,
+      "loc": {
+        "start": {
+          "line": 41,
+          "column": 7
+        },
+        "end": {
+          "line": 41,
+          "column": 14
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "class",
+        "keyword": "class",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "class",
+      "start": 873,
+      "end": 878,
+      "loc": {
+        "start": {
+          "line": 41,
+          "column": 15
+        },
+        "end": {
+          "line": 41,
+          "column": 20
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "Fps",
+      "start": 879,
+      "end": 882,
+      "loc": {
+        "start": {
+          "line": 41,
+          "column": 21
+        },
+        "end": {
+          "line": 41,
+          "column": 24
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "extends",
+        "keyword": "extends",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "extends",
+      "start": 883,
+      "end": 890,
+      "loc": {
+        "start": {
+          "line": 41,
+          "column": 25
+        },
+        "end": {
+          "line": 41,
+          "column": 32
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "Polling",
+      "start": 891,
+      "end": 898,
+      "loc": {
+        "start": {
+          "line": 41,
+          "column": 33
+        },
+        "end": {
+          "line": 41,
+          "column": 40
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "{",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 899,
+      "end": 900,
+      "loc": {
+        "start": {
+          "line": 41,
+          "column": 41
+        },
+        "end": {
+          "line": 41,
+          "column": 42
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " ----------------------------------------",
+      "start": 903,
+      "end": 946,
+      "loc": {
+        "start": {
+          "line": 42,
+          "column": 2
+        },
+        "end": {
+          "line": 42,
+          "column": 45
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " EVENT",
+      "start": 949,
+      "end": 957,
+      "loc": {
+        "start": {
+          "line": 43,
+          "column": 2
+        },
+        "end": {
+          "line": 43,
+          "column": 10
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " ----------------------------------------",
+      "start": 960,
+      "end": 1003,
+      "loc": {
+        "start": {
+          "line": 44,
+          "column": 2
+        },
+        "end": {
+          "line": 44,
+          "column": 45
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n   * フレームレート毎に発生するイベント - fpsUpdate\n   * @event UPDATE\n   * @type {string}\n   ",
+      "start": 1006,
+      "end": 1089,
+      "loc": {
+        "start": {
+          "line": 45,
+          "column": 2
+        },
+        "end": {
+          "line": 49,
+          "column": 5
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "static",
+      "start": 1092,
+      "end": 1098,
+      "loc": {
+        "start": {
+          "line": 50,
+          "column": 2
+        },
+        "end": {
+          "line": 50,
+          "column": 8
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "UPDATE",
+      "start": 1099,
+      "end": 1105,
+      "loc": {
+        "start": {
+          "line": 50,
+          "column": 9
+        },
+        "end": {
+          "line": 50,
+          "column": 15
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "=",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": true,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "=",
+      "start": 1106,
+      "end": 1107,
+      "loc": {
+        "start": {
+          "line": 50,
+          "column": 16
+        },
+        "end": {
+          "line": 50,
+          "column": 17
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "string",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "fpsUpdate",
+      "start": 1108,
+      "end": 1119,
+      "loc": {
+        "start": {
+          "line": 50,
+          "column": 18
+        },
+        "end": {
+          "line": 50,
+          "column": 29
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ";",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 1119,
+      "end": 1120,
+      "loc": {
+        "start": {
+          "line": 50,
+          "column": 29
+        },
+        "end": {
+          "line": 50,
+          "column": 30
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " /**",
+      "start": 1123,
+      "end": 1129,
+      "loc": {
+        "start": {
+          "line": 51,
+          "column": 2
+        },
+        "end": {
+          "line": 51,
+          "column": 8
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": "  * フレームレート毎に発生するイベントを取得します",
+      "start": 1132,
+      "end": 1161,
+      "loc": {
+        "start": {
+          "line": 52,
+          "column": 2
+        },
+        "end": {
+          "line": 52,
+          "column": 31
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": "  * @event UPDATE",
+      "start": 1164,
+      "end": 1183,
+      "loc": {
+        "start": {
+          "line": 53,
+          "column": 2
+        },
+        "end": {
+          "line": 53,
+          "column": 21
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": "  * @returns {string} event, fpsUpdate を返します",
+      "start": 1186,
+      "end": 1232,
+      "loc": {
+        "start": {
+          "line": 54,
+          "column": 2
+        },
+        "end": {
+          "line": 54,
+          "column": 48
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": "  * @default fpsUpdate",
+      "start": 1235,
+      "end": 1259,
+      "loc": {
+        "start": {
+          "line": 55,
+          "column": 2
+        },
+        "end": {
+          "line": 55,
+          "column": 26
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": "  */",
+      "start": 1262,
+      "end": 1268,
+      "loc": {
+        "start": {
+          "line": 56,
+          "column": 2
+        },
+        "end": {
+          "line": 56,
+          "column": 8
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " static get UPDATE() {",
+      "start": 1271,
+      "end": 1295,
+      "loc": {
+        "start": {
+          "line": 57,
+          "column": 2
+        },
+        "end": {
+          "line": 57,
+          "column": 26
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": "   return 'fpsUpdate';",
+      "start": 1298,
+      "end": 1322,
+      "loc": {
+        "start": {
+          "line": 58,
+          "column": 2
+        },
+        "end": {
+          "line": 58,
+          "column": 26
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " }",
+      "start": 1325,
+      "end": 1329,
+      "loc": {
+        "start": {
+          "line": 59,
+          "column": 2
+        },
+        "end": {
+          "line": 59,
+          "column": 6
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " ----------------------------------------",
+      "start": 1332,
+      "end": 1375,
+      "loc": {
+        "start": {
+          "line": 60,
+          "column": 2
+        },
+        "end": {
+          "line": 60,
+          "column": 45
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " CONSTRUCTOR",
+      "start": 1378,
+      "end": 1392,
+      "loc": {
+        "start": {
+          "line": 61,
+          "column": 2
+        },
+        "end": {
+          "line": 61,
+          "column": 16
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " ----------------------------------------",
+      "start": 1395,
+      "end": 1438,
+      "loc": {
+        "start": {
+          "line": 62,
+          "column": 2
+        },
+        "end": {
+          "line": 62,
+          "column": 45
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n   * 引数の frame rate に合わせ UPDATE イベントを発生させます\n   * @param {number} [fps=30] frame rate, default: 30\n   ",
+      "start": 1441,
+      "end": 1548,
+      "loc": {
+        "start": {
+          "line": 63,
+          "column": 2
+        },
+        "end": {
+          "line": 66,
+          "column": 5
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "constructor",
+      "start": 1551,
+      "end": 1562,
+      "loc": {
+        "start": {
+          "line": 67,
+          "column": 2
+        },
+        "end": {
+          "line": 67,
+          "column": 13
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "(",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 1562,
+      "end": 1563,
+      "loc": {
+        "start": {
+          "line": 67,
+          "column": 13
+        },
+        "end": {
+          "line": 67,
+          "column": 14
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "fps",
+      "start": 1563,
+      "end": 1566,
+      "loc": {
+        "start": {
+          "line": 67,
+          "column": 14
+        },
+        "end": {
+          "line": 67,
+          "column": 17
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "=",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": true,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "=",
+      "start": 1567,
+      "end": 1568,
+      "loc": {
+        "start": {
+          "line": 67,
+          "column": 18
+        },
+        "end": {
+          "line": 67,
+          "column": 19
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "num",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": 30,
+      "start": 1569,
+      "end": 1571,
+      "loc": {
+        "start": {
+          "line": 67,
+          "column": 20
+        },
+        "end": {
+          "line": 67,
+          "column": 22
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ")",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 1571,
+      "end": 1572,
+      "loc": {
+        "start": {
+          "line": 67,
+          "column": 22
+        },
+        "end": {
+          "line": 67,
+          "column": 23
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "{",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 1573,
+      "end": 1574,
+      "loc": {
+        "start": {
+          "line": 67,
+          "column": 24
+        },
+        "end": {
+          "line": 67,
+          "column": 25
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "super",
+        "keyword": "super",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "super",
+      "start": 1579,
+      "end": 1584,
+      "loc": {
+        "start": {
+          "line": 68,
+          "column": 4
+        },
+        "end": {
+          "line": 68,
+          "column": 9
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "(",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 1584,
+      "end": 1585,
+      "loc": {
+        "start": {
+          "line": 68,
+          "column": 9
+        },
+        "end": {
+          "line": 68,
+          "column": 10
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "num",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": 1000,
+      "start": 1585,
+      "end": 1589,
+      "loc": {
+        "start": {
+          "line": 68,
+          "column": 10
+        },
+        "end": {
+          "line": 68,
+          "column": 14
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "/",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": 10,
+        "updateContext": null
+      },
+      "value": "/",
+      "start": 1590,
+      "end": 1591,
+      "loc": {
+        "start": {
+          "line": 68,
+          "column": 15
+        },
+        "end": {
+          "line": 68,
+          "column": 16
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "fps",
+      "start": 1592,
+      "end": 1595,
+      "loc": {
+        "start": {
+          "line": 68,
+          "column": 17
+        },
+        "end": {
+          "line": 68,
+          "column": 20
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ")",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 1595,
+      "end": 1596,
+      "loc": {
+        "start": {
+          "line": 68,
+          "column": 20
+        },
+        "end": {
+          "line": 68,
+          "column": 21
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ";",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 1596,
+      "end": 1597,
+      "loc": {
+        "start": {
+          "line": 68,
+          "column": 21
+        },
+        "end": {
+          "line": 68,
+          "column": 22
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " @type {Events} - Events",
+      "start": 1602,
+      "end": 1628,
+      "loc": {
+        "start": {
+          "line": 69,
+          "column": 4
+        },
+        "end": {
+          "line": 69,
+          "column": 30
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "const",
+        "keyword": "const",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "const",
+      "start": 1633,
+      "end": 1638,
+      "loc": {
+        "start": {
+          "line": 70,
+          "column": 4
+        },
+        "end": {
+          "line": 70,
+          "column": 9
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "events",
+      "start": 1639,
+      "end": 1645,
+      "loc": {
+        "start": {
+          "line": 70,
+          "column": 10
+        },
+        "end": {
+          "line": 70,
+          "column": 16
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "=",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": true,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "=",
+      "start": 1646,
+      "end": 1647,
+      "loc": {
+        "start": {
+          "line": 70,
+          "column": 17
+        },
+        "end": {
+          "line": 70,
+          "column": 18
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "new",
+        "keyword": "new",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "new",
+      "start": 1648,
+      "end": 1651,
+      "loc": {
+        "start": {
+          "line": 70,
+          "column": 19
+        },
+        "end": {
+          "line": 70,
+          "column": 22
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "FpsEvents",
+      "start": 1652,
+      "end": 1661,
+      "loc": {
+        "start": {
+          "line": 70,
+          "column": 23
+        },
+        "end": {
+          "line": 70,
+          "column": 32
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "(",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 1661,
+      "end": 1662,
+      "loc": {
+        "start": {
+          "line": 70,
+          "column": 32
+        },
+        "end": {
+          "line": 70,
+          "column": 33
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "Fps",
+      "start": 1662,
+      "end": 1665,
+      "loc": {
+        "start": {
+          "line": 70,
+          "column": 33
+        },
+        "end": {
+          "line": 70,
+          "column": 36
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ".",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 1665,
+      "end": 1666,
+      "loc": {
+        "start": {
+          "line": 70,
+          "column": 36
+        },
+        "end": {
+          "line": 70,
+          "column": 37
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "UPDATE",
+      "start": 1666,
+      "end": 1672,
+      "loc": {
+        "start": {
+          "line": 70,
+          "column": 37
+        },
+        "end": {
+          "line": 70,
+          "column": 43
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ",",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 1672,
+      "end": 1673,
+      "loc": {
+        "start": {
+          "line": 70,
+          "column": 43
+        },
+        "end": {
+          "line": 70,
+          "column": 44
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "this",
+        "keyword": "this",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "this",
+      "start": 1674,
+      "end": 1678,
+      "loc": {
+        "start": {
+          "line": 70,
+          "column": 45
+        },
+        "end": {
+          "line": 70,
+          "column": 49
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ",",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 1678,
+      "end": 1679,
+      "loc": {
+        "start": {
+          "line": 70,
+          "column": 49
+        },
+        "end": {
+          "line": 70,
+          "column": 50
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "this",
+        "keyword": "this",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "this",
+      "start": 1680,
+      "end": 1684,
+      "loc": {
+        "start": {
+          "line": 70,
+          "column": 51
+        },
+        "end": {
+          "line": 70,
+          "column": 55
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ")",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 1684,
+      "end": 1685,
+      "loc": {
+        "start": {
+          "line": 70,
+          "column": 55
+        },
+        "end": {
+          "line": 70,
+          "column": 56
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ";",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 1685,
+      "end": 1686,
+      "loc": {
+        "start": {
+          "line": 70,
+          "column": 56
+        },
+        "end": {
+          "line": 70,
+          "column": 57
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "events",
+      "start": 1691,
+      "end": 1697,
+      "loc": {
+        "start": {
+          "line": 71,
+          "column": 4
+        },
+        "end": {
+          "line": 71,
+          "column": 10
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ".",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 1697,
+      "end": 1698,
+      "loc": {
+        "start": {
+          "line": 71,
+          "column": 10
+        },
+        "end": {
+          "line": 71,
+          "column": 11
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "fps",
+      "start": 1698,
+      "end": 1701,
+      "loc": {
+        "start": {
+          "line": 71,
+          "column": 11
+        },
+        "end": {
+          "line": 71,
+          "column": 14
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "=",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": true,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "=",
+      "start": 1702,
+      "end": 1703,
+      "loc": {
+        "start": {
+          "line": 71,
+          "column": 15
+        },
+        "end": {
+          "line": 71,
+          "column": 16
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "fps",
+      "start": 1704,
+      "end": 1707,
+      "loc": {
+        "start": {
+          "line": 71,
+          "column": 17
+        },
+        "end": {
+          "line": 71,
+          "column": 20
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ";",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 1707,
+      "end": 1708,
+      "loc": {
+        "start": {
+          "line": 71,
+          "column": 20
+        },
+        "end": {
+          "line": 71,
+          "column": 21
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n     * Fps.UPDATE Events instance\n     * @type {Events}\n     ",
+      "start": 1713,
+      "end": 1780,
+      "loc": {
+        "start": {
+          "line": 72,
+          "column": 4
+        },
+        "end": {
+          "line": 75,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "this",
+        "keyword": "this",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "this",
+      "start": 1785,
+      "end": 1789,
+      "loc": {
+        "start": {
+          "line": 76,
+          "column": 4
+        },
+        "end": {
+          "line": 76,
+          "column": 8
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ".",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 1789,
+      "end": 1790,
+      "loc": {
+        "start": {
+          "line": 76,
+          "column": 8
+        },
+        "end": {
+          "line": 76,
+          "column": 9
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "events",
+      "start": 1790,
+      "end": 1796,
+      "loc": {
+        "start": {
+          "line": 76,
+          "column": 9
+        },
+        "end": {
+          "line": 76,
+          "column": 15
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "=",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": true,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "=",
+      "start": 1797,
+      "end": 1798,
+      "loc": {
+        "start": {
+          "line": 76,
+          "column": 16
+        },
+        "end": {
+          "line": 76,
+          "column": 17
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "events",
+      "start": 1799,
+      "end": 1805,
+      "loc": {
+        "start": {
+          "line": 76,
+          "column": 18
+        },
+        "end": {
+          "line": 76,
+          "column": 24
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ";",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 1805,
+      "end": 1806,
+      "loc": {
+        "start": {
+          "line": 76,
+          "column": 24
+        },
+        "end": {
+          "line": 76,
+          "column": 25
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n     * frame rate\n     * @type {number}\n     ",
+      "start": 1811,
+      "end": 1862,
+      "loc": {
+        "start": {
+          "line": 77,
+          "column": 4
+        },
+        "end": {
+          "line": 80,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "this",
+        "keyword": "this",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "this",
+      "start": 1867,
+      "end": 1871,
+      "loc": {
+        "start": {
+          "line": 81,
+          "column": 4
+        },
+        "end": {
+          "line": 81,
+          "column": 8
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ".",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 1871,
+      "end": 1872,
+      "loc": {
+        "start": {
+          "line": 81,
+          "column": 8
+        },
+        "end": {
+          "line": 81,
+          "column": 9
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "fps",
+      "start": 1872,
+      "end": 1875,
+      "loc": {
+        "start": {
+          "line": 81,
+          "column": 9
+        },
+        "end": {
+          "line": 81,
+          "column": 12
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "=",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": true,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "=",
+      "start": 1876,
+      "end": 1877,
+      "loc": {
+        "start": {
+          "line": 81,
+          "column": 13
+        },
+        "end": {
+          "line": 81,
+          "column": 14
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "fps",
+      "start": 1878,
+      "end": 1881,
+      "loc": {
+        "start": {
+          "line": 81,
+          "column": 15
+        },
+        "end": {
+          "line": 81,
+          "column": 18
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ";",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 1881,
+      "end": 1882,
+      "loc": {
+        "start": {
+          "line": 81,
+          "column": 18
+        },
+        "end": {
+          "line": 81,
+          "column": 19
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "}",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 1885,
+      "end": 1886,
+      "loc": {
+        "start": {
+          "line": 82,
+          "column": 2
+        },
+        "end": {
+          "line": 82,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " ----------------------------------------",
+      "start": 1889,
+      "end": 1932,
+      "loc": {
+        "start": {
+          "line": 83,
+          "column": 2
+        },
+        "end": {
+          "line": 83,
+          "column": 45
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " METHOD",
+      "start": 1935,
+      "end": 1944,
+      "loc": {
+        "start": {
+          "line": 84,
+          "column": 2
+        },
+        "end": {
+          "line": 84,
+          "column": 11
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " ----------------------------------------",
+      "start": 1947,
+      "end": 1990,
+      "loc": {
+        "start": {
+          "line": 85,
+          "column": 2
+        },
+        "end": {
+          "line": 85,
+          "column": 45
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n   * fps を変更します\n   * 1. プロパティ polling 変更\n   * 1. 継承 method update 実行\n   * @param {number} interval fps\n   * @returns {boolean} 継承 method `update` をコールし UPDATE event が発生すると true を返します\n   ",
+      "start": 1993,
+      "end": 2185,
+      "loc": {
+        "start": {
+          "line": 86,
+          "column": 2
+        },
+        "end": {
+          "line": 92,
+          "column": 5
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "change",
+      "start": 2188,
+      "end": 2194,
+      "loc": {
+        "start": {
+          "line": 93,
+          "column": 2
+        },
+        "end": {
+          "line": 93,
+          "column": 8
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "(",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 2194,
+      "end": 2195,
+      "loc": {
+        "start": {
+          "line": 93,
+          "column": 8
+        },
+        "end": {
+          "line": 93,
+          "column": 9
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "interval",
+      "start": 2195,
+      "end": 2203,
+      "loc": {
+        "start": {
+          "line": 93,
+          "column": 9
+        },
+        "end": {
+          "line": 93,
+          "column": 17
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ")",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 2203,
+      "end": 2204,
+      "loc": {
+        "start": {
+          "line": 93,
+          "column": 17
+        },
+        "end": {
+          "line": 93,
+          "column": 18
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "{",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 2205,
+      "end": 2206,
+      "loc": {
+        "start": {
+          "line": 93,
+          "column": 19
+        },
+        "end": {
+          "line": 93,
+          "column": 20
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n     * polling 間隔\n     * @type {number}\n     ",
+      "start": 2211,
+      "end": 2262,
+      "loc": {
+        "start": {
+          "line": 94,
+          "column": 4
+        },
+        "end": {
+          "line": 97,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "this",
+        "keyword": "this",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "this",
+      "start": 2267,
+      "end": 2271,
+      "loc": {
+        "start": {
+          "line": 98,
+          "column": 4
+        },
+        "end": {
+          "line": 98,
+          "column": 8
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ".",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 2271,
+      "end": 2272,
+      "loc": {
+        "start": {
+          "line": 98,
+          "column": 8
+        },
+        "end": {
+          "line": 98,
+          "column": 9
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "interval",
+      "start": 2272,
+      "end": 2280,
+      "loc": {
+        "start": {
+          "line": 98,
+          "column": 9
+        },
+        "end": {
+          "line": 98,
+          "column": 17
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "=",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": true,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "=",
+      "start": 2281,
+      "end": 2282,
+      "loc": {
+        "start": {
+          "line": 98,
+          "column": 18
+        },
+        "end": {
+          "line": 98,
+          "column": 19
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "num",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": 1000,
+      "start": 2283,
+      "end": 2287,
+      "loc": {
+        "start": {
+          "line": 98,
+          "column": 20
+        },
+        "end": {
+          "line": 98,
+          "column": 24
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "/",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": 10,
+        "updateContext": null
+      },
+      "value": "/",
+      "start": 2288,
+      "end": 2289,
+      "loc": {
+        "start": {
+          "line": 98,
+          "column": 25
+        },
+        "end": {
+          "line": 98,
+          "column": 26
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "interval",
+      "start": 2290,
+      "end": 2298,
+      "loc": {
+        "start": {
+          "line": 98,
+          "column": 27
+        },
+        "end": {
+          "line": 98,
+          "column": 35
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ";",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 2298,
+      "end": 2299,
+      "loc": {
+        "start": {
+          "line": 98,
+          "column": 35
+        },
+        "end": {
+          "line": 98,
+          "column": 36
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "this",
+        "keyword": "this",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "this",
+      "start": 2304,
+      "end": 2308,
+      "loc": {
+        "start": {
+          "line": 99,
+          "column": 4
+        },
+        "end": {
+          "line": 99,
+          "column": 8
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ".",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 2308,
+      "end": 2309,
+      "loc": {
+        "start": {
+          "line": 99,
+          "column": 8
+        },
+        "end": {
+          "line": 99,
+          "column": 9
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "fps",
+      "start": 2309,
+      "end": 2312,
+      "loc": {
+        "start": {
+          "line": 99,
+          "column": 9
+        },
+        "end": {
+          "line": 99,
+          "column": 12
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "=",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": true,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "=",
+      "start": 2313,
+      "end": 2314,
+      "loc": {
+        "start": {
+          "line": 99,
+          "column": 13
+        },
+        "end": {
+          "line": 99,
+          "column": 14
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "interval",
+      "start": 2315,
+      "end": 2323,
+      "loc": {
+        "start": {
+          "line": 99,
+          "column": 15
+        },
+        "end": {
+          "line": 99,
+          "column": 23
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ";",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 2323,
+      "end": 2324,
+      "loc": {
+        "start": {
+          "line": 99,
+          "column": 23
+        },
+        "end": {
+          "line": 99,
+          "column": 24
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "this",
+        "keyword": "this",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "this",
+      "start": 2329,
+      "end": 2333,
+      "loc": {
+        "start": {
+          "line": 100,
+          "column": 4
+        },
+        "end": {
+          "line": 100,
+          "column": 8
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ".",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 2333,
+      "end": 2334,
+      "loc": {
+        "start": {
+          "line": 100,
+          "column": 8
+        },
+        "end": {
+          "line": 100,
+          "column": 9
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "events",
+      "start": 2334,
+      "end": 2340,
+      "loc": {
+        "start": {
+          "line": 100,
+          "column": 9
+        },
+        "end": {
+          "line": 100,
+          "column": 15
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ".",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 2340,
+      "end": 2341,
+      "loc": {
+        "start": {
+          "line": 100,
+          "column": 15
+        },
+        "end": {
+          "line": 100,
+          "column": 16
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "fps",
+      "start": 2341,
+      "end": 2344,
+      "loc": {
+        "start": {
+          "line": 100,
+          "column": 16
+        },
+        "end": {
+          "line": 100,
+          "column": 19
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "=",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": true,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "=",
+      "start": 2345,
+      "end": 2346,
+      "loc": {
+        "start": {
+          "line": 100,
+          "column": 20
+        },
+        "end": {
+          "line": 100,
+          "column": 21
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "interval",
+      "start": 2347,
+      "end": 2355,
+      "loc": {
+        "start": {
+          "line": 100,
+          "column": 22
+        },
+        "end": {
+          "line": 100,
+          "column": 30
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ";",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 2355,
+      "end": 2356,
+      "loc": {
+        "start": {
+          "line": 100,
+          "column": 30
+        },
+        "end": {
+          "line": 100,
+          "column": 31
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " return this.update();",
+      "start": 2361,
+      "end": 2385,
+      "loc": {
+        "start": {
+          "line": 101,
+          "column": 4
+        },
+        "end": {
+          "line": 101,
+          "column": 28
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "return",
+        "keyword": "return",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "return",
+      "start": 2390,
+      "end": 2396,
+      "loc": {
+        "start": {
+          "line": 102,
+          "column": 4
+        },
+        "end": {
+          "line": 102,
+          "column": 10
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "this",
+        "keyword": "this",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "this",
+      "start": 2397,
+      "end": 2401,
+      "loc": {
+        "start": {
+          "line": 102,
+          "column": 11
+        },
+        "end": {
+          "line": 102,
+          "column": 15
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ".",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 2401,
+      "end": 2402,
+      "loc": {
+        "start": {
+          "line": 102,
+          "column": 15
+        },
+        "end": {
+          "line": 102,
+          "column": 16
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "start",
+      "start": 2402,
+      "end": 2407,
+      "loc": {
+        "start": {
+          "line": 102,
+          "column": 16
+        },
+        "end": {
+          "line": 102,
+          "column": 21
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "(",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 2407,
+      "end": 2408,
+      "loc": {
+        "start": {
+          "line": 102,
+          "column": 21
+        },
+        "end": {
+          "line": 102,
+          "column": 22
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ")",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 2408,
+      "end": 2409,
+      "loc": {
+        "start": {
+          "line": 102,
+          "column": 22
+        },
+        "end": {
+          "line": 102,
+          "column": 23
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ";",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 2409,
+      "end": 2410,
+      "loc": {
+        "start": {
+          "line": 102,
+          "column": 23
+        },
+        "end": {
+          "line": 102,
+          "column": 24
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "}",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 2413,
+      "end": 2414,
+      "loc": {
+        "start": {
+          "line": 103,
+          "column": 2
+        },
+        "end": {
+          "line": 103,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "}",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 2415,
+      "end": 2416,
+      "loc": {
+        "start": {
+          "line": 104,
+          "column": 0
+        },
+        "end": {
+          "line": 104,
+          "column": 1
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "eof",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 2417,
+      "end": 2417,
+      "loc": {
+        "start": {
+          "line": 105,
+          "column": 0
+        },
+        "end": {
+          "line": 105,
+          "column": 0
+        }
+      }
     }
   ]
 }

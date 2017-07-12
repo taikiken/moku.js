@@ -1,6 +1,6 @@
 # moku.js
 
-**main.bundle.js**
+**moku.js**
 
 Copyright (c) inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
