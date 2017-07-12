@@ -65,12 +65,12 @@ export default class Rising extends EventDispatcher {
      */
     this.onUpdate = this.onUpdate.bind(this);
     // this.boundScroll = boundScroll;
-    /**
-     * start 済みフラッグ
-     * @type {boolean}
-     * @default false
-     */
-    this.started = false;
+    // /**
+    //  * start 済みフラッグ
+    //  * @type {boolean}
+    //  * @default false
+    //  */
+    // this.started = false;
     /**
      * Rising.[COLLISION|ALIEN] event instance
      * @type {RisingEvents}
@@ -100,30 +100,32 @@ export default class Rising extends EventDispatcher {
   // METHOD
   // ----------------------------------------
   /**
-   * fps を監視しスクロール位置を知らせます
+   * scroll を監視します
    * @returns {Rising} method chain 可能なように instance を返します
    */
   start() {
-    // flag check
-    if (this.started) {
-      return this;
-    }
-    this.started = true;
-    // scrolling
-    const scrolling = this.scrolling;
-    scrolling.on(Scrolling.UPDATE, this.onUpdate);
-    scrolling.start();
+    // // flag check
+    // if (this.started) {
+    //   return this;
+    // }
+    // this.started = true;
+    // // scrolling
+    // const scrolling = this.scrolling;
+    // scrolling.on(Scrolling.UPDATE, this.onUpdate);
+    // scrolling.start();
+    this.stop();
+    this.scrolling.on(Scrolling.UPDATE, this.onUpdate);
     return this;
   }
   /**
-   * fps 監視を止めます
+   * scroll 監視を止めます
    * @returns {Rising} method chain 可能なように instance を返します
    */
   stop() {
-    if (!this.started) {
-      return this;
-    }
-    this.started = false;
+    // if (!this.started) {
+    //   return this;
+    // }
+    // this.started = false;
     // const scrolling = this.scrolling;
     this.scrolling.off(Scrolling.UPDATE, this.onUpdate);
     return this;

@@ -68,17 +68,24 @@ export default class Scrolling extends EventDispatcher {
      * @default -1
      */
     this.previous = -1;
-    /**
-     * start 済みフラッグ
-     * @type {boolean}
-     * @default false
-     */
-    this.started = false;
+    // /**
+    //  * start 済みフラッグ
+    //  * @type {boolean}
+    //  * @default false
+    //  */
+    // this.started = false;
     /**
      * Rate instance
      * @type {?Rate}
      */
     this.rate = rate;
+    /**
+     * scrolling 監視開始 flag
+     * @type {boolean}
+     * @since 0.3.8
+     */
+    this.watching = false;
+    this.onNativeEvent = this.onNativeEvent.bind(this);
   }
   // ----------------------------------------
   // EVENT
@@ -96,31 +103,65 @@ export default class Scrolling extends EventDispatcher {
   // METHOD
   // ----------------------------------------
   /**
-   * fps を監視しスクロール位置を知らせます
+   * window.onscroll / window.onresize event handler,
+   * `this.watching` flag を確認し `watch` を call します
+   * @since 0.3.8
+   */
+  onNativeEvent() {
+    if (!this.watching) {
+      this.watch();
+    }
+  }
+  /**
+   * window.onscroll / window.onresize 監視を開始します
    * @returns {Scrolling} method chain 可能なように instance を返します
    */
   start() {
-    // flag check
-    if (this.started) {
-      return this;
-    }
-    this.started = true;
+    window.addEventListener('scroll', this.onNativeEvent, false);
+    window.addEventListener('resize', this.onNativeEvent, false);
+    return this;
+  }
+  /**
+   * window.onscroll / window.onresize 監視を停止します
+   * @returns {Scrolling} method chain 可能なように instance を返します
+   */
+  stop() {
+    window.removeEventListener('scroll', this.onNativeEvent);
+    window.removeEventListener('resize', this.onNativeEvent);
+    return this;
+  }
+  /**
+   * fps を監視しスクロール位置を知らせます
+   * @returns {Scrolling} method chain 可能なように instance を返します
+   * @since 0.3.8
+   */
+  watch() {
+    // // flag check
+    // if (this.started) {
+    //   return this;
+    // }
+    // this.started = true;
     // loop start
-    const rate = this.rate;
-    rate.on(Rate.UPDATE, this.onUpdate);
-    rate.start();
+    // const rate = this.rate;
+    // rate.on(Rate.UPDATE, this.onUpdate);
+    this.unwatch();
+    this.watching = true;
+    this.rate.on(Rate.UPDATE, this.onUpdate);
+    // rate.start();
     return this;
   }
   /**
    * fps 監視を止めます
    * @returns {Scrolling} method chain 可能なように instance を返します
+   * @since 0.3.8
    */
-  stop() {
-    if (!this.started) {
-      return this;
-    }
-    this.started = false;
+  unwatch() {
+    // if (!this.started) {
+    //   return this;
+    // }
+    // this.started = false;
     this.rate.off(Rate.UPDATE, this.onUpdate);
+    this.watching = false;
     return this;
   }
   /**
@@ -144,12 +185,18 @@ export default class Scrolling extends EventDispatcher {
   onUpdate(event) {
     // @type {number} - scroll top
     const y = Scroll.y();
+    // @type {number} - previous scroll top
+    const previous = this.previous;
+    // @type {boolean} - 移動したかを表します,
+    const changed = event === null || previous !== y;
+    // 移動量 0 の時は rate 監視を停止する
+    if (!changed) {
+      this.unwatch();
+    }
     // @type {number} - window height
     const height = window.innerHeight;
     // @type {number} - window width
     const width = window.innerWidth;
-    // @type {number} - previous scroll top
-    const previous = this.previous;
 
     // @type {ScrollEvents} - events
     const events = this.events;
@@ -166,7 +213,7 @@ export default class Scrolling extends EventDispatcher {
     events.bottom = y + height;
     // @type {boolean} - 移動したかを表します,
     // event が null の時は強制発火なので移動量 0 （scroll top 位置に変更がない）でも changed を true にします
-    events.changed = event === null || previous !== y;
+    events.changed = changed;
     // @type {number} - 前回の y 位置
     events.previous = previous;
     // @type {number} - 移動量 +: down, -: up
