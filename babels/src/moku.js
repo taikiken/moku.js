@@ -22,6 +22,9 @@ import Promise from 'promise-polyfill';
 // for IE
 import 'babel-polyfill';
 
+// polyfill
+import './polyfill/';
+
 // event
 import EventDispatcher from './event/EventDispatcher';
 import Events from './event/Events';
@@ -58,12 +61,17 @@ import Style from './css/Style';
 
 // device
 import Can from './device/Can';
+import devices from './device/devices';
+import Android from './device/os/Android';
+import Windows from './device/os/Windows';
+import iOS from './device/os/iOS';
 
 // dom
 import Bounding from './dom/Bounding';
 import Classes from './dom/Classes';
 import Elements from './dom/Elements';
 
+// ----------------------------------------------
 // promise
 // Promise: To add to window
 if (!window.Promise) {
@@ -154,6 +162,10 @@ MOKU.dom = {
 
 MOKU.device = {
   Can,
+  devices,
+  Android,
+  Windows,
+  iOS,
 };
 
 // export

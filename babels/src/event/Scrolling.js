@@ -85,6 +85,10 @@ export default class Scrolling extends EventDispatcher {
      * @since 0.3.8
      */
     this.watching = false;
+    /**
+     * bind onNativeEvent - window.onscroll|onresize event handler
+     * @type {function}
+     */
     this.onNativeEvent = this.onNativeEvent.bind(this);
   }
   // ----------------------------------------

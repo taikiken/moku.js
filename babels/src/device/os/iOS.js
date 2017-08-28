@@ -12,8 +12,15 @@
 
 import devices from '../devices';
 
+/**
+ * {@link devices}.props
+ * @type {?object}
+ */
 let props = null;
 
+/**
+ * version 情報を計算します
+ */
 const version = () => {
   const app = devices.app;
   const numbers = app.match(/os (\d+)_(\d+)_?(\d+)?/i);
@@ -39,6 +46,9 @@ const version = () => {
   props.numbers = versions;
 };
 
+/**
+ * iOS 判定を行います
+ */
 const init = () => {
   if (props) {
     return;
@@ -66,49 +76,103 @@ const init = () => {
   version();
 };
 
+/**
+ * iOS detector
+ */
 export default class iOS {
+  /**
+   * iOS
+   * @returns {boolean} true: iOS
+   */
   static is() {
     init();
     return props.android;
   }
+  /**
+   * iOS && iPhone or iPod
+   * @returns {boolean} true: iOS && iPhone or iPod
+   */
   static phone() {
     init();
     return props.phone;
   }
+  /**
+   * iOS && iPad
+   * @returns {boolean} true: iOS && iPad
+   */
   static tablet() {
     init();
     return props.tablet;
   }
+  /**
+   * iOS && iPhone
+   * @returns {boolean} true: iOS && iPhone
+   */
   static iphone() {
     init();
     return props.iphone;
   }
+  /**
+   * iOS && iPad
+   * @returns {boolean} true: iOS && iPad
+   */
   static ipad() {
     init();
     return props.ipad;
   }
+  /**
+   * iOS && iPod
+   * @returns {boolean} true: iOS && iPod
+   */
   static ipod() {
     init();
     return props.ipod;
   }
+  /**
+   * iOS version
+   * @returns {number} iOS version, not iOS -1
+   */
   static version() {
     init();
     return props.version;
   }
+  /**
+   * iOS major version
+   * @returns {number} iOS major version, not iOS -1
+   */
   static major() {
     init();
     return props.major;
   }
+  /**
+   * iOS version `major.minor.build`
+   * @returns {string} iOS version NN.NN.NN 型（文字）で返します, not iOS ''
+   */
   static build() {
     init();
     return props.build;
   }
+  /**
+   * version を配列形式で取得します
+   * @returns {Array.<number>} [major: int, minor: int, build: int] 形式で返します
+   */
   static numbers() {
     init();
     return props.numbers;
   }
+  /**
+   * iOS webView - 標準 UA のみ対応
+   * @returns {boolean} true: iOS webView
+   */
   static webView() {
     init();
     return props.webView;
+  }
+  /**
+   * iOS standalone - app mode
+   * @returns {boolean} true: iOS app mode
+   */
+  static standalone() {
+    return props.standalone;
   }
 }

@@ -13,8 +13,15 @@
 import devices from '../devices';
 import Windows from './Windows';
 
+/**
+ * {@link devices}.props
+ * @type {?object}
+ */
 let props = null;
 
+/**
+ * version 情報を計算します
+ */
 const version = () => {
   const app = devices.app;
   const numbers = app.match(/android (\d+)\.(\d+)\.?(\d+)?/i);
@@ -73,44 +80,88 @@ const init = () => {
   }
 };
 
+/**
+ * Android OS detector
+ */
 export default class Android {
+  /**
+   * Android OS
+   * @returns {boolean} true: Android OS
+   */
   static is() {
     init();
     return props.android;
   }
+  /**
+   * Android OS && standard browser
+   * @returns {boolean} true: Android standard browser
+   */
   static standard() {
     init();
     return props.standard;
   }
+  /**
+   * Android OS && phone
+   * @returns {boolean} true: Android phone
+   */
   static phone() {
     init();
     return props.phone;
   }
+  /**
+   * Android OS && tablet
+   * @returns {boolean} true: Android tablet
+   */
   static tablet() {
     init();
     return props.tablet;
   }
+  /**
+   * Android OS && HD window
+   * @returns {boolean} true: Android HD window
+   */
   static hd() {
     init();
     return props.hd;
   }
+  /**
+   * Android OS version
+   * @returns {number} Android OS version, not Android -1
+   */
   static version() {
     init();
     return props.version;
   }
+  /**
+   * Android OS major version
+   * @returns {number} Android OS major version, not Android -1
+   */
   static major() {
     init();
     return props.major;
   }
+  /**
+   * Android OS version `major.minor.build`
+   * @returns {string} Android OS version NN.NN.NN 型（文字）で返します, not Android ''
+   */
   static build() {
     init();
     return props.build;
   }
+  /**
+   * version を配列形式で取得します
+   * @returns {Array.<number>} [major: int, minor: int, build: int] 形式で返します
+   */
   static numbers() {
     init();
     return props.numbers;
   }
-  static bugEnd() {
+  /**
+   * Android 4.3 ~ 4.4 && standard browser
+   * - touchend が未実装
+   * @returns {boolean} true: Android 4.3 ~ 4.4
+   */
+  static kitKat() {
     // no touchend - standard browser 4.3 ~ 4.4
     const v = Android.version();
     return Android.standard() && (v > 4.2 && v < 4.5);

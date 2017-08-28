@@ -10,9 +10,26 @@
  *
  */
 
+/**
+ * [native code] userAgent
+ * @type {string}
+ */
 const ua = navigator.userAgent;
+/**
+ * [native code] appVersion
+ * @type {string}
+ */
 const app = navigator.appVersion;
+/**
+ * Safari - userAgent に `Safari` が含まれる
+ * - 【注意】Safari browser を保証しない
+ * @type {boolean}
+ */
 const safari = !!ua.match(/safari/i);
+/**
+ * device property
+ * @type {{ios: boolean, ipad: boolean, ipod: boolean, iphone: boolean, windows: boolean, android: boolean, standard: boolean, phone: boolean, tablet: boolean, hd: boolean, webView: boolean, standalone: boolean, version: number, major: number, build: number, numbers: [number,number,number]}}
+ */
 const props = {
   ios: false,
   ipad: false,
@@ -28,10 +45,19 @@ const props = {
   standalone: false,
   version: -1,
   major: -1,
-  build: -1,
+  build: '',
   numbers: [-1, -1, -1],
 };
 
+/**
+ * devices object
+ * @type {{
+ *  ua: string,
+ *  app: string,
+ *  props: {ios: boolean, ipad: boolean, ipod: boolean, iphone: boolean, windows: boolean, android: boolean, standard: boolean, phone: boolean, tablet: boolean, hd: boolean, webView: boolean, standalone: boolean, version: number, major: number, build: number, numbers: (number|number|number)[]},
+ *  safari: boolean
+ * }}
+ */
 const devices = {
   ua,
   app,

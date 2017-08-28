@@ -10,11 +10,18 @@
  *
  */
 
-
 import devices from '../devices';
 
+/**
+ * {@link devices}.props
+ * @type {?object}
+ */
 let props = null;
 
+/**
+ * `userAgent` を解析します
+ * @private
+ */
 const init = () => {
   if (props) {
     return;
@@ -28,11 +35,22 @@ const init = () => {
   }
 };
 
+/**
+ * windows phone detector
+ */
 export default class Windows {
+  /**
+   * windows OS
+   * @returns {boolean} true; windows OS
+   */
   static is() {
     init();
     return props.windows;
   }
+  /**
+   * windows phone
+   * @returns {boolean} true: windows phone
+   */
   static phone() {
     init();
     return props.phone;
