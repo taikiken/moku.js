@@ -67,8 +67,8 @@
               "Safari >= 7",
               "Explorer >= 9",
               "last 4 Edge versions",
-              "ChromeAndroid >= 4.0",
-              "Android >= 4.0",
+              "ChromeAndroid >= 18.0",
+              "Android >= 2",
               "iOS >= 8.4"
             ]
           },
