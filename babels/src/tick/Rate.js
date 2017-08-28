@@ -288,8 +288,8 @@ export default class Rate extends Polling {
    * fps 基準値を設定します
    * @throws {Error} 引数 rate が設定可能値以外の時に例外エラーが発生します
    * @param {number} rate fps 基準値, <br>
-   * this.RATE_30, this.RATE_20, this.RATE_15, this.RATE_12, this.RATE_10, <br>
-   * this.RATE_6, this.RATE_5 の何れかが必須です
+   * RATE_60, RATE_30, RATE_20, RATE_15, RATE_12, RATE_10, <br>
+   * RATE_6, RATE_5, RATE_4, RATE_3, RATE_2, RATE_1 の何れかが必須です
    * @returns {boolean} rate 設定に成功すると true を返します
    */
   change(rate) {
