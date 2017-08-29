@@ -1,7 +1,7 @@
 {
   "coverage": "100%",
-  "expectCount": 389,
-  "actualCount": 389,
+  "expectCount": 461,
+  "actualCount": 461,
   "files": {
     "src/event/Rising.js": {
       "expectCount": 10,
@@ -16,6 +16,11 @@
     "src/net/AjaxThunk.js": {
       "expectCount": 2,
       "actualCount": 2,
+      "undocumentLines": []
+    },
+    "src/device/os/Android.js": {
+      "expectCount": 14,
+      "actualCount": 14,
       "undocumentLines": []
     },
     "src/dom/Bounding.js": {
@@ -108,6 +113,11 @@
       "actualCount": 1,
       "undocumentLines": []
     },
+    "src/event/NativeResizing.js": {
+      "expectCount": 11,
+      "actualCount": 11,
+      "undocumentLines": []
+    },
     "src/util/NodeLists.js": {
       "expectCount": 3,
       "actualCount": 3,
@@ -136,6 +146,26 @@
     "src/tick/Rate.js": {
       "expectCount": 23,
       "actualCount": 23,
+      "undocumentLines": []
+    },
+    "src/event/Resizing.js": {
+      "expectCount": 10,
+      "actualCount": 10,
+      "undocumentLines": []
+    },
+    "src/event/events/ResizingEvents.js": {
+      "expectCount": 4,
+      "actualCount": 4,
+      "undocumentLines": []
+    },
+    "src/event/ResizingSingle.js": {
+      "expectCount": 3,
+      "actualCount": 3,
+      "undocumentLines": []
+    },
+    "src/event/NativeResizingSingle.js": {
+      "expectCount": 3,
+      "actualCount": 3,
       "undocumentLines": []
     },
     "src/event/events/RisingEvents.js": {
@@ -196,6 +226,26 @@
     "src/event/events/WheelEvents.js": {
       "expectCount": 3,
       "actualCount": 3,
+      "undocumentLines": []
+    },
+    "src/device/os/Windows.js": {
+      "expectCount": 5,
+      "actualCount": 5,
+      "undocumentLines": []
+    },
+    "src/polyfill/method/animationFrame.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/device/devices.js": {
+      "expectCount": 5,
+      "actualCount": 5,
+      "undocumentLines": []
+    },
+    "src/device/os/iOS.js": {
+      "expectCount": 16,
+      "actualCount": 16,
       "undocumentLines": []
     }
   }

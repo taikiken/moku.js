@@ -12,6 +12,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "./src/device/os/android.js~android",
+    "class/src/device/os/Android.js~Android.html",
+    "<span>Android</span> <span class=\"search-result-import-path\">./src/device/os/Android.js</span>",
+    "class"
+  ],
+  [
     "./src/dom/bounding.js~bounding",
     "class/src/dom/Bounding.js~Bounding.html",
     "<span>Bounding</span> <span class=\"search-result-import-path\">./src/dom/Bounding.js</span>",
@@ -108,6 +114,12 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "./src/event/nativeresizing.js~nativeresizing",
+    "class/src/event/NativeResizing.js~NativeResizing.html",
+    "<span>NativeResizing</span> <span class=\"search-result-import-path\">./src/event/NativeResizing.js</span>",
+    "class"
+  ],
+  [
     "./src/util/nodelists.js~nodelists",
     "class/src/util/NodeLists.js~NodeLists.html",
     "<span>NodeLists</span> <span class=\"search-result-import-path\">./src/util/NodeLists.js</span>",
@@ -154,6 +166,30 @@ window.esdocSearchIndex = [
     "variable/index.html#static-variable-Request",
     "<span>Request</span> <span class=\"search-result-import-path\">./src/net/Ajax.js</span>",
     "variable"
+  ],
+  [
+    "./src/event/resizing.js~resizing",
+    "class/src/event/Resizing.js~Resizing.html",
+    "<span>Resizing</span> <span class=\"search-result-import-path\">./src/event/Resizing.js</span>",
+    "class"
+  ],
+  [
+    "./src/event/events/resizingevents.js~resizingevents",
+    "class/src/event/events/ResizingEvents.js~ResizingEvents.html",
+    "<span>ResizingEvents</span> <span class=\"search-result-import-path\">./src/event/events/ResizingEvents.js</span>",
+    "class"
+  ],
+  [
+    "./src/event/nativeresizingsingle.js~resizingsingle",
+    "class/src/event/NativeResizingSingle.js~ResizingSingle.html",
+    "<span>ResizingSingle</span> <span class=\"search-result-import-path\">./src/event/NativeResizingSingle.js</span>",
+    "class"
+  ],
+  [
+    "./src/event/resizingsingle.js~resizingsingle",
+    "class/src/event/ResizingSingle.js~ResizingSingle.html",
+    "<span>ResizingSingle</span> <span class=\"search-result-import-path\">./src/event/ResizingSingle.js</span>",
+    "class"
   ],
   [
     "./src/event/rising.js~rising",
@@ -246,9 +282,33 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "./src/device/os/windows.js~windows",
+    "class/src/device/os/Windows.js~Windows.html",
+    "<span>Windows</span> <span class=\"search-result-import-path\">./src/device/os/Windows.js</span>",
+    "class"
+  ],
+  [
+    "./src/polyfill/method/animationframe.js~animationframe",
+    "function/index.html#static-function-animationFrame",
+    "<span>animationFrame</span> <span class=\"search-result-import-path\">./src/polyfill/method/animationFrame.js</span>",
+    "function"
+  ],
+  [
+    "./src/device/devices.js~app",
+    "variable/index.html#static-variable-app",
+    "<span>app</span> <span class=\"search-result-import-path\">./src/device/devices.js</span>",
+    "variable"
+  ],
+  [
     "./src/net/cookie.js~decodeuricomponent",
     "variable/index.html#static-variable-decodeURIComponent",
     "<span>decodeURIComponent</span> <span class=\"search-result-import-path\">./src/net/Cookie.js</span>",
+    "variable"
+  ],
+  [
+    "./src/device/devices.js~devices",
+    "variable/index.html#static-variable-devices",
+    "<span>devices</span> <span class=\"search-result-import-path\">./src/device/devices.js</span>",
     "variable"
   ],
   [
@@ -279,6 +339,42 @@ window.esdocSearchIndex = [
     "./src/util/iro.js~half",
     "variable/index.html#static-variable-half",
     "<span>half</span> <span class=\"search-result-import-path\">./src/util/Iro.js</span>",
+    "variable"
+  ],
+  [
+    "./src/device/os/ios.js~ios",
+    "class/src/device/os/iOS.js~iOS.html",
+    "<span>iOS</span> <span class=\"search-result-import-path\">./src/device/os/iOS.js</span>",
+    "class"
+  ],
+  [
+    "./src/device/os/android.js~init",
+    "function/index.html#static-function-init",
+    "<span>init</span> <span class=\"search-result-import-path\">./src/device/os/Android.js</span>",
+    "function"
+  ],
+  [
+    "./src/device/os/windows.js~init",
+    "function/index.html#static-function-init",
+    "<span>init</span> <span class=\"search-result-import-path\">./src/device/os/Windows.js</span>",
+    "function"
+  ],
+  [
+    "./src/device/os/ios.js~init",
+    "function/index.html#static-function-init",
+    "<span>init</span> <span class=\"search-result-import-path\">./src/device/os/iOS.js</span>",
+    "function"
+  ],
+  [
+    "./src/event/nativeresizingsingle.js~instance",
+    "variable/index.html#static-variable-instance",
+    "<span>instance</span> <span class=\"search-result-import-path\">./src/event/NativeResizingSingle.js</span>",
+    "variable"
+  ],
+  [
+    "./src/event/resizingsingle.js~instance",
+    "variable/index.html#static-variable-instance",
+    "<span>instance</span> <span class=\"search-result-import-path\">./src/event/ResizingSingle.js</span>",
     "variable"
   ],
   [
@@ -372,6 +468,36 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "./src/device/devices.js~props",
+    "variable/index.html#static-variable-props",
+    "<span>props</span> <span class=\"search-result-import-path\">./src/device/devices.js</span>",
+    "variable"
+  ],
+  [
+    "./src/device/os/android.js~props",
+    "variable/index.html#static-variable-props",
+    "<span>props</span> <span class=\"search-result-import-path\">./src/device/os/Android.js</span>",
+    "variable"
+  ],
+  [
+    "./src/device/os/windows.js~props",
+    "variable/index.html#static-variable-props",
+    "<span>props</span> <span class=\"search-result-import-path\">./src/device/os/Windows.js</span>",
+    "variable"
+  ],
+  [
+    "./src/device/os/ios.js~props",
+    "variable/index.html#static-variable-props",
+    "<span>props</span> <span class=\"search-result-import-path\">./src/device/os/iOS.js</span>",
+    "variable"
+  ],
+  [
+    "./src/device/devices.js~safari",
+    "variable/index.html#static-variable-safari",
+    "<span>safari</span> <span class=\"search-result-import-path\">./src/device/devices.js</span>",
+    "variable"
+  ],
+  [
     "./src/event/scroll.js~singletonsymbol",
     "variable/index.html#static-variable-singletonSymbol",
     "<span>singletonSymbol</span> <span class=\"search-result-import-path\">./src/event/Scroll.js</span>",
@@ -420,10 +546,28 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "./src/device/devices.js~ua",
+    "variable/index.html#static-variable-ua",
+    "<span>ua</span> <span class=\"search-result-import-path\">./src/device/devices.js</span>",
+    "variable"
+  ],
+  [
     "./src/device/can.js~vendors",
     "variable/index.html#static-variable-vendors",
     "<span>vendors</span> <span class=\"search-result-import-path\">./src/device/Can.js</span>",
     "variable"
+  ],
+  [
+    "./src/device/os/android.js~version",
+    "function/index.html#static-function-version",
+    "<span>version</span> <span class=\"search-result-import-path\">./src/device/os/Android.js</span>",
+    "function"
+  ],
+  [
+    "./src/device/os/ios.js~version",
+    "function/index.html#static-function-version",
+    "<span>version</span> <span class=\"search-result-import-path\">./src/device/os/iOS.js</span>",
+    "function"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~array",
@@ -882,6 +1026,174 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/device/devices.js",
+    "file/src/device/devices.js.html",
+    "src/device/devices.js",
+    "file"
+  ],
+  [
+    "src/device/os/android.js",
+    "file/src/device/os/Android.js.html",
+    "src/device/os/Android.js",
+    "file"
+  ],
+  [
+    "src/device/os/android.js~android.build",
+    "class/src/device/os/Android.js~Android.html#static-method-build",
+    "src/device/os/Android.js~Android.build",
+    "method"
+  ],
+  [
+    "src/device/os/android.js~android.hd",
+    "class/src/device/os/Android.js~Android.html#static-method-hd",
+    "src/device/os/Android.js~Android.hd",
+    "method"
+  ],
+  [
+    "src/device/os/android.js~android.is",
+    "class/src/device/os/Android.js~Android.html#static-method-is",
+    "src/device/os/Android.js~Android.is",
+    "method"
+  ],
+  [
+    "src/device/os/android.js~android.kitkat",
+    "class/src/device/os/Android.js~Android.html#static-method-kitKat",
+    "src/device/os/Android.js~Android.kitKat",
+    "method"
+  ],
+  [
+    "src/device/os/android.js~android.major",
+    "class/src/device/os/Android.js~Android.html#static-method-major",
+    "src/device/os/Android.js~Android.major",
+    "method"
+  ],
+  [
+    "src/device/os/android.js~android.numbers",
+    "class/src/device/os/Android.js~Android.html#static-method-numbers",
+    "src/device/os/Android.js~Android.numbers",
+    "method"
+  ],
+  [
+    "src/device/os/android.js~android.phone",
+    "class/src/device/os/Android.js~Android.html#static-method-phone",
+    "src/device/os/Android.js~Android.phone",
+    "method"
+  ],
+  [
+    "src/device/os/android.js~android.standard",
+    "class/src/device/os/Android.js~Android.html#static-method-standard",
+    "src/device/os/Android.js~Android.standard",
+    "method"
+  ],
+  [
+    "src/device/os/android.js~android.tablet",
+    "class/src/device/os/Android.js~Android.html#static-method-tablet",
+    "src/device/os/Android.js~Android.tablet",
+    "method"
+  ],
+  [
+    "src/device/os/android.js~android.version",
+    "class/src/device/os/Android.js~Android.html#static-method-version",
+    "src/device/os/Android.js~Android.version",
+    "method"
+  ],
+  [
+    "src/device/os/windows.js",
+    "file/src/device/os/Windows.js.html",
+    "src/device/os/Windows.js",
+    "file"
+  ],
+  [
+    "src/device/os/windows.js~windows.is",
+    "class/src/device/os/Windows.js~Windows.html#static-method-is",
+    "src/device/os/Windows.js~Windows.is",
+    "method"
+  ],
+  [
+    "src/device/os/windows.js~windows.phone",
+    "class/src/device/os/Windows.js~Windows.html#static-method-phone",
+    "src/device/os/Windows.js~Windows.phone",
+    "method"
+  ],
+  [
+    "src/device/os/ios.js",
+    "file/src/device/os/iOS.js.html",
+    "src/device/os/iOS.js",
+    "file"
+  ],
+  [
+    "src/device/os/ios.js~ios.build",
+    "class/src/device/os/iOS.js~iOS.html#static-method-build",
+    "src/device/os/iOS.js~iOS.build",
+    "method"
+  ],
+  [
+    "src/device/os/ios.js~ios.ipad",
+    "class/src/device/os/iOS.js~iOS.html#static-method-ipad",
+    "src/device/os/iOS.js~iOS.ipad",
+    "method"
+  ],
+  [
+    "src/device/os/ios.js~ios.iphone",
+    "class/src/device/os/iOS.js~iOS.html#static-method-iphone",
+    "src/device/os/iOS.js~iOS.iphone",
+    "method"
+  ],
+  [
+    "src/device/os/ios.js~ios.ipod",
+    "class/src/device/os/iOS.js~iOS.html#static-method-ipod",
+    "src/device/os/iOS.js~iOS.ipod",
+    "method"
+  ],
+  [
+    "src/device/os/ios.js~ios.is",
+    "class/src/device/os/iOS.js~iOS.html#static-method-is",
+    "src/device/os/iOS.js~iOS.is",
+    "method"
+  ],
+  [
+    "src/device/os/ios.js~ios.major",
+    "class/src/device/os/iOS.js~iOS.html#static-method-major",
+    "src/device/os/iOS.js~iOS.major",
+    "method"
+  ],
+  [
+    "src/device/os/ios.js~ios.numbers",
+    "class/src/device/os/iOS.js~iOS.html#static-method-numbers",
+    "src/device/os/iOS.js~iOS.numbers",
+    "method"
+  ],
+  [
+    "src/device/os/ios.js~ios.phone",
+    "class/src/device/os/iOS.js~iOS.html#static-method-phone",
+    "src/device/os/iOS.js~iOS.phone",
+    "method"
+  ],
+  [
+    "src/device/os/ios.js~ios.standalone",
+    "class/src/device/os/iOS.js~iOS.html#static-method-standalone",
+    "src/device/os/iOS.js~iOS.standalone",
+    "method"
+  ],
+  [
+    "src/device/os/ios.js~ios.tablet",
+    "class/src/device/os/iOS.js~iOS.html#static-method-tablet",
+    "src/device/os/iOS.js~iOS.tablet",
+    "method"
+  ],
+  [
+    "src/device/os/ios.js~ios.version",
+    "class/src/device/os/iOS.js~iOS.html#static-method-version",
+    "src/device/os/iOS.js~iOS.version",
+    "method"
+  ],
+  [
+    "src/device/os/ios.js~ios.webview",
+    "class/src/device/os/iOS.js~iOS.html#static-method-webView",
+    "src/device/os/iOS.js~iOS.webView",
+    "method"
+  ],
+  [
     "src/dom/bounding.js",
     "file/src/dom/Bounding.js.html",
     "src/dom/Bounding.js",
@@ -1156,6 +1468,156 @@ window.esdocSearchIndex = [
     "class/src/event/Events.js~Events.html#instance-member-type",
     "src/event/Events.js~Events#type",
     "member"
+  ],
+  [
+    "src/event/nativeresizing.js",
+    "file/src/event/NativeResizing.js.html",
+    "src/event/NativeResizing.js",
+    "file"
+  ],
+  [
+    "src/event/nativeresizing.js~nativeresizing#body",
+    "class/src/event/NativeResizing.js~NativeResizing.html#instance-member-body",
+    "src/event/NativeResizing.js~NativeResizing#body",
+    "member"
+  ],
+  [
+    "src/event/nativeresizing.js~nativeresizing#constructor",
+    "class/src/event/NativeResizing.js~NativeResizing.html#instance-constructor-constructor",
+    "src/event/NativeResizing.js~NativeResizing#constructor",
+    "method"
+  ],
+  [
+    "src/event/nativeresizing.js~nativeresizing#events",
+    "class/src/event/NativeResizing.js~NativeResizing.html#instance-member-events",
+    "src/event/NativeResizing.js~NativeResizing#events",
+    "member"
+  ],
+  [
+    "src/event/nativeresizing.js~nativeresizing#fire",
+    "class/src/event/NativeResizing.js~NativeResizing.html#instance-method-fire",
+    "src/event/NativeResizing.js~NativeResizing#fire",
+    "method"
+  ],
+  [
+    "src/event/nativeresizing.js~nativeresizing#onupdate",
+    "class/src/event/NativeResizing.js~NativeResizing.html#instance-method-onUpdate",
+    "src/event/NativeResizing.js~NativeResizing#onUpdate",
+    "method"
+  ],
+  [
+    "src/event/nativeresizing.js~nativeresizing#previous",
+    "class/src/event/NativeResizing.js~NativeResizing.html#instance-member-previous",
+    "src/event/NativeResizing.js~NativeResizing#previous",
+    "member"
+  ],
+  [
+    "src/event/nativeresizing.js~nativeresizing#start",
+    "class/src/event/NativeResizing.js~NativeResizing.html#instance-method-start",
+    "src/event/NativeResizing.js~NativeResizing#start",
+    "method"
+  ],
+  [
+    "src/event/nativeresizing.js~nativeresizing#stop",
+    "class/src/event/NativeResizing.js~NativeResizing.html#instance-method-stop",
+    "src/event/NativeResizing.js~NativeResizing#stop",
+    "method"
+  ],
+  [
+    "src/event/nativeresizing.js~nativeresizing#timer",
+    "class/src/event/NativeResizing.js~NativeResizing.html#instance-member-timer",
+    "src/event/NativeResizing.js~NativeResizing#timer",
+    "member"
+  ],
+  [
+    "src/event/nativeresizing.js~nativeresizing#window",
+    "class/src/event/NativeResizing.js~NativeResizing.html#instance-member-window",
+    "src/event/NativeResizing.js~NativeResizing#window",
+    "member"
+  ],
+  [
+    "src/event/nativeresizingsingle.js",
+    "file/src/event/NativeResizingSingle.js.html",
+    "src/event/NativeResizingSingle.js",
+    "file"
+  ],
+  [
+    "src/event/nativeresizingsingle.js~resizingsingle.factory",
+    "class/src/event/NativeResizingSingle.js~ResizingSingle.html#static-method-factory",
+    "src/event/NativeResizingSingle.js~ResizingSingle.factory",
+    "method"
+  ],
+  [
+    "src/event/resizing.js",
+    "file/src/event/Resizing.js.html",
+    "src/event/Resizing.js",
+    "file"
+  ],
+  [
+    "src/event/resizing.js~resizing#body",
+    "class/src/event/Resizing.js~Resizing.html#instance-member-body",
+    "src/event/Resizing.js~Resizing#body",
+    "member"
+  ],
+  [
+    "src/event/resizing.js~resizing#constructor",
+    "class/src/event/Resizing.js~Resizing.html#instance-constructor-constructor",
+    "src/event/Resizing.js~Resizing#constructor",
+    "method"
+  ],
+  [
+    "src/event/resizing.js~resizing#events",
+    "class/src/event/Resizing.js~Resizing.html#instance-member-events",
+    "src/event/Resizing.js~Resizing#events",
+    "member"
+  ],
+  [
+    "src/event/resizing.js~resizing#onupdate",
+    "class/src/event/Resizing.js~Resizing.html#instance-method-onUpdate",
+    "src/event/Resizing.js~Resizing#onUpdate",
+    "method"
+  ],
+  [
+    "src/event/resizing.js~resizing#previous",
+    "class/src/event/Resizing.js~Resizing.html#instance-member-previous",
+    "src/event/Resizing.js~Resizing#previous",
+    "member"
+  ],
+  [
+    "src/event/resizing.js~resizing#start",
+    "class/src/event/Resizing.js~Resizing.html#instance-method-start",
+    "src/event/Resizing.js~Resizing#start",
+    "method"
+  ],
+  [
+    "src/event/resizing.js~resizing#stop",
+    "class/src/event/Resizing.js~Resizing.html#instance-method-stop",
+    "src/event/Resizing.js~Resizing#stop",
+    "method"
+  ],
+  [
+    "src/event/resizing.js~resizing#window",
+    "class/src/event/Resizing.js~Resizing.html#instance-member-window",
+    "src/event/Resizing.js~Resizing#window",
+    "member"
+  ],
+  [
+    "src/event/resizing.js~resizing.update",
+    "class/src/event/Resizing.js~Resizing.html#static-member-UPDATE",
+    "src/event/Resizing.js~Resizing.UPDATE",
+    "member"
+  ],
+  [
+    "src/event/resizingsingle.js",
+    "file/src/event/ResizingSingle.js.html",
+    "src/event/ResizingSingle.js",
+    "file"
+  ],
+  [
+    "src/event/resizingsingle.js~resizingsingle.factory",
+    "class/src/event/ResizingSingle.js~ResizingSingle.html#static-method-factory",
+    "src/event/ResizingSingle.js~ResizingSingle.factory",
+    "method"
   ],
   [
     "src/event/rising.js",
@@ -1614,6 +2076,30 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/event/events/resizingevents.js",
+    "file/src/event/events/ResizingEvents.js.html",
+    "src/event/events/ResizingEvents.js",
+    "file"
+  ],
+  [
+    "src/event/events/resizingevents.js~resizingevents#bodyheight",
+    "class/src/event/events/ResizingEvents.js~ResizingEvents.html#instance-member-bodyHeight",
+    "src/event/events/ResizingEvents.js~ResizingEvents#bodyHeight",
+    "member"
+  ],
+  [
+    "src/event/events/resizingevents.js~resizingevents#bodywidth",
+    "class/src/event/events/ResizingEvents.js~ResizingEvents.html#instance-member-bodyWidth",
+    "src/event/events/ResizingEvents.js~ResizingEvents#bodyWidth",
+    "member"
+  ],
+  [
+    "src/event/events/resizingevents.js~resizingevents#constructor",
+    "class/src/event/events/ResizingEvents.js~ResizingEvents.html#instance-constructor-constructor",
+    "src/event/events/ResizingEvents.js~ResizingEvents#constructor",
+    "method"
+  ],
+  [
     "src/event/events/risingevents.js",
     "file/src/event/events/RisingEvents.js.html",
     "src/event/events/RisingEvents.js",
@@ -2026,6 +2512,36 @@ window.esdocSearchIndex = [
     "class/src/net/Queries.js~Queries.html#static-method-parse",
     "src/net/Queries.js~Queries.parse",
     "method"
+  ],
+  [
+    "src/polyfill/index.js",
+    "file/src/polyfill/index.js.html",
+    "src/polyfill/index.js",
+    "file"
+  ],
+  [
+    "src/polyfill/method/animationframe.js",
+    "file/src/polyfill/method/animationFrame.js.html",
+    "src/polyfill/method/animationFrame.js",
+    "file"
+  ],
+  [
+    "src/polyfill/method/babel.js",
+    "file/src/polyfill/method/babel.js.html",
+    "src/polyfill/method/babel.js",
+    "file"
+  ],
+  [
+    "src/polyfill/method/fetch.js",
+    "file/src/polyfill/method/fetch.js.html",
+    "src/polyfill/method/fetch.js",
+    "file"
+  ],
+  [
+    "src/polyfill/method/promise.js",
+    "file/src/polyfill/method/promise.js.html",
+    "src/polyfill/method/promise.js",
+    "file"
   ],
   [
     "src/tick/cycle.js",

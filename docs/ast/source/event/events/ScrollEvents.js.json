@@ -1,7 +1,7 @@
 {
   "type": "File",
   "start": 0,
-  "end": 1619,
+  "end": 1626,
   "loc": {
     "start": {
       "line": 1,
@@ -15,7 +15,7 @@
   "program": {
     "type": "Program",
     "start": 0,
-    "end": 1619,
+    "end": 1626,
     "loc": {
       "start": {
         "line": 1,
@@ -138,7 +138,7 @@
       {
         "type": "ExportDefaultDeclaration",
         "start": 400,
-        "end": 1618,
+        "end": 1625,
         "loc": {
           "start": {
             "line": 18,
@@ -152,7 +152,7 @@
         "declaration": {
           "type": "ClassDeclaration",
           "start": 415,
-          "end": 1618,
+          "end": 1625,
           "loc": {
             "start": {
               "line": 18,
@@ -201,7 +201,7 @@
           "body": {
             "type": "ClassBody",
             "start": 449,
-            "end": 1618,
+            "end": 1625,
             "loc": {
               "start": {
                 "line": 18,
@@ -216,7 +216,7 @@
               {
                 "type": "ClassMethod",
                 "start": 756,
-                "end": 1616,
+                "end": 1623,
                 "loc": {
                   "start": {
                     "line": 28,
@@ -340,7 +340,7 @@
                 "body": {
                   "type": "BlockStatement",
                   "start": 809,
-                  "end": 1616,
+                  "end": 1623,
                   "loc": {
                     "start": {
                       "line": 28,
@@ -610,9 +610,9 @@
                       "trailingComments": [
                         {
                           "type": "CommentBlock",
-                          "value": "*\n     * オリジナルイベント(window.onscroll)\n     * @type {?Event}\n     ",
+                          "value": "*\n     * オリジナルイベント(window.onscroll)\n     * @type {?Events|Event}\n     ",
                           "start": 944,
-                          "end": 1011,
+                          "end": 1018,
                           "loc": {
                             "start": {
                               "line": 35,
@@ -628,8 +628,8 @@
                     },
                     {
                       "type": "ExpressionStatement",
-                      "start": 1016,
-                      "end": 1037,
+                      "start": 1023,
+                      "end": 1044,
                       "loc": {
                         "start": {
                           "line": 39,
@@ -642,8 +642,8 @@
                       },
                       "expression": {
                         "type": "AssignmentExpression",
-                        "start": 1016,
-                        "end": 1036,
+                        "start": 1023,
+                        "end": 1043,
                         "loc": {
                           "start": {
                             "line": 39,
@@ -657,8 +657,8 @@
                         "operator": "=",
                         "left": {
                           "type": "MemberExpression",
-                          "start": 1016,
-                          "end": 1029,
+                          "start": 1023,
+                          "end": 1036,
                           "loc": {
                             "start": {
                               "line": 39,
@@ -671,8 +671,8 @@
                           },
                           "object": {
                             "type": "ThisExpression",
-                            "start": 1016,
-                            "end": 1020,
+                            "start": 1023,
+                            "end": 1027,
                             "loc": {
                               "start": {
                                 "line": 39,
@@ -687,8 +687,8 @@
                           },
                           "property": {
                             "type": "Identifier",
-                            "start": 1021,
-                            "end": 1029,
+                            "start": 1028,
+                            "end": 1036,
                             "loc": {
                               "start": {
                                 "line": 39,
@@ -707,8 +707,8 @@
                         },
                         "right": {
                           "type": "NullLiteral",
-                          "start": 1032,
-                          "end": 1036,
+                          "start": 1039,
+                          "end": 1043,
                           "loc": {
                             "start": {
                               "line": 39,
@@ -725,9 +725,9 @@
                       "leadingComments": [
                         {
                           "type": "CommentBlock",
-                          "value": "*\n     * オリジナルイベント(window.onscroll)\n     * @type {?Event}\n     ",
+                          "value": "*\n     * オリジナルイベント(window.onscroll)\n     * @type {?Events|Event}\n     ",
                           "start": 944,
-                          "end": 1011,
+                          "end": 1018,
                           "loc": {
                             "start": {
                               "line": 35,
@@ -744,8 +744,8 @@
                         {
                           "type": "CommentBlock",
                           "value": "*\n     * scroll top 現在位置(px)\n     * @type {number}\n     ",
-                          "start": 1042,
-                          "end": 1102,
+                          "start": 1049,
+                          "end": 1109,
                           "loc": {
                             "start": {
                               "line": 40,
@@ -761,8 +761,8 @@
                     },
                     {
                       "type": "ExpressionStatement",
-                      "start": 1107,
-                      "end": 1118,
+                      "start": 1114,
+                      "end": 1125,
                       "loc": {
                         "start": {
                           "line": 44,
@@ -775,8 +775,8 @@
                       },
                       "expression": {
                         "type": "AssignmentExpression",
-                        "start": 1107,
-                        "end": 1117,
+                        "start": 1114,
+                        "end": 1124,
                         "loc": {
                           "start": {
                             "line": 44,
@@ -790,8 +790,8 @@
                         "operator": "=",
                         "left": {
                           "type": "MemberExpression",
-                          "start": 1107,
-                          "end": 1113,
+                          "start": 1114,
+                          "end": 1120,
                           "loc": {
                             "start": {
                               "line": 44,
@@ -804,8 +804,8 @@
                           },
                           "object": {
                             "type": "ThisExpression",
-                            "start": 1107,
-                            "end": 1111,
+                            "start": 1114,
+                            "end": 1118,
                             "loc": {
                               "start": {
                                 "line": 44,
@@ -820,8 +820,8 @@
                           },
                           "property": {
                             "type": "Identifier",
-                            "start": 1112,
-                            "end": 1113,
+                            "start": 1119,
+                            "end": 1120,
                             "loc": {
                               "start": {
                                 "line": 44,
@@ -840,8 +840,8 @@
                         },
                         "right": {
                           "type": "NumericLiteral",
-                          "start": 1116,
-                          "end": 1117,
+                          "start": 1123,
+                          "end": 1124,
                           "loc": {
                             "start": {
                               "line": 44,
@@ -864,8 +864,8 @@
                         {
                           "type": "CommentBlock",
                           "value": "*\n     * scroll top 現在位置(px)\n     * @type {number}\n     ",
-                          "start": 1042,
-                          "end": 1102,
+                          "start": 1049,
+                          "end": 1109,
                           "loc": {
                             "start": {
                               "line": 40,
@@ -882,8 +882,8 @@
                         {
                           "type": "CommentBlock",
                           "value": "*\n     * window innerHeight\n     * @type {number}\n     ",
-                          "start": 1123,
-                          "end": 1182,
+                          "start": 1130,
+                          "end": 1189,
                           "loc": {
                             "start": {
                               "line": 45,
@@ -899,8 +899,8 @@
                     },
                     {
                       "type": "ExpressionStatement",
-                      "start": 1187,
-                      "end": 1203,
+                      "start": 1194,
+                      "end": 1210,
                       "loc": {
                         "start": {
                           "line": 49,
@@ -913,8 +913,8 @@
                       },
                       "expression": {
                         "type": "AssignmentExpression",
-                        "start": 1187,
-                        "end": 1202,
+                        "start": 1194,
+                        "end": 1209,
                         "loc": {
                           "start": {
                             "line": 49,
@@ -928,8 +928,8 @@
                         "operator": "=",
                         "left": {
                           "type": "MemberExpression",
-                          "start": 1187,
-                          "end": 1198,
+                          "start": 1194,
+                          "end": 1205,
                           "loc": {
                             "start": {
                               "line": 49,
@@ -942,8 +942,8 @@
                           },
                           "object": {
                             "type": "ThisExpression",
-                            "start": 1187,
-                            "end": 1191,
+                            "start": 1194,
+                            "end": 1198,
                             "loc": {
                               "start": {
                                 "line": 49,
@@ -958,8 +958,8 @@
                           },
                           "property": {
                             "type": "Identifier",
-                            "start": 1192,
-                            "end": 1198,
+                            "start": 1199,
+                            "end": 1205,
                             "loc": {
                               "start": {
                                 "line": 49,
@@ -978,8 +978,8 @@
                         },
                         "right": {
                           "type": "NumericLiteral",
-                          "start": 1201,
-                          "end": 1202,
+                          "start": 1208,
+                          "end": 1209,
                           "loc": {
                             "start": {
                               "line": 49,
@@ -1002,8 +1002,8 @@
                         {
                           "type": "CommentBlock",
                           "value": "*\n     * window innerHeight\n     * @type {number}\n     ",
-                          "start": 1123,
-                          "end": 1182,
+                          "start": 1130,
+                          "end": 1189,
                           "loc": {
                             "start": {
                               "line": 45,
@@ -1020,8 +1020,8 @@
                         {
                           "type": "CommentBlock",
                           "value": "*\n     * window innerWidth\n     * @type {number}\n     ",
-                          "start": 1208,
-                          "end": 1266,
+                          "start": 1215,
+                          "end": 1273,
                           "loc": {
                             "start": {
                               "line": 50,
@@ -1037,8 +1037,8 @@
                     },
                     {
                       "type": "ExpressionStatement",
-                      "start": 1271,
-                      "end": 1286,
+                      "start": 1278,
+                      "end": 1293,
                       "loc": {
                         "start": {
                           "line": 54,
@@ -1051,8 +1051,8 @@
                       },
                       "expression": {
                         "type": "AssignmentExpression",
-                        "start": 1271,
-                        "end": 1285,
+                        "start": 1278,
+                        "end": 1292,
                         "loc": {
                           "start": {
                             "line": 54,
@@ -1066,8 +1066,8 @@
                         "operator": "=",
                         "left": {
                           "type": "MemberExpression",
-                          "start": 1271,
-                          "end": 1281,
+                          "start": 1278,
+                          "end": 1288,
                           "loc": {
                             "start": {
                               "line": 54,
@@ -1080,8 +1080,8 @@
                           },
                           "object": {
                             "type": "ThisExpression",
-                            "start": 1271,
-                            "end": 1275,
+                            "start": 1278,
+                            "end": 1282,
                             "loc": {
                               "start": {
                                 "line": 54,
@@ -1096,8 +1096,8 @@
                           },
                           "property": {
                             "type": "Identifier",
-                            "start": 1276,
-                            "end": 1281,
+                            "start": 1283,
+                            "end": 1288,
                             "loc": {
                               "start": {
                                 "line": 54,
@@ -1116,8 +1116,8 @@
                         },
                         "right": {
                           "type": "NumericLiteral",
-                          "start": 1284,
-                          "end": 1285,
+                          "start": 1291,
+                          "end": 1292,
                           "loc": {
                             "start": {
                               "line": 54,
@@ -1140,8 +1140,8 @@
                         {
                           "type": "CommentBlock",
                           "value": "*\n     * window innerWidth\n     * @type {number}\n     ",
-                          "start": 1208,
-                          "end": 1266,
+                          "start": 1215,
+                          "end": 1273,
                           "loc": {
                             "start": {
                               "line": 50,
@@ -1158,8 +1158,8 @@
                         {
                           "type": "CommentBlock",
                           "value": "*\n     * window 下端位置(scroll top + window height)\n     * @type {number}\n     ",
-                          "start": 1291,
-                          "end": 1371,
+                          "start": 1298,
+                          "end": 1378,
                           "loc": {
                             "start": {
                               "line": 55,
@@ -1175,8 +1175,8 @@
                     },
                     {
                       "type": "ExpressionStatement",
-                      "start": 1376,
-                      "end": 1392,
+                      "start": 1383,
+                      "end": 1399,
                       "loc": {
                         "start": {
                           "line": 59,
@@ -1189,8 +1189,8 @@
                       },
                       "expression": {
                         "type": "AssignmentExpression",
-                        "start": 1376,
-                        "end": 1391,
+                        "start": 1383,
+                        "end": 1398,
                         "loc": {
                           "start": {
                             "line": 59,
@@ -1204,8 +1204,8 @@
                         "operator": "=",
                         "left": {
                           "type": "MemberExpression",
-                          "start": 1376,
-                          "end": 1387,
+                          "start": 1383,
+                          "end": 1394,
                           "loc": {
                             "start": {
                               "line": 59,
@@ -1218,8 +1218,8 @@
                           },
                           "object": {
                             "type": "ThisExpression",
-                            "start": 1376,
-                            "end": 1380,
+                            "start": 1383,
+                            "end": 1387,
                             "loc": {
                               "start": {
                                 "line": 59,
@@ -1234,8 +1234,8 @@
                           },
                           "property": {
                             "type": "Identifier",
-                            "start": 1381,
-                            "end": 1387,
+                            "start": 1388,
+                            "end": 1394,
                             "loc": {
                               "start": {
                                 "line": 59,
@@ -1254,8 +1254,8 @@
                         },
                         "right": {
                           "type": "NumericLiteral",
-                          "start": 1390,
-                          "end": 1391,
+                          "start": 1397,
+                          "end": 1398,
                           "loc": {
                             "start": {
                               "line": 59,
@@ -1278,8 +1278,8 @@
                         {
                           "type": "CommentBlock",
                           "value": "*\n     * window 下端位置(scroll top + window height)\n     * @type {number}\n     ",
-                          "start": 1291,
-                          "end": 1371,
+                          "start": 1298,
+                          "end": 1378,
                           "loc": {
                             "start": {
                               "line": 55,
@@ -1296,8 +1296,8 @@
                         {
                           "type": "CommentBlock",
                           "value": "*\n     * scroll top 位置が前回と違うかを表すフラッグ, true: 違う\n     * @type {boolean}\n     ",
-                          "start": 1397,
-                          "end": 1476,
+                          "start": 1404,
+                          "end": 1483,
                           "loc": {
                             "start": {
                               "line": 60,
@@ -1313,8 +1313,8 @@
                     },
                     {
                       "type": "ExpressionStatement",
-                      "start": 1481,
-                      "end": 1502,
+                      "start": 1488,
+                      "end": 1509,
                       "loc": {
                         "start": {
                           "line": 64,
@@ -1327,8 +1327,8 @@
                       },
                       "expression": {
                         "type": "AssignmentExpression",
-                        "start": 1481,
-                        "end": 1501,
+                        "start": 1488,
+                        "end": 1508,
                         "loc": {
                           "start": {
                             "line": 64,
@@ -1342,8 +1342,8 @@
                         "operator": "=",
                         "left": {
                           "type": "MemberExpression",
-                          "start": 1481,
-                          "end": 1493,
+                          "start": 1488,
+                          "end": 1500,
                           "loc": {
                             "start": {
                               "line": 64,
@@ -1356,8 +1356,8 @@
                           },
                           "object": {
                             "type": "ThisExpression",
-                            "start": 1481,
-                            "end": 1485,
+                            "start": 1488,
+                            "end": 1492,
                             "loc": {
                               "start": {
                                 "line": 64,
@@ -1372,8 +1372,8 @@
                           },
                           "property": {
                             "type": "Identifier",
-                            "start": 1486,
-                            "end": 1493,
+                            "start": 1493,
+                            "end": 1500,
                             "loc": {
                               "start": {
                                 "line": 64,
@@ -1392,8 +1392,8 @@
                         },
                         "right": {
                           "type": "BooleanLiteral",
-                          "start": 1496,
-                          "end": 1501,
+                          "start": 1503,
+                          "end": 1508,
                           "loc": {
                             "start": {
                               "line": 64,
@@ -1412,8 +1412,8 @@
                         {
                           "type": "CommentBlock",
                           "value": "*\n     * scroll top 位置が前回と違うかを表すフラッグ, true: 違う\n     * @type {boolean}\n     ",
-                          "start": 1397,
-                          "end": 1476,
+                          "start": 1404,
+                          "end": 1483,
                           "loc": {
                             "start": {
                               "line": 60,
@@ -1430,8 +1430,8 @@
                         {
                           "type": "CommentBlock",
                           "value": "*\n     * UP / DOWN と前回からの移動距離(px), 正(+): scroll down\n     * @type {number}\n     ",
-                          "start": 1507,
-                          "end": 1591,
+                          "start": 1514,
+                          "end": 1598,
                           "loc": {
                             "start": {
                               "line": 65,
@@ -1447,8 +1447,8 @@
                     },
                     {
                       "type": "ExpressionStatement",
-                      "start": 1596,
-                      "end": 1612,
+                      "start": 1603,
+                      "end": 1619,
                       "loc": {
                         "start": {
                           "line": 69,
@@ -1461,8 +1461,8 @@
                       },
                       "expression": {
                         "type": "AssignmentExpression",
-                        "start": 1596,
-                        "end": 1611,
+                        "start": 1603,
+                        "end": 1618,
                         "loc": {
                           "start": {
                             "line": 69,
@@ -1476,8 +1476,8 @@
                         "operator": "=",
                         "left": {
                           "type": "MemberExpression",
-                          "start": 1596,
-                          "end": 1607,
+                          "start": 1603,
+                          "end": 1614,
                           "loc": {
                             "start": {
                               "line": 69,
@@ -1490,8 +1490,8 @@
                           },
                           "object": {
                             "type": "ThisExpression",
-                            "start": 1596,
-                            "end": 1600,
+                            "start": 1603,
+                            "end": 1607,
                             "loc": {
                               "start": {
                                 "line": 69,
@@ -1506,8 +1506,8 @@
                           },
                           "property": {
                             "type": "Identifier",
-                            "start": 1601,
-                            "end": 1607,
+                            "start": 1608,
+                            "end": 1614,
                             "loc": {
                               "start": {
                                 "line": 69,
@@ -1526,8 +1526,8 @@
                         },
                         "right": {
                           "type": "NumericLiteral",
-                          "start": 1610,
-                          "end": 1611,
+                          "start": 1617,
+                          "end": 1618,
                           "loc": {
                             "start": {
                               "line": 69,
@@ -1550,8 +1550,8 @@
                         {
                           "type": "CommentBlock",
                           "value": "*\n     * UP / DOWN と前回からの移動距離(px), 正(+): scroll down\n     * @type {number}\n     ",
-                          "start": 1507,
-                          "end": 1591,
+                          "start": 1514,
+                          "end": 1598,
                           "loc": {
                             "start": {
                               "line": 65,
@@ -1794,9 +1794,9 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n     * オリジナルイベント(window.onscroll)\n     * @type {?Event}\n     ",
+      "value": "*\n     * オリジナルイベント(window.onscroll)\n     * @type {?Events|Event}\n     ",
       "start": 944,
-      "end": 1011,
+      "end": 1018,
       "loc": {
         "start": {
           "line": 35,
@@ -1811,8 +1811,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n     * scroll top 現在位置(px)\n     * @type {number}\n     ",
-      "start": 1042,
-      "end": 1102,
+      "start": 1049,
+      "end": 1109,
       "loc": {
         "start": {
           "line": 40,
@@ -1827,8 +1827,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n     * window innerHeight\n     * @type {number}\n     ",
-      "start": 1123,
-      "end": 1182,
+      "start": 1130,
+      "end": 1189,
       "loc": {
         "start": {
           "line": 45,
@@ -1843,8 +1843,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n     * window innerWidth\n     * @type {number}\n     ",
-      "start": 1208,
-      "end": 1266,
+      "start": 1215,
+      "end": 1273,
       "loc": {
         "start": {
           "line": 50,
@@ -1859,8 +1859,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n     * window 下端位置(scroll top + window height)\n     * @type {number}\n     ",
-      "start": 1291,
-      "end": 1371,
+      "start": 1298,
+      "end": 1378,
       "loc": {
         "start": {
           "line": 55,
@@ -1875,8 +1875,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n     * scroll top 位置が前回と違うかを表すフラッグ, true: 違う\n     * @type {boolean}\n     ",
-      "start": 1397,
-      "end": 1476,
+      "start": 1404,
+      "end": 1483,
       "loc": {
         "start": {
           "line": 60,
@@ -1891,8 +1891,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n     * UP / DOWN と前回からの移動距離(px), 正(+): scroll down\n     * @type {number}\n     ",
-      "start": 1507,
-      "end": 1591,
+      "start": 1514,
+      "end": 1598,
       "loc": {
         "start": {
           "line": 65,
@@ -3047,9 +3047,9 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n     * オリジナルイベント(window.onscroll)\n     * @type {?Event}\n     ",
+      "value": "*\n     * オリジナルイベント(window.onscroll)\n     * @type {?Events|Event}\n     ",
       "start": 944,
-      "end": 1011,
+      "end": 1018,
       "loc": {
         "start": {
           "line": 35,
@@ -3076,8 +3076,8 @@
         "updateContext": null
       },
       "value": "this",
-      "start": 1016,
-      "end": 1020,
+      "start": 1023,
+      "end": 1027,
       "loc": {
         "start": {
           "line": 39,
@@ -3102,8 +3102,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1020,
-      "end": 1021,
+      "start": 1027,
+      "end": 1028,
       "loc": {
         "start": {
           "line": 39,
@@ -3128,8 +3128,8 @@
         "binop": null
       },
       "value": "original",
-      "start": 1021,
-      "end": 1029,
+      "start": 1028,
+      "end": 1036,
       "loc": {
         "start": {
           "line": 39,
@@ -3155,8 +3155,8 @@
         "updateContext": null
       },
       "value": "=",
-      "start": 1030,
-      "end": 1031,
+      "start": 1037,
+      "end": 1038,
       "loc": {
         "start": {
           "line": 39,
@@ -3183,8 +3183,8 @@
         "updateContext": null
       },
       "value": "null",
-      "start": 1032,
-      "end": 1036,
+      "start": 1039,
+      "end": 1043,
       "loc": {
         "start": {
           "line": 39,
@@ -3209,8 +3209,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1036,
-      "end": 1037,
+      "start": 1043,
+      "end": 1044,
       "loc": {
         "start": {
           "line": 39,
@@ -3225,8 +3225,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n     * scroll top 現在位置(px)\n     * @type {number}\n     ",
-      "start": 1042,
-      "end": 1102,
+      "start": 1049,
+      "end": 1109,
       "loc": {
         "start": {
           "line": 40,
@@ -3253,8 +3253,8 @@
         "updateContext": null
       },
       "value": "this",
-      "start": 1107,
-      "end": 1111,
+      "start": 1114,
+      "end": 1118,
       "loc": {
         "start": {
           "line": 44,
@@ -3279,8 +3279,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1111,
-      "end": 1112,
+      "start": 1118,
+      "end": 1119,
       "loc": {
         "start": {
           "line": 44,
@@ -3305,8 +3305,8 @@
         "binop": null
       },
       "value": "y",
-      "start": 1112,
-      "end": 1113,
+      "start": 1119,
+      "end": 1120,
       "loc": {
         "start": {
           "line": 44,
@@ -3332,8 +3332,8 @@
         "updateContext": null
       },
       "value": "=",
-      "start": 1114,
-      "end": 1115,
+      "start": 1121,
+      "end": 1122,
       "loc": {
         "start": {
           "line": 44,
@@ -3359,8 +3359,8 @@
         "updateContext": null
       },
       "value": 0,
-      "start": 1116,
-      "end": 1117,
+      "start": 1123,
+      "end": 1124,
       "loc": {
         "start": {
           "line": 44,
@@ -3385,8 +3385,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1117,
-      "end": 1118,
+      "start": 1124,
+      "end": 1125,
       "loc": {
         "start": {
           "line": 44,
@@ -3401,8 +3401,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n     * window innerHeight\n     * @type {number}\n     ",
-      "start": 1123,
-      "end": 1182,
+      "start": 1130,
+      "end": 1189,
       "loc": {
         "start": {
           "line": 45,
@@ -3429,8 +3429,8 @@
         "updateContext": null
       },
       "value": "this",
-      "start": 1187,
-      "end": 1191,
+      "start": 1194,
+      "end": 1198,
       "loc": {
         "start": {
           "line": 49,
@@ -3455,8 +3455,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1191,
-      "end": 1192,
+      "start": 1198,
+      "end": 1199,
       "loc": {
         "start": {
           "line": 49,
@@ -3481,8 +3481,8 @@
         "binop": null
       },
       "value": "height",
-      "start": 1192,
-      "end": 1198,
+      "start": 1199,
+      "end": 1205,
       "loc": {
         "start": {
           "line": 49,
@@ -3508,8 +3508,8 @@
         "updateContext": null
       },
       "value": "=",
-      "start": 1199,
-      "end": 1200,
+      "start": 1206,
+      "end": 1207,
       "loc": {
         "start": {
           "line": 49,
@@ -3535,8 +3535,8 @@
         "updateContext": null
       },
       "value": 0,
-      "start": 1201,
-      "end": 1202,
+      "start": 1208,
+      "end": 1209,
       "loc": {
         "start": {
           "line": 49,
@@ -3561,8 +3561,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1202,
-      "end": 1203,
+      "start": 1209,
+      "end": 1210,
       "loc": {
         "start": {
           "line": 49,
@@ -3577,8 +3577,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n     * window innerWidth\n     * @type {number}\n     ",
-      "start": 1208,
-      "end": 1266,
+      "start": 1215,
+      "end": 1273,
       "loc": {
         "start": {
           "line": 50,
@@ -3605,8 +3605,8 @@
         "updateContext": null
       },
       "value": "this",
-      "start": 1271,
-      "end": 1275,
+      "start": 1278,
+      "end": 1282,
       "loc": {
         "start": {
           "line": 54,
@@ -3631,8 +3631,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1275,
-      "end": 1276,
+      "start": 1282,
+      "end": 1283,
       "loc": {
         "start": {
           "line": 54,
@@ -3657,8 +3657,8 @@
         "binop": null
       },
       "value": "width",
-      "start": 1276,
-      "end": 1281,
+      "start": 1283,
+      "end": 1288,
       "loc": {
         "start": {
           "line": 54,
@@ -3684,8 +3684,8 @@
         "updateContext": null
       },
       "value": "=",
-      "start": 1282,
-      "end": 1283,
+      "start": 1289,
+      "end": 1290,
       "loc": {
         "start": {
           "line": 54,
@@ -3711,8 +3711,8 @@
         "updateContext": null
       },
       "value": 0,
-      "start": 1284,
-      "end": 1285,
+      "start": 1291,
+      "end": 1292,
       "loc": {
         "start": {
           "line": 54,
@@ -3737,8 +3737,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1285,
-      "end": 1286,
+      "start": 1292,
+      "end": 1293,
       "loc": {
         "start": {
           "line": 54,
@@ -3753,8 +3753,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n     * window 下端位置(scroll top + window height)\n     * @type {number}\n     ",
-      "start": 1291,
-      "end": 1371,
+      "start": 1298,
+      "end": 1378,
       "loc": {
         "start": {
           "line": 55,
@@ -3781,8 +3781,8 @@
         "updateContext": null
       },
       "value": "this",
-      "start": 1376,
-      "end": 1380,
+      "start": 1383,
+      "end": 1387,
       "loc": {
         "start": {
           "line": 59,
@@ -3807,8 +3807,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1380,
-      "end": 1381,
+      "start": 1387,
+      "end": 1388,
       "loc": {
         "start": {
           "line": 59,
@@ -3833,8 +3833,8 @@
         "binop": null
       },
       "value": "bottom",
-      "start": 1381,
-      "end": 1387,
+      "start": 1388,
+      "end": 1394,
       "loc": {
         "start": {
           "line": 59,
@@ -3860,8 +3860,8 @@
         "updateContext": null
       },
       "value": "=",
-      "start": 1388,
-      "end": 1389,
+      "start": 1395,
+      "end": 1396,
       "loc": {
         "start": {
           "line": 59,
@@ -3887,8 +3887,8 @@
         "updateContext": null
       },
       "value": 0,
-      "start": 1390,
-      "end": 1391,
+      "start": 1397,
+      "end": 1398,
       "loc": {
         "start": {
           "line": 59,
@@ -3913,8 +3913,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1391,
-      "end": 1392,
+      "start": 1398,
+      "end": 1399,
       "loc": {
         "start": {
           "line": 59,
@@ -3929,8 +3929,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n     * scroll top 位置が前回と違うかを表すフラッグ, true: 違う\n     * @type {boolean}\n     ",
-      "start": 1397,
-      "end": 1476,
+      "start": 1404,
+      "end": 1483,
       "loc": {
         "start": {
           "line": 60,
@@ -3957,8 +3957,8 @@
         "updateContext": null
       },
       "value": "this",
-      "start": 1481,
-      "end": 1485,
+      "start": 1488,
+      "end": 1492,
       "loc": {
         "start": {
           "line": 64,
@@ -3983,8 +3983,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1485,
-      "end": 1486,
+      "start": 1492,
+      "end": 1493,
       "loc": {
         "start": {
           "line": 64,
@@ -4009,8 +4009,8 @@
         "binop": null
       },
       "value": "changed",
-      "start": 1486,
-      "end": 1493,
+      "start": 1493,
+      "end": 1500,
       "loc": {
         "start": {
           "line": 64,
@@ -4036,8 +4036,8 @@
         "updateContext": null
       },
       "value": "=",
-      "start": 1494,
-      "end": 1495,
+      "start": 1501,
+      "end": 1502,
       "loc": {
         "start": {
           "line": 64,
@@ -4064,8 +4064,8 @@
         "updateContext": null
       },
       "value": "false",
-      "start": 1496,
-      "end": 1501,
+      "start": 1503,
+      "end": 1508,
       "loc": {
         "start": {
           "line": 64,
@@ -4090,8 +4090,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1501,
-      "end": 1502,
+      "start": 1508,
+      "end": 1509,
       "loc": {
         "start": {
           "line": 64,
@@ -4106,8 +4106,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n     * UP / DOWN と前回からの移動距離(px), 正(+): scroll down\n     * @type {number}\n     ",
-      "start": 1507,
-      "end": 1591,
+      "start": 1514,
+      "end": 1598,
       "loc": {
         "start": {
           "line": 65,
@@ -4134,8 +4134,8 @@
         "updateContext": null
       },
       "value": "this",
-      "start": 1596,
-      "end": 1600,
+      "start": 1603,
+      "end": 1607,
       "loc": {
         "start": {
           "line": 69,
@@ -4160,8 +4160,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1600,
-      "end": 1601,
+      "start": 1607,
+      "end": 1608,
       "loc": {
         "start": {
           "line": 69,
@@ -4186,8 +4186,8 @@
         "binop": null
       },
       "value": "moving",
-      "start": 1601,
-      "end": 1607,
+      "start": 1608,
+      "end": 1614,
       "loc": {
         "start": {
           "line": 69,
@@ -4213,8 +4213,8 @@
         "updateContext": null
       },
       "value": "=",
-      "start": 1608,
-      "end": 1609,
+      "start": 1615,
+      "end": 1616,
       "loc": {
         "start": {
           "line": 69,
@@ -4240,8 +4240,8 @@
         "updateContext": null
       },
       "value": 0,
-      "start": 1610,
-      "end": 1611,
+      "start": 1617,
+      "end": 1618,
       "loc": {
         "start": {
           "line": 69,
@@ -4266,8 +4266,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1611,
-      "end": 1612,
+      "start": 1618,
+      "end": 1619,
       "loc": {
         "start": {
           "line": 69,
@@ -4291,8 +4291,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1615,
-      "end": 1616,
+      "start": 1622,
+      "end": 1623,
       "loc": {
         "start": {
           "line": 70,
@@ -4316,8 +4316,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1617,
-      "end": 1618,
+      "start": 1624,
+      "end": 1625,
       "loc": {
         "start": {
           "line": 71,
@@ -4342,8 +4342,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1619,
-      "end": 1619,
+      "start": 1626,
+      "end": 1626,
       "loc": {
         "start": {
           "line": 72,
