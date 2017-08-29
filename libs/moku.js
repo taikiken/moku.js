@@ -6970,8 +6970,8 @@ exports.default = Classes;
  * http://www.opensource.org/licenses/mit-license.html
  *
  * This notice shall be included in all copies or substantial portions of the Software.
- * 0.3.8
- * 2017-8-29 17:25:03
+ * 0.4.0
+ * 2017-8-29 18:14:20
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -7171,14 +7171,14 @@ var MOKU = {};
 
 // event
 MOKU.version = function () {
-  return '0.3.8';
+  return '0.4.0';
 };
 /**
  * build 日時を取得します
  * @returns {string}  build 日時を返します
  */
 MOKU.build = function () {
-  return '2017-8-29 17:25:03';
+  return '2017-8-29 18:14:20';
 };
 /**
  * MOKU.event

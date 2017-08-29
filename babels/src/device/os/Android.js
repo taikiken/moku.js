@@ -58,8 +58,12 @@ const version = () => {
  * `Mozilla/5.0 (Linux; U; Android 2.2.1; en-us; Nexus One Build/FRG83) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1`
  * - Windows phone
  * `Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.<OS build number>`
+ *
+ * ## MSDN
+ * ```
+ * https://msdn.microsoft.com/ja-jp/library/hh869301(v=vs.85).aspx
+ * ```
  * @see http://googlewebmastercentral.blogspot.jp/2011/03/mo-better-to-also-detect-mobile-user.html
- * @see https://msdn.microsoft.com/ja-jp/library/hh869301(v=vs.85).aspx
  */
 const init = () => {
   if (props) {
@@ -155,7 +159,7 @@ export default class Android {
   }
   /**
    * version を配列形式で取得します
-   * @returns {Array.<number>} [major: int, minor: int, build: int] 形式で返します
+   * @returns {Array.<number>} {{major: int, minor: int, build: int}} 形式で返します
    */
   static numbers() {
     init();

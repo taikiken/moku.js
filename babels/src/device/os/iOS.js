@@ -148,7 +148,7 @@ export default class iOS {
   }
   /**
    * iOS version `major.minor.build`
-   * @returns {string} iOS version NN.NN.NN 型（文字）で返します, not iOS ''
+   * @returns {string} iOS version NN.NN.NN 型（文字）で返します, not iOS 空文字列
    */
   static build() {
     init();
@@ -156,7 +156,7 @@ export default class iOS {
   }
   /**
    * version を配列形式で取得します
-   * @returns {Array.<number>} [major: int, minor: int, build: int] 形式で返します
+   * @returns {Array.<number>} {{major: int, minor: int, build: int}} 形式で返します
    */
   static numbers() {
     init();

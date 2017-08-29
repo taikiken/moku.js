@@ -99,7 +99,6 @@ export default class NativeResizing extends EventDispatcher {
   }
   /**
    * 下記のプロパティをイベント・インスタンスに追加します
-   *
    * - original {Events} - Rate Events instance
    * - y {number} - scroll top
    * - height {number} - window height
