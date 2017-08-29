@@ -34,8 +34,8 @@ export default class Scrolling extends EventDispatcher {
   //  CONSTANT / EVENT
   // ---------------------------------------------------
   /**
-   * fps: {@link Rate} で発生するイベント - scrollingScroll
-   * @event SCROLL
+   * fps: {@link Rate} で発生するイベント - scrollingUpdate
+   * @event UPDATE
    */
   static UPDATE = 'scrollingUpdate';
   // ---------------------------------------------------
@@ -140,14 +140,6 @@ export default class Scrolling extends EventDispatcher {
    * @since 0.3.8
    */
   watch() {
-    // // flag check
-    // if (this.started) {
-    //   return this;
-    // }
-    // this.started = true;
-    // loop start
-    // const rate = this.rate;
-    // rate.on(Rate.UPDATE, this.onUpdate);
     this.unwatch();
     this.watching = true;
     this.rate.on(Rate.UPDATE, this.onUpdate);
@@ -160,10 +152,6 @@ export default class Scrolling extends EventDispatcher {
    * @since 0.3.8
    */
   unwatch() {
-    // if (!this.started) {
-    //   return this;
-    // }
-    // this.started = false;
     this.rate.off(Rate.UPDATE, this.onUpdate);
     this.watching = false;
     return this;
