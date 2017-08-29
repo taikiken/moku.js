@@ -80,6 +80,18 @@ export default class Scroll extends EventDispatcher {
     }
     return instance;
   }
+  // ----------------------------------------
+  // EVENT
+  // ----------------------------------------
+  /**
+   * scroll で発生するイベントを取得します
+   * @event SCROLL
+   * @returns {string} event, scrollScroll を返します
+   * @default scrollScroll
+   */
+  static get SCROLL() {
+    return 'scrollScroll';
+  }
   // ---------------------------------------------------
   //  CONSTRUCTOR
   // ---------------------------------------------------
@@ -134,18 +146,6 @@ export default class Scroll extends EventDispatcher {
 
     // 設定済み instance を返します
     return this;
-  }
-  // ----------------------------------------
-  // EVENT
-  // ----------------------------------------
-  /**
-   * scroll で発生するイベントを取得します
-   * @event SCROLL
-   * @returns {string} event, scrollScroll を返します
-   * @default scrollScroll
-   */
-  static get SCROLL() {
-    return 'scrollScroll';
   }
   // ----------------------------------------
   // METHOD
