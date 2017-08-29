@@ -6971,7 +6971,7 @@ exports.default = Classes;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.3.8
- * 2017-8-29 16:49:49
+ * 2017-8-29 17:25:03
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -7178,7 +7178,7 @@ MOKU.version = function () {
  * @returns {string}  build 日時を返します
  */
 MOKU.build = function () {
-  return '2017-8-29 16:49:49';
+  return '2017-8-29 17:25:03';
 };
 /**
  * MOKU.event
