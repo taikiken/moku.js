@@ -28,9 +28,14 @@ const version = () => {
   if (!Array.isArray(numbers)) {
     return;
   }
-  const versions = numbers.map((number) => {
+  // 先頭の Android 4.3 削除
+  numbers.shift();
+  const versions = numbers.map((number, index) => {
     const int = parseInt(number, 10);
-    return isNaN(int) ? 0 : int;
+    if (index < 3) {
+      return isNaN(int) ? 0 : int;
+    }
+    return null;
   });
   props.build = versions.join('.');
   const major = parseInt(versions[0], 10);

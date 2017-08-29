@@ -37,6 +37,7 @@ import Scroll from './event/Scroll';
 import Scrolling from './event/Scrolling';
 import Touching from './event/Touching';
 import Wheel from './event/Wheel';
+import Resizing from './event/Resizing';
 
 // net
 import Ajax from './net/Ajax';
@@ -75,12 +76,12 @@ import Bounding from './dom/Bounding';
 import Classes from './dom/Classes';
 import Elements from './dom/Elements';
 
-// ----------------------------------------------
-// promise
-// Promise: To add to window
-if (!window.Promise) {
-  window.Promise = Promise;
-}
+// // ----------------------------------------------
+// // promise
+// // Promise: To add to window
+// if (!window.Promise) {
+//   window.Promise = Promise;
+// }
 
 /**
  * **MOKU**
@@ -111,6 +112,7 @@ MOKU.event = {
   Wheel,
   Scrolling,
   Touching,
+  Resizing,
 };
 /**
  * MOKU.net

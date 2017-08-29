@@ -171,7 +171,7 @@ module.exports = function(exec){
 /***/ (function(module, exports, __webpack_require__) {
 
 var anObject       = __webpack_require__(2)
-  , IE8_DOM_DEFINE = __webpack_require__(75)
+  , IE8_DOM_DEFINE = __webpack_require__(77)
   , toPrimitive    = __webpack_require__(35)
   , dP             = Object.defineProperty;
 
@@ -288,7 +288,7 @@ if(__webpack_require__(9)){
     , toIndex             = __webpack_require__(29)
     , toPrimitive         = __webpack_require__(35)
     , has                 = __webpack_require__(7)
-    , same                = __webpack_require__(77)
+    , same                = __webpack_require__(79)
     , classof             = __webpack_require__(61)
     , isObject            = __webpack_require__(3)
     , toObject            = __webpack_require__(22)
@@ -307,7 +307,7 @@ if(__webpack_require__(9)){
     , $iterDetect         = __webpack_require__(44)
     , setSpecies          = __webpack_require__(43)
     , arrayFill           = __webpack_require__(59)
-    , arrayCopyWithin     = __webpack_require__(82)
+    , arrayCopyWithin     = __webpack_require__(84)
     , $DP                 = __webpack_require__(6)
     , $GOPD               = __webpack_require__(17)
     , dP                  = $DP.f
@@ -819,7 +819,7 @@ var pIE            = __webpack_require__(40)
   , toIObject      = __webpack_require__(11)
   , toPrimitive    = __webpack_require__(35)
   , has            = __webpack_require__(7)
-  , IE8_DOM_DEFINE = __webpack_require__(75)
+  , IE8_DOM_DEFINE = __webpack_require__(77)
   , gOPD           = Object.getOwnPropertyDescriptor;
 
 exports.f = __webpack_require__(9) ? gOPD : function getOwnPropertyDescriptor(O, P){
@@ -1597,7 +1597,7 @@ module.exports = {};
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.14 / 15.2.3.14 Object.keys(O)
-var $keys       = __webpack_require__(76)
+var $keys       = __webpack_require__(78)
   , enumBugKeys = __webpack_require__(58);
 
 module.exports = Object.keys || function keys(O){
@@ -1645,7 +1645,7 @@ module.exports = function(it, S){
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
-var $keys      = __webpack_require__(76)
+var $keys      = __webpack_require__(78)
   , hiddenKeys = __webpack_require__(58).concat('length', 'prototype');
 
 exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O){
@@ -1658,7 +1658,7 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O){
 
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
 var anObject    = __webpack_require__(2)
-  , dPs         = __webpack_require__(118)
+  , dPs         = __webpack_require__(115)
   , enumBugKeys = __webpack_require__(58)
   , IE_PROTO    = __webpack_require__(56)('IE_PROTO')
   , Empty       = function(){ /* empty */ }
@@ -1673,7 +1673,7 @@ var createDict = function(){
     , gt     = '>'
     , iframeDocument;
   iframe.style.display = 'none';
-  __webpack_require__(78).appendChild(iframe);
+  __webpack_require__(80).appendChild(iframe);
   iframe.src = 'javascript:'; // eslint-disable-line no-script-url
   // createDict = iframe.contentWindow.Object;
   // html.removeChild(iframe);
@@ -1732,7 +1732,7 @@ var ctx      = __webpack_require__(12)
   , IObject  = __webpack_require__(54)
   , toObject = __webpack_require__(22)
   , toLength = __webpack_require__(8)
-  , asc      = __webpack_require__(119);
+  , asc      = __webpack_require__(116);
 module.exports = function(TYPE, $create){
   var IS_MAP        = TYPE == 1
     , IS_FILTER     = TYPE == 2
@@ -1911,7 +1911,7 @@ module.exports = function(exec, skipClosing){
 /***/ (function(module, exports, __webpack_require__) {
 
 var ctx         = __webpack_require__(12)
-  , call        = __webpack_require__(84)
+  , call        = __webpack_require__(86)
   , isArrayIter = __webpack_require__(62)
   , anObject    = __webpack_require__(2)
   , toLength    = __webpack_require__(8)
@@ -1953,7 +1953,7 @@ var global            = __webpack_require__(1)
   , fails             = __webpack_require__(5)
   , $iterDetect       = __webpack_require__(44)
   , setToStringTag    = __webpack_require__(30)
-  , inheritIfRequired = __webpack_require__(131);
+  , inheritIfRequired = __webpack_require__(128);
 
 module.exports = function(NAME, wrapper, methods, common, IS_MAP, IS_WEAK){
   var Base  = global[NAME]
@@ -2260,6 +2260,7 @@ var ua = navigator.userAgent;
 var app = navigator.appVersion;
 /**
  * Safari - userAgent に `Safari` が含まれる
+ * - 【注意】Safari browser を保証しない
  * @type {boolean}
  */
 var safari = !!ua.match(/safari/i);
@@ -2756,7 +2757,7 @@ module.exports = __webpack_require__(34).getIteratorMethod = function(it){
 "use strict";
 
 var addToUnscopables = __webpack_require__(33)
-  , step             = __webpack_require__(80)
+  , step             = __webpack_require__(82)
   , Iterators        = __webpack_require__(31)
   , toIObject        = __webpack_require__(11);
 
@@ -2764,7 +2765,7 @@ var addToUnscopables = __webpack_require__(33)
 // 22.1.3.13 Array.prototype.keys()
 // 22.1.3.29 Array.prototype.values()
 // 22.1.3.30 Array.prototype[@@iterator]()
-module.exports = __webpack_require__(81)(Array, 'Array', function(iterated, kind){
+module.exports = __webpack_require__(83)(Array, 'Array', function(iterated, kind){
   this._t = toIObject(iterated); // target
   this._i = 0;                   // next index
   this._k = kind;                // kind
@@ -2825,7 +2826,7 @@ module.exports = {
 
 var ctx                = __webpack_require__(12)
   , invoke             = __webpack_require__(48)
-  , html               = __webpack_require__(78)
+  , html               = __webpack_require__(80)
   , cel                = __webpack_require__(52)
   , global             = __webpack_require__(1)
   , process            = global.process
@@ -2904,7 +2905,7 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 // helper for String#{startsWith, endsWith, includes}
-var isRegExp = __webpack_require__(90)
+var isRegExp = __webpack_require__(92)
   , defined  = __webpack_require__(16);
 
 module.exports = function(that, searchString, NAME){
@@ -2969,6 +2970,694 @@ module.exports = (!$expm1
 
 /***/ }),
 /* 72 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _Scroll = __webpack_require__(73);
+
+var _Scroll2 = _interopRequireDefault(_Scroll);
+
+var _EventDispatcher2 = __webpack_require__(18);
+
+var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
+
+var _ScrollEvents = __webpack_require__(74);
+
+var _ScrollEvents2 = _interopRequireDefault(_ScrollEvents);
+
+var _Rate = __webpack_require__(98);
+
+var _Rate2 = _interopRequireDefault(_Rate);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @license inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date 2016/11/04
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Copyright (c) 2011-2015 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+// event
+
+
+// tick
+
+
+/**
+ * fps: {@link Rate} new Rate(Rate.RATE_5)` で Scroll 位置を計算します
+ *
+ * @example
+ * // 途中で rate を変更する
+ * const scrolling = new Scrolling();
+ * scrolling
+ *    .start()
+ *    .rate.setRate(Rate.RATE_12);
+ * */
+var Scrolling = function (_EventDispatcher) {
+  _inherits(Scrolling, _EventDispatcher);
+
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
+   * @param {Rate} [rate=new Rate(Rate.Rate_5)] Rate instance, scroll 監視 fps を設定します
+   */
+  function Scrolling() {
+    var rate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _Rate2.default(_Rate2.default.RATE_5);
+
+    _classCallCheck(this, Scrolling);
+
+    // @type {function}
+    // const onUpdate = this.scroll.bind(this);
+    /**
+     * bound onUpdate, Rate.UPDATE event handler
+     * @type {function}
+     */
+    var _this = _possibleConstructorReturn(this, (Scrolling.__proto__ || Object.getPrototypeOf(Scrolling)).call(this));
+
+    _this.onUpdate = _this.onUpdate.bind(_this);
+    // this.onUpdate = onUpdate;
+    // @type {ScrollEvents}
+    // const events = new ScrollEvents(Scrolling.UPDATE, this, this);
+    /**
+     * ScrollEvents instance, 発火時に使用します
+     * @type {ScrollEvents}
+     */
+    _this.events = new _ScrollEvents2.default(Scrolling.UPDATE, _this, _this);
+    // this.events = events;
+    /**
+     * 前回 scroll top 位置
+     * @type {number}
+     * @default -1
+     */
+    _this.previous = -1;
+    // /**
+    //  * start 済みフラッグ
+    //  * @type {boolean}
+    //  * @default false
+    //  */
+    // this.started = false;
+    /**
+     * Rate instance
+     * @type {?Rate}
+     */
+    _this.rate = rate;
+    /**
+     * scrolling 監視開始 flag
+     * @type {boolean}
+     * @since 0.3.8
+     */
+    _this.watching = false;
+    /**
+     * bind onNativeEvent - window.onscroll|onresize event handler
+     * @type {function}
+     */
+    _this.onNativeEvent = _this.onNativeEvent.bind(_this);
+    return _this;
+  }
+  // ----------------------------------------
+  // EVENT
+  // ----------------------------------------
+  // /**
+  //  * fps で発生するイベントを取得します
+  //  * @event SCROLL
+  //  * @returns {string} event, scrollingScroll を返します
+  //  * @default scrollingScroll
+  //  */
+  // static get UPDATE() {
+  //   return 'scrollingUpdate';
+  // }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
+  /**
+   * window.onscroll / window.onresize event handler,
+   * `this.watching` flag を確認し `watch` を call します
+   * @since 0.3.8
+   */
+
+  // ---------------------------------------------------
+  //  CONSTANT / EVENT
+  // ---------------------------------------------------
+  /**
+   * fps: {@link Rate} で発生するイベント - scrollingUpdate
+   * @event UPDATE
+   */
+
+
+  _createClass(Scrolling, [{
+    key: 'onNativeEvent',
+    value: function onNativeEvent() {
+      if (!this.watching) {
+        this.watch();
+      }
+    }
+    /**
+     * window.onscroll / window.onresize 監視を開始します
+     * @returns {Scrolling} method chain 可能なように instance を返します
+     */
+
+  }, {
+    key: 'start',
+    value: function start() {
+      window.addEventListener('scroll', this.onNativeEvent, false);
+      window.addEventListener('resize', this.onNativeEvent, false);
+      return this;
+    }
+    /**
+     * window.onscroll / window.onresize 監視を停止します
+     * @returns {Scrolling} method chain 可能なように instance を返します
+     */
+
+  }, {
+    key: 'stop',
+    value: function stop() {
+      window.removeEventListener('scroll', this.onNativeEvent);
+      window.removeEventListener('resize', this.onNativeEvent);
+      return this;
+    }
+    /**
+     * fps を監視しスクロール位置を知らせます
+     * @returns {Scrolling} method chain 可能なように instance を返します
+     * @since 0.3.8
+     */
+
+  }, {
+    key: 'watch',
+    value: function watch() {
+      this.unwatch();
+      this.watching = true;
+      this.rate.on(_Rate2.default.UPDATE, this.onUpdate);
+      // rate.start();
+      return this;
+    }
+    /**
+     * fps 監視を止めます
+     * @returns {Scrolling} method chain 可能なように instance を返します
+     * @since 0.3.8
+     */
+
+  }, {
+    key: 'unwatch',
+    value: function unwatch() {
+      this.rate.off(_Rate2.default.UPDATE, this.onUpdate);
+      this.watching = false;
+      return this;
+    }
+    /**
+     * 指定 rate(fps) 毎にスクロール位置を<br>
+     * scroll top 位置をもたせた Scrolling.UPDATE custom event を発火します
+     *
+     * 下記のプロパティをイベント・インスタンスに追加します
+     *
+     * - original {Events} - Rate Events instance
+     * - y {number} - scroll top
+     * - height {number} - window height
+     * - width {number} - window width
+     * - bottom {number} - window bottom 位置 (y + height)
+     * - previous {number} - 前回の scroll top
+     * - moving {number} - 前回からの移動量, 正: scroll down, 負: scroll up
+     * - wide {boolean} - width が 768 以上の時に true
+     * - changed {boolean} - scroll top が前回と変わっていたら true
+     *
+     * @param {?Events} event {@link Rate.UPDATE} Events instance
+     */
+
+  }, {
+    key: 'onUpdate',
+    value: function onUpdate(event) {
+      // @type {number} - scroll top
+      var y = _Scroll2.default.y();
+      // @type {number} - previous scroll top
+      var previous = this.previous;
+      // @type {boolean} - 移動したかを表します,
+      var changed = event === null || previous !== y;
+      // 移動量 0 の時は rate 監視を停止する
+      if (!changed) {
+        this.unwatch();
+      }
+      // @type {number} - window height
+      var height = window.innerHeight;
+      // @type {number} - window width
+      var width = window.innerWidth;
+
+      // @type {ScrollEvents} - events
+      var events = this.events;
+
+      // @type {Event} - Rate Events instance
+      events.original = event;
+      // @type {number} - scroll top
+      events.y = y;
+      // @type {number} - window height
+      events.height = height;
+      // @type {number} - window width
+      events.width = width;
+      // @type {number} - window bottom(y + height)
+      events.bottom = y + height;
+      // @type {boolean} - 移動したかを表します,
+      // event が null の時は強制発火なので移動量 0 （scroll top 位置に変更がない）でも changed を true にします
+      events.changed = changed;
+      // @type {number} - 前回の y 位置
+      events.previous = previous;
+      // @type {number} - 移動量 +: down, -: up
+      events.moving = y - previous;
+      // event fire
+      // console.log('Scrolling.scroll', events);
+      this.dispatch(events);
+
+      // save scroll top -> previous
+      this.previous = y;
+    }
+    /**
+     * 強制的に Scrolling.SCROLL event を発火させます
+     */
+
+  }, {
+    key: 'fire',
+    value: function fire() {
+      this.onUpdate(null);
+    }
+  }]);
+
+  return Scrolling;
+}(_EventDispatcher3.default);
+
+Scrolling.UPDATE = 'scrollingUpdate';
+exports.default = Scrolling;
+
+/***/ }),
+/* 73 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _EventDispatcher2 = __webpack_require__(18);
+
+var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
+
+var _ScrollEvents = __webpack_require__(74);
+
+var _ScrollEvents2 = _interopRequireDefault(_ScrollEvents);
+
+var _Freeze = __webpack_require__(222);
+
+var _Freeze2 = _interopRequireDefault(_Freeze);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Copyright (c) 2011-2016 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date 2016/07/26 - 21:05
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+// event
+
+
+// util
+
+
+/**
+ * new を許可しないための Symbol
+ * @type {Symbol}
+ * @private
+ */
+var singletonSymbol = Symbol('Scroll singleton symbol');
+/**
+ * singleton instance, nullable
+ * @type {?Scroll}
+ * @private
+ */
+var instance = null;
+
+/**
+ * window scroll event を監視し通知を行います
+ * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
+ *
+ * ```
+ * const instance = Scroll.factory();
+ * ```
+ */
+
+var Scroll = function (_EventDispatcher) {
+  _inherits(Scroll, _EventDispatcher);
+
+  _createClass(Scroll, null, [{
+    key: 'jump',
+
+    // ----------------------------------------
+    // STATIC METHOD
+    // ----------------------------------------
+    /**
+     * y 位置に scroll top を即座に移動させます
+     * @param {number} [y=0] scroll top 目標値
+     * @param {number} [delay=0] time out 遅延 ms
+     * @returns {number} time out id
+     */
+    value: function jump() {
+      var y = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+      return setTimeout(function () {
+        window.scrollTo(0, y);
+      }, delay);
+    }
+    /**
+     * {@link Freeze}.freeze を実行し scroll 操作を一定期間不能にします
+     * @returns {number} time out ID
+     */
+
+  }, {
+    key: 'freeze',
+    value: function freeze() {
+      return _Freeze2.default.freeze();
+    }
+    /**
+     * scroll top 位置
+     * @returns {number} scroll top 位置を返します
+     * @see https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
+     */
+
+  }, {
+    key: 'y',
+    value: function y() {
+      return typeof window.pageYOffset !== 'undefined' ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+    }
+    // ----------------------------------------
+    /**
+     * Scroll instance を singleton を保証し作成します
+     * @returns {Scroll} Scroll instance を返します
+     */
+
+  }, {
+    key: 'factory',
+    value: function factory() {
+      if (instance === null) {
+        instance = new Scroll(singletonSymbol);
+      }
+      return instance;
+    }
+    // ----------------------------------------
+    // EVENT
+    // ----------------------------------------
+    /**
+     * scroll で発生するイベントを取得します
+     * @event SCROLL
+     * @returns {string} event, scrollScroll を返します
+     * @default scrollScroll
+     */
+
+  }, {
+    key: 'SCROLL',
+    get: function get() {
+      return 'scrollScroll';
+    }
+    // ---------------------------------------------------
+    //  CONSTRUCTOR
+    // ---------------------------------------------------
+    /**
+    /**
+     * singleton です
+     * @param {Symbol} checkSymbol singleton を保証するための private instance
+     * @returns {Scroll} singleton instance を返します
+     */
+
+  }]);
+
+  function Scroll(checkSymbol) {
+    var _ret2;
+
+    _classCallCheck(this, Scroll);
+
+    // checkSymbol と singleton が等価かをチェックします
+    if (checkSymbol !== singletonSymbol) {
+      throw new Error('don\'t use new, instead use static factory method.');
+    }
+    // instance 作成済みかをチェックし instance が null の時 this を設定します
+    if (instance !== null) {
+      var _ret;
+
+      return _ret = instance, _possibleConstructorReturn(_this, _ret);
+    }
+    // onetime setting
+
+    // instance = this;
+
+    // event handler
+    // const boundScroll = this.scroll.bind(this);
+    /**
+     * bound onScroll, window.onscroll event handler
+     * @type {function}
+     */
+    // this.boundScroll = this.scroll.bind(this);
+    var _this = _possibleConstructorReturn(this, (Scroll.__proto__ || Object.getPrototypeOf(Scroll)).call(this));
+
+    _this.onScroll = _this.onScroll.bind(_this);
+    // this.boundScroll = () => boundScroll;
+    // @type {Events} - events instance
+    // const events = new ScrollEvents(Scroll.SCROLL, this, this);
+    /**
+     * ScrollEvents instance, 発火時に使用します
+     * @type {ScrollEvents}
+     */
+    _this.events = new _ScrollEvents2.default(Scroll.SCROLL, _this, _this);
+    // this.events = () => events;
+    /**
+     * 前回 scroll top 位置
+     * @type {number}
+     * @default -1
+     */
+    _this.previous = -1;
+    // /**
+    //  * start 済みフラッグ
+    //  * @type {boolean}
+    //  * @default false
+    //  */
+    // this.started = false;
+
+    // 設定済み instance を返します
+    return _ret2 = _this, _possibleConstructorReturn(_this, _ret2);
+  }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
+  /**
+   * scroll event を監視します
+   * @returns {Scroll} method chain 可能なように instance を返します
+   */
+
+
+  _createClass(Scroll, [{
+    key: 'start',
+    value: function start() {
+      // if (this.started) {
+      //   return this;
+      // }
+      // this.started = true;
+      this.stop();
+      window.addEventListener('scroll', this.onScroll, false);
+      return this;
+    }
+    /**
+     * scroll event を監視を止めます
+     * @returns {Scroll} method chain 可能なように instance を返します
+     */
+
+  }, {
+    key: 'stop',
+    value: function stop() {
+      // if (!this.started) {
+      //   return this;
+      // }
+      // this.started = false;
+      window.removeEventListener('scroll', this.onScroll);
+      return this;
+    }
+    /**
+     * window scroll event handler<br>
+     * window scroll event 発生後に scroll top 位置をもたせた Scroll.SCROLL custom event を発火します
+     * @param {?Event} event window scroll event, nullable
+     * @returns {void}
+     */
+
+  }, {
+    key: 'onScroll',
+    value: function onScroll(event) {
+      // @type {number} - scroll top
+      var y = Scroll.y();
+      // @type {number} - window height
+      var height = window.innerHeight;
+      // @type {number} - 前回の scroll top
+      var previous = this.previous;
+
+      // @type {Events} - events
+      var events = this.events;
+      // @type {Event} - scroll event
+      events.original = event;
+      // @type {number} - scroll top
+      events.y = y;
+      // @type {number} - window height
+      events.height = height;
+      // @type {number} - window bottom(y + height)
+      events.bottom = y + height;
+      events.previous = previous;
+      // @type {boolean} - 前回の scroll top と比較し移動したかを真偽値で取得します, true: 移動した
+      events.changed = previous !== y;
+      // @type {number} - 移動量 +（正）: down, -（負）: up
+      events.moving = y - previous;
+      // event fire
+      this.dispatch(events);
+      this.previous = y;
+    }
+  }]);
+
+  return Scroll;
+}(_EventDispatcher3.default);
+
+exports.default = Scroll;
+
+/***/ }),
+/* 74 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _Events2 = __webpack_require__(19);
+
+var _Events3 = _interopRequireDefault(_Events2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Copyright (c) 2011-2016 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date 2016/11/20 - 10:54
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+/**
+ * {@link Scroll} Events
+ */
+var ScrollEvents = function (_Events) {
+  _inherits(ScrollEvents, _Events);
+
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
+   * custom Event Object
+   * @param {string} type イベント種類
+   * @param {*} currentTarget current イベント発生インスタンス
+   * @param {*} [target=undefined] イベント発生インスタンス
+   * */
+  function ScrollEvents(type, currentTarget) {
+    var target = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
+
+    _classCallCheck(this, ScrollEvents);
+
+    /**
+     * scroll top 前回位置(px)
+     * @type {number}
+     */
+    var _this = _possibleConstructorReturn(this, (ScrollEvents.__proto__ || Object.getPrototypeOf(ScrollEvents)).call(this, type, currentTarget, target));
+
+    _this.previous = -1;
+    /**
+     * オリジナルイベント(window.onscroll)
+     * @type {?Events|Event}
+     */
+    _this.original = null;
+    /**
+     * scroll top 現在位置(px)
+     * @type {number}
+     */
+    _this.y = 0;
+    /**
+     * window innerHeight
+     * @type {number}
+     */
+    _this.height = 0;
+    /**
+     * window innerWidth
+     * @type {number}
+     */
+    _this.width = 0;
+    /**
+     * window 下端位置(scroll top + window height)
+     * @type {number}
+     */
+    _this.bottom = 0;
+    /**
+     * scroll top 位置が前回と違うかを表すフラッグ, true: 違う
+     * @type {boolean}
+     */
+    _this.changed = false;
+    /**
+     * UP / DOWN と前回からの移動距離(px), 正(+): scroll down
+     * @type {number}
+     */
+    _this.moving = 0;
+    return _this;
+  }
+
+  return ScrollEvents;
+}(_Events3.default);
+
+exports.default = ScrollEvents;
+
+/***/ }),
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3256,7 +3945,7 @@ Polling.UPDATE = 'pollingUpdate';
 exports.default = Polling;
 
 /***/ }),
-/* 73 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3579,34 +4268,7 @@ var Vectors = function () {
 exports.default = Vectors;
 
 /***/ }),
-/* 74 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 75 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = !__webpack_require__(9) && !__webpack_require__(5)(function(){
@@ -3614,7 +4276,7 @@ module.exports = !__webpack_require__(9) && !__webpack_require__(5)(function(){
 });
 
 /***/ }),
-/* 76 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var has          = __webpack_require__(7)
@@ -3636,7 +4298,7 @@ module.exports = function(object, names){
 };
 
 /***/ }),
-/* 77 */
+/* 79 */
 /***/ (function(module, exports) {
 
 // 7.2.9 SameValue(x, y)
@@ -3645,13 +4307,13 @@ module.exports = Object.is || function is(x, y){
 };
 
 /***/ }),
-/* 78 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(1).document && document.documentElement;
 
 /***/ }),
-/* 79 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.2.2 IsArray(argument)
@@ -3661,7 +4323,7 @@ module.exports = Array.isArray || function isArray(arg){
 };
 
 /***/ }),
-/* 80 */
+/* 82 */
 /***/ (function(module, exports) {
 
 module.exports = function(done, value){
@@ -3669,7 +4331,7 @@ module.exports = function(done, value){
 };
 
 /***/ }),
-/* 81 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3680,7 +4342,7 @@ var LIBRARY        = __webpack_require__(24)
   , hide           = __webpack_require__(10)
   , has            = __webpack_require__(7)
   , Iterators      = __webpack_require__(31)
-  , $iterCreate    = __webpack_require__(121)
+  , $iterCreate    = __webpack_require__(118)
   , setToStringTag = __webpack_require__(30)
   , getPrototypeOf = __webpack_require__(38)
   , ITERATOR       = __webpack_require__(4)('iterator')
@@ -3745,7 +4407,7 @@ module.exports = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCED
 };
 
 /***/ }),
-/* 82 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3777,7 +4439,7 @@ module.exports = [].copyWithin || function copyWithin(target/*= 0*/, start/*= 0,
 };
 
 /***/ }),
-/* 83 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3789,8 +4451,8 @@ var dP          = __webpack_require__(6).f
   , anInstance  = __webpack_require__(26)
   , defined     = __webpack_require__(16)
   , forOf       = __webpack_require__(45)
-  , $iterDefine = __webpack_require__(81)
-  , step        = __webpack_require__(80)
+  , $iterDefine = __webpack_require__(83)
+  , step        = __webpack_require__(82)
   , setSpecies  = __webpack_require__(43)
   , DESCRIPTORS = __webpack_require__(9)
   , fastKey     = __webpack_require__(41).fastKey
@@ -3925,7 +4587,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 84 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // call something on iterator step with safe closing on error
@@ -3942,7 +4604,7 @@ module.exports = function(iterator, fn, value, entries){
 };
 
 /***/ }),
-/* 85 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3981,7 +4643,7 @@ module.exports = !$assign || __webpack_require__(5)(function(){
 } : $assign;
 
 /***/ }),
-/* 86 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4070,7 +4732,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 87 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // all object keys, includes non-enumerable and symbols
@@ -4085,13 +4747,13 @@ module.exports = Reflect && Reflect.ownKeys || function ownKeys(it){
 };
 
 /***/ }),
-/* 88 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports.f = __webpack_require__(4);
 
 /***/ }),
-/* 89 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4109,7 +4771,7 @@ module.exports = function repeat(count){
 };
 
 /***/ }),
-/* 90 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.2.8 IsRegExp(argument)
@@ -4122,7 +4784,7 @@ module.exports = function(it){
 };
 
 /***/ }),
-/* 91 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.1.2.3 Number.isInteger(number)
@@ -4133,7 +4795,7 @@ module.exports = function isInteger(it){
 };
 
 /***/ }),
-/* 92 */
+/* 94 */
 /***/ (function(module, exports) {
 
 // 20.2.2.20 Math.log1p(x)
@@ -4142,7 +4804,7 @@ module.exports = Math.log1p || function log1p(x){
 };
 
 /***/ }),
-/* 93 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getKeys   = __webpack_require__(32)
@@ -4163,12 +4825,12 @@ module.exports = function(isEntries){
 };
 
 /***/ }),
-/* 94 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/tc39/proposal-string-pad-start-end
 var toLength = __webpack_require__(8)
-  , repeat   = __webpack_require__(89)
+  , repeat   = __webpack_require__(91)
   , defined  = __webpack_require__(16);
 
 module.exports = function(that, maxLength, fillString, left){
@@ -4185,704 +4847,31 @@ module.exports = function(that, maxLength, fillString, left){
 
 
 /***/ }),
-/* 95 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _Scroll = __webpack_require__(96);
-
-var _Scroll2 = _interopRequireDefault(_Scroll);
-
-var _EventDispatcher2 = __webpack_require__(18);
-
-var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
-
-var _ScrollEvents = __webpack_require__(97);
-
-var _ScrollEvents2 = _interopRequireDefault(_ScrollEvents);
-
-var _Rate = __webpack_require__(98);
-
-var _Rate2 = _interopRequireDefault(_Rate);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @license inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date 2016/11/04
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Copyright (c) 2011-2015 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
-
-// event
-
-
-// tick
-
-
-/**
- * fps: {@link Rate} new Rate(Rate.RATE_5)` で Scroll 位置を計算します
- *
- * @example
- * // 途中で rate を変更する
- * const scrolling = new Scrolling();
- * scrolling
- *    .start()
- *    .rate.setRate(Rate.RATE_12);
- * */
-var Scrolling = function (_EventDispatcher) {
-  _inherits(Scrolling, _EventDispatcher);
-
-  // ---------------------------------------------------
-  //  CONSTRUCTOR
-  // ---------------------------------------------------
-  /**
-   * @param {Rate} [rate=new Rate(Rate.Rate_5)] Rate instance, scroll 監視 fps を設定します
-   */
-  function Scrolling() {
-    var rate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _Rate2.default(_Rate2.default.RATE_5);
-
-    _classCallCheck(this, Scrolling);
-
-    // @type {function}
-    // const onUpdate = this.scroll.bind(this);
-    /**
-     * bound onUpdate, Rate.UPDATE event handler
-     * @type {function}
-     */
-    var _this = _possibleConstructorReturn(this, (Scrolling.__proto__ || Object.getPrototypeOf(Scrolling)).call(this));
-
-    _this.onUpdate = _this.onUpdate.bind(_this);
-    // this.onUpdate = onUpdate;
-    // @type {ScrollEvents}
-    // const events = new ScrollEvents(Scrolling.UPDATE, this, this);
-    /**
-     * ScrollEvents instance, 発火時に使用します
-     * @type {ScrollEvents}
-     */
-    _this.events = new _ScrollEvents2.default(Scrolling.UPDATE, _this, _this);
-    // this.events = events;
-    /**
-     * 前回 scroll top 位置
-     * @type {number}
-     * @default -1
-     */
-    _this.previous = -1;
-    // /**
-    //  * start 済みフラッグ
-    //  * @type {boolean}
-    //  * @default false
-    //  */
-    // this.started = false;
-    /**
-     * Rate instance
-     * @type {?Rate}
-     */
-    _this.rate = rate;
-    /**
-     * scrolling 監視開始 flag
-     * @type {boolean}
-     * @since 0.3.8
-     */
-    _this.watching = false;
-    /**
-     * bind onNativeEvent - window.onscroll|onresize event handler
-     * @type {function}
-     */
-    _this.onNativeEvent = _this.onNativeEvent.bind(_this);
-    return _this;
-  }
-  // ----------------------------------------
-  // EVENT
-  // ----------------------------------------
-  // /**
-  //  * fps で発生するイベントを取得します
-  //  * @event SCROLL
-  //  * @returns {string} event, scrollingScroll を返します
-  //  * @default scrollingScroll
-  //  */
-  // static get UPDATE() {
-  //   return 'scrollingUpdate';
-  // }
-  // ----------------------------------------
-  // METHOD
-  // ----------------------------------------
-  /**
-   * window.onscroll / window.onresize event handler,
-   * `this.watching` flag を確認し `watch` を call します
-   * @since 0.3.8
-   */
-
-  // ---------------------------------------------------
-  //  CONSTANT / EVENT
-  // ---------------------------------------------------
-  /**
-   * fps: {@link Rate} で発生するイベント - scrollingScroll
-   * @event SCROLL
-   */
-
-
-  _createClass(Scrolling, [{
-    key: 'onNativeEvent',
-    value: function onNativeEvent() {
-      if (!this.watching) {
-        this.watch();
-      }
-    }
-    /**
-     * window.onscroll / window.onresize 監視を開始します
-     * @returns {Scrolling} method chain 可能なように instance を返します
-     */
-
-  }, {
-    key: 'start',
-    value: function start() {
-      window.addEventListener('scroll', this.onNativeEvent, false);
-      window.addEventListener('resize', this.onNativeEvent, false);
-      return this;
-    }
-    /**
-     * window.onscroll / window.onresize 監視を停止します
-     * @returns {Scrolling} method chain 可能なように instance を返します
-     */
-
-  }, {
-    key: 'stop',
-    value: function stop() {
-      window.removeEventListener('scroll', this.onNativeEvent);
-      window.removeEventListener('resize', this.onNativeEvent);
-      return this;
-    }
-    /**
-     * fps を監視しスクロール位置を知らせます
-     * @returns {Scrolling} method chain 可能なように instance を返します
-     * @since 0.3.8
-     */
-
-  }, {
-    key: 'watch',
-    value: function watch() {
-      // // flag check
-      // if (this.started) {
-      //   return this;
-      // }
-      // this.started = true;
-      // loop start
-      // const rate = this.rate;
-      // rate.on(Rate.UPDATE, this.onUpdate);
-      this.unwatch();
-      this.watching = true;
-      this.rate.on(_Rate2.default.UPDATE, this.onUpdate);
-      // rate.start();
-      return this;
-    }
-    /**
-     * fps 監視を止めます
-     * @returns {Scrolling} method chain 可能なように instance を返します
-     * @since 0.3.8
-     */
-
-  }, {
-    key: 'unwatch',
-    value: function unwatch() {
-      // if (!this.started) {
-      //   return this;
-      // }
-      // this.started = false;
-      this.rate.off(_Rate2.default.UPDATE, this.onUpdate);
-      this.watching = false;
-      return this;
-    }
-    /**
-     * 指定 rate(fps) 毎にスクロール位置を<br>
-     * scroll top 位置をもたせた Scrolling.UPDATE custom event を発火します
-     *
-     * 下記のプロパティをイベント・インスタンスに追加します
-     *
-     * - original {Events} - Rate Events instance
-     * - y {number} - scroll top
-     * - height {number} - window height
-     * - width {number} - window width
-     * - bottom {number} - window bottom 位置 (y + height)
-     * - previous {number} - 前回の scroll top
-     * - moving {number} - 前回からの移動量, 正: scroll down, 負: scroll up
-     * - wide {boolean} - width が 768 以上の時に true
-     * - changed {boolean} - scroll top が前回と変わっていたら true
-     *
-     * @param {?Events} event {@link Rate.UPDATE} Events instance
-     */
-
-  }, {
-    key: 'onUpdate',
-    value: function onUpdate(event) {
-      // @type {number} - scroll top
-      var y = _Scroll2.default.y();
-      // @type {number} - previous scroll top
-      var previous = this.previous;
-      // @type {boolean} - 移動したかを表します,
-      var changed = event === null || previous !== y;
-      // 移動量 0 の時は rate 監視を停止する
-      if (!changed) {
-        this.unwatch();
-      }
-      // @type {number} - window height
-      var height = window.innerHeight;
-      // @type {number} - window width
-      var width = window.innerWidth;
-
-      // @type {ScrollEvents} - events
-      var events = this.events;
-
-      // @type {Event} - Rate Events instance
-      events.original = event;
-      // @type {number} - scroll top
-      events.y = y;
-      // @type {number} - window height
-      events.height = height;
-      // @type {number} - window width
-      events.width = width;
-      // @type {number} - window bottom(y + height)
-      events.bottom = y + height;
-      // @type {boolean} - 移動したかを表します,
-      // event が null の時は強制発火なので移動量 0 （scroll top 位置に変更がない）でも changed を true にします
-      events.changed = changed;
-      // @type {number} - 前回の y 位置
-      events.previous = previous;
-      // @type {number} - 移動量 +: down, -: up
-      events.moving = y - previous;
-      // event fire
-      // console.log('Scrolling.scroll', events);
-      this.dispatch(events);
-
-      // save scroll top -> previous
-      this.previous = y;
-    }
-    /**
-     * 強制的に Scrolling.SCROLL event を発火させます
-     */
-
-  }, {
-    key: 'fire',
-    value: function fire() {
-      this.onUpdate(null);
-    }
-  }]);
-
-  return Scrolling;
-}(_EventDispatcher3.default);
-
-Scrolling.UPDATE = 'scrollingUpdate';
-exports.default = Scrolling;
-
-/***/ }),
-/* 96 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _EventDispatcher2 = __webpack_require__(18);
-
-var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
-
-var _ScrollEvents = __webpack_require__(97);
-
-var _ScrollEvents2 = _interopRequireDefault(_ScrollEvents);
-
-var _Freeze = __webpack_require__(219);
-
-var _Freeze2 = _interopRequireDefault(_Freeze);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Copyright (c) 2011-2016 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date 2016/07/26 - 21:05
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
-
-// event
-
-
-// util
-
-
-/**
- * new を許可しないための Symbol
- * @type {Symbol}
- * @private
- */
-var singletonSymbol = Symbol('Scroll singleton symbol');
-/**
- * singleton instance, nullable
- * @type {?Scroll}
- * @private
- */
-var instance = null;
-
-/**
- * window scroll event を監視し通知を行います
- * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
- *
- * ```
- * const instance = Scroll.factory();
- * ```
- */
-
-var Scroll = function (_EventDispatcher) {
-  _inherits(Scroll, _EventDispatcher);
-
-  _createClass(Scroll, null, [{
-    key: 'jump',
-
-    // ----------------------------------------
-    // STATIC METHOD
-    // ----------------------------------------
-    /**
-     * y 位置に scroll top を即座に移動させます
-     * @param {number} [y=0] scroll top 目標値
-     * @param {number} [delay=0] time out 遅延 ms
-     * @returns {number} time out id
-     */
-    value: function jump() {
-      var y = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-      var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-
-      return setTimeout(function () {
-        window.scrollTo(0, y);
-      }, delay);
-    }
-    /**
-     * {@link Freeze}.freeze を実行し scroll 操作を一定期間不能にします
-     * @returns {number} time out ID
-     */
-
-  }, {
-    key: 'freeze',
-    value: function freeze() {
-      return _Freeze2.default.freeze();
-    }
-    /**
-     * scroll top 位置
-     * @returns {number} scroll top 位置を返します
-     * @see https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY
-     * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
-     */
-
-  }, {
-    key: 'y',
-    value: function y() {
-      return typeof window.pageYOffset !== 'undefined' ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
-    }
-    // ----------------------------------------
-    /**
-     * Scroll instance を singleton を保証し作成します
-     * @returns {Scroll} Scroll instance を返します
-     */
-
-  }, {
-    key: 'factory',
-    value: function factory() {
-      if (instance === null) {
-        instance = new Scroll(singletonSymbol);
-      }
-      return instance;
-    }
-    // ---------------------------------------------------
-    //  CONSTRUCTOR
-    // ---------------------------------------------------
-    /**
-    /**
-     * singleton です
-     * @param {Symbol} checkSymbol singleton を保証するための private instance
-     * @returns {Scroll} singleton instance を返します
-     */
-
-  }]);
-
-  function Scroll(checkSymbol) {
-    var _ret2;
-
-    _classCallCheck(this, Scroll);
-
-    // checkSymbol と singleton が等価かをチェックします
-    if (checkSymbol !== singletonSymbol) {
-      throw new Error('don\'t use new, instead use static factory method.');
-    }
-    // instance 作成済みかをチェックし instance が null の時 this を設定します
-    if (instance !== null) {
-      var _ret;
-
-      return _ret = instance, _possibleConstructorReturn(_this, _ret);
-    }
-    // onetime setting
-
-    // instance = this;
-
-    // event handler
-    // const boundScroll = this.scroll.bind(this);
-    /**
-     * bound onScroll, window.onscroll event handler
-     * @type {function}
-     */
-    // this.boundScroll = this.scroll.bind(this);
-    var _this = _possibleConstructorReturn(this, (Scroll.__proto__ || Object.getPrototypeOf(Scroll)).call(this));
-
-    _this.onScroll = _this.onScroll.bind(_this);
-    // this.boundScroll = () => boundScroll;
-    // @type {Events} - events instance
-    // const events = new ScrollEvents(Scroll.SCROLL, this, this);
-    /**
-     * ScrollEvents instance, 発火時に使用します
-     * @type {ScrollEvents}
-     */
-    _this.events = new _ScrollEvents2.default(Scroll.SCROLL, _this, _this);
-    // this.events = () => events;
-    /**
-     * 前回 scroll top 位置
-     * @type {number}
-     * @default -1
-     */
-    _this.previous = -1;
-    // /**
-    //  * start 済みフラッグ
-    //  * @type {boolean}
-    //  * @default false
-    //  */
-    // this.started = false;
-
-    // 設定済み instance を返します
-    return _ret2 = _this, _possibleConstructorReturn(_this, _ret2);
-  }
-  // ----------------------------------------
-  // EVENT
-  // ----------------------------------------
-  /**
-   * scroll で発生するイベントを取得します
-   * @event SCROLL
-   * @returns {string} event, scrollScroll を返します
-   * @default scrollScroll
-   */
-
-
-  _createClass(Scroll, [{
-    key: 'start',
-
-    // ----------------------------------------
-    // METHOD
-    // ----------------------------------------
-    /**
-     * scroll event を監視します
-     * @returns {Scroll} method chain 可能なように instance を返します
-     */
-    value: function start() {
-      // if (this.started) {
-      //   return this;
-      // }
-      // this.started = true;
-      this.stop();
-      window.addEventListener('scroll', this.onScroll, false);
-      return this;
-    }
-    /**
-     * scroll event を監視を止めます
-     * @returns {Scroll} method chain 可能なように instance を返します
-     */
-
-  }, {
-    key: 'stop',
-    value: function stop() {
-      // if (!this.started) {
-      //   return this;
-      // }
-      // this.started = false;
-      window.removeEventListener('scroll', this.onScroll);
-      return this;
-    }
-    /**
-     * window scroll event handler<br>
-     * window scroll event 発生後に scroll top 位置をもたせた Scroll.SCROLL custom event を発火します
-     * @param {?Event} event window scroll event, nullable
-     * @returns {void}
-     */
-
-  }, {
-    key: 'onScroll',
-    value: function onScroll(event) {
-      // @type {number} - scroll top
-      var y = Scroll.y();
-      // @type {number} - window height
-      var height = window.innerHeight;
-      // @type {number} - 前回の scroll top
-      var previous = this.previous;
-
-      // @type {Events} - events
-      var events = this.events;
-      // @type {Event} - scroll event
-      events.original = event;
-      // @type {number} - scroll top
-      events.y = y;
-      // @type {number} - window height
-      events.height = height;
-      // @type {number} - window bottom(y + height)
-      events.bottom = y + height;
-      events.previous = previous;
-      // @type {boolean} - 前回の scroll top と比較し移動したかを真偽値で取得します, true: 移動した
-      events.changed = previous !== y;
-      // @type {number} - 移動量 +（正）: down, -（負）: up
-      events.moving = y - previous;
-      // event fire
-      this.dispatch(events);
-      this.previous = y;
-    }
-  }], [{
-    key: 'SCROLL',
-    get: function get() {
-      return 'scrollScroll';
-    }
-  }]);
-
-  return Scroll;
-}(_EventDispatcher3.default);
-
-exports.default = Scroll;
-
-/***/ }),
 /* 97 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
+var g;
 
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
 
-var _Events2 = __webpack_require__(19);
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
 
-var _Events3 = _interopRequireDefault(_Events2);
+module.exports = g;
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Copyright (c) 2011-2016 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date 2016/11/20 - 10:54
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
-
-/**
- * {@link Scroll} Events
- */
-var ScrollEvents = function (_Events) {
-  _inherits(ScrollEvents, _Events);
-
-  // ---------------------------------------------------
-  //  CONSTRUCTOR
-  // ---------------------------------------------------
-  /**
-   * custom Event Object
-   * @param {string} type イベント種類
-   * @param {*} currentTarget current イベント発生インスタンス
-   * @param {*} [target=undefined] イベント発生インスタンス
-   * */
-  function ScrollEvents(type, currentTarget) {
-    var target = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
-
-    _classCallCheck(this, ScrollEvents);
-
-    /**
-     * scroll top 前回位置(px)
-     * @type {number}
-     */
-    var _this = _possibleConstructorReturn(this, (ScrollEvents.__proto__ || Object.getPrototypeOf(ScrollEvents)).call(this, type, currentTarget, target));
-
-    _this.previous = -1;
-    /**
-     * オリジナルイベント(window.onscroll)
-     * @type {?Event}
-     */
-    _this.original = null;
-    /**
-     * scroll top 現在位置(px)
-     * @type {number}
-     */
-    _this.y = 0;
-    /**
-     * window innerHeight
-     * @type {number}
-     */
-    _this.height = 0;
-    /**
-     * window innerWidth
-     * @type {number}
-     */
-    _this.width = 0;
-    /**
-     * window 下端位置(scroll top + window height)
-     * @type {number}
-     */
-    _this.bottom = 0;
-    /**
-     * scroll top 位置が前回と違うかを表すフラッグ, true: 違う
-     * @type {boolean}
-     */
-    _this.changed = false;
-    /**
-     * UP / DOWN と前回からの移動距離(px), 正(+): scroll down
-     * @type {number}
-     */
-    _this.moving = 0;
-    return _this;
-  }
-
-  return ScrollEvents;
-}(_Events3.default);
-
-exports.default = ScrollEvents;
 
 /***/ }),
 /* 98 */
@@ -4901,7 +4890,7 @@ var _Events = __webpack_require__(19);
 
 var _Events2 = _interopRequireDefault(_Events);
 
-var _Polling2 = __webpack_require__(72);
+var _Polling2 = __webpack_require__(75);
 
 var _Polling3 = _interopRequireDefault(_Polling2);
 
@@ -5292,7 +5281,7 @@ var _EventDispatcher2 = __webpack_require__(18);
 
 var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
 
-var _CycleEvents = __webpack_require__(220);
+var _CycleEvents = __webpack_require__(223);
 
 var _CycleEvents2 = _interopRequireDefault(_CycleEvents);
 
@@ -6982,7 +6971,7 @@ exports.default = Classes;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.3.8
- * 2017-8-28 19:42:27
+ * 2017-8-29 16:49:49
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -6990,193 +6979,23 @@ exports.default = Classes;
 
 
 
-// fetch / promise
+// // fetch / promise
+// import 'whatwg-fetch';
+// import Promise from 'promise-polyfill';
+// // for IE
+// import 'babel-polyfill';
+
+// polyfill
+// - babel-polyfill
+// - requestAnimationFrame
+// - promise-polyfill
+// - whatwg-fetch
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
 __webpack_require__(110);
-
-var _promisePolyfill = __webpack_require__(111);
-
-var _promisePolyfill2 = _interopRequireDefault(_promisePolyfill);
-
-__webpack_require__(115);
-
-__webpack_require__(116);
-
-__webpack_require__(117);
-
-__webpack_require__(122);
-
-__webpack_require__(123);
-
-__webpack_require__(124);
-
-__webpack_require__(125);
-
-__webpack_require__(126);
-
-__webpack_require__(127);
-
-__webpack_require__(128);
-
-__webpack_require__(129);
-
-__webpack_require__(130);
-
-__webpack_require__(132);
-
-__webpack_require__(133);
-
-__webpack_require__(134);
-
-__webpack_require__(135);
-
-__webpack_require__(136);
-
-__webpack_require__(138);
-
-__webpack_require__(139);
-
-__webpack_require__(140);
-
-__webpack_require__(141);
-
-__webpack_require__(142);
-
-__webpack_require__(143);
-
-__webpack_require__(144);
-
-__webpack_require__(145);
-
-__webpack_require__(146);
-
-__webpack_require__(147);
-
-__webpack_require__(148);
-
-__webpack_require__(149);
-
-__webpack_require__(151);
-
-__webpack_require__(156);
-
-__webpack_require__(157);
-
-__webpack_require__(158);
-
-__webpack_require__(159);
-
-__webpack_require__(160);
-
-__webpack_require__(161);
-
-__webpack_require__(162);
-
-__webpack_require__(164);
-
-__webpack_require__(165);
-
-__webpack_require__(166);
-
-__webpack_require__(167);
-
-__webpack_require__(168);
-
-__webpack_require__(170);
-
-__webpack_require__(171);
-
-__webpack_require__(172);
-
-__webpack_require__(173);
-
-__webpack_require__(174);
-
-__webpack_require__(175);
-
-__webpack_require__(176);
-
-__webpack_require__(177);
-
-__webpack_require__(178);
-
-__webpack_require__(179);
-
-__webpack_require__(64);
-
-__webpack_require__(180);
-
-__webpack_require__(181);
-
-__webpack_require__(182);
-
-__webpack_require__(183);
-
-__webpack_require__(184);
-
-__webpack_require__(185);
-
-__webpack_require__(186);
-
-__webpack_require__(187);
-
-__webpack_require__(188);
-
-__webpack_require__(189);
-
-__webpack_require__(190);
-
-__webpack_require__(191);
-
-__webpack_require__(192);
-
-__webpack_require__(193);
-
-__webpack_require__(194);
-
-__webpack_require__(195);
-
-__webpack_require__(196);
-
-__webpack_require__(197);
-
-__webpack_require__(198);
-
-__webpack_require__(199);
-
-__webpack_require__(200);
-
-__webpack_require__(201);
-
-__webpack_require__(202);
-
-__webpack_require__(203);
-
-__webpack_require__(204);
-
-__webpack_require__(205);
-
-__webpack_require__(206);
-
-__webpack_require__(207);
-
-__webpack_require__(208);
-
-__webpack_require__(209);
-
-__webpack_require__(210);
-
-__webpack_require__(213);
-
-__webpack_require__(214);
-
-__webpack_require__(215);
-
-__webpack_require__(216);
 
 var _EventDispatcher = __webpack_require__(18);
 
@@ -7186,39 +7005,43 @@ var _Events = __webpack_require__(19);
 
 var _Events2 = _interopRequireDefault(_Events);
 
-var _Rising = __webpack_require__(218);
+var _Rising = __webpack_require__(221);
 
 var _Rising2 = _interopRequireDefault(_Rising);
 
-var _Scroll = __webpack_require__(96);
+var _Scroll = __webpack_require__(73);
 
 var _Scroll2 = _interopRequireDefault(_Scroll);
 
-var _Scrolling = __webpack_require__(95);
+var _Scrolling = __webpack_require__(72);
 
 var _Scrolling2 = _interopRequireDefault(_Scrolling);
 
-var _Touching = __webpack_require__(222);
+var _Touching = __webpack_require__(225);
 
 var _Touching2 = _interopRequireDefault(_Touching);
 
-var _Wheel = __webpack_require__(224);
+var _Wheel = __webpack_require__(227);
 
 var _Wheel2 = _interopRequireDefault(_Wheel);
+
+var _Resizing = __webpack_require__(229);
+
+var _Resizing2 = _interopRequireDefault(_Resizing);
 
 var _Ajax = __webpack_require__(103);
 
 var _Ajax2 = _interopRequireDefault(_Ajax);
 
-var _Cookie = __webpack_require__(226);
+var _Cookie = __webpack_require__(231);
 
 var _Cookie2 = _interopRequireDefault(_Cookie);
 
-var _Queries = __webpack_require__(227);
+var _Queries = __webpack_require__(232);
 
 var _Queries2 = _interopRequireDefault(_Queries);
 
-var _AjaxThunk = __webpack_require__(228);
+var _AjaxThunk = __webpack_require__(233);
 
 var _AjaxThunk2 = _interopRequireDefault(_AjaxThunk);
 
@@ -7226,11 +7049,11 @@ var _Cycle = __webpack_require__(99);
 
 var _Cycle2 = _interopRequireDefault(_Cycle);
 
-var _Fps = __webpack_require__(229);
+var _Fps = __webpack_require__(234);
 
 var _Fps2 = _interopRequireDefault(_Fps);
 
-var _Polling = __webpack_require__(72);
+var _Polling = __webpack_require__(75);
 
 var _Polling2 = _interopRequireDefault(_Polling);
 
@@ -7246,7 +7069,7 @@ var _Hit = __webpack_require__(101);
 
 var _Hit2 = _interopRequireDefault(_Hit);
 
-var _List = __webpack_require__(231);
+var _List = __webpack_require__(236);
 
 var _List2 = _interopRequireDefault(_List);
 
@@ -7254,15 +7077,15 @@ var _Text = __webpack_require__(50);
 
 var _Text2 = _interopRequireDefault(_Text);
 
-var _Times = __webpack_require__(232);
+var _Times = __webpack_require__(237);
 
 var _Times2 = _interopRequireDefault(_Times);
 
-var _Vectors = __webpack_require__(73);
+var _Vectors = __webpack_require__(76);
 
 var _Vectors2 = _interopRequireDefault(_Vectors);
 
-var _Iro = __webpack_require__(233);
+var _Iro = __webpack_require__(238);
 
 var _Iro2 = _interopRequireDefault(_Iro);
 
@@ -7282,7 +7105,7 @@ var _devices = __webpack_require__(51);
 
 var _devices2 = _interopRequireDefault(_devices);
 
-var _Android = __webpack_require__(234);
+var _Android = __webpack_require__(239);
 
 var _Android2 = _interopRequireDefault(_Android);
 
@@ -7290,7 +7113,7 @@ var _Windows = __webpack_require__(106);
 
 var _Windows2 = _interopRequireDefault(_Windows);
 
-var _iOS = __webpack_require__(235);
+var _iOS = __webpack_require__(240);
 
 var _iOS2 = _interopRequireDefault(_iOS);
 
@@ -7302,35 +7125,35 @@ var _Classes = __webpack_require__(108);
 
 var _Classes2 = _interopRequireDefault(_Classes);
 
-var _Elements = __webpack_require__(236);
+var _Elements = __webpack_require__(241);
 
 var _Elements2 = _interopRequireDefault(_Elements);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// ----------------------------------------------
-// promise
-// Promise: To add to window
-
-
-// device
-
-
-// css
-
-
-// event
-
-// for IE
-if (!window.Promise) {
-  window.Promise = _promisePolyfill2.default;
-}
+// // ----------------------------------------------
+// // promise
+// // Promise: To add to window
+// if (!window.Promise) {
+//   window.Promise = Promise;
+// }
 
 /**
  * **MOKU**
  * <p>global Object</p>
  * <p>public な Class はここからアクセス可能です</p>
  * @type {Object}
+ */
+
+
+// device
+
+
+// css
+var MOKU = {};
+/**
+ * version number を取得します
+ * @returns {string} version number を返します
  */
 
 
@@ -7346,12 +7169,7 @@ if (!window.Promise) {
 // net
 
 
-// polyfill
-var MOKU = {};
-/**
- * version number を取得します
- * @returns {string} version number を返します
- */
+// event
 MOKU.version = function () {
   return '0.3.8';
 };
@@ -7360,7 +7178,7 @@ MOKU.version = function () {
  * @returns {string}  build 日時を返します
  */
 MOKU.build = function () {
-  return '2017-8-28 19:42:27';
+  return '2017-8-29 16:49:49';
 };
 /**
  * MOKU.event
@@ -7373,7 +7191,8 @@ MOKU.event = {
   Scroll: _Scroll2.default,
   Wheel: _Wheel2.default,
   Scrolling: _Scrolling2.default,
-  Touching: _Touching2.default
+  Touching: _Touching2.default,
+  Resizing: _Resizing2.default
 };
 /**
  * MOKU.net
@@ -7446,1155 +7265,234 @@ exports.default = MOKU;
 
 /***/ }),
 /* 110 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-(function(self) {
-  'use strict';
+"use strict";
 
-  if (self.fetch) {
-    return
-  }
 
-  var support = {
-    searchParams: 'URLSearchParams' in self,
-    iterable: 'Symbol' in self && 'iterator' in Symbol,
-    blob: 'FileReader' in self && 'Blob' in self && (function() {
-      try {
-        new Blob()
-        return true
-      } catch(e) {
-        return false
-      }
-    })(),
-    formData: 'FormData' in self,
-    arrayBuffer: 'ArrayBuffer' in self
-  }
+__webpack_require__(111);
 
-  if (support.arrayBuffer) {
-    var viewClasses = [
-      '[object Int8Array]',
-      '[object Uint8Array]',
-      '[object Uint8ClampedArray]',
-      '[object Int16Array]',
-      '[object Uint16Array]',
-      '[object Int32Array]',
-      '[object Uint32Array]',
-      '[object Float32Array]',
-      '[object Float64Array]'
-    ]
+__webpack_require__(213);
 
-    var isDataView = function(obj) {
-      return obj && DataView.prototype.isPrototypeOf(obj)
-    }
+__webpack_require__(218);
 
-    var isArrayBufferView = ArrayBuffer.isView || function(obj) {
-      return obj && viewClasses.indexOf(Object.prototype.toString.call(obj)) > -1
-    }
-  }
+var _animationFrame = __webpack_require__(220);
 
-  function normalizeName(name) {
-    if (typeof name !== 'string') {
-      name = String(name)
-    }
-    if (/[^a-z0-9\-#$%&'*+.\^_`|~]/i.test(name)) {
-      throw new TypeError('Invalid character in header field name')
-    }
-    return name.toLowerCase()
-  }
+var _animationFrame2 = _interopRequireDefault(_animationFrame);
 
-  function normalizeValue(value) {
-    if (typeof value !== 'string') {
-      value = String(value)
-    }
-    return value
-  }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-  // Build a destructive iterator for the value list
-  function iteratorFor(items) {
-    var iterator = {
-      next: function() {
-        var value = items.shift()
-        return {done: value === undefined, value: value}
-      }
-    }
+// ------------------------------------------------
 
-    if (support.iterable) {
-      iterator[Symbol.iterator] = function() {
-        return iterator
-      }
-    }
 
-    return iterator
-  }
+// fetch
+/**
+ * Copyright (c) 2011-2017 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2017/08/28 - 18:25
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
 
-  function Headers(headers) {
-    this.map = {}
+// babel polyfill
+(0, _animationFrame2.default)();
 
-    if (headers instanceof Headers) {
-      headers.forEach(function(value, name) {
-        this.append(name, value)
-      }, this)
-    } else if (Array.isArray(headers)) {
-      headers.forEach(function(header) {
-        this.append(header[0], header[1])
-      }, this)
-    } else if (headers) {
-      Object.getOwnPropertyNames(headers).forEach(function(name) {
-        this.append(name, headers[name])
-      }, this)
-    }
-  }
+// const polyfill = {
+//   animationFrame,
+// };
+//
+// export default polyfill;
 
-  Headers.prototype.append = function(name, value) {
-    name = normalizeName(name)
-    value = normalizeValue(value)
-    var oldValue = this.map[name]
-    this.map[name] = oldValue ? oldValue+','+value : value
-  }
 
-  Headers.prototype['delete'] = function(name) {
-    delete this.map[normalizeName(name)]
-  }
-
-  Headers.prototype.get = function(name) {
-    name = normalizeName(name)
-    return this.has(name) ? this.map[name] : null
-  }
-
-  Headers.prototype.has = function(name) {
-    return this.map.hasOwnProperty(normalizeName(name))
-  }
-
-  Headers.prototype.set = function(name, value) {
-    this.map[normalizeName(name)] = normalizeValue(value)
-  }
-
-  Headers.prototype.forEach = function(callback, thisArg) {
-    for (var name in this.map) {
-      if (this.map.hasOwnProperty(name)) {
-        callback.call(thisArg, this.map[name], name, this)
-      }
-    }
-  }
-
-  Headers.prototype.keys = function() {
-    var items = []
-    this.forEach(function(value, name) { items.push(name) })
-    return iteratorFor(items)
-  }
-
-  Headers.prototype.values = function() {
-    var items = []
-    this.forEach(function(value) { items.push(value) })
-    return iteratorFor(items)
-  }
-
-  Headers.prototype.entries = function() {
-    var items = []
-    this.forEach(function(value, name) { items.push([name, value]) })
-    return iteratorFor(items)
-  }
-
-  if (support.iterable) {
-    Headers.prototype[Symbol.iterator] = Headers.prototype.entries
-  }
-
-  function consumed(body) {
-    if (body.bodyUsed) {
-      return Promise.reject(new TypeError('Already read'))
-    }
-    body.bodyUsed = true
-  }
-
-  function fileReaderReady(reader) {
-    return new Promise(function(resolve, reject) {
-      reader.onload = function() {
-        resolve(reader.result)
-      }
-      reader.onerror = function() {
-        reject(reader.error)
-      }
-    })
-  }
-
-  function readBlobAsArrayBuffer(blob) {
-    var reader = new FileReader()
-    var promise = fileReaderReady(reader)
-    reader.readAsArrayBuffer(blob)
-    return promise
-  }
-
-  function readBlobAsText(blob) {
-    var reader = new FileReader()
-    var promise = fileReaderReady(reader)
-    reader.readAsText(blob)
-    return promise
-  }
-
-  function readArrayBufferAsText(buf) {
-    var view = new Uint8Array(buf)
-    var chars = new Array(view.length)
-
-    for (var i = 0; i < view.length; i++) {
-      chars[i] = String.fromCharCode(view[i])
-    }
-    return chars.join('')
-  }
-
-  function bufferClone(buf) {
-    if (buf.slice) {
-      return buf.slice(0)
-    } else {
-      var view = new Uint8Array(buf.byteLength)
-      view.set(new Uint8Array(buf))
-      return view.buffer
-    }
-  }
-
-  function Body() {
-    this.bodyUsed = false
-
-    this._initBody = function(body) {
-      this._bodyInit = body
-      if (!body) {
-        this._bodyText = ''
-      } else if (typeof body === 'string') {
-        this._bodyText = body
-      } else if (support.blob && Blob.prototype.isPrototypeOf(body)) {
-        this._bodyBlob = body
-      } else if (support.formData && FormData.prototype.isPrototypeOf(body)) {
-        this._bodyFormData = body
-      } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
-        this._bodyText = body.toString()
-      } else if (support.arrayBuffer && support.blob && isDataView(body)) {
-        this._bodyArrayBuffer = bufferClone(body.buffer)
-        // IE 10-11 can't handle a DataView body.
-        this._bodyInit = new Blob([this._bodyArrayBuffer])
-      } else if (support.arrayBuffer && (ArrayBuffer.prototype.isPrototypeOf(body) || isArrayBufferView(body))) {
-        this._bodyArrayBuffer = bufferClone(body)
-      } else {
-        throw new Error('unsupported BodyInit type')
-      }
-
-      if (!this.headers.get('content-type')) {
-        if (typeof body === 'string') {
-          this.headers.set('content-type', 'text/plain;charset=UTF-8')
-        } else if (this._bodyBlob && this._bodyBlob.type) {
-          this.headers.set('content-type', this._bodyBlob.type)
-        } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
-          this.headers.set('content-type', 'application/x-www-form-urlencoded;charset=UTF-8')
-        }
-      }
-    }
-
-    if (support.blob) {
-      this.blob = function() {
-        var rejected = consumed(this)
-        if (rejected) {
-          return rejected
-        }
-
-        if (this._bodyBlob) {
-          return Promise.resolve(this._bodyBlob)
-        } else if (this._bodyArrayBuffer) {
-          return Promise.resolve(new Blob([this._bodyArrayBuffer]))
-        } else if (this._bodyFormData) {
-          throw new Error('could not read FormData body as blob')
-        } else {
-          return Promise.resolve(new Blob([this._bodyText]))
-        }
-      }
-
-      this.arrayBuffer = function() {
-        if (this._bodyArrayBuffer) {
-          return consumed(this) || Promise.resolve(this._bodyArrayBuffer)
-        } else {
-          return this.blob().then(readBlobAsArrayBuffer)
-        }
-      }
-    }
-
-    this.text = function() {
-      var rejected = consumed(this)
-      if (rejected) {
-        return rejected
-      }
-
-      if (this._bodyBlob) {
-        return readBlobAsText(this._bodyBlob)
-      } else if (this._bodyArrayBuffer) {
-        return Promise.resolve(readArrayBufferAsText(this._bodyArrayBuffer))
-      } else if (this._bodyFormData) {
-        throw new Error('could not read FormData body as text')
-      } else {
-        return Promise.resolve(this._bodyText)
-      }
-    }
-
-    if (support.formData) {
-      this.formData = function() {
-        return this.text().then(decode)
-      }
-    }
-
-    this.json = function() {
-      return this.text().then(JSON.parse)
-    }
-
-    return this
-  }
-
-  // HTTP methods whose capitalization should be normalized
-  var methods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'POST', 'PUT']
-
-  function normalizeMethod(method) {
-    var upcased = method.toUpperCase()
-    return (methods.indexOf(upcased) > -1) ? upcased : method
-  }
-
-  function Request(input, options) {
-    options = options || {}
-    var body = options.body
-
-    if (input instanceof Request) {
-      if (input.bodyUsed) {
-        throw new TypeError('Already read')
-      }
-      this.url = input.url
-      this.credentials = input.credentials
-      if (!options.headers) {
-        this.headers = new Headers(input.headers)
-      }
-      this.method = input.method
-      this.mode = input.mode
-      if (!body && input._bodyInit != null) {
-        body = input._bodyInit
-        input.bodyUsed = true
-      }
-    } else {
-      this.url = String(input)
-    }
-
-    this.credentials = options.credentials || this.credentials || 'omit'
-    if (options.headers || !this.headers) {
-      this.headers = new Headers(options.headers)
-    }
-    this.method = normalizeMethod(options.method || this.method || 'GET')
-    this.mode = options.mode || this.mode || null
-    this.referrer = null
-
-    if ((this.method === 'GET' || this.method === 'HEAD') && body) {
-      throw new TypeError('Body not allowed for GET or HEAD requests')
-    }
-    this._initBody(body)
-  }
-
-  Request.prototype.clone = function() {
-    return new Request(this, { body: this._bodyInit })
-  }
-
-  function decode(body) {
-    var form = new FormData()
-    body.trim().split('&').forEach(function(bytes) {
-      if (bytes) {
-        var split = bytes.split('=')
-        var name = split.shift().replace(/\+/g, ' ')
-        var value = split.join('=').replace(/\+/g, ' ')
-        form.append(decodeURIComponent(name), decodeURIComponent(value))
-      }
-    })
-    return form
-  }
-
-  function parseHeaders(rawHeaders) {
-    var headers = new Headers()
-    rawHeaders.split(/\r?\n/).forEach(function(line) {
-      var parts = line.split(':')
-      var key = parts.shift().trim()
-      if (key) {
-        var value = parts.join(':').trim()
-        headers.append(key, value)
-      }
-    })
-    return headers
-  }
-
-  Body.call(Request.prototype)
-
-  function Response(bodyInit, options) {
-    if (!options) {
-      options = {}
-    }
-
-    this.type = 'default'
-    this.status = 'status' in options ? options.status : 200
-    this.ok = this.status >= 200 && this.status < 300
-    this.statusText = 'statusText' in options ? options.statusText : 'OK'
-    this.headers = new Headers(options.headers)
-    this.url = options.url || ''
-    this._initBody(bodyInit)
-  }
-
-  Body.call(Response.prototype)
-
-  Response.prototype.clone = function() {
-    return new Response(this._bodyInit, {
-      status: this.status,
-      statusText: this.statusText,
-      headers: new Headers(this.headers),
-      url: this.url
-    })
-  }
-
-  Response.error = function() {
-    var response = new Response(null, {status: 0, statusText: ''})
-    response.type = 'error'
-    return response
-  }
-
-  var redirectStatuses = [301, 302, 303, 307, 308]
-
-  Response.redirect = function(url, status) {
-    if (redirectStatuses.indexOf(status) === -1) {
-      throw new RangeError('Invalid status code')
-    }
-
-    return new Response(null, {status: status, headers: {location: url}})
-  }
-
-  self.Headers = Headers
-  self.Request = Request
-  self.Response = Response
-
-  self.fetch = function(input, init) {
-    return new Promise(function(resolve, reject) {
-      var request = new Request(input, init)
-      var xhr = new XMLHttpRequest()
-
-      xhr.onload = function() {
-        var options = {
-          status: xhr.status,
-          statusText: xhr.statusText,
-          headers: parseHeaders(xhr.getAllResponseHeaders() || '')
-        }
-        options.url = 'responseURL' in xhr ? xhr.responseURL : options.headers.get('X-Request-URL')
-        var body = 'response' in xhr ? xhr.response : xhr.responseText
-        resolve(new Response(body, options))
-      }
-
-      xhr.onerror = function() {
-        reject(new TypeError('Network request failed'))
-      }
-
-      xhr.ontimeout = function() {
-        reject(new TypeError('Network request failed'))
-      }
-
-      xhr.open(request.method, request.url, true)
-
-      if (request.credentials === 'include') {
-        xhr.withCredentials = true
-      }
-
-      if ('responseType' in xhr && support.blob) {
-        xhr.responseType = 'blob'
-      }
-
-      request.headers.forEach(function(value, name) {
-        xhr.setRequestHeader(name, value)
-      })
-
-      xhr.send(typeof request._bodyInit === 'undefined' ? null : request._bodyInit)
-    })
-  }
-  self.fetch.polyfill = true
-})(typeof self !== 'undefined' ? self : this);
-
+// promise
 
 /***/ }),
 /* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(setImmediate) {(function (root) {
+"use strict";
 
-  // Store setTimeout reference so promise-polyfill will be unaffected by
-  // other code modifying setTimeout (like sinon.useFakeTimers())
-  var setTimeoutFunc = setTimeout;
 
-  function noop() {}
-  
-  // Polyfill for Function.prototype.bind
-  function bind(fn, thisArg) {
-    return function () {
-      fn.apply(thisArg, arguments);
-    };
-  }
+__webpack_require__(112);
 
-  function Promise(fn) {
-    if (typeof this !== 'object') throw new TypeError('Promises must be constructed via new');
-    if (typeof fn !== 'function') throw new TypeError('not a function');
-    this._state = 0;
-    this._handled = false;
-    this._value = undefined;
-    this._deferreds = [];
+__webpack_require__(113);
 
-    doResolve(fn, this);
-  }
+__webpack_require__(114);
 
-  function handle(self, deferred) {
-    while (self._state === 3) {
-      self = self._value;
-    }
-    if (self._state === 0) {
-      self._deferreds.push(deferred);
-      return;
-    }
-    self._handled = true;
-    Promise._immediateFn(function () {
-      var cb = self._state === 1 ? deferred.onFulfilled : deferred.onRejected;
-      if (cb === null) {
-        (self._state === 1 ? resolve : reject)(deferred.promise, self._value);
-        return;
-      }
-      var ret;
-      try {
-        ret = cb(self._value);
-      } catch (e) {
-        reject(deferred.promise, e);
-        return;
-      }
-      resolve(deferred.promise, ret);
-    });
-  }
+__webpack_require__(119);
 
-  function resolve(self, newValue) {
-    try {
-      // Promise Resolution Procedure: https://github.com/promises-aplus/promises-spec#the-promise-resolution-procedure
-      if (newValue === self) throw new TypeError('A promise cannot be resolved with itself.');
-      if (newValue && (typeof newValue === 'object' || typeof newValue === 'function')) {
-        var then = newValue.then;
-        if (newValue instanceof Promise) {
-          self._state = 3;
-          self._value = newValue;
-          finale(self);
-          return;
-        } else if (typeof then === 'function') {
-          doResolve(bind(then, newValue), self);
-          return;
-        }
-      }
-      self._state = 1;
-      self._value = newValue;
-      finale(self);
-    } catch (e) {
-      reject(self, e);
-    }
-  }
+__webpack_require__(120);
 
-  function reject(self, newValue) {
-    self._state = 2;
-    self._value = newValue;
-    finale(self);
-  }
+__webpack_require__(121);
 
-  function finale(self) {
-    if (self._state === 2 && self._deferreds.length === 0) {
-      Promise._immediateFn(function() {
-        if (!self._handled) {
-          Promise._unhandledRejectionFn(self._value);
-        }
-      });
-    }
+__webpack_require__(122);
 
-    for (var i = 0, len = self._deferreds.length; i < len; i++) {
-      handle(self, self._deferreds[i]);
-    }
-    self._deferreds = null;
-  }
+__webpack_require__(123);
 
-  function Handler(onFulfilled, onRejected, promise) {
-    this.onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : null;
-    this.onRejected = typeof onRejected === 'function' ? onRejected : null;
-    this.promise = promise;
-  }
+__webpack_require__(124);
 
-  /**
-   * Take a potentially misbehaving resolver function and make sure
-   * onFulfilled and onRejected are only called once.
-   *
-   * Makes no guarantees about asynchrony.
-   */
-  function doResolve(fn, self) {
-    var done = false;
-    try {
-      fn(function (value) {
-        if (done) return;
-        done = true;
-        resolve(self, value);
-      }, function (reason) {
-        if (done) return;
-        done = true;
-        reject(self, reason);
-      });
-    } catch (ex) {
-      if (done) return;
-      done = true;
-      reject(self, ex);
-    }
-  }
+__webpack_require__(125);
 
-  Promise.prototype['catch'] = function (onRejected) {
-    return this.then(null, onRejected);
-  };
+__webpack_require__(126);
 
-  Promise.prototype.then = function (onFulfilled, onRejected) {
-    var prom = new (this.constructor)(noop);
+__webpack_require__(127);
 
-    handle(this, new Handler(onFulfilled, onRejected, prom));
-    return prom;
-  };
+__webpack_require__(129);
 
-  Promise.all = function (arr) {
-    var args = Array.prototype.slice.call(arr);
+__webpack_require__(130);
 
-    return new Promise(function (resolve, reject) {
-      if (args.length === 0) return resolve([]);
-      var remaining = args.length;
+__webpack_require__(131);
 
-      function res(i, val) {
-        try {
-          if (val && (typeof val === 'object' || typeof val === 'function')) {
-            var then = val.then;
-            if (typeof then === 'function') {
-              then.call(val, function (val) {
-                res(i, val);
-              }, reject);
-              return;
-            }
-          }
-          args[i] = val;
-          if (--remaining === 0) {
-            resolve(args);
-          }
-        } catch (ex) {
-          reject(ex);
-        }
-      }
+__webpack_require__(132);
 
-      for (var i = 0; i < args.length; i++) {
-        res(i, args[i]);
-      }
-    });
-  };
+__webpack_require__(133);
 
-  Promise.resolve = function (value) {
-    if (value && typeof value === 'object' && value.constructor === Promise) {
-      return value;
-    }
+__webpack_require__(135);
 
-    return new Promise(function (resolve) {
-      resolve(value);
-    });
-  };
+__webpack_require__(136);
 
-  Promise.reject = function (value) {
-    return new Promise(function (resolve, reject) {
-      reject(value);
-    });
-  };
+__webpack_require__(137);
 
-  Promise.race = function (values) {
-    return new Promise(function (resolve, reject) {
-      for (var i = 0, len = values.length; i < len; i++) {
-        values[i].then(resolve, reject);
-      }
-    });
-  };
+__webpack_require__(138);
 
-  // Use polyfill for setImmediate for performance gains
-  Promise._immediateFn = (typeof setImmediate === 'function' && function (fn) { setImmediate(fn); }) ||
-    function (fn) {
-      setTimeoutFunc(fn, 0);
-    };
+__webpack_require__(139);
 
-  Promise._unhandledRejectionFn = function _unhandledRejectionFn(err) {
-    if (typeof console !== 'undefined' && console) {
-      console.warn('Possible Unhandled Promise Rejection:', err); // eslint-disable-line no-console
-    }
-  };
+__webpack_require__(140);
 
-  /**
-   * Set the immediate function to execute callbacks
-   * @param fn {function} Function to execute
-   * @deprecated
-   */
-  Promise._setImmediateFn = function _setImmediateFn(fn) {
-    Promise._immediateFn = fn;
-  };
+__webpack_require__(141);
 
-  /**
-   * Change the function to execute on unhandled rejection
-   * @param {function} fn Function to execute on unhandled rejection
-   * @deprecated
-   */
-  Promise._setUnhandledRejectionFn = function _setUnhandledRejectionFn(fn) {
-    Promise._unhandledRejectionFn = fn;
-  };
-  
-  if (typeof module !== 'undefined' && module.exports) {
-    module.exports = Promise;
-  } else if (!root.Promise) {
-    root.Promise = Promise;
-  }
+__webpack_require__(142);
 
-})(this);
+__webpack_require__(143);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(112).setImmediate))
+__webpack_require__(144);
+
+__webpack_require__(145);
+
+__webpack_require__(146);
+
+__webpack_require__(148);
+
+__webpack_require__(153);
+
+__webpack_require__(154);
+
+__webpack_require__(155);
+
+__webpack_require__(156);
+
+__webpack_require__(157);
+
+__webpack_require__(158);
+
+__webpack_require__(159);
+
+__webpack_require__(161);
+
+__webpack_require__(162);
+
+__webpack_require__(163);
+
+__webpack_require__(164);
+
+__webpack_require__(165);
+
+__webpack_require__(167);
+
+__webpack_require__(168);
+
+__webpack_require__(169);
+
+__webpack_require__(170);
+
+__webpack_require__(171);
+
+__webpack_require__(172);
+
+__webpack_require__(173);
+
+__webpack_require__(174);
+
+__webpack_require__(175);
+
+__webpack_require__(176);
+
+__webpack_require__(64);
+
+__webpack_require__(177);
+
+__webpack_require__(178);
+
+__webpack_require__(179);
+
+__webpack_require__(180);
+
+__webpack_require__(181);
+
+__webpack_require__(182);
+
+__webpack_require__(183);
+
+__webpack_require__(184);
+
+__webpack_require__(185);
+
+__webpack_require__(186);
+
+__webpack_require__(187);
+
+__webpack_require__(188);
+
+__webpack_require__(189);
+
+__webpack_require__(190);
+
+__webpack_require__(191);
+
+__webpack_require__(192);
+
+__webpack_require__(193);
+
+__webpack_require__(194);
+
+__webpack_require__(195);
+
+__webpack_require__(196);
+
+__webpack_require__(197);
+
+__webpack_require__(198);
+
+__webpack_require__(199);
+
+__webpack_require__(200);
+
+__webpack_require__(201);
+
+__webpack_require__(202);
+
+__webpack_require__(203);
+
+__webpack_require__(204);
+
+__webpack_require__(205);
+
+__webpack_require__(206);
+
+__webpack_require__(207);
+
+__webpack_require__(210);
+
+__webpack_require__(211);
+
+__webpack_require__(212);
 
 /***/ }),
 /* 112 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var apply = Function.prototype.apply;
-
-// DOM APIs, for completeness
-
-exports.setTimeout = function() {
-  return new Timeout(apply.call(setTimeout, window, arguments), clearTimeout);
-};
-exports.setInterval = function() {
-  return new Timeout(apply.call(setInterval, window, arguments), clearInterval);
-};
-exports.clearTimeout =
-exports.clearInterval = function(timeout) {
-  if (timeout) {
-    timeout.close();
-  }
-};
-
-function Timeout(id, clearFn) {
-  this._id = id;
-  this._clearFn = clearFn;
-}
-Timeout.prototype.unref = Timeout.prototype.ref = function() {};
-Timeout.prototype.close = function() {
-  this._clearFn.call(window, this._id);
-};
-
-// Does not start the time, just sets up the members needed.
-exports.enroll = function(item, msecs) {
-  clearTimeout(item._idleTimeoutId);
-  item._idleTimeout = msecs;
-};
-
-exports.unenroll = function(item) {
-  clearTimeout(item._idleTimeoutId);
-  item._idleTimeout = -1;
-};
-
-exports._unrefActive = exports.active = function(item) {
-  clearTimeout(item._idleTimeoutId);
-
-  var msecs = item._idleTimeout;
-  if (msecs >= 0) {
-    item._idleTimeoutId = setTimeout(function onTimeout() {
-      if (item._onTimeout)
-        item._onTimeout();
-    }, msecs);
-  }
-};
-
-// setimmediate attaches itself to the global object
-__webpack_require__(113);
-exports.setImmediate = setImmediate;
-exports.clearImmediate = clearImmediate;
-
-
-/***/ }),
-/* 113 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
-    "use strict";
-
-    if (global.setImmediate) {
-        return;
-    }
-
-    var nextHandle = 1; // Spec says greater than zero
-    var tasksByHandle = {};
-    var currentlyRunningATask = false;
-    var doc = global.document;
-    var registerImmediate;
-
-    function setImmediate(callback) {
-      // Callback can either be a function or a string
-      if (typeof callback !== "function") {
-        callback = new Function("" + callback);
-      }
-      // Copy function arguments
-      var args = new Array(arguments.length - 1);
-      for (var i = 0; i < args.length; i++) {
-          args[i] = arguments[i + 1];
-      }
-      // Store and register the task
-      var task = { callback: callback, args: args };
-      tasksByHandle[nextHandle] = task;
-      registerImmediate(nextHandle);
-      return nextHandle++;
-    }
-
-    function clearImmediate(handle) {
-        delete tasksByHandle[handle];
-    }
-
-    function run(task) {
-        var callback = task.callback;
-        var args = task.args;
-        switch (args.length) {
-        case 0:
-            callback();
-            break;
-        case 1:
-            callback(args[0]);
-            break;
-        case 2:
-            callback(args[0], args[1]);
-            break;
-        case 3:
-            callback(args[0], args[1], args[2]);
-            break;
-        default:
-            callback.apply(undefined, args);
-            break;
-        }
-    }
-
-    function runIfPresent(handle) {
-        // From the spec: "Wait until any invocations of this algorithm started before this one have completed."
-        // So if we're currently running a task, we'll need to delay this invocation.
-        if (currentlyRunningATask) {
-            // Delay by doing a setTimeout. setImmediate was tried instead, but in Firefox 7 it generated a
-            // "too much recursion" error.
-            setTimeout(runIfPresent, 0, handle);
-        } else {
-            var task = tasksByHandle[handle];
-            if (task) {
-                currentlyRunningATask = true;
-                try {
-                    run(task);
-                } finally {
-                    clearImmediate(handle);
-                    currentlyRunningATask = false;
-                }
-            }
-        }
-    }
-
-    function installNextTickImplementation() {
-        registerImmediate = function(handle) {
-            process.nextTick(function () { runIfPresent(handle); });
-        };
-    }
-
-    function canUsePostMessage() {
-        // The test against `importScripts` prevents this implementation from being installed inside a web worker,
-        // where `global.postMessage` means something completely different and can't be used for this purpose.
-        if (global.postMessage && !global.importScripts) {
-            var postMessageIsAsynchronous = true;
-            var oldOnMessage = global.onmessage;
-            global.onmessage = function() {
-                postMessageIsAsynchronous = false;
-            };
-            global.postMessage("", "*");
-            global.onmessage = oldOnMessage;
-            return postMessageIsAsynchronous;
-        }
-    }
-
-    function installPostMessageImplementation() {
-        // Installs an event handler on `global` for the `message` event: see
-        // * https://developer.mozilla.org/en/DOM/window.postMessage
-        // * http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#crossDocumentMessages
-
-        var messagePrefix = "setImmediate$" + Math.random() + "$";
-        var onGlobalMessage = function(event) {
-            if (event.source === global &&
-                typeof event.data === "string" &&
-                event.data.indexOf(messagePrefix) === 0) {
-                runIfPresent(+event.data.slice(messagePrefix.length));
-            }
-        };
-
-        if (global.addEventListener) {
-            global.addEventListener("message", onGlobalMessage, false);
-        } else {
-            global.attachEvent("onmessage", onGlobalMessage);
-        }
-
-        registerImmediate = function(handle) {
-            global.postMessage(messagePrefix + handle, "*");
-        };
-    }
-
-    function installMessageChannelImplementation() {
-        var channel = new MessageChannel();
-        channel.port1.onmessage = function(event) {
-            var handle = event.data;
-            runIfPresent(handle);
-        };
-
-        registerImmediate = function(handle) {
-            channel.port2.postMessage(handle);
-        };
-    }
-
-    function installReadyStateChangeImplementation() {
-        var html = doc.documentElement;
-        registerImmediate = function(handle) {
-            // Create a <script> element; its readystatechange event will be fired asynchronously once it is inserted
-            // into the document. Do so, thus queuing up the task. Remember to clean up once it's been called.
-            var script = doc.createElement("script");
-            script.onreadystatechange = function () {
-                runIfPresent(handle);
-                script.onreadystatechange = null;
-                html.removeChild(script);
-                script = null;
-            };
-            html.appendChild(script);
-        };
-    }
-
-    function installSetTimeoutImplementation() {
-        registerImmediate = function(handle) {
-            setTimeout(runIfPresent, 0, handle);
-        };
-    }
-
-    // If supported, we should attach to the prototype of global, since that is where setTimeout et al. live.
-    var attachTo = Object.getPrototypeOf && Object.getPrototypeOf(global);
-    attachTo = attachTo && attachTo.setTimeout ? attachTo : global;
-
-    // Don't get fooled by e.g. browserify environments.
-    if ({}.toString.call(global.process) === "[object process]") {
-        // For Node.js before 0.9
-        installNextTickImplementation();
-
-    } else if (canUsePostMessage()) {
-        // For non-IE10 modern browsers
-        installPostMessageImplementation();
-
-    } else if (global.MessageChannel) {
-        // For web workers, where supported
-        installMessageChannelImplementation();
-
-    } else if (doc && "onreadystatechange" in doc.createElement("script")) {
-        // For IE 6–8
-        installReadyStateChangeImplementation();
-
-    } else {
-        // For older browsers
-        installSetTimeoutImplementation();
-    }
-
-    attachTo.setImmediate = setImmediate;
-    attachTo.clearImmediate = clearImmediate;
-}(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(74), __webpack_require__(114)))
-
-/***/ }),
-/* 114 */
-/***/ (function(module, exports) {
-
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) { return [] }
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-
-/***/ }),
-/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8646,7 +7544,7 @@ $export($export.P + $export.U + $export.F * __webpack_require__(5)(function(){
 __webpack_require__(43)(ARRAY_BUFFER);
 
 /***/ }),
-/* 116 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export = __webpack_require__(0);
@@ -8655,7 +7553,7 @@ $export($export.G + $export.W + $export.F * !__webpack_require__(42).ABV, {
 });
 
 /***/ }),
-/* 117 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(13)('Int8', 1, function(init){
@@ -8665,7 +7563,7 @@ __webpack_require__(13)('Int8', 1, function(init){
 });
 
 /***/ }),
-/* 118 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var dP       = __webpack_require__(6)
@@ -8683,22 +7581,22 @@ module.exports = __webpack_require__(9) ? Object.defineProperties : function def
 };
 
 /***/ }),
-/* 119 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 9.4.2.3 ArraySpeciesCreate(originalArray, length)
-var speciesConstructor = __webpack_require__(120);
+var speciesConstructor = __webpack_require__(117);
 
 module.exports = function(original, length){
   return new (speciesConstructor(original))(length);
 };
 
 /***/ }),
-/* 120 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isObject = __webpack_require__(3)
-  , isArray  = __webpack_require__(79)
+  , isArray  = __webpack_require__(81)
   , SPECIES  = __webpack_require__(4)('species');
 
 module.exports = function(original){
@@ -8715,7 +7613,7 @@ module.exports = function(original){
 };
 
 /***/ }),
-/* 121 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8734,7 +7632,7 @@ module.exports = function(Constructor, NAME, next){
 };
 
 /***/ }),
-/* 122 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(13)('Uint8', 1, function(init){
@@ -8744,7 +7642,7 @@ __webpack_require__(13)('Uint8', 1, function(init){
 });
 
 /***/ }),
-/* 123 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(13)('Uint8', 1, function(init){
@@ -8754,7 +7652,7 @@ __webpack_require__(13)('Uint8', 1, function(init){
 }, true);
 
 /***/ }),
-/* 124 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(13)('Int16', 2, function(init){
@@ -8764,7 +7662,7 @@ __webpack_require__(13)('Int16', 2, function(init){
 });
 
 /***/ }),
-/* 125 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(13)('Uint16', 2, function(init){
@@ -8774,7 +7672,7 @@ __webpack_require__(13)('Uint16', 2, function(init){
 });
 
 /***/ }),
-/* 126 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(13)('Int32', 4, function(init){
@@ -8784,7 +7682,7 @@ __webpack_require__(13)('Int32', 4, function(init){
 });
 
 /***/ }),
-/* 127 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(13)('Uint32', 4, function(init){
@@ -8794,7 +7692,7 @@ __webpack_require__(13)('Uint32', 4, function(init){
 });
 
 /***/ }),
-/* 128 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(13)('Float32', 4, function(init){
@@ -8804,7 +7702,7 @@ __webpack_require__(13)('Float32', 4, function(init){
 });
 
 /***/ }),
-/* 129 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(13)('Float64', 8, function(init){
@@ -8814,12 +7712,12 @@ __webpack_require__(13)('Float64', 8, function(init){
 });
 
 /***/ }),
-/* 130 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var strong = __webpack_require__(83);
+var strong = __webpack_require__(85);
 
 // 23.1 Map Objects
 module.exports = __webpack_require__(46)('Map', function(get){
@@ -8837,7 +7735,7 @@ module.exports = __webpack_require__(46)('Map', function(get){
 }, strong, true);
 
 /***/ }),
-/* 131 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isObject       = __webpack_require__(3)
@@ -8850,12 +7748,12 @@ module.exports = function(that, target, C){
 };
 
 /***/ }),
-/* 132 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var strong = __webpack_require__(83);
+var strong = __webpack_require__(85);
 
 // 23.2 Set Objects
 module.exports = __webpack_require__(46)('Set', function(get){
@@ -8868,7 +7766,7 @@ module.exports = __webpack_require__(46)('Set', function(get){
 }, strong);
 
 /***/ }),
-/* 133 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8876,8 +7774,8 @@ module.exports = __webpack_require__(46)('Set', function(get){
 var each         = __webpack_require__(39)(0)
   , redefine     = __webpack_require__(15)
   , meta         = __webpack_require__(41)
-  , assign       = __webpack_require__(85)
-  , weak         = __webpack_require__(86)
+  , assign       = __webpack_require__(87)
+  , weak         = __webpack_require__(88)
   , isObject     = __webpack_require__(3)
   , getWeak      = meta.getWeak
   , isExtensible = Object.isExtensible
@@ -8930,12 +7828,12 @@ if(new $WeakMap().set((Object.freeze || Object)(tmp), 7).get(tmp) != 7){
 }
 
 /***/ }),
-/* 134 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var weak = __webpack_require__(86);
+var weak = __webpack_require__(88);
 
 // 23.4 WeakSet Objects
 __webpack_require__(46)('WeakSet', function(get){
@@ -8948,7 +7846,7 @@ __webpack_require__(46)('WeakSet', function(get){
 }, weak, false, true);
 
 /***/ }),
-/* 135 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.1 Reflect.apply(target, thisArgument, argumentsList)
@@ -8969,7 +7867,7 @@ $export($export.S + $export.F * !__webpack_require__(5)(function(){
 });
 
 /***/ }),
-/* 136 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.2 Reflect.construct(target, argumentsList [, newTarget])
@@ -8979,7 +7877,7 @@ var $export    = __webpack_require__(0)
   , anObject   = __webpack_require__(2)
   , isObject   = __webpack_require__(3)
   , fails      = __webpack_require__(5)
-  , bind       = __webpack_require__(137)
+  , bind       = __webpack_require__(134)
   , rConstruct = (__webpack_require__(1).Reflect || {}).construct;
 
 // MS Edge supports only 2 arguments and argumentsList argument is optional
@@ -9021,7 +7919,7 @@ $export($export.S + $export.F * (NEW_TARGET_BUG || ARGS_BUG), 'Reflect', {
 });
 
 /***/ }),
-/* 137 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9051,7 +7949,7 @@ module.exports = Function.bind || function bind(that /*, args... */){
 };
 
 /***/ }),
-/* 138 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.3 Reflect.defineProperty(target, propertyKey, attributes)
@@ -9078,7 +7976,7 @@ $export($export.S + $export.F * __webpack_require__(5)(function(){
 });
 
 /***/ }),
-/* 139 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.4 Reflect.deleteProperty(target, propertyKey)
@@ -9094,7 +7992,7 @@ $export($export.S, 'Reflect', {
 });
 
 /***/ }),
-/* 140 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.6 Reflect.get(target, propertyKey [, receiver])
@@ -9120,7 +8018,7 @@ function get(target, propertyKey/*, receiver*/){
 $export($export.S, 'Reflect', {get: get});
 
 /***/ }),
-/* 141 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.7 Reflect.getOwnPropertyDescriptor(target, propertyKey)
@@ -9135,7 +8033,7 @@ $export($export.S, 'Reflect', {
 });
 
 /***/ }),
-/* 142 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.8 Reflect.getPrototypeOf(target)
@@ -9150,7 +8048,7 @@ $export($export.S, 'Reflect', {
 });
 
 /***/ }),
-/* 143 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.9 Reflect.has(target, propertyKey)
@@ -9163,7 +8061,7 @@ $export($export.S, 'Reflect', {
 });
 
 /***/ }),
-/* 144 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.10 Reflect.isExtensible(target)
@@ -9179,16 +8077,16 @@ $export($export.S, 'Reflect', {
 });
 
 /***/ }),
-/* 145 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.11 Reflect.ownKeys(target)
 var $export = __webpack_require__(0);
 
-$export($export.S, 'Reflect', {ownKeys: __webpack_require__(87)});
+$export($export.S, 'Reflect', {ownKeys: __webpack_require__(89)});
 
 /***/ }),
-/* 146 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.12 Reflect.preventExtensions(target)
@@ -9209,7 +8107,7 @@ $export($export.S, 'Reflect', {
 });
 
 /***/ }),
-/* 147 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.13 Reflect.set(target, propertyKey, V [, receiver])
@@ -9245,7 +8143,7 @@ function set(target, propertyKey, V/*, receiver*/){
 $export($export.S, 'Reflect', {set: set});
 
 /***/ }),
-/* 148 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.14 Reflect.setPrototypeOf(target, proto)
@@ -9265,7 +8163,7 @@ if(setProto)$export($export.S, 'Reflect', {
 });
 
 /***/ }),
-/* 149 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9281,7 +8179,7 @@ var LIBRARY            = __webpack_require__(24)
   , forOf              = __webpack_require__(45)
   , speciesConstructor = __webpack_require__(60)
   , task               = __webpack_require__(66).set
-  , microtask          = __webpack_require__(150)()
+  , microtask          = __webpack_require__(147)()
   , PROMISE            = 'Promise'
   , TypeError          = global.TypeError
   , process            = global.process
@@ -9570,7 +8468,7 @@ $export($export.S + $export.F * !(USE_NATIVE && __webpack_require__(44)(function
 });
 
 /***/ }),
-/* 150 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var global    = __webpack_require__(1)
@@ -9643,7 +8541,7 @@ module.exports = function(){
 };
 
 /***/ }),
-/* 151 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9660,17 +8558,17 @@ var global         = __webpack_require__(1)
   , setToStringTag = __webpack_require__(30)
   , uid            = __webpack_require__(20)
   , wks            = __webpack_require__(4)
-  , wksExt         = __webpack_require__(88)
-  , wksDefine      = __webpack_require__(152)
-  , keyOf          = __webpack_require__(153)
-  , enumKeys       = __webpack_require__(154)
-  , isArray        = __webpack_require__(79)
+  , wksExt         = __webpack_require__(90)
+  , wksDefine      = __webpack_require__(149)
+  , keyOf          = __webpack_require__(150)
+  , enumKeys       = __webpack_require__(151)
+  , isArray        = __webpack_require__(81)
   , anObject       = __webpack_require__(2)
   , toIObject      = __webpack_require__(11)
   , toPrimitive    = __webpack_require__(35)
   , createDesc     = __webpack_require__(14)
   , _create        = __webpack_require__(37)
-  , gOPNExt        = __webpack_require__(155)
+  , gOPNExt        = __webpack_require__(152)
   , $GOPD          = __webpack_require__(17)
   , $DP            = __webpack_require__(6)
   , $keys          = __webpack_require__(32)
@@ -9884,13 +8782,13 @@ setToStringTag(Math, 'Math', true);
 setToStringTag(global.JSON, 'JSON', true);
 
 /***/ }),
-/* 152 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var global         = __webpack_require__(1)
   , core           = __webpack_require__(34)
   , LIBRARY        = __webpack_require__(24)
-  , wksExt         = __webpack_require__(88)
+  , wksExt         = __webpack_require__(90)
   , defineProperty = __webpack_require__(6).f;
 module.exports = function(name){
   var $Symbol = core.Symbol || (core.Symbol = LIBRARY ? {} : global.Symbol || {});
@@ -9898,7 +8796,7 @@ module.exports = function(name){
 };
 
 /***/ }),
-/* 153 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getKeys   = __webpack_require__(32)
@@ -9913,7 +8811,7 @@ module.exports = function(object, el){
 };
 
 /***/ }),
-/* 154 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // all enumerable object keys, includes symbols
@@ -9933,7 +8831,7 @@ module.exports = function(it){
 };
 
 /***/ }),
-/* 155 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
@@ -9958,24 +8856,24 @@ module.exports.f = function getOwnPropertyNames(it){
 
 
 /***/ }),
-/* 156 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.3.1 Object.assign(target, source)
 var $export = __webpack_require__(0);
 
-$export($export.S + $export.F, 'Object', {assign: __webpack_require__(85)});
+$export($export.S + $export.F, 'Object', {assign: __webpack_require__(87)});
 
 /***/ }),
-/* 157 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.3.10 Object.is(value1, value2)
 var $export = __webpack_require__(0);
-$export($export.S, 'Object', {is: __webpack_require__(77)});
+$export($export.S, 'Object', {is: __webpack_require__(79)});
 
 /***/ }),
-/* 158 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.3.19 Object.setPrototypeOf(O, proto)
@@ -9983,7 +8881,7 @@ var $export = __webpack_require__(0);
 $export($export.S, 'Object', {setPrototypeOf: __webpack_require__(65).set});
 
 /***/ }),
-/* 159 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var dP         = __webpack_require__(6).f
@@ -10013,7 +8911,7 @@ NAME in FProto || __webpack_require__(9) && dP(FProto, NAME, {
 });
 
 /***/ }),
-/* 160 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export   = __webpack_require__(0)
@@ -10036,7 +8934,7 @@ $export($export.S, 'String', {
 });
 
 /***/ }),
-/* 161 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export        = __webpack_require__(0)
@@ -10064,13 +8962,13 @@ $export($export.S + $export.F * (!!$fromCodePoint && $fromCodePoint.length != 1)
 });
 
 /***/ }),
-/* 162 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var $export = __webpack_require__(0)
-  , $at     = __webpack_require__(163)(false);
+  , $at     = __webpack_require__(160)(false);
 $export($export.P, 'String', {
   // 21.1.3.3 String.prototype.codePointAt(pos)
   codePointAt: function codePointAt(pos){
@@ -10079,7 +8977,7 @@ $export($export.P, 'String', {
 });
 
 /***/ }),
-/* 163 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var toInteger = __webpack_require__(27)
@@ -10101,18 +8999,18 @@ module.exports = function(TO_STRING){
 };
 
 /***/ }),
-/* 164 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export = __webpack_require__(0);
 
 $export($export.P, 'String', {
   // 21.1.3.13 String.prototype.repeat(count)
-  repeat: __webpack_require__(89)
+  repeat: __webpack_require__(91)
 });
 
 /***/ }),
-/* 165 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10136,7 +9034,7 @@ $export($export.P + $export.F * __webpack_require__(68)(STARTS_WITH), 'String', 
 });
 
 /***/ }),
-/* 166 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10162,7 +9060,7 @@ $export($export.P + $export.F * __webpack_require__(68)(ENDS_WITH), 'String', {
 });
 
 /***/ }),
-/* 167 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10180,17 +9078,17 @@ $export($export.P + $export.F * __webpack_require__(68)(INCLUDES), 'String', {
 });
 
 /***/ }),
-/* 168 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 21.2.5.3 get RegExp.prototype.flags()
 if(__webpack_require__(9) && /./g.flags != 'g')__webpack_require__(6).f(RegExp.prototype, 'flags', {
   configurable: true,
-  get: __webpack_require__(169)
+  get: __webpack_require__(166)
 });
 
 /***/ }),
-/* 169 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10209,7 +9107,7 @@ module.exports = function(){
 };
 
 /***/ }),
-/* 170 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // @@match logic
@@ -10224,7 +9122,7 @@ __webpack_require__(49)('match', 1, function(defined, MATCH, $match){
 });
 
 /***/ }),
-/* 171 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // @@replace logic
@@ -10241,13 +9139,13 @@ __webpack_require__(49)('replace', 2, function(defined, REPLACE, $replace){
 });
 
 /***/ }),
-/* 172 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // @@split logic
 __webpack_require__(49)('split', 2, function(defined, SPLIT, $split){
   'use strict';
-  var isRegExp   = __webpack_require__(90)
+  var isRegExp   = __webpack_require__(92)
     , _split     = $split
     , $push      = [].push
     , $SPLIT     = 'split'
@@ -10316,7 +9214,7 @@ __webpack_require__(49)('split', 2, function(defined, SPLIT, $split){
 });
 
 /***/ }),
-/* 173 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // @@search logic
@@ -10331,7 +9229,7 @@ __webpack_require__(49)('search', 1, function(defined, SEARCH, $search){
 });
 
 /***/ }),
-/* 174 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10339,7 +9237,7 @@ __webpack_require__(49)('search', 1, function(defined, SEARCH, $search){
 var ctx            = __webpack_require__(12)
   , $export        = __webpack_require__(0)
   , toObject       = __webpack_require__(22)
-  , call           = __webpack_require__(84)
+  , call           = __webpack_require__(86)
   , isArrayIter    = __webpack_require__(62)
   , toLength       = __webpack_require__(8)
   , createProperty = __webpack_require__(69)
@@ -10375,7 +9273,7 @@ $export($export.S + $export.F * !__webpack_require__(44)(function(iter){ Array.f
 
 
 /***/ }),
-/* 175 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10400,18 +9298,18 @@ $export($export.S + $export.F * __webpack_require__(5)(function(){
 });
 
 /***/ }),
-/* 176 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 22.1.3.3 Array.prototype.copyWithin(target, start, end = this.length)
 var $export = __webpack_require__(0);
 
-$export($export.P, 'Array', {copyWithin: __webpack_require__(82)});
+$export($export.P, 'Array', {copyWithin: __webpack_require__(84)});
 
 __webpack_require__(33)('copyWithin');
 
 /***/ }),
-/* 177 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10431,7 +9329,7 @@ $export($export.P + $export.F * forced, 'Array', {
 __webpack_require__(33)(KEY);
 
 /***/ }),
-/* 178 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10451,7 +9349,7 @@ $export($export.P + $export.F * forced, 'Array', {
 __webpack_require__(33)(KEY);
 
 /***/ }),
-/* 179 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 22.1.3.6 Array.prototype.fill(value, start = 0, end = this.length)
@@ -10462,7 +9360,7 @@ $export($export.P, 'Array', {fill: __webpack_require__(59)});
 __webpack_require__(33)('fill');
 
 /***/ }),
-/* 180 */
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.1.2.2 Number.isFinite(number)
@@ -10476,21 +9374,21 @@ $export($export.S, 'Number', {
 });
 
 /***/ }),
-/* 181 */
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.1.2.3 Number.isInteger(number)
 var $export = __webpack_require__(0);
 
-$export($export.S, 'Number', {isInteger: __webpack_require__(91)});
+$export($export.S, 'Number', {isInteger: __webpack_require__(93)});
 
 /***/ }),
-/* 182 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.1.2.5 Number.isSafeInteger(number)
 var $export   = __webpack_require__(0)
-  , isInteger = __webpack_require__(91)
+  , isInteger = __webpack_require__(93)
   , abs       = Math.abs;
 
 $export($export.S, 'Number', {
@@ -10500,7 +9398,7 @@ $export($export.S, 'Number', {
 });
 
 /***/ }),
-/* 183 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.1.2.4 Number.isNaN(number)
@@ -10513,7 +9411,7 @@ $export($export.S, 'Number', {
 });
 
 /***/ }),
-/* 184 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.1.2.1 Number.EPSILON
@@ -10522,7 +9420,7 @@ var $export = __webpack_require__(0);
 $export($export.S, 'Number', {EPSILON: Math.pow(2, -52)});
 
 /***/ }),
-/* 185 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.1.2.10 Number.MIN_SAFE_INTEGER
@@ -10531,7 +9429,7 @@ var $export = __webpack_require__(0);
 $export($export.S, 'Number', {MIN_SAFE_INTEGER: -0x1fffffffffffff});
 
 /***/ }),
-/* 186 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.1.2.6 Number.MAX_SAFE_INTEGER
@@ -10540,12 +9438,12 @@ var $export = __webpack_require__(0);
 $export($export.S, 'Number', {MAX_SAFE_INTEGER: 0x1fffffffffffff});
 
 /***/ }),
-/* 187 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.3 Math.acosh(x)
 var $export = __webpack_require__(0)
-  , log1p   = __webpack_require__(92)
+  , log1p   = __webpack_require__(94)
   , sqrt    = Math.sqrt
   , $acosh  = Math.acosh;
 
@@ -10563,7 +9461,7 @@ $export($export.S + $export.F * !($acosh
 });
 
 /***/ }),
-/* 188 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.5 Math.asinh(x)
@@ -10578,7 +9476,7 @@ function asinh(x){
 $export($export.S + $export.F * !($asinh && 1 / $asinh(0) > 0), 'Math', {asinh: asinh});
 
 /***/ }),
-/* 189 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.7 Math.atanh(x)
@@ -10593,7 +9491,7 @@ $export($export.S + $export.F * !($atanh && 1 / $atanh(-0) < 0), 'Math', {
 });
 
 /***/ }),
-/* 190 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.9 Math.cbrt(x)
@@ -10607,7 +9505,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-/* 191 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.11 Math.clz32(x)
@@ -10620,7 +9518,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-/* 192 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.12 Math.cosh(x)
@@ -10634,7 +9532,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-/* 193 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.14 Math.expm1(x)
@@ -10644,7 +9542,7 @@ var $export = __webpack_require__(0)
 $export($export.S + $export.F * ($expm1 != Math.expm1), 'Math', {expm1: $expm1});
 
 /***/ }),
-/* 194 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.16 Math.fround(x)
@@ -10675,7 +9573,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-/* 195 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.17 Math.hypot([value1[, value2[, … ]]])
@@ -10705,7 +9603,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-/* 196 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.18 Math.imul(x, y)
@@ -10727,16 +9625,16 @@ $export($export.S + $export.F * __webpack_require__(5)(function(){
 });
 
 /***/ }),
-/* 197 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.20 Math.log1p(x)
 var $export = __webpack_require__(0);
 
-$export($export.S, 'Math', {log1p: __webpack_require__(92)});
+$export($export.S, 'Math', {log1p: __webpack_require__(94)});
 
 /***/ }),
-/* 198 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.21 Math.log10(x)
@@ -10749,7 +9647,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-/* 199 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.22 Math.log2(x)
@@ -10762,7 +9660,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-/* 200 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.28 Math.sign(x)
@@ -10771,7 +9669,7 @@ var $export = __webpack_require__(0);
 $export($export.S, 'Math', {sign: __webpack_require__(70)});
 
 /***/ }),
-/* 201 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.30 Math.sinh(x)
@@ -10791,7 +9689,7 @@ $export($export.S + $export.F * __webpack_require__(5)(function(){
 });
 
 /***/ }),
-/* 202 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.33 Math.tanh(x)
@@ -10808,7 +9706,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-/* 203 */
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.34 Math.trunc(x)
@@ -10821,7 +9719,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-/* 204 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10839,12 +9737,12 @@ $export($export.P, 'Array', {
 __webpack_require__(33)('includes');
 
 /***/ }),
-/* 205 */
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/tc39/proposal-object-values-entries
 var $export = __webpack_require__(0)
-  , $values = __webpack_require__(93)(false);
+  , $values = __webpack_require__(95)(false);
 
 $export($export.S, 'Object', {
   values: function values(it){
@@ -10853,12 +9751,12 @@ $export($export.S, 'Object', {
 });
 
 /***/ }),
-/* 206 */
+/* 203 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/tc39/proposal-object-values-entries
 var $export  = __webpack_require__(0)
-  , $entries = __webpack_require__(93)(true);
+  , $entries = __webpack_require__(95)(true);
 
 $export($export.S, 'Object', {
   entries: function entries(it){
@@ -10867,12 +9765,12 @@ $export($export.S, 'Object', {
 });
 
 /***/ }),
-/* 207 */
+/* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/tc39/proposal-object-getownpropertydescriptors
 var $export        = __webpack_require__(0)
-  , ownKeys        = __webpack_require__(87)
+  , ownKeys        = __webpack_require__(89)
   , toIObject      = __webpack_require__(11)
   , gOPD           = __webpack_require__(17)
   , createProperty = __webpack_require__(69);
@@ -10891,14 +9789,14 @@ $export($export.S, 'Object', {
 });
 
 /***/ }),
-/* 208 */
+/* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // https://github.com/tc39/proposal-string-pad-start-end
 var $export = __webpack_require__(0)
-  , $pad    = __webpack_require__(94);
+  , $pad    = __webpack_require__(96);
 
 $export($export.P, 'String', {
   padStart: function padStart(maxLength /*, fillString = ' ' */){
@@ -10907,14 +9805,14 @@ $export($export.P, 'String', {
 });
 
 /***/ }),
-/* 209 */
+/* 206 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // https://github.com/tc39/proposal-string-pad-start-end
 var $export = __webpack_require__(0)
-  , $pad    = __webpack_require__(94);
+  , $pad    = __webpack_require__(96);
 
 $export($export.P, 'String', {
   padEnd: function padEnd(maxLength /*, fillString = ' ' */){
@@ -10923,14 +9821,14 @@ $export($export.P, 'String', {
 });
 
 /***/ }),
-/* 210 */
+/* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // ie9- setTimeout & setInterval additional parameters fix
 var global     = __webpack_require__(1)
   , $export    = __webpack_require__(0)
   , invoke     = __webpack_require__(48)
-  , partial    = __webpack_require__(211)
+  , partial    = __webpack_require__(208)
   , navigator  = global.navigator
   , MSIE       = !!navigator && /MSIE .\./.test(navigator.userAgent); // <- dirty ie9- check
 var wrap = function(set){
@@ -10948,12 +9846,12 @@ $export($export.G + $export.B + $export.F * MSIE, {
 });
 
 /***/ }),
-/* 211 */
+/* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var path      = __webpack_require__(212)
+var path      = __webpack_require__(209)
   , invoke    = __webpack_require__(48)
   , aFunction = __webpack_require__(21);
 module.exports = function(/* ...pargs */){
@@ -10977,13 +9875,13 @@ module.exports = function(/* ...pargs */){
 };
 
 /***/ }),
-/* 212 */
+/* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(1);
 
 /***/ }),
-/* 213 */
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export = __webpack_require__(0)
@@ -10994,7 +9892,7 @@ $export($export.G + $export.B, {
 });
 
 /***/ }),
-/* 214 */
+/* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $iterators    = __webpack_require__(64)
@@ -11021,7 +9919,7 @@ for(var collections = ['NodeList', 'DOMTokenList', 'MediaList', 'StyleSheetList'
 }
 
 /***/ }),
-/* 215 */
+/* 212 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/**
@@ -11761,42 +10659,1200 @@ for(var collections = ['NodeList', 'DOMTokenList', 'MediaList', 'StyleSheetList'
   typeof self === "object" ? self : this
 );
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(74)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(97)))
 
 /***/ }),
-/* 216 */
+/* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _animationFrame = __webpack_require__(217);
+var _promisePolyfill = __webpack_require__(214);
 
-var _animationFrame2 = _interopRequireDefault(_animationFrame);
+var _promisePolyfill2 = _interopRequireDefault(_promisePolyfill);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(0, _animationFrame2.default)();
+// Promise: To add to window
+if (!window.Promise) {
+  window.Promise = _promisePolyfill2.default;
+} /**
+   * Copyright (c) 2011-2017 inazumatv.com, inc.
+   * @author (at)taikiken / http://inazumatv.com
+   * @date 2017/08/29 - 14:05
+   *
+   * Distributed under the terms of the MIT license.
+   * http://www.opensource.org/licenses/mit-license.html
+   *
+   * This notice shall be included in all copies or substantial portions of the Software.
+   *
+   */
 
-// const polyfill = {
-//   animationFrame,
-// };
-//
-// export default polyfill;
-/**
- * Copyright (c) 2011-2017 inazumatv.com, inc.
- * @author (at)taikiken / http://inazumatv.com
- * @date 2017/08/28 - 18:25
- *
- * Distributed under the terms of the MIT license.
- * http://www.opensource.org/licenses/mit-license.html
- *
- * This notice shall be included in all copies or substantial portions of the Software.
- *
- */
+// @see https://github.com/taylorhakes/promise-polyfill
+// @see https://developers.google.com/web/fundamentals/getting-started/primers/promises
+// > Chrome 32、Opera 19、Firefox 29、Safari 8、および Microsoft Edge - enabled
+
+/***/ }),
+/* 214 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(setImmediate) {(function (root) {
+
+  // Store setTimeout reference so promise-polyfill will be unaffected by
+  // other code modifying setTimeout (like sinon.useFakeTimers())
+  var setTimeoutFunc = setTimeout;
+
+  function noop() {}
+  
+  // Polyfill for Function.prototype.bind
+  function bind(fn, thisArg) {
+    return function () {
+      fn.apply(thisArg, arguments);
+    };
+  }
+
+  function Promise(fn) {
+    if (typeof this !== 'object') throw new TypeError('Promises must be constructed via new');
+    if (typeof fn !== 'function') throw new TypeError('not a function');
+    this._state = 0;
+    this._handled = false;
+    this._value = undefined;
+    this._deferreds = [];
+
+    doResolve(fn, this);
+  }
+
+  function handle(self, deferred) {
+    while (self._state === 3) {
+      self = self._value;
+    }
+    if (self._state === 0) {
+      self._deferreds.push(deferred);
+      return;
+    }
+    self._handled = true;
+    Promise._immediateFn(function () {
+      var cb = self._state === 1 ? deferred.onFulfilled : deferred.onRejected;
+      if (cb === null) {
+        (self._state === 1 ? resolve : reject)(deferred.promise, self._value);
+        return;
+      }
+      var ret;
+      try {
+        ret = cb(self._value);
+      } catch (e) {
+        reject(deferred.promise, e);
+        return;
+      }
+      resolve(deferred.promise, ret);
+    });
+  }
+
+  function resolve(self, newValue) {
+    try {
+      // Promise Resolution Procedure: https://github.com/promises-aplus/promises-spec#the-promise-resolution-procedure
+      if (newValue === self) throw new TypeError('A promise cannot be resolved with itself.');
+      if (newValue && (typeof newValue === 'object' || typeof newValue === 'function')) {
+        var then = newValue.then;
+        if (newValue instanceof Promise) {
+          self._state = 3;
+          self._value = newValue;
+          finale(self);
+          return;
+        } else if (typeof then === 'function') {
+          doResolve(bind(then, newValue), self);
+          return;
+        }
+      }
+      self._state = 1;
+      self._value = newValue;
+      finale(self);
+    } catch (e) {
+      reject(self, e);
+    }
+  }
+
+  function reject(self, newValue) {
+    self._state = 2;
+    self._value = newValue;
+    finale(self);
+  }
+
+  function finale(self) {
+    if (self._state === 2 && self._deferreds.length === 0) {
+      Promise._immediateFn(function() {
+        if (!self._handled) {
+          Promise._unhandledRejectionFn(self._value);
+        }
+      });
+    }
+
+    for (var i = 0, len = self._deferreds.length; i < len; i++) {
+      handle(self, self._deferreds[i]);
+    }
+    self._deferreds = null;
+  }
+
+  function Handler(onFulfilled, onRejected, promise) {
+    this.onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : null;
+    this.onRejected = typeof onRejected === 'function' ? onRejected : null;
+    this.promise = promise;
+  }
+
+  /**
+   * Take a potentially misbehaving resolver function and make sure
+   * onFulfilled and onRejected are only called once.
+   *
+   * Makes no guarantees about asynchrony.
+   */
+  function doResolve(fn, self) {
+    var done = false;
+    try {
+      fn(function (value) {
+        if (done) return;
+        done = true;
+        resolve(self, value);
+      }, function (reason) {
+        if (done) return;
+        done = true;
+        reject(self, reason);
+      });
+    } catch (ex) {
+      if (done) return;
+      done = true;
+      reject(self, ex);
+    }
+  }
+
+  Promise.prototype['catch'] = function (onRejected) {
+    return this.then(null, onRejected);
+  };
+
+  Promise.prototype.then = function (onFulfilled, onRejected) {
+    var prom = new (this.constructor)(noop);
+
+    handle(this, new Handler(onFulfilled, onRejected, prom));
+    return prom;
+  };
+
+  Promise.all = function (arr) {
+    var args = Array.prototype.slice.call(arr);
+
+    return new Promise(function (resolve, reject) {
+      if (args.length === 0) return resolve([]);
+      var remaining = args.length;
+
+      function res(i, val) {
+        try {
+          if (val && (typeof val === 'object' || typeof val === 'function')) {
+            var then = val.then;
+            if (typeof then === 'function') {
+              then.call(val, function (val) {
+                res(i, val);
+              }, reject);
+              return;
+            }
+          }
+          args[i] = val;
+          if (--remaining === 0) {
+            resolve(args);
+          }
+        } catch (ex) {
+          reject(ex);
+        }
+      }
+
+      for (var i = 0; i < args.length; i++) {
+        res(i, args[i]);
+      }
+    });
+  };
+
+  Promise.resolve = function (value) {
+    if (value && typeof value === 'object' && value.constructor === Promise) {
+      return value;
+    }
+
+    return new Promise(function (resolve) {
+      resolve(value);
+    });
+  };
+
+  Promise.reject = function (value) {
+    return new Promise(function (resolve, reject) {
+      reject(value);
+    });
+  };
+
+  Promise.race = function (values) {
+    return new Promise(function (resolve, reject) {
+      for (var i = 0, len = values.length; i < len; i++) {
+        values[i].then(resolve, reject);
+      }
+    });
+  };
+
+  // Use polyfill for setImmediate for performance gains
+  Promise._immediateFn = (typeof setImmediate === 'function' && function (fn) { setImmediate(fn); }) ||
+    function (fn) {
+      setTimeoutFunc(fn, 0);
+    };
+
+  Promise._unhandledRejectionFn = function _unhandledRejectionFn(err) {
+    if (typeof console !== 'undefined' && console) {
+      console.warn('Possible Unhandled Promise Rejection:', err); // eslint-disable-line no-console
+    }
+  };
+
+  /**
+   * Set the immediate function to execute callbacks
+   * @param fn {function} Function to execute
+   * @deprecated
+   */
+  Promise._setImmediateFn = function _setImmediateFn(fn) {
+    Promise._immediateFn = fn;
+  };
+
+  /**
+   * Change the function to execute on unhandled rejection
+   * @param {function} fn Function to execute on unhandled rejection
+   * @deprecated
+   */
+  Promise._setUnhandledRejectionFn = function _setUnhandledRejectionFn(fn) {
+    Promise._unhandledRejectionFn = fn;
+  };
+  
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = Promise;
+  } else if (!root.Promise) {
+    root.Promise = Promise;
+  }
+
+})(this);
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(215).setImmediate))
+
+/***/ }),
+/* 215 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var apply = Function.prototype.apply;
+
+// DOM APIs, for completeness
+
+exports.setTimeout = function() {
+  return new Timeout(apply.call(setTimeout, window, arguments), clearTimeout);
+};
+exports.setInterval = function() {
+  return new Timeout(apply.call(setInterval, window, arguments), clearInterval);
+};
+exports.clearTimeout =
+exports.clearInterval = function(timeout) {
+  if (timeout) {
+    timeout.close();
+  }
+};
+
+function Timeout(id, clearFn) {
+  this._id = id;
+  this._clearFn = clearFn;
+}
+Timeout.prototype.unref = Timeout.prototype.ref = function() {};
+Timeout.prototype.close = function() {
+  this._clearFn.call(window, this._id);
+};
+
+// Does not start the time, just sets up the members needed.
+exports.enroll = function(item, msecs) {
+  clearTimeout(item._idleTimeoutId);
+  item._idleTimeout = msecs;
+};
+
+exports.unenroll = function(item) {
+  clearTimeout(item._idleTimeoutId);
+  item._idleTimeout = -1;
+};
+
+exports._unrefActive = exports.active = function(item) {
+  clearTimeout(item._idleTimeoutId);
+
+  var msecs = item._idleTimeout;
+  if (msecs >= 0) {
+    item._idleTimeoutId = setTimeout(function onTimeout() {
+      if (item._onTimeout)
+        item._onTimeout();
+    }, msecs);
+  }
+};
+
+// setimmediate attaches itself to the global object
+__webpack_require__(216);
+exports.setImmediate = setImmediate;
+exports.clearImmediate = clearImmediate;
+
+
+/***/ }),
+/* 216 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
+    "use strict";
+
+    if (global.setImmediate) {
+        return;
+    }
+
+    var nextHandle = 1; // Spec says greater than zero
+    var tasksByHandle = {};
+    var currentlyRunningATask = false;
+    var doc = global.document;
+    var registerImmediate;
+
+    function setImmediate(callback) {
+      // Callback can either be a function or a string
+      if (typeof callback !== "function") {
+        callback = new Function("" + callback);
+      }
+      // Copy function arguments
+      var args = new Array(arguments.length - 1);
+      for (var i = 0; i < args.length; i++) {
+          args[i] = arguments[i + 1];
+      }
+      // Store and register the task
+      var task = { callback: callback, args: args };
+      tasksByHandle[nextHandle] = task;
+      registerImmediate(nextHandle);
+      return nextHandle++;
+    }
+
+    function clearImmediate(handle) {
+        delete tasksByHandle[handle];
+    }
+
+    function run(task) {
+        var callback = task.callback;
+        var args = task.args;
+        switch (args.length) {
+        case 0:
+            callback();
+            break;
+        case 1:
+            callback(args[0]);
+            break;
+        case 2:
+            callback(args[0], args[1]);
+            break;
+        case 3:
+            callback(args[0], args[1], args[2]);
+            break;
+        default:
+            callback.apply(undefined, args);
+            break;
+        }
+    }
+
+    function runIfPresent(handle) {
+        // From the spec: "Wait until any invocations of this algorithm started before this one have completed."
+        // So if we're currently running a task, we'll need to delay this invocation.
+        if (currentlyRunningATask) {
+            // Delay by doing a setTimeout. setImmediate was tried instead, but in Firefox 7 it generated a
+            // "too much recursion" error.
+            setTimeout(runIfPresent, 0, handle);
+        } else {
+            var task = tasksByHandle[handle];
+            if (task) {
+                currentlyRunningATask = true;
+                try {
+                    run(task);
+                } finally {
+                    clearImmediate(handle);
+                    currentlyRunningATask = false;
+                }
+            }
+        }
+    }
+
+    function installNextTickImplementation() {
+        registerImmediate = function(handle) {
+            process.nextTick(function () { runIfPresent(handle); });
+        };
+    }
+
+    function canUsePostMessage() {
+        // The test against `importScripts` prevents this implementation from being installed inside a web worker,
+        // where `global.postMessage` means something completely different and can't be used for this purpose.
+        if (global.postMessage && !global.importScripts) {
+            var postMessageIsAsynchronous = true;
+            var oldOnMessage = global.onmessage;
+            global.onmessage = function() {
+                postMessageIsAsynchronous = false;
+            };
+            global.postMessage("", "*");
+            global.onmessage = oldOnMessage;
+            return postMessageIsAsynchronous;
+        }
+    }
+
+    function installPostMessageImplementation() {
+        // Installs an event handler on `global` for the `message` event: see
+        // * https://developer.mozilla.org/en/DOM/window.postMessage
+        // * http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#crossDocumentMessages
+
+        var messagePrefix = "setImmediate$" + Math.random() + "$";
+        var onGlobalMessage = function(event) {
+            if (event.source === global &&
+                typeof event.data === "string" &&
+                event.data.indexOf(messagePrefix) === 0) {
+                runIfPresent(+event.data.slice(messagePrefix.length));
+            }
+        };
+
+        if (global.addEventListener) {
+            global.addEventListener("message", onGlobalMessage, false);
+        } else {
+            global.attachEvent("onmessage", onGlobalMessage);
+        }
+
+        registerImmediate = function(handle) {
+            global.postMessage(messagePrefix + handle, "*");
+        };
+    }
+
+    function installMessageChannelImplementation() {
+        var channel = new MessageChannel();
+        channel.port1.onmessage = function(event) {
+            var handle = event.data;
+            runIfPresent(handle);
+        };
+
+        registerImmediate = function(handle) {
+            channel.port2.postMessage(handle);
+        };
+    }
+
+    function installReadyStateChangeImplementation() {
+        var html = doc.documentElement;
+        registerImmediate = function(handle) {
+            // Create a <script> element; its readystatechange event will be fired asynchronously once it is inserted
+            // into the document. Do so, thus queuing up the task. Remember to clean up once it's been called.
+            var script = doc.createElement("script");
+            script.onreadystatechange = function () {
+                runIfPresent(handle);
+                script.onreadystatechange = null;
+                html.removeChild(script);
+                script = null;
+            };
+            html.appendChild(script);
+        };
+    }
+
+    function installSetTimeoutImplementation() {
+        registerImmediate = function(handle) {
+            setTimeout(runIfPresent, 0, handle);
+        };
+    }
+
+    // If supported, we should attach to the prototype of global, since that is where setTimeout et al. live.
+    var attachTo = Object.getPrototypeOf && Object.getPrototypeOf(global);
+    attachTo = attachTo && attachTo.setTimeout ? attachTo : global;
+
+    // Don't get fooled by e.g. browserify environments.
+    if ({}.toString.call(global.process) === "[object process]") {
+        // For Node.js before 0.9
+        installNextTickImplementation();
+
+    } else if (canUsePostMessage()) {
+        // For non-IE10 modern browsers
+        installPostMessageImplementation();
+
+    } else if (global.MessageChannel) {
+        // For web workers, where supported
+        installMessageChannelImplementation();
+
+    } else if (doc && "onreadystatechange" in doc.createElement("script")) {
+        // For IE 6–8
+        installReadyStateChangeImplementation();
+
+    } else {
+        // For older browsers
+        installSetTimeoutImplementation();
+    }
+
+    attachTo.setImmediate = setImmediate;
+    attachTo.clearImmediate = clearImmediate;
+}(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(97), __webpack_require__(217)))
 
 /***/ }),
 /* 217 */
+/***/ (function(module, exports) {
+
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+
+/***/ }),
+/* 218 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+__webpack_require__(219);
+
+/***/ }),
+/* 219 */
+/***/ (function(module, exports) {
+
+(function(self) {
+  'use strict';
+
+  if (self.fetch) {
+    return
+  }
+
+  var support = {
+    searchParams: 'URLSearchParams' in self,
+    iterable: 'Symbol' in self && 'iterator' in Symbol,
+    blob: 'FileReader' in self && 'Blob' in self && (function() {
+      try {
+        new Blob()
+        return true
+      } catch(e) {
+        return false
+      }
+    })(),
+    formData: 'FormData' in self,
+    arrayBuffer: 'ArrayBuffer' in self
+  }
+
+  if (support.arrayBuffer) {
+    var viewClasses = [
+      '[object Int8Array]',
+      '[object Uint8Array]',
+      '[object Uint8ClampedArray]',
+      '[object Int16Array]',
+      '[object Uint16Array]',
+      '[object Int32Array]',
+      '[object Uint32Array]',
+      '[object Float32Array]',
+      '[object Float64Array]'
+    ]
+
+    var isDataView = function(obj) {
+      return obj && DataView.prototype.isPrototypeOf(obj)
+    }
+
+    var isArrayBufferView = ArrayBuffer.isView || function(obj) {
+      return obj && viewClasses.indexOf(Object.prototype.toString.call(obj)) > -1
+    }
+  }
+
+  function normalizeName(name) {
+    if (typeof name !== 'string') {
+      name = String(name)
+    }
+    if (/[^a-z0-9\-#$%&'*+.\^_`|~]/i.test(name)) {
+      throw new TypeError('Invalid character in header field name')
+    }
+    return name.toLowerCase()
+  }
+
+  function normalizeValue(value) {
+    if (typeof value !== 'string') {
+      value = String(value)
+    }
+    return value
+  }
+
+  // Build a destructive iterator for the value list
+  function iteratorFor(items) {
+    var iterator = {
+      next: function() {
+        var value = items.shift()
+        return {done: value === undefined, value: value}
+      }
+    }
+
+    if (support.iterable) {
+      iterator[Symbol.iterator] = function() {
+        return iterator
+      }
+    }
+
+    return iterator
+  }
+
+  function Headers(headers) {
+    this.map = {}
+
+    if (headers instanceof Headers) {
+      headers.forEach(function(value, name) {
+        this.append(name, value)
+      }, this)
+    } else if (Array.isArray(headers)) {
+      headers.forEach(function(header) {
+        this.append(header[0], header[1])
+      }, this)
+    } else if (headers) {
+      Object.getOwnPropertyNames(headers).forEach(function(name) {
+        this.append(name, headers[name])
+      }, this)
+    }
+  }
+
+  Headers.prototype.append = function(name, value) {
+    name = normalizeName(name)
+    value = normalizeValue(value)
+    var oldValue = this.map[name]
+    this.map[name] = oldValue ? oldValue+','+value : value
+  }
+
+  Headers.prototype['delete'] = function(name) {
+    delete this.map[normalizeName(name)]
+  }
+
+  Headers.prototype.get = function(name) {
+    name = normalizeName(name)
+    return this.has(name) ? this.map[name] : null
+  }
+
+  Headers.prototype.has = function(name) {
+    return this.map.hasOwnProperty(normalizeName(name))
+  }
+
+  Headers.prototype.set = function(name, value) {
+    this.map[normalizeName(name)] = normalizeValue(value)
+  }
+
+  Headers.prototype.forEach = function(callback, thisArg) {
+    for (var name in this.map) {
+      if (this.map.hasOwnProperty(name)) {
+        callback.call(thisArg, this.map[name], name, this)
+      }
+    }
+  }
+
+  Headers.prototype.keys = function() {
+    var items = []
+    this.forEach(function(value, name) { items.push(name) })
+    return iteratorFor(items)
+  }
+
+  Headers.prototype.values = function() {
+    var items = []
+    this.forEach(function(value) { items.push(value) })
+    return iteratorFor(items)
+  }
+
+  Headers.prototype.entries = function() {
+    var items = []
+    this.forEach(function(value, name) { items.push([name, value]) })
+    return iteratorFor(items)
+  }
+
+  if (support.iterable) {
+    Headers.prototype[Symbol.iterator] = Headers.prototype.entries
+  }
+
+  function consumed(body) {
+    if (body.bodyUsed) {
+      return Promise.reject(new TypeError('Already read'))
+    }
+    body.bodyUsed = true
+  }
+
+  function fileReaderReady(reader) {
+    return new Promise(function(resolve, reject) {
+      reader.onload = function() {
+        resolve(reader.result)
+      }
+      reader.onerror = function() {
+        reject(reader.error)
+      }
+    })
+  }
+
+  function readBlobAsArrayBuffer(blob) {
+    var reader = new FileReader()
+    var promise = fileReaderReady(reader)
+    reader.readAsArrayBuffer(blob)
+    return promise
+  }
+
+  function readBlobAsText(blob) {
+    var reader = new FileReader()
+    var promise = fileReaderReady(reader)
+    reader.readAsText(blob)
+    return promise
+  }
+
+  function readArrayBufferAsText(buf) {
+    var view = new Uint8Array(buf)
+    var chars = new Array(view.length)
+
+    for (var i = 0; i < view.length; i++) {
+      chars[i] = String.fromCharCode(view[i])
+    }
+    return chars.join('')
+  }
+
+  function bufferClone(buf) {
+    if (buf.slice) {
+      return buf.slice(0)
+    } else {
+      var view = new Uint8Array(buf.byteLength)
+      view.set(new Uint8Array(buf))
+      return view.buffer
+    }
+  }
+
+  function Body() {
+    this.bodyUsed = false
+
+    this._initBody = function(body) {
+      this._bodyInit = body
+      if (!body) {
+        this._bodyText = ''
+      } else if (typeof body === 'string') {
+        this._bodyText = body
+      } else if (support.blob && Blob.prototype.isPrototypeOf(body)) {
+        this._bodyBlob = body
+      } else if (support.formData && FormData.prototype.isPrototypeOf(body)) {
+        this._bodyFormData = body
+      } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
+        this._bodyText = body.toString()
+      } else if (support.arrayBuffer && support.blob && isDataView(body)) {
+        this._bodyArrayBuffer = bufferClone(body.buffer)
+        // IE 10-11 can't handle a DataView body.
+        this._bodyInit = new Blob([this._bodyArrayBuffer])
+      } else if (support.arrayBuffer && (ArrayBuffer.prototype.isPrototypeOf(body) || isArrayBufferView(body))) {
+        this._bodyArrayBuffer = bufferClone(body)
+      } else {
+        throw new Error('unsupported BodyInit type')
+      }
+
+      if (!this.headers.get('content-type')) {
+        if (typeof body === 'string') {
+          this.headers.set('content-type', 'text/plain;charset=UTF-8')
+        } else if (this._bodyBlob && this._bodyBlob.type) {
+          this.headers.set('content-type', this._bodyBlob.type)
+        } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
+          this.headers.set('content-type', 'application/x-www-form-urlencoded;charset=UTF-8')
+        }
+      }
+    }
+
+    if (support.blob) {
+      this.blob = function() {
+        var rejected = consumed(this)
+        if (rejected) {
+          return rejected
+        }
+
+        if (this._bodyBlob) {
+          return Promise.resolve(this._bodyBlob)
+        } else if (this._bodyArrayBuffer) {
+          return Promise.resolve(new Blob([this._bodyArrayBuffer]))
+        } else if (this._bodyFormData) {
+          throw new Error('could not read FormData body as blob')
+        } else {
+          return Promise.resolve(new Blob([this._bodyText]))
+        }
+      }
+
+      this.arrayBuffer = function() {
+        if (this._bodyArrayBuffer) {
+          return consumed(this) || Promise.resolve(this._bodyArrayBuffer)
+        } else {
+          return this.blob().then(readBlobAsArrayBuffer)
+        }
+      }
+    }
+
+    this.text = function() {
+      var rejected = consumed(this)
+      if (rejected) {
+        return rejected
+      }
+
+      if (this._bodyBlob) {
+        return readBlobAsText(this._bodyBlob)
+      } else if (this._bodyArrayBuffer) {
+        return Promise.resolve(readArrayBufferAsText(this._bodyArrayBuffer))
+      } else if (this._bodyFormData) {
+        throw new Error('could not read FormData body as text')
+      } else {
+        return Promise.resolve(this._bodyText)
+      }
+    }
+
+    if (support.formData) {
+      this.formData = function() {
+        return this.text().then(decode)
+      }
+    }
+
+    this.json = function() {
+      return this.text().then(JSON.parse)
+    }
+
+    return this
+  }
+
+  // HTTP methods whose capitalization should be normalized
+  var methods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'POST', 'PUT']
+
+  function normalizeMethod(method) {
+    var upcased = method.toUpperCase()
+    return (methods.indexOf(upcased) > -1) ? upcased : method
+  }
+
+  function Request(input, options) {
+    options = options || {}
+    var body = options.body
+
+    if (input instanceof Request) {
+      if (input.bodyUsed) {
+        throw new TypeError('Already read')
+      }
+      this.url = input.url
+      this.credentials = input.credentials
+      if (!options.headers) {
+        this.headers = new Headers(input.headers)
+      }
+      this.method = input.method
+      this.mode = input.mode
+      if (!body && input._bodyInit != null) {
+        body = input._bodyInit
+        input.bodyUsed = true
+      }
+    } else {
+      this.url = String(input)
+    }
+
+    this.credentials = options.credentials || this.credentials || 'omit'
+    if (options.headers || !this.headers) {
+      this.headers = new Headers(options.headers)
+    }
+    this.method = normalizeMethod(options.method || this.method || 'GET')
+    this.mode = options.mode || this.mode || null
+    this.referrer = null
+
+    if ((this.method === 'GET' || this.method === 'HEAD') && body) {
+      throw new TypeError('Body not allowed for GET or HEAD requests')
+    }
+    this._initBody(body)
+  }
+
+  Request.prototype.clone = function() {
+    return new Request(this, { body: this._bodyInit })
+  }
+
+  function decode(body) {
+    var form = new FormData()
+    body.trim().split('&').forEach(function(bytes) {
+      if (bytes) {
+        var split = bytes.split('=')
+        var name = split.shift().replace(/\+/g, ' ')
+        var value = split.join('=').replace(/\+/g, ' ')
+        form.append(decodeURIComponent(name), decodeURIComponent(value))
+      }
+    })
+    return form
+  }
+
+  function parseHeaders(rawHeaders) {
+    var headers = new Headers()
+    rawHeaders.split(/\r?\n/).forEach(function(line) {
+      var parts = line.split(':')
+      var key = parts.shift().trim()
+      if (key) {
+        var value = parts.join(':').trim()
+        headers.append(key, value)
+      }
+    })
+    return headers
+  }
+
+  Body.call(Request.prototype)
+
+  function Response(bodyInit, options) {
+    if (!options) {
+      options = {}
+    }
+
+    this.type = 'default'
+    this.status = 'status' in options ? options.status : 200
+    this.ok = this.status >= 200 && this.status < 300
+    this.statusText = 'statusText' in options ? options.statusText : 'OK'
+    this.headers = new Headers(options.headers)
+    this.url = options.url || ''
+    this._initBody(bodyInit)
+  }
+
+  Body.call(Response.prototype)
+
+  Response.prototype.clone = function() {
+    return new Response(this._bodyInit, {
+      status: this.status,
+      statusText: this.statusText,
+      headers: new Headers(this.headers),
+      url: this.url
+    })
+  }
+
+  Response.error = function() {
+    var response = new Response(null, {status: 0, statusText: ''})
+    response.type = 'error'
+    return response
+  }
+
+  var redirectStatuses = [301, 302, 303, 307, 308]
+
+  Response.redirect = function(url, status) {
+    if (redirectStatuses.indexOf(status) === -1) {
+      throw new RangeError('Invalid status code')
+    }
+
+    return new Response(null, {status: status, headers: {location: url}})
+  }
+
+  self.Headers = Headers
+  self.Request = Request
+  self.Response = Response
+
+  self.fetch = function(input, init) {
+    return new Promise(function(resolve, reject) {
+      var request = new Request(input, init)
+      var xhr = new XMLHttpRequest()
+
+      xhr.onload = function() {
+        var options = {
+          status: xhr.status,
+          statusText: xhr.statusText,
+          headers: parseHeaders(xhr.getAllResponseHeaders() || '')
+        }
+        options.url = 'responseURL' in xhr ? xhr.responseURL : options.headers.get('X-Request-URL')
+        var body = 'response' in xhr ? xhr.response : xhr.responseText
+        resolve(new Response(body, options))
+      }
+
+      xhr.onerror = function() {
+        reject(new TypeError('Network request failed'))
+      }
+
+      xhr.ontimeout = function() {
+        reject(new TypeError('Network request failed'))
+      }
+
+      xhr.open(request.method, request.url, true)
+
+      if (request.credentials === 'include') {
+        xhr.withCredentials = true
+      }
+
+      if ('responseType' in xhr && support.blob) {
+        xhr.responseType = 'blob'
+      }
+
+      request.headers.forEach(function(value, name) {
+        xhr.setRequestHeader(name, value)
+      })
+
+      xhr.send(typeof request._bodyInit === 'undefined' ? null : request._bodyInit)
+    })
+  }
+  self.fetch.polyfill = true
+})(typeof self !== 'undefined' ? self : this);
+
+
+/***/ }),
+/* 220 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11860,7 +11916,7 @@ var animationFrame = function animationFrame() {
 exports.default = animationFrame;
 
 /***/ }),
-/* 218 */
+/* 221 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11872,7 +11928,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _Scrolling = __webpack_require__(95);
+var _Scrolling = __webpack_require__(72);
 
 var _Scrolling2 = _interopRequireDefault(_Scrolling);
 
@@ -11880,7 +11936,7 @@ var _EventDispatcher2 = __webpack_require__(18);
 
 var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
 
-var _RisingEvents = __webpack_require__(221);
+var _RisingEvents = __webpack_require__(224);
 
 var _RisingEvents2 = _interopRequireDefault(_RisingEvents);
 
@@ -12083,7 +12139,7 @@ Rising.ALIEN = 'risingAlien';
 exports.default = Rising;
 
 /***/ }),
-/* 219 */
+/* 222 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12235,7 +12291,7 @@ Freeze.delay = 200;
 exports.default = Freeze;
 
 /***/ }),
-/* 220 */
+/* 223 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12304,7 +12360,7 @@ var CycleEvents = function (_Events) {
 exports.default = CycleEvents;
 
 /***/ }),
-/* 221 */
+/* 224 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12383,7 +12439,7 @@ var RisingEvents = function (_Events) {
 exports.default = RisingEvents;
 
 /***/ }),
-/* 222 */
+/* 225 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12399,11 +12455,11 @@ var _EventDispatcher2 = __webpack_require__(18);
 
 var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
 
-var _TouchingEvents = __webpack_require__(223);
+var _TouchingEvents = __webpack_require__(226);
 
 var _TouchingEvents2 = _interopRequireDefault(_TouchingEvents);
 
-var _Vectors = __webpack_require__(73);
+var _Vectors = __webpack_require__(76);
 
 var _Vectors2 = _interopRequireDefault(_Vectors);
 
@@ -12895,7 +12951,7 @@ Touching.TOUCH = 'touchingTouch';
 exports.default = Touching;
 
 /***/ }),
-/* 223 */
+/* 226 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12909,7 +12965,7 @@ var _Events2 = __webpack_require__(19);
 
 var _Events3 = _interopRequireDefault(_Events2);
 
-var _Vectors = __webpack_require__(73);
+var _Vectors = __webpack_require__(76);
 
 var _Vectors2 = _interopRequireDefault(_Vectors);
 
@@ -12994,7 +13050,7 @@ var TouchingEvents = function (_Events) {
 exports.default = TouchingEvents;
 
 /***/ }),
-/* 224 */
+/* 227 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13010,7 +13066,7 @@ var _EventDispatcher2 = __webpack_require__(18);
 
 var _EventDispatcher3 = _interopRequireDefault(_EventDispatcher2);
 
-var _WheelEvents = __webpack_require__(225);
+var _WheelEvents = __webpack_require__(228);
 
 var _WheelEvents2 = _interopRequireDefault(_WheelEvents);
 
@@ -13306,7 +13362,7 @@ var Wheel = function (_EventDispatcher) {
 exports.default = Wheel;
 
 /***/ }),
-/* 225 */
+/* 228 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13371,7 +13427,293 @@ var WheelEvents = function (_Events) {
 exports.default = WheelEvents;
 
 /***/ }),
-/* 226 */
+/* 229 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _Scrolling2 = __webpack_require__(72);
+
+var _Scrolling3 = _interopRequireDefault(_Scrolling2);
+
+var _Scroll = __webpack_require__(73);
+
+var _Scroll2 = _interopRequireDefault(_Scroll);
+
+var _ResizingEvents = __webpack_require__(230);
+
+var _ResizingEvents2 = _interopRequireDefault(_ResizingEvents);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Copyright (c) 2011-2017 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date 2017/08/03 - 19:33
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+// event
+
+
+// event/events
+
+
+/**
+ * resize のみを監視します
+ */
+var Resizing = function (_Scrolling) {
+  _inherits(Resizing, _Scrolling);
+
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
+  /**
+   * events instance を準備します
+   */
+  function Resizing() {
+    _classCallCheck(this, Resizing);
+
+    // ------
+    /**
+     * Resizing event を準備します
+     * @type {ScrollEvents}
+     */
+    var _this = _possibleConstructorReturn(this, (Resizing.__proto__ || Object.getPrototypeOf(Resizing)).call(this));
+
+    _this.events = new _ResizingEvents2.default(Resizing.UPDATE, _this, _this);
+    // console.log('Resizing events', this.events);
+    /**
+     * document.body size - clientWidth / clientHeight
+     * @type {{width: number, height: number}}
+     */
+    _this.body = {
+      width: -1,
+      height: -1
+    };
+    /**
+     * window innerWidth / innerHeight
+     * @type {{width: number, height: number}}
+     */
+    _this.window = {
+      width: -1,
+      height: -1
+    };
+    /**
+     * 前回スクロールトップ値
+     * @type {number}
+     */
+    _this.previous = -1;
+    return _this;
+  }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
+  /**
+   * 監視を開始します
+   * - 常時監視します - document.body.onresize が作動しないため
+   * @returns {*} method chain 可能なように instance を返します
+   */
+
+  // ----------------------------------------
+  // STATIC PROPERTY
+  // ----------------------------------------
+  /**
+   * Resizing event type - resizingUpdate
+   * @event UPDATE
+   * @type {string}
+   */
+
+
+  _createClass(Resizing, [{
+    key: 'start',
+    value: function start() {
+      this.watch();
+      return this;
+    }
+    /**
+     * 監視を停止します
+     * @returns {*} method chain 可能なように instance を返します
+     */
+
+  }, {
+    key: 'stop',
+    value: function stop() {
+      this.unwatch();
+      return this;
+    }
+    /**
+     * 指定 rate(fps) 毎にスクロール位置を<br>
+     * scroll top 位置をもたせた Scrolling.UPDATE custom event を発火します
+     *
+     * 下記のプロパティをイベント・インスタンスに追加します
+     *
+     * - original {Events} - Rate Events instance
+     * - y {number} - scroll top
+     * - height {number} - window height
+     * - width {number} - window width
+     * - bottom {number} - window bottom 位置 (y + height)
+     * - previous {number} - 前回の scroll top
+     * - moving {number} - 前回からの移動量, 正: scroll down, 負: scroll up
+     * - wide {boolean} - width が 768 以上の時に true
+     * - changed {boolean} - scroll top が前回と変わっていたら true
+     *
+     * @param {?Events} event {@link Rate.UPDATE} Events instance
+     */
+
+  }, {
+    key: 'onUpdate',
+    value: function onUpdate(event) {
+      // @type {number} - scroll top
+      var y = _Scroll2.default.y();
+      // @type {number} - previous scroll top
+      var previous = this.previous;
+      // --- [window]
+      // @type {number} - window width
+      var width = window.innerWidth;
+      // @type {number} - window height
+      var height = window.innerHeight;
+      // --- [body]
+      var bodyWidth = document.body.clientWidth;
+      var bodyHeight = document.body.clientHeight;
+      // @type {boolean} - 移動したかを表します,
+      var changed = event === null || previous !== y || height !== this.window.height || width !== this.window.width || bodyWidth !== this.body.width || bodyHeight !== this.body.height;
+      // ----------------------------------------------
+      // @type {ScrollEvents} - events
+      var events = this.events.clone();
+      // @type {Event} - Rate Events instance
+      events.original = event;
+      // @type {number} - scroll top
+      events.y = y;
+      // @type {number} - window height
+      events.height = height;
+      // @type {number} - window width
+      events.width = width;
+      // -- body
+      events.bodyWidth = bodyWidth;
+      events.bodyHeight = bodyHeight;
+      // @type {number} - window bottom(y + height)
+      events.bottom = y + height;
+      // @type {boolean} - 移動したかを表します,
+      // event が null の時は強制発火なので移動量 0 （scroll top 位置に変更がない）でも changed を true にします
+      events.changed = changed;
+      // @type {number} - 前回の y 位置
+      events.previous = previous;
+      // @type {number} - 移動量 +: down, -: up
+      events.moving = y - previous;
+      // event fire
+      // console.log('Resizing.onUpdate', events);
+      this.dispatch(events);
+      // ----------------------------------------------
+      this.window.width = width;
+      this.window.height = height;
+      this.body.width = bodyWidth;
+      this.body.height = bodyHeight;
+      // save scroll top -> previous
+      this.previous = y;
+      // // 移動量 0 の時は rate 監視を停止する
+      // if (!changed) {
+      //   this.unwatch();
+      // }
+    }
+  }]);
+
+  return Resizing;
+}(_Scrolling3.default);
+
+Resizing.UPDATE = 'resizingUpdate';
+exports.default = Resizing;
+
+/***/ }),
+/* 230 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _ScrollEvents2 = __webpack_require__(74);
+
+var _ScrollEvents3 = _interopRequireDefault(_ScrollEvents2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Copyright (c) 2011-2017 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date 2017/08/04 - 18:02
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+
+/**
+ * {@link Resizing} Events
+ */
+var ResizingEvents = function (_ScrollEvents) {
+  _inherits(ResizingEvents, _ScrollEvents);
+
+  /**
+   * {@link Resizing} Events
+   * @param {string} type イベント種類
+   * @param {*} currentTarget current イベント発生インスタンス
+   * @param {*} [target=undefined] イベント発生インスタンス
+   */
+  function ResizingEvents(type, currentTarget) {
+    var target = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
+
+    _classCallCheck(this, ResizingEvents);
+
+    // -----
+    /**
+     * body clientWidth
+     * @type {number}
+     */
+    var _this = _possibleConstructorReturn(this, (ResizingEvents.__proto__ || Object.getPrototypeOf(ResizingEvents)).call(this, type, currentTarget, target));
+
+    _this.bodyWidth = 0;
+    /**
+     * body clientHeight
+     * @type {number}
+     */
+    _this.bodyHeight = 0;
+    return _this;
+  }
+
+  return ResizingEvents;
+}(_ScrollEvents3.default);
+
+exports.default = ResizingEvents;
+
+/***/ }),
+/* 231 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13648,7 +13990,7 @@ var Cookie = function () {
 exports.default = Cookie;
 
 /***/ }),
-/* 227 */
+/* 232 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13852,7 +14194,7 @@ var Queries = function () {
 exports.default = Queries;
 
 /***/ }),
-/* 228 */
+/* 233 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13985,7 +14327,7 @@ var AjaxThunk = function (_Ajax) {
 exports.default = AjaxThunk;
 
 /***/ }),
-/* 229 */
+/* 234 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13997,11 +14339,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _Polling2 = __webpack_require__(72);
+var _Polling2 = __webpack_require__(75);
 
 var _Polling3 = _interopRequireDefault(_Polling2);
 
-var _FpsEvents = __webpack_require__(230);
+var _FpsEvents = __webpack_require__(235);
 
 var _FpsEvents2 = _interopRequireDefault(_FpsEvents);
 
@@ -14135,7 +14477,7 @@ Fps.UPDATE = 'fpsUpdate';
 exports.default = Fps;
 
 /***/ }),
-/* 230 */
+/* 235 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14204,7 +14546,7 @@ var FpsEvents = function (_PollingEvents) {
 exports.default = FpsEvents;
 
 /***/ }),
-/* 231 */
+/* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14288,7 +14630,7 @@ var List = function () {
 exports.default = List;
 
 /***/ }),
-/* 232 */
+/* 237 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14456,7 +14798,7 @@ var Times = function () {
 exports.default = Times;
 
 /***/ }),
-/* 233 */
+/* 238 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14943,7 +15285,7 @@ var Iro = function () {
 exports.default = Iro;
 
 /***/ }),
-/* 234 */
+/* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14992,9 +15334,14 @@ var version = function version() {
   if (!Array.isArray(numbers)) {
     return;
   }
-  var versions = numbers.map(function (number) {
+  // 先頭の Android 4.3 削除
+  numbers.shift();
+  var versions = numbers.map(function (number, index) {
     var int = parseInt(number, 10);
-    return isNaN(int) ? 0 : int;
+    if (index < 3) {
+      return isNaN(int) ? 0 : int;
+    }
+    return null;
   });
   props.build = versions.join('.');
   var major = parseInt(versions[0], 10);
@@ -15173,7 +15520,7 @@ var Android = function () {
 exports.default = Android;
 
 /***/ }),
-/* 235 */
+/* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15218,6 +15565,8 @@ var version = function version() {
   if (!Array.isArray(numbers)) {
     return;
   }
+  // iOS N.N.N 削除
+  numbers.shift();
   var versions = numbers.map(function (number) {
     var int = parseInt(number, 10);
     return isNaN(int) ? 0 : int;
@@ -15415,7 +15764,7 @@ var iOS = function () {
 exports.default = iOS;
 
 /***/ }),
-/* 236 */
+/* 241 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

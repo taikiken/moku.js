@@ -27,6 +27,8 @@ const version = () => {
   if (!Array.isArray(numbers)) {
     return;
   }
+  // iOS N.N.N 削除
+  numbers.shift();
   const versions = numbers.map((number) => {
     const int = parseInt(number, 10);
     return isNaN(int) ? 0 : int;
