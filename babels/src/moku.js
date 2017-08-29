@@ -16,13 +16,17 @@
 
 'use strict';
 
-// fetch / promise
-import 'whatwg-fetch';
-import Promise from 'promise-polyfill';
-// for IE
-import 'babel-polyfill';
+// // fetch / promise
+// import 'whatwg-fetch';
+// import Promise from 'promise-polyfill';
+// // for IE
+// import 'babel-polyfill';
 
 // polyfill
+// - babel-polyfill
+// - requestAnimationFrame
+// - promise-polyfill
+// - whatwg-fetch
 import './polyfill/';
 
 // event

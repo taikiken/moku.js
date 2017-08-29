@@ -10,8 +10,18 @@
  *
  */
 
+// babel polyfill
+import './method/babel';
+
+// promise
+import './method/promise';
+
+// fetch
+import './method/fetch';
+
 import animationFrame from './method/animationFrame';
 
+// ------------------------------------------------
 animationFrame();
 
 // const polyfill = {
