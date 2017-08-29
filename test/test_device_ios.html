@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>devices</title>
+<link href="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+  <style>
+    .container {
+      padding: 10px;
+      border: 1px solid #333;
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+<div id="ua" class="container"></div>
+<div id="app" class="container"></div>
+<div id="result" class="container"></div>
+<div id="mocha"></div>
+<script src="//cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
+<script src="//cdn.rawgit.com/Automattic/expect.js/0.3.1/index.js"></script>
+<script src="//cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+<script src="//chaijs.com/chai.js"></script>
+<script src="../libs/moku.js" charset="utf-8"></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script>
+  // mochaの機能を呼び出します。ここでは、BDDとTDDを使用します。
+  mocha.setup('bdd');
+  mocha.setup('tdd');
+  var assert = chai.assert;
+  // expectの機能を読み込み
+  var expect = chai.expect;
+  // shouldの機能を読み込み
+  chai.Should();
+</script>
+<script type="text/babel">
+const ua = document.getElementById('ua');
+const app = document.getElementById('app');
+const result = document.getElementById('result');
+
+const devices = MOKU.device.devices;
+ua.innerHTML = devices.ua;
+app.innerHTML = devices.app;
+// ----
+const Android = MOKU.device.Android;
+let content = '';
+content += `Android.is: ${Android.is()}<br>`;
+content += `Android.standard: ${Android.standard()}<br>`;
+content += `Android.phone: ${Android.phone()}<br>`;
+content += `Android.tablet: ${Android.tablet()}<br>`;
+content += `Android.hd: ${Android.hd()}<br>`;
+content += `Android.version: ${Android.version()}<br>`;
+content += `Android.major: ${Android.major()}<br>`;
+content += `Android.build: ${Android.build()}<br>`;
+content += `Android.numbers: ${Android.numbers().join(', ')}<br>`;
+content += `Android.kitKat: ${Android.kitKat()}<br>`;
+
+result.innerHTML = content;
+</script>
+<script>
+  mocha.checkLeaks();
+  mocha.globals(['jQuery']);
+  mocha.run();
+</script>
+</body>
+</html>

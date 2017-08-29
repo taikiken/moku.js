@@ -16,11 +16,18 @@
 
 'use strict';
 
-// fetch / promise
-import 'whatwg-fetch';
-import Promise from 'promise-polyfill';
-// for IE
-import 'babel-polyfill';
+// // fetch / promise
+// import 'whatwg-fetch';
+// import Promise from 'promise-polyfill';
+// // for IE
+// import 'babel-polyfill';
+
+// polyfill
+// - babel-polyfill
+// - requestAnimationFrame
+// - promise-polyfill
+// - whatwg-fetch
+import './polyfill/';
 
 // event
 import EventDispatcher from './event/EventDispatcher';
@@ -30,6 +37,7 @@ import Scroll from './event/Scroll';
 import Scrolling from './event/Scrolling';
 import Touching from './event/Touching';
 import Wheel from './event/Wheel';
+import Resizing from './event/Resizing';
 
 // net
 import Ajax from './net/Ajax';
@@ -58,17 +66,22 @@ import Style from './css/Style';
 
 // device
 import Can from './device/Can';
+import devices from './device/devices';
+import Android from './device/os/Android';
+import Windows from './device/os/Windows';
+import iOS from './device/os/iOS';
 
 // dom
 import Bounding from './dom/Bounding';
 import Classes from './dom/Classes';
 import Elements from './dom/Elements';
 
-// promise
-// Promise: To add to window
-if (!window.Promise) {
-  window.Promise = Promise;
-}
+// // ----------------------------------------------
+// // promise
+// // Promise: To add to window
+// if (!window.Promise) {
+//   window.Promise = Promise;
+// }
 
 /**
  * **MOKU**
@@ -99,6 +112,7 @@ MOKU.event = {
   Wheel,
   Scrolling,
   Touching,
+  Resizing,
 };
 /**
  * MOKU.net
@@ -154,6 +168,10 @@ MOKU.dom = {
 
 MOKU.device = {
   Can,
+  devices,
+  Android,
+  Windows,
+  iOS,
 };
 
 // export

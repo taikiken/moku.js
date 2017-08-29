@@ -34,7 +34,7 @@ export default class ScrollEvents extends Events {
     this.previous = -1;
     /**
      * オリジナルイベント(window.onscroll)
-     * @type {?Event}
+     * @type {?Events|Event}
      */
     this.original = null;
     /**
