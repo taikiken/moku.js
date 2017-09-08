@@ -47,32 +47,6 @@ const vendors = [
   '-o-',
   '',
 ];
-// /**
-//  * 確認用関数
-//  * - transition - @return {boolean}
-//  * - transform - @return {boolean}
-//  * @private
-//  * @static
-//  * @type {{transition: (()), transform: (())}}
-//  */
-// const check = {
-//   transition() {
-//     const p = document.createElement('p');
-//     return typeof p.style.transition !== 'undefined' ||
-//       typeof p.style.WebkitTransition !== 'undefined' ||
-//       typeof p.style.MozTransition !== 'undefined' ||
-//       typeof p.style.msTransition !== 'undefined' ||
-//       typeof p.style.OTransition !== 'undefined';
-//   },
-//   transform() {
-//     const p = document.createElement('p');
-//     return typeof p.style.transform !== 'undefined' ||
-//       typeof p.style.WebkitTransform !== 'undefined' ||
-//       typeof p.style.MozTransform !== 'undefined' ||
-//       typeof p.style.msTransform !== 'undefined' ||
-//       typeof p.style.OTransform !== 'undefined';
-//   },
-// };
 
 /**
  * CSS3 transition 可能フラッグ
@@ -88,6 +62,24 @@ const transition = vendors.some(prefix => typeof style[`${prefix}transition`] !=
  * @static
  */
 const transform = vendors.some(prefix => typeof style[`${prefix}transform`] !== 'undefined');
+
+/**
+ * touch event 使用可能フラッグ
+ * @type {boolean}
+ */
+const touch = 'ontouchstart' in document.documentElement;
+
+const canvas = !!window.CanvasRenderingContext2D;
+
+let webgl = false;
+if (canvas) {
+  try {
+    webgl = !!window.WebGLRenderingContext &&
+      !!document.createElement('canvas').getContext('experimental-webgl');
+  } catch(e) {
+    webgl = false;
+  }
+}
 
 /**
  * addEventListener 第三引数 - { passive: true } : false するためのブラウザテスト・フラッグ
@@ -150,5 +142,29 @@ export default class Can {
    */
   static passive() {
     return supportsPassive;
+  }
+  /**
+   * touch event 使用可能かを調べます
+   * @returns {boolean} true: 使用可能
+   * @since 4.0.1
+   */
+  static touch() {
+    return touch;
+  }
+  /**
+   * canvas 使用可能かを調べます
+   * @returns {boolean} true: canvas 使用可能
+   * @since 4.0.1
+   */
+  static canvas() {
+    return canvas;
+  }
+  /**
+   * webgl 使用可能かを調べます
+   * @returns {boolean} true: webgl 使用可能
+   * @since 4.0.1
+   */
+  static webgl() {
+    return webgl;
   }
 }
