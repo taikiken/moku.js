@@ -89,9 +89,6 @@ export default class Cycle extends EventDispatcher {
     super();
     // -------------------------------
     // onetime setting
-    // instance = this;
-    // const events = new Events(Cycle.UPDATE, this, this);
-    // const update = this.update.bind(this);
     /**
      * Cycle.UPDATE Events instance
      * @type {Events}
@@ -107,32 +104,17 @@ export default class Cycle extends EventDispatcher {
      * @type {number}
      */
     this.id = 0;
-    // /**
-    //  * start 済みフラッグ
-    //  * @type {boolean}
-    //  */
-    // this.started = false;
+    // instance 作成時に自動スタートさせる
     this.start(checkSymbol);
     // 設定済み instance を返します
     return this;
   }
-  // // ----------------------------------------
-  // // EVENT
-  // // ----------------------------------------
-  // /**
-  //  * requestAnimationFrame 毎に発生するイベントを取得します
-  //  * @event UPDATE
-  //  * @returns {string} event, cycleUpdate を返します
-  //  * @default cycleUpdate
-  //  */
-  // static get UPDATE() {
-  //   return 'cycleUpdate';
-  // }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
   /**
    * loop(requestAnimationFrame) を開始します
+   * @private
    * @param {Symbol} checkSymbol inner method 保証する inner Symbol
    */
   start(checkSymbol) {
@@ -140,31 +122,13 @@ export default class Cycle extends EventDispatcher {
     if (checkSymbol !== singletonSymbol) {
       throw new Error('start is private method, dont call this.');
     }
-    // if (this.started) {
-    //   // already start
-    //   return false;
-    // }
-    // this.started = true;
     this.onUpdate();
-    //
-    // // @return
-    // return true;
   }
   /**
    * loop(cancelAnimationFrame) を止めます
    * @param {number} [id] requestAnimationFrame id を使い cancelAnimationFrame をします
    */
   stop(id = this.id) {
-    // if (!this.started) {
-    //   // not start
-    //   return false;
-    // }
-    //
-    // cancelAnimationFrame(id);
-    // this.started = false;
-    //
-    // // @return
-    // return true;
     cancelAnimationFrame(id);
   }
   // ----------------------------------------

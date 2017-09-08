@@ -51,10 +51,6 @@ export default class Polling extends EventDispatcher {
    */
   constructor(interval = 1000) {
     super();
-    // // @type {Cycle} - Cycle instance
-    // const cycle = Cycle.factory();
-    // const boundUpdate = this.update.bind(this);
-    // const events = new Events(Polling.UPDATE, this, this);
     /**
      * Cycle instance を取得します
      * @ty[e {Cycle}
@@ -80,22 +76,7 @@ export default class Polling extends EventDispatcher {
      * @type {number}
      */
     this.begin = 0;
-    // /**
-    //  * Cycle 監視開始フラッグ
-    //  * @type {boolean}
-    //  */
-    // this.started = false;
   }
-  // // ----------------------------------------
-  // // EVENT
-  // // ----------------------------------------
-  // /**
-  //  * 一定間隔(milliseconds)毎に発生するイベント type を取得します
-  //  * @returns {string} event, pollingUpdate を返します
-  //  */
-  // static get UPDATE() {
-  //   return 'pollingUpdate';
-  // }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
@@ -108,69 +89,18 @@ export default class Polling extends EventDispatcher {
    */
   change(interval) {
     this.interval = interval;
-    // return this.update();
     return this.start();
   }
-  // /**
-  //  * started flag を反転させ現在の started flag 状態を取得します
-  //  * @returns {boolean} 現在の started flag 状態を返します
-  //  */
-  // turnOver() {
-  //   this.started = !this.started;
-  //   return this.started;
-  // }
-  /**
-   * events object を発火前に作成します
-   * @param {number} begin 開始時間: 前回の発火時間
-   * @param {number} present 現在時間
-   * @returns {Events} アップデートした Events を返します
-   */
-  updateEvents(begin, present) {
-    this.begin = begin;
-    // @type {Events} - start event
-    const events = this.events;
-    events.begin = begin;
-    events.present = present;
-    events.interval = this.interval;
-    return events;
-  }
-  // /**
-  //  * cycle ループを開始します<br>
-  //  * watch Cycle.UPDATE event
-  //  * @returns {Cycle} cycle ループを開始しインスタンスを返します
-  //  */
-  // initCycle() {
-  //   // cycle
-  //   const cycle = this.cycle;
-  //   // bind Cycle.UPDATE
-  //   cycle.on(Cycle.UPDATE, this.onUpdate);
-  //   // cycle 開始
-  //   cycle.start();
-  //   return cycle;
-  // }
   /**
    * polling を開始します
    * @returns {boolean} start に成功すると true を返します
    */
   start() {
+    // event unbind
     this.stop();
-    // if (this.started) {
-    //   // already start
-    //   return false;
-    // }
-    // // flag -> true
-    // // this[startSymbol] = true;
-    // this.turnOver();
     // @type {number} - 開始時間
     this.begin = Date.now();
-    // cycle
-    // this.initCycle();
-    // // @type {number} - 開始時間
-    // const present = Date.now();
-    // // 強制的に1回目を実行
-    // this.fire(this.updateEvents(present, present));
     this.cycle.on(Cycle.UPDATE, this.onUpdate);
-
     return true;
   }
   /**
@@ -178,13 +108,7 @@ export default class Polling extends EventDispatcher {
    * @returns {boolean} stop に成功すると true を返します
    */
   stop() {
-    // if (!this.started) {
-    //   // not start
-    //   return false;
-    // }
     this.cycle.off(Cycle.UPDATE, this.onUpdate);
-    // // this[startSymbol] = false;
-    // this.turnOver();
     return true;
   }
   /**
@@ -211,6 +135,23 @@ export default class Polling extends EventDispatcher {
       return true;
     }
     return false;
+  }
+  // -----
+  // event create & fire
+  /**
+   * events object を発火前に作成します
+   * @param {number} begin 開始時間: 前回の発火時間
+   * @param {number} present 現在時間
+   * @returns {Events} アップデートした Events を返します
+   */
+  updateEvents(begin, present) {
+    this.begin = begin;
+    // @type {Events} - start event
+    const events = this.events;
+    events.begin = begin;
+    events.present = present;
+    events.interval = this.interval;
+    return events;
   }
   /**
    * Polling.UPDATE event を発生します

@@ -19,13 +19,6 @@ import Polling from './Polling';
 // tick/events
 import FpsEvents from './events/FpsEvents';
 
-// /**
-//  * private property key, fps を保存するための Symbol
-//  * @type {Symbol}
-//  * @private
-//  */
-// const fpsSymbol = Symbol('Singleton Fps Symbol');
-
 /**
  * フレームレート毎に `UPDATE` イベントを発生させます
  *
@@ -48,15 +41,6 @@ export default class Fps extends Polling {
    * @type {string}
    */
   static UPDATE = 'fpsUpdate';
-  // /**
-  //  * フレームレート毎に発生するイベントを取得します
-  //  * @event UPDATE
-  //  * @returns {string} event, fpsUpdate を返します
-  //  * @default fpsUpdate
-  //  */
-  // static get UPDATE() {
-  //   return 'fpsUpdate';
-  // }
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------

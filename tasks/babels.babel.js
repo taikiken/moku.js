@@ -106,6 +106,12 @@ gulp.task('babels:pack:build', (callback) => {
   config.plugins = [
     // new $$.webpack.optimize.DedupePlugin(),
     new $$.webpack.optimize.UglifyJsPlugin({ compress: { warnings: true } }),
+    // https://facebook.github.io/react/docs/optimizing-performance.html#use-the-production-build
+    new $$.webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
   ];
   config.entry = `${config.entry}/babels/compile/moku.js`;
   config.output.path = `${wpk.entry}${dir.dist.libs.substr(1)}`;

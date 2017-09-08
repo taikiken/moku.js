@@ -10,24 +10,6 @@
  *
  */
 
-
-// /**
-//  * scroll freeze timeout id
-//  * @private
-//  * @static
-//  * @type {number}
-//  */
-// let timerId = 0;
-//
-// /**
-//  * scroll を止める時間
-//  * @private
-//  * @static
-//  * @type {number}
-//  * @default 200
-//  */
-// let duration = 200;
-
 /**
  * scroll 操作を強制的に不可能にします
  */
@@ -93,19 +75,4 @@ export default class Freeze {
     }
     return Freeze.timerId;
   }
-  // /**
-  //  * scroll 操作を不能にする時間間隔(ms)を取得します
-  //  * @returns {number} scroll 操作を不能にする時間間隔(ms)
-  //  */
-  // static duration() {
-  //   return Freeze.delay;
-  // }
-  // /**
-  //  * scroll 操作を不能にする時間間隔(ms)を設定します
-  //  * @param {number} time scroll 操作を不能にする時間(ms)
-  //  * @returns {void}
-  //  */
-  // static setDuration(time) {
-  //   Freeze.delay = time;
-  // }
 }

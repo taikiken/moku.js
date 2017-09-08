@@ -60,11 +60,11 @@ rules:
       "ignoreComments": true,
       "code": 100,
      }
-  # eslint@4.6.1, eslint-plugin-jsx-a11y@6.0.2, gulp-eslint@4.0.0
-  # ERROR: Definition for rule 'jsx-a11y/href-no-hash' was not found  jsx-a11y/href-no-hash
-  # になるので ignore する
-  # https://github.com/humanmade/coding-standards/blob/master/node_modules/eslint-plugin-jsx-a11y/docs/rules/href-no-hash.md
-  # TODO: 対応バージョン出たら削除する - on 2017-09-09
-  "jsx-a11y/href-no-hash":
-    - 0
-    - "Link"
+#  # eslint@4.6.1, eslint-plugin-jsx-a11y@6.0.2, gulp-eslint@4.0.0
+#  # ERROR: Definition for rule 'jsx-a11y/href-no-hash' was not found  jsx-a11y/href-no-hash
+#  # になるので ignore する
+#  # https://github.com/humanmade/coding-standards/blob/master/node_modules/eslint-plugin-jsx-a11y/docs/rules/href-no-hash.md
+#  # 対応バージョン出たら削除する - on 2017-09-09 -> eslint-plugin-jsx-a11y@5.1.1 で対応 - downgrade する
+#  "jsx-a11y/href-no-hash":
+#    - 0
+#    - "Link"

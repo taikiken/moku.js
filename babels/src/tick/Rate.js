@@ -104,77 +104,6 @@ export default class Rate extends Polling {
    * @type {number}
    */
   static RATE_1 = 60;
-  // /**
-  //  * fps 60 基準値を取得します
-  //  * @const RATE_60
-  //  * @returns {number} fps 60 基準値を返します
-  //  * @default 1
-  //  */
-  // static get RATE_60() {
-  //   return 1;
-  // }  /**
-  //  * fps 30 基準値を取得します
-  //  * @const RATE_30
-  //  * @returns {number} fps 30 基準値を返します
-  //  * @default 2
-  //  */
-  // static get RATE_30() {
-  //   return 2;
-  // }
-  // /**
-  //  * fps 20 基準値を取得します
-  //  * @const RATE_20
-  //  * @returns {number} fps 20 基準値を返します
-  //  * @default 3
-  //  */
-  // static get RATE_20() {
-  //   return 3;
-  // }
-  // /**
-  //  * fps 15 基準値を取得します
-  //  * @const RATE_15
-  //  * @returns {number} fps 15 基準値を返します
-  //  * @default 4
-  //  */
-  // static get RATE_15() {
-  //   return 4;
-  // }
-  // /**
-  //  * fps 12 基準値を取得します
-  //  * @const RATE_12
-  //  * @returns {number} fps 12 基準値を返します
-  //  * @default 5
-  //  */
-  // static get RATE_12() {
-  //   return 5;
-  // }
-  // /**
-  //  * fps 10 基準値を取得します
-  //  * @const RATE_10
-  //  * @returns {number} fps 10 基準値を返します
-  //  * @default 6
-  //  */
-  // static get RATE_10() {
-  //   return 6;
-  // }
-  // /**
-  //  * fps 6 基準値を取得します
-  //  * @const RATE_6
-  //  * @returns {number} fps 6 基準値を返します
-  //  * @default 10
-  //  */
-  // static get RATE_6() {
-  //   return 10;
-  // }
-  // /**
-  //  * fps 5 基準値を取得します
-  //  * @const RATE_5
-  //  * @returns {number} fps 6 基準値を返します
-  //  * @default 12
-  //  */
-  // static get RATE_5() {
-  //   return 12;
-  // }
   // ----------------------------------------
   // EVENT
   // ----------------------------------------
@@ -184,15 +113,6 @@ export default class Rate extends Polling {
    * @type {string}
    */
   static UPDATE = 'rateUpdate';
-  // /**
-  //  * フレームレート毎に発生するイベント type を取得します
-  //  * @event UPDATE
-  //  * @returns {string} event, rateUpdate を返します
-  //  * @default rateUpdate
-  //  */
-  // static get UPDATE() {
-  //   return 'rateUpdate';
-  // }
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
@@ -243,21 +163,6 @@ export default class Rate extends Polling {
      * @default Rate.RATE_5
      */
     this.rate = this.validate(rateValue) ? rateValue : Rate.RATE_5;
-    // this.rate = rate;
-    // /**
-    //  * rate 値を設定します
-    //  * @param {number} value rate 値
-    //  * @returns {boolean} rate 設定に成功すると true を返します
-    //  */
-    // this.setRate = (value) => {
-    //   if (this.validate(value)) {
-    //     rate = value;
-    //     return true;
-    //   }
-    //   return false;
-    // };
-    // init
-    // this.setRate(rateValue);
   }
   // ----------------------------------------
   // METHOD
@@ -293,29 +198,9 @@ export default class Rate extends Polling {
    * @returns {boolean} rate 設定に成功すると true を返します
    */
   change(rate) {
-    // const result = this.setRate(rate);
-    // this.update();
-    // return result !== null;
     this.setRate(rate);
     return this.start();
   }
-  // /**
-  //  * loop(requestAnimationFrame) を開始します
-  //  * @returns {boolean} start に成功すると true を返します
-  //  */
-  // start() {
-  //   if (this.started) {
-  //     // already start
-  //     return false;
-  //   }
-  //   // flag -> true
-  //   this.turnOver();
-  //   // cycle
-  //   this.initCycle();
-  //   // 強制的に1回目を実行
-  //   this.fire(this.updateEvents(0, 0));
-  //   return true;
-  // }
   /**
    * {@link Polling}.UPDATE event handler
    *
