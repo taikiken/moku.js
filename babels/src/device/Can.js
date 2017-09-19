@@ -69,8 +69,16 @@ const transform = vendors.some(prefix => typeof style[`${prefix}transform`] !== 
  */
 const touch = 'ontouchstart' in document.documentElement;
 
+/**
+ * canvas detect flag
+ * @type {boolean}
+ */
 const canvas = !!window.CanvasRenderingContext2D;
 
+/**
+ * webgl detect flag
+ * @type {boolean}
+ */
 let webgl = false;
 if (canvas) {
   try {
