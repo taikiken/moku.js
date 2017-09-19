@@ -13,6 +13,7 @@
 // --------------------------------
 // constant for calculate
 /**
+ * {@link Times}
  * 計算用定数 - 1 minute
  * ```
  * 1000 * 60
@@ -23,6 +24,7 @@
  */
 const oneMinute = 1000 * 60;
 /**
+ * {@link Times}
  * 計算用定数 - 1 hour
  * ```
  * 1000 * 60 * 60
@@ -33,6 +35,7 @@ const oneMinute = 1000 * 60;
  */
 const oneHour = oneMinute * 60;
 /**
+ * {@link Times}
  * 計算用定数 - 1 day
  * ```
  * 1000 * 60 * 60 * 24
@@ -43,6 +46,7 @@ const oneHour = oneMinute * 60;
  */
 const oneDay = oneHour * 24;
 /**
+ * {@link Times}
  * 計算用定数 - 1 week
  * ```
  * 1000 * 60 * 60 * 24 * 7
@@ -53,6 +57,7 @@ const oneDay = oneHour * 24;
  */
 const oneWeek = oneDay * 7;
 /**
+ * {@link Times}
  * 計算用定数 - 1 month
  * ```
  * 1000 * 60 * 60 * 24 * 30

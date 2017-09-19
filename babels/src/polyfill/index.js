@@ -24,8 +24,10 @@ import animationFrame from './method/animationFrame';
 // ------------------------------------------------
 animationFrame();
 
-// const polyfill = {
-//   animationFrame,
-// };
-//
-// export default polyfill;
+/**
+ * 以下全てを読み込みます、一部だけ必要な時は個別に `import` します
+ * - babel-polyfill
+ * - promise-polyfill
+ * - whatwg-fetch
+ * - animationFrame
+ */

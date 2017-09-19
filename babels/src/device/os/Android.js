@@ -15,12 +15,14 @@ import Windows from './Windows';
 
 /**
  * {@link devices}.props
+ * {@link Android}
  * @type {?object}
  */
 let props = null;
 
 /**
  * version 情報を計算します
+ * {@link Android}
  */
 const version = () => {
   const app = devices.app;
@@ -63,6 +65,7 @@ const version = () => {
  * ```
  * https://msdn.microsoft.com/ja-jp/library/hh869301(v=vs.85).aspx
  * ```
+ * {@link Android}
  * @see http://googlewebmastercentral.blogspot.jp/2011/03/mo-better-to-also-detect-mobile-user.html
  */
 const init = () => {

@@ -78,6 +78,15 @@ export default class Style {
     // separate 4
     return `${top} ${right} ${bottom} ${left}`;
   }
+  /**
+   * 引数 `element` の css を書き換えます
+   * @param {Element} element 操作対象 Element
+   * @param {string} css `cssText` 設定する
+   */
+  static change(element, css) {
+    const style = element.style;
+    style.cssText = css;
+  }
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
@@ -188,5 +197,12 @@ export default class Style {
   save() {
     const style = this.current();
     return this.update(style);
+  }
+  /**
+   * element の style.cssText を引数 `css` で書き換えます
+   * @param {string} css 書き換える css
+   */
+  change(css) {
+    Style.change(this.element, css);
   }
 }

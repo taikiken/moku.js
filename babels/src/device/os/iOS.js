@@ -14,12 +14,14 @@ import devices from '../devices';
 
 /**
  * {@link devices}.props
+ * {@link iOS}
  * @type {?object}
  */
 let props = null;
 
 /**
  * version 情報を計算します
+ * {@link iOS}
  */
 const version = () => {
   const app = devices.app;
@@ -50,6 +52,7 @@ const version = () => {
 
 /**
  * iOS 判定を行います
+ * {@link iOS}
  */
 const init = () => {
   if (props) {
