@@ -62,9 +62,7 @@ const version = () => {
  * `Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.<OS build number>`
  *
  * ## MSDN
- * ```
- * https://msdn.microsoft.com/ja-jp/library/hh869301(v=vs.85).aspx
- * ```
+ * [MSDN](https://msdn.microsoft.com/ja-jp/library/hh869301(v=vs.85).aspx)
  * {@link Android}
  * @see http://googlewebmastercentral.blogspot.jp/2011/03/mo-better-to-also-detect-mobile-user.html
  */

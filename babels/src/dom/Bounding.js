@@ -20,8 +20,10 @@
  * - width: float
  * - x: float
  * - y: float
+ *
+ * [MSDN](https://msdn.microsoft.com/ja-jp/library/hh826029(v=vs.85).aspx)
+ *
  * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
- * @see https://msdn.microsoft.com/ja-jp/library/hh826029(v=vs.85).aspx
  */
 export default class Bounding {
   // ----------------------------------------
