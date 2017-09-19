@@ -12,11 +12,13 @@
 
 /**
  * [native code] userAgent
+ * `device/index.js`
  * @type {string}
  */
 const ua = navigator.userAgent;
 /**
  * [native code] appVersion
+ * `device/index.js`
  * @type {string}
  */
 const app = navigator.appVersion;
@@ -28,6 +30,7 @@ const app = navigator.appVersion;
 const safari = !!ua.match(/safari/i);
 /**
  * device property
+ * `device/index.js`
  * @type {{ios: boolean, ipad: boolean, ipod: boolean, iphone: boolean, windows: boolean, android: boolean, standard: boolean, phone: boolean, tablet: boolean, hd: boolean, webView: boolean, standalone: boolean, version: number, major: number, build: number, numbers: Array.<number>}}
  */
 const props = {
@@ -51,6 +54,11 @@ const props = {
 
 /**
  * devices object
+ * `device/index.js`
+ * ```
+ * @import device from './device';
+ * const property = Object.assign({}, device);
+ * ```
  * @type {{
  *  ua: string,
  *  app: string,

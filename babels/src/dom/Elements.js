@@ -21,9 +21,48 @@ import Classes from './Classes';
 import Type from '../util/Type';
 
 /**
- * HTMLElement の操作を行います
+ * HTMLElement の操作を行います。
+ * 操作のために各種インスタンスを保持します
+ * - {@link Classes}
+ * - {@link Style}
+ * - {@link Bounding}
  */
 export default class Elements {
+  // ----------------------------------------
+  // STATIC METHOD
+  // ----------------------------------------
+  /**
+   * 引数の id attribute value で HTMLElement を `document.getElementById` で取得します
+   * @param {string} idName id attribute value
+   * @return {?Element} Element を返します, 取得できない時は null を返します
+   */
+  static id(idName) {
+    const element = self.document.getElementById(idName);
+    // 存在チェックを行います
+    return Type.exist(element) ? element : null;
+  }
+  /**
+   * querySelector を使用し Element を探します
+   * @param {string} selector 探索 selector
+   * @param {Element|*} [parentNode=document] 親 Node|Element
+   * @return {?Element} Element or null
+   */
+  static select(selector, parentNode = self.document) {
+    return parentNode.querySelector(selector);
+  }
+  /**
+   * querySelectorAll を使用し Element を探します
+   * @param {string} selector 探索 selector
+   * @param {Element|*} [parentNode=document] 親 Node|Element
+   * @return {?NodeList} NodeList or null
+   */
+  static selects(selector, parentNode = self.document) {
+    const elements = parentNode.querySelectorAll(selector);
+    return elements.length > 0 ? elements : null;
+  }
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
   /**
    * 操作対象 Element を保存します
    * @param {Element|Node} element 操作対象 Element
@@ -66,37 +105,5 @@ export default class Elements {
    */
   offset() {
     return this.bounding.offset();
-  }
-  // ----------------------------------------
-  // STATIC METHOD
-  // ----------------------------------------
-  /**
-   * 引数の id attribute value で HTMLElement を `document.getElementById` で取得します
-   * @param {string} idName id attribute value
-   * @return {?Element} Element を返します, 取得できない時は null を返します
-   */
-  static id(idName) {
-    const element = self.document.getElementById(idName);
-    // 存在チェックを行います
-    return Type.exist(element) ? element : null;
-  }
-  /**
-   * querySelector を使用し Element を探します
-   * @param {string} selector 探索 selector
-   * @param {Element|*} [parentNode=document] 親 Node|Element
-   * @return {?Element} Element or null
-   */
-  static select(selector, parentNode = self.document) {
-    return parentNode.querySelector(selector);
-  }
-  /**
-   * querySelectorAll を使用し Element を探します
-   * @param {string} selector 探索 selector
-   * @param {Element|*} [parentNode=document] 親 Node|Element
-   * @return {?NodeList} NodeList or null
-   */
-  static selects(selector, parentNode = self.document) {
-    const elements = parentNode.querySelectorAll(selector);
-    return elements.length > 0 ? elements : null;
   }
 }

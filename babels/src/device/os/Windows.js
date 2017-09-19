@@ -14,12 +14,14 @@ import devices from '../devices';
 
 /**
  * {@link devices}.props
+ * {@link Windows}
  * @type {?object}
  */
 let props = null;
 
 /**
  * `userAgent` を解析します
+ * {@link Windows}
  * @private
  */
 const init = () => {
