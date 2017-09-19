@@ -2250,11 +2250,13 @@ Object.defineProperty(exports, "__esModule", {
 
 /**
  * [native code] userAgent
+ * `device/index.js`
  * @type {string}
  */
 var ua = navigator.userAgent;
 /**
  * [native code] appVersion
+ * `device/index.js`
  * @type {string}
  */
 var app = navigator.appVersion;
@@ -2266,7 +2268,8 @@ var app = navigator.appVersion;
 var safari = !!ua.match(/safari/i);
 /**
  * device property
- * @type {{ios: boolean, ipad: boolean, ipod: boolean, iphone: boolean, windows: boolean, android: boolean, standard: boolean, phone: boolean, tablet: boolean, hd: boolean, webView: boolean, standalone: boolean, version: number, major: number, build: number, numbers: [number,number,number]}}
+ * `device/index.js`
+ * @type {{ios: boolean, ipad: boolean, ipod: boolean, iphone: boolean, windows: boolean, android: boolean, standard: boolean, phone: boolean, tablet: boolean, hd: boolean, webView: boolean, standalone: boolean, version: number, major: number, build: number, numbers: Array.<number>}}
  */
 var props = {
   ios: false,
@@ -2289,10 +2292,15 @@ var props = {
 
 /**
  * devices object
+ * `device/index.js`
+ * ```
+ * @import device from './device';
+ * const property = Object.assign({}, device);
+ * ```
  * @type {{
  *  ua: string,
  *  app: string,
- *  props: {ios: boolean, ipad: boolean, ipod: boolean, iphone: boolean, windows: boolean, android: boolean, standard: boolean, phone: boolean, tablet: boolean, hd: boolean, webView: boolean, standalone: boolean, version: number, major: number, build: number, numbers: (number|number|number)[]},
+ *  props: {ios: boolean, ipad: boolean, ipod: boolean, iphone: boolean, windows: boolean, android: boolean, standard: boolean, phone: boolean, tablet: boolean, hd: boolean, webView: boolean, standalone: boolean, version: number, major: number, build: number, numbers: Array.<number>},
  *  safari: boolean
  * }}
  */
@@ -3736,10 +3744,6 @@ var Polling = function (_EventDispatcher) {
 
     _classCallCheck(this, Polling);
 
-    // // @type {Cycle} - Cycle instance
-    // const cycle = Cycle.factory();
-    // const boundUpdate = this.update.bind(this);
-    // const events = new Events(Polling.UPDATE, this, this);
     /**
      * Cycle instance を取得します
      * @ty[e {Cycle}
@@ -3767,23 +3771,8 @@ var Polling = function (_EventDispatcher) {
      * @type {number}
      */
     _this.begin = 0;
-    // /**
-    //  * Cycle 監視開始フラッグ
-    //  * @type {boolean}
-    //  */
-    // this.started = false;
     return _this;
   }
-  // // ----------------------------------------
-  // // EVENT
-  // // ----------------------------------------
-  // /**
-  //  * 一定間隔(milliseconds)毎に発生するイベント type を取得します
-  //  * @returns {string} event, pollingUpdate を返します
-  //  */
-  // static get UPDATE() {
-  //   return 'pollingUpdate';
-  // }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
@@ -3809,49 +3798,8 @@ var Polling = function (_EventDispatcher) {
     key: 'change',
     value: function change(interval) {
       this.interval = interval;
-      // return this.update();
       return this.start();
     }
-    // /**
-    //  * started flag を反転させ現在の started flag 状態を取得します
-    //  * @returns {boolean} 現在の started flag 状態を返します
-    //  */
-    // turnOver() {
-    //   this.started = !this.started;
-    //   return this.started;
-    // }
-    /**
-     * events object を発火前に作成します
-     * @param {number} begin 開始時間: 前回の発火時間
-     * @param {number} present 現在時間
-     * @returns {Events} アップデートした Events を返します
-     */
-
-  }, {
-    key: 'updateEvents',
-    value: function updateEvents(begin, present) {
-      this.begin = begin;
-      // @type {Events} - start event
-      var events = this.events;
-      events.begin = begin;
-      events.present = present;
-      events.interval = this.interval;
-      return events;
-    }
-    // /**
-    //  * cycle ループを開始します<br>
-    //  * watch Cycle.UPDATE event
-    //  * @returns {Cycle} cycle ループを開始しインスタンスを返します
-    //  */
-    // initCycle() {
-    //   // cycle
-    //   const cycle = this.cycle;
-    //   // bind Cycle.UPDATE
-    //   cycle.on(Cycle.UPDATE, this.onUpdate);
-    //   // cycle 開始
-    //   cycle.start();
-    //   return cycle;
-    // }
     /**
      * polling を開始します
      * @returns {boolean} start に成功すると true を返します
@@ -3860,24 +3808,11 @@ var Polling = function (_EventDispatcher) {
   }, {
     key: 'start',
     value: function start() {
+      // event unbind
       this.stop();
-      // if (this.started) {
-      //   // already start
-      //   return false;
-      // }
-      // // flag -> true
-      // // this[startSymbol] = true;
-      // this.turnOver();
       // @type {number} - 開始時間
       this.begin = Date.now();
-      // cycle
-      // this.initCycle();
-      // // @type {number} - 開始時間
-      // const present = Date.now();
-      // // 強制的に1回目を実行
-      // this.fire(this.updateEvents(present, present));
       this.cycle.on(_Cycle2.default.UPDATE, this.onUpdate);
-
       return true;
     }
     /**
@@ -3888,13 +3823,7 @@ var Polling = function (_EventDispatcher) {
   }, {
     key: 'stop',
     value: function stop() {
-      // if (!this.started) {
-      //   // not start
-      //   return false;
-      // }
       this.cycle.off(_Cycle2.default.UPDATE, this.onUpdate);
-      // // this[startSymbol] = false;
-      // this.turnOver();
       return true;
     }
     /**
@@ -3924,6 +3853,26 @@ var Polling = function (_EventDispatcher) {
         return true;
       }
       return false;
+    }
+    // -----
+    // event create & fire
+    /**
+     * events object を発火前に作成します
+     * @param {number} begin 開始時間: 前回の発火時間
+     * @param {number} present 現在時間
+     * @returns {Events} アップデートした Events を返します
+     */
+
+  }, {
+    key: 'updateEvents',
+    value: function updateEvents(begin, present) {
+      this.begin = begin;
+      // @type {Events} - start event
+      var events = this.events;
+      events.begin = begin;
+      events.present = present;
+      events.interval = this.interval;
+      return events;
     }
     /**
      * Polling.UPDATE event を発生します
@@ -4945,15 +4894,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Rate = function (_Polling) {
   _inherits(Rate, _Polling);
 
-  // /**
-  //  * フレームレート毎に発生するイベント type を取得します
-  //  * @event UPDATE
-  //  * @returns {string} event, rateUpdate を返します
-  //  * @default rateUpdate
-  //  */
-  // static get UPDATE() {
-  //   return 'rateUpdate';
-  // }
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
@@ -5027,21 +4967,6 @@ var Rate = function (_Polling) {
      * @default Rate.RATE_5
      */
     _this.rate = _this.validate(rateValue) ? rateValue : Rate.RATE_5;
-    // this.rate = rate;
-    // /**
-    //  * rate 値を設定します
-    //  * @param {number} value rate 値
-    //  * @returns {boolean} rate 設定に成功すると true を返します
-    //  */
-    // this.setRate = (value) => {
-    //   if (this.validate(value)) {
-    //     rate = value;
-    //     return true;
-    //   }
-    //   return false;
-    // };
-    // init
-    // this.setRate(rateValue);
     return _this;
   }
   // ----------------------------------------
@@ -5055,77 +4980,6 @@ var Rate = function (_Polling) {
    * @returns {?number} 正しい rate は設定値を不正な時は null を返します
    */
 
-  // /**
-  //  * fps 60 基準値を取得します
-  //  * @const RATE_60
-  //  * @returns {number} fps 60 基準値を返します
-  //  * @default 1
-  //  */
-  // static get RATE_60() {
-  //   return 1;
-  // }  /**
-  //  * fps 30 基準値を取得します
-  //  * @const RATE_30
-  //  * @returns {number} fps 30 基準値を返します
-  //  * @default 2
-  //  */
-  // static get RATE_30() {
-  //   return 2;
-  // }
-  // /**
-  //  * fps 20 基準値を取得します
-  //  * @const RATE_20
-  //  * @returns {number} fps 20 基準値を返します
-  //  * @default 3
-  //  */
-  // static get RATE_20() {
-  //   return 3;
-  // }
-  // /**
-  //  * fps 15 基準値を取得します
-  //  * @const RATE_15
-  //  * @returns {number} fps 15 基準値を返します
-  //  * @default 4
-  //  */
-  // static get RATE_15() {
-  //   return 4;
-  // }
-  // /**
-  //  * fps 12 基準値を取得します
-  //  * @const RATE_12
-  //  * @returns {number} fps 12 基準値を返します
-  //  * @default 5
-  //  */
-  // static get RATE_12() {
-  //   return 5;
-  // }
-  // /**
-  //  * fps 10 基準値を取得します
-  //  * @const RATE_10
-  //  * @returns {number} fps 10 基準値を返します
-  //  * @default 6
-  //  */
-  // static get RATE_10() {
-  //   return 6;
-  // }
-  // /**
-  //  * fps 6 基準値を取得します
-  //  * @const RATE_6
-  //  * @returns {number} fps 6 基準値を返します
-  //  * @default 10
-  //  */
-  // static get RATE_6() {
-  //   return 10;
-  // }
-  // /**
-  //  * fps 5 基準値を取得します
-  //  * @const RATE_5
-  //  * @returns {number} fps 6 基準値を返します
-  //  * @default 12
-  //  */
-  // static get RATE_5() {
-  //   return 12;
-  // }
   // ----------------------------------------
   // EVENT
   // ----------------------------------------
@@ -5201,29 +5055,9 @@ var Rate = function (_Polling) {
   }, {
     key: 'change',
     value: function change(rate) {
-      // const result = this.setRate(rate);
-      // this.update();
-      // return result !== null;
       this.setRate(rate);
       return this.start();
     }
-    // /**
-    //  * loop(requestAnimationFrame) を開始します
-    //  * @returns {boolean} start に成功すると true を返します
-    //  */
-    // start() {
-    //   if (this.started) {
-    //     // already start
-    //     return false;
-    //   }
-    //   // flag -> true
-    //   this.turnOver();
-    //   // cycle
-    //   this.initCycle();
-    //   // 強制的に1回目を実行
-    //   this.fire(this.updateEvents(0, 0));
-    //   return true;
-    // }
     /**
      * {@link Polling}.UPDATE event handler
      *
@@ -5397,9 +5231,6 @@ var Cycle = function (_EventDispatcher) {
 
     // -------------------------------
     // onetime setting
-    // instance = this;
-    // const events = new Events(Cycle.UPDATE, this, this);
-    // const update = this.update.bind(this);
     /**
      * Cycle.UPDATE Events instance
      * @type {Events}
@@ -5417,32 +5248,17 @@ var Cycle = function (_EventDispatcher) {
      * @type {number}
      */
     _this.id = 0;
-    // /**
-    //  * start 済みフラッグ
-    //  * @type {boolean}
-    //  */
-    // this.started = false;
+    // instance 作成時に自動スタートさせる
     _this.start(checkSymbol);
     // 設定済み instance を返します
     return _ret2 = _this, _possibleConstructorReturn(_this, _ret2);
   }
-  // // ----------------------------------------
-  // // EVENT
-  // // ----------------------------------------
-  // /**
-  //  * requestAnimationFrame 毎に発生するイベントを取得します
-  //  * @event UPDATE
-  //  * @returns {string} event, cycleUpdate を返します
-  //  * @default cycleUpdate
-  //  */
-  // static get UPDATE() {
-  //   return 'cycleUpdate';
-  // }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
   /**
    * loop(requestAnimationFrame) を開始します
+   * @private
    * @param {Symbol} checkSymbol inner method 保証する inner Symbol
    */
 
@@ -5454,15 +5270,7 @@ var Cycle = function (_EventDispatcher) {
       if (checkSymbol !== singletonSymbol) {
         throw new Error('start is private method, dont call this.');
       }
-      // if (this.started) {
-      //   // already start
-      //   return false;
-      // }
-      // this.started = true;
       this.onUpdate();
-      //
-      // // @return
-      // return true;
     }
     /**
      * loop(cancelAnimationFrame) を止めます
@@ -5474,16 +5282,6 @@ var Cycle = function (_EventDispatcher) {
     value: function stop() {
       var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.id;
 
-      // if (!this.started) {
-      //   // not start
-      //   return false;
-      // }
-      //
-      // cancelAnimationFrame(id);
-      // this.started = false;
-      //
-      // // @return
-      // return true;
       cancelAnimationFrame(id);
     }
     // ----------------------------------------
@@ -5720,103 +5518,118 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @static
  */
 var document = self.document;
-/**
- * CSS detector に使用する virtual CSSStyleDeclaration
- * ```
- * document.createElement('p').style
- * ```
- * @type {CSSStyleDeclaration}
- * @private
- * @static
- * @see https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration
- * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style
- */
-var style = document.createElement('p').style;
-/**
- * vendor prefix list, CSS detector に使用します
- * - '-webkit-',
- * - '-moz-',
- * - '-ms-',
- * - '-o-',
- * - ''
- * @type {[string]}
- * @private
- * @static
- */
-var vendors = ['-webkit-', '-moz-', '-ms-', '-o-', ''];
 // /**
-//  * 確認用関数
-//  * - transition - @return {boolean}
-//  * - transform - @return {boolean}
+//  * CSS detector に使用する virtual CSSStyleDeclaration
+//  * ```
+//  * document.createElement('p').style
+//  * ```
+//  * @type {CSSStyleDeclaration}
 //  * @private
 //  * @static
-//  * @type {{transition: (()), transform: (())}}
+//  * @see https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration
+//  * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style
 //  */
-// const check = {
-//   transition() {
-//     const p = document.createElement('p');
-//     return typeof p.style.transition !== 'undefined' ||
-//       typeof p.style.WebkitTransition !== 'undefined' ||
-//       typeof p.style.MozTransition !== 'undefined' ||
-//       typeof p.style.msTransition !== 'undefined' ||
-//       typeof p.style.OTransition !== 'undefined';
-//   },
-//   transform() {
-//     const p = document.createElement('p');
-//     return typeof p.style.transform !== 'undefined' ||
-//       typeof p.style.WebkitTransform !== 'undefined' ||
-//       typeof p.style.MozTransform !== 'undefined' ||
-//       typeof p.style.msTransform !== 'undefined' ||
-//       typeof p.style.OTransform !== 'undefined';
-//   },
-// };
+// const style = document.createElement('p').style;
+// /**
+//  * vendor prefix list, CSS detector に使用します
+//  * - '-webkit-',
+//  * - '-moz-',
+//  * - '-ms-',
+//  * - '-o-',
+//  * - ''
+//  * @type {[string]}
+//  * @private
+//  * @static
+//  */
+// const vendors = [
+//   '-webkit-',
+//   '-moz-',
+//   '-ms-',
+//   '-o-',
+//   '',
+// ];
+
+// /**
+//  * CSS3 transition 可能フラッグ
+//  * @type {boolean}
+//  * @private
+//  * @static
+//  */
+// const transition = vendors.some(prefix => typeof style[`${prefix}transition`] !== 'undefined');
+// /**
+//  * CSS3 transform 可能フラッグ
+//  * @type {boolean}
+//  * @private
+//  * @static
+//  */
+// const transform = vendors.some(prefix => typeof style[`${prefix}transform`] !== 'undefined');
+
+// /**
+//  * touch event 使用可能フラッグ
+//  * @type {boolean}
+//  */
+// const touch = 'ontouchstart' in document.documentElement;
+
+// /**
+//  * canvas detect flag
+//  * @type {boolean}
+//  */
+// const canvas = !!window.CanvasRenderingContext2D;
+
+// /**
+//  * webgl detect flag
+//  * @type {boolean}
+//  */
+// let webgl = false;
+// if (canvas) {
+//   try {
+//     webgl = !!window.WebGLRenderingContext &&
+//       !!document.createElement('canvas').getContext('experimental-webgl');
+//   } catch (e) {
+//     webgl = false;
+//   }
+// }
+
+// /**
+//  * addEventListener 第三引数 - { passive: true } : false するためのブラウザテスト・フラッグ
+//  *
+//  * TouchEvent#Using with addEventListener() and preventDefault()
+//  * <pre>
+//  * It's important to note that in many cases, both touch and mouse events get sent (in order to let non-touch-specific code still interact with the user). If you use touch events, you should call preventDefault() to keep the mouse event from being sent as well.
+//  * The exception to this is Chrome, starting with version 56 (desktop, Chrome for android, and android webview), where the default value for touchstart and touchmove is true and calls to preventDefault() are not needed. To override this behavior, you simply set the passive option to false as shown in the example below. This change prevents the listener from blocking page rendering while a user is scrolling. A demo is available on the Google Developer site.
+//  * </pre>
+//  * @private
+//  * @type {boolean}
+//  * @see https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent
+//  * @see https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md
+//  * @see https://blog.jxck.io/entries/2016-06-09/passive-event-listeners.html
+//  * @since 0.3.2
+//  */
+// let supportsPassive = false;
+// try {
+//   const opts = Object.defineProperty({}, 'passive', {
+//     get() {
+//       supportsPassive = true;
+//     },
+//   });
+//   window.addEventListener('test', null, opts);
+// } catch (e) {
+//   supportsPassive = false;
+//   // console.warn('passive test', e);
+// }
 
 /**
- * CSS3 transition 可能フラッグ
- * @type {boolean}
- * @private
- * @static
+ * 判定結果を保持します
+ * @type {{transition: ?boolean, transform: ?boolean, touch: ?boolean, canvas: ?boolean, webgl: ?boolean, passive: ?boolean}}
  */
-var _transition = vendors.some(function (prefix) {
-  return typeof style[prefix + 'transition'] !== 'undefined';
-});
-/**
- * CSS3 transform 可能フラッグ
- * @type {boolean}
- * @private
- * @static
- */
-var _transform = vendors.some(function (prefix) {
-  return typeof style[prefix + 'transform'] !== 'undefined';
-});
-
-/**
- * addEventListener 第三引数 - { passive: true } : false するためのブラウザテスト・フラッグ
- *
- * TouchEvent#Using with addEventListener() and preventDefault()
- * <pre>
- * It's important to note that in many cases, both touch and mouse events get sent (in order to let non-touch-specific code still interact with the user). If you use touch events, you should call preventDefault() to keep the mouse event from being sent as well.
- * The exception to this is Chrome, starting with version 56 (desktop, Chrome for android, and android webview), where the default value for touchstart and touchmove is true and calls to preventDefault() are not needed. To override this behavior, you simply set the passive option to false as shown in the example below. This change prevents the listener from blocking page rendering while a user is scrolling. A demo is available on the Google Developer site.
- * </pre>
- * @private
- * @type {boolean}
- * @see https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent
- * @see https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md
- * @see https://blog.jxck.io/entries/2016-06-09/passive-event-listeners.html
- * @since 0.3.2
- */
-var supportsPassive = false;
-try {
-  var opts = Object.defineProperty({}, 'passive', {
-    get: function get() {
-      supportsPassive = true;
-    }
-  });
-  window.addEventListener('test', null, opts);
-} catch (e) {
-  supportsPassive = false;
-  // console.warn('passive test', e);
-}
+var can = {
+  transition: null,
+  transform: null,
+  touch: null,
+  canvas: null,
+  webgl: null,
+  passive: null
+};
 
 /**
  * CSS3 機能使用可能かを調べます
@@ -5840,37 +5653,141 @@ var Can = function () {
 
     /**
      * CSS3 transition が使用可能かを調べます
-     * @returns {boolean} true: 使用可能
+     * @returns {?boolean} true: 使用可能
      */
     value: function transition() {
-      return _transition;
+      if (can.transition === null) {
+        var style = document.createElement('p').style;
+        // eslint-disable-next-line max-len
+        can.transition = Can.vendors.some(function (prefix) {
+          return typeof style[prefix + 'transition'] !== 'undefined';
+        });
+      }
+      return can.transition;
     }
     /**
      * CSS3 transform が使用可能かを調べます
-     * @returns {boolean} true: 使用可能
+     * @returns {?boolean} true: 使用可能
+     */
+
+    /**
+     * vendor prefix list, CSS detector に使用します
+     * - '-webkit-',
+     * - '-moz-',
+     * - '-ms-',
+     * - '-o-',
+     * - ''
+     * @type {[string,string,string,string,string]}
      */
 
   }, {
     key: 'transform',
     value: function transform() {
-      return _transform;
+      if (can.transform === null) {
+        var style = document.createElement('p').style;
+        // eslint-disable-next-line max-len
+        can.transform = Can.vendors.some(function (prefix) {
+          return typeof style[prefix + 'transform'] !== 'undefined';
+        });
+      }
+      return can.transform;
     }
     /**
      * addEventListener 第三引数 - { passive: true } が使用できるかを調べます
-     * @returns {boolean} true: 使用可能
+     *
+     * TouchEvent#Using with addEventListener() and preventDefault()
+     * <pre>
+     * It's important to note that in many cases, both touch and mouse events get sent (in order to let non-touch-specific code still interact with the user). If you use touch events, you should call preventDefault() to keep the mouse event from being sent as well.
+     * The exception to this is Chrome, starting with version 56 (desktop, Chrome for android, and android webview), where the default value for touchstart and touchmove is true and calls to preventDefault() are not needed. To override this behavior, you simply set the passive option to false as shown in the example below. This change prevents the listener from blocking page rendering while a user is scrolling. A demo is available on the Google Developer site.
+     * </pre>
+     * @returns {?boolean} true: 使用可能
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent
+     * @see https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md
+     * @see https://blog.jxck.io/entries/2016-06-09/passive-event-listeners.html
      * @since 0.3.2
      */
 
   }, {
     key: 'passive',
     value: function passive() {
-      return supportsPassive;
+      if (can.passive === null) {
+        var supportsPassive = false;
+        try {
+          var opts = Object.defineProperty({}, 'passive', {
+            get: function get() {
+              supportsPassive = true;
+            }
+          });
+          window.addEventListener('test', null, opts);
+        } catch (e) {
+          supportsPassive = false;
+          // console.warn('passive test', e);
+        }
+        can.passive = supportsPassive;
+      }
+      return can.passive;
+    }
+    /**
+     * touch event 使用可能かを調べます
+     * @returns {?boolean} true: 使用可能
+     * @since 4.0.1
+     */
+
+  }, {
+    key: 'touch',
+    value: function touch() {
+      if (can.touch === null) {
+        can.touch = 'ontouchstart' in document.documentElement;
+      }
+      return can.touch;
+    }
+    /**
+     * canvas 使用可能かを調べます
+     * @returns {?boolean} true: canvas 使用可能
+     * @since 4.0.1
+     */
+
+  }, {
+    key: 'canvas',
+    value: function canvas() {
+      if (can.canvas === null) {
+        can.canvas = !!window.CanvasRenderingContext2D;
+      }
+      return can.canvas;
+    }
+    /**
+     * webgl 使用可能かを調べます
+     * @returns {?boolean} true: webgl 使用可能
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/getShaderPrecisionFormat
+     * @see https://qiita.com/tonkotsuboy_com/items/cdffcdd7bdccac371292
+     * @since 4.0.1
+     */
+
+  }, {
+    key: 'webgl',
+    value: function webgl() {
+      if (can.webgl === null) {
+        var webgl = false;
+        if (Can.canvas()) {
+          var canvas = document.createElement('canvas');
+          var webGLContext = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+          try {
+            webgl = !!(window.WebGLRenderingContext && webGLContext && webGLContext.getShaderPrecisionFormat);
+          } catch (e) {
+            webgl = false;
+          }
+        }
+        can.webgl = webgl;
+      }
+      return can.webgl;
     }
   }]);
 
   return Can;
 }();
 
+Can.vendors = ['-webkit-', '-moz-', '-ms-', '-o-', ''];
 exports.default = Can;
 
 /***/ }),
@@ -6423,6 +6340,18 @@ var Style = function () {
       // separate 4
       return top + ' ' + right + ' ' + bottom + ' ' + left;
     }
+    /**
+     * 引数 `element` の css を書き換えます
+     * @param {Element} element 操作対象 Element
+     * @param {string} css `cssText` 設定する
+     */
+
+  }, {
+    key: 'change',
+    value: function change(element, css) {
+      var style = element.style;
+      style.cssText = css;
+    }
     // ----------------------------------------
     // CONSTRUCTOR
     // ----------------------------------------
@@ -6560,6 +6489,16 @@ var Style = function () {
       var style = this.current();
       return this.update(style);
     }
+    /**
+     * element の style.cssText を引数 `css` で書き換えます
+     * @param {string} css 書き換える css
+     */
+
+  }, {
+    key: 'change',
+    value: function change(css) {
+      Style.change(this.element, css);
+    }
   }]);
 
   return Style;
@@ -6600,12 +6539,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 /**
  * {@link devices}.props
+ * {@link Windows}
  * @type {?object}
  */
 var props = null;
 
 /**
  * `userAgent` を解析します
+ * {@link Windows}
  * @private
  */
 var init = function init() {
@@ -6696,13 +6637,67 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * - width: float
  * - x: float
  * - y: float
- * @see https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XPCOM/Reference/Interface/nsIDOMClientRect
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
+ * @see https://msdn.microsoft.com/ja-jp/library/hh826029(v=vs.85).aspx
  */
 var Bounding = function () {
-  /**
-   * 操作対象 Element を保存します
-   * @param {Element} element 操作対象 Element
-   */
+  _createClass(Bounding, null, [{
+    key: "offset",
+
+    // ----------------------------------------
+    // STATIC METHOD
+    // ----------------------------------------
+    /**
+     * `getBoundingClientRect` を使用し引数 element の offset 値を取得します
+     *
+     * ```
+     * {{top: Number, right: Number, left: Number, bottom: Number, width: Number, height: Number}}
+     * ```
+     *
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
+     *
+     * @param {Element} element 調査対象 Element
+     * @return {ClientRect} 引数 element の offset 値を返します
+     */
+    value: function offset(element) {
+      return element.getBoundingClientRect();
+    }
+    /**
+     * ClientRect の複製を Object 化し writable にします
+     * @param {DOMRect|ClientRect} offset 複製元 ClientRect
+     * @return {{
+     *  top: number,
+     *  right: number,
+     *  bottom: number,
+     *  left: number,
+     *  width: number,
+     *  height: number}} ClientRect の複製 (Object) を返します
+     *  @see https://developer.mozilla.org/en-US/docs/Web/API/DOMRect
+     *  @see https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
+     */
+
+  }, {
+    key: "clone",
+    value: function clone(offset) {
+      return {
+        top: offset.top,
+        right: offset.right,
+        bottom: offset.bottom,
+        left: offset.left,
+        width: offset.width,
+        height: offset.height
+      };
+    }
+    // ----------------------------------------
+    // CONSTRUCTOR
+    // ----------------------------------------
+    /**
+     * 操作対象 Element を保存します
+     * @param {Element} element 操作対象 Element
+     */
+
+  }]);
+
   function Bounding(element) {
     _classCallCheck(this, Bounding);
 
@@ -6712,6 +6707,9 @@ var Bounding = function () {
      */
     this.element = element;
   }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
   /**
    * `getBoundingClientRect` を使用しプロパティ element の offset 値を取得します
    * @return {ClientRect} read only ClientRect を返します
@@ -6738,48 +6736,6 @@ var Bounding = function () {
     key: "clone",
     value: function clone() {
       return Bounding.clone(this.offset());
-    }
-    /**
-     * `getBoundingClientRect` を使用し引数 element の offset 値を取得します
-     *
-     * ```
-     * {{top: Number, right: Number, left: Number, bottom: Number, width: Number, height: Number}}
-     * ```
-     *
-     * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
-     *
-     * @param {Element} element 調査対象 Element
-     * @return {ClientRect} 引数 element の offset 値を返します
-     */
-
-  }], [{
-    key: "offset",
-    value: function offset(element) {
-      return element.getBoundingClientRect();
-    }
-    /**
-     * ClientRect の複製を Object 化し writable にします
-     * @param {ClientRect} offset 複製元 ClientRect
-     * @return {{
-     *  top: number,
-     *  right: number,
-     *  bottom: number,
-     *  left: number,
-     *  width: number,
-     *  height: number}} ClientRect の複製 (Object) を返します
-     */
-
-  }, {
-    key: "clone",
-    value: function clone(offset) {
-      return {
-        top: offset.top,
-        right: offset.right,
-        bottom: offset.bottom,
-        left: offset.left,
-        width: offset.width,
-        height: offset.height
-      };
     }
   }]);
 
@@ -6819,10 +6775,116 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * Element の CSS class を操作します
  */
 var Classes = function () {
-  /**
-   * 操作対象 Element を保持します
-   * @param {Element} element 操作対象 Element
-   */
+  _createClass(Classes, null, [{
+    key: 'get',
+
+    // ----------------------------------------
+    // STATIC METHOD
+    // ----------------------------------------
+    /**
+     * 1. `classList` && `Array.from` - `Array.from(element.classList)`
+     * 2. {@link Classes.convert}
+     * @param {Element} element 操作対象 Element
+     * @returns {Array.<string>} 引数 `element` の class を配列変換し返します
+     */
+    value: function get(element) {
+      return element.classList && Array.from ? Array.from(element.classList) : Classes.convert(element);
+    }
+    /**
+     * Elementが引数 className を有するかを調べます
+     * @param {Element} element 操作対象 Element
+     * @param {string} className 調査対象 CSS class name
+     * @returns {boolean} 存在すると true を返します
+     */
+
+  }, {
+    key: 'has',
+    value: function has(element, className) {
+      var elementClasses = Classes.get(element);
+      return elementClasses.indexOf(className) !== -1;
+    }
+    /**
+     * Element へ引数 className を追加します
+     * - className 存在チェック
+     * -
+     * @param {Element} node 操作対象 Element
+     * @param {string} className 追加対象 CSS class name
+     * @returns {boolean} 追加に成功すると true を返します
+     */
+
+  }, {
+    key: 'add',
+    value: function add(node, className) {
+      // CSS class の存在チェック
+      if (Classes.has(node, className)) {
+        return false;
+      }
+      // argument copy
+      var element = node;
+      // @type {Array<string>} - element class を取得し配列へ変換
+      var elementClasses = Classes.get(element);
+      // 置換え配列最後尾に新規 `className` を追加します
+      elementClasses.push(className);
+      // 配列を ' '（ワンスペース）でつなぎ文字列変換後に設定します
+      element.className = elementClasses.join(' ');
+      return true;
+    }
+    /**
+     * Element から引数 className を削除します
+     * @param {Element} node 操作対象 Element
+     * @param {string} className 削除対象 CSS class name
+     * @returns {boolean} 削除に成功すると true を返します
+     */
+
+  }, {
+    key: 'remove',
+    value: function remove(node, className) {
+      if (!Classes.has(node, className)) {
+        return false;
+      }
+      // argument copy
+      var element = node;
+      // @type {Array<string>} - element class を取得し配列へ変換
+      var elementClasses = Classes.get(element);
+      // 配列での削除対象 class の位置を取得します
+      var index = elementClasses.indexOf(className);
+      // 配列位置を元に削除実行します
+      elementClasses.splice(index, 1);
+      // 削除後配列を ' '（ワンスペース）でつなぎ文字列変換後に設定します
+      element.className = elementClasses.join(' ');
+      return true;
+    }
+    /**
+     * 可哀相な IE のための配列コンバーター, `.classList` 代用します
+     * @param {Element} element 操作対象 NodeList
+     * @returns {Array} 配列にコンバートして返します
+     */
+
+  }, {
+    key: 'convert',
+    value: function convert(element) {
+      var arr = element.className.split(' ');
+      var i = 0;
+      var limit = arr.length;
+      var empty = [];
+      for (; i < limit; i += 1) {
+        var className = arr[i];
+        if (!!className && className !== ' ') {
+          empty.push(className);
+        }
+      }
+      return empty;
+    }
+    // ----------------------------------------
+    // CONSTRUCTOR
+    // ----------------------------------------
+    /**
+     * 操作対象 Element を保持します
+     * @param {Element} element 操作対象 Element
+     */
+
+  }]);
+
   function Classes(element) {
     _classCallCheck(this, Classes);
 
@@ -6832,6 +6894,9 @@ var Classes = function () {
      */
     this.element = element;
   }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
   /**
    * className を有するかを調べます
    * @param {string} className 調査対象 CSS class name
@@ -6866,89 +6931,6 @@ var Classes = function () {
     value: function remove(className) {
       return Classes.remove(this.element, className);
     }
-    /**
-     * Elementが引数 className を有するかを調べます
-     * @param {Element} element 操作対象 Element
-     * @param {string} className 調査対象 CSS class name
-     * @returns {boolean} 存在すると true を返します
-     */
-
-  }], [{
-    key: 'has',
-    value: function has(element, className) {
-      var elementClasses = element.classList && Array.from ? Array.from(element.classList) : Classes.convert(element);
-      return elementClasses.indexOf(className) !== -1;
-    }
-    /**
-     * Element へ引数 className を追加します
-     * @param {Element} node 操作対象 Element
-     * @param {string} className 追加対象 CSS class name
-     * @returns {boolean} 追加に成功すると true を返します
-     */
-
-  }, {
-    key: 'add',
-    value: function add(node, className) {
-      // CSS class の存在チェック
-      if (Classes.has(node, className)) {
-        return false;
-      }
-      // argument copy
-      var element = node;
-      // @type {Array<string>} - element class を取得し配列へ変換
-      var elementClasses = element.classList && Array.from ? Array.from(element.classList) : Classes.convert(element);
-      // 置換え配列最後尾に新規 `className` を追加します
-      elementClasses.push(className);
-      // 配列を ' '（ワンスペース）でつなぎ文字列変換後に設定します
-      element.className = elementClasses.join(' ');
-      return true;
-    }
-    /**
-     * Element から引数 className を削除します
-     * @param {Element} node 操作対象 Element
-     * @param {string} className 削除対象 CSS class name
-     * @returns {boolean} 削除に成功すると true を返します
-     */
-
-  }, {
-    key: 'remove',
-    value: function remove(node, className) {
-      if (!Classes.has(node, className)) {
-        return false;
-      }
-      // argument copy
-      var element = node;
-      // @type {Array<string>} - element class を取得し配列へ変換
-      var elementClasses = element.classList && Array.from ? Array.from(element.classList) : Classes.convert(element);
-      // 配列での削除対象 class の位置を取得します
-      var index = elementClasses.indexOf(className);
-      // 配列位置を元に削除実行します
-      elementClasses.splice(index, 1);
-      // 削除後配列を ' '（ワンスペース）でつなぎ文字列変換後に設定します
-      element.className = elementClasses.join(' ');
-      return true;
-    }
-    /**
-     * 可哀相な IE のための配列コンバーター, `.classList` 代用します
-     * @param {Element} element 操作対象 NodeList
-     * @returns {Array} 配列にコンバートして返します
-     */
-
-  }, {
-    key: 'convert',
-    value: function convert(element) {
-      var arr = element.classList ? element.classList : element.className.split(' ');
-      var i = 0;
-      var limit = arr.length;
-      var empty = [];
-      for (; i < limit; i += 1) {
-        var className = arr[i];
-        if (!!className && className !== ' ') {
-          empty.push(className);
-        }
-      }
-      return empty;
-    }
   }]);
 
   return Classes;
@@ -6970,8 +6952,8 @@ exports.default = Classes;
  * http://www.opensource.org/licenses/mit-license.html
  *
  * This notice shall be included in all copies or substantial portions of the Software.
- * 0.4.0
- * 2017-8-29 18:14:20
+ * 0.4.1
+ * 2017-9-19 19:56:31
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -7171,14 +7153,14 @@ var MOKU = {};
 
 // event
 MOKU.version = function () {
-  return '0.4.0';
+  return '0.4.1';
 };
 /**
  * build 日時を取得します
  * @returns {string}  build 日時を返します
  */
 MOKU.build = function () {
-  return '2017-8-29 18:14:20';
+  return '2017-9-19 19:56:31';
 };
 /**
  * MOKU.event
@@ -7301,11 +7283,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // babel polyfill
 (0, _animationFrame2.default)();
 
-// const polyfill = {
-//   animationFrame,
-// };
-//
-// export default polyfill;
+/**
+ * 以下全てを読み込みます、一部だけ必要な時は個別に `import` します
+ * - babel-polyfill
+ * - promise-polyfill
+ * - whatwg-fetch
+ * - animationFrame
+ */
 
 
 // promise
@@ -12165,23 +12149,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  *
  */
 
-// /**
-//  * scroll freeze timeout id
-//  * @private
-//  * @static
-//  * @type {number}
-//  */
-// let timerId = 0;
-//
-// /**
-//  * scroll を止める時間
-//  * @private
-//  * @static
-//  * @type {number}
-//  * @default 200
-//  */
-// let duration = 200;
-
 /**
  * scroll 操作を強制的に不可能にします
  */
@@ -12265,22 +12232,6 @@ var Freeze = function () {
       }
       return Freeze.timerId;
     }
-    // /**
-    //  * scroll 操作を不能にする時間間隔(ms)を取得します
-    //  * @returns {number} scroll 操作を不能にする時間間隔(ms)
-    //  */
-    // static duration() {
-    //   return Freeze.delay;
-    // }
-    // /**
-    //  * scroll 操作を不能にする時間間隔(ms)を設定します
-    //  * @param {number} time scroll 操作を不能にする時間(ms)
-    //  * @returns {void}
-    //  */
-    // static setDuration(time) {
-    //   Freeze.delay = time;
-    // }
-
   }]);
 
   return Freeze;
@@ -14374,13 +14325,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // tick/events
 
 
-// /**
-//  * private property key, fps を保存するための Symbol
-//  * @type {Symbol}
-//  * @private
-//  */
-// const fpsSymbol = Symbol('Singleton Fps Symbol');
-
 /**
  * フレームレート毎に `UPDATE` イベントを発生させます
  *
@@ -14396,15 +14340,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Fps = function (_Polling) {
   _inherits(Fps, _Polling);
 
-  // /**
-  //  * フレームレート毎に発生するイベントを取得します
-  //  * @event UPDATE
-  //  * @returns {string} event, fpsUpdate を返します
-  //  * @default fpsUpdate
-  //  */
-  // static get UPDATE() {
-  //   return 'fpsUpdate';
-  // }
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
@@ -14659,6 +14594,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 // --------------------------------
 // constant for calculate
 /**
+ * {@link Times}
  * 計算用定数 - 1 minute
  * ```
  * 1000 * 60
@@ -14669,6 +14605,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  */
 var oneMinute = 1000 * 60;
 /**
+ * {@link Times}
  * 計算用定数 - 1 hour
  * ```
  * 1000 * 60 * 60
@@ -14679,6 +14616,7 @@ var oneMinute = 1000 * 60;
  */
 var oneHour = oneMinute * 60;
 /**
+ * {@link Times}
  * 計算用定数 - 1 day
  * ```
  * 1000 * 60 * 60 * 24
@@ -14689,6 +14627,7 @@ var oneHour = oneMinute * 60;
  */
 var oneDay = oneHour * 24;
 /**
+ * {@link Times}
  * 計算用定数 - 1 week
  * ```
  * 1000 * 60 * 60 * 24 * 7
@@ -14699,6 +14638,7 @@ var oneDay = oneHour * 24;
  */
 var oneWeek = oneDay * 7;
 /**
+ * {@link Times}
  * 計算用定数 - 1 month
  * ```
  * 1000 * 60 * 60 * 24 * 30
@@ -15321,12 +15261,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 /**
  * {@link devices}.props
+ * {@link Android}
  * @type {?object}
  */
 var props = null;
 
 /**
  * version 情報を計算します
+ * {@link Android}
  */
 var version = function version() {
   var app = _devices2.default.app;
@@ -15364,8 +15306,13 @@ var version = function version() {
  * `Mozilla/5.0 (Linux; U; Android 2.2.1; en-us; Nexus One Build/FRG83) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1`
  * - Windows phone
  * `Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.<OS build number>`
+ *
+ * ## MSDN
+ * ```
+ * https://msdn.microsoft.com/ja-jp/library/hh869301(v=vs.85).aspx
+ * ```
+ * {@link Android}
  * @see http://googlewebmastercentral.blogspot.jp/2011/03/mo-better-to-also-detect-mobile-user.html
- * @see https://msdn.microsoft.com/ja-jp/library/hh869301(v=vs.85).aspx
  */
 var init = function init() {
   if (props) {
@@ -15490,7 +15437,7 @@ var Android = function () {
     }
     /**
      * version を配列形式で取得します
-     * @returns {Array.<number>} [major: int, minor: int, build: int] 形式で返します
+     * @returns {Array.<number>} {{major: int, minor: int, build: int}} 形式で返します
      */
 
   }, {
@@ -15552,12 +15499,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 /**
  * {@link devices}.props
+ * {@link iOS}
  * @type {?object}
  */
 var props = null;
 
 /**
  * version 情報を計算します
+ * {@link iOS}
  */
 var version = function version() {
   var app = _devices2.default.app;
@@ -15588,6 +15537,7 @@ var version = function version() {
 
 /**
  * iOS 判定を行います
+ * {@link iOS}
  */
 var init = function init() {
   if (props) {
@@ -15715,7 +15665,7 @@ var iOS = function () {
     }
     /**
      * iOS version `major.minor.build`
-     * @returns {string} iOS version NN.NN.NN 型（文字）で返します, not iOS ''
+     * @returns {string} iOS version NN.NN.NN 型（文字）で返します, not iOS 空文字列
      */
 
   }, {
@@ -15726,7 +15676,7 @@ var iOS = function () {
     }
     /**
      * version を配列形式で取得します
-     * @returns {Array.<number>} [major: int, minor: int, build: int] 形式で返します
+     * @returns {Array.<number>} {{major: int, minor: int, build: int}} 形式で返します
      */
 
   }, {
@@ -15816,13 +15766,68 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
- * HTMLElement の操作を行います
+ * HTMLElement の操作を行います。
+ * 操作のために各種インスタンスを保持します
+ * - {@link Classes}
+ * - {@link Style}
+ * - {@link Bounding}
  */
 var Elements = function () {
-  /**
-   * 操作対象 Element を保存します
-   * @param {Element|Node} element 操作対象 Element
-   */
+  _createClass(Elements, null, [{
+    key: 'id',
+
+    // ----------------------------------------
+    // STATIC METHOD
+    // ----------------------------------------
+    /**
+     * 引数の id attribute value で HTMLElement を `document.getElementById` で取得します
+     * @param {string} idName id attribute value
+     * @return {?Element} Element を返します, 取得できない時は null を返します
+     */
+    value: function id(idName) {
+      var element = self.document.getElementById(idName);
+      // 存在チェックを行います
+      return _Type2.default.exist(element) ? element : null;
+    }
+    /**
+     * querySelector を使用し Element を探します
+     * @param {string} selector 探索 selector
+     * @param {Element|*} [parentNode=document] 親 Node|Element
+     * @return {?Element} Element or null
+     */
+
+  }, {
+    key: 'select',
+    value: function select(selector) {
+      var parentNode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : self.document;
+
+      return parentNode.querySelector(selector);
+    }
+    /**
+     * querySelectorAll を使用し Element を探します
+     * @param {string} selector 探索 selector
+     * @param {Element|*} [parentNode=document] 親 Node|Element
+     * @return {?NodeList} NodeList or null
+     */
+
+  }, {
+    key: 'selects',
+    value: function selects(selector) {
+      var parentNode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : self.document;
+
+      var elements = parentNode.querySelectorAll(selector);
+      return elements.length > 0 ? elements : null;
+    }
+    // ----------------------------------------
+    // CONSTRUCTOR
+    // ----------------------------------------
+    /**
+     * 操作対象 Element を保存します
+     * @param {Element|Node} element 操作対象 Element
+     */
+
+  }]);
+
   function Elements(element) {
     _classCallCheck(this, Elements);
 
@@ -15867,51 +15872,6 @@ var Elements = function () {
     key: 'offset',
     value: function offset() {
       return this.bounding.offset();
-    }
-    // ----------------------------------------
-    // STATIC METHOD
-    // ----------------------------------------
-    /**
-     * 引数の id attribute value で HTMLElement を `document.getElementById` で取得します
-     * @param {string} idName id attribute value
-     * @return {?Element} Element を返します, 取得できない時は null を返します
-     */
-
-  }], [{
-    key: 'id',
-    value: function id(idName) {
-      var element = self.document.getElementById(idName);
-      // 存在チェックを行います
-      return _Type2.default.exist(element) ? element : null;
-    }
-    /**
-     * querySelector を使用し Element を探します
-     * @param {string} selector 探索 selector
-     * @param {Element|*} [parentNode=document] 親 Node|Element
-     * @return {?Element} Element or null
-     */
-
-  }, {
-    key: 'select',
-    value: function select(selector) {
-      var parentNode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : self.document;
-
-      return parentNode.querySelector(selector);
-    }
-    /**
-     * querySelectorAll を使用し Element を探します
-     * @param {string} selector 探索 selector
-     * @param {Element|*} [parentNode=document] 親 Node|Element
-     * @return {?NodeList} NodeList or null
-     */
-
-  }, {
-    key: 'selects',
-    value: function selects(selector) {
-      var parentNode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : self.document;
-
-      var elements = parentNode.querySelectorAll(selector);
-      return elements.length > 0 ? elements : null;
     }
   }]);
 
