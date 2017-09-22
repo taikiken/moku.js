@@ -6637,8 +6637,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * - width: float
  * - x: float
  * - y: float
+ *
+ * [MSDN](https://msdn.microsoft.com/ja-jp/library/hh826029(v=vs.85).aspx)
+ *
  * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
- * @see https://msdn.microsoft.com/ja-jp/library/hh826029(v=vs.85).aspx
  */
 var Bounding = function () {
   _createClass(Bounding, null, [{
@@ -6953,7 +6955,7 @@ exports.default = Classes;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.4.1
- * 2017-9-19 19:56:31
+ * 2017-9-22 19:18:31
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -7160,7 +7162,7 @@ MOKU.version = function () {
  * @returns {string}  build 日時を返します
  */
 MOKU.build = function () {
-  return '2017-9-19 19:56:31';
+  return '2017-9-22 19:18:31';
 };
 /**
  * MOKU.event
@@ -13042,73 +13044,66 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // event
 
 
-/**
- * new を許可しないための Symbol
- * @type {Symbol}
- * @private
- */
-var singletonSymbol = Symbol('Scroll singleton symbol');
-/**
- * singleton instance, nullable
- * @type {?Wheel}
- * @private
- */
-var instance = null;
+// /**
+//  * new を許可しないための Symbol
+//  * @type {Symbol}
+//  * @private
+//  */
+// const singletonSymbol = Symbol('Scroll singleton symbol');
+// /**
+//  * singleton instance, nullable
+//  * @type {?Wheel}
+//  * @private
+//  */
+// let instance = null;
 
 /**
  * mousewheel event を監視し通知を行います
  * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
  *
  * ```
- * const instance:Wheel = Wheel.factory();
+ * const wheel = new Wheel();
+ * wheel.threshold = 500;
+ * wheel.start();
  * ```
  */
-
 var Wheel = function (_EventDispatcher) {
   _inherits(Wheel, _EventDispatcher);
 
-  _createClass(Wheel, null, [{
-    key: 'factory',
+  // // ----------------------------------------
+  // // STATIC METHOD
+  // // ----------------------------------------
+  // /**
+  //  * Wheel instance を singleton を保証し作成します
+  //  * @returns {Wheel} Wheel instance を返します
+  //  */
+  // static factory() {
+  //   if (instance === null) {
+  //     instance = new Wheel(singletonSymbol);
+  //   }
+  //   return instance;
+  // }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  // /**
+  //  * singleton です
+  //  * @param {Symbol} checkSymbol singleton を保証するための private instance
+  //  * @returns {Wheel} singleton instance を返します
+  //  */
+  /**
+   * wheel event を管理します
+   * @param {number} [threshold=200] 閾値 - event を発生させる移動量(px)
+   */
 
-    // ----------------------------------------
-    // STATIC METHOD
-    // ----------------------------------------
-    /**
-     * Wheel instance を singleton を保証し作成します
-     * @returns {Wheel} Wheel instance を返します
-     */
-    value: function factory() {
-      if (instance === null) {
-        instance = new Wheel(singletonSymbol);
-      }
-      return instance;
-    }
-    // ---------------------------------------------------
-    //  CONSTRUCTOR
-    // ---------------------------------------------------
-    /**
-     * singleton です
-     * @param {Symbol} checkSymbol singleton を保証するための private instance
-     * @returns {Wheel} singleton instance を返します
-     */
-
-  }]);
-
-  function Wheel(checkSymbol) {
-    var _ret2;
+  /**
+   * wheel down で発生するイベント - wheelDown
+   * @type {string}
+   */
+  function Wheel() {
+    var threshold = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 200;
 
     _classCallCheck(this, Wheel);
-
-    // checkSymbol と singleton が等価かをチェックします
-    if (checkSymbol !== singletonSymbol) {
-      throw new Error('don\'t use new, instead use static factory method.');
-    }
-    // instance 作成済みかをチェックし instance が null の時 this を設定します
-    if (instance !== null) {
-      var _ret;
-
-      return _ret = instance, _possibleConstructorReturn(_this, _ret);
-    }
 
     // onetime setting
     // instance = this;
@@ -13120,6 +13115,15 @@ var Wheel = function (_EventDispatcher) {
      * @type {function}
      */
     var _this = _possibleConstructorReturn(this, (Wheel.__proto__ || Object.getPrototypeOf(Wheel)).call(this));
+    // // checkSymbol と singleton が等価かをチェックします
+    // if (checkSymbol !== singletonSymbol) {
+    //   throw new Error('don\'t use new, instead use static factory method.');
+    // }
+    // // instance 作成済みかをチェックし instance が null の時 this を設定します
+    // if (instance !== null) {
+    //   return instance;
+    // }
+
 
     _this.onMouseWheel = _this.onMouseWheel.bind(_this);
     // this.onMouseWheel = () => onMouseWheel;
@@ -13128,7 +13132,7 @@ var Wheel = function (_EventDispatcher) {
      * @type {number}
      * @default 200
      */
-    _this.threshold = 200;
+    _this.threshold = threshold;
     /**
      * wheelDelta 移動量が閾値を超えるかをチェックするための積算計算変数
      * @type {number}
@@ -13145,37 +13149,72 @@ var Wheel = function (_EventDispatcher) {
     // };
     /**
      * UP / DOWN Events instance
-     * @returns {{up: WheelEvents, down: WheelEvents}} UP / DOWN Events instance
+     * @returns {{up: WheelEvents, down: WheelEvents, update: WheelEvents}} UP / DOWN Events instance
      */
     _this.events = {
-      up: new _WheelEvents2.default(Wheel.UP, _this),
-      down: new _WheelEvents2.default(Wheel.DOWN, _this)
+      up: new _WheelEvents2.default(Wheel.UP, _this, _this),
+      down: new _WheelEvents2.default(Wheel.DOWN, _this, _this),
+      update: new _WheelEvents2.default(Wheel.UPDATE, _this, _this)
     };
 
     // 設定済み instance を返します
-    return _ret2 = _this, _possibleConstructorReturn(_this, _ret2);
+    // return this;
+    return _this;
   }
+  // // ----------------------------------------
+  // // EVENT
+  // // ----------------------------------------
+  // /**
+  //  * wheel up で発生するイベントを取得します
+  //  * @event UP
+  //  * @returns {string} event, wheelUp を返します
+  //  * @default wheelUp
+  //  */
+  // static get UP() {
+  //   return 'wheelUp';
+  // }
+  // /**
+  //  * wheel  で発生するイベントを取得します
+  //  * @event DOWN
+  //  * @returns {string} event, wheelUp を返します
+  //  * @default wheelUp
+  //  */
+  // static get DOWN() {
+  //   return 'wheelDown';
+  // }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
+  /**
+   * 移動量積算 property を `0` にします
+   */
+
+  /**
+   * wheel move で発生するイベント - wheelUpdate
+   * @type {string}
+   */
+
   // ----------------------------------------
   // EVENT
   // ----------------------------------------
   /**
-   * wheel up で発生するイベントを取得します
-   * @event UP
-   * @returns {string} event, wheelUp を返します
-   * @default wheelUp
+   * wheel up で発生するイベント - wheelUp
+   * @type {string}
    */
 
 
   _createClass(Wheel, [{
-    key: 'start',
-
-    // ----------------------------------------
-    // METHOD
-    // ----------------------------------------
+    key: 'reset',
+    value: function reset() {
+      this.moved = 0;
+    }
     /**
      * mousewheel event を監視します
      * @returns {Wheel} method chain 可能なように instance を返します
      */
+
+  }, {
+    key: 'start',
     value: function start() {
       // if (this.started) {
       //   return this;
@@ -13183,6 +13222,7 @@ var Wheel = function (_EventDispatcher) {
       // this.started = true;
       // this.unwatch();
       this.stop();
+      this.reset();
       window.addEventListener('wheel', this.onMouseWheel, false);
       return this;
     }
@@ -13242,6 +13282,8 @@ var Wheel = function (_EventDispatcher) {
       // 閾値チェック
       if (Math.abs(moved) >= this.threshold) {
         // scroll event を発火します
+        this.update(moved);
+        // down / up
         if (moved > 0) {
           // scroll up
           this.up(moved);
@@ -13250,7 +13292,8 @@ var Wheel = function (_EventDispatcher) {
         }
 
         // initialize moved, 発火後に積算移動変数を初期化します
-        this.moved = 0;
+        // this.moved = 0;
+        this.reset();
         return moved;
       }
       // 閾値を超えていないので処理をしない
@@ -13288,28 +13331,30 @@ var Wheel = function (_EventDispatcher) {
 
       return moved;
     }
-  }], [{
-    key: 'UP',
-    get: function get() {
-      return 'wheelUp';
-    }
     /**
-     * wheel  で発生するイベントを取得します
-     * @event DOWN
-     * @returns {string} event, wheelUp を返します
-     * @default wheelUp
+     * scroll update イベントを発火します
+     * @param {number} moved 移動量
+     * @returns {number} 加算移動量を返します
      */
 
   }, {
-    key: 'DOWN',
-    get: function get() {
-      return 'wheelDown';
+    key: 'update',
+    value: function update(moved) {
+      // @type {Events}
+      var events = this.events.update;
+      events.moved = moved;
+      this.dispatch(events);
+
+      return moved;
     }
   }]);
 
   return Wheel;
 }(_EventDispatcher3.default);
 
+Wheel.UP = 'wheelUp';
+Wheel.DOWN = 'wheelDown';
+Wheel.UPDATE = 'wheelUpdate';
 exports.default = Wheel;
 
 /***/ }),
@@ -15308,9 +15353,7 @@ var version = function version() {
  * `Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.<OS build number>`
  *
  * ## MSDN
- * ```
- * https://msdn.microsoft.com/ja-jp/library/hh869301(v=vs.85).aspx
- * ```
+ * [MSDN](https://msdn.microsoft.com/ja-jp/library/hh869301(v=vs.85).aspx)
  * {@link Android}
  * @see http://googlewebmastercentral.blogspot.jp/2011/03/mo-better-to-also-detect-mobile-user.html
  */
