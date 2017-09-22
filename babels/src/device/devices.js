@@ -28,10 +28,28 @@ const app = navigator.appVersion;
  * @type {boolean}
  */
 const safari = !!ua.match(/safari/i);
+
 /**
  * device property
  * `device/index.js`
- * @type {{ios: boolean, ipad: boolean, ipod: boolean, iphone: boolean, windows: boolean, android: boolean, standard: boolean, phone: boolean, tablet: boolean, hd: boolean, webView: boolean, standalone: boolean, version: number, major: number, build: number, numbers: Array.<number>}}
+ * @type {{
+ * ios: boolean,
+ * ipad: boolean,
+ * ipod: boolean,
+ * iphone: boolean,
+ * windows: boolean,
+ * android: boolean,
+ * standard: boolean,
+ * phone: boolean,
+ * tablet: boolean,
+ * hd: boolean,
+ * webView: boolean,
+ * standalone: boolean,
+ * version: number,
+ * major: number,
+ * build: string,
+ * numbers: [?number,?number,?number]
+ * }}
  */
 const props = {
   ios: false,
@@ -46,10 +64,25 @@ const props = {
   hd: false,
   webView: false,
   standalone: false,
-  version: -1,
-  major: -1,
   build: '',
+  major: -1,
   numbers: [-1, -1, -1],
+  version: -1,
+};
+
+const browsers = {
+  safari: false,
+  chrome: false,
+  firefox: false,
+  ie: false,
+  edge: false,
+  crios: false,
+  fxios: false,
+  standard: false,
+  build: '',
+  major: -1,
+  numbers: [-1, -1, -1],
+  version: -1,
 };
 
 /**
@@ -66,11 +99,28 @@ const props = {
  *  safari: boolean
  * }}
  */
+
+/**
+ * devices object
+ * `device/index.js`
+ * ```
+ * @import device from './device';
+ * const property = Object.assign({}, device);
+ * ```
+ * @type {{
+ *    ua: string,
+ *    app: string,
+ *    props: {ios: boolean, ipad: boolean, ipod: boolean, iphone: boolean, windows: boolean, android: boolean, standard: boolean, phone: boolean, tablet: boolean, hd: boolean, webView: boolean, standalone: boolean, version: number, major: number, build: string, numbers: (number|number|number)[]},
+ *    safari: boolean,
+ *    browsers: object
+ * }}
+ */
 const devices = {
   ua,
   app,
   props,
   safari,
+  browsers,
 };
 
 export default devices;
