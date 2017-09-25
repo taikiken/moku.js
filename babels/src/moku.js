@@ -67,9 +67,20 @@ import Style from './css/Style';
 // device
 import Can from './device/Can';
 import devices from './device/devices';
+
+// device/os
 import Android from './device/os/Android';
 import Windows from './device/os/Windows';
 import iOS from './device/os/iOS';
+
+// device/browser
+import Chrome from './device/browser/Chrome';
+import CriOS from './device/browser/CriOS';
+import Edge from './device/browser/Edge';
+import Firefox from './device/browser/Firefox';
+import FxiOS from './device/browser/FxiOS';
+import IE from './device/browser/IE';
+import Safari from './device/browser/Safari';
 
 // dom
 import Bounding from './dom/Bounding';
@@ -169,9 +180,20 @@ MOKU.dom = {
 MOKU.device = {
   Can,
   devices,
-  Android,
-  Windows,
-  iOS,
+  os: {
+    Android,
+    Windows,
+    iOS,
+  },
+  browser: {
+    Chrome,
+    CriOS,
+    Edge,
+    Firefox,
+    FxiOS,
+    IE,
+    Safari,
+  },
 };
 
 // export

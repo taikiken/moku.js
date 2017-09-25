@@ -42,22 +42,22 @@ const devices = MOKU.device.devices;
 ua.innerHTML = devices.ua;
 app.innerHTML = devices.app;
 // ----
-const iOS = MOKU.device.os.iOS;
-let content = '';
-content += `iOS.is: ${iOS.is()}<br>`;
-content += `iOS.phone: ${iOS.phone()}<br>`;
-content += `iOS.tablet: ${iOS.tablet()}<br>`;
-content += `iOS.iphone: ${iOS.iphone()}<br>`;
-content += `iOS.ipad: ${iOS.ipad()}<br>`;
-content += `iOS.ipod: ${iOS.ipod()}<br>`;
-content += `iOS.version: ${iOS.version()}<br>`;
-content += `iOS.major: ${iOS.major()}<br>`;
-content += `iOS.build: ${iOS.build()}<br>`;
-content += `iOS.numbers: ${iOS.numbers().join(', ')}<br>`;
-content += `iOS.webView: ${iOS.webView()}<br>`;
-content += `iOS.standalone: ${iOS.standalone()}<br>`;
+const output = (title, browsers) => {
+  result.innerHTML += `<h1>${title}</h1>`;
+  Object.keys(browsers).map((key) => {
+    result.innerHTML += `${key}: ${browsers[key]}<br>`;
+  });
+  result.innerHTML += '<p>-----------------------------------------------</p>';
+};
 
-result.innerHTML = content;
+output('Chrome', MOKU.device.browser.Chrome.browsers());
+output('CriOS', MOKU.device.browser.CriOS.browsers());
+output('Edge', MOKU.device.browser.Edge.browsers());
+output('Firefox', MOKU.device.browser.Firefox.browsers());
+output('FxiOS', MOKU.device.browser.FxiOS.browsers());
+output('IE', MOKU.device.browser.IE.browsers());
+output('Safari', MOKU.device.browser.Safari.browsers());
+
 </script>
 <script>
   mocha.checkLeaks();
