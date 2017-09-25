@@ -42,6 +42,7 @@ const version = () => {
       major = 6;
     }
   }
+  browsers.build = String(major);
   browsers.major = major;
   browsers.version = major;
   if (major >= 0) {
