@@ -7977,8 +7977,8 @@ exports.default = Classes;
  * http://www.opensource.org/licenses/mit-license.html
  *
  * This notice shall be included in all copies or substantial portions of the Software.
- * 0.4.1
- * 2017-9-25 17:58:45
+ * 0.4.2
+ * 2017-9-25 18:36:01
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -8212,14 +8212,14 @@ var MOKU = {};
 
 // css
 MOKU.version = function () {
-  return '0.4.1';
+  return '0.4.2';
 };
 /**
  * build 日時を取得します
  * @returns {string}  build 日時を返します
  */
 MOKU.build = function () {
-  return '2017-9-25 17:58:45';
+  return '2017-9-25 18:36:01';
 };
 /**
  * MOKU.event
@@ -16629,7 +16629,7 @@ var _browsers = null;
  * @since 0.4.2
  */
 var version = function version() {
-  var app = _devices2.default.app;
+  var app = _devices2.default.ua;
   var numbers = app.match(/firefox\/(\d+)\.?(\d+)?/i);
   if (!Array.isArray(numbers)) {
     return;
@@ -16852,6 +16852,7 @@ var init = function init() {
     _browsers.ie6 = !!ua.match(/msie [6]/i);
   } else {
     var ie11 = !!ua.match(/trident\/[7]/i) && !!ua.match(/rv:[11]/i);
+    ie = ie11;
     _browsers.ie = ie11;
     _browsers.ie11 = ie11;
   }

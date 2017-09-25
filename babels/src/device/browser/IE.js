@@ -60,7 +60,7 @@ const init = () => {
   }
   browsers = Object.assign({}, devices.browsers);
   const ua = devices.ua;
-  const ie = !!ua.match(/msie/i);
+  let ie = !!ua.match(/msie/i);
   browsers.ie = ie;
   if (ie) {
     browsers.ie10 = !!ua.match(/msie [10]/i);
@@ -70,6 +70,7 @@ const init = () => {
     browsers.ie6 = !!ua.match(/msie [6]/i);
   } else {
     const ie11 = !!ua.match(/trident\/[7]/i) && !!ua.match(/rv:[11]/i);
+    ie = ie11;
     browsers.ie = ie11;
     browsers.ie11 = ie11;
   }

@@ -26,7 +26,7 @@ let browsers = null;
  * @since 0.4.2
  */
 const version = () => {
-  const app = devices.app;
+  const app = devices.ua;
   const numbers = app.match(/firefox\/(\d+)\.?(\d+)?/i);
   if (!Array.isArray(numbers)) {
     return;

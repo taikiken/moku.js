@@ -45,7 +45,15 @@ app.innerHTML = devices.app;
 const output = (title, browsers) => {
   result.innerHTML += `<h1>${title}</h1>`;
   Object.keys(browsers).map((key) => {
-    result.innerHTML += `${key}: ${browsers[key]}<br>`;
+    const value = browsers[key];
+    const bool = typeof value === 'boolean' ? value : false;
+    let start = '';
+    let end = '';
+    if (bool || (key === 'version' && value >= 0)) {
+      start = '<strong style="color: red;">';
+      end = '</strong>';
+    }
+    result.innerHTML += `${start}${key}: ${browsers[key]}${end}<br>`;
   });
   result.innerHTML += '<p>-----------------------------------------------</p>';
 };
