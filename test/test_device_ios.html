@@ -42,7 +42,7 @@ const devices = MOKU.device.devices;
 ua.innerHTML = devices.ua;
 app.innerHTML = devices.app;
 // ----
-const Android = MOKU.device.Android;
+const Android = MOKU.device.os.Android;
 let content = '';
 content += `Android.is: ${Android.is()}<br>`;
 content += `Android.standard: ${Android.standard()}<br>`;
