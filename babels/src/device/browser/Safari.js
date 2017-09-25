@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2017 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2017/09/22 - 19:27
+ * @date 2017/09/22 - 19:29
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -10,14 +10,16 @@
  *
  */
 
-
 import devices from '../devices';
 import CriOS from './CriOS';
 import Edge from './Edge';
+import Chrome from './Chrome';
+import FxiOS from './FxiOS';
+import Android from '../os/Android';
 
 /**
  * {@link devices}.browsers
- * {@link Chrome}
+ * {@link Safari}
  * @type {?object}
  * @since 0.4.2
  */
@@ -25,24 +27,20 @@ let browsers = null;
 
 /**
  * version 情報を計算します
- * {@link Chrome}
+ * {@link Safari}
  * @since 0.4.2
  */
 const version = () => {
   const app = devices.app;
-  const numbers = app.match(/chrome\/(\d+)\.(\d+)\.(\d+)\.?(\d+)?/i);
+  const numbers = app.match(/version\/(\d+)\.(\d+)\.?(\d+)?/i);
   if (!Array.isArray(numbers)) {
     return;
   }
   // 先頭 削除
   numbers.shift();
-  const versions = numbers.map((number, index) => {
-    const int = parseInt(number, 10);
-    if (index <= 3) {
-      return isNaN(int) ? 0 : int;
-    }
-    return null;
-  });
+  // array
+  const intArr = numbers.map(number => (parseInt(number, 10)));
+  const versions = intArr.filter(int => !isNaN(int));
   browsers.build = versions.join('.');
   const major = parseInt(versions[0], 10);
   let minor = 0;
@@ -64,7 +62,7 @@ const version = () => {
 
 /**
  * browser 判別します
- * {@link Chrome}
+ * {@link Safari}
  * @since 0.4.2
  */
 const init = () => {
@@ -72,29 +70,27 @@ const init = () => {
     return;
   }
   browsers = Object.assign({}, devices.browsers);
-  const crios = CriOS.is();
-  const edge = Edge.is();
-  let chrome = false;
-  if (!edge) {
-    if (crios) {
-      // iOS chrome
-      chrome = true;
-    } else {
-      const ua = devices.ua;
-      chrome = !!ua.match(/chrome/i);
-    }
+  let safari = devices.safari;
+  if (
+    CriOS.is() ||
+    Edge.is() ||
+    Chrome.is() ||
+    FxiOS.is() ||
+    Android.standard()
+  ) {
+    safari = false;
   }
-  browsers.chrome = chrome;
-  if (chrome) {
+  browsers.safari = safari;
+  if (safari) {
     version();
   }
 };
 
 /**
- * Chrome detector
+ * iOS Chrome detector
  * @since 0.4.2
  */
-export default class Chrome {
+export default class Safari {
   /**
    * 書き換え済み `browsers` を取得します
    * @returns {Object} 書き換え済み `browsers` を返します
@@ -104,32 +100,32 @@ export default class Chrome {
     return browsers;
   }
   /**
-   * Chrome 判定
-   * @returns {boolean} true: Chrome
+   * iOS Chrome 判定
+   * @returns {boolean} true: iOS Chrome
    */
   static is() {
     init();
-    return browsers.chrome;
+    return browsers.safari;
   }
   /**
-   * Chrome Browser version
-   * @returns {number} Chrome version, not Android -1
+   * Safari Browser version
+   * @returns {number} Safari version, not Android -1
    */
   static version() {
     init();
     return browsers.version;
   }
   /**
-   * Chrome Browser major version
-   * @returns {number} Chrome major version, not Android -1
+   * Safari Browser major version
+   * @returns {number} Safari major version, not Android -1
    */
   static major() {
     init();
     return browsers.major;
   }
   /**
-   * Chrome Browser version `major.minor.build`
-   * @returns {string} Chrome version NN.NN.NN.NN 型（文字）で返します, not Android ''
+   * Safari Browser version `major.minor.build`
+   * @returns {string} Safari version NN.NN.NN.NN 型（文字）で返します, not Android ''
    */
   static build() {
     init();
@@ -141,5 +137,6 @@ export default class Chrome {
    */
   static numbers() {
     init();
+    return browsers.numbers;
   }
 }

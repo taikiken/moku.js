@@ -16,12 +16,14 @@ import devices from '../devices';
  * {@link devices}.browsers
  * {@link CriOS}
  * @type {?object}
+ * @since 0.4.2
  */
 let browsers = null;
 
 /**
  * version 情報を計算します
  * {@link CriOS}
+ * @since 0.4.2
  */
 const version = () => {
   const app = devices.app;
@@ -31,13 +33,9 @@ const version = () => {
   }
   // 先頭 削除
   numbers.shift();
-  const versions = numbers.map((number, index) => {
-    const int = parseInt(number, 10);
-    if (index <= 3) {
-      return isNaN(int) ? 0 : int;
-    }
-    return null;
-  });
+  // array
+  const intArr = numbers.map(number => (parseInt(number, 10)));
+  const versions = intArr.filter(int => !isNaN(int));
   browsers.build = versions.join('.');
   const major = parseInt(versions[0], 10);
   let minor = 0;
@@ -60,6 +58,7 @@ const version = () => {
 /**
  * browser 判別します
  * {@link CriOS}
+ * @since 0.4.2
  */
 const init = () => {
   if (browsers) {
@@ -67,18 +66,37 @@ const init = () => {
   }
   browsers = Object.assign({}, devices.browsers);
   const ua = devices.ua;
-  browsers.crios = !!ua.match(/crios/i);
-  version();
+  const crios = !!ua.match(/crios/i);
+  browsers.crios = crios;
+  if (crios) {
+    version();
+  }
 };
 
+/**
+ * iOS Chrome detector
+ * @since 0.4.2
+ */
 export default class CriOS {
+  /**
+   * 書き換え済み `browsers` を取得します
+   * @returns {Object} 書き換え済み `browsers` を返します
+   */
+  static browsers() {
+    init();
+    return browsers;
+  }
+  /**
+   * iOS Chrome 判定
+   * @returns {boolean} true: iOS Chrome
+   */
   static is() {
     init();
     return browsers.crios;
   }
   /**
    * CriOS Browser version
-   * @returns {number} Android OS version, not Android -1
+   * @returns {number} CriOS version, not Android -1
    */
   static version() {
     init();
@@ -86,7 +104,7 @@ export default class CriOS {
   }
   /**
    * CriOS Browser major version
-   * @returns {number} Android OS major version, not Android -1
+   * @returns {number} CriOS major version, not Android -1
    */
   static major() {
     init();
@@ -94,7 +112,7 @@ export default class CriOS {
   }
   /**
    * CriOS Browser version `major.minor.build`
-   * @returns {string} Android OS version NN.NN.NN.NN 型（文字）で返します, not Android ''
+   * @returns {string} CriOS version NN.NN.NN.NN 型（文字）で返します, not Android ''
    */
   static build() {
     init();
