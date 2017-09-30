@@ -4424,7 +4424,7 @@ var CriOS = function () {
     }
     /**
      * CriOS Browser version `major.minor.build`
-     * @returns {string} CriOS version NN.NN.NN.NN 型（文字）で返します, not Android ''
+     * @returns {string} CriOS version NN.NN.NN.NN 型（文字）で返します
      */
 
   }, {
@@ -4581,7 +4581,7 @@ var Edge = function () {
     }
     /**
      * Edge Browser version
-     * @returns {number} Firefox OS version, not Android -1
+     * @returns {number} Edge version, not Android -1
      */
 
   }, {
@@ -4592,7 +4592,7 @@ var Edge = function () {
     }
     /**
      * Edge Browser major version
-     * @returns {number} Firefox OS major version, not Android -1
+     * @returns {number} Edge major version, not Android -1
      */
 
   }, {
@@ -4603,7 +4603,7 @@ var Edge = function () {
     }
     /**
      * Edge Browser version `major.minor.build`
-     * @returns {string} Firefox OS version NN.NN.NN.NN 型（文字）で返します, not Android ''
+     * @returns {string} Edge version NN.NN.NN.NN 型（文字）で返します
      */
 
   }, {
@@ -4621,6 +4621,7 @@ var Edge = function () {
     key: 'numbers',
     value: function numbers() {
       init();
+      return _browsers.numbers;
     }
   }]);
 
@@ -7423,7 +7424,7 @@ var Chrome = function () {
     }
     /**
      * Chrome Browser version `major.minor.build`
-     * @returns {string} Chrome version NN.NN.NN.NN 型（文字）で返します, not Android ''
+     * @returns {string} Chrome version NN.NN.NN.NN 型（文字）で返します
      */
 
   }, {
@@ -7441,6 +7442,7 @@ var Chrome = function () {
     key: 'numbers',
     value: function numbers() {
       init();
+      return _browsers.numbers;
     }
   }]);
 
@@ -7488,6 +7490,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  */
 var _browsers = null;
 
+/**
+ * version 情報を計算します
+ * {@link FxiOS}
+ * @since 0.4.2
+ */
 var version = function version() {
   var app = _devices2.default.app;
   var numbers = app.match(/fxios\/(\d+)\.?(\d+)?/i);
@@ -7978,7 +7985,7 @@ exports.default = Classes;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.4.3
- * 2017-9-25 18:43:33
+ * 2017-9-30 16:24:27
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -8219,7 +8226,7 @@ MOKU.version = function () {
  * @returns {string}  build 日時を返します
  */
 MOKU.build = function () {
-  return '2017-9-25 18:43:33';
+  return '2017-9-30 16:24:27';
 };
 /**
  * MOKU.event
@@ -13521,19 +13528,20 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // device
 
 
-// touchevent 3rd argument
-/**
- * addEventListener 第三引数 - { passive: true } | false
- * @private
- * @type {*}
- * @since 0.3.2
- */
-var event3rd = _Can2.default.passive() ? { passive: true } : false;
+// // touchevent 3rd argument
+// /**
+//  * addEventListener 第三引数 - { passive: true } | false
+//  * {@link Touching}
+//  * @private
+//  * @type {*}
+//  * @since 0.3.2
+//  */
+// const event3rd = Can.passive() ? { passive: true } : false;
+
 
 /**
  * Touch event を監視し y方向移動が `threshold` 以内の時に `TOUCH` event を発火します
  */
-
 var Touching = function (_EventDispatcher) {
   _inherits(Touching, _EventDispatcher);
 
@@ -13561,6 +13569,14 @@ var Touching = function (_EventDispatcher) {
      * touchend event type - touchingEnd
      * @constant END
      * @type {string}
+     */
+
+    /**
+     * addEventListener 第三引数 - { passive: true } | false
+     * {@link Touching}
+     * @private
+     * @type {*}
+     * @since 0.3.2
      */
     value: function scrolling(pointA, pointB, threshold) {
       var y = pointA.betweenY(pointB);
@@ -13714,8 +13730,9 @@ var Touching = function (_EventDispatcher) {
     /**
      * TouchEvent listener 3rd argument, option | useCapture
      * @type {boolean}
+     * @since 0.3.2
      */
-    _this.eventOption = canceling ? false : event3rd;
+    _this.eventOption = canceling ? false : Touching.event3rd;
     /**
      * [native code] - document.body
      * @type {HTMLElement}
@@ -13964,6 +13981,7 @@ var Touching = function (_EventDispatcher) {
   return Touching;
 }(_EventDispatcher3.default);
 
+Touching.event3rd = _Can2.default.passive() ? { passive: true } : false;
 Touching.START = 'touchingStart';
 Touching.END = 'touchingEnd';
 Touching.CANCEL = 'touchingCancel';
@@ -16736,7 +16754,7 @@ var Firefox = function () {
     }
     /**
      * Firefox Browser version `major.minor.build`
-     * @returns {string} Firefox version NN.NN.NN.NN 型（文字）で返します, not Android ''
+     * @returns {string} Firefox version NN.NN.NN.NN 型（文字）で返します
      */
 
   }, {
@@ -16984,7 +17002,7 @@ var IE = function () {
     }
     /**
      * IE Browser version `major.minor.build`
-     * @returns {string} IE version NN.NN.NN.NN 型（文字）で返します, not Android ''
+     * @returns {string} IE version NN.NN.NN.NN 型（文字）で返します
      */
 
   }, {
@@ -17185,7 +17203,7 @@ var Safari = function () {
     }
     /**
      * Safari Browser version `major.minor.build`
-     * @returns {string} Safari version NN.NN.NN.NN 型（文字）で返します, not Android ''
+     * @returns {string} Safari version NN.NN.NN.NN 型（文字）で返します
      */
 
   }, {

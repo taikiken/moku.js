@@ -70,6 +70,30 @@ const props = {
   version: -1,
 };
 
+/**
+ * browser property
+ * `device/index.js`
+ * @type {{
+ *   safari: boolean,
+ *   chrome: boolean,
+ *   firefox: boolean,
+ *   ie: boolean,
+ *   ie6: boolean,
+ *   ie7: boolean,
+ *   ie8: boolean,
+ *   ie9: boolean,
+ *   ie10: boolean,
+ *   ie11: boolean,
+ *   edge: boolean,
+ *   crios: boolean,
+ *   fxios: boolean,
+ *   standard: boolean,
+ *   build: string,
+ *   major: number,
+ *   numbers: [null,null,null],
+ *   version: number
+ * }}
+ */
 const browsers = {
   safari: false,
   chrome: false,
@@ -118,7 +142,26 @@ const browsers = {
  *    app: string,
  *    props: {ios: boolean, ipad: boolean, ipod: boolean, iphone: boolean, windows: boolean, android: boolean, standard: boolean, phone: boolean, tablet: boolean, hd: boolean, webView: boolean, standalone: boolean, version: number, major: number, build: string, numbers: (number|number|number)[]},
  *    safari: boolean,
- *    browsers: object
+ *    browsers: {
+ *      safari: boolean,
+ *      chrome: boolean,
+ *      firefox: boolean,
+ *      ie: boolean,
+ *      ie6: boolean,
+ *      ie7: boolean,
+ *      ie8: boolean,
+ *      ie9: boolean,
+ *      ie10: boolean,
+ *      ie11: boolean,
+ *      edge: boolean,
+ *      crios: boolean,
+ *      fxios: boolean,
+ *      standard: boolean,
+ *      build: string,
+ *      major: number,
+ *      numbers: [null,null,null],
+ *      version: number
+ *    }
  * }}
  */
 const devices = {

@@ -78,6 +78,7 @@
             "leadingComments": null
           }
         ],
+        "importKind": "value",
         "source": {
           "type": "StringLiteral",
           "start": 371,
@@ -181,6 +182,7 @@
             }
           }
         ],
+        "importKind": "value",
         "source": {
           "type": "StringLiteral",
           "start": 417,
@@ -270,6 +272,7 @@
             "leadingComments": null
           }
         ],
+        "importKind": "value",
         "source": {
           "type": "StringLiteral",
           "start": 470,
@@ -1087,7 +1090,7 @@
                   },
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * y 位置に scroll top を即座に移動させます\n   * @param {number} [y=0] scroll top 目標値\n   * @param {number} [delay=0] time out 遅延 ms\n   * @returns {number} time out id\n   ",
+                    "value": "*\n * @desc \n * y 位置に scroll top を即座に移動させます \n * @param \n * {number} [y=0] scroll top 目標値 \n * @param \n * {number} [delay=0] time out 遅延 ms \n * @returns \n * {number} time out id \n",
                     "start": 1030,
                     "end": 1195,
                     "loc": {
@@ -1263,7 +1266,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * {@link Freeze}.freeze を実行し scroll 操作を一定期間不能にします\n   * @returns {number} time out ID\n   ",
+                    "value": "*\n * @desc \n * {@link Freeze}.freeze を実行し scroll 操作を一定期間不能にします \n * @returns \n * {number} time out ID \n",
                     "start": 1300,
                     "end": 1397,
                     "loc": {
@@ -1800,7 +1803,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * scroll top 位置\n   * @returns {number} scroll top 位置を返します\n   * @see https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY\n   * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset\n   ",
+                    "value": "*\n * @desc \n * scroll top 位置 \n * @returns \n * {number} scroll top 位置を返します \n * @see \n * https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY \n * @see \n * https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset \n",
                     "start": 1452,
                     "end": 1671,
                     "loc": {
@@ -2140,7 +2143,7 @@
                   },
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * Scroll instance を singleton を保証し作成します\n   * @returns {Scroll} Scroll instance を返します\n   ",
+                    "value": "*\n * @desc \n * Scroll instance を singleton を保証し作成します \n * @returns \n * {Scroll} Scroll instance を返します \n",
                     "start": 1912,
                     "end": 2009,
                     "loc": {
@@ -4659,7 +4662,7 @@
                   },
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * scroll event を監視します\n   * @returns {Scroll} method chain 可能なように instance を返します\n   ",
+                    "value": "*\n * @desc \n * scroll event を監視します \n * @returns \n * {Scroll} method chain 可能なように instance を返します \n",
                     "start": 4072,
                     "end": 4164,
                     "loc": {
@@ -5004,7 +5007,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * scroll event を監視を止めます\n   * @returns {Scroll} method chain 可能なように instance を返します\n   ",
+                    "value": "*\n * @desc \n * scroll event を監視を止めます \n * @returns \n * {Scroll} method chain 可能なように instance を返します \n",
                     "start": 4364,
                     "end": 4458,
                     "loc": {
@@ -6914,7 +6917,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * window scroll event handler<br>\n   * window scroll event 発生後に scroll top 位置をもたせた Scroll.SCROLL custom event を発火します\n   * @param {?Event} event window scroll event, nullable\n   * @returns {void}\n   ",
+                    "value": "*\n * @desc \n * window scroll event handler<br>\n * window scroll event 発生後に scroll top 位置をもたせた Scroll.SCROLL custom event を発火します \n * @param \n * {?Event} event window scroll event, nullable \n * @returns \n * {void} \n",
                     "start": 4638,
                     "end": 4845,
                     "loc": {

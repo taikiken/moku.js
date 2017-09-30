@@ -78,6 +78,7 @@
             "leadingComments": null
           }
         ],
+        "importKind": "value",
         "source": {
           "type": "StringLiteral",
           "start": 369,
@@ -1613,7 +1614,7 @@
                   },
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * key が存在するかを調べます\n   * @param {string} keyName 調査対象 key 名称\n   * @returns {boolean} true: 存在する\n   ",
+                    "value": "*\n * @desc \n * key が存在するかを調べます \n * @param \n * {string} keyName 調査対象 key 名称 \n * @returns \n * {boolean} true: 存在する \n",
                     "start": 1284,
                     "end": 1390,
                     "loc": {
@@ -1823,7 +1824,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * key 値を取得します\n   * @param {string} keyName 調査対象 key 名称\n   * @returns {string|undefined} 見つかると文字列で返します, 見つからない時は undefined を返します\n   ",
+                    "value": "*\n * @desc \n * key 値を取得します \n * @param \n * {string} keyName 調査対象 key 名称 \n * @returns \n * {string|undefined} 見つかると文字列で返します, 見つからない時は undefined を返します \n",
                     "start": 1460,
                     "end": 1600,
                     "loc": {
@@ -1982,7 +1983,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * key: value 形式を取得します\n   * @returns {Object} URL query を key: value 形式で返します\n   ",
+                    "value": "*\n * @desc \n * key: value 形式を取得します \n * @returns \n * {Object} URL query を key: value 形式で返します \n",
                     "start": 1655,
                     "end": 1743,
                     "loc": {
@@ -2878,7 +2879,7 @@
                   },
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 文字列先頭に `?` があればそれ以降の文字列を返し {@link Text.and} を実行し `&amp;` を `&` 変換します\n   * @param {string} targetText 操作対象文字列\n   * @returns {string} query を正規化します\n   ",
+                    "value": "*\n * @desc \n * 文字列先頭に `?` があればそれ以降の文字列を返し {@link Text.and} を実行し `&amp;` を `&` 変換します \n * @param \n * {string} targetText 操作対象文字列 \n * @returns \n * {string} query を正規化します \n",
                     "start": 2123,
                     "end": 2283,
                     "loc": {
@@ -4610,7 +4611,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * query を kye: value 形式にします\n   * @param {string} targetText 操作対象文字列\n   * @returns {[Object, Array]} data, keys を返します\n   ",
+                    "value": "*\n * @desc \n * query を kye: value 形式にします \n * @param \n * {string} targetText 操作対象文字列 \n * @returns \n * {[Object, Array]} data, keys を返します \n",
                     "start": 2502,
                     "end": 2631,
                     "loc": {
@@ -5054,7 +5055,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 引数 targetText (query) から引数 keyName 値を取得します\n   * @param {string} keyName key 名称\n   * @param {string} targetText query\n   * @returns {string|undefined} 見つかると文字列で返します, 見つからない時は undefined を返します\n   ",
+                    "value": "*\n * @desc \n * 引数 targetText (query) から引数 keyName 値を取得します \n * @param \n * {string} keyName key 名称 \n * @param \n * {string} targetText query \n * @returns \n * {string|undefined} 見つかると文字列で返します, 見つからない時は undefined を返します \n",
                     "start": 3281,
                     "end": 3485,
                     "loc": {
@@ -5384,7 +5385,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * URL query の key: value 形式を取得します\n   * @param {string} targetText query\n   * @returns {[Object, Array]} URL query を key: value 形式で返します\n   ",
+                    "value": "*\n * @desc \n * URL query の key: value 形式を取得します \n * @param \n * {string} targetText query \n * @returns \n * {[Object, Array]} URL query を key: value 形式で返します \n",
                     "start": 3625,
                     "end": 3772,
                     "loc": {

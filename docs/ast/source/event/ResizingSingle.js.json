@@ -78,6 +78,7 @@
             "leadingComments": null
           }
         ],
+        "importKind": "value",
         "source": {
           "type": "StringLiteral",
           "start": 355,
@@ -592,7 +593,7 @@
                   },
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * Resizing instance を singleton 提供します\n   * @returns {Resizing} Resizing instance\n   ",
+                    "value": "*\n * @desc \n * Resizing instance を singleton 提供します \n * @returns \n * {Resizing} Resizing instance \n",
                     "start": 650,
                     "end": 743,
                     "loc": {

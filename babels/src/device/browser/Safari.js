@@ -125,7 +125,7 @@ export default class Safari {
   }
   /**
    * Safari Browser version `major.minor.build`
-   * @returns {string} Safari version NN.NN.NN.NN 型（文字）で返します, not Android ''
+   * @returns {string} Safari version NN.NN.NN.NN 型（文字）で返します
    */
   static build() {
     init();

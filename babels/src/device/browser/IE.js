@@ -167,7 +167,7 @@ export default class IE {
   }
   /**
    * IE Browser version `major.minor.build`
-   * @returns {string} IE version NN.NN.NN.NN 型（文字）で返します, not Android ''
+   * @returns {string} IE version NN.NN.NN.NN 型（文字）で返します
    */
   static build() {
     init();

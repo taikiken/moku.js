@@ -1,36 +1,16 @@
 {
   "coverage": "100%",
-  "expectCount": 461,
-  "actualCount": 461,
+  "expectCount": 543,
+  "actualCount": 543,
   "files": {
-    "src/event/Rising.js": {
-      "expectCount": 10,
-      "actualCount": 10,
+    "src/css/Patterns.js": {
+      "expectCount": 4,
+      "actualCount": 4,
       "undocumentLines": []
     },
-    "src/net/Ajax.js": {
-      "expectCount": 12,
-      "actualCount": 12,
-      "undocumentLines": []
-    },
-    "src/net/AjaxThunk.js": {
-      "expectCount": 2,
-      "actualCount": 2,
-      "undocumentLines": []
-    },
-    "src/device/os/Android.js": {
-      "expectCount": 14,
-      "actualCount": 14,
-      "undocumentLines": []
-    },
-    "src/dom/Bounding.js": {
-      "expectCount": 7,
-      "actualCount": 7,
-      "undocumentLines": []
-    },
-    "src/event/Touching.js": {
-      "expectCount": 25,
-      "actualCount": 25,
+    "src/css/Style.js": {
+      "expectCount": 15,
+      "actualCount": 15,
       "undocumentLines": []
     },
     "src/device/Can.js": {
@@ -38,29 +18,69 @@
       "actualCount": 10,
       "undocumentLines": []
     },
-    "src/dom/Classes.js": {
+    "src/device/browser/Chrome.js": {
       "expectCount": 10,
       "actualCount": 10,
       "undocumentLines": []
     },
-    "src/net/Cookie.js": {
-      "expectCount": 22,
-      "actualCount": 22,
+    "src/device/browser/CriOS.js": {
+      "expectCount": 10,
+      "actualCount": 10,
       "undocumentLines": []
     },
-    "src/tick/Cycle.js": {
-      "expectCount": 11,
-      "actualCount": 11,
+    "src/device/browser/Edge.js": {
+      "expectCount": 10,
+      "actualCount": 10,
       "undocumentLines": []
     },
-    "src/tick/events/CycleEvents.js": {
-      "expectCount": 3,
-      "actualCount": 3,
+    "src/device/browser/Firefox.js": {
+      "expectCount": 10,
+      "actualCount": 10,
       "undocumentLines": []
     },
-    "src/event/Wheel.js": {
+    "src/device/browser/FxiOS.js": {
+      "expectCount": 10,
+      "actualCount": 10,
+      "undocumentLines": []
+    },
+    "src/device/browser/IE.js": {
       "expectCount": 16,
       "actualCount": 16,
+      "undocumentLines": []
+    },
+    "src/device/browser/Safari.js": {
+      "expectCount": 10,
+      "actualCount": 10,
+      "undocumentLines": []
+    },
+    "src/device/devices.js": {
+      "expectCount": 6,
+      "actualCount": 6,
+      "undocumentLines": []
+    },
+    "src/device/os/Android.js": {
+      "expectCount": 14,
+      "actualCount": 14,
+      "undocumentLines": []
+    },
+    "src/device/os/Windows.js": {
+      "expectCount": 5,
+      "actualCount": 5,
+      "undocumentLines": []
+    },
+    "src/device/os/iOS.js": {
+      "expectCount": 16,
+      "actualCount": 16,
+      "undocumentLines": []
+    },
+    "src/dom/Bounding.js": {
+      "expectCount": 7,
+      "actualCount": 7,
+      "undocumentLines": []
+    },
+    "src/dom/Classes.js": {
+      "expectCount": 11,
+      "actualCount": 11,
       "undocumentLines": []
     },
     "src/dom/Elements.js": {
@@ -78,14 +98,154 @@
       "actualCount": 6,
       "undocumentLines": []
     },
+    "src/event/NativeResizing.js": {
+      "expectCount": 11,
+      "actualCount": 11,
+      "undocumentLines": []
+    },
+    "src/event/NativeResizingSingle.js": {
+      "expectCount": 3,
+      "actualCount": 3,
+      "undocumentLines": []
+    },
+    "src/event/Resizing.js": {
+      "expectCount": 10,
+      "actualCount": 10,
+      "undocumentLines": []
+    },
+    "src/event/ResizingSingle.js": {
+      "expectCount": 3,
+      "actualCount": 3,
+      "undocumentLines": []
+    },
+    "src/event/Rising.js": {
+      "expectCount": 10,
+      "actualCount": 10,
+      "undocumentLines": []
+    },
+    "src/event/Scroll.js": {
+      "expectCount": 14,
+      "actualCount": 14,
+      "undocumentLines": []
+    },
+    "src/event/Scrolling.js": {
+      "expectCount": 14,
+      "actualCount": 14,
+      "undocumentLines": []
+    },
+    "src/event/ScrollingSingle.js": {
+      "expectCount": 3,
+      "actualCount": 3,
+      "undocumentLines": []
+    },
+    "src/event/Touching.js": {
+      "expectCount": 25,
+      "actualCount": 25,
+      "undocumentLines": []
+    },
+    "src/event/Wheel.js": {
+      "expectCount": 16,
+      "actualCount": 16,
+      "undocumentLines": []
+    },
+    "src/event/events/ResizingEvents.js": {
+      "expectCount": 4,
+      "actualCount": 4,
+      "undocumentLines": []
+    },
+    "src/event/events/RisingEvents.js": {
+      "expectCount": 5,
+      "actualCount": 5,
+      "undocumentLines": []
+    },
+    "src/event/events/ScrollEvents.js": {
+      "expectCount": 10,
+      "actualCount": 10,
+      "undocumentLines": []
+    },
+    "src/event/events/TouchingEvents.js": {
+      "expectCount": 6,
+      "actualCount": 6,
+      "undocumentLines": []
+    },
+    "src/event/events/WheelEvents.js": {
+      "expectCount": 3,
+      "actualCount": 3,
+      "undocumentLines": []
+    },
+    "src/moku.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/net/Ajax.js": {
+      "expectCount": 12,
+      "actualCount": 12,
+      "undocumentLines": []
+    },
+    "src/net/AjaxThunk.js": {
+      "expectCount": 2,
+      "actualCount": 2,
+      "undocumentLines": []
+    },
+    "src/net/Cookie.js": {
+      "expectCount": 22,
+      "actualCount": 22,
+      "undocumentLines": []
+    },
+    "src/net/Queries.js": {
+      "expectCount": 13,
+      "actualCount": 13,
+      "undocumentLines": []
+    },
+    "src/polyfill/index.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/polyfill/method/animationFrame.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/polyfill/method/promise.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/tick/Cycle.js": {
+      "expectCount": 11,
+      "actualCount": 11,
+      "undocumentLines": []
+    },
     "src/tick/Fps.js": {
       "expectCount": 7,
       "actualCount": 7,
       "undocumentLines": []
     },
+    "src/tick/Polling.js": {
+      "expectCount": 13,
+      "actualCount": 13,
+      "undocumentLines": []
+    },
+    "src/tick/Rate.js": {
+      "expectCount": 23,
+      "actualCount": 23,
+      "undocumentLines": []
+    },
+    "src/tick/events/CycleEvents.js": {
+      "expectCount": 3,
+      "actualCount": 3,
+      "undocumentLines": []
+    },
     "src/tick/events/FpsEvents.js": {
       "expectCount": 3,
       "actualCount": 3,
+      "undocumentLines": []
+    },
+    "src/tick/events/PollingEvents.js": {
+      "expectCount": 5,
+      "actualCount": 5,
       "undocumentLines": []
     },
     "src/util/Freeze.js": {
@@ -108,94 +268,9 @@
       "actualCount": 3,
       "undocumentLines": []
     },
-    "src/moku.js": {
-      "expectCount": 1,
-      "actualCount": 1,
-      "undocumentLines": []
-    },
-    "src/event/NativeResizing.js": {
-      "expectCount": 11,
-      "actualCount": 11,
-      "undocumentLines": []
-    },
     "src/util/NodeLists.js": {
       "expectCount": 3,
       "actualCount": 3,
-      "undocumentLines": []
-    },
-    "src/css/Patterns.js": {
-      "expectCount": 4,
-      "actualCount": 4,
-      "undocumentLines": []
-    },
-    "src/tick/Polling.js": {
-      "expectCount": 13,
-      "actualCount": 13,
-      "undocumentLines": []
-    },
-    "src/tick/events/PollingEvents.js": {
-      "expectCount": 5,
-      "actualCount": 5,
-      "undocumentLines": []
-    },
-    "src/net/Queries.js": {
-      "expectCount": 13,
-      "actualCount": 13,
-      "undocumentLines": []
-    },
-    "src/tick/Rate.js": {
-      "expectCount": 23,
-      "actualCount": 23,
-      "undocumentLines": []
-    },
-    "src/event/Resizing.js": {
-      "expectCount": 10,
-      "actualCount": 10,
-      "undocumentLines": []
-    },
-    "src/event/events/ResizingEvents.js": {
-      "expectCount": 4,
-      "actualCount": 4,
-      "undocumentLines": []
-    },
-    "src/event/ResizingSingle.js": {
-      "expectCount": 3,
-      "actualCount": 3,
-      "undocumentLines": []
-    },
-    "src/event/NativeResizingSingle.js": {
-      "expectCount": 3,
-      "actualCount": 3,
-      "undocumentLines": []
-    },
-    "src/event/events/RisingEvents.js": {
-      "expectCount": 5,
-      "actualCount": 5,
-      "undocumentLines": []
-    },
-    "src/event/Scroll.js": {
-      "expectCount": 14,
-      "actualCount": 14,
-      "undocumentLines": []
-    },
-    "src/event/events/ScrollEvents.js": {
-      "expectCount": 10,
-      "actualCount": 10,
-      "undocumentLines": []
-    },
-    "src/event/Scrolling.js": {
-      "expectCount": 14,
-      "actualCount": 14,
-      "undocumentLines": []
-    },
-    "src/event/ScrollingSingle.js": {
-      "expectCount": 3,
-      "actualCount": 3,
-      "undocumentLines": []
-    },
-    "src/css/Style.js": {
-      "expectCount": 13,
-      "actualCount": 13,
       "undocumentLines": []
     },
     "src/util/Text.js": {
@@ -208,11 +283,6 @@
       "actualCount": 12,
       "undocumentLines": []
     },
-    "src/event/events/TouchingEvents.js": {
-      "expectCount": 6,
-      "actualCount": 6,
-      "undocumentLines": []
-    },
     "src/util/Type.js": {
       "expectCount": 15,
       "actualCount": 15,
@@ -221,31 +291,6 @@
     "src/util/Vectors.js": {
       "expectCount": 24,
       "actualCount": 24,
-      "undocumentLines": []
-    },
-    "src/event/events/WheelEvents.js": {
-      "expectCount": 3,
-      "actualCount": 3,
-      "undocumentLines": []
-    },
-    "src/device/os/Windows.js": {
-      "expectCount": 5,
-      "actualCount": 5,
-      "undocumentLines": []
-    },
-    "src/polyfill/method/animationFrame.js": {
-      "expectCount": 1,
-      "actualCount": 1,
-      "undocumentLines": []
-    },
-    "src/device/devices.js": {
-      "expectCount": 5,
-      "actualCount": 5,
-      "undocumentLines": []
-    },
-    "src/device/os/iOS.js": {
-      "expectCount": 16,
-      "actualCount": 16,
       "undocumentLines": []
     }
   }

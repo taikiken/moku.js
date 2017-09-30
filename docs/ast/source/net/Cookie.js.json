@@ -3474,7 +3474,7 @@
                   },
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * cookie value を取得します\n   * @returns {string|null} cookie value を返します\n   ",
+                    "value": "*\n * @desc \n * cookie value を取得します \n * @returns \n * {string|null} cookie value を返します \n",
                     "start": 2891,
                     "end": 2972,
                     "loc": {
@@ -4203,7 +4203,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * cookie value を設定します\n   * @param {string} value cookie value\n   * @param {?Date} [end=null] cookie end Date instance, null の時はプラウザ `quit` で削除されます\n   * @param {string} [path='/'] cookie path\n   * @param {string} [domain=''] cookie domain\n   * @param {boolean} [secure=false] true: https 通信のときのみ、クッキーが送信されます\n   * @returns {string} 設定した cookie 文字列\n   ",
+                    "value": "*\n * @desc \n * cookie value を設定します \n * @param \n * {string} value cookie value \n * @param \n * {?Date} [end=null] cookie end Date instance, null の時はプラウザ `quit` で削除されます \n * @param \n * {string} [path='/'] cookie path \n * @param \n * {string} [domain=''] cookie domain \n * @param \n * {boolean} [secure=false] true: https 通信のときのみ、クッキーが送信されます \n * @returns \n * {string} 設定した cookie 文字列 \n",
                     "start": 3025,
                     "end": 3383,
                     "loc": {
@@ -4445,7 +4445,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * cookie を削除します\n   * @returns {boolean} true: cookie 削除成功\n   ",
+                    "value": "*\n * @desc \n * cookie を削除します \n * @returns \n * {boolean} true: cookie 削除成功 \n",
                     "start": 3560,
                     "end": 3630,
                     "loc": {
@@ -5289,7 +5289,7 @@
                   },
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * cookie value を取得します\n   * @param {string} key 取得する cookie key 名称\n   * @returns {string|null} cookie value\n   ",
+                    "value": "*\n * @desc \n * cookie value を取得します \n * @param \n * {string} key 取得する cookie key 名称 \n * @returns \n * {string|null} cookie value \n",
                     "start": 3799,
                     "end": 3918,
                     "loc": {
@@ -6672,7 +6672,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * cookie value を設定します\n   * @param {string} key cookie key\n   * @param {string} value cookie value\n   * @param {?Date} [end=null] cookie end date Date instance\n   * @param {string} [path=/] cookie path\n   * @param {string} [domain=''] cookie domain\n   * @param {boolean} [secure=false] true: https 通信のときのみ、クッキーが送信されます\n   * @returns {string} 設定した cookie 文字列\n   ",
+                    "value": "*\n * @desc \n * cookie value を設定します \n * @param \n * {string} key cookie key \n * @param \n * {string} value cookie value \n * @param \n * {?Date} [end=null] cookie end date Date instance \n * @param \n * {string} [path=/] cookie path \n * @param \n * {string} [domain=''] cookie domain \n * @param \n * {boolean} [secure=false] true: https 通信のときのみ、クッキーが送信されます \n * @returns \n * {string} 設定した cookie 文字列 \n",
                     "start": 4208,
                     "end": 4576,
                     "loc": {
@@ -7117,7 +7117,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * cookie を削除します\n   *\n   * 現在時間より前の時刻を設定します\n   * @param {string} key cookie key\n   * @returns {boolean} true: 削除成功\n   ",
+                    "value": "*\n * @desc \n * cookie を削除します\n * \n * 現在時間より前の時刻を設定します \n * @param \n * {string} key cookie key \n * @returns \n * {boolean} true: 削除成功 \n",
                     "start": 5029,
                     "end": 5155,
                     "loc": {
@@ -7359,7 +7359,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * cookie key が存在するかを調べます\n   * @param {string} key cookie key\n   * @returns {boolean} true: cookie key が存在します\n   ",
+                    "value": "*\n * @desc \n * cookie key が存在するかを調べます \n * @param \n * {string} key cookie key \n * @returns \n * {boolean} true: cookie key が存在します \n",
                     "start": 5294,
                     "end": 5415,
                     "loc": {

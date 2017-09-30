@@ -705,7 +705,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * Array.from 使えないので for...i iteration する\n   * @param {NodeList} elements 処理対象\n   * @returns {Array} 配列変換し返します\n   ",
+                    "value": "*\n * @desc \n * Array.from 使えないので for...i iteration する \n * @param \n * {NodeList} elements 処理対象 \n * @returns \n * {Array} 配列変換し返します \n",
                     "start": 437,
                     "end": 559,
                     "loc": {
@@ -1119,7 +1119,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * Array.from 使用判定を行い、\n   * 使用できない時は {@link NodeLists.from} を実行します\n   * @param {NodeList} elements 処理対象\n   * @returns {Array} 配列変換し返します\n   ",
+                    "value": "*\n * @desc \n * Array.from 使用判定を行い、\n * 使用できない時は {@link NodeLists.from} を実行します \n * @param \n * {NodeList} elements 処理対象 \n * @returns \n * {Array} 配列変換し返します \n",
                     "start": 742,
                     "end": 889,
                     "loc": {

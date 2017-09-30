@@ -78,6 +78,7 @@
             "leadingComments": null
           }
         ],
+        "importKind": "value",
         "source": {
           "type": "StringLiteral",
           "start": 356,
@@ -603,7 +604,7 @@
                   },
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * Scrolling instance を singleton を保証し作成します\n   * @returns {Scrolling} Scrolling instance を返します\n   ",
+                    "value": "*\n * @desc \n * Scrolling instance を singleton を保証し作成します \n * @returns \n * {Scrolling} Scrolling instance を返します \n",
                     "start": 668,
                     "end": 774,
                     "loc": {

@@ -101,7 +101,7 @@ export default class Edge {
   }
   /**
    * Edge Browser version
-   * @returns {number} Firefox OS version, not Android -1
+   * @returns {number} Edge version, not Android -1
    */
   static version() {
     init();
@@ -109,7 +109,7 @@ export default class Edge {
   }
   /**
    * Edge Browser major version
-   * @returns {number} Firefox OS major version, not Android -1
+   * @returns {number} Edge major version, not Android -1
    */
   static major() {
     init();
@@ -117,7 +117,7 @@ export default class Edge {
   }
   /**
    * Edge Browser version `major.minor.build`
-   * @returns {string} Firefox OS version NN.NN.NN.NN 型（文字）で返します, not Android ''
+   * @returns {string} Edge version NN.NN.NN.NN 型（文字）で返します
    */
   static build() {
     init();
@@ -129,5 +129,6 @@ export default class Edge {
    */
   static numbers() {
     init();
+    return browsers.numbers;
   }
 }

@@ -1024,7 +1024,7 @@
                   },
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 複製を作成します\n   * @returns {Events|*} 複製を返します\n   ",
+                    "value": "*\n * @desc \n * 複製を作成します \n * @returns \n * {Events|*} 複製を返します \n",
                     "start": 1316,
                     "end": 1372,
                     "loc": {
