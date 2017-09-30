@@ -129,7 +129,7 @@ export default class Chrome {
   }
   /**
    * Chrome Browser version `major.minor.build`
-   * @returns {string} Chrome version NN.NN.NN.NN 型（文字）で返します, not Android ''
+   * @returns {string} Chrome version NN.NN.NN.NN 型（文字）で返します
    */
   static build() {
     init();
@@ -141,5 +141,6 @@ export default class Chrome {
    */
   static numbers() {
     init();
+    return browsers.numbers;
   }
 }

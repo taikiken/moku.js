@@ -78,6 +78,7 @@
             "leadingComments": null
           }
         ],
+        "importKind": "value",
         "source": {
           "type": "StringLiteral",
           "start": 365,
@@ -201,6 +202,7 @@
             "leadingComments": null
           }
         ],
+        "importKind": "value",
         "source": {
           "type": "StringLiteral",
           "start": 442,
@@ -288,6 +290,7 @@
             }
           }
         ],
+        "importKind": "value",
         "source": {
           "type": "StringLiteral",
           "start": 488,
@@ -377,6 +380,7 @@
             "leadingComments": null
           }
         ],
+        "importKind": "value",
         "source": {
           "type": "StringLiteral",
           "start": 537,
@@ -544,6 +548,7 @@
                   },
                   "name": "COLLISION"
                 },
+                "variance": null,
                 "static": true,
                 "value": {
                   "type": "StringLiteral",
@@ -682,6 +687,7 @@
                   },
                   "name": "ALIEN"
                 },
+                "variance": null,
                 "static": true,
                 "value": {
                   "type": "StringLiteral",
@@ -3285,7 +3291,7 @@
                   },
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * scroll を監視します\n   * @returns {Rising} method chain 可能なように instance を返します\n   ",
+                    "value": "*\n * @desc \n * scroll を監視します \n * @returns \n * {Rising} method chain 可能なように instance を返します \n",
                     "start": 2697,
                     "end": 2783,
                     "loc": {
@@ -3708,7 +3714,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * scroll 監視を止めます\n   * @returns {Rising} method chain 可能なように instance を返します\n   ",
+                    "value": "*\n * @desc \n * scroll 監視を止めます \n * @returns \n * {Rising} method chain 可能なように instance を返します \n",
                     "start": 3140,
                     "end": 3227,
                     "loc": {
@@ -5472,7 +5478,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * Scrolling.UPDATE event handler - {link Hit.test} 衝突判定を行います\n   * @param {ScrollEvents} scrollEvents scroll events object\n   * @return {boolean} 衝突時に true を返します\n   ",
+                    "value": "*\n * @desc \n * Scrolling.UPDATE event handler - {link Hit.test} 衝突判定を行います \n * @param \n * {ScrollEvents} scrollEvents scroll events object \n * @return \n * {boolean} 衝突時に true を返します \n",
                     "start": 3448,
                     "end": 3621,
                     "loc": {

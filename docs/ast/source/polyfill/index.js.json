@@ -1,28 +1,28 @@
 {
   "type": "File",
   "start": 0,
-  "end": 658,
+  "end": 1633,
   "loc": {
     "start": {
       "line": 1,
       "column": 0
     },
     "end": {
-      "line": 32,
+      "line": 51,
       "column": 0
     }
   },
   "program": {
     "type": "Program",
     "start": 0,
-    "end": 658,
+    "end": 1633,
     "loc": {
       "start": {
         "line": 1,
         "column": 0
       },
       "end": {
-        "line": 32,
+        "line": 51,
         "column": 0
       }
     },
@@ -293,6 +293,7 @@
             }
           }
         ],
+        "importKind": "value",
         "source": {
           "type": "StringLiteral",
           "start": 479,
@@ -401,86 +402,342 @@
         ],
         "trailingComments": [
           {
-            "type": "CommentLine",
-            "value": " const polyfill = {",
+            "type": "CommentBlock",
+            "value": "*\n * 以下全てを読み込みます、一部だけ必要な時は個別に `import` します\n * - babel-polyfill - `./method/babel`\n *   - IE, Symbol 対応できない問題を解決するために...\n *   - https://babeljs.io/docs/usage/polyfill/\n *   - https://github.com/babel/babel-preset-env/issues/203\n *   - `babel-preset-env includes plugins by default. To include polyfill you need:, specify useBuiltIns: true in presets options (see more), include import \"babel-polyfill\" to your codebase.`\n * - promise-polyfill - `./method/promise`\n *   - https://github.com/taylorhakes/promise-polyfill\n *   - https://developers.google.com/web/fundamentals/getting-started/primers/promises\n *   - Chrome 32、Opera 19、Firefox 29、Safari 8、および Microsoft Edge - enabled\n * - whatwg-fetch - `./method/fetch`\n *   - https://github.com/whatwg/fetch\n *   - https://fetch.spec.whatwg.org/\n *   - https://github.github.io/fetch/\n * - animationFrame - `./method/animationFrame`\n *   - Android 4.3 以下, requestAnimationFrame 未実装なので polyfill する\n * @type {{animationFrame: function}}\n ",
             "start": 578,
-            "end": 599,
+            "end": 1566,
             "loc": {
               "start": {
                 "line": 27,
                 "column": 0
               },
               "end": {
-                "line": 27,
-                "column": 21
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": "   animationFrame,",
-            "start": 600,
-            "end": 620,
-            "loc": {
-              "start": {
-                "line": 28,
-                "column": 0
-              },
-              "end": {
-                "line": 28,
-                "column": 20
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " };",
-            "start": 621,
-            "end": 626,
-            "loc": {
-              "start": {
-                "line": 29,
-                "column": 0
-              },
-              "end": {
-                "line": 29,
-                "column": 5
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": "",
-            "start": 627,
-            "end": 629,
-            "loc": {
-              "start": {
-                "line": 30,
-                "column": 0
-              },
-              "end": {
-                "line": 30,
-                "column": 2
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " export default polyfill;",
-            "start": 630,
-            "end": 657,
-            "loc": {
-              "start": {
-                "line": 31,
-                "column": 0
-              },
-              "end": {
-                "line": 31,
-                "column": 27
+                "line": 45,
+                "column": 3
               }
             }
           }
         ]
+      },
+      {
+        "type": "Identifier",
+        "start": 1567,
+        "end": 1606,
+        "loc": {
+          "start": {
+            "line": 46,
+            "column": 0
+          },
+          "end": {
+            "line": 48,
+            "column": 2
+          }
+        },
+        "declarations": [
+          {
+            "type": "VariableDeclarator",
+            "start": 1573,
+            "end": 1605,
+            "loc": {
+              "start": {
+                "line": 46,
+                "column": 6
+              },
+              "end": {
+                "line": 48,
+                "column": 1
+              }
+            },
+            "id": {
+              "type": "Identifier",
+              "start": 1573,
+              "end": 1581,
+              "loc": {
+                "start": {
+                  "line": 46,
+                  "column": 6
+                },
+                "end": {
+                  "line": 46,
+                  "column": 14
+                },
+                "identifierName": "polyfill"
+              },
+              "name": "polyfill",
+              "leadingComments": null
+            },
+            "init": {
+              "type": "ObjectExpression",
+              "start": 1584,
+              "end": 1605,
+              "loc": {
+                "start": {
+                  "line": 46,
+                  "column": 17
+                },
+                "end": {
+                  "line": 48,
+                  "column": 1
+                }
+              },
+              "properties": [
+                {
+                  "type": "ObjectProperty",
+                  "start": 1588,
+                  "end": 1602,
+                  "loc": {
+                    "start": {
+                      "line": 47,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 47,
+                      "column": 16
+                    }
+                  },
+                  "method": false,
+                  "shorthand": true,
+                  "computed": false,
+                  "key": {
+                    "type": "Identifier",
+                    "start": 1588,
+                    "end": 1602,
+                    "loc": {
+                      "start": {
+                        "line": 47,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 47,
+                        "column": 16
+                      },
+                      "identifierName": "animationFrame"
+                    },
+                    "name": "animationFrame"
+                  },
+                  "value": {
+                    "type": "Identifier",
+                    "start": 1588,
+                    "end": 1602,
+                    "loc": {
+                      "start": {
+                        "line": 47,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 47,
+                        "column": 16
+                      },
+                      "identifierName": "animationFrame"
+                    },
+                    "name": "animationFrame"
+                  },
+                  "extra": {
+                    "shorthand": true
+                  }
+                }
+              ]
+            },
+            "leadingComments": null
+          }
+        ],
+        "kind": "const",
+        "leadingComments": [],
+        "name": "_",
+        "trailingComments": []
+      },
+      {
+        "type": "Identifier",
+        "start": 1608,
+        "end": 1632,
+        "loc": {
+          "start": {
+            "line": 50,
+            "column": 0
+          },
+          "end": {
+            "line": 50,
+            "column": 24
+          }
+        },
+        "declaration": {
+          "type": "Identifier",
+          "start": 1623,
+          "end": 1631,
+          "loc": {
+            "start": {
+              "line": 50,
+              "column": 15
+            },
+            "end": {
+              "line": 50,
+              "column": 23
+            },
+            "identifierName": "polyfill"
+          },
+          "name": "polyfill"
+        },
+        "name": "_",
+        "leadingComments": [],
+        "trailingComments": []
+      },
+      {
+        "type": "ExportDefaultDeclaration",
+        "start": 1608,
+        "end": 1632,
+        "loc": {
+          "start": {
+            "line": 50,
+            "column": 0
+          },
+          "end": {
+            "line": 50,
+            "column": 24
+          }
+        },
+        "declaration": {
+          "type": "VariableDeclaration",
+          "start": 1567,
+          "end": 1606,
+          "loc": {
+            "start": {
+              "line": 46,
+              "column": 0
+            },
+            "end": {
+              "line": 48,
+              "column": 2
+            }
+          },
+          "declarations": [
+            {
+              "type": "VariableDeclarator",
+              "start": 1573,
+              "end": 1605,
+              "loc": {
+                "start": {
+                  "line": 46,
+                  "column": 6
+                },
+                "end": {
+                  "line": 48,
+                  "column": 1
+                }
+              },
+              "id": {
+                "type": "Identifier",
+                "start": 1573,
+                "end": 1581,
+                "loc": {
+                  "start": {
+                    "line": 46,
+                    "column": 6
+                  },
+                  "end": {
+                    "line": 46,
+                    "column": 14
+                  },
+                  "identifierName": "polyfill"
+                },
+                "name": "polyfill",
+                "leadingComments": null
+              },
+              "init": {
+                "type": "ObjectExpression",
+                "start": 1584,
+                "end": 1605,
+                "loc": {
+                  "start": {
+                    "line": 46,
+                    "column": 17
+                  },
+                  "end": {
+                    "line": 48,
+                    "column": 1
+                  }
+                },
+                "properties": [
+                  {
+                    "type": "ObjectProperty",
+                    "start": 1588,
+                    "end": 1602,
+                    "loc": {
+                      "start": {
+                        "line": 47,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 47,
+                        "column": 16
+                      }
+                    },
+                    "method": false,
+                    "shorthand": true,
+                    "computed": false,
+                    "key": {
+                      "type": "Identifier",
+                      "start": 1588,
+                      "end": 1602,
+                      "loc": {
+                        "start": {
+                          "line": 47,
+                          "column": 2
+                        },
+                        "end": {
+                          "line": 47,
+                          "column": 16
+                        },
+                        "identifierName": "animationFrame"
+                      },
+                      "name": "animationFrame"
+                    },
+                    "value": {
+                      "type": "Identifier",
+                      "start": 1588,
+                      "end": 1602,
+                      "loc": {
+                        "start": {
+                          "line": 47,
+                          "column": 2
+                        },
+                        "end": {
+                          "line": 47,
+                          "column": 16
+                        },
+                        "identifierName": "animationFrame"
+                      },
+                      "name": "animationFrame"
+                    },
+                    "extra": {
+                      "shorthand": true
+                    }
+                  }
+                ]
+              },
+              "leadingComments": null
+            }
+          ],
+          "kind": "const",
+          "leadingComments": [
+            {
+              "type": "CommentBlock",
+              "value": "*\n * 以下全てを読み込みます、一部だけ必要な時は個別に `import` します\n * - babel-polyfill - `./method/babel`\n *   - IE, Symbol 対応できない問題を解決するために...\n *   - https://babeljs.io/docs/usage/polyfill/\n *   - https://github.com/babel/babel-preset-env/issues/203\n *   - `babel-preset-env includes plugins by default. To include polyfill you need:, specify useBuiltIns: true in presets options (see more), include import \"babel-polyfill\" to your codebase.`\n * - promise-polyfill - `./method/promise`\n *   - https://github.com/taylorhakes/promise-polyfill\n *   - https://developers.google.com/web/fundamentals/getting-started/primers/promises\n *   - Chrome 32、Opera 19、Firefox 29、Safari 8、および Microsoft Edge - enabled\n * - whatwg-fetch - `./method/fetch`\n *   - https://github.com/whatwg/fetch\n *   - https://fetch.spec.whatwg.org/\n *   - https://github.github.io/fetch/\n * - animationFrame - `./method/animationFrame`\n *   - Android 4.3 以下, requestAnimationFrame 未実装なので polyfill する\n * @type {{animationFrame: function}}\n ",
+              "start": 578,
+              "end": 1566,
+              "loc": {
+                "start": {
+                  "line": 27,
+                  "column": 0
+                },
+                "end": {
+                  "line": 45,
+                  "column": 3
+                }
+              }
+            }
+          ],
+          "trailingComments": []
+        }
       }
     ],
     "directives": []
@@ -567,82 +824,18 @@
       }
     },
     {
-      "type": "CommentLine",
-      "value": " const polyfill = {",
+      "type": "CommentBlock",
+      "value": "*\n * 以下全てを読み込みます、一部だけ必要な時は個別に `import` します\n * - babel-polyfill - `./method/babel`\n *   - IE, Symbol 対応できない問題を解決するために...\n *   - https://babeljs.io/docs/usage/polyfill/\n *   - https://github.com/babel/babel-preset-env/issues/203\n *   - `babel-preset-env includes plugins by default. To include polyfill you need:, specify useBuiltIns: true in presets options (see more), include import \"babel-polyfill\" to your codebase.`\n * - promise-polyfill - `./method/promise`\n *   - https://github.com/taylorhakes/promise-polyfill\n *   - https://developers.google.com/web/fundamentals/getting-started/primers/promises\n *   - Chrome 32、Opera 19、Firefox 29、Safari 8、および Microsoft Edge - enabled\n * - whatwg-fetch - `./method/fetch`\n *   - https://github.com/whatwg/fetch\n *   - https://fetch.spec.whatwg.org/\n *   - https://github.github.io/fetch/\n * - animationFrame - `./method/animationFrame`\n *   - Android 4.3 以下, requestAnimationFrame 未実装なので polyfill する\n * @type {{animationFrame: function}}\n ",
       "start": 578,
-      "end": 599,
+      "end": 1566,
       "loc": {
         "start": {
           "line": 27,
           "column": 0
         },
         "end": {
-          "line": 27,
-          "column": 21
-        }
-      }
-    },
-    {
-      "type": "CommentLine",
-      "value": "   animationFrame,",
-      "start": 600,
-      "end": 620,
-      "loc": {
-        "start": {
-          "line": 28,
-          "column": 0
-        },
-        "end": {
-          "line": 28,
-          "column": 20
-        }
-      }
-    },
-    {
-      "type": "CommentLine",
-      "value": " };",
-      "start": 621,
-      "end": 626,
-      "loc": {
-        "start": {
-          "line": 29,
-          "column": 0
-        },
-        "end": {
-          "line": 29,
-          "column": 5
-        }
-      }
-    },
-    {
-      "type": "CommentLine",
-      "value": "",
-      "start": 627,
-      "end": 629,
-      "loc": {
-        "start": {
-          "line": 30,
-          "column": 0
-        },
-        "end": {
-          "line": 30,
-          "column": 2
-        }
-      }
-    },
-    {
-      "type": "CommentLine",
-      "value": " export default polyfill;",
-      "start": 630,
-      "end": 657,
-      "loc": {
-        "start": {
-          "line": 31,
-          "column": 0
-        },
-        "end": {
-          "line": 31,
-          "column": 27
+          "line": 45,
+          "column": 3
         }
       }
     }
@@ -1207,82 +1400,335 @@
       }
     },
     {
-      "type": "CommentLine",
-      "value": " const polyfill = {",
+      "type": "CommentBlock",
+      "value": "*\n * 以下全てを読み込みます、一部だけ必要な時は個別に `import` します\n * - babel-polyfill - `./method/babel`\n *   - IE, Symbol 対応できない問題を解決するために...\n *   - https://babeljs.io/docs/usage/polyfill/\n *   - https://github.com/babel/babel-preset-env/issues/203\n *   - `babel-preset-env includes plugins by default. To include polyfill you need:, specify useBuiltIns: true in presets options (see more), include import \"babel-polyfill\" to your codebase.`\n * - promise-polyfill - `./method/promise`\n *   - https://github.com/taylorhakes/promise-polyfill\n *   - https://developers.google.com/web/fundamentals/getting-started/primers/promises\n *   - Chrome 32、Opera 19、Firefox 29、Safari 8、および Microsoft Edge - enabled\n * - whatwg-fetch - `./method/fetch`\n *   - https://github.com/whatwg/fetch\n *   - https://fetch.spec.whatwg.org/\n *   - https://github.github.io/fetch/\n * - animationFrame - `./method/animationFrame`\n *   - Android 4.3 以下, requestAnimationFrame 未実装なので polyfill する\n * @type {{animationFrame: function}}\n ",
       "start": 578,
-      "end": 599,
+      "end": 1566,
       "loc": {
         "start": {
           "line": 27,
           "column": 0
         },
         "end": {
-          "line": 27,
-          "column": 21
+          "line": 45,
+          "column": 3
         }
       }
     },
     {
-      "type": "CommentLine",
-      "value": "   animationFrame,",
-      "start": 600,
-      "end": 620,
+      "type": {
+        "label": "const",
+        "keyword": "const",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "const",
+      "start": 1567,
+      "end": 1572,
       "loc": {
         "start": {
-          "line": 28,
+          "line": 46,
           "column": 0
         },
         "end": {
-          "line": 28,
-          "column": 20
-        }
-      }
-    },
-    {
-      "type": "CommentLine",
-      "value": " };",
-      "start": 621,
-      "end": 626,
-      "loc": {
-        "start": {
-          "line": 29,
-          "column": 0
-        },
-        "end": {
-          "line": 29,
+          "line": 46,
           "column": 5
         }
       }
     },
     {
-      "type": "CommentLine",
-      "value": "",
-      "start": 627,
-      "end": 629,
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "polyfill",
+      "start": 1573,
+      "end": 1581,
       "loc": {
         "start": {
-          "line": 30,
+          "line": 46,
+          "column": 6
+        },
+        "end": {
+          "line": 46,
+          "column": 14
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "=",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": true,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "=",
+      "start": 1582,
+      "end": 1583,
+      "loc": {
+        "start": {
+          "line": 46,
+          "column": 15
+        },
+        "end": {
+          "line": 46,
+          "column": 16
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "{",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 1584,
+      "end": 1585,
+      "loc": {
+        "start": {
+          "line": 46,
+          "column": 17
+        },
+        "end": {
+          "line": 46,
+          "column": 18
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "animationFrame",
+      "start": 1588,
+      "end": 1602,
+      "loc": {
+        "start": {
+          "line": 47,
+          "column": 2
+        },
+        "end": {
+          "line": 47,
+          "column": 16
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ",",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 1602,
+      "end": 1603,
+      "loc": {
+        "start": {
+          "line": 47,
+          "column": 16
+        },
+        "end": {
+          "line": 47,
+          "column": 17
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "}",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 1604,
+      "end": 1605,
+      "loc": {
+        "start": {
+          "line": 48,
           "column": 0
         },
         "end": {
-          "line": 30,
+          "line": 48,
+          "column": 1
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ";",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 1605,
+      "end": 1606,
+      "loc": {
+        "start": {
+          "line": 48,
+          "column": 1
+        },
+        "end": {
+          "line": 48,
           "column": 2
         }
       }
     },
     {
-      "type": "CommentLine",
-      "value": " export default polyfill;",
-      "start": 630,
-      "end": 657,
+      "type": {
+        "label": "export",
+        "keyword": "export",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "export",
+      "start": 1608,
+      "end": 1614,
       "loc": {
         "start": {
-          "line": 31,
+          "line": 50,
           "column": 0
         },
         "end": {
-          "line": 31,
-          "column": 27
+          "line": 50,
+          "column": 6
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "default",
+        "keyword": "default",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "default",
+      "start": 1615,
+      "end": 1622,
+      "loc": {
+        "start": {
+          "line": 50,
+          "column": 7
+        },
+        "end": {
+          "line": 50,
+          "column": 14
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "polyfill",
+      "start": 1623,
+      "end": 1631,
+      "loc": {
+        "start": {
+          "line": 50,
+          "column": 15
+        },
+        "end": {
+          "line": 50,
+          "column": 23
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ";",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 1631,
+      "end": 1632,
+      "loc": {
+        "start": {
+          "line": 50,
+          "column": 23
+        },
+        "end": {
+          "line": 50,
+          "column": 24
         }
       }
     },
@@ -1299,15 +1745,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 658,
-      "end": 658,
+      "start": 1633,
+      "end": 1633,
       "loc": {
         "start": {
-          "line": 32,
+          "line": 51,
           "column": 0
         },
         "end": {
-          "line": 32,
+          "line": 51,
           "column": 0
         }
       }

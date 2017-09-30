@@ -78,6 +78,7 @@
             "leadingComments": null
           }
         ],
+        "importKind": "value",
         "source": {
           "type": "StringLiteral",
           "start": 365,
@@ -181,6 +182,7 @@
             }
           }
         ],
+        "importKind": "value",
         "source": {
           "type": "StringLiteral",
           "start": 399,
@@ -270,6 +272,7 @@
             "leadingComments": null
           }
         ],
+        "importKind": "value",
         "source": {
           "type": "StringLiteral",
           "start": 455,
@@ -437,6 +440,7 @@
                   },
                   "name": "UPDATE"
                 },
+                "variance": null,
                 "static": true,
                 "value": {
                   "type": "StringLiteral",
@@ -2072,7 +2076,7 @@
                   },
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 監視を開始します\n   * - 常時監視します - document.body.onresize が作動しないため\n   * @returns {*} method chain 可能なように instance を返します\n   ",
+                    "value": "*\n * @desc \n * 監視を開始します\n * - 常時監視します - document.body.onresize が作動しないため \n * @returns \n * {*} method chain 可能なように instance を返します \n",
                     "start": 1721,
                     "end": 1846,
                     "loc": {
@@ -2277,7 +2281,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 監視を停止します\n   * @returns {*} method chain 可能なように instance を返します\n   ",
+                    "value": "*\n * @desc \n * 監視を停止します \n * @returns \n * {*} method chain 可能なように instance を返します \n",
                     "start": 1900,
                     "end": 1976,
                     "loc": {
@@ -6567,7 +6571,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 指定 rate(fps) 毎にスクロール位置を<br>\n   * scroll top 位置をもたせた Scrolling.UPDATE custom event を発火します\n   *\n   * 下記のプロパティをイベント・インスタンスに追加します\n   *\n   * - original {Events} - Rate Events instance\n   * - y {number} - scroll top\n   * - height {number} - window height\n   * - width {number} - window width\n   * - bottom {number} - window bottom 位置 (y + height)\n   * - previous {number} - 前回の scroll top\n   * - moving {number} - 前回からの移動量, 正: scroll down, 負: scroll up\n   * - wide {boolean} - width が 768 以上の時に true\n   * - changed {boolean} - scroll top が前回と変わっていたら true\n   *\n   * @param {?Events} event {@link Rate.UPDATE} Events instance\n   ",
+                    "value": "*\n * @desc \n * 指定 rate(fps) 毎にスクロール位置を<br>\n * scroll top 位置をもたせた Scrolling.UPDATE custom event を発火します\n * \n * 下記のプロパティをイベント・インスタンスに追加します\n * \n * - original {Events} - Rate Events instance\n * - y {number} - scroll top\n * - height {number} - window height\n * - width {number} - window width\n * - bottom {number} - window bottom 位置 (y + height)\n * - previous {number} - 前回の scroll top\n * - moving {number} - 前回からの移動量, 正: scroll down, 負: scroll up\n * - wide {boolean} - width が 768 以上の時に true\n * - changed {boolean} - scroll top が前回と変わっていたら true \n * @param \n * {?Events} event {@link Rate.UPDATE} Events instance \n",
                     "start": 2031,
                     "end": 2663,
                     "loc": {

@@ -78,6 +78,7 @@
             "leadingComments": null
           }
         ],
+        "importKind": "value",
         "source": {
           "type": "StringLiteral",
           "start": 351,
@@ -959,7 +960,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * パターン調査対象の CSS class リスト\n   * ```\n   * {\n   *  padding: ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'],\n   *  margin: ['marginTop', 'marginRight', 'marginBottom', 'marginLeft'],\n   *  'border-color': [\n   *    'borderTopColor',\n   *    'borderRightColor',\n   *    'borderBottomColor',\n   *    'borderLeftColor'],\n   *  'border-style': [\n   *    'borderTopStyle',\n   *    'borderRightStyle',\n   *    'borderBottomStyle',\n   *    'borderLeftStyle'],\n   *  'border-width': [\n   *    'borderTopWidth',\n   *    'borderRightWidth',\n   *    'borderBottomWidth',\n   *    'borderLeftWidth'],\n   * }\n   * ```\n   * @returns {Object} パターン調査対象の CSS class list\n   ",
+                    "value": "*\n * @desc \n * パターン調査対象の CSS class リスト\n * ```\n * {\n *  padding: ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'],\n *  margin: ['marginTop', 'marginRight', 'marginBottom', 'marginLeft'],\n *  'border-color': [\n *    'borderTopColor',\n *    'borderRightColor',\n *    'borderBottomColor',\n *    'borderLeftColor'],\n *  'border-style': [\n *    'borderTopStyle',\n *    'borderRightStyle',\n *    'borderBottomStyle',\n *    'borderLeftStyle'],\n *  'border-width': [\n *    'borderTopWidth',\n *    'borderRightWidth',\n *    'borderBottomWidth',\n *    'borderLeftWidth'],\n * }\n * ``` \n * @returns \n * {Object} パターン調査対象の CSS class list \n",
                     "start": 443,
                     "end": 1119,
                     "loc": {
@@ -1539,7 +1540,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 引数 `str` が調査対象 className かを判定します\n   * @param {string} str CSS className\n   * @returns {boolean} 調査対象の時に true を返します\n   ",
+                    "value": "*\n * @desc \n * 引数 `str` が調査対象 className かを判定します \n * @param \n * {string} str CSS className \n * @returns \n * {boolean} 調査対象の時に true を返します \n",
                     "start": 1750,
                     "end": 1879,
                     "loc": {
@@ -1919,7 +1920,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 引数 `str` をキーにした操作対象のリストを取得します\n   * @param {string} str CSS className\n   * @returns {Array<string>|undefined} 引数 `str` をキーにした操作対象のリスト\n   ",
+                    "value": "*\n * @desc \n * 引数 `str` をキーにした操作対象のリストを取得します \n * @param \n * {string} str CSS className \n * @returns \n * {Array<string>|undefined} 引数 `str` をキーにした操作対象のリスト \n",
                     "start": 2085,
                     "end": 2232,
                     "loc": {

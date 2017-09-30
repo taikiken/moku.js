@@ -2597,7 +2597,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * element と window.top(0) window.bottom(height) のヒットテストを行います\n   * @param {number} height 衝突対象物の高さ window.innerHeight\n   * @param {ClientRect|Object} offset 比較対象物の element ClientRect または同等の Object\n   * @returns {{\n   *  top: boolean,\n   *  bottom: boolean,\n   *  contain: boolean,\n   *  include: boolean,\n   *  result: boolean\n   * }} hit check object を返します\n   ",
+                    "value": "*\n * @desc \n * element と window.top(0) window.bottom(height) のヒットテストを行います \n * @param \n * {number} height 衝突対象物の高さ window.innerHeight \n * @param \n * {ClientRect|Object} offset 比較対象物の element ClientRect または同等の Object \n * @returns \n * {{\n *  top: boolean,\n *  bottom: boolean,\n *  contain: boolean,\n *  include: boolean,\n *  result: boolean\n * }} hit check object を返します \n",
                     "start": 384,
                     "end": 753,
                     "loc": {

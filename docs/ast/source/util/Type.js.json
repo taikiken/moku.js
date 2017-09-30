@@ -257,7 +257,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 引数(target)が関数かを調べます\n   * @param {Function|*} target 調査対象\n   * @returns {boolean} 引数(target)が関数かを調べ結果を返します、true: 関数\n   ",
+                    "value": "*\n * @desc \n * 引数(target)が関数かを調べます \n * @param \n * {Function|*} target 調査対象 \n * @returns \n * {boolean} 引数(target)が関数かを調べ結果を返します、true: 関数 \n",
                     "start": 397,
                     "end": 526,
                     "loc": {
@@ -442,7 +442,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 引数(target)を `!!` で調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)を `!!` で調べ結果を返します\n   ",
+                    "value": "*\n * @desc \n * 引数(target)を `!!` で調べます \n * @param \n * {*} target 調査対象 \n * @returns \n * {boolean} 引数(target)を `!!` で調べ結果を返します \n",
                     "start": 600,
                     "end": 717,
                     "loc": {
@@ -966,7 +966,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 引数(target)が number かを調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)が number かを調べ結果を返します、true: number\n   ",
+                    "value": "*\n * @desc \n * 引数(target)が number かを調べます \n * @param \n * {*} target 調査対象 \n * @returns \n * {boolean} 引数(target)が number かを調べ結果を返します、true: number \n",
                     "start": 770,
                     "end": 906,
                     "loc": {
@@ -1178,7 +1178,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 引数(target)が int かを `Number.isInteger` を使用し調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)が int かを調べ結果を返します、true: int\n   ",
+                    "value": "*\n * @desc \n * 引数(target)が int かを `Number.isInteger` を使用し調べます \n * @param \n * {*} target 調査対象 \n * @returns \n * {boolean} 引数(target)が int かを調べ結果を返します、true: int \n",
                     "start": 1131,
                     "end": 1282,
                     "loc": {
@@ -1379,7 +1379,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 引数(target)が string かを調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)が string かを調べ結果を返します、true: string\n   ",
+                    "value": "*\n * @desc \n * 引数(target)が string かを調べます \n * @param \n * {*} target 調査対象 \n * @returns \n * {boolean} 引数(target)が string かを調べ結果を返します、true: string \n",
                     "start": 1349,
                     "end": 1485,
                     "loc": {
@@ -1591,7 +1591,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 引数(target)を `Array.isArray` で配列かを調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)が 配列 かを調べ結果を返します、true: 配列\n   ",
+                    "value": "*\n * @desc \n * 引数(target)を `Array.isArray` で配列かを調べます \n * @param \n * {*} target 調査対象 \n * @returns \n * {boolean} 引数(target)が 配列 かを調べ結果を返します、true: 配列 \n",
                     "start": 1557,
                     "end": 1697,
                     "loc": {
@@ -1767,7 +1767,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 引数(target)が null かを調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} 引数(target)が null かを調べ結果を返します、true: null\n   ",
+                    "value": "*\n * @desc \n * 引数(target)が null かを調べます \n * @param \n * {*} target 調査対象 \n * @returns \n * {boolean} 引数(target)が null かを調べ結果を返します、true: null \n",
                     "start": 1763,
                     "end": 1893,
                     "loc": {
@@ -2013,7 +2013,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * Object型 引数 `object` は String型 引数 `key` を [key] として所持しているかを調べます\n   * @deprecated instead use Type.has\n   * @param {Object} target 調査対象\n   * @param {string} key Object.key 名称\n   * @returns {boolean} 存在する時は true を返します\n   ",
+                    "value": "*\n * @desc \n * Object型 引数 `object` は String型 引数 `key` を [key] として所持しているかを調べます \n * @deprecated \n * instead use Type.has \n * @param \n * {Object} target 調査対象 \n * @param \n * {string} key Object.key 名称 \n * @returns \n * {boolean} 存在する時は true を返します \n",
                     "start": 1951,
                     "end": 2180,
                     "loc": {
@@ -2365,7 +2365,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * Object型 引数 `object` は String型 引数 `key` を [key] として所持しているかを調べます\n   * @param {Object} target 調査対象\n   * @param {string} key Object.key 名称\n   * @returns {boolean} 存在する時は true を返します\n   ",
+                    "value": "*\n * @desc \n * Object型 引数 `object` は String型 引数 `key` を [key] として所持しているかを調べます \n * @param \n * {Object} target 調査対象 \n * @param \n * {string} key Object.key 名称 \n * @returns \n * {boolean} 存在する時は true を返します \n",
                     "start": 2252,
                     "end": 2443,
                     "loc": {
@@ -2566,7 +2566,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * target が undefined かを調べます\n   * @param {*} target 調査対象\n   * @returns {boolean} true: undefined\n   * @since 2016-10-25\n   ",
+                    "value": "*\n * @desc \n * target が undefined かを調べます \n * @param \n * {*} target 調査対象 \n * @returns \n * {boolean} true: undefined \n * @since \n * 2016-10-25 \n",
                     "start": 2530,
                     "end": 2661,
                     "loc": {
@@ -2778,7 +2778,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * ファイル名から拡張子を取得します\n   * @deprecated instead use Type.extension\n   * @param {string} fileName 取得したいファイル名称\n   * @returns {string} ファイル名の拡張子を返します\n   ",
+                    "value": "*\n * @desc \n * ファイル名から拡張子を取得します \n * @deprecated \n * instead use Type.extension \n * @param \n * {string} fileName 取得したいファイル名称 \n * @returns \n * {string} ファイル名の拡張子を返します \n",
                     "start": 2735,
                     "end": 2890,
                     "loc": {
@@ -3455,7 +3455,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * ファイル名から拡張子を取得します\n   * @param {string} fileName 取得したいファイル名称\n   * @returns {string} ファイル名の拡張子を返します\n   ",
+                    "value": "*\n * @desc \n * ファイル名から拡張子を取得します \n * @param \n * {string} fileName 取得したいファイル名称 \n * @returns \n * {string} ファイル名の拡張子を返します \n",
                     "start": 2968,
                     "end": 3079,
                     "loc": {
@@ -4436,7 +4436,7 @@
                   },
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 使用可能なbase64 file かを調べます\n   * @param {string} fileName 調査対象ファイル名\n   * @returns {boolean} jpeg / png の時に true を返します\n   ",
+                    "value": "*\n * @desc \n * 使用可能なbase64 file かを調べます \n * @param \n * {string} fileName 調査対象ファイル名 \n * @returns \n * {boolean} jpeg / png の時に true を返します \n",
                     "start": 3397,
                     "end": 3525,
                     "loc": {
@@ -5250,7 +5250,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 拡張子から画像ファイルかを調べます\n   * @param {string} fileName 調査対象ファイル名\n   * @returns {Boolean} 'jpg', 'png', 'jpeg', 'gif' のいづれかに該当するかの真偽値を返します\n   ",
+                    "value": "*\n * @desc \n * 拡張子から画像ファイルかを調べます \n * @param \n * {string} fileName 調査対象ファイル名 \n * @returns \n * {Boolean} 'jpg', 'png', 'jpeg', 'gif' のいづれかに該当するかの真偽値を返します \n",
                     "start": 3855,
                     "end": 4000,
                     "loc": {

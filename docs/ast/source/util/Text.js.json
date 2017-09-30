@@ -340,7 +340,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * camel case を hyphenation に変換します\n   * @param {string} str 操作対象文字列\n   * @returns {string} キャメルケースをハイフネーションに変換後文字列を返します\n   ",
+                    "value": "*\n * @desc \n * camel case を hyphenation に変換します \n * @param \n * {string} str 操作対象文字列 \n * @returns \n * {string} キャメルケースをハイフネーションに変換後文字列を返します \n",
                     "start": 390,
                     "end": 521,
                     "loc": {
@@ -816,7 +816,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * camel case へ変換します\n   * @param {string} str 操作対象文字列\n   * @returns {*|void|string|XML} キャメルケース文字列を返します\n   ",
+                    "value": "*\n * @desc \n * camel case へ変換します \n * @param \n * {string} str 操作対象文字列 \n * @returns \n * {*|void|string|XML} キャメルケース文字列を返します \n",
                     "start": 606,
                     "end": 721,
                     "loc": {
@@ -1681,7 +1681,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 数値に3桁区切りの `,` カンマを挿入します\n   * @param {number} number カンマを挿入する数値\n   * @param {string} [locale=js-JP] ロケール\n   * @returns {string} カンマ挿入後の文字列, 小数点なし\n   * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString\n   * @see http://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript\n   ",
+                    "value": "*\n * @desc \n * 数値に3桁区切りの `,` カンマを挿入します \n * @param \n * {number} number カンマを挿入する数値 \n * @param \n * {string} [locale=js-JP] ロケール \n * @returns \n * {string} カンマ挿入後の文字列, 小数点なし \n * @see \n * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString \n * @see \n * http://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript \n",
                     "start": 908,
                     "end": 1305,
                     "loc": {
@@ -1994,7 +1994,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 文字列の単語を置き換えます\n   * @param {string} targetText 置換え対象文字列\n   * @param {string} targetWord 置換え元単語\n   * @param {string} replaceWord 置換える単語\n   * @returns {string} 置換え後の文字列を返します\n   ",
+                    "value": "*\n * @desc \n * 文字列の単語を置き換えます \n * @param \n * {string} targetText 置換え対象文字列 \n * @param \n * {string} targetWord 置換え元単語 \n * @param \n * {string} replaceWord 置換える単語 \n * @returns \n * {string} 置換え後の文字列を返します \n",
                     "start": 1627,
                     "end": 1812,
                     "loc": {
@@ -2260,7 +2260,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 文字列から単語を削除します\n   * @param {string} targetText 置換え対象文字列\n   * @param {string} targetWord 削除する単語\n   * @returns {string} 削除後の文字列を返します\n   ",
+                    "value": "*\n * @desc \n * 文字列から単語を削除します \n * @param \n * {string} targetText 置換え対象文字列 \n * @param \n * {string} targetWord 削除する単語 \n * @returns \n * {string} 削除後の文字列を返します \n",
                     "start": 1934,
                     "end": 2078,
                     "loc": {
@@ -2512,7 +2512,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 文字列の `&` を `&amp;` へ置換えます\n   * @param {string} targetText 操作対象文字列\n   * @returns {string} `&amp;` 置換え後の文字列を返します\n   ",
+                    "value": "*\n * @desc \n * 文字列の `&` を `&amp;` へ置換えます \n * @param \n * {string} targetText 操作対象文字列 \n * @returns \n * {string} `&amp;` 置換え後の文字列を返します \n",
                     "start": 2180,
                     "end": 2305,
                     "loc": {
@@ -2763,7 +2763,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 文字列の `&amp;` を `&` へ置換えます\n   * @param {string} targetText 操作対象文字列\n   * @returns {string} `&` 置換え後の文字列を返します\n   ",
+                    "value": "*\n * @desc \n * 文字列の `&amp;` を `&` へ置換えます \n * @param \n * {string} targetText 操作対象文字列 \n * @returns \n * {string} `&` 置換え後の文字列を返します \n",
                     "start": 2390,
                     "end": 2511,
                     "loc": {

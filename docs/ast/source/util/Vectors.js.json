@@ -1299,7 +1299,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * x, y, time プロパティを全て `0` にします\n   * @returns {Vectors} メソッドチェイン可能なようにインスタンスを返します\n   ",
+                    "value": "*\n * @desc \n * x, y, time プロパティを全て `0` にします \n * @returns \n * {Vectors} メソッドチェイン可能なようにインスタンスを返します \n",
                     "start": 965,
                     "end": 1058,
                     "loc": {
@@ -1846,7 +1846,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * x, y, time を更新します\n   * @param {number} x 座標 x\n   * @param {number} y 座標 y\n   * @param {number} [time=Date.now] 時間 milli seconds\n   * @returns {Vectors} メソッドチェイン可能なようにインスタンスを返します\n   ",
+                    "value": "*\n * @desc \n * x, y, time を更新します \n * @param \n * {number} x 座標 x \n * @param \n * {number} y 座標 y \n * @param \n * {number} [time=Date.now] 時間 milli seconds \n * @returns \n * {Vectors} メソッドチェイン可能なようにインスタンスを返します \n",
                     "start": 1146,
                     "end": 1338,
                     "loc": {
@@ -2561,7 +2561,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 引数 vectors 間の距離を測ります\n   * @param {Vectors} vectors 計測したい対象 Vector instance\n   * @returns {number} 距離を返します\n   ",
+                    "value": "*\n * @desc \n * 引数 vectors 間の距離を測ります \n * @param \n * {Vectors} vectors 計測したい対象 Vector instance \n * @returns \n * {number} 距離を返します \n",
                     "start": 1453,
                     "end": 1573,
                     "loc": {
@@ -2804,7 +2804,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 引数 vectors との時間差を計算します\n   * @param {Vectors} vectors 計測したい対象 Vector instance\n   * @returns {number} 時間差(milli seconds) を返します\n   ",
+                    "value": "*\n * @desc \n * 引数 vectors との時間差を計算します \n * @param \n * {Vectors} vectors 計測したい対象 Vector instance \n * @returns \n * {number} 時間差(milli seconds) を返します \n",
                     "start": 1782,
                     "end": 1921,
                     "loc": {
@@ -3289,7 +3289,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 複製を作成し返します\n   * @returns {Vectors} 複製を返します\n   ",
+                    "value": "*\n * @desc \n * 複製を作成し返します \n * @returns \n * {Vectors} 複製を返します \n",
                     "start": 1987,
                     "end": 2044,
                     "loc": {
@@ -3787,7 +3787,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * ベクトルの大きさの２乗の平方根を計算します\n   * @returns {number} ベクトルの大きさの２乗の平方根を返します\n   ",
+                    "value": "*\n * @desc \n * ベクトルの大きさの２乗の平方根を計算します \n * @returns \n * {number} ベクトルの大きさの２乗の平方根を返します \n",
                     "start": 2177,
                     "end": 2257,
                     "loc": {
@@ -4918,7 +4918,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * ベクトルの値を scalar 値で除算します\n   *\n   * @param {number} scalar 除算母数\n   * @returns {Vectors} 除算後の Vector を返します\n   ",
+                    "value": "*\n * @desc \n * ベクトルの値を scalar 値で除算します \n * @param \n * {number} scalar 除算母数 \n * @returns \n * {Vectors} 除算後の Vector を返します \n",
                     "start": 2362,
                     "end": 2479,
                     "loc": {
@@ -5374,7 +5374,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * ベクトルの値を scalar 値で乗算します\n   *\n   * @param {number} scalar 乗算母数\n   * @returns {Vectors} 乗算後の Vector を返します\n   ",
+                    "value": "*\n * @desc \n * ベクトルの値を scalar 値で乗算します \n * @param \n * {number} scalar 乗算母数 \n * @returns \n * {Vectors} 乗算後の Vector を返します \n",
                     "start": 2787,
                     "end": 2904,
                     "loc": {
@@ -6162,7 +6162,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 現在の Vectors を元に引数 `maxValue` 以下にした `Vectors` を取得します\n   * @param {number} maxValue 最高目標値\n   * @returns {Vectors} `maxValue` 以下にした `Vectors` を返します\n   ",
+                    "value": "*\n * @desc \n * 現在の Vectors を元に引数 `maxValue` 以下にした `Vectors` を取得します \n * @param \n * {number} maxValue 最高目標値 \n * @returns \n * {Vectors} `maxValue` 以下にした `Vectors` を返します \n",
                     "start": 3036,
                     "end": 3195,
                     "loc": {
@@ -6402,7 +6402,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * ベクトルの大きさを正規化（大きさを1）した Vector を作成します\n   * @returns {Vectors} ベクトルの大きさを正規化（大きさを1）した Vectors を返します\n   ",
+                    "value": "*\n * @desc \n * ベクトルの大きさを正規化（大きさを1）した Vector を作成します \n * @returns \n * {Vectors} ベクトルの大きさを正規化（大きさを1）した Vectors を返します \n",
                     "start": 3460,
                     "end": 3570,
                     "loc": {
@@ -6613,7 +6613,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * ベクトルが正規化されているかを判定します\n   * @returns {boolean} true: 正規化されている\n   ",
+                    "value": "*\n * @desc \n * ベクトルが正規化されているかを判定します \n * @returns \n * {boolean} true: 正規化されている \n",
                     "start": 3640,
                     "end": 3714,
                     "loc": {
@@ -6856,7 +6856,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 引数 vectors との X 値を減算します\n   * @param {Vectors} vectors 計測したい対象 Vectors instance\n   * @returns {number} X 値を減算し返します\n   ",
+                    "value": "*\n * @desc \n * 引数 vectors との X 値を減算します \n * @param \n * {Vectors} vectors 計測したい対象 Vectors instance \n * @returns \n * {number} X 値を減算し返します \n",
                     "start": 3771,
                     "end": 3899,
                     "loc": {
@@ -7099,7 +7099,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 引数 vectors との Y 値を減算します\n   * @param {Vectors} vectors 計測したい対象 Vectors instance\n   * @returns {number} Y 値を減算し返します\n   ",
+                    "value": "*\n * @desc \n * 引数 vectors との Y 値を減算します \n * @param \n * {Vectors} vectors 計測したい対象 Vectors instance \n * @returns \n * {number} Y 値を減算し返します \n",
                     "start": 3959,
                     "end": 4087,
                     "loc": {
@@ -7342,7 +7342,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 引数 vectors との time 値を減算します\n   * @param {Vectors} vectors 計測したい対象 Vectors instance\n   * @returns {number} time 値を減算し返します\n   ",
+                    "value": "*\n * @desc \n * 引数 vectors との time 値を減算します \n * @param \n * {Vectors} vectors 計測したい対象 Vectors instance \n * @returns \n * {number} time 値を減算し返します \n",
                     "start": 4147,
                     "end": 4281,
                     "loc": {
@@ -8097,7 +8097,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 引数 vectors との x, y, time 値を減算します\n   * @param {Vectors} vectors 計測したい対象 Vectors instance\n   * @returns {Vectors} 引数 vectors との x, y, time 値を減算した clone を返します\n   ",
+                    "value": "*\n * @desc \n * 引数 vectors との x, y, time 値を減算します \n * @param \n * {Vectors} vectors 計測したい対象 Vectors instance \n * @returns \n * {Vectors} 引数 vectors との x, y, time 値を減算した clone を返します \n",
                     "start": 4350,
                     "end": 4520,
                     "loc": {
@@ -8478,7 +8478,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 引数ベクトルの内積を計算します\n   * @param {Vectors} vectors 計測したい対象 Vectors instance\n   * @returns {number} 内積を返します\n   ",
+                    "value": "*\n * @desc \n * 引数ベクトルの内積を計算します \n * @param \n * {Vectors} vectors 計測したい対象 Vectors instance \n * @returns \n * {number} 内積を返します \n",
                     "start": 4722,
                     "end": 4838,
                     "loc": {
@@ -8859,7 +8859,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 引数ベクトルの値(x, y)が等しいかを判定します\n   * @param {Vectors} vectors 計測したい対象 Vectors instance\n   * @returns {boolean} true: 等しい\n   ",
+                    "value": "*\n * @desc \n * 引数ベクトルの値(x, y)が等しいかを判定します \n * @param \n * {Vectors} vectors 計測したい対象 Vectors instance \n * @returns \n * {boolean} true: 等しい \n",
                     "start": 4918,
                     "end": 5047,
                     "loc": {
@@ -9876,7 +9876,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 引数ベクトルとの角度を計算します\n   * @param {Vectors} vectors 計測したい対象 Vectors instance\n   * @returns {number} 角度を返します\n   ",
+                    "value": "*\n * @desc \n * 引数ベクトルとの角度を計算します \n * @param \n * {Vectors} vectors 計測したい対象 Vectors instance \n * @returns \n * {number} 角度を返します \n",
                     "start": 5135,
                     "end": 5252,
                     "loc": {

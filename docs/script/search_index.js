@@ -30,6 +30,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "./src/device/browser/chrome.js~chrome",
+    "class/src/device/browser/Chrome.js~Chrome.html",
+    "<span>Chrome</span> <span class=\"search-result-import-path\">./src/device/browser/Chrome.js</span>",
+    "class"
+  ],
+  [
     "./src/dom/classes.js~classes",
     "class/src/dom/Classes.js~Classes.html",
     "<span>Classes</span> <span class=\"search-result-import-path\">./src/dom/Classes.js</span>",
@@ -42,6 +48,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "./src/device/browser/crios.js~crios",
+    "class/src/device/browser/CriOS.js~CriOS.html",
+    "<span>CriOS</span> <span class=\"search-result-import-path\">./src/device/browser/CriOS.js</span>",
+    "class"
+  ],
+  [
     "./src/tick/cycle.js~cycle",
     "class/src/tick/Cycle.js~Cycle.html",
     "<span>Cycle</span> <span class=\"search-result-import-path\">./src/tick/Cycle.js</span>",
@@ -51,6 +63,12 @@ window.esdocSearchIndex = [
     "./src/tick/events/cycleevents.js~cycleevents",
     "class/src/tick/events/CycleEvents.js~CycleEvents.html",
     "<span>CycleEvents</span> <span class=\"search-result-import-path\">./src/tick/events/CycleEvents.js</span>",
+    "class"
+  ],
+  [
+    "./src/device/browser/edge.js~edge",
+    "class/src/device/browser/Edge.js~Edge.html",
+    "<span>Edge</span> <span class=\"search-result-import-path\">./src/device/browser/Edge.js</span>",
     "class"
   ],
   [
@@ -72,6 +90,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "./src/device/browser/firefox.js~firefox",
+    "class/src/device/browser/Firefox.js~Firefox.html",
+    "<span>Firefox</span> <span class=\"search-result-import-path\">./src/device/browser/Firefox.js</span>",
+    "class"
+  ],
+  [
     "./src/tick/fps.js~fps",
     "class/src/tick/Fps.js~Fps.html",
     "<span>Fps</span> <span class=\"search-result-import-path\">./src/tick/Fps.js</span>",
@@ -90,9 +114,21 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "./src/device/browser/fxios.js~fxios",
+    "class/src/device/browser/FxiOS.js~FxiOS.html",
+    "<span>FxiOS</span> <span class=\"search-result-import-path\">./src/device/browser/FxiOS.js</span>",
+    "class"
+  ],
+  [
     "./src/util/hit.js~hit",
     "class/src/util/Hit.js~Hit.html",
     "<span>Hit</span> <span class=\"search-result-import-path\">./src/util/Hit.js</span>",
+    "class"
+  ],
+  [
+    "./src/device/browser/ie.js~ie",
+    "class/src/device/browser/IE.js~IE.html",
+    "<span>IE</span> <span class=\"search-result-import-path\">./src/device/browser/IE.js</span>",
     "class"
   ],
   [
@@ -204,6 +240,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "./src/device/browser/safari.js~safari",
+    "class/src/device/browser/Safari.js~Safari.html",
+    "<span>Safari</span> <span class=\"search-result-import-path\">./src/device/browser/Safari.js</span>",
+    "class"
+  ],
+  [
     "./src/event/scroll.js~scroll",
     "class/src/event/Scroll.js~Scroll.html",
     "<span>Scroll</span> <span class=\"search-result-import-path\">./src/event/Scroll.js</span>",
@@ -288,6 +330,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "./src/polyfill/method/promise.js~activate",
+    "function/index.html#static-function-activate",
+    "<span>activate</span> <span class=\"search-result-import-path\">./src/polyfill/method/promise.js</span>",
+    "function"
+  ],
+  [
     "./src/polyfill/method/animationframe.js~animationframe",
     "function/index.html#static-function-animationFrame",
     "<span>animationFrame</span> <span class=\"search-result-import-path\">./src/polyfill/method/animationFrame.js</span>",
@@ -297,6 +345,60 @@ window.esdocSearchIndex = [
     "./src/device/devices.js~app",
     "variable/index.html#static-variable-app",
     "<span>app</span> <span class=\"search-result-import-path\">./src/device/devices.js</span>",
+    "variable"
+  ],
+  [
+    "./src/device/browser/chrome.js~browsers",
+    "variable/index.html#static-variable-browsers",
+    "<span>browsers</span> <span class=\"search-result-import-path\">./src/device/browser/Chrome.js</span>",
+    "variable"
+  ],
+  [
+    "./src/device/browser/crios.js~browsers",
+    "variable/index.html#static-variable-browsers",
+    "<span>browsers</span> <span class=\"search-result-import-path\">./src/device/browser/CriOS.js</span>",
+    "variable"
+  ],
+  [
+    "./src/device/browser/edge.js~browsers",
+    "variable/index.html#static-variable-browsers",
+    "<span>browsers</span> <span class=\"search-result-import-path\">./src/device/browser/Edge.js</span>",
+    "variable"
+  ],
+  [
+    "./src/device/browser/firefox.js~browsers",
+    "variable/index.html#static-variable-browsers",
+    "<span>browsers</span> <span class=\"search-result-import-path\">./src/device/browser/Firefox.js</span>",
+    "variable"
+  ],
+  [
+    "./src/device/browser/fxios.js~browsers",
+    "variable/index.html#static-variable-browsers",
+    "<span>browsers</span> <span class=\"search-result-import-path\">./src/device/browser/FxiOS.js</span>",
+    "variable"
+  ],
+  [
+    "./src/device/browser/ie.js~browsers",
+    "variable/index.html#static-variable-browsers",
+    "<span>browsers</span> <span class=\"search-result-import-path\">./src/device/browser/IE.js</span>",
+    "variable"
+  ],
+  [
+    "./src/device/browser/safari.js~browsers",
+    "variable/index.html#static-variable-browsers",
+    "<span>browsers</span> <span class=\"search-result-import-path\">./src/device/browser/Safari.js</span>",
+    "variable"
+  ],
+  [
+    "./src/device/devices.js~browsers",
+    "variable/index.html#static-variable-browsers",
+    "<span>browsers</span> <span class=\"search-result-import-path\">./src/device/devices.js</span>",
+    "variable"
+  ],
+  [
+    "./src/device/can.js~can",
+    "variable/index.html#static-variable-can",
+    "<span>can</span> <span class=\"search-result-import-path\">./src/device/Can.js</span>",
     "variable"
   ],
   [
@@ -324,12 +426,6 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
-    "./src/event/touching.js~event3rd",
-    "variable/index.html#static-variable-event3rd",
-    "<span>event3rd</span> <span class=\"search-result-import-path\">./src/event/Touching.js</span>",
-    "variable"
-  ],
-  [
     "./src/net/ajax.js~fetch",
     "variable/index.html#static-variable-fetch",
     "<span>fetch</span> <span class=\"search-result-import-path\">./src/net/Ajax.js</span>",
@@ -346,6 +442,48 @@ window.esdocSearchIndex = [
     "class/src/device/os/iOS.js~iOS.html",
     "<span>iOS</span> <span class=\"search-result-import-path\">./src/device/os/iOS.js</span>",
     "class"
+  ],
+  [
+    "./src/device/browser/chrome.js~init",
+    "function/index.html#static-function-init",
+    "<span>init</span> <span class=\"search-result-import-path\">./src/device/browser/Chrome.js</span>",
+    "function"
+  ],
+  [
+    "./src/device/browser/crios.js~init",
+    "function/index.html#static-function-init",
+    "<span>init</span> <span class=\"search-result-import-path\">./src/device/browser/CriOS.js</span>",
+    "function"
+  ],
+  [
+    "./src/device/browser/edge.js~init",
+    "function/index.html#static-function-init",
+    "<span>init</span> <span class=\"search-result-import-path\">./src/device/browser/Edge.js</span>",
+    "function"
+  ],
+  [
+    "./src/device/browser/firefox.js~init",
+    "function/index.html#static-function-init",
+    "<span>init</span> <span class=\"search-result-import-path\">./src/device/browser/Firefox.js</span>",
+    "function"
+  ],
+  [
+    "./src/device/browser/fxios.js~init",
+    "function/index.html#static-function-init",
+    "<span>init</span> <span class=\"search-result-import-path\">./src/device/browser/FxiOS.js</span>",
+    "function"
+  ],
+  [
+    "./src/device/browser/ie.js~init",
+    "function/index.html#static-function-init",
+    "<span>init</span> <span class=\"search-result-import-path\">./src/device/browser/IE.js</span>",
+    "function"
+  ],
+  [
+    "./src/device/browser/safari.js~init",
+    "function/index.html#static-function-init",
+    "<span>init</span> <span class=\"search-result-import-path\">./src/device/browser/Safari.js</span>",
+    "function"
   ],
   [
     "./src/device/os/android.js~init",
@@ -387,12 +525,6 @@ window.esdocSearchIndex = [
     "./src/event/scrollingsingle.js~instance",
     "variable/index.html#static-variable-instance",
     "<span>instance</span> <span class=\"search-result-import-path\">./src/event/ScrollingSingle.js</span>",
-    "variable"
-  ],
-  [
-    "./src/event/wheel.js~instance",
-    "variable/index.html#static-variable-instance",
-    "<span>instance</span> <span class=\"search-result-import-path\">./src/event/Wheel.js</span>",
     "variable"
   ],
   [
@@ -468,6 +600,12 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "./src/polyfill/index.js~polyfill",
+    "variable/index.html#static-variable-polyfill",
+    "<span>polyfill</span> <span class=\"search-result-import-path\">./src/polyfill/index.js</span>",
+    "variable"
+  ],
+  [
     "./src/device/devices.js~props",
     "variable/index.html#static-variable-props",
     "<span>props</span> <span class=\"search-result-import-path\">./src/device/devices.js</span>",
@@ -504,39 +642,9 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
-    "./src/event/wheel.js~singletonsymbol",
-    "variable/index.html#static-variable-singletonSymbol",
-    "<span>singletonSymbol</span> <span class=\"search-result-import-path\">./src/event/Wheel.js</span>",
-    "variable"
-  ],
-  [
     "./src/tick/cycle.js~singletonsymbol",
     "variable/index.html#static-variable-singletonSymbol",
     "<span>singletonSymbol</span> <span class=\"search-result-import-path\">./src/tick/Cycle.js</span>",
-    "variable"
-  ],
-  [
-    "./src/device/can.js~style",
-    "variable/index.html#static-variable-style",
-    "<span>style</span> <span class=\"search-result-import-path\">./src/device/Can.js</span>",
-    "variable"
-  ],
-  [
-    "./src/device/can.js~supportspassive",
-    "variable/index.html#static-variable-supportsPassive",
-    "<span>supportsPassive</span> <span class=\"search-result-import-path\">./src/device/Can.js</span>",
-    "variable"
-  ],
-  [
-    "./src/device/can.js~transform",
-    "variable/index.html#static-variable-transform",
-    "<span>transform</span> <span class=\"search-result-import-path\">./src/device/Can.js</span>",
-    "variable"
-  ],
-  [
-    "./src/device/can.js~transition",
-    "variable/index.html#static-variable-transition",
-    "<span>transition</span> <span class=\"search-result-import-path\">./src/device/Can.js</span>",
     "variable"
   ],
   [
@@ -552,10 +660,46 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
-    "./src/device/can.js~vendors",
-    "variable/index.html#static-variable-vendors",
-    "<span>vendors</span> <span class=\"search-result-import-path\">./src/device/Can.js</span>",
-    "variable"
+    "./src/device/browser/chrome.js~version",
+    "function/index.html#static-function-version",
+    "<span>version</span> <span class=\"search-result-import-path\">./src/device/browser/Chrome.js</span>",
+    "function"
+  ],
+  [
+    "./src/device/browser/crios.js~version",
+    "function/index.html#static-function-version",
+    "<span>version</span> <span class=\"search-result-import-path\">./src/device/browser/CriOS.js</span>",
+    "function"
+  ],
+  [
+    "./src/device/browser/edge.js~version",
+    "function/index.html#static-function-version",
+    "<span>version</span> <span class=\"search-result-import-path\">./src/device/browser/Edge.js</span>",
+    "function"
+  ],
+  [
+    "./src/device/browser/firefox.js~version",
+    "function/index.html#static-function-version",
+    "<span>version</span> <span class=\"search-result-import-path\">./src/device/browser/Firefox.js</span>",
+    "function"
+  ],
+  [
+    "./src/device/browser/fxios.js~version",
+    "function/index.html#static-function-version",
+    "<span>version</span> <span class=\"search-result-import-path\">./src/device/browser/FxiOS.js</span>",
+    "function"
+  ],
+  [
+    "./src/device/browser/ie.js~version",
+    "function/index.html#static-function-version",
+    "<span>version</span> <span class=\"search-result-import-path\">./src/device/browser/IE.js</span>",
+    "function"
+  ],
+  [
+    "./src/device/browser/safari.js~version",
+    "function/index.html#static-function-version",
+    "<span>version</span> <span class=\"search-result-import-path\">./src/device/browser/Safari.js</span>",
+    "function"
   ],
   [
     "./src/device/os/android.js~version",
@@ -570,333 +714,285 @@ window.esdocSearchIndex = [
     "function"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~array",
+    "src/.external-ecmascript.js~array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
-    "BuiltinExternal/ECMAScriptExternal.js~Array",
+    "src/.external-ecmascript.js~Array",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~arraybuffer",
+    "src/.external-ecmascript.js~arraybuffer",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
-    "BuiltinExternal/ECMAScriptExternal.js~ArrayBuffer",
+    "src/.external-ecmascript.js~ArrayBuffer",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~boolean",
+    "src/.external-ecmascript.js~boolean",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
-    "BuiltinExternal/ECMAScriptExternal.js~Boolean",
+    "src/.external-ecmascript.js~Boolean",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~dataview",
+    "src/.external-ecmascript.js~dataview",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
-    "BuiltinExternal/ECMAScriptExternal.js~DataView",
+    "src/.external-ecmascript.js~DataView",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~date",
+    "src/.external-ecmascript.js~date",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
-    "BuiltinExternal/ECMAScriptExternal.js~Date",
+    "src/.external-ecmascript.js~Date",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~error",
+    "src/.external-ecmascript.js~error",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
-    "BuiltinExternal/ECMAScriptExternal.js~Error",
+    "src/.external-ecmascript.js~Error",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~evalerror",
+    "src/.external-ecmascript.js~evalerror",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
-    "BuiltinExternal/ECMAScriptExternal.js~EvalError",
+    "src/.external-ecmascript.js~EvalError",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~float32array",
+    "src/.external-ecmascript.js~float32array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
-    "BuiltinExternal/ECMAScriptExternal.js~Float32Array",
+    "src/.external-ecmascript.js~Float32Array",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~float64array",
+    "src/.external-ecmascript.js~float64array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
-    "BuiltinExternal/ECMAScriptExternal.js~Float64Array",
+    "src/.external-ecmascript.js~Float64Array",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~function",
+    "src/.external-ecmascript.js~function",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
-    "BuiltinExternal/ECMAScriptExternal.js~Function",
+    "src/.external-ecmascript.js~Function",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~generator",
+    "src/.external-ecmascript.js~generator",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
-    "BuiltinExternal/ECMAScriptExternal.js~Generator",
+    "src/.external-ecmascript.js~Generator",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~generatorfunction",
+    "src/.external-ecmascript.js~generatorfunction",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
-    "BuiltinExternal/ECMAScriptExternal.js~GeneratorFunction",
+    "src/.external-ecmascript.js~GeneratorFunction",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~infinity",
+    "src/.external-ecmascript.js~infinity",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
-    "BuiltinExternal/ECMAScriptExternal.js~Infinity",
+    "src/.external-ecmascript.js~Infinity",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~int16array",
+    "src/.external-ecmascript.js~int16array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
-    "BuiltinExternal/ECMAScriptExternal.js~Int16Array",
+    "src/.external-ecmascript.js~Int16Array",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~int32array",
+    "src/.external-ecmascript.js~int32array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
-    "BuiltinExternal/ECMAScriptExternal.js~Int32Array",
+    "src/.external-ecmascript.js~Int32Array",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~int8array",
+    "src/.external-ecmascript.js~int8array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
-    "BuiltinExternal/ECMAScriptExternal.js~Int8Array",
+    "src/.external-ecmascript.js~Int8Array",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~internalerror",
+    "src/.external-ecmascript.js~internalerror",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
-    "BuiltinExternal/ECMAScriptExternal.js~InternalError",
+    "src/.external-ecmascript.js~InternalError",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~json",
+    "src/.external-ecmascript.js~json",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
-    "BuiltinExternal/ECMAScriptExternal.js~JSON",
+    "src/.external-ecmascript.js~JSON",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~map",
+    "src/.external-ecmascript.js~map",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
-    "BuiltinExternal/ECMAScriptExternal.js~Map",
+    "src/.external-ecmascript.js~Map",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~nan",
+    "src/.external-ecmascript.js~nan",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
-    "BuiltinExternal/ECMAScriptExternal.js~NaN",
+    "src/.external-ecmascript.js~NaN",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~number",
+    "src/.external-ecmascript.js~number",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
-    "BuiltinExternal/ECMAScriptExternal.js~Number",
+    "src/.external-ecmascript.js~Number",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~object",
+    "src/.external-ecmascript.js~object",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
-    "BuiltinExternal/ECMAScriptExternal.js~Object",
+    "src/.external-ecmascript.js~Object",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~promise",
+    "src/.external-ecmascript.js~promise",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
-    "BuiltinExternal/ECMAScriptExternal.js~Promise",
+    "src/.external-ecmascript.js~Promise",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~proxy",
+    "src/.external-ecmascript.js~proxy",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
-    "BuiltinExternal/ECMAScriptExternal.js~Proxy",
+    "src/.external-ecmascript.js~Proxy",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~rangeerror",
+    "src/.external-ecmascript.js~rangeerror",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
-    "BuiltinExternal/ECMAScriptExternal.js~RangeError",
+    "src/.external-ecmascript.js~RangeError",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~referenceerror",
+    "src/.external-ecmascript.js~referenceerror",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
-    "BuiltinExternal/ECMAScriptExternal.js~ReferenceError",
+    "src/.external-ecmascript.js~ReferenceError",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~reflect",
+    "src/.external-ecmascript.js~reflect",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
-    "BuiltinExternal/ECMAScriptExternal.js~Reflect",
+    "src/.external-ecmascript.js~Reflect",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~regexp",
+    "src/.external-ecmascript.js~regexp",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
-    "BuiltinExternal/ECMAScriptExternal.js~RegExp",
+    "src/.external-ecmascript.js~RegExp",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~set",
+    "src/.external-ecmascript.js~set",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
-    "BuiltinExternal/ECMAScriptExternal.js~Set",
+    "src/.external-ecmascript.js~Set",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~string",
+    "src/.external-ecmascript.js~string",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
-    "BuiltinExternal/ECMAScriptExternal.js~String",
+    "src/.external-ecmascript.js~String",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~symbol",
+    "src/.external-ecmascript.js~symbol",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
-    "BuiltinExternal/ECMAScriptExternal.js~Symbol",
+    "src/.external-ecmascript.js~Symbol",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~syntaxerror",
+    "src/.external-ecmascript.js~syntaxerror",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
-    "BuiltinExternal/ECMAScriptExternal.js~SyntaxError",
+    "src/.external-ecmascript.js~SyntaxError",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~typeerror",
+    "src/.external-ecmascript.js~typeerror",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
-    "BuiltinExternal/ECMAScriptExternal.js~TypeError",
+    "src/.external-ecmascript.js~TypeError",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~urierror",
+    "src/.external-ecmascript.js~urierror",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
-    "BuiltinExternal/ECMAScriptExternal.js~URIError",
+    "src/.external-ecmascript.js~URIError",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~uint16array",
+    "src/.external-ecmascript.js~uint16array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
-    "BuiltinExternal/ECMAScriptExternal.js~Uint16Array",
+    "src/.external-ecmascript.js~Uint16Array",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~uint32array",
+    "src/.external-ecmascript.js~uint32array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
-    "BuiltinExternal/ECMAScriptExternal.js~Uint32Array",
+    "src/.external-ecmascript.js~Uint32Array",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~uint8array",
+    "src/.external-ecmascript.js~uint8array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
-    "BuiltinExternal/ECMAScriptExternal.js~Uint8Array",
+    "src/.external-ecmascript.js~Uint8Array",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~uint8clampedarray",
+    "src/.external-ecmascript.js~uint8clampedarray",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
-    "BuiltinExternal/ECMAScriptExternal.js~Uint8ClampedArray",
+    "src/.external-ecmascript.js~Uint8ClampedArray",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~weakmap",
+    "src/.external-ecmascript.js~weakmap",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
-    "BuiltinExternal/ECMAScriptExternal.js~WeakMap",
+    "src/.external-ecmascript.js~WeakMap",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~weakset",
+    "src/.external-ecmascript.js~weakset",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
-    "BuiltinExternal/ECMAScriptExternal.js~WeakSet",
+    "src/.external-ecmascript.js~WeakSet",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~boolean",
+    "src/.external-ecmascript.js~boolean",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
-    "BuiltinExternal/ECMAScriptExternal.js~boolean",
+    "src/.external-ecmascript.js~boolean",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~function",
+    "src/.external-ecmascript.js~function",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
-    "BuiltinExternal/ECMAScriptExternal.js~function",
+    "src/.external-ecmascript.js~function",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~null",
+    "src/.external-ecmascript.js~null",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
-    "BuiltinExternal/ECMAScriptExternal.js~null",
+    "src/.external-ecmascript.js~null",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~number",
+    "src/.external-ecmascript.js~number",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
-    "BuiltinExternal/ECMAScriptExternal.js~number",
+    "src/.external-ecmascript.js~number",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~object",
+    "src/.external-ecmascript.js~object",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
-    "BuiltinExternal/ECMAScriptExternal.js~object",
+    "src/.external-ecmascript.js~object",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~string",
+    "src/.external-ecmascript.js~string",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
-    "BuiltinExternal/ECMAScriptExternal.js~string",
+    "src/.external-ecmascript.js~string",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~undefined",
+    "src/.external-ecmascript.js~undefined",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
-    "BuiltinExternal/ECMAScriptExternal.js~undefined",
-    "external"
-  ],
-  [
-    "builtinexternal/webapiexternal.js~audiocontext",
-    "https://developer.mozilla.org/en/docs/Web/API/AudioContext",
-    "BuiltinExternal/WebAPIExternal.js~AudioContext",
-    "external"
-  ],
-  [
-    "builtinexternal/webapiexternal.js~canvasrenderingcontext2d",
-    "https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D",
-    "BuiltinExternal/WebAPIExternal.js~CanvasRenderingContext2D",
-    "external"
-  ],
-  [
-    "builtinexternal/webapiexternal.js~documentfragment",
-    "https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment",
-    "BuiltinExternal/WebAPIExternal.js~DocumentFragment",
-    "external"
-  ],
-  [
-    "builtinexternal/webapiexternal.js~element",
-    "https://developer.mozilla.org/en-US/docs/Web/API/Element",
-    "BuiltinExternal/WebAPIExternal.js~Element",
-    "external"
-  ],
-  [
-    "builtinexternal/webapiexternal.js~event",
-    "https://developer.mozilla.org/en-US/docs/Web/API/Event",
-    "BuiltinExternal/WebAPIExternal.js~Event",
-    "external"
-  ],
-  [
-    "builtinexternal/webapiexternal.js~node",
-    "https://developer.mozilla.org/en-US/docs/Web/API/Node",
-    "BuiltinExternal/WebAPIExternal.js~Node",
-    "external"
-  ],
-  [
-    "builtinexternal/webapiexternal.js~nodelist",
-    "https://developer.mozilla.org/en-US/docs/Web/API/NodeList",
-    "BuiltinExternal/WebAPIExternal.js~NodeList",
-    "external"
-  ],
-  [
-    "builtinexternal/webapiexternal.js~xmlhttprequest",
-    "https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest",
-    "BuiltinExternal/WebAPIExternal.js~XMLHttpRequest",
+    "src/.external-ecmascript.js~undefined",
     "external"
   ],
   [
@@ -928,6 +1024,12 @@ window.esdocSearchIndex = [
     "file/src/css/Style.js.html",
     "src/css/Style.js",
     "file"
+  ],
+  [
+    "src/css/style.js~style#change",
+    "class/src/css/Style.js~Style.html#instance-method-change",
+    "src/css/Style.js~Style#change",
+    "method"
   ],
   [
     "src/css/style.js~style#constructor",
@@ -990,6 +1092,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/css/style.js~style.change",
+    "class/src/css/Style.js~Style.html#static-method-change",
+    "src/css/Style.js~Style.change",
+    "method"
+  ],
+  [
     "src/css/style.js~style.compute",
     "class/src/css/Style.js~Style.html#static-method-compute",
     "src/css/Style.js~Style.compute",
@@ -1008,9 +1116,21 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "src/device/can.js~can.canvas",
+    "class/src/device/Can.js~Can.html#static-method-canvas",
+    "src/device/Can.js~Can.canvas",
+    "method"
+  ],
+  [
     "src/device/can.js~can.passive",
     "class/src/device/Can.js~Can.html#static-method-passive",
     "src/device/Can.js~Can.passive",
+    "method"
+  ],
+  [
+    "src/device/can.js~can.touch",
+    "class/src/device/Can.js~Can.html#static-method-touch",
+    "src/device/Can.js~Can.touch",
     "method"
   ],
   [
@@ -1023,6 +1143,348 @@ window.esdocSearchIndex = [
     "src/device/can.js~can.transition",
     "class/src/device/Can.js~Can.html#static-method-transition",
     "src/device/Can.js~Can.transition",
+    "method"
+  ],
+  [
+    "src/device/can.js~can.vendors",
+    "class/src/device/Can.js~Can.html#static-member-vendors",
+    "src/device/Can.js~Can.vendors",
+    "member"
+  ],
+  [
+    "src/device/can.js~can.webgl",
+    "class/src/device/Can.js~Can.html#static-method-webgl",
+    "src/device/Can.js~Can.webgl",
+    "method"
+  ],
+  [
+    "src/device/browser/chrome.js",
+    "file/src/device/browser/Chrome.js.html",
+    "src/device/browser/Chrome.js",
+    "file"
+  ],
+  [
+    "src/device/browser/chrome.js~chrome.browsers",
+    "class/src/device/browser/Chrome.js~Chrome.html#static-method-browsers",
+    "src/device/browser/Chrome.js~Chrome.browsers",
+    "method"
+  ],
+  [
+    "src/device/browser/chrome.js~chrome.build",
+    "class/src/device/browser/Chrome.js~Chrome.html#static-method-build",
+    "src/device/browser/Chrome.js~Chrome.build",
+    "method"
+  ],
+  [
+    "src/device/browser/chrome.js~chrome.is",
+    "class/src/device/browser/Chrome.js~Chrome.html#static-method-is",
+    "src/device/browser/Chrome.js~Chrome.is",
+    "method"
+  ],
+  [
+    "src/device/browser/chrome.js~chrome.major",
+    "class/src/device/browser/Chrome.js~Chrome.html#static-method-major",
+    "src/device/browser/Chrome.js~Chrome.major",
+    "method"
+  ],
+  [
+    "src/device/browser/chrome.js~chrome.numbers",
+    "class/src/device/browser/Chrome.js~Chrome.html#static-method-numbers",
+    "src/device/browser/Chrome.js~Chrome.numbers",
+    "method"
+  ],
+  [
+    "src/device/browser/chrome.js~chrome.version",
+    "class/src/device/browser/Chrome.js~Chrome.html#static-method-version",
+    "src/device/browser/Chrome.js~Chrome.version",
+    "method"
+  ],
+  [
+    "src/device/browser/crios.js",
+    "file/src/device/browser/CriOS.js.html",
+    "src/device/browser/CriOS.js",
+    "file"
+  ],
+  [
+    "src/device/browser/crios.js~crios.browsers",
+    "class/src/device/browser/CriOS.js~CriOS.html#static-method-browsers",
+    "src/device/browser/CriOS.js~CriOS.browsers",
+    "method"
+  ],
+  [
+    "src/device/browser/crios.js~crios.build",
+    "class/src/device/browser/CriOS.js~CriOS.html#static-method-build",
+    "src/device/browser/CriOS.js~CriOS.build",
+    "method"
+  ],
+  [
+    "src/device/browser/crios.js~crios.is",
+    "class/src/device/browser/CriOS.js~CriOS.html#static-method-is",
+    "src/device/browser/CriOS.js~CriOS.is",
+    "method"
+  ],
+  [
+    "src/device/browser/crios.js~crios.major",
+    "class/src/device/browser/CriOS.js~CriOS.html#static-method-major",
+    "src/device/browser/CriOS.js~CriOS.major",
+    "method"
+  ],
+  [
+    "src/device/browser/crios.js~crios.numbers",
+    "class/src/device/browser/CriOS.js~CriOS.html#static-method-numbers",
+    "src/device/browser/CriOS.js~CriOS.numbers",
+    "method"
+  ],
+  [
+    "src/device/browser/crios.js~crios.version",
+    "class/src/device/browser/CriOS.js~CriOS.html#static-method-version",
+    "src/device/browser/CriOS.js~CriOS.version",
+    "method"
+  ],
+  [
+    "src/device/browser/edge.js",
+    "file/src/device/browser/Edge.js.html",
+    "src/device/browser/Edge.js",
+    "file"
+  ],
+  [
+    "src/device/browser/edge.js~edge.browsers",
+    "class/src/device/browser/Edge.js~Edge.html#static-method-browsers",
+    "src/device/browser/Edge.js~Edge.browsers",
+    "method"
+  ],
+  [
+    "src/device/browser/edge.js~edge.build",
+    "class/src/device/browser/Edge.js~Edge.html#static-method-build",
+    "src/device/browser/Edge.js~Edge.build",
+    "method"
+  ],
+  [
+    "src/device/browser/edge.js~edge.is",
+    "class/src/device/browser/Edge.js~Edge.html#static-method-is",
+    "src/device/browser/Edge.js~Edge.is",
+    "method"
+  ],
+  [
+    "src/device/browser/edge.js~edge.major",
+    "class/src/device/browser/Edge.js~Edge.html#static-method-major",
+    "src/device/browser/Edge.js~Edge.major",
+    "method"
+  ],
+  [
+    "src/device/browser/edge.js~edge.numbers",
+    "class/src/device/browser/Edge.js~Edge.html#static-method-numbers",
+    "src/device/browser/Edge.js~Edge.numbers",
+    "method"
+  ],
+  [
+    "src/device/browser/edge.js~edge.version",
+    "class/src/device/browser/Edge.js~Edge.html#static-method-version",
+    "src/device/browser/Edge.js~Edge.version",
+    "method"
+  ],
+  [
+    "src/device/browser/firefox.js",
+    "file/src/device/browser/Firefox.js.html",
+    "src/device/browser/Firefox.js",
+    "file"
+  ],
+  [
+    "src/device/browser/firefox.js~firefox.browsers",
+    "class/src/device/browser/Firefox.js~Firefox.html#static-method-browsers",
+    "src/device/browser/Firefox.js~Firefox.browsers",
+    "method"
+  ],
+  [
+    "src/device/browser/firefox.js~firefox.build",
+    "class/src/device/browser/Firefox.js~Firefox.html#static-method-build",
+    "src/device/browser/Firefox.js~Firefox.build",
+    "method"
+  ],
+  [
+    "src/device/browser/firefox.js~firefox.is",
+    "class/src/device/browser/Firefox.js~Firefox.html#static-method-is",
+    "src/device/browser/Firefox.js~Firefox.is",
+    "method"
+  ],
+  [
+    "src/device/browser/firefox.js~firefox.major",
+    "class/src/device/browser/Firefox.js~Firefox.html#static-method-major",
+    "src/device/browser/Firefox.js~Firefox.major",
+    "method"
+  ],
+  [
+    "src/device/browser/firefox.js~firefox.numbers",
+    "class/src/device/browser/Firefox.js~Firefox.html#static-method-numbers",
+    "src/device/browser/Firefox.js~Firefox.numbers",
+    "method"
+  ],
+  [
+    "src/device/browser/firefox.js~firefox.version",
+    "class/src/device/browser/Firefox.js~Firefox.html#static-method-version",
+    "src/device/browser/Firefox.js~Firefox.version",
+    "method"
+  ],
+  [
+    "src/device/browser/fxios.js",
+    "file/src/device/browser/FxiOS.js.html",
+    "src/device/browser/FxiOS.js",
+    "file"
+  ],
+  [
+    "src/device/browser/fxios.js~fxios.browsers",
+    "class/src/device/browser/FxiOS.js~FxiOS.html#static-method-browsers",
+    "src/device/browser/FxiOS.js~FxiOS.browsers",
+    "method"
+  ],
+  [
+    "src/device/browser/fxios.js~fxios.build",
+    "class/src/device/browser/FxiOS.js~FxiOS.html#static-method-build",
+    "src/device/browser/FxiOS.js~FxiOS.build",
+    "method"
+  ],
+  [
+    "src/device/browser/fxios.js~fxios.is",
+    "class/src/device/browser/FxiOS.js~FxiOS.html#static-method-is",
+    "src/device/browser/FxiOS.js~FxiOS.is",
+    "method"
+  ],
+  [
+    "src/device/browser/fxios.js~fxios.major",
+    "class/src/device/browser/FxiOS.js~FxiOS.html#static-method-major",
+    "src/device/browser/FxiOS.js~FxiOS.major",
+    "method"
+  ],
+  [
+    "src/device/browser/fxios.js~fxios.numbers",
+    "class/src/device/browser/FxiOS.js~FxiOS.html#static-method-numbers",
+    "src/device/browser/FxiOS.js~FxiOS.numbers",
+    "method"
+  ],
+  [
+    "src/device/browser/fxios.js~fxios.version",
+    "class/src/device/browser/FxiOS.js~FxiOS.html#static-method-version",
+    "src/device/browser/FxiOS.js~FxiOS.version",
+    "method"
+  ],
+  [
+    "src/device/browser/ie.js",
+    "file/src/device/browser/IE.js.html",
+    "src/device/browser/IE.js",
+    "file"
+  ],
+  [
+    "src/device/browser/ie.js~ie.browsers",
+    "class/src/device/browser/IE.js~IE.html#static-method-browsers",
+    "src/device/browser/IE.js~IE.browsers",
+    "method"
+  ],
+  [
+    "src/device/browser/ie.js~ie.build",
+    "class/src/device/browser/IE.js~IE.html#static-method-build",
+    "src/device/browser/IE.js~IE.build",
+    "method"
+  ],
+  [
+    "src/device/browser/ie.js~ie.is",
+    "class/src/device/browser/IE.js~IE.html#static-method-is",
+    "src/device/browser/IE.js~IE.is",
+    "method"
+  ],
+  [
+    "src/device/browser/ie.js~ie.is10",
+    "class/src/device/browser/IE.js~IE.html#static-method-is10",
+    "src/device/browser/IE.js~IE.is10",
+    "method"
+  ],
+  [
+    "src/device/browser/ie.js~ie.is11",
+    "class/src/device/browser/IE.js~IE.html#static-method-is11",
+    "src/device/browser/IE.js~IE.is11",
+    "method"
+  ],
+  [
+    "src/device/browser/ie.js~ie.is6",
+    "class/src/device/browser/IE.js~IE.html#static-method-is6",
+    "src/device/browser/IE.js~IE.is6",
+    "method"
+  ],
+  [
+    "src/device/browser/ie.js~ie.is7",
+    "class/src/device/browser/IE.js~IE.html#static-method-is7",
+    "src/device/browser/IE.js~IE.is7",
+    "method"
+  ],
+  [
+    "src/device/browser/ie.js~ie.is8",
+    "class/src/device/browser/IE.js~IE.html#static-method-is8",
+    "src/device/browser/IE.js~IE.is8",
+    "method"
+  ],
+  [
+    "src/device/browser/ie.js~ie.is9",
+    "class/src/device/browser/IE.js~IE.html#static-method-is9",
+    "src/device/browser/IE.js~IE.is9",
+    "method"
+  ],
+  [
+    "src/device/browser/ie.js~ie.major",
+    "class/src/device/browser/IE.js~IE.html#static-method-major",
+    "src/device/browser/IE.js~IE.major",
+    "method"
+  ],
+  [
+    "src/device/browser/ie.js~ie.numbers",
+    "class/src/device/browser/IE.js~IE.html#static-method-numbers",
+    "src/device/browser/IE.js~IE.numbers",
+    "method"
+  ],
+  [
+    "src/device/browser/ie.js~ie.version",
+    "class/src/device/browser/IE.js~IE.html#static-method-version",
+    "src/device/browser/IE.js~IE.version",
+    "method"
+  ],
+  [
+    "src/device/browser/safari.js",
+    "file/src/device/browser/Safari.js.html",
+    "src/device/browser/Safari.js",
+    "file"
+  ],
+  [
+    "src/device/browser/safari.js~safari.browsers",
+    "class/src/device/browser/Safari.js~Safari.html#static-method-browsers",
+    "src/device/browser/Safari.js~Safari.browsers",
+    "method"
+  ],
+  [
+    "src/device/browser/safari.js~safari.build",
+    "class/src/device/browser/Safari.js~Safari.html#static-method-build",
+    "src/device/browser/Safari.js~Safari.build",
+    "method"
+  ],
+  [
+    "src/device/browser/safari.js~safari.is",
+    "class/src/device/browser/Safari.js~Safari.html#static-method-is",
+    "src/device/browser/Safari.js~Safari.is",
+    "method"
+  ],
+  [
+    "src/device/browser/safari.js~safari.major",
+    "class/src/device/browser/Safari.js~Safari.html#static-method-major",
+    "src/device/browser/Safari.js~Safari.major",
+    "method"
+  ],
+  [
+    "src/device/browser/safari.js~safari.numbers",
+    "class/src/device/browser/Safari.js~Safari.html#static-method-numbers",
+    "src/device/browser/Safari.js~Safari.numbers",
+    "method"
+  ],
+  [
+    "src/device/browser/safari.js~safari.version",
+    "class/src/device/browser/Safari.js~Safari.html#static-method-version",
+    "src/device/browser/Safari.js~Safari.version",
     "method"
   ],
   [
@@ -1281,6 +1743,12 @@ window.esdocSearchIndex = [
     "src/dom/classes.js~classes.convert",
     "class/src/dom/Classes.js~Classes.html#static-method-convert",
     "src/dom/Classes.js~Classes.convert",
+    "method"
+  ],
+  [
+    "src/dom/classes.js~classes.get",
+    "class/src/dom/Classes.js~Classes.html#static-method-get",
+    "src/dom/Classes.js~Classes.get",
     "method"
   ],
   [
@@ -1980,6 +2448,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/event/touching.js~touching.event3rd",
+    "class/src/event/Touching.js~Touching.html#static-member-event3rd",
+    "src/event/Touching.js~Touching.event3rd",
+    "member"
+  ],
+  [
     "src/event/touching.js~touching.point",
     "class/src/event/Touching.js~Touching.html#static-method-point",
     "src/event/Touching.js~Touching.point",
@@ -2034,6 +2508,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/event/wheel.js~wheel#reset",
+    "class/src/event/Wheel.js~Wheel.html#instance-method-reset",
+    "src/event/Wheel.js~Wheel#reset",
+    "method"
+  ],
+  [
     "src/event/wheel.js~wheel#start",
     "class/src/event/Wheel.js~Wheel.html#instance-method-start",
     "src/event/Wheel.js~Wheel#start",
@@ -2058,22 +2538,28 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/event/wheel.js~wheel#update",
+    "class/src/event/Wheel.js~Wheel.html#instance-method-update",
+    "src/event/Wheel.js~Wheel#update",
+    "method"
+  ],
+  [
     "src/event/wheel.js~wheel.down",
-    "class/src/event/Wheel.js~Wheel.html#static-get-DOWN",
+    "class/src/event/Wheel.js~Wheel.html#static-member-DOWN",
     "src/event/Wheel.js~Wheel.DOWN",
     "member"
   ],
   [
     "src/event/wheel.js~wheel.up",
-    "class/src/event/Wheel.js~Wheel.html#static-get-UP",
+    "class/src/event/Wheel.js~Wheel.html#static-member-UP",
     "src/event/Wheel.js~Wheel.UP",
     "member"
   ],
   [
-    "src/event/wheel.js~wheel.factory",
-    "class/src/event/Wheel.js~Wheel.html#static-method-factory",
-    "src/event/Wheel.js~Wheel.factory",
-    "method"
+    "src/event/wheel.js~wheel.update",
+    "class/src/event/Wheel.js~Wheel.html#static-member-UPDATE",
+    "src/event/Wheel.js~Wheel.UPDATE",
+    "member"
   ],
   [
     "src/event/events/resizingevents.js",

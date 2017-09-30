@@ -23,20 +23,29 @@ import Type from '../util/Type';
 // device
 import Can from '../device/Can';
 
-// touchevent 3rd argument
-/**
- * addEventListener 第三引数 - { passive: true } | false
- * @private
- * @type {*}
- * @since 0.3.2
- */
-const event3rd = Can.passive() ? { passive: true } : false;
+// // touchevent 3rd argument
+// /**
+//  * addEventListener 第三引数 - { passive: true } | false
+//  * {@link Touching}
+//  * @private
+//  * @type {*}
+//  * @since 0.3.2
+//  */
+// const event3rd = Can.passive() ? { passive: true } : false;
 
 
 /**
  * Touch event を監視し y方向移動が `threshold` 以内の時に `TOUCH` event を発火します
  */
 export default class Touching extends EventDispatcher {
+  /**
+   * addEventListener 第三引数 - { passive: true } | false
+   * {@link Touching}
+   * @private
+   * @type {*}
+   * @since 0.3.2
+   */
+  static event3rd = Can.passive() ? { passive: true } : false;
   // ---------------------------------------------------
   //  CONSTANT / EVENT
   // ---------------------------------------------------
@@ -199,8 +208,9 @@ export default class Touching extends EventDispatcher {
     /**
      * TouchEvent listener 3rd argument, option | useCapture
      * @type {boolean}
+     * @since 0.3.2
      */
-    this.eventOption = canceling ? false : event3rd;
+    this.eventOption = canceling ? false : Touching.event3rd;
     /**
      * [native code] - document.body
      * @type {HTMLElement}

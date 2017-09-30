@@ -78,6 +78,7 @@
             "leadingComments": null
           }
         ],
+        "importKind": "value",
         "source": {
           "type": "StringLiteral",
           "start": 351,
@@ -781,7 +782,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * Array.prototype.fill, polyfill\n   * @param {number} lengthData 配列長\n   * @param {*} value fill する値\n   * @returns {Array.<*>} fill 後の配列を返します\n   * @private\n   ",
+                    "value": "*\n * @desc \n * Array.prototype.fill, polyfill \n * @param \n * {number} lengthData 配列長 \n * @param \n * {*} value fill する値 \n * @returns \n * {Array.<*>} fill 後の配列を返します \n * @private \n *  \n",
                     "start": 420,
                     "end": 587,
                     "loc": {
@@ -1460,7 +1461,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * Array.prototype.fill を行います\n   * @param {number} length 配列長\n   * @param {*} value fill する値\n   * @returns {Array.<*>} fill 後の配列を返しますd\n   ",
+                    "value": "*\n * @desc \n * Array.prototype.fill を行います \n * @param \n * {number} length 配列長 \n * @param \n * {*} value fill する値 \n * @returns \n * {Array.<*>} fill 後の配列を返しますd \n",
                     "start": 779,
                     "end": 925,
                     "loc": {

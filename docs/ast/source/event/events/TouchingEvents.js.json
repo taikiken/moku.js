@@ -78,6 +78,7 @@
             "leadingComments": null
           }
         ],
+        "importKind": "value",
         "source": {
           "type": "StringLiteral",
           "start": 399,
@@ -201,6 +202,7 @@
             "leadingComments": null
           }
         ],
+        "importKind": "value",
         "source": {
           "type": "StringLiteral",
           "start": 441,

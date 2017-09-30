@@ -78,6 +78,7 @@
             "leadingComments": null
           }
         ],
+        "importKind": "value",
         "source": {
           "type": "StringLiteral",
           "start": 359,
@@ -1862,7 +1863,7 @@
                   },
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * <p>fetch API へ送るオプションを作成します</p>\n   *\n   * 必ず設定します\n   * - method: GET, POST, PUT, DELETE...etc\n   * - cache: 'no-cache'\n   * - credentials: 'same-origin'\n   *\n   * headers, formData は存在すれば option に追加されます\n   *\n   * ```\n   * var myRequest = new Request(input, init);\n   * ```\n   * <blockquote>\n   * リクエストに適用するカスタム設定を含むオプションオブジェクト。設定可能なオプションは：\n   *   method：リクエストメソッド、たとえば GET、POST。\n   *   headers：Headers オブジェクトか ByteString を含む、リクエストに追加するヘッダー。\n   *   body： リクエストに追加するボディー：Blob か BufferSource、FormData、URLSearchParams、USVString オブジェクトが使用できる。リクエストが GET か HEAD メソッドを使用している場合、ボディーを持てないことに注意。\n   *   mode：リクエストで使用するモード。たとえば、cors か no-cors、same-origin。既定値は cors。Chrome では、47 以前は no-cors が既定値であり、 same-origin は 47 から使用できるようになった。\n   *   credentials：リクエストで使用するリクエスト credential：omit か same-origin、include が使用できる。 既定値は omit。Chrome では、47 以前は same-origin が既定値であり、include は 47 から使用できるようになった。\n   *   cache：リクエストで使用する cache モード：default か no-store、reload、no-cache、force-cache、only-if-cached が設定できる。\n   *   redirect：使用するリダイレクトモード：follow か error、manual が使用できる。Chrome では、47 以前は既定値が follow であり、manual は 47 から使用できるようになった。\n   *   referrer：no-referrer か client、URL を指定する USVString。既定値は client。\n   * </blockquote>\n   * @param {string|USVString|Request} path Ajax request path\n   * @param {string} method GET, POST, PUT, DELETE...etc request method\n   * @param {Headers|Object|null} headers Headers option\n   * @param {FormData|null} formData 送信フォームデータオプション\n   * @returns {*|Request} fetch API へ送る Request instance を返します\n   *\n   * @see https://developers.google.com/web/updates/2015/03/introduction-to-fetch\n   * @see https://developer.mozilla.org/ja/docs/Web/API/Request\n   * @see https://developer.mozilla.org/ja/docs/Web/API/Request/Request\n   ",
+                    "value": "*\n * @desc \n * <p>fetch API へ送るオプションを作成します</p>\n * \n * 必ず設定します\n * - method: GET, POST, PUT, DELETE...etc\n * - cache: 'no-cache'\n * - credentials: 'same-origin'\n * \n * headers, formData は存在すれば option に追加されます\n * \n * ```\n * var myRequest = new Request(input, init);\n * ```\n * <blockquote>\n * リクエストに適用するカスタム設定を含むオプションオブジェクト。設定可能なオプションは：\n *   method：リクエストメソッド、たとえば GET、POST。\n *   headers：Headers オブジェクトか ByteString を含む、リクエストに追加するヘッダー。\n *   body： リクエストに追加するボディー：Blob か BufferSource、FormData、URLSearchParams、USVString オブジェクトが使用できる。リクエストが GET か HEAD メソッドを使用している場合、ボディーを持てないことに注意。\n *   mode：リクエストで使用するモード。たとえば、cors か no-cors、same-origin。既定値は cors。Chrome では、47 以前は no-cors が既定値であり、 same-origin は 47 から使用できるようになった。\n *   credentials：リクエストで使用するリクエスト credential：omit か same-origin、include が使用できる。 既定値は omit。Chrome では、47 以前は same-origin が既定値であり、include は 47 から使用できるようになった。\n *   cache：リクエストで使用する cache モード：default か no-store、reload、no-cache、force-cache、only-if-cached が設定できる。\n *   redirect：使用するリダイレクトモード：follow か error、manual が使用できる。Chrome では、47 以前は既定値が follow であり、manual は 47 から使用できるようになった。\n *   referrer：no-referrer か client、URL を指定する USVString。既定値は client。\n * </blockquote> \n * @param \n * {string|USVString|Request} path Ajax request path \n * @param \n * {string} method GET, POST, PUT, DELETE...etc request method \n * @param \n * {Headers|Object|null} headers Headers option \n * @param \n * {FormData|null} formData 送信フォームデータオプション \n * @returns \n * {*|Request} fetch API へ送る Request instance を返します \n * @see \n * https://developers.google.com/web/updates/2015/03/introduction-to-fetch \n * @see \n * https://developer.mozilla.org/ja/docs/Web/API/Request \n * @see \n * https://developer.mozilla.org/ja/docs/Web/API/Request/Request \n",
                     "start": 2953,
                     "end": 4682,
                     "loc": {
@@ -5576,7 +5577,7 @@
                   },
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * <p>Ajax request 開始します</p>\n   * <p>request 可能 / 不可能 flag が false の時は実行しません<br>\n   * true の時は false にしリクエストを開始します</p>\n   *\n   * from v0.3.4\n   * - resolve, reject 関数確認後実行します\n   * - Promise instance を返します\n   * - json / error を返します\n   *\n   * @param {string} path Ajax request path\n   * @param {string} [method=GET] GET, POST, PUT, DELETE...etc request method\n   * @param {?Headers} [headers=null] Headers option, token などを埋め込むのに使用します\n   * @param {?FormData} [formData=null] フォームデータを送信するのに使用します\n   * @return {Promise} ajax request を開始し fetch Promise 返します\n   ",
+                    "value": "*\n * @desc \n * <p>Ajax request 開始します</p>\n * <p>request 可能 / 不可能 flag が false の時は実行しません<br>\n * true の時は false にしリクエストを開始します</p>\n * \n * from v0.3.4\n * - resolve, reject 関数確認後実行します\n * - Promise instance を返します\n * - json / error を返します \n * @param \n * {string} path Ajax request path \n * @param \n * {string} [method=GET] GET, POST, PUT, DELETE...etc request method \n * @param \n * {?Headers} [headers=null] Headers option, token などを埋め込むのに使用します \n * @param \n * {?FormData} [formData=null] フォームデータを送信するのに使用します \n * @return \n * {Promise} ajax request を開始し fetch Promise 返します \n",
                     "start": 6558,
                     "end": 7122,
                     "loc": {
@@ -5830,7 +5831,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 実行可否 flag を true にします\n   * @returns {boolean} 現在の this.can property を返します\n   ",
+                    "value": "*\n * @desc \n * 実行可否 flag を true にします \n * @returns \n * {boolean} 現在の this.can property を返します \n",
                     "start": 8265,
                     "end": 8353,
                     "loc": {
@@ -6083,7 +6084,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * 実行可否 flag を false にします\n   * @returns {boolean} 現在の this.can property を返します\n   ",
+                    "value": "*\n * @desc \n * 実行可否 flag を false にします \n * @returns \n * {boolean} 現在の this.can property を返します \n",
                     "start": 8415,
                     "end": 8504,
                     "loc": {

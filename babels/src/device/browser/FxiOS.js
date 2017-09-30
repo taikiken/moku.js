@@ -20,6 +20,11 @@ import devices from '../devices';
  */
 let browsers = null;
 
+/**
+ * version 情報を計算します
+ * {@link FxiOS}
+ * @since 0.4.2
+ */
 const version = () => {
   const app = devices.app;
   const numbers = app.match(/fxios\/(\d+)\.?(\d+)?/i);

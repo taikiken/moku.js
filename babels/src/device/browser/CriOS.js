@@ -112,7 +112,7 @@ export default class CriOS {
   }
   /**
    * CriOS Browser version `major.minor.build`
-   * @returns {string} CriOS version NN.NN.NN.NN 型（文字）で返します, not Android ''
+   * @returns {string} CriOS version NN.NN.NN.NN 型（文字）で返します
    */
   static build() {
     init();

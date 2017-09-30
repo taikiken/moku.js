@@ -78,6 +78,7 @@
             "leadingComments": null
           }
         ],
+        "importKind": "value",
         "source": {
           "type": "StringLiteral",
           "start": 351,
@@ -1733,7 +1734,7 @@
                   },
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * <p>Ajax request 開始します</p>\n   * <p>request 可能 / 不可能 flag が false の時は実行しません<br>\n   * true の時は false にしリクエストを開始します</p>\n   *\n   * - resolve, reject 関数確認後実行します\n   * - Promise instance を返します\n   * - json / error を返します\n   *\n   * @param {string} path Ajax request path\n   * @param {string} [method=GET] GET, POST, PUT, DELETE...etc request method\n   * @param {?Headers} [headers=null] Headers option, token などを埋め込むのに使用します\n   * @param {?FormData} [formData=null] フォームデータを送信するのに使用します\n   * @return {Promise} ajax request を開始し fetch Promise 返します\n   ",
+                    "value": "*\n * @desc \n * <p>Ajax request 開始します</p>\n * <p>request 可能 / 不可能 flag が false の時は実行しません<br>\n * true の時は false にしリクエストを開始します</p>\n * \n * - resolve, reject 関数確認後実行します\n * - Promise instance を返します\n * - json / error を返します \n * @param \n * {string} path Ajax request path \n * @param \n * {string} [method=GET] GET, POST, PUT, DELETE...etc request method \n * @param \n * {?Headers} [headers=null] Headers option, token などを埋め込むのに使用します \n * @param \n * {?FormData} [formData=null] フォームデータを送信するのに使用します \n * @return \n * {Promise} ajax request を開始し fetch Promise 返します \n",
                     "start": 1844,
                     "end": 2391,
                     "loc": {
