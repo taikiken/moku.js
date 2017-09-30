@@ -3571,7 +3571,7 @@
     "__docId__": 171,
     "kind": "file",
     "name": "src/device/os/Android.js",
-    "content": "/**\n * Copyright (c) 2011-2017 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2017/08/28 - 16:36\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\nimport devices from '../devices';\nimport Windows from './Windows';\n\n/**\n * {@link devices}.props\n * {@link Android}\n * @type {?object}\n */\nlet props = null;\n\n/**\n * version 情報を計算します\n * {@link Android}\n */\nconst version = () => {\n  const app = devices.app;\n  const numbers = app.match(/android (\\d+)\\.(\\d+)\\.?(\\d+)?/i);\n  if (!Array.isArray(numbers)) {\n    return;\n  }\n  // 先頭の Android 4.3 削除\n  numbers.shift();\n  const versions = numbers.map((number, index) => {\n    const int = parseInt(number, 10);\n    if (index < 3) {\n      return isNaN(int) ? 0 : int;\n    }\n    return null;\n  });\n  props.build = versions.join('.');\n  const major = parseInt(versions[0], 10);\n  let minor = 0;\n  if (versions.length >= 2) {\n    minor = versions[1];\n  }\n  let build = '';\n  if (versions.length >= 3) {\n    build = versions[2];\n  }\n  props.major = major;\n  props.version = parseFloat(`${major}.${minor}${build}`);\n  props.numbers = versions;\n};\n\n/**\n * - Android standard browser\n * `Mozilla/5.0 (Linux; U; Android 3.0; en-us; Xoom Build/HRI39) AppleWebKit/534.13 (KHTML, like Gecko) Version/4.0 Safari/534.13`,\n * `Mozilla/5.0 (Linux; U; Android 2.2.1; en-us; Nexus One Build/FRG83) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1`\n * - Windows phone\n * `Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.<OS build number>`\n *\n * ## MSDN\n * [MSDN](https://msdn.microsoft.com/ja-jp/library/hh869301(v=vs.85).aspx)\n * {@link Android}\n * @see http://googlewebmastercentral.blogspot.jp/2011/03/mo-better-to-also-detect-mobile-user.html\n */\nconst init = () => {\n  if (props) {\n    return;\n  }\n  props = Object.assign({}, devices.props);\n  const ua = devices.ua;\n  // windows phone ua に `Android` が入っている\n  const android = !Windows.phone() && !!ua.match(/android/i);\n  if (android) {\n    props.android = true;\n    props.phone = !!ua.match(/mobile/i);\n    // phone / tablet\n    if (!props.phone) {\n      props.tablet = true;\n    }\n    // Android 標準 browser\n    props.standard = devices.safari && (!!ua.match(/version/i) || !!ua.match(/samsungbrowser/i));\n    // hd\n    props.hd = Math.max(window.innerWidth, window.innerHeight) > 1024;\n    // version check\n    version();\n  }\n};\n\n/**\n * Android OS detector\n */\nexport default class Android {\n  /**\n   * Android OS\n   * @returns {boolean} true: Android OS\n   */\n  static is() {\n    init();\n    return props.android;\n  }\n  /**\n   * Android OS && standard browser\n   * @returns {boolean} true: Android standard browser\n   */\n  static standard() {\n    init();\n    return props.standard;\n  }\n  /**\n   * Android OS && phone\n   * @returns {boolean} true: Android phone\n   */\n  static phone() {\n    init();\n    return props.phone;\n  }\n  /**\n   * Android OS && tablet\n   * @returns {boolean} true: Android tablet\n   */\n  static tablet() {\n    init();\n    return props.tablet;\n  }\n  /**\n   * Android OS && HD window\n   * @returns {boolean} true: Android HD window\n   */\n  static hd() {\n    init();\n    return props.hd;\n  }\n  /**\n   * Android OS version\n   * @returns {number} Android OS version, not Android -1\n   */\n  static version() {\n    init();\n    return props.version;\n  }\n  /**\n   * Android OS major version\n   * @returns {number} Android OS major version, not Android -1\n   */\n  static major() {\n    init();\n    return props.major;\n  }\n  /**\n   * Android OS version `major.minor.build`\n   * @returns {string} Android OS version NN.NN.NN 型（文字）で返します, not Android ''\n   */\n  static build() {\n    init();\n    return props.build;\n  }\n  /**\n   * version を配列形式で取得します\n   * @returns {Array.<number>} {{major: int, minor: int, build: int}} 形式で返します\n   */\n  static numbers() {\n    init();\n    return props.numbers;\n  }\n  /**\n   * Android 4.3 ~ 4.4 && standard browser\n   * - touchend が未実装\n   * @returns {boolean} true: Android 4.3 ~ 4.4\n   */\n  static kitKat() {\n    // no touchend - standard browser 4.3 ~ 4.4\n    const v = Android.version();\n    return Android.standard() && (v > 4.2 && v < 4.5);\n  }\n}\n",
+    "content": "/**\n * Copyright (c) 2011-2017 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2017/08/28 - 16:36\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\nimport devices from '../devices';\nimport Windows from './Windows';\n\n/**\n * {@link devices}.props\n * {@link Android}\n * @type {?object}\n */\nlet props = null;\n\n/**\n * version 情報を計算します\n * {@link Android}\n */\nconst version = () => {\n  const app = devices.app;\n  const numbers = app.match(/android (\\d+)\\.(\\d+)\\.?(\\d+)?/i);\n  if (!Array.isArray(numbers)) {\n    return;\n  }\n  // 先頭の Android 4.3 削除\n  numbers.shift();\n  const versions = numbers.map((number, index) => {\n    const int = parseInt(number, 10);\n    if (index < 3) {\n      return isNaN(int) ? 0 : int;\n    }\n    return null;\n  });\n  props.build = versions.join('.');\n  const major = parseInt(versions[0], 10);\n  let minor = 0;\n  if (versions.length >= 2) {\n    minor = versions[1];\n  }\n  let build = '';\n  if (versions.length >= 3) {\n    build = versions[2];\n  }\n  props.major = major;\n  props.version = parseFloat(`${major}.${minor}${build}`);\n  props.numbers = versions;\n};\n\n/**\n * {@link Android}\n * - Android standard browser\n *   - `Mozilla/5.0 (Linux; U; Android 3.0; en-us; Xoom Build/HRI39) AppleWebKit/534.13 (KHTML, like Gecko) Version/4.0 Safari/534.13`,\n *   - `Mozilla/5.0 (Linux; U; Android 2.2.1; en-us; Nexus One Build/FRG83) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1`\n * - Windows phone\n *   - `Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.OS_BUILD_NUMBER`\n * - #ref: `https://msdn.microsoft.com/ja-jp/library/hh869301(v=vs.85).aspx`\n * - @see http://googlewebmastercentral.blogspot.jp/2011/03/mo-better-to-also-detect-mobile-user.html\n */\nconst init = () => {\n  if (props) {\n    return;\n  }\n  props = Object.assign({}, devices.props);\n  const ua = devices.ua;\n  // windows phone ua に `Android` が入っている\n  const android = !Windows.phone() && !!ua.match(/android/i);\n  if (android) {\n    props.android = true;\n    props.phone = !!ua.match(/mobile/i);\n    // phone / tablet\n    if (!props.phone) {\n      props.tablet = true;\n    }\n    // Android 標準 browser\n    props.standard = devices.safari && (!!ua.match(/version/i) || !!ua.match(/samsungbrowser/i));\n    // hd\n    props.hd = Math.max(window.innerWidth, window.innerHeight) > 1024;\n    // version check\n    version();\n  }\n};\n\n/**\n * Android OS detector\n */\nexport default class Android {\n  /**\n   * Android OS\n   * @returns {boolean} true: Android OS\n   */\n  static is() {\n    init();\n    return props.android;\n  }\n  /**\n   * Android OS && standard browser\n   * @returns {boolean} true: Android standard browser\n   */\n  static standard() {\n    init();\n    return props.standard;\n  }\n  /**\n   * Android OS && phone\n   * @returns {boolean} true: Android phone\n   */\n  static phone() {\n    init();\n    return props.phone;\n  }\n  /**\n   * Android OS && tablet\n   * @returns {boolean} true: Android tablet\n   */\n  static tablet() {\n    init();\n    return props.tablet;\n  }\n  /**\n   * Android OS && HD window\n   * @returns {boolean} true: Android HD window\n   */\n  static hd() {\n    init();\n    return props.hd;\n  }\n  /**\n   * Android OS version\n   * @returns {number} Android OS version, not Android -1\n   */\n  static version() {\n    init();\n    return props.version;\n  }\n  /**\n   * Android OS major version\n   * @returns {number} Android OS major version, not Android -1\n   */\n  static major() {\n    init();\n    return props.major;\n  }\n  /**\n   * Android OS version `major.minor.build`\n   * @returns {string} Android OS version NN.NN.NN 型（文字）で返します, not Android ''\n   */\n  static build() {\n    init();\n    return props.build;\n  }\n  /**\n   * version を配列形式で取得します\n   * @returns {Array.<number>} {{major: int, minor: int, build: int}} 形式で返します\n   */\n  static numbers() {\n    init();\n    return props.numbers;\n  }\n  /**\n   * Android 4.3 ~ 4.4 && standard browser\n   * - touchend が未実装\n   * @returns {boolean} true: Android 4.3 ~ 4.4\n   */\n  static kitKat() {\n    // no touchend - standard browser 4.3 ~ 4.4\n    const v = Android.version();\n    return Android.standard() && (v > 4.2 && v < 4.5);\n  }\n}\n",
     "static": true,
     "longname": "/Users/inazuma15/web/www/inazumatv.js.library/moku.js/babels/src/device/os/Android.js",
     "access": "public",
@@ -3631,11 +3631,8 @@
     "export": false,
     "importPath": "./src/device/os/Android.js",
     "importStyle": null,
-    "description": "- Android standard browser\n`Mozilla/5.0 (Linux; U; Android 3.0; en-us; Xoom Build/HRI39) AppleWebKit/534.13 (KHTML, like Gecko) Version/4.0 Safari/534.13`,\n`Mozilla/5.0 (Linux; U; Android 2.2.1; en-us; Nexus One Build/FRG83) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1`\n- Windows phone\n`Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.<OS build number>`\n\n## MSDN\n[MSDN](https://msdn.microsoft.com/ja-jp/library/hh869301(v=vs.85).aspx)\n{@link Android}",
-    "see": [
-      "http://googlewebmastercentral.blogspot.jp/2011/03/mo-better-to-also-detect-mobile-user.html"
-    ],
-    "lineNumber": 69,
+    "description": "{@link Android}\n- Android standard browser\n  - `Mozilla/5.0 (Linux; U; Android 3.0; en-us; Xoom Build/HRI39) AppleWebKit/534.13 (KHTML, like Gecko) Version/4.0 Safari/534.13`,\n  - `Mozilla/5.0 (Linux; U; Android 2.2.1; en-us; Nexus One Build/FRG83) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1`\n- Windows phone\n  - `Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.OS_BUILD_NUMBER`\n- #ref: `https://msdn.microsoft.com/ja-jp/library/hh869301(v=vs.85).aspx`\n- @see http://googlewebmastercentral.blogspot.jp/2011/03/mo-better-to-also-detect-mobile-user.html",
+    "lineNumber": 67,
     "params": [],
     "return": null
   },
@@ -3651,7 +3648,7 @@
     "importPath": "./src/device/os/Android.js",
     "importStyle": "Android",
     "description": "Android OS detector",
-    "lineNumber": 96,
+    "lineNumber": 94,
     "interface": false
   },
   {
@@ -3665,7 +3662,7 @@
     "longname": "src/device/os/Android.js~Android.is",
     "access": "public",
     "description": "Android OS ",
-    "lineNumber": 101,
+    "lineNumber": 99,
     "unknown": [
       {
         "tagName": "@returns",
@@ -3693,7 +3690,7 @@
     "longname": "src/device/os/Android.js~Android.standard",
     "access": "public",
     "description": "Android OS && standard browser ",
-    "lineNumber": 109,
+    "lineNumber": 107,
     "unknown": [
       {
         "tagName": "@returns",
@@ -3721,7 +3718,7 @@
     "longname": "src/device/os/Android.js~Android.phone",
     "access": "public",
     "description": "Android OS && phone ",
-    "lineNumber": 117,
+    "lineNumber": 115,
     "unknown": [
       {
         "tagName": "@returns",
@@ -3749,7 +3746,7 @@
     "longname": "src/device/os/Android.js~Android.tablet",
     "access": "public",
     "description": "Android OS && tablet ",
-    "lineNumber": 125,
+    "lineNumber": 123,
     "unknown": [
       {
         "tagName": "@returns",
@@ -3777,7 +3774,7 @@
     "longname": "src/device/os/Android.js~Android.hd",
     "access": "public",
     "description": "Android OS && HD window ",
-    "lineNumber": 133,
+    "lineNumber": 131,
     "unknown": [
       {
         "tagName": "@returns",
@@ -3805,7 +3802,7 @@
     "longname": "src/device/os/Android.js~Android.version",
     "access": "public",
     "description": "Android OS version ",
-    "lineNumber": 141,
+    "lineNumber": 139,
     "unknown": [
       {
         "tagName": "@returns",
@@ -3833,7 +3830,7 @@
     "longname": "src/device/os/Android.js~Android.major",
     "access": "public",
     "description": "Android OS major version ",
-    "lineNumber": 149,
+    "lineNumber": 147,
     "unknown": [
       {
         "tagName": "@returns",
@@ -3861,7 +3858,7 @@
     "longname": "src/device/os/Android.js~Android.build",
     "access": "public",
     "description": "Android OS version `major.minor.build` ",
-    "lineNumber": 157,
+    "lineNumber": 155,
     "unknown": [
       {
         "tagName": "@returns",
@@ -3889,7 +3886,7 @@
     "longname": "src/device/os/Android.js~Android.numbers",
     "access": "public",
     "description": "version を配列形式で取得します ",
-    "lineNumber": 165,
+    "lineNumber": 163,
     "unknown": [
       {
         "tagName": "@returns",
@@ -3917,7 +3914,7 @@
     "longname": "src/device/os/Android.js~Android.kitKat",
     "access": "public",
     "description": "Android 4.3 ~ 4.4 && standard browser\n- touchend が未実装 ",
-    "lineNumber": 174,
+    "lineNumber": 172,
     "unknown": [
       {
         "tagName": "@returns",
@@ -4480,7 +4477,7 @@
     "__docId__": 209,
     "kind": "file",
     "name": "src/dom/Bounding.js",
-    "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/10/06 - 22:02\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n/**\n * Element の ClientRect 取得します\n * - bottom: float\n * - height: float\n * - left: float\n * - right: float\n * - top: float\n * - width: float\n * - x: float\n * - y: float\n *\n * [MSDN](https://msdn.microsoft.com/ja-jp/library/hh826029(v=vs.85).aspx)\n *\n * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect\n */\nexport default class Bounding {\n  // ----------------------------------------\n  // STATIC METHOD\n  // ----------------------------------------\n  /**\n   * `getBoundingClientRect` を使用し引数 element の offset 値を取得します\n   *\n   * ```\n   * {{top: Number, right: Number, left: Number, bottom: Number, width: Number, height: Number}}\n   * ```\n   *\n   * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect\n   *\n   * @param {Element} element 調査対象 Element\n   * @return {ClientRect} 引数 element の offset 値を返します\n   */\n  static offset(element) {\n    return element.getBoundingClientRect();\n  }\n  /**\n   * ClientRect の複製を Object 化し writable にします\n   * @param {DOMRect|ClientRect} offset 複製元 ClientRect\n   * @return {{\n   *  top: number,\n   *  right: number,\n   *  bottom: number,\n   *  left: number,\n   *  width: number,\n   *  height: number}} ClientRect の複製 (Object) を返します\n   *  @see https://developer.mozilla.org/en-US/docs/Web/API/DOMRect\n   *  @see https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect\n   */\n  static clone(offset) {\n    return {\n      top: offset.top,\n      right: offset.right,\n      bottom: offset.bottom,\n      left: offset.left,\n      width: offset.width,\n      height: offset.height,\n    };\n  }\n  // ----------------------------------------\n  // CONSTRUCTOR\n  // ----------------------------------------\n  /**\n   * 操作対象 Element を保存します\n   * @param {Element} element 操作対象 Element\n   */\n  constructor(element) {\n    /**\n     * 操作対象 Element\n     * @type {Element}\n     */\n    this.element = element;\n  }\n  // ----------------------------------------\n  // METHOD\n  // ----------------------------------------\n  /**\n   * `getBoundingClientRect` を使用しプロパティ element の offset 値を取得します\n   * @return {ClientRect} read only ClientRect を返します\n   */\n  offset() {\n    return Bounding.offset(this.element);\n  }\n  /**\n   * writable な element の offset 値を取得します\n   * @return {{\n   *  top: number,\n   *  right: number,\n   *  bottom: number,\n   *  left: number,\n   *  width: number,\n   *  height: number}} writable な element の offset\n   *  */\n  clone() {\n    return Bounding.clone(this.offset());\n  }\n}\n",
+    "content": "/**\n * Copyright (c) 2011-2016 inazumatv.com, inc.\n * @author (at)taikiken / http://inazumatv.com\n * @date 2016/10/06 - 22:02\n *\n * Distributed under the terms of the MIT license.\n * http://www.opensource.org/licenses/mit-license.html\n *\n * This notice shall be included in all copies or substantial portions of the Software.\n *\n */\n\n/**\n * Element の ClientRect 取得します\n * - bottom: float\n * - height: float\n * - left: float\n * - right: float\n * - top: float\n * - width: float\n * - x: float\n * - y: float\n *\n * #ref: MSDN `https://msdn.microsoft.com/ja-jp/library/hh826029(v=vs.85).aspx`\n *\n * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect\n */\nexport default class Bounding {\n  // ----------------------------------------\n  // STATIC METHOD\n  // ----------------------------------------\n  /**\n   * `getBoundingClientRect` を使用し引数 element の offset 値を取得します\n   *\n   * ```\n   * {{top: Number, right: Number, left: Number, bottom: Number, width: Number, height: Number}}\n   * ```\n   *\n   * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect\n   *\n   * @param {Element} element 調査対象 Element\n   * @return {ClientRect} 引数 element の offset 値を返します\n   */\n  static offset(element) {\n    return element.getBoundingClientRect();\n  }\n  /**\n   * ClientRect の複製を Object 化し writable にします\n   * @param {DOMRect|ClientRect} offset 複製元 ClientRect\n   * @return {{\n   *  top: number,\n   *  right: number,\n   *  bottom: number,\n   *  left: number,\n   *  width: number,\n   *  height: number}} ClientRect の複製 (Object) を返します\n   *  @see https://developer.mozilla.org/en-US/docs/Web/API/DOMRect\n   *  @see https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect\n   */\n  static clone(offset) {\n    return {\n      top: offset.top,\n      right: offset.right,\n      bottom: offset.bottom,\n      left: offset.left,\n      width: offset.width,\n      height: offset.height,\n    };\n  }\n  // ----------------------------------------\n  // CONSTRUCTOR\n  // ----------------------------------------\n  /**\n   * 操作対象 Element を保存します\n   * @param {Element} element 操作対象 Element\n   */\n  constructor(element) {\n    /**\n     * 操作対象 Element\n     * @type {Element}\n     */\n    this.element = element;\n  }\n  // ----------------------------------------\n  // METHOD\n  // ----------------------------------------\n  /**\n   * `getBoundingClientRect` を使用しプロパティ element の offset 値を取得します\n   * @return {ClientRect} read only ClientRect を返します\n   */\n  offset() {\n    return Bounding.offset(this.element);\n  }\n  /**\n   * writable な element の offset 値を取得します\n   * @return {{\n   *  top: number,\n   *  right: number,\n   *  bottom: number,\n   *  left: number,\n   *  width: number,\n   *  height: number}} writable な element の offset\n   *  */\n  clone() {\n    return Bounding.clone(this.offset());\n  }\n}\n",
     "static": true,
     "longname": "/Users/inazuma15/web/www/inazumatv.js.library/moku.js/babels/src/dom/Bounding.js",
     "access": "public",
@@ -4498,7 +4495,7 @@
     "export": true,
     "importPath": "./src/dom/Bounding.js",
     "importStyle": "Bounding",
-    "description": "Element の ClientRect 取得します\n- bottom: float\n- height: float\n- left: float\n- right: float\n- top: float\n- width: float\n- x: float\n- y: float\n\n[MSDN](https://msdn.microsoft.com/ja-jp/library/hh826029(v=vs.85).aspx)",
+    "description": "Element の ClientRect 取得します\n- bottom: float\n- height: float\n- left: float\n- right: float\n- top: float\n- width: float\n- x: float\n- y: float\n\n#ref: MSDN `https://msdn.microsoft.com/ja-jp/library/hh826029(v=vs.85).aspx`",
     "see": [
       "https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect"
     ],
