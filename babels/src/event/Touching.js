@@ -23,6 +23,9 @@ import Type from '../util/Type';
 // device
 import Can from '../device/Can';
 
+// device/os
+import Android from '../device/os/Android';
+
 // // touchevent 3rd argument
 // /**
 //  * addEventListener 第三引数 - { passive: true } | false
@@ -96,7 +99,7 @@ export default class Touching extends EventDispatcher {
   }
   /**
    * MouseEvent|TouchEvent から pageX / pageY 座標を取得します
-   * @param {MouseEvent|TouchEvent} event down / move / up event object
+   * @param {Event|MouseEvent|TouchEvent} event down / move / up event object
    * @returns {{x: number, y: number}} pageX / pageY 座標を返します
    * @see https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent
    * @see https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/changedTouches
@@ -155,47 +158,31 @@ export default class Touching extends EventDispatcher {
      * @default 10
      */
     this.threshold = threshold;
-    // @type {function}
-    // const onStart = this.onStart.bind(this);
     /**
      * bound onStart
      * @type {function}
      */
     this.onStart = this.onStart.bind(this);
-    // this.onStart = () => onStart;
-    // const onMove = this.onMove.bind(this);
     /**
      * bound onMove
      * @type {function}
      */
     this.onMove = this.onMove.bind(this);
-    // this.onMove = () => onMove;
-    // const onEnd = this.onEnd.bind(this);
     /**
      * bound onEnd
      * @type {function}
      */
     this.onEnd = this.onEnd.bind(this);
-    // this.onEnd = () => onEnd;
-    // const onCancel = this.onCancel.bind(this);
     /**
      * bound onCancel
      * @type {function}
      */
     this.onCancel = this.onCancel.bind(this);
-    // this.onCancel = () => onCancel;
-    // const onBlur = this.onBlur.bind(this);
     /**
      * bound onBlur
      * @type {function}
      */
     this.onBlur = this.onBlur.bind(this);
-    // this.onBlur = () => onBlur;
-    // const vectors = {
-    //   start: new Vectors(),
-    //   end: new Vectors(),
-    //   moving: [].slice(0),
-    // };
     /**
      * 位置管理を行う Vectors instance を含む object
      * @type {{start: Vectors, end: Vectors, moving: Array.<Vectors>}}
@@ -216,63 +203,24 @@ export default class Touching extends EventDispatcher {
      * @type {HTMLElement}
      */
     this.body = document.body;
+    /**
+     * timer ID
+     * - kitkat - touchend 強制実行
+     * @type {{kitkat: number}}
+     * @since v0.4.4
+     */
+    this.timer = {
+      kitkat: 0,
+    };
+    /**
+     * Android 4.3 ~ 4.4 && standard browser (webview) flag
+     * @type {boolean}
+     */
+    this.kitkat = Android.kitKat();
   }
-  // // ---------------------------------------------------
-  // //  EVENT
-  // // ---------------------------------------------------
-  // /**
-  //  * touchstart event type
-  //  * @event START
-  //  * @returns {string} touchingStart を返します
-  //  */
-  // static get START() {
-  //   return 'touchingStart';
-  // }
-  // /**
-  //  * touchend event type
-  //  * @event END
-  //  * @returns {string} touchingEnd を返します
-  //  */
-  // static get END() {
-  //   return 'touchingEnd';
-  // }
-  // /**
-  //  * touchend event type
-  //  * @event CANCEL
-  //  * @returns {string} touchingCancel を返します
-  //  */
-  // static get CANCEL() {
-  //   return 'touchingCancel';
-  // }
-  // /**
-  //  * touchmove event type
-  //  * @event MOVE
-  //  * @returns {string} touchingMove を返します
-  //  */
-  // static get MOVE() {
-  //   return 'touchingMove';
-  // }
-  // /**
-  //  * touch(click) event type
-  //  * @event TOUCH
-  //  * @returns {string} touchingTouch を返します
-  //  */
-  // static get TOUCH() {
-  //   return 'touchingTouch';
-  // }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
-  /**
-   * 初期処理<br>
-   * element への `touchstart` と<br>
-   * window.blur event をそれぞれ bind します
-   * @returns {void}
-   */
-  init() {
-    this.element.addEventListener('touchstart', this.onStart, this.eventOption);
-    window.addEventListener('blur', this.onBlur, false);
-  }
   // event handlers
   // ---------------------------------------------------
   /**
@@ -348,6 +296,22 @@ export default class Touching extends EventDispatcher {
       between,
       scrolling,
     ));
+    // kitkat(Android 4.3 ~ 4.4 && standard browser) - touchend 発火しないので check
+    if (this.kitkat) {
+      this.kitkatEnd(event);
+    }
+  }
+  /**
+   * Android 4.3 ~ 4.4 && standard browser - touchend 発火しない
+   * `onEnd` を強制実行します
+   * @param {Event} event touch event
+   * @since v0.4.4
+   */
+  kitkatEnd(event) {
+    clearTimeout(this.timer.kitkat);
+    this.timer.kitkat = setTimeout(() => {
+      this.onEnd(event);
+    }, 32);
   }
   /**
    * touchend event handler
@@ -394,6 +358,8 @@ export default class Touching extends EventDispatcher {
       between,
       scrolling,
     ));
+    // ---
+    this.dispose();
   }
   /**
    * touchcancel event handler<br>
@@ -415,6 +381,38 @@ export default class Touching extends EventDispatcher {
   }
   // 処理
   // ---------------------------------------------------
+  /**
+   * touch event 監視を開始します
+   * - `element`.ontouchstart
+   * - window.onblur - cancel するため
+   * @since 0.4.4
+   */
+  start() {
+    this.stop();
+    this.element.addEventListener('touchstart', this.onStart, this.eventOption);
+    window.addEventListener('blur', this.onBlur, false);
+  }
+  /**
+   * touch event 監視を停止します
+   * @since 0.4.4
+   */
+  stop() {
+    this.element.removeEventListener('touchstart', this.onStart);
+    window.removeEventListener('blur', this.onBlur);
+    this.dispose();
+  }
+  /**
+   * @deprecated instead use `start`
+   * 初期処理<br>
+   * element への `touchstart` と<br>
+   * window.blur event をそれぞれ bind します
+   * @returns {void}
+   */
+  init() {
+    // this.element.addEventListener('touchstart', this.onStart, this.eventOption);
+    // window.addEventListener('blur', this.onBlur, false);
+    this.start();
+  }
   /**
    * touch event での処理をキャンセルし、設定値を初期値に戻します
    * @param {Event} event touch / window.onblur Event
