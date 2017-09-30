@@ -93,6 +93,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scroll.js~Scroll.html">Scroll</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scrolling.js~Scrolling.html">Scrolling</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/ScrollingSingle.js~ScrollingSingle.html">ScrollingSingle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Swipe.js~Swipe.html">Swipe</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Touching.js~Touching.html">Touching</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-instance">instance</a></span></span></li>
@@ -100,7 +101,8 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-instance">instance</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-singletonSymbol">singletonSymbol</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-instance">instance</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#event-events">event/events</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/events/ResizingEvents.js~ResizingEvents.html">ResizingEvents</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#event-events">event/events</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/events/DragEvents.js~DragEvents.html">DragEvents</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/events/ResizingEvents.js~ResizingEvents.html">ResizingEvents</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/events/RisingEvents.js~RisingEvents.html">RisingEvents</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/events/ScrollEvents.js~ScrollEvents.html">ScrollEvents</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/events/TouchingEvents.js~TouchingEvents.html">TouchingEvents</a></span></span></li>
@@ -153,13 +155,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Touching from &apos;<span><a href="file/src/event/Touching.js.html#lineNumber40">./src/event/Touching.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Touching from &apos;<span><a href="file/src/event/Touching.js.html#lineNumber43">./src/event/Touching.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/event/Touching.js.html#lineNumber40">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/event/Touching.js.html#lineNumber43">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -398,7 +400,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/event/Touching.js~Touching.html#static-method-point">point</a></span></span><span class="code" data-ice="signature">(event: <span>MouseEvent</span> | <span>TouchEvent</span>): {x: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>, y: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>}</span>
+          <span class="code" data-ice="name"><span><a href="class/src/event/Touching.js~Touching.html#static-method-point">point</a></span></span><span class="code" data-ice="signature">(event: <span>Event</span> | <span>MouseEvent</span> | <span>TouchEvent</span>): {x: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>, y: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>}</span>
         </p>
       </div>
       <div>
@@ -615,6 +617,35 @@
           
           
           
+          <span class="code" data-ice="name"><span><a href="class/src/event/Touching.js~Touching.html#instance-member-kitkat">kitkat</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Android 4.3 ~ 4.4 &amp;&amp; standard browser (webview) flag</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
           <span class="code" data-ice="name"><span><a href="class/src/event/Touching.js~Touching.html#instance-member-threshold">threshold</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span></span>
         </p>
       </div>
@@ -628,6 +659,38 @@
     <td>
       
       
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/event/Touching.js~Touching.html#instance-member-timer">timer</a></span></span><span class="code" data-ice="signature">: {kitkat: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>}</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>timer ID</p>
+<ul>
+<li>kitkat - touchend &#x5F37;&#x5236;&#x5B9F;&#x884C;</li>
+</ul>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      <span class="since" data-ice="since">since v0.4.4</span>
     </td>
   </tr>
 <tr data-ice="target">
@@ -742,17 +805,47 @@
         </p>
       </div>
       <div>
+        <div class="deprecated" data-ice="deprecated">this method was deprecated. instead use `start`
+&#x521D;&#x671F;&#x51E6;&#x7406;<br>
+element &#x3078;&#x306E; `touchstart` &#x3068;<br>
+window.blur event &#x3092;&#x305D;&#x308C;&#x305E;&#x308C; bind &#x3057;&#x307E;&#x3059; </div>
         
         
-        <div data-ice="description"><p>&#x521D;&#x671F;&#x51E6;&#x7406;<br>
-element &#x3078;&#x306E; <code>touchstart</code> &#x3068;<br>
-window.blur event &#x3092;&#x305D;&#x308C;&#x305E;&#x308C; bind &#x3057;&#x307E;&#x3059; </p>
-</div>
       </div>
     </td>
     <td>
       
       
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/event/Touching.js~Touching.html#instance-method-kitkatEnd">kitkatEnd</a></span></span><span class="code" data-ice="signature">(event: <span>Event</span>)</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Android 4.3 ~ 4.4 &amp;&amp; standard browser - touchend &#x767A;&#x706B;&#x3057;&#x306A;&#x3044;
+<code>onEnd</code> &#x3092;&#x5F37;&#x5236;&#x5B9F;&#x884C;&#x3057;&#x307E;&#x3059; </p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      <span class="since" data-ice="since">since v0.4.4 </span>
     </td>
   </tr>
 <tr data-ice="target">
@@ -929,6 +1022,68 @@ window.blur event &#x3092;&#x305D;&#x308C;&#x305E;&#x308C; bind &#x3057;&#x307E;
     <td>
       
       
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/event/Touching.js~Touching.html#instance-method-start">start</a></span></span><span class="code" data-ice="signature">()</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>touch event &#x76E3;&#x8996;&#x3092;&#x958B;&#x59CB;&#x3057;&#x307E;&#x3059;</p>
+<ul>
+<li><code>element</code>.ontouchstart</li>
+<li>window.onblur - cancel &#x3059;&#x308B;&#x305F;&#x3081; </li>
+</ul>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      <span class="since" data-ice="since">since 0.4.4 </span>
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/event/Touching.js~Touching.html#instance-method-stop">stop</a></span></span><span class="code" data-ice="signature">()</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>touch event &#x76E3;&#x8996;&#x3092;&#x505C;&#x6B62;&#x3057;&#x307E;&#x3059; </p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      <span class="since" data-ice="since">since 0.4.4 </span>
     </td>
   </tr>
 </tbody>
@@ -1283,7 +1438,7 @@ event type {string} &#x3092; key, &#x5024;&#x306F; Array.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber69">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber72">source</a></span></span>
     </span>
   </h3>
 
@@ -1327,7 +1482,7 @@ event type {string} &#x3092; key, &#x5024;&#x306F; Array.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber63">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber66">source</a></span></span>
     </span>
   </h3>
 
@@ -1371,7 +1526,7 @@ event type {string} &#x3092; key, &#x5024;&#x306F; Array.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber75">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber78">source</a></span></span>
     </span>
   </h3>
 
@@ -1415,7 +1570,7 @@ event type {string} &#x3092; key, &#x5024;&#x306F; Array.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber57">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber60">source</a></span></span>
     </span>
   </h3>
 
@@ -1459,7 +1614,7 @@ event type {string} &#x3092; key, &#x5024;&#x306F; Array.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber81">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber84">source</a></span></span>
     </span>
   </h3>
 
@@ -1505,7 +1660,7 @@ event type {string} &#x3092; key, &#x5024;&#x306F; Array.</p>
     <span class="right-info">
       
       <span class="since" data-ice="since">since 0.3.2</span>
-      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber48">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber51">source</a></span></span>
     </span>
   </h3>
 
@@ -1549,11 +1704,11 @@ event type {string} &#x3092; key, &#x5024;&#x306F; Array.</p>
     
     
     
-    <span class="code" data-ice="name">point</span><span class="code" data-ice="signature">(event: <span>MouseEvent</span> | <span>TouchEvent</span>): {x: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>, y: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>}</span>
+    <span class="code" data-ice="name">point</span><span class="code" data-ice="signature">(event: <span>Event</span> | <span>MouseEvent</span> | <span>TouchEvent</span>): {x: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>, y: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>}</span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber105">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber108">source</a></span></span>
     </span>
   </h3>
 
@@ -1575,7 +1730,7 @@ event type {string} &#x3092; key, &#x5024;&#x306F; Array.</p>
     
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">event</td>
-      <td data-ice="type" class="code"><span>MouseEvent</span> | <span>TouchEvent</span></td>
+      <td data-ice="type" class="code"><span>Event</span> | <span>MouseEvent</span> | <span>TouchEvent</span></td>
       <td data-ice="appendix"></td>
       <td data-ice="description"><p>down / move / up event object</p>
 </td>
@@ -1629,7 +1784,7 @@ event type {string} &#x3092; key, &#x5024;&#x306F; Array.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber92">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber95">source</a></span></span>
     </span>
   </h3>
 
@@ -1720,7 +1875,7 @@ event type {string} &#x3092; key, &#x5024;&#x306F; Array.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber139">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber142">source</a></span></span>
     </span>
   </h3>
 
@@ -1801,7 +1956,7 @@ false &#x306E;&#x6642;&#x306F; <span><a href="class/src/device/Can.js~Can.html#s
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber218">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber205">source</a></span></span>
     </span>
   </h3>
 
@@ -1845,7 +2000,7 @@ false &#x306E;&#x6642;&#x306F; <span><a href="class/src/device/Can.js~Can.html#s
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber151">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber154">source</a></span></span>
     </span>
   </h3>
 
@@ -1889,7 +2044,7 @@ false &#x306E;&#x6642;&#x306F; <span><a href="class/src/device/Can.js~Can.html#s
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber145">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber148">source</a></span></span>
     </span>
   </h3>
 
@@ -1933,7 +2088,7 @@ false &#x306E;&#x6642;&#x306F; <span><a href="class/src/device/Can.js~Can.html#s
     <span class="right-info">
       
       <span class="since" data-ice="since">since 0.3.2</span>
-      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber213">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber200">source</a></span></span>
     </span>
   </h3>
 
@@ -1941,6 +2096,50 @@ false &#x306E;&#x6642;&#x306F; <span><a href="class/src/device/Can.js~Can.html#s
   
   
   <div data-ice="description"><p>TouchEvent listener 3rd argument, option | useCapture</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-kitkat">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">kitkat</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber219">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Android 4.3 ~ 4.4 &amp;&amp; standard browser (webview) flag</p>
 </div>
 
   
@@ -1977,7 +2176,7 @@ false &#x306E;&#x6642;&#x306F; <span><a href="class/src/device/Can.js~Can.html#s
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber157">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber160">source</a></span></span>
     </span>
   </h3>
 
@@ -1985,6 +2184,53 @@ false &#x306E;&#x6642;&#x306F; <span><a href="class/src/device/Can.js~Can.html#s
   
   
   <div data-ice="description"><p>y &#x65B9;&#x5411;&#x95BE;&#x5024;, default: 10px</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-timer">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">timer</span><span class="code" data-ice="signature">: {kitkat: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>}</span>
+    <span class="right-info">
+      
+      <span class="since" data-ice="since">since v0.4.4</span>
+      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber212">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>timer ID</p>
+<ul>
+<li>kitkat - touchend &#x5F37;&#x5236;&#x5B9F;&#x884C;</li>
+</ul>
 </div>
 
   
@@ -2021,7 +2267,7 @@ false &#x306E;&#x6642;&#x306F; <span><a href="class/src/device/Can.js~Can.html#s
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber203">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber190">source</a></span></span>
     </span>
   </h3>
 
@@ -2068,7 +2314,7 @@ false &#x306E;&#x6642;&#x306F; <span><a href="class/src/device/Can.js~Can.html#s
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber423">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber421">source</a></span></span>
     </span>
   </h3>
 
@@ -2142,7 +2388,7 @@ false &#x306E;&#x6642;&#x306F; <span><a href="class/src/device/Can.js~Can.html#s
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber437">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber435">source</a></span></span>
     </span>
   </h3>
 
@@ -2199,17 +2445,17 @@ false &#x306E;&#x6642;&#x306F; <span><a href="class/src/device/Can.js~Can.html#s
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber272">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber411">source</a></span></span>
     </span>
   </h3>
 
   
+  <div class="deprecated" data-ice="deprecated">this method was deprecated. instead use `start`
+&#x521D;&#x671F;&#x51E6;&#x7406;<br>
+element &#x3078;&#x306E; `touchstart` &#x3068;<br>
+window.blur event &#x3092;&#x305D;&#x308C;&#x305E;&#x308C; bind &#x3057;&#x307E;&#x3059; </div>
   
   
-  <div data-ice="description"><p>&#x521D;&#x671F;&#x51E6;&#x7406;<br>
-element &#x3078;&#x306E; <code>touchstart</code> &#x3068;<br>
-window.blur event &#x3092;&#x305D;&#x308C;&#x305E;&#x308C; bind &#x3057;&#x307E;&#x3059; </p>
-</div>
 
   
 
@@ -2246,6 +2492,68 @@ window.blur event &#x3092;&#x305D;&#x308C;&#x305E;&#x308C; bind &#x3057;&#x307E;
   
 </div>
 <div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-kitkatEnd">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">kitkatEnd</span><span class="code" data-ice="signature">(event: <span>Event</span>)</span>
+    <span class="right-info">
+      
+      <span class="since" data-ice="since">since v0.4.4 </span>
+      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber310">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Android 4.3 ~ 4.4 &amp;&amp; standard browser - touchend &#x767A;&#x706B;&#x3057;&#x306A;&#x3044;
+<code>onEnd</code> &#x3092;&#x5F37;&#x5236;&#x5B9F;&#x884C;&#x3057;&#x307E;&#x3059; </p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">event</td>
+      <td data-ice="type" class="code"><span>Event</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>touch event</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="instance-method-onBlur">
     <span class="access" data-ice="access">public</span>
     
@@ -2257,7 +2565,7 @@ window.blur event &#x3092;&#x305D;&#x308C;&#x305E;&#x308C; bind &#x3057;&#x307E;
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber413">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber379">source</a></span></span>
     </span>
   </h3>
 
@@ -2332,7 +2640,7 @@ window.blur event &#x3092;&#x305D;&#x308C;&#x305E;&#x308C; bind &#x3057;&#x307E;
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber404">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber370">source</a></span></span>
     </span>
   </h3>
 
@@ -2407,7 +2715,7 @@ window.blur event &#x3092;&#x305D;&#x308C;&#x305E;&#x308C; bind &#x3057;&#x307E;
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber357">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber321">source</a></span></span>
     </span>
   </h3>
 
@@ -2480,7 +2788,7 @@ window.blur event &#x3092;&#x305D;&#x308C;&#x305E;&#x308C; bind &#x3057;&#x307E;
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber314">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber262">source</a></span></span>
     </span>
   </h3>
 
@@ -2553,7 +2861,7 @@ window.blur event &#x3092;&#x305D;&#x308C;&#x305E;&#x308C; bind &#x3057;&#x307E;
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber283">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber231">source</a></span></span>
     </span>
   </h3>
 
@@ -2626,7 +2934,7 @@ window.blur event &#x3092;&#x305D;&#x308C;&#x305E;&#x308C; bind &#x3057;&#x307E;
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber450">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber448">source</a></span></span>
     </span>
   </h3>
 
@@ -2655,6 +2963,98 @@ window.blur event &#x3092;&#x305D;&#x308C;&#x305E;&#x308C; bind &#x3057;&#x307E;
     <div data-ice="returnProperties">
 </div>
   </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-start">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">start</span><span class="code" data-ice="signature">()</span>
+    <span class="right-info">
+      
+      <span class="since" data-ice="since">since 0.4.4 </span>
+      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber390">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>touch event &#x76E3;&#x8996;&#x3092;&#x958B;&#x59CB;&#x3057;&#x307E;&#x3059;</p>
+<ul>
+<li><code>element</code>.ontouchstart</li>
+<li>window.onblur - cancel &#x3059;&#x308B;&#x305F;&#x3081; </li>
+</ul>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-stop">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">stop</span><span class="code" data-ice="signature">()</span>
+    <span class="right-info">
+      
+      <span class="since" data-ice="since">since 0.4.4 </span>
+      <span data-ice="source"><span><a href="file/src/event/Touching.js.html#lineNumber399">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>touch event &#x76E3;&#x8996;&#x3092;&#x505C;&#x6B62;&#x3057;&#x307E;&#x3059; </p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
 
   
 

@@ -38,6 +38,10 @@ import Scrolling from './event/Scrolling';
 import Touching from './event/Touching';
 import Wheel from './event/Wheel';
 import Resizing from './event/Resizing';
+import ResizingSingle from './event/ResizingSingle';
+import Swipe from './event/Swipe';
+import NativeResizing from './event/NativeResizing';
+import NativeResizingSingle from './event/NativeResizingSingle';
 
 // net
 import Ajax from './net/Ajax';
@@ -124,6 +128,10 @@ MOKU.event = {
   Scrolling,
   Touching,
   Resizing,
+  ResizingSingle,
+  Swipe,
+  NativeResizing,
+  NativeResizingSingle,
 };
 /**
  * MOKU.net

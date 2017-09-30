@@ -93,6 +93,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scroll.js~Scroll.html">Scroll</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Scrolling.js~Scrolling.html">Scrolling</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/ScrollingSingle.js~ScrollingSingle.html">ScrollingSingle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Swipe.js~Swipe.html">Swipe</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Touching.js~Touching.html">Touching</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/Wheel.js~Wheel.html">Wheel</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-instance">instance</a></span></span></li>
@@ -100,7 +101,8 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-instance">instance</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-singletonSymbol">singletonSymbol</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-instance">instance</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#event-events">event/events</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/events/ResizingEvents.js~ResizingEvents.html">ResizingEvents</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#event-events">event/events</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/events/DragEvents.js~DragEvents.html">DragEvents</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/events/ResizingEvents.js~ResizingEvents.html">ResizingEvents</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/events/RisingEvents.js~RisingEvents.html">RisingEvents</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/events/ScrollEvents.js~ScrollEvents.html">ScrollEvents</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/event/events/TouchingEvents.js~TouchingEvents.html">TouchingEvents</a></span></span></li>
@@ -178,6 +180,9 @@ import Type from &apos;../util/Type&apos;;
 // device
 import Can from &apos;../device/Can&apos;;
 
+// device/os
+import Android from &apos;../device/os/Android&apos;;
+
 // // touchevent 3rd argument
 // /**
 //  * addEventListener &#x7B2C;&#x4E09;&#x5F15;&#x6570; - { passive: true } | false
@@ -251,7 +256,7 @@ export default class Touching extends EventDispatcher {
   }
   /**
    * MouseEvent|TouchEvent &#x304B;&#x3089; pageX / pageY &#x5EA7;&#x6A19;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x307E;&#x3059;
-   * @param {MouseEvent|TouchEvent} event down / move / up event object
+   * @param {Event|MouseEvent|TouchEvent} event down / move / up event object
    * @returns {{x: number, y: number}} pageX / pageY &#x5EA7;&#x6A19;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
    * @see https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent
    * @see https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/changedTouches
@@ -310,47 +315,31 @@ export default class Touching extends EventDispatcher {
      * @default 10
      */
     this.threshold = threshold;
-    // @type {function}
-    // const onStart = this.onStart.bind(this);
     /**
      * bound onStart
      * @type {function}
      */
     this.onStart = this.onStart.bind(this);
-    // this.onStart = () =&gt; onStart;
-    // const onMove = this.onMove.bind(this);
     /**
      * bound onMove
      * @type {function}
      */
     this.onMove = this.onMove.bind(this);
-    // this.onMove = () =&gt; onMove;
-    // const onEnd = this.onEnd.bind(this);
     /**
      * bound onEnd
      * @type {function}
      */
     this.onEnd = this.onEnd.bind(this);
-    // this.onEnd = () =&gt; onEnd;
-    // const onCancel = this.onCancel.bind(this);
     /**
      * bound onCancel
      * @type {function}
      */
     this.onCancel = this.onCancel.bind(this);
-    // this.onCancel = () =&gt; onCancel;
-    // const onBlur = this.onBlur.bind(this);
     /**
      * bound onBlur
      * @type {function}
      */
     this.onBlur = this.onBlur.bind(this);
-    // this.onBlur = () =&gt; onBlur;
-    // const vectors = {
-    //   start: new Vectors(),
-    //   end: new Vectors(),
-    //   moving: [].slice(0),
-    // };
     /**
      * &#x4F4D;&#x7F6E;&#x7BA1;&#x7406;&#x3092;&#x884C;&#x3046; Vectors instance &#x3092;&#x542B;&#x3080; object
      * @type {{start: Vectors, end: Vectors, moving: Array.&lt;Vectors&gt;}}
@@ -371,63 +360,24 @@ export default class Touching extends EventDispatcher {
      * @type {HTMLElement}
      */
     this.body = document.body;
+    /**
+     * timer ID
+     * - kitkat - touchend &#x5F37;&#x5236;&#x5B9F;&#x884C;
+     * @type {{kitkat: number}}
+     * @since v0.4.4
+     */
+    this.timer = {
+      kitkat: 0,
+    };
+    /**
+     * Android 4.3 ~ 4.4 &amp;&amp; standard browser (webview) flag
+     * @type {boolean}
+     */
+    this.kitkat = Android.kitKat();
   }
-  // // ---------------------------------------------------
-  // //  EVENT
-  // // ---------------------------------------------------
-  // /**
-  //  * touchstart event type
-  //  * @event START
-  //  * @returns {string} touchingStart &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-  //  */
-  // static get START() {
-  //   return &apos;touchingStart&apos;;
-  // }
-  // /**
-  //  * touchend event type
-  //  * @event END
-  //  * @returns {string} touchingEnd &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-  //  */
-  // static get END() {
-  //   return &apos;touchingEnd&apos;;
-  // }
-  // /**
-  //  * touchend event type
-  //  * @event CANCEL
-  //  * @returns {string} touchingCancel &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-  //  */
-  // static get CANCEL() {
-  //   return &apos;touchingCancel&apos;;
-  // }
-  // /**
-  //  * touchmove event type
-  //  * @event MOVE
-  //  * @returns {string} touchingMove &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-  //  */
-  // static get MOVE() {
-  //   return &apos;touchingMove&apos;;
-  // }
-  // /**
-  //  * touch(click) event type
-  //  * @event TOUCH
-  //  * @returns {string} touchingTouch &#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;
-  //  */
-  // static get TOUCH() {
-  //   return &apos;touchingTouch&apos;;
-  // }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
-  /**
-   * &#x521D;&#x671F;&#x51E6;&#x7406;&lt;br&gt;
-   * element &#x3078;&#x306E; `touchstart` &#x3068;&lt;br&gt;
-   * window.blur event &#x3092;&#x305D;&#x308C;&#x305E;&#x308C; bind &#x3057;&#x307E;&#x3059;
-   * @returns {void}
-   */
-  init() {
-    this.element.addEventListener(&apos;touchstart&apos;, this.onStart, this.eventOption);
-    window.addEventListener(&apos;blur&apos;, this.onBlur, false);
-  }
   // event handlers
   // ---------------------------------------------------
   /**
@@ -503,6 +453,22 @@ export default class Touching extends EventDispatcher {
       between,
       scrolling,
     ));
+    // kitkat(Android 4.3 ~ 4.4 &amp;&amp; standard browser) - touchend &#x767A;&#x706B;&#x3057;&#x306A;&#x3044;&#x306E;&#x3067; check
+    if (this.kitkat) {
+      this.kitkatEnd(event);
+    }
+  }
+  /**
+   * Android 4.3 ~ 4.4 &amp;&amp; standard browser - touchend &#x767A;&#x706B;&#x3057;&#x306A;&#x3044;
+   * `onEnd` &#x3092;&#x5F37;&#x5236;&#x5B9F;&#x884C;&#x3057;&#x307E;&#x3059;
+   * @param {Event} event touch event
+   * @since v0.4.4
+   */
+  kitkatEnd(event) {
+    clearTimeout(this.timer.kitkat);
+    this.timer.kitkat = setTimeout(() =&gt; {
+      this.onEnd(event);
+    }, 32);
   }
   /**
    * touchend event handler
@@ -549,6 +515,8 @@ export default class Touching extends EventDispatcher {
       between,
       scrolling,
     ));
+    // ---
+    this.dispose();
   }
   /**
    * touchcancel event handler&lt;br&gt;
@@ -570,6 +538,38 @@ export default class Touching extends EventDispatcher {
   }
   // &#x51E6;&#x7406;
   // ---------------------------------------------------
+  /**
+   * touch event &#x76E3;&#x8996;&#x3092;&#x958B;&#x59CB;&#x3057;&#x307E;&#x3059;
+   * - `element`.ontouchstart
+   * - window.onblur - cancel &#x3059;&#x308B;&#x305F;&#x3081;
+   * @since 0.4.4
+   */
+  start() {
+    this.stop();
+    this.element.addEventListener(&apos;touchstart&apos;, this.onStart, this.eventOption);
+    window.addEventListener(&apos;blur&apos;, this.onBlur, false);
+  }
+  /**
+   * touch event &#x76E3;&#x8996;&#x3092;&#x505C;&#x6B62;&#x3057;&#x307E;&#x3059;
+   * @since 0.4.4
+   */
+  stop() {
+    this.element.removeEventListener(&apos;touchstart&apos;, this.onStart);
+    window.removeEventListener(&apos;blur&apos;, this.onBlur);
+    this.dispose();
+  }
+  /**
+   * @deprecated instead use `start`
+   * &#x521D;&#x671F;&#x51E6;&#x7406;&lt;br&gt;
+   * element &#x3078;&#x306E; `touchstart` &#x3068;&lt;br&gt;
+   * window.blur event &#x3092;&#x305D;&#x308C;&#x305E;&#x308C; bind &#x3057;&#x307E;&#x3059;
+   * @returns {void}
+   */
+  init() {
+    // this.element.addEventListener(&apos;touchstart&apos;, this.onStart, this.eventOption);
+    // window.addEventListener(&apos;blur&apos;, this.onBlur, false);
+    this.start();
+  }
   /**
    * touch event &#x3067;&#x306E;&#x51E6;&#x7406;&#x3092;&#x30AD;&#x30E3;&#x30F3;&#x30BB;&#x30EB;&#x3057;&#x3001;&#x8A2D;&#x5B9A;&#x5024;&#x3092;&#x521D;&#x671F;&#x5024;&#x306B;&#x623B;&#x3057;&#x307E;&#x3059;
    * @param {Event} event touch / window.onblur Event
