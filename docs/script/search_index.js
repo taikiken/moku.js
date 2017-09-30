@@ -66,6 +66,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "./src/event/events/dragevents.js~dragevents",
+    "class/src/event/events/DragEvents.js~DragEvents.html",
+    "<span>DragEvents</span> <span class=\"search-result-import-path\">./src/event/events/DragEvents.js</span>",
+    "class"
+  ],
+  [
     "./src/device/browser/edge.js~edge",
     "class/src/device/browser/Edge.js~Edge.html",
     "<span>Edge</span> <span class=\"search-result-import-path\">./src/device/browser/Edge.js</span>",
@@ -273,6 +279,12 @@ window.esdocSearchIndex = [
     "./src/css/style.js~style",
     "class/src/css/Style.js~Style.html",
     "<span>Style</span> <span class=\"search-result-import-path\">./src/css/Style.js</span>",
+    "class"
+  ],
+  [
+    "./src/event/swipe.js~swipe",
+    "class/src/event/Swipe.js~Swipe.html",
+    "<span>Swipe</span> <span class=\"search-result-import-path\">./src/event/Swipe.js</span>",
     "class"
   ],
   [
@@ -2316,6 +2328,132 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/event/swipe.js",
+    "file/src/event/Swipe.js.html",
+    "src/event/Swipe.js",
+    "file"
+  ],
+  [
+    "src/event/swipe.js~swipe#constructor",
+    "class/src/event/Swipe.js~Swipe.html#instance-constructor-constructor",
+    "src/event/Swipe.js~Swipe#constructor",
+    "method"
+  ],
+  [
+    "src/event/swipe.js~swipe#dispose",
+    "class/src/event/Swipe.js~Swipe.html#instance-method-dispose",
+    "src/event/Swipe.js~Swipe#dispose",
+    "method"
+  ],
+  [
+    "src/event/swipe.js~swipe#drag",
+    "class/src/event/Swipe.js~Swipe.html#instance-method-drag",
+    "src/event/Swipe.js~Swipe#drag",
+    "method"
+  ],
+  [
+    "src/event/swipe.js~swipe#dragging",
+    "class/src/event/Swipe.js~Swipe.html#instance-member-dragging",
+    "src/event/Swipe.js~Swipe#dragging",
+    "member"
+  ],
+  [
+    "src/event/swipe.js~swipe#element",
+    "class/src/event/Swipe.js~Swipe.html#instance-member-element",
+    "src/event/Swipe.js~Swipe#element",
+    "member"
+  ],
+  [
+    "src/event/swipe.js~swipe#events",
+    "class/src/event/Swipe.js~Swipe.html#instance-member-events",
+    "src/event/Swipe.js~Swipe#events",
+    "member"
+  ],
+  [
+    "src/event/swipe.js~swipe#marginal",
+    "class/src/event/Swipe.js~Swipe.html#instance-member-marginal",
+    "src/event/Swipe.js~Swipe#marginal",
+    "member"
+  ],
+  [
+    "src/event/swipe.js~swipe#oncancel",
+    "class/src/event/Swipe.js~Swipe.html#instance-method-onCancel",
+    "src/event/Swipe.js~Swipe#onCancel",
+    "method"
+  ],
+  [
+    "src/event/swipe.js~swipe#onend",
+    "class/src/event/Swipe.js~Swipe.html#instance-method-onEnd",
+    "src/event/Swipe.js~Swipe#onEnd",
+    "method"
+  ],
+  [
+    "src/event/swipe.js~swipe#onmove",
+    "class/src/event/Swipe.js~Swipe.html#instance-method-onMove",
+    "src/event/Swipe.js~Swipe#onMove",
+    "method"
+  ],
+  [
+    "src/event/swipe.js~swipe#onstart",
+    "class/src/event/Swipe.js~Swipe.html#instance-method-onStart",
+    "src/event/Swipe.js~Swipe#onStart",
+    "method"
+  ],
+  [
+    "src/event/swipe.js~swipe#reset",
+    "class/src/event/Swipe.js~Swipe.html#instance-method-reset",
+    "src/event/Swipe.js~Swipe#reset",
+    "method"
+  ],
+  [
+    "src/event/swipe.js~swipe#start",
+    "class/src/event/Swipe.js~Swipe.html#instance-method-start",
+    "src/event/Swipe.js~Swipe#start",
+    "method"
+  ],
+  [
+    "src/event/swipe.js~swipe#stop",
+    "class/src/event/Swipe.js~Swipe.html#instance-method-stop",
+    "src/event/Swipe.js~Swipe#stop",
+    "method"
+  ],
+  [
+    "src/event/swipe.js~swipe#swipecheck",
+    "class/src/event/Swipe.js~Swipe.html#instance-method-swipeCheck",
+    "src/event/Swipe.js~Swipe#swipeCheck",
+    "method"
+  ],
+  [
+    "src/event/swipe.js~swipe#touching",
+    "class/src/event/Swipe.js~Swipe.html#instance-member-touching",
+    "src/event/Swipe.js~Swipe#touching",
+    "member"
+  ],
+  [
+    "src/event/swipe.js~swipe.drag",
+    "class/src/event/Swipe.js~Swipe.html#static-member-DRAG",
+    "src/event/Swipe.js~Swipe.DRAG",
+    "member"
+  ],
+  [
+    "src/event/swipe.js~swipe.end",
+    "class/src/event/Swipe.js~Swipe.html#static-member-END",
+    "src/event/Swipe.js~Swipe.END",
+    "member"
+  ],
+  [
+    "src/event/swipe.js~swipe.left",
+    "class/src/event/Swipe.js~Swipe.html#static-member-LEFT",
+    "src/event/Swipe.js~Swipe.LEFT",
+    "member"
+  ],
+  [
+    "src/event/swipe.js~swipe.right",
+    "class/src/event/Swipe.js~Swipe.html#static-member-RIGHT",
+    "src/event/Swipe.js~Swipe.RIGHT",
+    "member"
+  ],
+  [
     "src/event/touching.js",
     "file/src/event/Touching.js.html",
     "src/event/Touching.js",
@@ -2370,6 +2508,18 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/event/touching.js~touching#kitkat",
+    "class/src/event/Touching.js~Touching.html#instance-member-kitkat",
+    "src/event/Touching.js~Touching#kitkat",
+    "member"
+  ],
+  [
+    "src/event/touching.js~touching#kitkatend",
+    "class/src/event/Touching.js~Touching.html#instance-method-kitkatEnd",
+    "src/event/Touching.js~Touching#kitkatEnd",
+    "method"
+  ],
+  [
     "src/event/touching.js~touching#onblur",
     "class/src/event/Touching.js~Touching.html#instance-method-onBlur",
     "src/event/Touching.js~Touching#onBlur",
@@ -2406,9 +2556,27 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/event/touching.js~touching#start",
+    "class/src/event/Touching.js~Touching.html#instance-method-start",
+    "src/event/Touching.js~Touching#start",
+    "method"
+  ],
+  [
+    "src/event/touching.js~touching#stop",
+    "class/src/event/Touching.js~Touching.html#instance-method-stop",
+    "src/event/Touching.js~Touching#stop",
+    "method"
+  ],
+  [
     "src/event/touching.js~touching#threshold",
     "class/src/event/Touching.js~Touching.html#instance-member-threshold",
     "src/event/Touching.js~Touching#threshold",
+    "member"
+  ],
+  [
+    "src/event/touching.js~touching#timer",
+    "class/src/event/Touching.js~Touching.html#instance-member-timer",
+    "src/event/Touching.js~Touching#timer",
     "member"
   ],
   [
@@ -2559,6 +2727,24 @@ window.esdocSearchIndex = [
     "src/event/wheel.js~wheel.update",
     "class/src/event/Wheel.js~Wheel.html#static-member-UPDATE",
     "src/event/Wheel.js~Wheel.UPDATE",
+    "member"
+  ],
+  [
+    "src/event/events/dragevents.js",
+    "file/src/event/events/DragEvents.js.html",
+    "src/event/events/DragEvents.js",
+    "file"
+  ],
+  [
+    "src/event/events/dragevents.js~dragevents#constructor",
+    "class/src/event/events/DragEvents.js~DragEvents.html#instance-constructor-constructor",
+    "src/event/events/DragEvents.js~DragEvents#constructor",
+    "method"
+  ],
+  [
+    "src/event/events/dragevents.js~dragevents#x",
+    "class/src/event/events/DragEvents.js~DragEvents.html#instance-member-x",
+    "src/event/events/DragEvents.js~DragEvents#x",
     "member"
   ],
   [

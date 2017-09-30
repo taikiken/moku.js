@@ -1,7 +1,7 @@
 {
   "coverage": "100%",
-  "expectCount": 543,
-  "actualCount": 543,
+  "expectCount": 572,
+  "actualCount": 572,
   "files": {
     "src/css/Patterns.js": {
       "expectCount": 4,
@@ -138,14 +138,24 @@
       "actualCount": 3,
       "undocumentLines": []
     },
+    "src/event/Swipe.js": {
+      "expectCount": 21,
+      "actualCount": 21,
+      "undocumentLines": []
+    },
     "src/event/Touching.js": {
-      "expectCount": 25,
-      "actualCount": 25,
+      "expectCount": 30,
+      "actualCount": 30,
       "undocumentLines": []
     },
     "src/event/Wheel.js": {
       "expectCount": 16,
       "actualCount": 16,
+      "undocumentLines": []
+    },
+    "src/event/events/DragEvents.js": {
+      "expectCount": 3,
+      "actualCount": 3,
       "undocumentLines": []
     },
     "src/event/events/ResizingEvents.js": {
