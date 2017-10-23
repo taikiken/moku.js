@@ -142,8 +142,9 @@ export default class Scrolling extends EventDispatcher {
   watch() {
     this.unwatch();
     this.watching = true;
-    this.rate.on(Rate.UPDATE, this.onUpdate);
-    // rate.start();
+    const rate = this.rate;
+    rate.on(Rate.UPDATE, this.onUpdate);
+    rate.start();
     return this;
   }
   /**
