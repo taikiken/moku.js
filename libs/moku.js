@@ -3562,8 +3562,9 @@ var Scrolling = function (_EventDispatcher) {
     value: function watch() {
       this.unwatch();
       this.watching = true;
-      this.rate.on(_Rate2.default.UPDATE, this.onUpdate);
-      // rate.start();
+      var rate = this.rate;
+      rate.on(_Rate2.default.UPDATE, this.onUpdate);
+      rate.start();
       return this;
     }
     /**
@@ -9076,7 +9077,7 @@ exports.default = Classes;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.4.4
- * 2017-9-30 18:37:13
+ * 2017-10-23 16:31:34
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -9333,7 +9334,7 @@ MOKU.version = function () {
  * @returns {string}  build 日時を返します
  */
 MOKU.build = function () {
-  return '2017-9-30 18:37:13';
+  return '2017-10-23 16:31:34';
 };
 /**
  * MOKU.event
