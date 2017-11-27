@@ -91,7 +91,7 @@ export default class iOS {
    */
   static is() {
     init();
-    return props.android;
+    return props.ios;
   }
   /**
    * iOS && iPhone or iPod
