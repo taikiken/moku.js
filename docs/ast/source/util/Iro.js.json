@@ -1308,6 +1308,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -1326,7 +1327,6 @@
                   },
                   "name": "rgb2hsl"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -4535,6 +4535,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -4553,7 +4554,6 @@
                   },
                   "name": "hue2rgb"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -5775,6 +5775,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -5793,7 +5794,6 @@
                   },
                   "name": "hsl2rgb"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -7752,6 +7752,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -7770,7 +7771,6 @@
                   },
                   "name": "rgb2hsv"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -10548,6 +10548,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -10566,7 +10567,6 @@
                   },
                   "name": "hsv2rgb"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -14095,6 +14095,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -14113,7 +14114,6 @@
                   },
                   "name": "shorthand"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -15156,6 +15156,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -15174,7 +15175,6 @@
                   },
                   "name": "hex2rgb"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -16390,6 +16390,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -16408,7 +16409,6 @@
                   },
                   "name": "int16"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -16849,6 +16849,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -16867,7 +16868,6 @@
                   },
                   "name": "rgb2hex"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -17362,6 +17362,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -17380,7 +17381,6 @@
                   },
                   "name": "int2hex"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -18360,6 +18360,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -18378,7 +18379,6 @@
                   },
                   "name": "hex2int"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -18920,6 +18920,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -18938,7 +18939,6 @@
                   },
                   "name": "toInt"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,

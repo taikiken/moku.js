@@ -106,4 +106,31 @@ export default class Elements {
   offset() {
     return this.bounding.offset();
   }
+  /**
+   * className を有するかを調べます
+   * @param {string} className 調査対象 CSS class name
+   * @returns {boolean} 存在すると true を返します
+   * @since 0.4.6
+   */
+  has(className) {
+    return this.classes.has(className);
+  }
+  /**
+   * className を追加します
+   * @param {string} className 追加対象 CSS class name
+   * @returns {boolean} 追加に成功すると true を返します
+   * @since 0.4.6
+   */
+  add(className) {
+    return this.classes.add(className);
+  }
+  /**
+   * className を削除します
+   * @param {string} className 削除対象 CSS class name
+   * @returns {boolean} 削除に成功すると true を返します
+   * @since 0.4.6
+   */
+  remove(className) {
+    return this.classes.remove(className);
+  }
 }

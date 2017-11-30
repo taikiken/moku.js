@@ -1782,6 +1782,12 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "src/dom/elements.js~elements#add",
+    "class/src/dom/Elements.js~Elements.html#instance-method-add",
+    "src/dom/Elements.js~Elements#add",
+    "method"
+  ],
+  [
     "src/dom/elements.js~elements#bounding",
     "class/src/dom/Elements.js~Elements.html#instance-member-bounding",
     "src/dom/Elements.js~Elements#bounding",
@@ -1806,9 +1812,21 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/dom/elements.js~elements#has",
+    "class/src/dom/Elements.js~Elements.html#instance-method-has",
+    "src/dom/Elements.js~Elements#has",
+    "method"
+  ],
+  [
     "src/dom/elements.js~elements#offset",
     "class/src/dom/Elements.js~Elements.html#instance-method-offset",
     "src/dom/Elements.js~Elements#offset",
+    "method"
+  ],
+  [
+    "src/dom/elements.js~elements#remove",
+    "class/src/dom/Elements.js~Elements.html#instance-method-remove",
+    "src/dom/Elements.js~Elements#remove",
     "method"
   ],
   [

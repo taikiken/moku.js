@@ -87,7 +87,7 @@ const init = () => {
 };
 
 /**
- * iOS Chrome detector
+ * Safari detector
  * @since 0.4.2
  */
 export default class Safari {

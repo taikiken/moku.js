@@ -324,6 +324,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -343,7 +344,6 @@
                   "name": "constructor",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "constructor",
                 "id": null,
                 "generator": false,
@@ -891,6 +891,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -910,7 +911,6 @@
                   "name": "destroy",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -1197,6 +1197,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -1216,7 +1217,6 @@
                   "name": "on",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -2350,6 +2350,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -2369,7 +2370,6 @@
                   "name": "off",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -3856,6 +3856,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -3875,7 +3876,6 @@
                   "name": "clean",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -4676,6 +4676,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -4695,7 +4696,6 @@
                   "name": "has",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -5583,6 +5583,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -5602,7 +5603,6 @@
                   "name": "dispatch",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -7023,6 +7023,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -7042,7 +7043,6 @@
                   "name": "addEventListener",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -7268,6 +7268,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -7287,7 +7288,6 @@
                   "name": "removeEventListener",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -7513,6 +7513,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -7532,7 +7533,6 @@
                   "name": "hasEventListener",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -7758,6 +7758,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -7777,7 +7778,6 @@
                   "name": "dispatchEvent",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -9476,7 +9476,7 @@
         "label": "import",
         "keyword": "import",
         "beforeExpr": false,
-        "startsExpr": false,
+        "startsExpr": true,
         "rightAssociative": false,
         "isLoop": false,
         "isAssign": false,

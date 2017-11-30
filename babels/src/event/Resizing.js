@@ -40,6 +40,11 @@ export default class Resizing extends Scrolling {
     super();
     // ------
     /**
+     * bound onUpdate, Rate.UPDATE event handler
+     * @type {function}
+     */
+    this.onUpdate = this.onUpdate.bind(this);
+    /**
      * Resizing event を準備します
      * @type {ScrollEvents}
      */

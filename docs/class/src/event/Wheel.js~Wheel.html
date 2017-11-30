@@ -155,13 +155,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Wheel from &apos;<span><a href="file/src/event/Wheel.js.html#lineNumber40">./src/event/Wheel.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Wheel from &apos;<span><a href="file/src/event/Wheel.js.html#lineNumber55">./src/event/Wheel.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/event/Wheel.js.html#lineNumber40">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/event/Wheel.js.html#lineNumber55">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -185,8 +185,24 @@
 <p></p><p>singleton &#x306A;&#x306E;&#x3067; new &#x3067;&#x306F;&#x306A;&#x304F; factory &#x3092;&#x4F7F;&#x7528;&#x3057; instance &#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;</p>
 
 <p></p>
-<pre><code><code class="source-code prettyprint">const wheel = new Wheel();
+<p>event handler &#x5F15;&#x6570; <code>events</code> &#x306F; <span><a href="class/src/event/events/WheelEvents.js~WheelEvents.html">WheelEvents</a></span> instance &#x3067;&#x3059;</p>
+<ul>
+<li>events.moved &gt; 0 - wheel up</li>
+</ul>
+<pre><code><code class="source-code prettyprint">const up = (events) =&gt; {
+ // wheel up
+};
+const down = (events) =&gt; {
+ // wheel down
+};
+const update = (events) =&gt; {
+ // wheel up / down
+};
+const wheel = new Wheel();
 wheel.threshold = 500;
+wheel.on(Wheel.UP, up);
+wheel.on(Wheel.DOWN, down);
+wheel.on(Wheel.UPDATE, update);
 wheel.start();</code>
 </code></pre></div>
   
@@ -1014,7 +1030,7 @@ event type {string} &#x3092; key, &#x5024;&#x306F; Array.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber53">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber68">source</a></span></span>
     </span>
   </h3>
 
@@ -1058,7 +1074,7 @@ event type {string} &#x3092; key, &#x5024;&#x306F; Array.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber48">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber63">source</a></span></span>
     </span>
   </h3>
 
@@ -1102,7 +1118,7 @@ event type {string} &#x3092; key, &#x5024;&#x306F; Array.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber58">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber73">source</a></span></span>
     </span>
   </h3>
 
@@ -1150,7 +1166,7 @@ event type {string} &#x3092; key, &#x5024;&#x306F; Array.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber84">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber99">source</a></span></span>
     </span>
   </h3>
 
@@ -1215,7 +1231,7 @@ event type {string} &#x3092; key, &#x5024;&#x306F; Array.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber129">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber144">source</a></span></span>
     </span>
   </h3>
 
@@ -1272,7 +1288,7 @@ event type {string} &#x3092; key, &#x5024;&#x306F; Array.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber115">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber130">source</a></span></span>
     </span>
   </h3>
 
@@ -1316,7 +1332,7 @@ event type {string} &#x3092; key, &#x5024;&#x306F; Array.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber110">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber125">source</a></span></span>
     </span>
   </h3>
 
@@ -1363,7 +1379,7 @@ event type {string} &#x3092; key, &#x5024;&#x306F; Array.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber265">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber280">source</a></span></span>
     </span>
   </h3>
 
@@ -1437,7 +1453,7 @@ event type {string} &#x3092; key, &#x5024;&#x306F; Array.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber212">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber227">source</a></span></span>
     </span>
   </h3>
 
@@ -1511,7 +1527,7 @@ event type {string} &#x3092; key, &#x5024;&#x306F; Array.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber203">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber218">source</a></span></span>
     </span>
   </h3>
 
@@ -1598,7 +1614,7 @@ event type {string} &#x3092; key, &#x5024;&#x306F; Array.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber165">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber180">source</a></span></span>
     </span>
   </h3>
 
@@ -1642,7 +1658,7 @@ event type {string} &#x3092; key, &#x5024;&#x306F; Array.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber172">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber187">source</a></span></span>
     </span>
   </h3>
 
@@ -1699,7 +1715,7 @@ event type {string} &#x3092; key, &#x5024;&#x306F; Array.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber187">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber202">source</a></span></span>
     </span>
   </h3>
 
@@ -1756,7 +1772,7 @@ event type {string} &#x3092; key, &#x5024;&#x306F; Array.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber252">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber267">source</a></span></span>
     </span>
   </h3>
 
@@ -1830,7 +1846,7 @@ event type {string} &#x3092; key, &#x5024;&#x306F; Array.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber278">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/event/Wheel.js.html#lineNumber293">source</a></span></span>
     </span>
   </h3>
 
@@ -1896,7 +1912,7 @@ event type {string} &#x3092; key, &#x5024;&#x306F; Array.</p>
 </div>
 
 <footer class="footer">
-  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.3)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.4)</span><img src="./image/esdoc-logo-mini-black.png"></a>
 </footer>
 
 <script src="script/search_index.js"></script>

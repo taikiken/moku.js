@@ -492,6 +492,7 @@
                     "column": 23
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -511,7 +512,6 @@
                   "name": "LEFT"
                 },
                 "variance": null,
-                "static": true,
                 "value": {
                   "type": "StringLiteral",
                   "start": 794,
@@ -631,6 +631,7 @@
                     "column": 25
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -650,7 +651,6 @@
                   "name": "RIGHT"
                 },
                 "variance": null,
-                "static": true,
                 "value": {
                   "type": "StringLiteral",
                   "start": 870,
@@ -722,6 +722,7 @@
                     "column": 21
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -741,7 +742,6 @@
                   "name": "END"
                 },
                 "variance": null,
-                "static": true,
                 "value": {
                   "type": "StringLiteral",
                   "start": 941,
@@ -813,6 +813,7 @@
                     "column": 23
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -832,7 +833,6 @@
                   "name": "DRAG"
                 },
                 "variance": null,
-                "static": true,
                 "value": {
                   "type": "StringLiteral",
                   "start": 1014,
@@ -952,6 +952,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -971,7 +972,6 @@
                   "name": "constructor",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "constructor",
                 "id": null,
                 "generator": false,
@@ -3527,6 +3527,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -3546,7 +3547,6 @@
                   "name": "onStart",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -4505,6 +4505,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -4524,7 +4525,6 @@
                   "name": "onMove",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -5186,6 +5186,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -5205,7 +5206,6 @@
                   "name": "onEnd",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -6193,6 +6193,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -6212,7 +6213,6 @@
                   "name": "onCancel",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -6608,6 +6608,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -6627,7 +6628,6 @@
                   "name": "swipeCheck",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -7473,6 +7473,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -7492,7 +7493,6 @@
                   "name": "dispose",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -8207,6 +8207,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -8226,7 +8227,6 @@
                   "name": "reset",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -8402,6 +8402,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -8421,7 +8422,6 @@
                   "name": "drag",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -8842,6 +8842,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -8861,7 +8862,6 @@
                   "name": "start",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -9376,6 +9376,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -9395,7 +9396,6 @@
                   "name": "stop",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -10649,7 +10649,7 @@
         "label": "import",
         "keyword": "import",
         "beforeExpr": false,
-        "startsExpr": false,
+        "startsExpr": true,
         "rightAssociative": false,
         "isLoop": false,
         "isAssign": false,
@@ -10782,7 +10782,7 @@
         "label": "import",
         "keyword": "import",
         "beforeExpr": false,
-        "startsExpr": false,
+        "startsExpr": true,
         "rightAssociative": false,
         "isLoop": false,
         "isAssign": false,
@@ -10931,7 +10931,7 @@
         "label": "import",
         "keyword": "import",
         "beforeExpr": false,
-        "startsExpr": false,
+        "startsExpr": true,
         "rightAssociative": false,
         "isLoop": false,
         "isAssign": false,
@@ -11064,7 +11064,7 @@
         "label": "import",
         "keyword": "import",
         "beforeExpr": false,
-        "startsExpr": false,
+        "startsExpr": true,
         "rightAssociative": false,
         "isLoop": false,
         "isAssign": false,

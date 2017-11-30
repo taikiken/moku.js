@@ -4623,6 +4623,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -4641,7 +4642,6 @@
                   },
                   "name": "browsers"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -4798,6 +4798,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -4816,7 +4817,6 @@
                   },
                   "name": "is"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -5006,6 +5006,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -5024,7 +5025,6 @@
                   },
                   "name": "is6"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -5214,6 +5214,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -5232,7 +5233,6 @@
                   },
                   "name": "is7"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -5422,6 +5422,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -5440,7 +5441,6 @@
                   },
                   "name": "is8"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -5630,6 +5630,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -5648,7 +5649,6 @@
                   },
                   "name": "is9"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -5838,6 +5838,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -5856,7 +5857,6 @@
                   },
                   "name": "is10"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -6046,6 +6046,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -6064,7 +6065,6 @@
                   },
                   "name": "is11"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -6254,6 +6254,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -6272,7 +6273,6 @@
                   },
                   "name": "version"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -6462,6 +6462,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -6480,7 +6481,6 @@
                   },
                   "name": "major"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -6670,6 +6670,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -6688,7 +6689,6 @@
                   },
                   "name": "build"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -6878,6 +6878,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -6896,7 +6897,6 @@
                   },
                   "name": "numbers"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -7393,7 +7393,7 @@
         "label": "import",
         "keyword": "import",
         "beforeExpr": false,
-        "startsExpr": false,
+        "startsExpr": true,
         "rightAssociative": false,
         "isLoop": false,
         "isAssign": false,

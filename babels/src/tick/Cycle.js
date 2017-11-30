@@ -41,10 +41,12 @@ let instance = null;
  *  // code here, something do
  * };
  * loop.on(Cycle.UPDATE, update);
- * loop.start();
  * ```
  *
- * <p>requestAnimationFrame は tab が active(focus) な時のみ発生します</p>
+ * Cycle は `requestAnimationFrame` を auto start させます
+ * <p>【注意】requestAnimationFrame は tab が active(focus) な時のみ発生します<br>
+ * `blur` 時にも動作させたい時は使用しないでください。<br>
+ *   `setTimeout` の利用を検討してください</p>
  */
 export default class Cycle extends EventDispatcher {
   // ---------------------------------------------------

@@ -74,7 +74,7 @@ const init = () => {
 };
 
 /**
- * iOS Chrome detector
+ * Firefox detector
  * @since 0.4.2
  */
 export default class Firefox {

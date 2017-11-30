@@ -256,6 +256,7 @@ export default class Touching extends EventDispatcher {
   }
   /**
    * touchmove event handler
+   * - Android 4.3 ~ 4.4 && standard browser のために `kitkatEnd` を実行します
    * @param {Event} event touchmove event
    * @returns {void}
    */
@@ -302,8 +303,9 @@ export default class Touching extends EventDispatcher {
     }
   }
   /**
-   * Android 4.3 ~ 4.4 && standard browser - touchend 発火しない
-   * `onEnd` を強制実行します
+   * Android 4.3 ~ 4.4 && standard browser - browser bug のため `touchend` が発火しません
+   * - `touchmove` も 1 回だけ発火します - touchmove の後に本 method `kitkatEnd` を実行します
+   * - `onEnd` を強制実行し `touchend` させます
    * @param {Event} event touch event
    * @since v0.4.4
    */
@@ -315,8 +317,8 @@ export default class Touching extends EventDispatcher {
   }
   /**
    * touchend event handler
+   * - {@link Touching}.[END|TOUCH] を発火します
    * @param {Event} event touchend event
-   * @returns {void}
    */
   onEnd(event) {
     // console.log('Touching.onEnd', event);

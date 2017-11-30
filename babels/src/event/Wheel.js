@@ -31,9 +31,24 @@ import WheelEvents from './events/WheelEvents';
  * mousewheel event を監視し通知を行います
  * <p>singleton なので new ではなく factory を使用し instance を作成します</p>
  *
+ * event handler 引数 `events` は {@link WheelEvents} instance です
+ * - events.moved > 0 - wheel up
+ *
  * ```
+ * const up = (events) => {
+ *  // wheel up
+ * };
+ * const down = (events) => {
+ *  // wheel down
+ * };
+ * const update = (events) => {
+ *  // wheel up / down
+ * };
  * const wheel = new Wheel();
  * wheel.threshold = 500;
+ * wheel.on(Wheel.UP, up);
+ * wheel.on(Wheel.DOWN, down);
+ * wheel.on(Wheel.UPDATE, update);
  * wheel.start();
  * ```
  */

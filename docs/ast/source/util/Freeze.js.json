@@ -104,6 +104,7 @@
                     "column": 21
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -123,7 +124,6 @@
                   "name": "timerId"
                 },
                 "variance": null,
-                "static": true,
                 "value": {
                   "type": "NumericLiteral",
                   "start": 478,
@@ -195,6 +195,7 @@
                     "column": 21
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -214,7 +215,6 @@
                   "name": "delay"
                 },
                 "variance": null,
-                "static": true,
                 "value": {
                   "type": "NumericLiteral",
                   "start": 567,
@@ -286,6 +286,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -304,7 +305,6 @@
                   },
                   "name": "start"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -1557,6 +1557,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -1575,7 +1576,6 @@
                   },
                   "name": "stop"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -2716,6 +2716,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -2734,7 +2735,6 @@
                   },
                   "name": "onScroll"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -3022,6 +3022,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -3040,7 +3041,6 @@
                   },
                   "name": "freeze"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,

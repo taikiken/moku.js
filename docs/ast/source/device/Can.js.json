@@ -3671,6 +3671,7 @@
                     "column": 4
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -3690,7 +3691,6 @@
                   "name": "vendors"
                 },
                 "variance": null,
-                "static": true,
                 "value": {
                   "type": "ArrayExpression",
                   "start": 4218,
@@ -3859,6 +3859,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -3877,7 +3878,6 @@
                   },
                   "name": "transition"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -4727,6 +4727,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -4745,7 +4746,6 @@
                   },
                   "name": "transform"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -5595,6 +5595,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -5613,7 +5614,6 @@
                   },
                   "name": "passive"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -6628,6 +6628,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -6646,7 +6647,6 @@
                   },
                   "name": "touch"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -7070,6 +7070,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -7088,7 +7089,6 @@
                   },
                   "name": "canvas"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -7516,6 +7516,7 @@
                     "column": 3
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -7534,7 +7535,6 @@
                   },
                   "name": "webgl"
                 },
-                "static": true,
                 "kind": "method",
                 "id": null,
                 "generator": false,

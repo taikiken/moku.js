@@ -352,6 +352,7 @@
                     "column": 21
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -371,7 +372,6 @@
                   "name": "RATE_60"
                 },
                 "variance": null,
-                "static": true,
                 "value": {
                   "type": "NumericLiteral",
                   "start": 1038,
@@ -491,6 +491,7 @@
                     "column": 21
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -510,7 +511,6 @@
                   "name": "RATE_30"
                 },
                 "variance": null,
-                "static": true,
                 "value": {
                   "type": "NumericLiteral",
                   "start": 1108,
@@ -582,6 +582,7 @@
                     "column": 21
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -601,7 +602,6 @@
                   "name": "RATE_20"
                 },
                 "variance": null,
-                "static": true,
                 "value": {
                   "type": "NumericLiteral",
                   "start": 1178,
@@ -673,6 +673,7 @@
                     "column": 21
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -692,7 +693,6 @@
                   "name": "RATE_15"
                 },
                 "variance": null,
-                "static": true,
                 "value": {
                   "type": "NumericLiteral",
                   "start": 1248,
@@ -764,6 +764,7 @@
                     "column": 21
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -783,7 +784,6 @@
                   "name": "RATE_12"
                 },
                 "variance": null,
-                "static": true,
                 "value": {
                   "type": "NumericLiteral",
                   "start": 1318,
@@ -855,6 +855,7 @@
                     "column": 21
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -874,7 +875,6 @@
                   "name": "RATE_10"
                 },
                 "variance": null,
-                "static": true,
                 "value": {
                   "type": "NumericLiteral",
                   "start": 1388,
@@ -946,6 +946,7 @@
                     "column": 21
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -965,7 +966,6 @@
                   "name": "RATE_6"
                 },
                 "variance": null,
-                "static": true,
                 "value": {
                   "type": "NumericLiteral",
                   "start": 1456,
@@ -1037,6 +1037,7 @@
                     "column": 21
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -1056,7 +1057,6 @@
                   "name": "RATE_5"
                 },
                 "variance": null,
-                "static": true,
                 "value": {
                   "type": "NumericLiteral",
                   "start": 1525,
@@ -1128,6 +1128,7 @@
                     "column": 21
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -1147,7 +1148,6 @@
                   "name": "RATE_4"
                 },
                 "variance": null,
-                "static": true,
                 "value": {
                   "type": "NumericLiteral",
                   "start": 1594,
@@ -1219,6 +1219,7 @@
                     "column": 21
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -1238,7 +1239,6 @@
                   "name": "RATE_3"
                 },
                 "variance": null,
-                "static": true,
                 "value": {
                   "type": "NumericLiteral",
                   "start": 1663,
@@ -1310,6 +1310,7 @@
                     "column": 21
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -1329,7 +1330,6 @@
                   "name": "RATE_2"
                 },
                 "variance": null,
-                "static": true,
                 "value": {
                   "type": "NumericLiteral",
                   "start": 1732,
@@ -1401,6 +1401,7 @@
                     "column": 21
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -1420,7 +1421,6 @@
                   "name": "RATE_1"
                 },
                 "variance": null,
-                "static": true,
                 "value": {
                   "type": "NumericLiteral",
                   "start": 1801,
@@ -1540,6 +1540,7 @@
                     "column": 31
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -1559,7 +1560,6 @@
                   "name": "UPDATE"
                 },
                 "variance": null,
-                "static": true,
                 "value": {
                   "type": "StringLiteral",
                   "start": 2013,
@@ -1727,6 +1727,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -1746,7 +1747,6 @@
                   "name": "constructor",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "constructor",
                 "id": null,
                 "generator": false,
@@ -3754,6 +3754,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -3773,7 +3774,6 @@
                   "name": "setRate",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -4190,6 +4190,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -4209,7 +4210,6 @@
                   "name": "validate",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -4490,6 +4490,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -4509,7 +4510,6 @@
                   "name": "change",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -4780,6 +4780,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -4799,7 +4800,6 @@
                   "name": "onUpdate",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -6330,7 +6330,7 @@
         "label": "import",
         "keyword": "import",
         "beforeExpr": false,
-        "startsExpr": false,
+        "startsExpr": true,
         "rightAssociative": false,
         "isLoop": false,
         "isAssign": false,
@@ -6479,7 +6479,7 @@
         "label": "import",
         "keyword": "import",
         "beforeExpr": false,
-        "startsExpr": false,
+        "startsExpr": true,
         "rightAssociative": false,
         "isLoop": false,
         "isAssign": false,
