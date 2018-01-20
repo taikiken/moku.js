@@ -49,9 +49,9 @@ let instance = null;
  *   `setTimeout` の利用を検討してください</p>
  */
 export default class Cycle extends EventDispatcher {
-  // ---------------------------------------------------
+  // ----------------------------------------
   //  CONSTANT / EVENT
-  // ---------------------------------------------------
+  // ----------------------------------------
   /**
    * requestAnimationFrame 毎に発生するイベント - cycleUpdate
    * @event UPDATE
@@ -71,9 +71,9 @@ export default class Cycle extends EventDispatcher {
     }
     return instance;
   }
-  // ---------------------------------------------------
+  // ----------------------------------------
   //  CONSTRUCTOR
-  // ---------------------------------------------------
+  // ----------------------------------------
   /**
    * singleton です
    * @param {Symbol} checkSymbol singleton を保証するための private instance
@@ -137,10 +137,12 @@ export default class Cycle extends EventDispatcher {
   // PRIVATE METHOD
   // ----------------------------------------
   /**
-   * loop(requestAnimationFrame)コールバック関数<br>Cycle.UPDATE event を発火します
+   * loop(requestAnimationFrame)コールバック関数
+   * - Cycle.UPDATE event を発火します
+   * @param {number} time animation time
    * @returns {number} requestAnimationFrame ID
    */
-  onUpdate() {
+  onUpdate(time) {
     // @type {number} - requestAnimationFrame id
     const id = requestAnimationFrame(this.onUpdate);
     this.id = id;
@@ -148,6 +150,7 @@ export default class Cycle extends EventDispatcher {
     // @type {Events} - events
     const events = this.events;
     events.id = id;
+    events.time = time;
     // event fire
     this.dispatch(events);
     return id;

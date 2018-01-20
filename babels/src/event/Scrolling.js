@@ -42,9 +42,9 @@ export default class Scrolling extends EventDispatcher {
   //  CONSTRUCTOR
   // ---------------------------------------------------
   /**
-   * @param {Rate} [rate=new Rate(Rate.Rate_5)] Rate instance, scroll 監視 fps を設定します
+   * @param {Rate} [rate=new Rate(Rate.RATE_30)] Rate instance, scroll 監視 fps を設定します
    */
-  constructor(rate = new Rate(Rate.RATE_5)) {
+  constructor(rate = new Rate(Rate.RATE_30)) {
     super();
     // @type {function}
     // const onUpdate = this.scroll.bind(this);

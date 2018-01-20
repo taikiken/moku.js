@@ -93,8 +93,7 @@ export default class Resizing extends Scrolling {
     return this;
   }
   /**
-   * 指定 rate(fps) 毎にスクロール位置を<br>
-   * scroll top 位置をもたせた Scrolling.UPDATE custom event を発火します
+   * 指定 rate(fps) 毎にスクロール位置を scroll top 位置をもたせた Scrolling.UPDATE custom event を発火します
    *
    * 下記のプロパティをイベント・インスタンスに追加します
    *

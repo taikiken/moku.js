@@ -33,5 +33,11 @@ export default class CycleEvents extends Events {
      * @type {number}
      */
     this.id = -1;
+    /**
+     * animation time
+     * @type {number}
+     * @since 2018-01-20
+     */
+    this.time = 0;
   }
 }
