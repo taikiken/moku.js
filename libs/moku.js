@@ -3450,10 +3450,10 @@ var Scrolling = function (_EventDispatcher) {
   //  CONSTRUCTOR
   // ---------------------------------------------------
   /**
-   * @param {Rate} [rate=new Rate(Rate.Rate_5)] Rate instance, scroll 監視 fps を設定します
+   * @param {Rate} [rate=new Rate(Rate.RATE_30)] Rate instance, scroll 監視 fps を設定します
    */
   function Scrolling() {
-    var rate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _Rate2.default(_Rate2.default.RATE_5);
+    var rate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _Rate2.default(_Rate2.default.RATE_30);
 
     _classCallCheck(this, Scrolling);
 
@@ -3832,6 +3832,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // tick/events
 
 
+// import CycleEvents from './events/CycleEvents';
+
 /**
  * 一定間隔毎に UPDATE イベントを発生させます
  *
@@ -3944,13 +3946,14 @@ var Polling = function (_EventDispatcher) {
     /**
      * Cycle.UPDATE event handler, polling を計測しイベントを発火するかを判断します
      *
+     * @param {CycleEvents|PollingEvents|} events Cycle event object
      * @listens {Cycle.UPDATE} Cycle.UPDATE が発生すると実行されます
      * @returns {boolean} Polling.UPDATE event が発生すると true を返します
      */
 
   }, {
     key: 'onUpdate',
-    value: function onUpdate() {
+    value: function onUpdate(events) {
       // 現在時間
       // @type {number}
       var present = Date.now();
@@ -3961,7 +3964,7 @@ var Polling = function (_EventDispatcher) {
       // 現在時間 が interval より大きくなったか
       if (present - begin >= interval) {
         // event 発火
-        this.fire(this.updateEvents(begin, present));
+        this.fire(this.updateEvents(begin, present, events));
         // 開始時間を update
         this.begin = present;
         // event 発生
@@ -3975,18 +3978,20 @@ var Polling = function (_EventDispatcher) {
      * events object を発火前に作成します
      * @param {number} begin 開始時間: 前回の発火時間
      * @param {number} present 現在時間
+     * @param {CycleEvents} cycleEvents Cycle event object
      * @returns {Events} アップデートした Events を返します
      */
 
   }, {
     key: 'updateEvents',
-    value: function updateEvents(begin, present) {
+    value: function updateEvents(begin, present, cycleEvents) {
       this.begin = begin;
       // @type {Events} - start event
       var events = this.events;
       events.begin = begin;
       events.present = present;
       events.interval = this.interval;
+      events.cycleEvents = cycleEvents;
       return events;
     }
     /**
@@ -4707,8 +4712,7 @@ var Resizing = function (_Scrolling) {
       return this;
     }
     /**
-     * 指定 rate(fps) 毎にスクロール位置を<br>
-     * scroll top 位置をもたせた Scrolling.UPDATE custom event を発火します
+     * 指定 rate(fps) 毎にスクロール位置を scroll top 位置をもたせた Scrolling.UPDATE custom event を発火します
      *
      * 下記のプロパティをイベント・インスタンスに追加します
      *
@@ -6017,18 +6021,19 @@ var Rate = function (_Polling) {
      * {@link Polling}.UPDATE event handler
      *
      * count property を `+1` 加算後設定 rate で割り算し余りが `0` の時にイベント Rate.UPDATE を発生させます
+     * @param {CycleEvents|PollingEvents} events Polling event object
      * @returns {boolean} Rate.UPDATE event が発生すると true を返します
      */
 
   }, {
     key: 'onUpdate',
-    value: function onUpdate() {
+    value: function onUpdate(events) {
       // 余りが 0 の時にイベントを発火します
       this.count += 1;
       var reminder = this.count % this.rate;
       if (reminder === 0) {
         this.count = 0;
-        this.fire(this.updateEvents(0, 0));
+        this.fire(this.updateEvents(0, 0, events.cycleEvents));
         return true;
       }
       return false;
@@ -6150,18 +6155,18 @@ var Cycle = function (_EventDispatcher) {
       }
       return instance;
     }
-    // ---------------------------------------------------
+    // ----------------------------------------
     //  CONSTRUCTOR
-    // ---------------------------------------------------
+    // ----------------------------------------
     /**
      * singleton です
      * @param {Symbol} checkSymbol singleton を保証するための private instance
      * @returns {Cycle} singleton instance を返します
      */
 
-    // ---------------------------------------------------
+    // ----------------------------------------
     //  CONSTANT / EVENT
-    // ---------------------------------------------------
+    // ----------------------------------------
     /**
      * requestAnimationFrame 毎に発生するイベント - cycleUpdate
      * @event UPDATE
@@ -6245,13 +6250,15 @@ var Cycle = function (_EventDispatcher) {
     // PRIVATE METHOD
     // ----------------------------------------
     /**
-     * loop(requestAnimationFrame)コールバック関数<br>Cycle.UPDATE event を発火します
+     * loop(requestAnimationFrame)コールバック関数
+     * - Cycle.UPDATE event を発火します
+     * @param {number} time animation time
      * @returns {number} requestAnimationFrame ID
      */
 
   }, {
     key: 'onUpdate',
-    value: function onUpdate() {
+    value: function onUpdate(time) {
       // @type {number} - requestAnimationFrame id
       var id = requestAnimationFrame(this.onUpdate);
       this.id = id;
@@ -6259,6 +6266,7 @@ var Cycle = function (_EventDispatcher) {
       // @type {Events} - events
       var events = this.events;
       events.id = id;
+      events.time = time;
       // event fire
       this.dispatch(events);
       return id;
@@ -6342,6 +6350,12 @@ var PollingEvents = function (_Events) {
      * @type {number}
      */
     _this.interval = 0;
+    /**
+     * CycleEvents
+     * @type {CycleEvents}
+     * @since 2018-01-20
+     */
+    _this.cycleEvents = 0;
     return _this;
   }
 
@@ -9125,8 +9139,8 @@ exports.default = Classes;
  * http://www.opensource.org/licenses/mit-license.html
  *
  * This notice shall be included in all copies or substantial portions of the Software.
- * 0.4.6
- * 2017-11-30 17:09:49
+ * 0.4.7
+ * 2018-1-24 16:19:58
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -9376,14 +9390,14 @@ var MOKU = {};
 
 // css
 MOKU.version = function () {
-  return '0.4.6';
+  return '0.4.7';
 };
 /**
  * build 日時を取得します
  * @returns {string}  build 日時を返します
  */
 MOKU.build = function () {
-  return '2017-11-30 17:09:49';
+  return '2018-1-24 16:19:58';
 };
 /**
  * MOKU.event
@@ -14705,6 +14719,12 @@ var CycleEvents = function (_Events) {
     var _this = _possibleConstructorReturn(this, (CycleEvents.__proto__ || Object.getPrototypeOf(CycleEvents)).call(this, type, currentTarget, target));
 
     _this.id = -1;
+    /**
+     * animation time
+     * @type {number}
+     * @since 2018-01-20
+     */
+    _this.time = 0;
     return _this;
   }
 
