@@ -19,6 +19,7 @@ import Cycle from './Cycle';
 
 // tick/events
 import PollingEvents from './events/PollingEvents';
+// import CycleEvents from './events/CycleEvents';
 
 /**
  * 一定間隔毎に UPDATE イベントを発生させます
@@ -114,10 +115,11 @@ export default class Polling extends EventDispatcher {
   /**
    * Cycle.UPDATE event handler, polling を計測しイベントを発火するかを判断します
    *
+   * @param {CycleEvents|PollingEvents|} events Cycle event object
    * @listens {Cycle.UPDATE} Cycle.UPDATE が発生すると実行されます
    * @returns {boolean} Polling.UPDATE event が発生すると true を返します
    */
-  onUpdate() {
+  onUpdate(events) {
     // 現在時間
     // @type {number}
     const present = Date.now();
@@ -128,7 +130,7 @@ export default class Polling extends EventDispatcher {
     // 現在時間 が interval より大きくなったか
     if ((present - begin) >= interval) {
       // event 発火
-      this.fire(this.updateEvents(begin, present));
+      this.fire(this.updateEvents(begin, present, events));
       // 開始時間を update
       this.begin = present;
       // event 発生
@@ -142,15 +144,17 @@ export default class Polling extends EventDispatcher {
    * events object を発火前に作成します
    * @param {number} begin 開始時間: 前回の発火時間
    * @param {number} present 現在時間
+   * @param {CycleEvents} cycleEvents Cycle event object
    * @returns {Events} アップデートした Events を返します
    */
-  updateEvents(begin, present) {
+  updateEvents(begin, present, cycleEvents) {
     this.begin = begin;
     // @type {Events} - start event
     const events = this.events;
     events.begin = begin;
     events.present = present;
     events.interval = this.interval;
+    events.cycleEvents = cycleEvents;
     return events;
   }
   /**

@@ -43,5 +43,11 @@ export default class PollingEvents extends Events {
      * @type {number}
      */
     this.interval = 0;
+    /**
+     * CycleEvents
+     * @type {CycleEvents}
+     * @since 2018-01-20
+     */
+    this.cycleEvents = 0;
   }
 }
