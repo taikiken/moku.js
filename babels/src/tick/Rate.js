@@ -202,10 +202,10 @@ export default class Rate extends Polling {
     return this.start();
   }
   /**
-   * {@link Polling}.UPDATE event handler
+   * {@link Cycle}.UPDATE event handler
    *
    * count property を `+1` 加算後設定 rate で割り算し余りが `0` の時にイベント Rate.UPDATE を発生させます
-   * @param {CycleEvents|PollingEvents} events Polling event object
+   * @param {CycleEvents} events Polling event object
    * @returns {boolean} Rate.UPDATE event が発生すると true を返します
    */
   onUpdate(events) {
@@ -214,7 +214,7 @@ export default class Rate extends Polling {
     const reminder = this.count % this.rate;
     if (reminder === 0) {
       this.count = 0;
-      this.fire(this.updateEvents(0, 0, events.cycleEvents));
+      this.fire(this.updateEvents(0, 0, events));
       return true;
     }
     return false;

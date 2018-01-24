@@ -115,7 +115,7 @@ export default class Polling extends EventDispatcher {
   /**
    * Cycle.UPDATE event handler, polling を計測しイベントを発火するかを判断します
    *
-   * @param {CycleEvents|PollingEvents|} events Cycle event object
+   * @param {CycleEvents} events Cycle event object
    * @listens {Cycle.UPDATE} Cycle.UPDATE が発生すると実行されます
    * @returns {boolean} Polling.UPDATE event が発生すると true を返します
    */
