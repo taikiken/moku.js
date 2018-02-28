@@ -46,4 +46,23 @@ export default class List {
     // native method
     return new Array(length).fill(value);
   }
+  /**
+   * 複数の配列を `concat` marge 結合します
+   * @param {*} args 複数の配列
+   * @returns {*[]} 複数の配列を結合し返します
+   * @see https://gist.github.com/yesvods/51af798dd1e7058625f4
+   */
+  static marge(...args) {
+    return args.reduce((acc, val) => ([...acc, ...val]));
+  }
+  /**
+   * 配列内配列（多次元配列）を1階層にします
+   * @param {*} arr 多次元配列
+   * @returns {*[]} 多次元配列を1階層にし返します
+   * @see https://stackoverflow.com/questions/27266550/how-to-flatten-nested-array-in-javascript
+   */
+  static flatten(arr) {
+    const flat = [].concat(...arr);
+    return flat.some(Array.isArray) ? List.flatten(flat) : flat;
+  }
 }
