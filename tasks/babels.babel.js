@@ -132,7 +132,7 @@ gulp.task('babels:pack:build', (callback) => {
 // --------------------------------------
 //  TASK > SEQUENCE
 // --------------------------------------
-gulp.task('babels:dev', (callback) => (
+gulp.task('babels:dev', callback => (
   $$.runSequence(
     'babels:lint',
     'babels:babel',

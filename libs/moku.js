@@ -3946,7 +3946,7 @@ var Polling = function (_EventDispatcher) {
     /**
      * Cycle.UPDATE event handler, polling を計測しイベントを発火するかを判断します
      *
-     * @param {CycleEvents|PollingEvents|} events Cycle event object
+     * @param {CycleEvents} events Cycle event object
      * @listens {Cycle.UPDATE} Cycle.UPDATE が発生すると実行されます
      * @returns {boolean} Polling.UPDATE event が発生すると true を返します
      */
@@ -6018,10 +6018,10 @@ var Rate = function (_Polling) {
       return this.start();
     }
     /**
-     * {@link Polling}.UPDATE event handler
+     * {@link Cycle}.UPDATE event handler
      *
      * count property を `+1` 加算後設定 rate で割り算し余りが `0` の時にイベント Rate.UPDATE を発生させます
-     * @param {CycleEvents|PollingEvents} events Polling event object
+     * @param {CycleEvents} events Polling event object
      * @returns {boolean} Rate.UPDATE event が発生すると true を返します
      */
 
@@ -6033,7 +6033,7 @@ var Rate = function (_Polling) {
       var reminder = this.count % this.rate;
       if (reminder === 0) {
         this.count = 0;
-        this.fire(this.updateEvents(0, 0, events.cycleEvents));
+        this.fire(this.updateEvents(0, 0, events));
         return true;
       }
       return false;
@@ -9139,8 +9139,8 @@ exports.default = Classes;
  * http://www.opensource.org/licenses/mit-license.html
  *
  * This notice shall be included in all copies or substantial portions of the Software.
- * 0.4.7
- * 2018-1-24 16:19:58
+ * 0.4.8
+ * 2018-2-28 22:44:11
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -9390,14 +9390,14 @@ var MOKU = {};
 
 // css
 MOKU.version = function () {
-  return '0.4.7';
+  return '0.4.8';
 };
 /**
  * build 日時を取得します
  * @returns {string}  build 日時を返します
  */
 MOKU.build = function () {
-  return '2018-1-24 16:19:58';
+  return '2018-2-28 22:44:11';
 };
 /**
  * MOKU.event
@@ -16707,6 +16707,8 @@ var _Type2 = _interopRequireDefault(_Type);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
@@ -16754,6 +16756,39 @@ var List = function () {
       }
       // native method
       return new Array(length).fill(value);
+    }
+    /**
+     * 複数の配列を `concat` marge 結合します
+     * @param {*} args 複数の配列
+     * @returns {*[]} 複数の配列を結合し返します
+     * @see https://gist.github.com/yesvods/51af798dd1e7058625f4
+     */
+
+  }, {
+    key: 'marge',
+    value: function marge() {
+      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
+      return args.reduce(function (acc, val) {
+        return [].concat(_toConsumableArray(acc), _toConsumableArray(val));
+      });
+    }
+    /**
+     * 配列内配列（多次元配列）を1階層にします
+     * @param {*} arr 多次元配列
+     * @returns {*[]} 多次元配列を1階層にし返します
+     * @see https://stackoverflow.com/questions/27266550/how-to-flatten-nested-array-in-javascript
+     */
+
+  }, {
+    key: 'flatten',
+    value: function flatten(arr) {
+      var _ref;
+
+      var flat = (_ref = []).concat.apply(_ref, _toConsumableArray(arr));
+      return flat.some(Array.isArray) ? List.flatten(flat) : flat;
     }
   }]);
 
