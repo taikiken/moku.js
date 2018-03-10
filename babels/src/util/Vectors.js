@@ -160,7 +160,7 @@ export default class Vectors {
     return this.divideByScalar(this.length());
   }
   /**
-   * ベクトルが正規化されているかを判定します
+   * ベクトルが正規化（length が 1）されているかを判定します
    * @returns {boolean} true: 正規化されている
    */
   isNormalize() {
