@@ -10,13 +10,13 @@
  *
  */
 
-/**
- * [native code] - document
- * @type {HTMLDocument}
- * @private
- * @static
- */
-const document = self.document;
+// /**
+//  * [native code] - document
+//  * @type {HTMLDocument}
+//  * @private
+//  * @static
+//  */
+// const document = self.document;
 // /**
 //  * CSS detector に使用する virtual CSSStyleDeclaration
 //  * ```

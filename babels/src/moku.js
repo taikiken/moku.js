@@ -100,8 +100,8 @@ import Elements from './dom/Elements';
 
 /**
  * **MOKU**
- * <p>global Object</p>
- * <p>public な Class はここからアクセス可能です</p>
+ * - global Object
+ * - public な Class はここからアクセス可能です
  * @type {Object}
  */
 const MOKU = {};
@@ -109,12 +109,12 @@ const MOKU = {};
  * version number を取得します
  * @returns {string} version number を返します
  */
-MOKU.version = () => '@@version';
+MOKU.version = () => ('@@version');
 /**
  * build 日時を取得します
  * @returns {string}  build 日時を返します
  */
-MOKU.build = () => '@@buildTime';
+MOKU.build = () => ('@@buildTime');
 /**
  * MOKU.event
  * @type {Object} MOKU.event object を返します

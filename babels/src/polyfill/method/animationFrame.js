@@ -17,24 +17,24 @@
  */
 const animationFrame = () => {
   // native code check
-  if (self.requestAnimationFrame && self.cancelAnimationFrame) {
+  if (window.requestAnimationFrame && window.cancelAnimationFrame) {
     return;
   }
   // vendor prefix
   const vendors = ['ms', 'moz', 'webkit', 'o'];
   // add vendor prefix
   vendors.some((prefix) => {
-    self.requestAnimationFrame = self[`${prefix}RequestAnimationFrame`];
-    self.cancelAnimationFrame = self[`${prefix}CancelAnimationFrame`] ||
+    window.requestAnimationFrame = self[`${prefix}RequestAnimationFrame`];
+    window.cancelAnimationFrame = self[`${prefix}CancelAnimationFrame`] ||
       self[`${prefix}CancelRequestAnimationFrame`];
     // return false;
-    return !!self.requestAnimationFrame;
+    return !!window.requestAnimationFrame;
   });
   // ------------------------------------------------
   // still check
-  if (!self.requestAnimationFrame) {
+  if (!window.requestAnimationFrame) {
     let lastTime = 0;
-    self.requestAnimationFrame = (callback) => {
+    window.requestAnimationFrame = (callback) => {
       const currentTime = new Date().getTime();
       const timeToCall = Math.max(0, 16 - (currentTime - lastTime));
       const id = setTimeout(() => {
@@ -44,8 +44,8 @@ const animationFrame = () => {
       return id;
     };
   }
-  if (!self.cancelAnimationFrame) {
-    self.cancelAnimationFrame = (id) => {
+  if (!window.cancelAnimationFrame) {
+    window.cancelAnimationFrame = (id) => {
       clearTimeout(id);
     };
   }

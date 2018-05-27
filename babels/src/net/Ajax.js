@@ -13,24 +13,24 @@
 // util
 import Type from '../util/Type';
 
-// built-in function
-// Safari, IE はサポートしていないのでライブラリを使用すること
-/**
- * fetch [native code]
- * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch
- * @type {fetch}
- * @private
- * @static
- */
-const fetch = self.fetch;
-/**
- * fetch request instance を作成します
- * @see https://developer.mozilla.org/ja/docs/Web/API/Request
- * @type {Request}
- * @private
- * @static
- */
-const Request = self.Request;
+// // built-in function
+// // Safari, IE はサポートしていないのでライブラリを使用すること
+// /**
+//  * fetch [native code]
+//  * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch
+//  * @type {fetch}
+//  * @private
+//  * @static
+//  */
+// const fetch = self.fetch;
+// /**
+//  * fetch request instance を作成します
+//  * @see https://developer.mozilla.org/ja/docs/Web/API/Request
+//  * @type {Request}
+//  * @private
+//  * @static
+//  */
+// const Request = self.Request;
 
 /**
  * <p>fetch API を使用し Ajax request を行います</p>

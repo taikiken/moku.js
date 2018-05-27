@@ -33,13 +33,13 @@ const mathMax = Math.max;
  * @static
  */
 const mathMin = Math.min;
-/**
- * copy [native code] - parseInt
- * @type {function}
- * @private
- * @static
- */
-const mathInt = self.parseInt;
+// /**
+//  * copy [native code] - parseInt
+//  * @type {function}
+//  * @private
+//  * @static
+//  */
+// const mathInt = self.parseInt;
 
 // --------------------------------
 // constant for calculate
@@ -52,7 +52,7 @@ const mathInt = self.parseInt;
  * @private
  * @static
  */
-const oneSix = 1 / 6;
+const ONE_SIX = 1 / 6;
 /**
  * 計算定数
  * ```
@@ -62,7 +62,7 @@ const oneSix = 1 / 6;
  * @private
  * @static
  */
-const half = 0.5;
+const HALF = 0.5;
 /**
  * 計算定数
  * ```
@@ -72,7 +72,7 @@ const half = 0.5;
  * @private
  * @static
  */
-const twoThree = 2 / 3;
+const TWO_THREE = 2 / 3;
 /**
  * 計算定数
  * ```
@@ -82,7 +82,7 @@ const twoThree = 2 / 3;
  * @private
  * @static
  */
-const oneThree = 1 / 3;
+const ONE_THREE = 1 / 3;
 /**
  * 色変換ユーティリティーです
  */
@@ -164,12 +164,12 @@ export default class Iro {
     } else if (t > 1) {
       t -= 1;
     }
-    if (t < oneSix) {
+    if (t < ONE_SIX) {
       return point + ((q - point) * 6 * t);
-    } else if (t < half) {
+    } else if (t < HALF) {
       return q;
-    } else if (t < twoThree) {
-      return point + ((q - point) * (twoThree - t) * 6);
+    } else if (t < TWO_THREE) {
+      return point + ((q - point) * (TWO_THREE - t) * 6);
     }
     return point;
   }
@@ -187,14 +187,17 @@ export default class Iro {
     if (s !== 0) {
       const q = l < 0.5 ? l * (1 + s) : (l + s) - (l * s);
       const point = (2 * l) - q;
-      r = Iro.hue2rgb(point, q, h + oneThree);
+      r = Iro.hue2rgb(point, q, h + ONE_THREE);
       g = Iro.hue2rgb(point, q, h);
-      b = Iro.hue2rgb(point, q, h - oneThree);
+      b = Iro.hue2rgb(point, q, h - ONE_THREE);
     }
     return {
-      r: mathInt(r * 255, 10),
-      g: mathInt(g * 255, 10),
-      b: mathInt(b * 255, 10),
+      // r: parseInt(r * 255, 10),
+      // g: parseInt(g * 255, 10),
+      // b: parseInt(b * 255, 10),
+      r: r * 255,
+      g: g * 255,
+      b: b * 255,
     };
   }
   // ----------------------------------------
@@ -315,9 +318,9 @@ export default class Iro {
     }
     // ---
     return {
-      r: mathInt(r * 255, 10),
-      g: mathInt(g * 255, 10),
-      b: mathInt(b * 255, 10),
+      r: parseInt(r * 255, 10),
+      g: parseInt(g * 255, 10),
+      b: parseInt(b * 255, 10),
     };
   }
   // ----------------------------------------
@@ -351,9 +354,9 @@ export default class Iro {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hexString);
     return Array.isArray(result) && result.length === 4 ?
       {
-        r: mathInt(result[1], 16),
-        g: mathInt(result[2], 16),
-        b: mathInt(result[3], 16),
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
       } : null;
   }
   /**
@@ -403,7 +406,7 @@ export default class Iro {
     if (typeof hexString !== 'string') {
       return null;
     }
-    return mathInt(hexString.replace('#', ''), 16);
+    return parseInt(hexString.replace('#', ''), 16);
   }
   /**
    * #FFFFFF な CSS 16進を 0xFFFFFF 変換し 10進数にします

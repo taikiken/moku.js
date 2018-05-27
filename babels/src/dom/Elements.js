@@ -37,7 +37,7 @@ export default class Elements {
    * @return {?Element} Element を返します, 取得できない時は null を返します
    */
   static id(idName) {
-    const element = self.document.getElementById(idName);
+    const element = document.getElementById(idName);
     // 存在チェックを行います
     return Type.exist(element) ? element : null;
   }
@@ -47,7 +47,7 @@ export default class Elements {
    * @param {Element|*} [parentNode=document] 親 Node|Element
    * @return {?Element} Element or null
    */
-  static select(selector, parentNode = self.document) {
+  static select(selector, parentNode = document) {
     return parentNode.querySelector(selector);
   }
   /**
@@ -56,7 +56,7 @@ export default class Elements {
    * @param {Element|*} [parentNode=document] 親 Node|Element
    * @return {?NodeList} NodeList or null
    */
-  static selects(selector, parentNode = self.document) {
+  static selects(selector, parentNode = document) {
     const elements = parentNode.querySelectorAll(selector);
     return elements.length > 0 ? elements : null;
   }
