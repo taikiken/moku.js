@@ -103,11 +103,27 @@ dir.dist = {
 // --------------------------------------
 const wpk = {
   entry: __dirname,
+  mode: 'development',
   output: {
-    path: dir.app.bundle,
+    path: __dirname + dir.app.bundle.substr(1),
     publicPath: 'assets/js/bundle',
     filename: 'moku.js',
     chunkFilename: '[chunkhash].bundle.js',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        use: [
+          {
+            loader: 'babel-loader',
+          },
+        ],
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
 };
 
@@ -147,6 +163,14 @@ const patterns = [
     replacement: 'inazumatv.com',
   },
 ];
+
+// --------------------------------------
+//  static property
+// --------------------------------------
+const information = {
+  VERSION: pkg.version,
+  BUILD: new Date().toLocaleString(),
+};
 
 // --------------------------------------
 //  COMPRESSION
@@ -198,6 +222,7 @@ const module = {
   compress,
   server,
   pkg,
+  information,
 };
 
 export default module;
