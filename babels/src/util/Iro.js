@@ -150,6 +150,7 @@ export default class Iro {
       l,
     };
   }// rgb2hsl
+
   /**
    * HSL to RGB で `saturation !== 0` な時の R, G, B 変換 helper です
    * @param {number} point `(2 * l) - q`
@@ -166,13 +167,16 @@ export default class Iro {
     }
     if (t < ONE_SIX) {
       return point + ((q - point) * 6 * t);
-    } else if (t < HALF) {
+    }
+    if (t < HALF) {
       return q;
-    } else if (t < TWO_THREE) {
+    }
+    if (t < TWO_THREE) {
       return point + ((q - point) * (TWO_THREE - t) * 6);
     }
     return point;
   }
+
   /**
    * HSL to RGB 変換します
    * @param {number} h hue 0 ~ 1 degree / 360 正規化
@@ -200,6 +204,7 @@ export default class Iro {
       b: b * 255,
     };
   }
+
   // ----------------------------------------
   // HSV
   // ----------------------------------------
@@ -256,6 +261,7 @@ export default class Iro {
       v,
     };
   }
+
   /**
    * HSV(HSB) to RGB 変換します
    * @param {number} h hue 0 ~ 1
@@ -323,6 +329,7 @@ export default class Iro {
       b: parseInt(b * 255, 10),
     };
   }
+
   // ----------------------------------------
   // HEX
   // ----------------------------------------
@@ -340,6 +347,7 @@ export default class Iro {
     const color = hex.replace(pattern, (m, r, g, b) => `${r}${r}${g}${g}${b}${b}`);
     return color.length === 7 ? color : `#${color}`;
   }
+
   /**
    * CSS 色指定を RGB 変換します
    * @param {string} hex CSS 色形式 `#f00` or `#ff0000`
@@ -352,13 +360,15 @@ export default class Iro {
     }
     // ---
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hexString);
-    return Array.isArray(result) && result.length === 4 ?
-      {
+    return Array.isArray(result) && result.length === 4
+      ? {
         r: parseInt(result[1], 16),
         g: parseInt(result[2], 16),
         b: parseInt(result[3], 16),
-      } : null;
+      }
+      : null;
   }
+
   /**
    * 0 ~ 255 RGB color number を `00` な 16進形式に変換します
    * @param {number} colorNumber 変換する RGB color number
@@ -368,6 +378,7 @@ export default class Iro {
     const hex = colorNumber.toString(16);
     return hex.length === 1 ? `0${hex}` : hex;
   }
+
   /**
    * RGB を CSS形式 hex 変換します
    * @param {number} r red 0 ~ 255
@@ -378,6 +389,7 @@ export default class Iro {
   static rgb2hex(r, g, b) {
     return `#${Iro.int16(r)}${Iro.int16(g)}${Iro.int16(b)}`;
   }
+
   /**
    * 0 ~ 16777215 数値を `#ffffff` な CSS 16進色形式に変換します
    * @param {number} rgb 0 ~ 16777215 名数値
@@ -385,7 +397,7 @@ export default class Iro {
    */
   static int2hex(rgb) {
     let hex = mathFloor(rgb).toString(16);
-    const length = hex.length;
+    const { length } = hex;
     if (length === 6) {
       return `#${hex}`;
     }
@@ -396,6 +408,7 @@ export default class Iro {
     }
     return `#${hex}`;
   }
+
   /**
    * `#ffffff` な CSS 16進色形式を 10進数変換します
    * @param {string} hex `#f00` or `#ff0000` な CSS 16進色形式
@@ -408,6 +421,7 @@ export default class Iro {
     }
     return parseInt(hexString.replace('#', ''), 16);
   }
+
   /**
    * #FFFFFF な CSS 16進を 0xFFFFFF 変換し 10進数にします
    * @param {string} hex #FFFFFF な CSS 16進

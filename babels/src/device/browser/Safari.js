@@ -31,7 +31,7 @@ let browsers = null;
  * @since 0.4.2
  */
 const version = () => {
-  const app = devices.app;
+  const { app } = devices;
   const numbers = app.match(/version\/(\d+)\.(\d+)\.?(\d+)?/i);
   if (!Array.isArray(numbers)) {
     return;
@@ -40,7 +40,7 @@ const version = () => {
   numbers.shift();
   // array
   const intArr = numbers.map(number => (parseInt(number, 10)));
-  const versions = intArr.filter(int => !isNaN(int));
+  const versions = intArr.filter(int => !Number.isNaN(int));
   browsers.build = versions.join('.');
   const major = parseInt(versions[0], 10);
   let minor = 0;
@@ -70,13 +70,13 @@ const init = () => {
     return;
   }
   browsers = Object.assign({}, devices.browsers);
-  let safari = devices.safari;
+  let { safari } = devices;
   if (
-    CriOS.is() ||
-    Edge.is() ||
-    Chrome.is() ||
-    FxiOS.is() ||
-    Android.standard()
+    CriOS.is()
+    || Edge.is()
+    || Chrome.is()
+    || FxiOS.is()
+    || Android.standard()
   ) {
     safari = false;
   }
@@ -99,6 +99,7 @@ export default class Safari {
     init();
     return browsers;
   }
+
   /**
    * iOS Chrome 判定
    * @returns {boolean} true: iOS Chrome
@@ -107,6 +108,7 @@ export default class Safari {
     init();
     return browsers.safari;
   }
+
   /**
    * Safari Browser version
    * @returns {number} Safari version, not Android -1
@@ -115,6 +117,7 @@ export default class Safari {
     init();
     return browsers.version;
   }
+
   /**
    * Safari Browser major version
    * @returns {number} Safari major version, not Android -1
@@ -123,6 +126,7 @@ export default class Safari {
     init();
     return browsers.major;
   }
+
   /**
    * Safari Browser version `major.minor.build`
    * @returns {string} Safari version NN.NN.NN.NN 型（文字）で返します
@@ -131,6 +135,7 @@ export default class Safari {
     init();
     return browsers.build;
   }
+
   /**
    * version を配列形式で取得します
    * @returns {Array.<number>} {{major: int, minor: int, build: int, option: number}} 形式で返します

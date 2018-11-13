@@ -26,7 +26,7 @@ let browsers = null;
  * @since 0.4.2
  */
 const version = () => {
-  const app = devices.app;
+  const { app } = devices;
   const numbers = app.match(/fxios\/(\d+)\.?(\d+)?/i);
   if (!Array.isArray(numbers)) {
     return;
@@ -35,7 +35,7 @@ const version = () => {
   numbers.shift();
   // array
   const intArr = numbers.map(number => (parseInt(number, 10)));
-  const versions = intArr.filter(int => !isNaN(int));
+  const versions = intArr.filter(int => !Number.isNaN(int));
   browsers.build = versions.join('.');
   const major = parseInt(versions[0], 10);
   let minor = 0;
@@ -65,7 +65,7 @@ const init = () => {
     return;
   }
   browsers = Object.assign({}, devices.browsers);
-  const ua = devices.ua;
+  const { ua } = devices;
   const fxios = !!ua.match(/fxios/i);
   browsers.fxios = fxios;
   if (fxios) {
@@ -86,6 +86,7 @@ export default class FxiOS {
     init();
     return browsers;
   }
+
   /**
    * iOS Firefox 判定
    * @returns {boolean} true: iOS Firefox
@@ -94,6 +95,7 @@ export default class FxiOS {
     init();
     return browsers.fxios;
   }
+
   /**
    * Firefox Browser version
    * @returns {number} Firefox OS version, not Android -1
@@ -102,6 +104,7 @@ export default class FxiOS {
     init();
     return browsers.version;
   }
+
   /**
    * Firefox Browser major version
    * @returns {number} Firefox OS major version, not Android -1
@@ -110,6 +113,7 @@ export default class FxiOS {
     init();
     return browsers.major;
   }
+
   /**
    * Firefox Browser version `major.minor.build`
    * @returns {string} Firefox OS version NN.NN.NN.NN 型（文字）で返します, not Android ''
@@ -118,6 +122,7 @@ export default class FxiOS {
     init();
     return browsers.build;
   }
+
   /**
    * version を配列形式で取得します
    * @returns {Array.<number>} {{major: int, minor: int, build: int, option: number}} 形式で返します

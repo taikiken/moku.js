@@ -37,7 +37,8 @@ export default class TouchingEvents extends Events {
     origin,
     current = new Vectors(),
     between = new Vectors(),
-    scrolling = false) {
+    scrolling = false,
+  ) {
     // super
     super(type, target);
     /**

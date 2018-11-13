@@ -48,6 +48,7 @@ export default class Events {
      */
     this.currentTarget = currentTarget;
   }
+
   // ----------------------------------------
   // METHOD
   // ----------------------------------------

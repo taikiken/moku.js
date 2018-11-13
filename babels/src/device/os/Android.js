@@ -25,7 +25,7 @@ let props = null;
  * {@link Android}
  */
 const version = () => {
-  const app = devices.app;
+  const { app } = devices;
   const numbers = app.match(/android (\d+)\.(\d+)\.?(\d+)?/i);
   if (!Array.isArray(numbers)) {
     return;
@@ -35,7 +35,7 @@ const version = () => {
   const versions = numbers.map((number, index) => {
     const int = parseInt(number, 10);
     if (index < 3) {
-      return isNaN(int) ? 0 : int;
+      return Number.isNaN(int) ? 0 : int;
     }
     return null;
   });
@@ -69,7 +69,7 @@ const init = () => {
     return;
   }
   props = Object.assign({}, devices.props);
-  const ua = devices.ua;
+  const { ua } = devices;
   // windows phone ua に `Android` が入っている
   const android = !Windows.phone() && !!ua.match(/android/i);
   if (android) {
@@ -100,6 +100,7 @@ export default class Android {
     init();
     return props.android;
   }
+
   /**
    * Android OS && standard browser
    * @returns {boolean} true: Android standard browser
@@ -108,6 +109,7 @@ export default class Android {
     init();
     return props.standard;
   }
+
   /**
    * Android OS && phone
    * @returns {boolean} true: Android phone
@@ -116,6 +118,7 @@ export default class Android {
     init();
     return props.phone;
   }
+
   /**
    * Android OS && tablet
    * @returns {boolean} true: Android tablet
@@ -124,6 +127,7 @@ export default class Android {
     init();
     return props.tablet;
   }
+
   /**
    * Android OS && HD window
    * @returns {boolean} true: Android HD window
@@ -132,6 +136,7 @@ export default class Android {
     init();
     return props.hd;
   }
+
   /**
    * Android OS version
    * @returns {number} Android OS version, not Android -1
@@ -140,6 +145,7 @@ export default class Android {
     init();
     return props.version;
   }
+
   /**
    * Android OS major version
    * @returns {number} Android OS major version, not Android -1
@@ -148,6 +154,7 @@ export default class Android {
     init();
     return props.major;
   }
+
   /**
    * Android OS version `major.minor.build`
    * @returns {string} Android OS version NN.NN.NN 型（文字）で返します, not Android ''
@@ -156,6 +163,7 @@ export default class Android {
     init();
     return props.build;
   }
+
   /**
    * version を配列形式で取得します
    * @returns {Array.<number>} {{major: int, minor: int, build: int}} 形式で返します
@@ -164,6 +172,7 @@ export default class Android {
     init();
     return props.numbers;
   }
+
   /**
    * Android 4.3 ~ 4.4 && standard browser
    * - touchend が未実装

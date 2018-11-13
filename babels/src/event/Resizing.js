@@ -30,6 +30,7 @@ export default class Resizing extends Scrolling {
    * @type {string}
    */
   static UPDATE = 'resizingUpdate';
+
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
@@ -72,6 +73,7 @@ export default class Resizing extends Scrolling {
      */
     this.previous = -1;
   }
+
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
@@ -84,6 +86,7 @@ export default class Resizing extends Scrolling {
     this.watch();
     return this;
   }
+
   /**
    * 監視を停止します
    * @returns {*} method chain 可能なように instance を返します
@@ -92,6 +95,7 @@ export default class Resizing extends Scrolling {
     this.unwatch();
     return this;
   }
+
   /**
    * 指定 rate(fps) 毎にスクロール位置を scroll top 位置をもたせた Scrolling.UPDATE custom event を発火します
    *
@@ -113,7 +117,7 @@ export default class Resizing extends Scrolling {
     // @type {number} - scroll top
     const y = Scroll.y();
     // @type {number} - previous scroll top
-    const previous = this.previous;
+    const { previous } = this;
     // --- [window]
     // @type {number} - window width
     const width = window.innerWidth;
@@ -123,9 +127,12 @@ export default class Resizing extends Scrolling {
     const bodyWidth = document.body.clientWidth;
     const bodyHeight = document.body.clientHeight;
     // @type {boolean} - 移動したかを表します,
-    const changed = event === null || previous !== y ||
-      height !== this.window.height || width !== this.window.width ||
-      bodyWidth !== this.body.width || bodyHeight !== this.body.height;
+    const changed = event === null
+      || previous !== y
+      || height !== this.window.height
+      || width !== this.window.width
+      || bodyWidth !== this.body.width
+      || bodyHeight !== this.body.height;
     // ----------------------------------------------
     // @type {ScrollEvents} - events
     const events = this.events.clone();

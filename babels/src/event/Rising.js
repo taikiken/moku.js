@@ -32,12 +32,14 @@ export default class Rising extends EventDispatcher {
    * @type {string}
    */
   static COLLISION = 'risingCollision';
+
   /**
    * 衝突「していない」イベント - risingAlien
    * @event ALIEN
    * @type {string}
    */
   static ALIEN = 'risingAlien';
+
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
@@ -64,19 +66,13 @@ export default class Rising extends EventDispatcher {
      * @type {function}
      */
     this.onUpdate = this.onUpdate.bind(this);
-    // this.boundScroll = boundScroll;
-    // /**
-    //  * start 済みフラッグ
-    //  * @type {boolean}
-    //  * @default false
-    //  */
-    // this.started = false;
     /**
      * Rising.[COLLISION|ALIEN] event instance
      * @type {RisingEvents}
      */
     this.events = new RisingEvents(Rising.COLLISION, this, this);
   }
+
   // // ----------------------------------------
   // // EVENT
   // // ----------------------------------------
@@ -104,32 +100,20 @@ export default class Rising extends EventDispatcher {
    * @returns {Rising} method chain 可能なように instance を返します
    */
   start() {
-    // // flag check
-    // if (this.started) {
-    //   return this;
-    // }
-    // this.started = true;
-    // // scrolling
-    // const scrolling = this.scrolling;
-    // scrolling.on(Scrolling.UPDATE, this.onUpdate);
-    // scrolling.start();
     this.stop();
     this.scrolling.on(Scrolling.UPDATE, this.onUpdate);
     return this;
   }
+
   /**
    * scroll 監視を止めます
    * @returns {Rising} method chain 可能なように instance を返します
    */
   stop() {
-    // if (!this.started) {
-    //   return this;
-    // }
-    // this.started = false;
-    // const scrolling = this.scrolling;
     this.scrolling.off(Scrolling.UPDATE, this.onUpdate);
     return this;
   }
+
   /**
    * Scrolling.UPDATE event handler - {link Hit.test} 衝突判定を行います
    * @param {ScrollEvents} scrollEvents scroll events object
@@ -143,14 +127,7 @@ export default class Rising extends EventDispatcher {
     const offset = this.elements.offset();
     // hit result
     const hit = Hit.test(scrollEvents.height, offset);
-    // // @type {?Elements}
-    // let events = null;
-    // if (hit.result) {
-    //   events = new Events(Rising.COLLISION, this, this);
-    // } else {
-    //   events = new Events(Rising.ALIEN, this, this);
-    // }
-    const events = this.events;
+    const { events } = this;
     events.type = hit.result ? Rising.COLLISION : Rising.ALIEN;
     // hit / original / offset を追加します
     events.hit = hit;

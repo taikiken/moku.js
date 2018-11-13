@@ -68,6 +68,7 @@ export default class EventDispatcher {
      */
     this.listeners = Object.create({});
   }
+
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
@@ -77,6 +78,7 @@ export default class EventDispatcher {
   destroy() {
     this.listeners = Object.create({});
   }
+
   /**
    * event type に リスナー関数を bind します
    * @param {string} type event type（種類）
@@ -94,7 +96,7 @@ export default class EventDispatcher {
     }
 
     // type {Object} - {{eventType: array [listener: Function...]...}}
-    const listeners = this.listeners;
+    const { listeners } = this;
 
     if (!Type.has(listeners, type)) {
       // listeners.type が存在しない場合は
@@ -106,6 +108,7 @@ export default class EventDispatcher {
     listeners[type].push(listener);
     return true;
   }
+
   /**
    * <p>event type からリスナー関数を remove します<br>
    * 内部処理は一時的に null 設定にします</p>
@@ -120,7 +123,7 @@ export default class EventDispatcher {
     }
 
     // @type {Object} - events.type:String: [listener:Function...]
-    const listeners = this.listeners;
+    const { listeners } = this;
     if (!Type.has(listeners, type)) {
       // listener.type が存在しない
       // 処理しない
@@ -148,6 +151,7 @@ export default class EventDispatcher {
 
     return true;
   }
+
   /**
    * <p>リスナー配列を調べ可能なら空にします<br>
    * リスナーリストが全て null の時に 空配列にします</p>
@@ -170,6 +174,7 @@ export default class EventDispatcher {
     // 空配列にしたかを hasFunction flag を反転させることで知らせます
     return !hasFunction;
   }
+
   /**
    * event type にリスナー関数が登録されているかを調べます
    * @param {string} type event type（種類）
@@ -183,7 +188,7 @@ export default class EventDispatcher {
     }
 
     // @type {Object} - events.type:String: [listener:Function...]
-    const listeners = this.listeners;
+    const { listeners } = this;
 
     if (!Type.has(listeners, type)) {
       // listener.type が存在しない
@@ -194,6 +199,7 @@ export default class EventDispatcher {
     // @type {boolean} - 存在チェック
     return listeners[type].indexOf(listener) !== -1;
   }
+
   /**
    * イベントを発生させリスナー関数を call します
    * @param {Events|*} events 送信される Event Object.<br>
@@ -202,9 +208,9 @@ export default class EventDispatcher {
    */
   dispatch(events) {
     // @type {Object} - events.type:string: [listener:Function...]
-    const listeners = this.listeners;
+    const { listeners } = this;
     // @type {string} - event type
-    const type = events.type;
+    const { type } = events;
 
     if (!Type.has(listeners, type)) {
       // listener.type が存在しない
@@ -234,6 +240,7 @@ export default class EventDispatcher {
 
     return true;
   }
+
   /**
    * **alias on**
    * <p>event type に リスナー関数を bind します</p>
@@ -245,6 +252,7 @@ export default class EventDispatcher {
   addEventListener(type, listener) {
     return this.on(type, listener);
   }
+
   /**
    * **alias off**
    * <p>event type からリスナー関数を remove します</p>
@@ -256,6 +264,7 @@ export default class EventDispatcher {
   removeEventListener(type, listener) {
     return this.off(type, listener);
   }
+
   /**
    * **alias has**
    * <p>event type にリスナー関数が登録されているかを調べます</p>
@@ -267,6 +276,7 @@ export default class EventDispatcher {
   hasEventListener(type, listener) {
     return this.has(type, listener);
   }
+
   /**
    * **alias dispatch**
    * <p>イベントを発生させリスナー関数を call します</p>

@@ -106,6 +106,7 @@ export default class Cookie {
      */
     this.setSecure = (setting) => { secure = setting; };
   }
+
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
@@ -129,6 +130,7 @@ export default class Cookie {
   set(value, end = this.end(), path = this.path(), domain = this.domain(), secure = this.secure()) {
     return Cookie.set(this.key(), value, end, path, domain, secure);
   }
+
   /**
    * cookie を削除します
    * @returns {boolean} true: cookie 削除成功
@@ -136,6 +138,7 @@ export default class Cookie {
   remove() {
     return Cookie.remove(this.key());
   }
+
   // ----------------------------------------
   // STATIC METHOD
   // ----------------------------------------
@@ -145,11 +148,12 @@ export default class Cookie {
    * @returns {string|null} cookie value
    */
   static get(key) {
-    const cookie = document.cookie;
+    const { cookie } = document;
     const escapeKey = encodeURIComponent(key).replace(/[-.+*]/g, '\\$&');
     const exp = new RegExp(`(?:(?:^|.*;)\\s*${escapeKey}\\s*\\=\\s*([^;]*).*$)|^.*$`);
     return decodeURIComponent(cookie.replace(exp, '$1')) || null;
   }
+
   /**
    * cookie value を設定します
    * @param {string} key cookie key
@@ -177,6 +181,7 @@ export default class Cookie {
     document.cookie = cookie;
     return cookie;
   }
+
   /**
    * cookie を削除します
    *
@@ -191,6 +196,7 @@ export default class Cookie {
     }
     return false;
   }
+
   /**
    * cookie key が存在するかを調べます
    * @param {string} key cookie key

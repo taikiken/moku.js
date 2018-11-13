@@ -86,6 +86,7 @@ export default class Times {
   static present() {
     return new Date();
   }
+
   /**
    * 指定分後の Date instance
    * @param {number} n 指定分
@@ -94,6 +95,7 @@ export default class Times {
   static minute(n) {
     return new Date(Date.now() + (n * oneMinute));
   }
+
   /**
    * 指定時間後の Date instance
    * @param {number} n 指定時間
@@ -102,6 +104,7 @@ export default class Times {
   static hour(n) {
     return new Date(Date.now() + (n * oneHour));
   }
+
   /**
    * 指定日後の Date instance
    * @param {number} n 指定日
@@ -110,6 +113,7 @@ export default class Times {
   static day(n) {
     return new Date(Date.now() + (n * oneDay));
   }
+
   /**
    * 指定週後の Date instance
    * @param {number} n 指定週
@@ -118,6 +122,7 @@ export default class Times {
   static week(n) {
     return new Date(Date.now() + (n * oneWeek));
   }
+
   /**
    * 指定月後の Date instance
    * @param {number} n 指定月

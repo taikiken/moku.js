@@ -53,8 +53,8 @@ export default class Hit {
 
     // include check を行います
     if (
-      (offset.top >= 0 && offset.top <= height) &&
-      (offset.bottom >= 0 && offset.bottom <= height)
+      (offset.top >= 0 && offset.top <= height)
+      && (offset.bottom >= 0 && offset.bottom <= height)
     ) {
       hit.include = true;
     }

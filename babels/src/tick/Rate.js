@@ -49,61 +49,73 @@ export default class Rate extends Polling {
    * @type {number}
    */
   static RATE_60 = 1;
+
   /**
    * fps 30 基準値
    * @type {number}
    */
   static RATE_30 = 2;
+
   /**
    * fps 20 基準値
    * @type {number}
    */
   static RATE_20 = 3;
+
   /**
    * fps 15 基準値
    * @type {number}
    */
   static RATE_15 = 4;
+
   /**
    * fps 12 基準値
    * @type {number}
    */
   static RATE_12 = 5;
+
   /**
    * fps 10 基準値
    * @type {number}
    */
   static RATE_10 = 6;
+
   /**
    * fps 6 基準値
    * @type {number}
    */
   static RATE_6 = 10;
+
   /**
    * fps 5 基準値
    * @type {number}
    */
   static RATE_5 = 12;
+
   /**
    * fps 4 基準値
    * @type {number}
    */
   static RATE_4 = 15;
+
   /**
    * fps 3 基準値
    * @type {number}
    */
   static RATE_3 = 20;
+
   /**
    * fps 2 基準値
    * @type {number}
    */
   static RATE_2 = 30;
+
   /**
    * fps 1 基準値
    * @type {number}
    */
   static RATE_1 = 60;
+
   // ----------------------------------------
   // EVENT
   // ----------------------------------------
@@ -113,6 +125,7 @@ export default class Rate extends Polling {
    * @type {string}
    */
   static UPDATE = 'rateUpdate';
+
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
@@ -164,6 +177,7 @@ export default class Rate extends Polling {
      */
     this.rate = this.validate(rateValue) ? rateValue : Rate.RATE_5;
   }
+
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
@@ -181,6 +195,7 @@ export default class Rate extends Polling {
     }
     return null;
   }
+
   /**
    * 正規な rate 値かをチェックします
    * @param {number} rate 対象 rate
@@ -189,6 +204,7 @@ export default class Rate extends Polling {
   validate(rate) {
     return this.rates.indexOf(rate) !== -1;
   }
+
   /**
    * fps 基準値を設定します
    * @throws {Error} 引数 rate が設定可能値以外の時に例外エラーが発生します
@@ -201,6 +217,7 @@ export default class Rate extends Polling {
     this.setRate(rate);
     return this.start();
   }
+
   /**
    * {@link Cycle}.UPDATE event handler
    *

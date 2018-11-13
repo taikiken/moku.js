@@ -43,6 +43,7 @@ export default class Polling extends EventDispatcher {
    * @type {string}
    */
   static UPDATE = 'pollingUpdate';
+
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
@@ -78,6 +79,7 @@ export default class Polling extends EventDispatcher {
      */
     this.begin = 0;
   }
+
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
@@ -92,6 +94,7 @@ export default class Polling extends EventDispatcher {
     this.interval = interval;
     return this.start();
   }
+
   /**
    * polling を開始します
    * @returns {boolean} start に成功すると true を返します
@@ -104,6 +107,7 @@ export default class Polling extends EventDispatcher {
     this.cycle.on(Cycle.UPDATE, this.onUpdate);
     return true;
   }
+
   /**
    * polling を止めます
    * @returns {boolean} stop に成功すると true を返します
@@ -112,6 +116,7 @@ export default class Polling extends EventDispatcher {
     this.cycle.off(Cycle.UPDATE, this.onUpdate);
     return true;
   }
+
   /**
    * Cycle.UPDATE event handler, polling を計測しイベントを発火するかを判断します
    *
@@ -124,9 +129,9 @@ export default class Polling extends EventDispatcher {
     // @type {number}
     const present = Date.now();
     // @type {number} - interval 間隔
-    const interval = this.interval;
+    // const interval = this.interval;
     // @type {number} - 開始時間
-    const begin = this.begin;
+    const { begin, interval } = this;
     // 現在時間 が interval より大きくなったか
     if ((present - begin) >= interval) {
       // event 発火
@@ -138,6 +143,7 @@ export default class Polling extends EventDispatcher {
     }
     return false;
   }
+
   // -----
   // event create & fire
   /**
@@ -150,13 +156,14 @@ export default class Polling extends EventDispatcher {
   updateEvents(begin, present, cycleEvents) {
     this.begin = begin;
     // @type {Events} - start event
-    const events = this.events;
+    const { events } = this;
     events.begin = begin;
     events.present = present;
     events.interval = this.interval;
     events.cycleEvents = cycleEvents;
     return events;
   }
+
   /**
    * Polling.UPDATE event を発生します
    * @param {Events} events Polling.UPDATE event object

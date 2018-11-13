@@ -27,7 +27,7 @@
 // - requestAnimationFrame
 // - promise-polyfill
 // - whatwg-fetch
-import './polyfill/';
+import './polyfill';
 
 // event
 import EventDispatcher from './event/EventDispatcher';

@@ -24,9 +24,9 @@ const animationFrame = () => {
   const vendors = ['ms', 'moz', 'webkit', 'o'];
   // add vendor prefix
   vendors.some((prefix) => {
-    window.requestAnimationFrame = self[`${prefix}RequestAnimationFrame`];
-    window.cancelAnimationFrame = self[`${prefix}CancelAnimationFrame`] ||
-      self[`${prefix}CancelRequestAnimationFrame`];
+    window.requestAnimationFrame = window[`${prefix}RequestAnimationFrame`];
+    window.cancelAnimationFrame = window[`${prefix}CancelAnimationFrame`]
+      || window[`${prefix}CancelRequestAnimationFrame`];
     // return false;
     return !!window.requestAnimationFrame;
   });

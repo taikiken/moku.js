@@ -51,6 +51,7 @@ export default class Scroll extends EventDispatcher {
   static jump(y = 0, delay = 0) {
     return setTimeout(() => { window.scrollTo(0, y); }, delay);
   }
+
   /**
    * {@link Freeze}.freeze を実行し scroll 操作を一定期間不能にします
    * @returns {number} time out ID
@@ -58,6 +59,7 @@ export default class Scroll extends EventDispatcher {
   static freeze() {
     return Freeze.freeze();
   }
+
   /**
    * scroll top 位置
    * @returns {number} scroll top 位置を返します
@@ -65,10 +67,13 @@ export default class Scroll extends EventDispatcher {
    * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
    */
   static y() {
-    return (typeof window.pageYOffset !== 'undefined') ?
-      window.pageYOffset :
-      (document.documentElement || document.body.parentNode || document.body).scrollTop;
+    return (typeof window.pageYOffset !== 'undefined')
+      ? window.pageYOffset
+      : (document.documentElement
+        || document.body.parentNode
+        || document.body).scrollTop;
   }
+
   // ----------------------------------------
   /**
    * Scroll instance を singleton を保証し作成します
@@ -80,6 +85,7 @@ export default class Scroll extends EventDispatcher {
     }
     return instance;
   }
+
   // ----------------------------------------
   // EVENT
   // ----------------------------------------
@@ -92,6 +98,7 @@ export default class Scroll extends EventDispatcher {
   static get SCROLL() {
     return 'scrollScroll';
   }
+
   // ---------------------------------------------------
   //  CONSTRUCTOR
   // ---------------------------------------------------
@@ -147,6 +154,7 @@ export default class Scroll extends EventDispatcher {
     // 設定済み instance を返します
     return this;
   }
+
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
@@ -163,6 +171,7 @@ export default class Scroll extends EventDispatcher {
     window.addEventListener('scroll', this.onScroll, false);
     return this;
   }
+
   /**
    * scroll event を監視を止めます
    * @returns {Scroll} method chain 可能なように instance を返します
@@ -175,6 +184,7 @@ export default class Scroll extends EventDispatcher {
     window.removeEventListener('scroll', this.onScroll);
     return this;
   }
+
   /**
    * window scroll event handler<br>
    * window scroll event 発生後に scroll top 位置をもたせた Scroll.SCROLL custom event を発火します
@@ -185,20 +195,18 @@ export default class Scroll extends EventDispatcher {
     // @type {number} - scroll top
     const y = Scroll.y();
     // @type {number} - window height
-    const height = window.innerHeight;
+    const { innerHeight } = window;
     // @type {number} - 前回の scroll top
-    const previous = this.previous;
-
     // @type {Events} - events
-    const events = this.events;
+    const { events, previous } = this;
     // @type {Event} - scroll event
     events.original = event;
     // @type {number} - scroll top
     events.y = y;
     // @type {number} - window height
-    events.height = height;
+    events.height = innerHeight;
     // @type {number} - window bottom(y + height)
-    events.bottom = y + height;
+    events.bottom = y + innerHeight;
     events.previous = previous;
     // @type {boolean} - 前回の scroll top と比較し移動したかを真偽値で取得します, true: 移動した
     events.changed = previous !== y;

@@ -65,6 +65,7 @@ export default class Patterns {
       ],
     };
   }
+
   /**
    * 引数 `str` が調査対象 className かを判定します
    * @param {string} str CSS className
@@ -76,6 +77,7 @@ export default class Patterns {
     // settings パターンキーと合致してるかを調査します
     return Object.keys(Patterns.settings()).indexOf(key) !== -1;
   }
+
   /**
    * 引数 `str` をキーにした操作対象のリストを取得します
    * @param {string} str CSS className

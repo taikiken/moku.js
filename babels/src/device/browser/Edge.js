@@ -27,7 +27,7 @@ let browsers = null;
  * @since 0.4.2
  */
 const version = () => {
-  const app = devices.app;
+  const { app } = devices;
   const numbers = app.match(/edge\/(\d+)\.(\d+)\.?(\d+)?/i);
   if (!Array.isArray(numbers)) {
     return;
@@ -37,7 +37,7 @@ const version = () => {
   const versions = numbers.map((number, index) => {
     const int = parseInt(number, 10);
     if (index <= 3) {
-      return isNaN(int) ? 0 : int;
+      return Number.isNaN(int) ? 0 : int;
     }
     return null;
   });
@@ -70,7 +70,7 @@ const init = () => {
     return;
   }
   browsers = Object.assign({}, devices.browsers);
-  const ua = devices.ua;
+  const { ua } = devices;
   const edge = !!ua.match(/edge/i);
   browsers.edge = edge;
   if (edge) {
@@ -91,6 +91,7 @@ export default class Edge {
     init();
     return browsers;
   }
+
   /**
    * Edge 判定
    * @returns {boolean} true: Edge
@@ -99,6 +100,7 @@ export default class Edge {
     init();
     return browsers.edge;
   }
+
   /**
    * Edge Browser version
    * @returns {number} Edge version, not Android -1
@@ -107,6 +109,7 @@ export default class Edge {
     init();
     return browsers.version;
   }
+
   /**
    * Edge Browser major version
    * @returns {number} Edge major version, not Android -1
@@ -115,6 +118,7 @@ export default class Edge {
     init();
     return browsers.major;
   }
+
   /**
    * Edge Browser version `major.minor.build`
    * @returns {string} Edge version NN.NN.NN.NN 型（文字）で返します
@@ -123,6 +127,7 @@ export default class Edge {
     init();
     return browsers.build;
   }
+
   /**
    * version を配列形式で取得します
    * @returns {Array.<number>} {{major: int, minor: int, build: int, option: number}} 形式で返します

@@ -58,6 +58,7 @@ export default class Cycle extends EventDispatcher {
    * @type {string}
    */
   static UPDATE = 'cycleUpdate';
+
   // ----------------------------------------
   // STATIC METHOD
   // ----------------------------------------
@@ -71,6 +72,7 @@ export default class Cycle extends EventDispatcher {
     }
     return instance;
   }
+
   // ----------------------------------------
   //  CONSTRUCTOR
   // ----------------------------------------
@@ -111,6 +113,7 @@ export default class Cycle extends EventDispatcher {
     // 設定済み instance を返します
     return this;
   }
+
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
@@ -126,6 +129,7 @@ export default class Cycle extends EventDispatcher {
     }
     this.onUpdate();
   }
+
   /**
    * loop(cancelAnimationFrame) を止めます
    * @param {number} [id] requestAnimationFrame id を使い cancelAnimationFrame をします
@@ -133,6 +137,7 @@ export default class Cycle extends EventDispatcher {
   stop(id = this.id) {
     cancelAnimationFrame(id);
   }
+
   // ----------------------------------------
   // PRIVATE METHOD
   // ----------------------------------------
@@ -148,7 +153,7 @@ export default class Cycle extends EventDispatcher {
     this.id = id;
 
     // @type {Events} - events
-    const events = this.events;
+    const { events } = this;
     events.id = id;
     events.time = time;
     // event fire

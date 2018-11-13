@@ -29,7 +29,7 @@ let browsers = null;
  * @since 0.4.2
  */
 const version = () => {
-  const app = devices.app;
+  const { app } = devices;
   const numbers = app.match(/chrome\/(\d+)\.(\d+)\.(\d+)\.?(\d+)?/i);
   if (!Array.isArray(numbers)) {
     return;
@@ -39,7 +39,7 @@ const version = () => {
   const versions = numbers.map((number, index) => {
     const int = parseInt(number, 10);
     if (index <= 3) {
-      return isNaN(int) ? 0 : int;
+      return Number.isNaN(int) ? 0 : int;
     }
     return null;
   });
@@ -80,7 +80,7 @@ const init = () => {
       // iOS chrome
       chrome = true;
     } else {
-      const ua = devices.ua;
+      const { ua } = devices;
       chrome = !!ua.match(/chrome/i);
     }
   }
@@ -103,6 +103,7 @@ export default class Chrome {
     init();
     return browsers;
   }
+
   /**
    * Chrome 判定
    * @returns {boolean} true: Chrome
@@ -111,6 +112,7 @@ export default class Chrome {
     init();
     return browsers.chrome;
   }
+
   /**
    * Chrome Browser version
    * @returns {number} Chrome version, not Android -1
@@ -119,6 +121,7 @@ export default class Chrome {
     init();
     return browsers.version;
   }
+
   /**
    * Chrome Browser major version
    * @returns {number} Chrome major version, not Android -1
@@ -127,6 +130,7 @@ export default class Chrome {
     init();
     return browsers.major;
   }
+
   /**
    * Chrome Browser version `major.minor.build`
    * @returns {string} Chrome version NN.NN.NN.NN 型（文字）で返します
@@ -135,6 +139,7 @@ export default class Chrome {
     init();
     return browsers.build;
   }
+
   /**
    * version を配列形式で取得します
    * @returns {Array.<number>} {{major: int, minor: int, build: int, option: number}} 形式で返します

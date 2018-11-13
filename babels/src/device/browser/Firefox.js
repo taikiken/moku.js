@@ -26,8 +26,8 @@ let browsers = null;
  * @since 0.4.2
  */
 const version = () => {
-  const app = devices.ua;
-  const numbers = app.match(/firefox\/(\d+)\.?(\d+)?/i);
+  const { ua } = devices;
+  const numbers = ua.match(/firefox\/(\d+)\.?(\d+)?/i);
   if (!Array.isArray(numbers)) {
     return;
   }
@@ -35,7 +35,7 @@ const version = () => {
   numbers.shift();
   // array
   const intArr = numbers.map(number => (parseInt(number, 10)));
-  const versions = intArr.filter(int => !isNaN(int));
+  const versions = intArr.filter(int => !Number.isNaN(int));
   browsers.build = versions.join('.');
   const major = parseInt(versions[0], 10);
   let minor = 0;
@@ -65,7 +65,7 @@ const init = () => {
     return;
   }
   browsers = Object.assign({}, devices.browsers);
-  const ua = devices.ua;
+  const { ua } = devices;
   const firefox = !!ua.match(/firefox/i);
   browsers.firefox = firefox;
   if (firefox) {
@@ -86,6 +86,7 @@ export default class Firefox {
     init();
     return browsers;
   }
+
   /**
    * iOS Chrome 判定
    * @returns {boolean} true: iOS Chrome
@@ -94,6 +95,7 @@ export default class Firefox {
     init();
     return browsers.firefox;
   }
+
   /**
    * Firefox Browser version
    * @returns {number} Firefox version, not Android -1
@@ -102,6 +104,7 @@ export default class Firefox {
     init();
     return browsers.version;
   }
+
   /**
    * Firefox Browser major version
    * @returns {number} Firefox major version, not Android -1
@@ -110,6 +113,7 @@ export default class Firefox {
     init();
     return browsers.major;
   }
+
   /**
    * Firefox Browser version `major.minor.build`
    * @returns {string} Firefox version NN.NN.NN.NN 型（文字）で返します
@@ -118,6 +122,7 @@ export default class Firefox {
     init();
     return browsers.build;
   }
+
   /**
    * version を配列形式で取得します
    * @returns {Array.<number>} {{major: int, minor: int, build: int, option: number}} 形式で返します

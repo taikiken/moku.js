@@ -60,7 +60,7 @@ const init = () => {
     return;
   }
   browsers = Object.assign({}, devices.browsers);
-  const ua = devices.ua;
+  const { ua } = devices;
   let ie = !!ua.match(/msie/i);
   browsers.ie = ie;
   if (ie) {
@@ -93,6 +93,7 @@ export default class IE {
     init();
     return browsers;
   }
+
   /**
    * IE 判定
    * @returns {boolean} true: IE
@@ -101,6 +102,7 @@ export default class IE {
     init();
     return browsers.ie;
   }
+
   /**
    * IE 6 判定
    * @returns {boolean} true: IE 6
@@ -109,6 +111,7 @@ export default class IE {
     init();
     return browsers.ie6;
   }
+
   /**
    * IE 7 判定
    * @returns {boolean} true: IE 7
@@ -117,6 +120,7 @@ export default class IE {
     init();
     return browsers.ie7;
   }
+
   /**
    * IE 8 判定
    * @returns {boolean} true: IE 8
@@ -125,6 +129,7 @@ export default class IE {
     init();
     return browsers.ie8;
   }
+
   /**
    * IE 9 判定
    * @returns {boolean} true: IE 9
@@ -133,6 +138,7 @@ export default class IE {
     init();
     return browsers.ie9;
   }
+
   /**
    * IE 10 判定
    * @returns {boolean} true: IE 10
@@ -141,6 +147,7 @@ export default class IE {
     init();
     return browsers.ie10;
   }
+
   /**
    * IE 11 判定
    * @returns {boolean} true: IE 11
@@ -149,6 +156,7 @@ export default class IE {
     init();
     return browsers.ie11;
   }
+
   /**
    * IE Browser version
    * @returns {number} IE version, not Android -1
@@ -157,6 +165,7 @@ export default class IE {
     init();
     return browsers.version;
   }
+
   /**
    * IE Browser major version
    * @returns {number} IE major version, not Android -1
@@ -165,6 +174,7 @@ export default class IE {
     init();
     return browsers.major;
   }
+
   /**
    * IE Browser version `major.minor.build`
    * @returns {string} IE version NN.NN.NN.NN 型（文字）で返します
@@ -173,6 +183,7 @@ export default class IE {
     init();
     return browsers.build;
   }
+
   /**
    * version を配列形式で取得します
    * @returns {Array.<number>} {{major: int, minor: int, build: int, option: number}} 形式で返します
