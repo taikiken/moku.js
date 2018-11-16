@@ -20,4 +20,5 @@
 // specify useBuiltIns: true in presets options (see more)
 // include import "babel-polyfill" to your codebase.
 // ```
+// eslint-disable-next-line import/no-unresolved
 import 'babel-polyfill';

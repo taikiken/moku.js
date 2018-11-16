@@ -57,8 +57,8 @@ rules:
   max-len:
    - 1
    - {
-      "ignoreComments": true,
-      "code": 100,
+      ignoreComments: true,
+      code: 100,
      }
 #  # eslint@4.6.1, eslint-plugin-jsx-a11y@6.0.2, gulp-eslint@4.0.0
 #  # ERROR: Definition for rule 'jsx-a11y/href-no-hash' was not found  jsx-a11y/href-no-hash
