@@ -40,14 +40,19 @@ const version = () => {
     return null;
   });
   props.build = versions.join('.');
-  const major = parseInt(versions[0], 10);
+  const {
+    strMajor,
+    strMinor,
+    strBuild,
+  } = versions;
+  const major = parseInt(strMajor, 10);
   let minor = 0;
   if (versions.length >= 2) {
-    minor = versions[1];
+    minor = strMinor;
   }
   let build = '';
   if (versions.length >= 3) {
-    build = versions[2];
+    build = strBuild;
   }
   props.major = major;
   props.version = parseFloat(`${major}.${minor}${build}`);

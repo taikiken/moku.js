@@ -206,6 +206,7 @@ export default class Can {
         const opts = Object.defineProperty({}, 'passive', {
           get() {
             supportsPassive = true;
+            return supportsPassive;
           },
         });
         window.addEventListener('test', null, opts);

@@ -44,18 +44,24 @@ const version = () => {
     return null;
   });
   browsers.build = versions.join('.');
-  const major = parseInt(versions[0], 10);
+  const {
+    strMajor,
+    strMinor,
+    strBuild,
+    strOption,
+  } = versions;
+  const major = parseInt(strMajor, 10);
   let minor = 0;
   if (versions.length >= 2) {
-    minor = versions[1];
+    minor = strMinor;
   }
   let build = '';
   if (versions.length >= 3) {
-    build = versions[2];
+    build = strBuild;
   }
   let option = '';
   if (versions.length === 4) {
-    option = versions[3];
+    option = strOption;
   }
   browsers.major = major;
   browsers.version = parseFloat(`${major}.${minor}${build}${option}`);
