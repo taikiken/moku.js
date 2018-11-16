@@ -199,9 +199,9 @@ export default class Iro {
       // r: parseInt(r * 255, 10),
       // g: parseInt(g * 255, 10),
       // b: parseInt(b * 255, 10),
-      r: r * 255,
-      g: g * 255,
-      b: b * 255,
+      r: Math.round(r * 255),
+      g: Math.round(g * 255),
+      b: Math.round(b * 255),
     };
   }
 
