@@ -1,5 +1,5 @@
 /**
- * @license inazumatv.com
+ * license inazumatv.com
  * @author (at)taikiken / http://inazumatv.com
  * @date 2016/11/04
  *
