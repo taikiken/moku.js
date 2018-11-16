@@ -61,16 +61,19 @@ export default class Wheel extends EventDispatcher {
    * @type {string}
    */
   static UP = 'wheelUp';
+
   /**
    * wheel down で発生するイベント - wheelDown
    * @type {string}
    */
   static DOWN = 'wheelDown';
+
   /**
    * wheel move で発生するイベント - wheelUpdate
    * @type {string}
    */
   static UPDATE = 'wheelUpdate';
+
   // // ----------------------------------------
   // // STATIC METHOD
   // // ----------------------------------------
@@ -150,6 +153,7 @@ export default class Wheel extends EventDispatcher {
     // 設定済み instance を返します
     // return this;
   }
+
   // // ----------------------------------------
   // // EVENT
   // // ----------------------------------------
@@ -180,6 +184,7 @@ export default class Wheel extends EventDispatcher {
   reset() {
     this.moved = 0;
   }
+
   /**
    * mousewheel event を監視します
    * @returns {Wheel} method chain 可能なように instance を返します
@@ -195,6 +200,7 @@ export default class Wheel extends EventDispatcher {
     window.addEventListener('wheel', this.onMouseWheel, false);
     return this;
   }
+
   /**
    * mousewheel event を監視を止めます
    * @returns {Wheel} method chain 可能なように instance を返します
@@ -207,6 +213,7 @@ export default class Wheel extends EventDispatcher {
     window.removeEventListener('wheel', this.onMouseWheel);
     return this;
   }
+
   /**
    * window mousewheel event handler
    * <p>delta 値を取得し `this.moving` を実行します</p>
@@ -216,9 +223,10 @@ export default class Wheel extends EventDispatcher {
    * @returns {number} 前回移動量に delta 値 を加算した値を返します
    */
   onMouseWheel(event) {
-    const wheelDelta = event.deltaY;
-    return this.moving(wheelDelta);
+    const { deltaY } = event;
+    return this.moving(deltaY);
   }
+
   /**
    * mouse delta から移動量を計算します
    * @param {number} delta mouse delta 値
@@ -231,7 +239,7 @@ export default class Wheel extends EventDispatcher {
      */
     this.moved += delta;
     // @type {number}
-    const moved = this.moved;
+    const { moved } = this;
 
     // 0 check
     if (moved === 0) {
@@ -259,6 +267,7 @@ export default class Wheel extends EventDispatcher {
     // 閾値を超えていないので処理をしない
     return moved;
   }
+
   /**
    * scroll up イベントを発火します
    * @param {number} moved 移動量
@@ -272,6 +281,7 @@ export default class Wheel extends EventDispatcher {
 
     return moved;
   }
+
   /**
    * scroll down イベントを発火します
    * @param {number} moved 移動量
@@ -285,6 +295,7 @@ export default class Wheel extends EventDispatcher {
 
     return moved;
   }
+
   /**
    * scroll update イベントを発火します
    * @param {number} moved 移動量

@@ -1,5 +1,5 @@
 /**
- * @license inazumatv.com
+ * license inazumatv.com
  * @author (at)taikiken / http://inazumatv.com
  * @date 2016/10/08
  *
@@ -49,6 +49,7 @@ export default class Touching extends EventDispatcher {
    * @since 0.3.2
    */
   static event3rd = Can.passive() ? { passive: true } : false;
+
   // ---------------------------------------------------
   //  CONSTANT / EVENT
   // ---------------------------------------------------
@@ -58,30 +59,35 @@ export default class Touching extends EventDispatcher {
    * @type {string}
    */
   static START = 'touchingStart';
+
   /**
    * touchend event type - touchingEnd
    * @constant END
    * @type {string}
    */
   static END = 'touchingEnd';
+
   /**
    * touchcancel event type - touchingCancel
    * @constant CANCEL
    * @type {string}
    */
   static CANCEL = 'touchingCancel';
+
   /**
    * touchmove event type - touchingMove
    * @constant MOVE
    * @type {string}
    */
   static MOVE = 'touchingMove';
+
   /**
    * touch event type - touchingTouch
    * @constant TOUCH
    * @type {string}
    */
   static TOUCH = 'touchingTouch';
+
   // ----------------------------------------
   // STATIC METHOD
   // ----------------------------------------
@@ -97,6 +103,7 @@ export default class Touching extends EventDispatcher {
     // 正数値にし閾値と比較
     return Math.abs(y) >= threshold;
   }
+
   /**
    * MouseEvent|TouchEvent から pageX / pageY 座標を取得します
    * @param {Event|MouseEvent|TouchEvent} event down / move / up event object
@@ -129,6 +136,7 @@ export default class Touching extends EventDispatcher {
     const touch = touches[0];
     return { x: touch.pageX, y: touch.pageY };
   }
+
   // ---------------------------------------------------
   //  CONSTRUCTOR
   // ---------------------------------------------------
@@ -218,6 +226,7 @@ export default class Touching extends EventDispatcher {
      */
     this.kitkat = Android.kitKat();
   }
+
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
@@ -234,14 +243,14 @@ export default class Touching extends EventDispatcher {
     // vectors を初期化
     this.reset();
     // 現在 position を保存
-    const vectors = this.vectors;
+    const { vectors, body, eventOption } = this;
     const point = Touching.point(event);
     vectors.start.update(point.x, point.y);
     vectors.moving.push(vectors.start);
 
     // キャンセル event 監視を開始
-    const eventOption = this.eventOption;
-    const body = this.body;
+    // const eventOption = this.eventOption;
+    // const body = this.body;
     body.addEventListener('touchend', this.onEnd, eventOption);
     body.addEventListener('touchmove', this.onMove, eventOption);
     body.addEventListener('touchcancel', this.onCancel, eventOption);
@@ -254,6 +263,7 @@ export default class Touching extends EventDispatcher {
       vectors.start,
     ));
   }
+
   /**
    * touchmove event handler
    * - Android 4.3 ~ 4.4 && standard browser のために `kitkatEnd` を実行します
@@ -262,7 +272,7 @@ export default class Touching extends EventDispatcher {
    */
   onMove(event) {
     // console.log('Touching.onMove', event);
-    const vectors = this.vectors;
+    const { vectors } = this;
     const movingArray = vectors.moving;
 
     // 現在 position
@@ -302,6 +312,7 @@ export default class Touching extends EventDispatcher {
       this.kitkatEnd(event);
     }
   }
+
   /**
    * Android 4.3 ~ 4.4 && standard browser - browser bug のため `touchend` が発火しません
    * - `touchmove` も 1 回だけ発火します - touchmove の後に本 method `kitkatEnd` を実行します
@@ -315,6 +326,7 @@ export default class Touching extends EventDispatcher {
       this.onEnd(event);
     }, 32);
   }
+
   /**
    * touchend event handler
    * - {@link Touching}.[END|TOUCH] を発火します
@@ -322,7 +334,7 @@ export default class Touching extends EventDispatcher {
    */
   onEnd(event) {
     // console.log('Touching.onEnd', event);
-    const vectors = this.vectors;
+    const { vectors } = this;
 
     // 現在 position
     const point = Touching.point(event);
@@ -363,6 +375,7 @@ export default class Touching extends EventDispatcher {
     // ---
     this.dispose();
   }
+
   /**
    * touchcancel event handler<br>
    * 処理をキャンセルします
@@ -372,6 +385,7 @@ export default class Touching extends EventDispatcher {
   onCancel(event) {
     return this.abort(event);
   }
+
   /**
    * window.blur event handler<br>
    * 処理をキャンセルします
@@ -381,6 +395,7 @@ export default class Touching extends EventDispatcher {
   onBlur(event) {
     return this.abort(event);
   }
+
   // 処理
   // ---------------------------------------------------
   /**
@@ -394,6 +409,7 @@ export default class Touching extends EventDispatcher {
     this.element.addEventListener('touchstart', this.onStart, this.eventOption);
     window.addEventListener('blur', this.onBlur, false);
   }
+
   /**
    * touch event 監視を停止します
    * @since 0.4.4
@@ -403,6 +419,7 @@ export default class Touching extends EventDispatcher {
     window.removeEventListener('blur', this.onBlur);
     this.dispose();
   }
+
   /**
    * @deprecated instead use `start`
    * 初期処理<br>
@@ -415,6 +432,7 @@ export default class Touching extends EventDispatcher {
     // window.addEventListener('blur', this.onBlur, false);
     this.start();
   }
+
   /**
    * touch event での処理をキャンセルし、設定値を初期値に戻します
    * @param {Event} event touch / window.onblur Event
@@ -430,25 +448,27 @@ export default class Touching extends EventDispatcher {
     ));
     return true;
   }
+
   /**
    * bind した event を unbind します
    * @returns {boolean} 正常終了時に true を返します
    */
   dispose() {
-    const body = this.body;
+    const { body } = this;
 
     body.removeEventListener('touchend', this.onEnd);
     body.removeEventListener('touchmove', this.onMove);
     body.removeEventListener('touchcancel', this.onCancel);
     return true;
   }
+
   /**
    * 移動監視に使用した vectors instance を全て reset します
    * @returns {{start: Vectors, end: Vectors, moving: Array.<Vectors>}}
    * reset 後の vectors object を返します
    */
   reset() {
-    const vectors = this.vectors;
+    const { vectors } = this;
     vectors.start.reset();
     vectors.end.reset();
     vectors.moving = [].slice(0);

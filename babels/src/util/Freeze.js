@@ -19,12 +19,14 @@ export default class Freeze {
    * @type {number}
    */
   static timerId = 0;
+
   /**
    * scroll を止める時間
    * @type {number}
    * @default 200
    */
   static delay = 200;
+
   /**
    * scroll 動作を受付不能にします
    * @returns {void}
@@ -38,6 +40,7 @@ export default class Freeze {
     document.addEventListener('mousewheel', Freeze.onScroll, false);
     window.addEventListener('DOMMouseScroll', Freeze.onScroll, false);
   }
+
   /**
    * scroll 動作を回復します
    * @returns {void}
@@ -51,6 +54,7 @@ export default class Freeze {
     document.removeEventListener('mousewheel', Freeze.onScroll);
     window.removeEventListener('DOMMouseScroll', Freeze.onScroll);
   }
+
   /**
    * window scroll event handler, バブリング・伝播全てキャンセルします
    * @param {Event} event window scroll event
@@ -61,6 +65,7 @@ export default class Freeze {
     event.stopPropagation();
     return false;
   }
+
   /**
    * scroll 操作を引数(delay)の間キャンセルします
    * @param {number} [delay=200] 遅延時間(ms), 200

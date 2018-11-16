@@ -3,18 +3,14 @@
  * @author (at)taikiken / http://inazumatv.com
  * @date 2016/06/30 - 17:54
  *
+ * @license MIT
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
  *
  * This notice shall be included in all copies or substantial portions of the Software.
- * @@version
- * @@buildTime
  */
-// use strict は本来不要でエラーになる
-// 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
-/* eslint strict: [0, "global"] */
 
-'use strict';
+// 'use strict';
 
 // // fetch / promise
 // import 'whatwg-fetch';
@@ -27,7 +23,7 @@
 // - requestAnimationFrame
 // - promise-polyfill
 // - whatwg-fetch
-import './polyfill/';
+import './polyfill';
 
 // event
 import EventDispatcher from './event/EventDispatcher';
@@ -109,12 +105,12 @@ const MOKU = {};
  * version number を取得します
  * @returns {string} version number を返します
  */
-MOKU.version = () => ('@@version');
+MOKU.version = () => (process.env.BUILD_VERSION);
 /**
  * build 日時を取得します
  * @returns {string}  build 日時を返します
  */
-MOKU.build = () => ('@@buildTime');
+MOKU.buildTime = () => (process.env.BUILD_TIME);
 /**
  * MOKU.event
  * @type {Object} MOKU.event object を返します

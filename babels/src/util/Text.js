@@ -22,6 +22,7 @@ export default class Text {
   static dash(str) {
     return str.replace(/([A-Z])/g, '-$1').toLowerCase();
   }
+
   /**
    * camel case へ変換します
    * @param {string} str 操作対象文字列
@@ -34,6 +35,7 @@ export default class Text {
       return first.toUpperCase();
     });
   }
+
   /**
    * 数値に3桁区切りの `,` カンマを挿入します
    * @param {number} number カンマを挿入する数値
@@ -52,6 +54,7 @@ export default class Text {
     // IE 8 `NN.00` にするので `.` 以下削除
     return numbered.split('.').shift();
   }
+
   /**
    * 文字列の単語を置き換えます
    * @param {string} targetText 置換え対象文字列
@@ -62,6 +65,7 @@ export default class Text {
   static replace(targetText, targetWord, replaceWord) {
     return targetText.split(targetWord).join(replaceWord);
   }
+
   /**
    * 文字列から単語を削除します
    * @param {string} targetText 置換え対象文字列
@@ -71,6 +75,7 @@ export default class Text {
   static remove(targetText, targetWord) {
     return Text.replace(targetText, targetWord, '');
   }
+
   /**
    * 文字列の `&` を `&amp;` へ置換えます
    * @param {string} targetText 操作対象文字列
@@ -79,6 +84,7 @@ export default class Text {
   static amp(targetText) {
     return Text.replace(targetText, '&', '&amp;');
   }
+
   /**
    * 文字列の `&amp;` を `&` へ置換えます
    * @param {string} targetText 操作対象文字列

@@ -24,10 +24,11 @@ export default class Classes {
    * @returns {Array.<string>} 引数 `element` の class を配列変換し返します
    */
   static get(element) {
-    return element.classList && Array.from ?
-      Array.from(element.classList) :
-      Classes.convert(element);
+    return element.classList && Array.from
+      ? Array.from(element.classList)
+      : Classes.convert(element);
   }
+
   /**
    * Elementが引数 className を有するかを調べます
    * @param {Element} element 操作対象 Element
@@ -38,6 +39,7 @@ export default class Classes {
     const elementClasses = Classes.get(element);
     return elementClasses.indexOf(className) !== -1;
   }
+
   /**
    * Element へ引数 className を追加します
    * - className 存在チェック
@@ -61,6 +63,7 @@ export default class Classes {
     element.className = elementClasses.join(' ');
     return true;
   }
+
   /**
    * Element から引数 className を削除します
    * @param {Element} node 操作対象 Element
@@ -83,6 +86,7 @@ export default class Classes {
     element.className = elementClasses.join(' ');
     return true;
   }
+
   /**
    * 可哀相な IE のための配列コンバーター, `.classList` 代用します
    * @param {Element} element 操作対象 NodeList
@@ -101,6 +105,7 @@ export default class Classes {
     }
     return empty;
   }
+
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
@@ -115,6 +120,7 @@ export default class Classes {
      */
     this.element = element;
   }
+
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
@@ -126,6 +132,7 @@ export default class Classes {
   has(className) {
     return Classes.has(this.element, className);
   }
+
   /**
    * className を追加します
    * @param {string} className 追加対象 CSS class name
@@ -134,6 +141,7 @@ export default class Classes {
   add(className) {
     return Classes.add(this.element, className);
   }
+
   /**
    * className を削除します
    * @param {string} className 削除対象 CSS class name

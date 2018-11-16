@@ -32,6 +32,7 @@ export default class List {
     }
     return arr;
   }
+
   /**
    * Array.prototype.fill を行います
    * @param {number} length 配列長
@@ -46,6 +47,7 @@ export default class List {
     // native method
     return new Array(length).fill(value);
   }
+
   /**
    * 複数の配列を `concat` marge 結合します
    * @param {*} args 複数の配列
@@ -55,6 +57,7 @@ export default class List {
   static marge(...args) {
     return args.reduce((acc, val) => ([...acc, ...val]));
   }
+
   /**
    * 配列内配列（多次元配列）を1階層にします
    * @param {*} arr 多次元配列

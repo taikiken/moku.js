@@ -43,6 +43,7 @@ export default class Style {
     }
     return style;
   }
+
   /**
    * CSS 設定値の short hand をパターン {@link Patterns} から探し返します
    * @param {Object|Window} view Document.defaultView
@@ -58,7 +59,9 @@ export default class Style {
     const left = Style.compute(view, element, patterns[3]);
     if (!top && !right && !bottom && !left) {
       return undefined;
-    } else if (top === bottom) {
+    }
+    // top / bottom ...
+    if (top === bottom) {
       // top - bottom: same
       if (right === left) {
         // top - bottom: same
@@ -71,22 +74,26 @@ export default class Style {
       }
       // separate 4
       return `${top} ${right} ${bottom} ${left}`;
-    } else if (right === left) {
+    }
+    // right / left
+    if (right === left) {
       // top - bottom: different, left- right: same
       return `${top} ${right} ${bottom}`;
     }
     // separate 4
     return `${top} ${right} ${bottom} ${left}`;
   }
+
   /**
    * 引数 `element` の css を書き換えます
    * @param {Element} element 操作対象 Element
    * @param {string} css `cssText` 設定する
    */
   static change(element, css) {
-    const style = element.style;
+    const { style } = element;
     style.cssText = css;
   }
+
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
@@ -122,6 +129,7 @@ export default class Style {
     //   return style;
     // };
   }
+
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
@@ -134,15 +142,16 @@ export default class Style {
     this.css = style;
     return style;
   }
+
   /**
    * style value を取得します
    * @param {string} [property=''] 調査する style property name
    * @return {string} style value を返します
    */
   get(property = '') {
-    const element = this.element;
-    const ownerDocument = element.ownerDocument;
-    const defaultView = ownerDocument.defaultView;
+    const { element } = this;
+    const { ownerDocument } = element;
+    const { defaultView } = ownerDocument;
     let style = Style.compute(defaultView, element, property);
     // firefox が css shorthand の取り扱いが違うので再度マッチテストする
     if (style === '' && property && Patterns.match(property)) {
@@ -150,6 +159,7 @@ export default class Style {
     }
     return style;
   }
+
   /**
    * element へ css を設定します、設定済み css を上書きします
    * @param {string} property 設定する css property name
@@ -158,7 +168,7 @@ export default class Style {
    */
   set(property, value) {
     // 存在チェック
-    const element = this.element;
+    const { element } = this;
     if (!Type.exist(element)) {
       return false;
     }
@@ -168,12 +178,13 @@ export default class Style {
 
     return true;
   }
+
   /**
    * element の inline style(style.cssText) を取得します
    * @return {string} style.cssText を返します
    */
   current() {
-    const element = this.element;
+    const { element } = this;
     if (Type.exist(element)) {
       return element.style.cssText;
     }
@@ -181,6 +192,7 @@ export default class Style {
     // this.element 不正の時は空文字を返します
     return '';
   }
+
   /**
    * element の style.cssText をインスタンス作成時点まで戻します
    * @return {string} 設定した css を返します
@@ -190,6 +202,7 @@ export default class Style {
     this.element.style.cssText = css;
     return css;
   }
+
   /**
    * `save` 実行時に設定されている inline style を default にします
    * @returns {string} 設定されている inline style を返します
@@ -198,6 +211,7 @@ export default class Style {
     const style = this.current();
     return this.update(style);
   }
+
   /**
    * element の style.cssText を引数 `css` で書き換えます
    * @param {string} css 書き換える css

@@ -24,7 +24,7 @@ let props = null;
  * {@link iOS}
  */
 const version = () => {
-  const app = devices.app;
+  const { app } = devices;
   const numbers = app.match(/os (\d+)_(\d+)_?(\d+)?/i);
   if (!Array.isArray(numbers)) {
     return;
@@ -33,17 +33,22 @@ const version = () => {
   numbers.shift();
   const versions = numbers.map((number) => {
     const int = parseInt(number, 10);
-    return isNaN(int) ? 0 : int;
+    return Number.isNaN(int) ? 0 : int;
   });
   props.build = versions.join('.');
-  const major = parseInt(versions[0], 10);
+  const {
+    strMajor,
+    strMinor,
+    strBuild,
+  } = versions;
+  const major = parseInt(strMajor, 10);
   let minor = 0;
   if (versions.length >= 2) {
-    minor = versions[1];
+    minor = strMinor;
   }
   let build = '';
   if (versions.length >= 3) {
-    build = versions[2];
+    build = strBuild;
   }
   props.major = major;
   props.version = parseFloat(`${major}.${minor}${build}`);
@@ -59,7 +64,7 @@ const init = () => {
     return;
   }
   props = Object.assign({}, devices.props);
-  const ua = devices.ua;
+  const { ua } = devices;
   const ipad = !!ua.match(/ipad/i);
   const ipod = !!ua.match(/ipod/i);
   const iphone = !!ua.match(/iphone/i) && !ipad && !ipod;
@@ -93,6 +98,7 @@ export default class iOS {
     init();
     return props.ios;
   }
+
   /**
    * iOS && iPhone or iPod
    * @returns {boolean} true: iOS && iPhone or iPod
@@ -101,6 +107,7 @@ export default class iOS {
     init();
     return props.phone;
   }
+
   /**
    * iOS && iPad
    * @returns {boolean} true: iOS && iPad
@@ -109,6 +116,7 @@ export default class iOS {
     init();
     return props.tablet;
   }
+
   /**
    * iOS && iPhone
    * @returns {boolean} true: iOS && iPhone
@@ -117,6 +125,7 @@ export default class iOS {
     init();
     return props.iphone;
   }
+
   /**
    * iOS && iPad
    * @returns {boolean} true: iOS && iPad
@@ -125,6 +134,7 @@ export default class iOS {
     init();
     return props.ipad;
   }
+
   /**
    * iOS && iPod
    * @returns {boolean} true: iOS && iPod
@@ -133,6 +143,7 @@ export default class iOS {
     init();
     return props.ipod;
   }
+
   /**
    * iOS version
    * @returns {number} iOS version, not iOS -1
@@ -141,6 +152,7 @@ export default class iOS {
     init();
     return props.version;
   }
+
   /**
    * iOS major version
    * @returns {number} iOS major version, not iOS -1
@@ -149,6 +161,7 @@ export default class iOS {
     init();
     return props.major;
   }
+
   /**
    * iOS version `major.minor.build`
    * @returns {string} iOS version NN.NN.NN 型（文字）で返します, not iOS 空文字列
@@ -157,6 +170,7 @@ export default class iOS {
     init();
     return props.build;
   }
+
   /**
    * version を配列形式で取得します
    * @returns {Array.<number>} {{major: int, minor: int, build: int}} 形式で返します
@@ -165,6 +179,7 @@ export default class iOS {
     init();
     return props.numbers;
   }
+
   /**
    * iOS webView - 標準 UA のみ対応
    * @returns {boolean} true: iOS webView
@@ -173,6 +188,7 @@ export default class iOS {
     init();
     return props.webView;
   }
+
   /**
    * iOS standalone - app mode
    * @returns {boolean} true: iOS app mode

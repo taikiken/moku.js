@@ -31,21 +31,25 @@ export default class Swipe extends EventDispatcher {
    * @type {string}
    */
   static LEFT = 'left';
+
   /**
    * RIGHT - right
    * @type {string}
    */
   static RIGHT = 'right';
+
   /**
    * END - end
    * @type {string}
    */
   static END = 'end';
+
   /**
    * DRAG - drag'
    * @type {string}
    */
   static DRAG = 'drag';
+
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
@@ -113,6 +117,7 @@ export default class Swipe extends EventDispatcher {
       drag: new DragEvents(Swipe.DRAG, this, this, 0),
     };
   }
+
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
@@ -123,11 +128,12 @@ export default class Swipe extends EventDispatcher {
     this.dispose();
     this.reset();
     // ----
-    const touching = this.touching;
+    const { touching } = this;
     touching.on(Touching.MOVE, this.onMove);
     touching.on(Touching.END, this.onEnd);
     touching.on(Touching.CANCEL, this.onCancel);
   }
+
   /**
    * touchmove {@link Touching}.MOVE - event handler
    * @param {TouchingEvents} events events.between.y で移動量を計算します
@@ -141,6 +147,7 @@ export default class Swipe extends EventDispatcher {
       this.reset();
     }
   }
+
   /**
    * touchend {@link Touching}.END - event handler
    * @param {TouchingEvents} events events.between.y で移動量を計算します
@@ -158,6 +165,7 @@ export default class Swipe extends EventDispatcher {
     this.dispose();
     this.reset();
   }
+
   /**
    * touchend {@link Touching}.CANCEL - event handler
    * - 処理を中止します
@@ -167,6 +175,7 @@ export default class Swipe extends EventDispatcher {
     this.reset();
     this.dispatch(this.events.end);
   }
+
   /**
    * x 方向閾値(`marginal`)超えているかをチェックします
    * - 超えているときは swipe 方向を check し `swipe` event を発火します
@@ -185,21 +194,24 @@ export default class Swipe extends EventDispatcher {
     }
     return move;
   }
+
   /**
    * {@link Touching}.[MOVE|END|CANCEL] unbind します
    */
   dispose() {
-    const touching = this.touching;
+    const { touching } = this;
     touching.off(Touching.MOVE, this.onMove);
     touching.off(Touching.END, this.onEnd);
     touching.off(Touching.CANCEL, this.onCancel);
   }
+
   /**
    * drag 量を `0` にします
    */
   reset() {
     this.dragging = 0;
   }
+
   /**
    * drag `x` value と共に通知します
    * @param {number} x 移動(px)
@@ -209,20 +221,22 @@ export default class Swipe extends EventDispatcher {
     events.x = x;
     this.dispatch(events);
   }
+
   /**
    * {@link Touching}.START 監視を始めます
    */
   start() {
     this.stop();
-    const touching = this.touching;
+    const { touching } = this;
     touching.on(Touching.START, this.onStart);
     touching.start();
   }
+
   /**
    * {@link Touching}.START 監視を停止します
    */
   stop() {
-    const touching = this.touching;
+    const { touching } = this;
     touching.off(Touching.START, this.onStart);
     touching.stop();
     this.dispose();

@@ -41,6 +41,7 @@ export default class Elements {
     // 存在チェックを行います
     return Type.exist(element) ? element : null;
   }
+
   /**
    * querySelector を使用し Element を探します
    * @param {string} selector 探索 selector
@@ -50,6 +51,7 @@ export default class Elements {
   static select(selector, parentNode = document) {
     return parentNode.querySelector(selector);
   }
+
   /**
    * querySelectorAll を使用し Element を探します
    * @param {string} selector 探索 selector
@@ -60,6 +62,7 @@ export default class Elements {
     const elements = parentNode.querySelectorAll(selector);
     return elements.length > 0 ? elements : null;
   }
+
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
@@ -89,6 +92,7 @@ export default class Elements {
      */
     this.bounding = new Bounding(element);
   }
+
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
@@ -106,6 +110,7 @@ export default class Elements {
   offset() {
     return this.bounding.offset();
   }
+
   /**
    * className を有するかを調べます
    * @param {string} className 調査対象 CSS class name
@@ -115,6 +120,7 @@ export default class Elements {
   has(className) {
     return this.classes.has(className);
   }
+
   /**
    * className を追加します
    * @param {string} className 追加対象 CSS class name
@@ -124,6 +130,7 @@ export default class Elements {
   add(className) {
     return this.classes.add(className);
   }
+
   /**
    * className を削除します
    * @param {string} className 削除対象 CSS class name

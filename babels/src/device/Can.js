@@ -158,30 +158,33 @@ export default class Can {
     '-o-',
     '',
   ];
+
   /**
    * CSS3 transition が使用可能かを調べます
    * @returns {?boolean} true: 使用可能
    */
   static transition() {
     if (can.transition === null) {
-      const style = document.createElement('p').style;
+      const { style } = document.createElement('p');
       // eslint-disable-next-line max-len
       can.transition = Can.vendors.some(prefix => typeof style[`${prefix}transition`] !== 'undefined');
     }
     return can.transition;
   }
+
   /**
    * CSS3 transform が使用可能かを調べます
    * @returns {?boolean} true: 使用可能
    */
   static transform() {
     if (can.transform === null) {
-      const style = document.createElement('p').style;
+      const { style } = document.createElement('p');
       // eslint-disable-next-line max-len
       can.transform = Can.vendors.some(prefix => typeof style[`${prefix}transform`] !== 'undefined');
     }
     return can.transform;
   }
+
   /**
    * addEventListener 第三引数 - { passive: true } が使用できるかを調べます
    *
@@ -203,6 +206,7 @@ export default class Can {
         const opts = Object.defineProperty({}, 'passive', {
           get() {
             supportsPassive = true;
+            return supportsPassive;
           },
         });
         window.addEventListener('test', null, opts);
@@ -214,6 +218,7 @@ export default class Can {
     }
     return can.passive;
   }
+
   /**
    * touch event 使用可能かを調べます
    * @returns {?boolean} true: 使用可能
@@ -225,6 +230,7 @@ export default class Can {
     }
     return can.touch;
   }
+
   /**
    * canvas 使用可能かを調べます
    * @returns {?boolean} true: canvas 使用可能
@@ -236,6 +242,7 @@ export default class Can {
     }
     return can.canvas;
   }
+
   /**
    * webgl 使用可能かを調べます
    * @returns {?boolean} true: webgl 使用可能
@@ -252,9 +259,9 @@ export default class Can {
         const webGLContext = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
         try {
           webgl = !!(
-            window.WebGLRenderingContext &&
-            webGLContext &&
-            webGLContext.getShaderPrecisionFormat
+            window.WebGLRenderingContext
+            && webGLContext
+            && webGLContext.getShaderPrecisionFormat
           );
         } catch (e) {
           webgl = false;

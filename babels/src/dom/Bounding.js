@@ -44,6 +44,7 @@ export default class Bounding {
   static offset(element) {
     return element.getBoundingClientRect();
   }
+
   /**
    * ClientRect の複製を Object 化し writable にします
    * @param {DOMRect|ClientRect} offset 複製元 ClientRect
@@ -67,6 +68,7 @@ export default class Bounding {
       height: offset.height,
     };
   }
+
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
@@ -81,6 +83,7 @@ export default class Bounding {
      */
     this.element = element;
   }
+
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
@@ -91,6 +94,7 @@ export default class Bounding {
   offset() {
     return Bounding.offset(this.element);
   }
+
   /**
    * writable な element の offset 値を取得します
    * @return {{

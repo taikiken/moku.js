@@ -152,6 +152,7 @@ export default class Ajax {
     // https://developer.mozilla.org/ja/docs/Web/API/Request
     return new Request(path, option);
   }
+
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
@@ -191,6 +192,7 @@ export default class Ajax {
       credentials: 'same-origin',
     };
   }
+
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
@@ -253,6 +255,7 @@ export default class Ajax {
         return error;
       });
   }
+
   /**
    * 実行可否 flag を true にします
    * @returns {boolean} 現在の this.can property を返します
@@ -261,6 +264,7 @@ export default class Ajax {
     this.can = true;
     return this.can;
   }
+
   /**
    * 実行可否 flag を false にします
    * @returns {boolean} 現在の this.can property を返します

@@ -29,7 +29,7 @@ const init = () => {
     return;
   }
   props = Object.assign({}, devices.props);
-  const ua = devices.ua;
+  const { ua } = devices;
   const windows = !!ua.match(/windows/i);
   if (windows) {
     props.windows = true;
@@ -49,6 +49,7 @@ export default class Windows {
     init();
     return props.windows;
   }
+
   /**
    * windows phone
    * @returns {boolean} true: windows phone

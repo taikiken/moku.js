@@ -1,5 +1,5 @@
 /**
- * @license inazumatv.com
+ * license inazumatv.com
  * @author (at)taikiken / http://inazumatv.com
  * @date 2016/10/08
  *
@@ -44,6 +44,7 @@ export default class Vectors {
      */
     this.scrolling = false;
   }
+
   /**
    * x, y, time プロパティを全て `0` にします
    * @returns {Vectors} メソッドチェイン可能なようにインスタンスを返します
@@ -55,6 +56,7 @@ export default class Vectors {
 
     return this;
   }
+
   /**
    * x, y, time を更新します
    * @param {number} x 座標 x
@@ -69,6 +71,7 @@ export default class Vectors {
 
     return this;
   }
+
   /**
    * 引数 vectors 間の距離を測ります
    * @param {Vectors} vectors 計測したい対象 Vector instance
@@ -80,6 +83,7 @@ export default class Vectors {
     const sqrt = (distanceX * distanceX) + (distanceY * distanceY);
     return Math.sqrt(sqrt);
   }
+
   /**
    * 引数 vectors との時間差を計算します
    * @param {Vectors} vectors 計測したい対象 Vector instance
@@ -88,6 +92,7 @@ export default class Vectors {
   duration(vectors) {
     return this.time - vectors.time;
   }
+
   /**
    * 複製を作成し返します
    * @returns {Vectors} 複製を返します
@@ -97,15 +102,16 @@ export default class Vectors {
     clone.scrolling = this.scrolling;
     return clone;
   }
+
   /**
    * ベクトルの大きさの２乗の平方根を計算します
    * @returns {number} ベクトルの大きさの２乗の平方根を返します
    */
   length() {
-    const x = this.x;
-    const y = this.y;
+    const { x, y } = this;
     return Math.sqrt((x * x) + (y * y));
   }
+
   /**
    * ベクトルの値を scalar 値で除算します
    *
@@ -118,8 +124,7 @@ export default class Vectors {
       clone.x = 0;
       clone.y = 0;
     } else {
-      const x = clone.x;
-      const y = clone.y;
+      const { x, y } = clone;
       const inverse = 1 / scalar;
       clone.x = x * inverse;
       clone.y = y * inverse;
@@ -127,6 +132,7 @@ export default class Vectors {
 
     return clone;
   }
+
   /**
    * ベクトルの値を scalar 値で乗算します
    *
@@ -139,6 +145,7 @@ export default class Vectors {
     clone.y *= scalar;
     return clone;
   }
+
   /**
    * 現在の Vectors を元に引数 `maxValue` 以下にした `Vectors` を取得します
    * @param {number} maxValue 最高目標値
@@ -152,6 +159,7 @@ export default class Vectors {
     }
     return this.clone();
   }
+
   /**
    * ベクトルの大きさを正規化（大きさを1）した Vector を作成します
    * @returns {Vectors} ベクトルの大きさを正規化（大きさを1）した Vectors を返します
@@ -159,6 +167,7 @@ export default class Vectors {
   normalize() {
     return this.divideByScalar(this.length());
   }
+
   /**
    * ベクトルが正規化（length が 1）されているかを判定します
    * @returns {boolean} true: 正規化されている
@@ -166,6 +175,7 @@ export default class Vectors {
   isNormalize() {
     return this.length() === 1;
   }
+
   /**
    * 引数 vectors との X 値を減算します
    * @param {Vectors} vectors 計測したい対象 Vectors instance
@@ -174,6 +184,7 @@ export default class Vectors {
   betweenX(vectors) {
     return this.x - vectors.x;
   }
+
   /**
    * 引数 vectors との Y 値を減算します
    * @param {Vectors} vectors 計測したい対象 Vectors instance
@@ -182,6 +193,7 @@ export default class Vectors {
   betweenY(vectors) {
     return this.y - vectors.y;
   }
+
   /**
    * 引数 vectors との time 値を減算します
    * @param {Vectors} vectors 計測したい対象 Vectors instance
@@ -190,6 +202,7 @@ export default class Vectors {
   betweenTime(vectors) {
     return this.time - vectors.time;
   }
+
   /**
    * 引数 vectors との x, y, time 値を減算します
    * @param {Vectors} vectors 計測したい対象 Vectors instance
@@ -203,6 +216,7 @@ export default class Vectors {
 
     return clone;
   }
+
   /**
    * 引数ベクトルの内積を計算します
    * @param {Vectors} vectors 計測したい対象 Vectors instance
@@ -211,6 +225,7 @@ export default class Vectors {
   dot(vectors) {
     return (this.x * vectors.x) + (this.y * vectors.y);
   }
+
   /**
    * 引数ベクトルの値(x, y)が等しいかを判定します
    * @param {Vectors} vectors 計測したい対象 Vectors instance
@@ -219,6 +234,7 @@ export default class Vectors {
   equals(vectors) {
     return (vectors.x === this.x) && (vectors.y === this.y);
   }
+
   /**
    * 引数ベクトルとの角度を計算します
    * @param {Vectors} vectors 計測したい対象 Vectors instance

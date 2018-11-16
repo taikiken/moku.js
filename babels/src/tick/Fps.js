@@ -41,6 +41,7 @@ export default class Fps extends Polling {
    * @type {string}
    */
   static UPDATE = 'fpsUpdate';
+
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
@@ -64,6 +65,7 @@ export default class Fps extends Polling {
      */
     this.fps = fps;
   }
+
   // ----------------------------------------
   // METHOD
   // ----------------------------------------

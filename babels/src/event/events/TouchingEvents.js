@@ -1,5 +1,5 @@
 /**
- * @license inazumatv.com
+ * license inazumatv.com
  * @author (at)taikiken / http://inazumatv.com
  * @date 2016/10/08
  *
@@ -37,7 +37,8 @@ export default class TouchingEvents extends Events {
     origin,
     current = new Vectors(),
     between = new Vectors(),
-    scrolling = false) {
+    scrolling = false,
+  ) {
     // super
     super(type, target);
     /**

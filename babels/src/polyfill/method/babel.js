@@ -20,4 +20,4 @@
 // specify useBuiltIns: true in presets options (see more)
 // include import "babel-polyfill" to your codebase.
 // ```
-import 'babel-polyfill';
+import '@babel/polyfill';

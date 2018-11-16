@@ -27,6 +27,7 @@ export default class NodeLists {
     }
     return data;
   }
+
   /**
    * Array.from 使用判定を行い、
    * 使用できない時は {@link NodeLists.from} を実行します

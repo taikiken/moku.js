@@ -38,7 +38,7 @@ const dir = module.dir;
 
 const wpk = module.wpk;
 
-const patterns = module.patterns;
+const information = module.information;
 
 // --------------------------------------
 //  TASK
@@ -54,41 +54,48 @@ gulp.task('babels:lint', () => gulp.src(files)
   .pipe($.eslint({ useEslintrc: true }))
   .pipe($.eslint.format())
   .pipe($.eslint.failAfterError())
-  .pipe($.size({ title: '*** babels:eslint ***' }))
+  .pipe($.size({ title: '*** babels:lint ***' }))
 );
 
-// babel
-// --------------------------------------
-gulp.task('babels:babel', () => gulp.src(files)
-  // .pipe($.babel({
-  //   presets: [
-  //     'es2015',
-  //     'react',
-  //     'stage-0',
-  //   ],
-  //   plugins: ['transform-runtime'],
-  // }))
-  .pipe($.babel())
-  .pipe($.replaceTask({ patterns }))
-  .pipe(gulp.dest(dir.babels.compile))
-  .pipe($.size({ title: '*** babels:babel ***' }))
-);
-console.log('Object.create', Object.create);
+// // babel
+// // --------------------------------------
+// gulp.task('babels:babel', () => gulp.src(files)
+//   // .pipe($.babel({
+//   //   presets: [
+//   //     'es2015',
+//   //     'react',
+//   //     'stage-0',
+//   //   ],
+//   //   plugins: ['transform-runtime'],
+//   // }))
+//   .pipe($.babel())
+//   .pipe($.replaceTask({ patterns }))
+//   .pipe(gulp.dest(dir.babels.compile))
+//   .pipe($.size({ title: '*** babels:babel ***' }))
+// );
+// console.log('Object.create', Object.create);
+
 // webpack [DEV]
 // --------------------------------------
 gulp.task('babels:pack:dev', (callback) => {
   // const config = Object.create(wpk);
   const config = Object.assign({}, wpk);
-  // config.plugins = [
-  //   new $$.webpack.optimize.DedupePlugin(),
-  // ];
-  config.entry = `${config.entry}/babels/compile/moku.js`;
+  config.plugins = [
+    // https://facebook.github.io/react/docs/optimizing-performance.html#use-the-production-build
+    new $$.webpack.DefinePlugin({
+      'process.env': {
+        BUILD_VERSION: JSON.stringify(information.VERSION),
+        BUILD_TIME: JSON.stringify(information.BUILD),
+      },
+    }),
+  ];
+  config.entry = `${config.entry}/babels/src/moku.js`;
   config.output.path = `${wpk.entry}${dir.dist.libs.substr(1)}`;
-  // console.log('config', config);
+  console.log('config', config);
   // webpack
   return $$.webpack(config, (error, stats) => {
     if (error) {
-      throw new $.util.PluginError('webpack', error);
+      throw new $.util.PluginError('webpack:dev', error);
     }
     $.util.log('[webpack:dev]', stats.toString({
       colors: true,
@@ -103,23 +110,26 @@ gulp.task('babels:pack:dev', (callback) => {
 gulp.task('babels:pack:build', (callback) => {
   // const config = Object.create(wpk);
   const config = Object.assign({}, wpk);
+  config.mode = 'production';
   config.plugins = [
     // new $$.webpack.optimize.DedupePlugin(),
-    new $$.webpack.optimize.UglifyJsPlugin({ compress: { warnings: true } }),
+    // new $$.webpack.optimize.UglifyJsPlugin({ compress: { warnings: true } }),
     // https://facebook.github.io/react/docs/optimizing-performance.html#use-the-production-build
     new $$.webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
+        BUILD_VERSION: JSON.stringify(information.VERSION),
+        BUILD_TIME: JSON.stringify(information.BUILD),
       },
     }),
   ];
-  config.entry = `${config.entry}/babels/compile/moku.js`;
+  config.entry = `${config.entry}/babels/src/moku.js`;
   config.output.path = `${wpk.entry}${dir.dist.libs.substr(1)}`;
   config.output.filename = 'moku.min.js';
   // webpack
   return $$.webpack(config, (error, stats) => {
     if (error) {
-      throw new $.util.PluginError('webpack', error);
+      throw new $.util.PluginError('webpack:build', error);
     }
     $.util.log('[webpack:build]', stats.toString({
       colors: true,
@@ -135,7 +145,7 @@ gulp.task('babels:pack:build', (callback) => {
 gulp.task('babels:dev', callback => (
   $$.runSequence(
     'babels:lint',
-    'babels:babel',
+    // 'babels:babel',
     'babels:pack:dev',
     callback,
   )
@@ -144,7 +154,7 @@ gulp.task('babels:dev', callback => (
 gulp.task('babels:build', ['babels:dev'], (callback) => (
   $$.runSequence(
     // 'babels:lint',
-    'babels:babel',
+    // 'babels:babel',
     'babels:pack:build',
     callback,
   )

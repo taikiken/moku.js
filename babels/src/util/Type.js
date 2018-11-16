@@ -23,6 +23,7 @@ export default class Type {
   static method(target) {
     return typeof target === 'function';
   }
+
   /**
    * 引数(target)を `!!` で調べます
    * @param {*} target 調査対象
@@ -31,6 +32,7 @@ export default class Type {
   static exist(target) {
     return !!target;
   }
+
   /**
    * 引数(target)が number かを調べます
    * @param {*} target 調査対象
@@ -38,10 +40,11 @@ export default class Type {
    */
   static number(target) {
     // [参考] jQuery 2.x, jQuery 2 関数は文字列 "2" も true にするので type check を追加した
-    return typeof target === 'number' &&
-      !Type.array(target) &&
-      ((target - parseFloat(target)) + 1) >= 0;
+    return typeof target === 'number'
+      && !Type.array(target)
+      && ((target - parseFloat(target)) + 1) >= 0;
   }
+
   /**
    * 引数(target)が int かを `Number.isInteger` を使用し調べます
    * @param {*} target 調査対象
@@ -50,6 +53,7 @@ export default class Type {
   static int(target) {
     return Number.isInteger(target);
   }
+
   /**
    * 引数(target)が string かを調べます
    * @param {*} target 調査対象
@@ -58,6 +62,7 @@ export default class Type {
   static string(target) {
     return typeof target === 'string';
   }
+
   /**
    * 引数(target)を `Array.isArray` で配列かを調べます
    * @param {*} target 調査対象
@@ -66,6 +71,7 @@ export default class Type {
   static array(target) {
     return Array.isArray(target);
   }
+
   /**
    * 引数(target)が null かを調べます
    * @param {*} target 調査対象
@@ -74,6 +80,7 @@ export default class Type {
   static nil(target) {
     return target === null;
   }
+
   /**
    * Object型 引数 `object` は String型 引数 `key` を [key] として所持しているかを調べます
    * @deprecated instead use Type.has
@@ -84,6 +91,7 @@ export default class Type {
   static hasKey(target, key) {
     return Type.has(target, key);
   }
+
   /**
    * Object型 引数 `object` は String型 引数 `key` を [key] として所持しているかを調べます
    * @param {Object} target 調査対象
@@ -93,6 +101,7 @@ export default class Type {
   static has(target, key) {
     return Object.keys(target).indexOf(key) !== -1;
   }
+
   /**
    * target が undefined かを調べます
    * @param {*} target 調査対象
@@ -102,6 +111,7 @@ export default class Type {
   static undef(target) {
     return typeof target === 'undefined';
   }
+
   /**
    * ファイル名から拡張子を取得します
    * @deprecated instead use Type.extension
@@ -111,6 +121,7 @@ export default class Type {
   static getExtension(fileName) {
     return Type.extension(fileName);
   }
+
   /**
    * ファイル名から拡張子を取得します
    * @param {string} fileName 取得したいファイル名称
@@ -126,6 +137,7 @@ export default class Type {
     }
     return splits.pop().toLowerCase();
   }
+
   // ----------------------------------------------------------
   // 画像パスが正規かチェックする
   /**
@@ -137,11 +149,12 @@ export default class Type {
     if (!Type.exist(fileName)) {
       return false;
     }
-    return fileName.indexOf('data:image/jpeg;base64') !== -1 ||
-      fileName.indexOf('data:image/png;base64') !== -1 ||
-      fileName.indexOf('data:image/jpg;base64') !== -1 ||
-      fileName.indexOf('data:image/gif;base64') !== -1;
+    return fileName.indexOf('data:image/jpeg;base64') !== -1
+      || fileName.indexOf('data:image/png;base64') !== -1
+      || fileName.indexOf('data:image/jpg;base64') !== -1
+      || fileName.indexOf('data:image/gif;base64') !== -1;
   }
+
   /**
    * 拡張子から画像ファイルかを調べます
    * @param {string} fileName 調査対象ファイル名

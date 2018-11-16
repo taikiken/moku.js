@@ -1,5 +1,5 @@
 /**
- * @license inazumatv.com
+ * license inazumatv.com
  * @author (at)taikiken / http://inazumatv.com
  * @date 2016/12/23
  *
@@ -45,6 +45,7 @@ export default class Queries {
      */
     this.naked = naked;
   }
+
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
@@ -56,6 +57,7 @@ export default class Queries {
   has(keyName) {
     return this.keys.indexOf(keyName) !== -1;
   }
+
   /**
    * key 値を取得します
    * @param {string} keyName 調査対象 key 名称
@@ -64,6 +66,7 @@ export default class Queries {
   get(keyName) {
     return this.data[keyName];
   }
+
   /**
    * key: value 形式を取得します
    * @returns {Object} URL query を key: value 形式で返します
@@ -71,6 +74,7 @@ export default class Queries {
   getAll() {
     return this.data;
   }
+
   // ----------------------------------------
   // STATIC METHOD
   // ----------------------------------------
@@ -92,6 +96,7 @@ export default class Queries {
     const queryString = Text.and(targetText);
     return queryString.substr(0, 1) === '?' ? queryString.substring(1) : targetText;
   }
+
   /**
    * query を kye: value 形式にします
    * @param {string} targetText 操作対象文字列
@@ -120,6 +125,7 @@ export default class Queries {
 
     return [data, keys];
   }
+
   /**
    * 引数 targetText (query) から引数 keyName 値を取得します
    * @param {string} keyName key 名称
@@ -130,6 +136,7 @@ export default class Queries {
     const [data] = Queries.parse(targetText);
     return data[keyName];
   }
+
   /**
    * URL query の key: value 形式を取得します
    * @param {string} targetText query

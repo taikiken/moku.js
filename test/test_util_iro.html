@@ -50,13 +50,13 @@
 
   //  Iro.hsl2rgb
   describe('#Iro.hsl2rgb', function() {
-    it("Iro.rgb2hsl(0, 0, 1) is {r: 255, g: 255, b: 255}", function() {
+    it("Iro.hsl2rgb(0, 0, 1) is {r: 255, g: 255, b: 255}", function() {
       expect(Iro.hsl2rgb(0, 0, 1)).to.eql({r: 255, g: 255, b: 255});
     });
-    it("Iro.rgb2hsl(300 / 360, 1, 0.5) is {r: 255, g: 0, b: 255}", function() {
+    it("Iro.hsl2rgb(300 / 360, 1, 0.5) is {r: 255, g: 0, b: 255}", function() {
       expect(Iro.hsl2rgb(300 / 360, 1, 0.5)).to.eql({r: 255, g: 0, b: 255});
     });
-    it("Iro.rgb2hsl(240 / 360, 1, 0.5) is {r: 0, g: 0, b: 255}", function() {
+    it("Iro.hsl2rgb(240 / 360, 1, 0.5) is {r: 0, g: 0, b: 255}", function() {
       expect(Iro.hsl2rgb(240 / 360, 1, 0.5)).to.eql({r: 0, g: 0, b: 255});
     });
   });

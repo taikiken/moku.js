@@ -26,7 +26,7 @@ let browsers = null;
  * @since 0.4.2
  */
 const version = () => {
-  const app = devices.app;
+  const { app } = devices;
   const numbers = app.match(/crios\/(\d+)\.(\d+)\.(\d+)\.?(\d+)?/i);
   if (!Array.isArray(numbers)) {
     return;
@@ -35,20 +35,26 @@ const version = () => {
   numbers.shift();
   // array
   const intArr = numbers.map(number => (parseInt(number, 10)));
-  const versions = intArr.filter(int => !isNaN(int));
+  const versions = intArr.filter(int => !Number.isNaN(int));
   browsers.build = versions.join('.');
-  const major = parseInt(versions[0], 10);
+  const {
+    strMajor,
+    strMinor,
+    strBuild,
+    strOption,
+  } = versions;
+  const major = parseInt(strMajor, 10);
   let minor = 0;
   if (versions.length >= 2) {
-    minor = versions[1];
+    minor = strMinor;
   }
   let build = '';
   if (versions.length >= 3) {
-    build = versions[2];
+    build = strBuild;
   }
   let option = '';
   if (versions.length === 4) {
-    option = versions[3];
+    option = strOption;
   }
   browsers.major = major;
   browsers.version = parseFloat(`${major}.${minor}${build}${option}`);
@@ -65,7 +71,7 @@ const init = () => {
     return;
   }
   browsers = Object.assign({}, devices.browsers);
-  const ua = devices.ua;
+  const { ua } = devices;
   const crios = !!ua.match(/crios/i);
   browsers.crios = crios;
   if (crios) {
@@ -86,6 +92,7 @@ export default class CriOS {
     init();
     return browsers;
   }
+
   /**
    * iOS Chrome 判定
    * @returns {boolean} true: iOS Chrome
@@ -94,6 +101,7 @@ export default class CriOS {
     init();
     return browsers.crios;
   }
+
   /**
    * CriOS Browser version
    * @returns {number} CriOS version, not Android -1
@@ -102,6 +110,7 @@ export default class CriOS {
     init();
     return browsers.version;
   }
+
   /**
    * CriOS Browser major version
    * @returns {number} CriOS major version, not Android -1
@@ -110,6 +119,7 @@ export default class CriOS {
     init();
     return browsers.major;
   }
+
   /**
    * CriOS Browser version `major.minor.build`
    * @returns {string} CriOS version NN.NN.NN.NN 型（文字）で返します
@@ -118,6 +128,7 @@ export default class CriOS {
     init();
     return browsers.build;
   }
+
   /**
    * version を配列形式で取得します
    * @returns {Array.<number>} {{major: int, minor: int, build: int, option: number}} 形式で返します

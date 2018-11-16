@@ -70,6 +70,7 @@ export default class NativeResizing extends EventDispatcher {
      */
     this.onUpdate = this.onUpdate.bind(this);
   }
+
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
@@ -87,6 +88,7 @@ export default class NativeResizing extends EventDispatcher {
     }, 500);
     return this;
   }
+
   /**
    * 監視を停止します
    * @returns {*} method chain 可能なように instance を返します
@@ -97,6 +99,7 @@ export default class NativeResizing extends EventDispatcher {
     window.removeEventListener('resize', this.onUpdate);
     return this;
   }
+
   /**
    * 下記のプロパティをイベント・インスタンスに追加します
    * - original {Events} - Rate Events instance
@@ -114,7 +117,7 @@ export default class NativeResizing extends EventDispatcher {
     // @type {number} - scroll top
     const y = Scroll.y();
     // @type {number} - previous scroll top
-    const previous = this.previous;
+    const { previous } = this;
     // --- [window]
     // @type {number} - window width
     const width = window.innerWidth;
@@ -124,12 +127,12 @@ export default class NativeResizing extends EventDispatcher {
     const bodyWidth = document.body.clientWidth;
     const bodyHeight = document.body.clientHeight;
     // @type {boolean} - 移動したかを表します,
-    const changed = event === null ||
-      previous !== y ||
-      height !== this.window.height ||
-      width !== this.window.width ||
-      bodyWidth !== this.body.width ||
-      bodyHeight !== this.body.height;
+    const changed = event === null
+      || previous !== y
+      || height !== this.window.height
+      || width !== this.window.width
+      || bodyWidth !== this.body.width
+      || bodyHeight !== this.body.height;
     // ----------------------------------------------
     // @type {ScrollEvents} - events
     const events = this.events.clone();
@@ -164,6 +167,7 @@ export default class NativeResizing extends EventDispatcher {
     // save scroll top -> previous
     this.previous = y;
   }
+
   /**
    * 強制 update
    */
