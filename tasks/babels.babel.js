@@ -145,7 +145,7 @@ gulp.task('babels:pack:build', (callback) => {
 gulp.task('babels:dev', callback => (
   $$.runSequence(
     'babels:lint',
-    'babels:babel',
+    // 'babels:babel',
     'babels:pack:dev',
     callback,
   )
@@ -154,7 +154,7 @@ gulp.task('babels:dev', callback => (
 gulp.task('babels:build', ['babels:dev'], (callback) => (
   $$.runSequence(
     // 'babels:lint',
-    'babels:babel',
+    // 'babels:babel',
     'babels:pack:build',
     callback,
   )
