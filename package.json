@@ -1,6 +1,6 @@
 {
   "name": "moku.js",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "EventDispatcher written in ES2016",
   "main": "index.js",
   "scripts": {
@@ -77,7 +77,7 @@
               "iOS >= 8.4"
             ]
           },
-          "useBuiltIns": "entry"
+          "useBuiltIns": "usage"
         }
       ]
     ],
