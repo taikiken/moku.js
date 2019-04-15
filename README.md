@@ -1,3 +1,7 @@
+deprecated
+
+[moku](https://github.com/taikiken/moku)
+
 # moku.js
 **「目」**
 
